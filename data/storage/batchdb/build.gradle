@@ -1,0 +1,22 @@
+archivesBaseName = 'data.storage.batchdb'
+
+eclipse {
+  project {
+    name = 'data.storage.batchdb'
+  }
+}
+
+configurations {
+  deployJars {
+    transitive = false
+  }
+}
+
+
+dependencies {
+  compile project(':lib/utils')
+
+  compile group: 'org.apache.hadoop', name: 'hadoop-common', version: hadoopVersion
+  compile group: 'org.apache.hadoop', name: 'hadoop-hdfs', version: hadoopVersion
+  compile group: 'org.apache.hadoop', name: 'hadoop-mapreduce-client-core', version: hadoopVersion
+}

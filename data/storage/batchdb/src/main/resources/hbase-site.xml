@@ -1,0 +1,268 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+  <property>
+    <name>hbase.rootdir</name>
+    <value>hdfs://MasterNode:9000/hbase</value>
+    <description>The directory shared by region servers.
+    Should be fully-qualified to include the filesystem to use.
+    E.g: hdfs://NAMENODE_SERVER:PORT/HBASE_ROOTDIR
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.tmp.dir</name>
+    <value>/mnt/moom/hbase</value>
+    <description>Temporary directory on the local filesystem.</description>
+  </property>
+
+  <property>
+    <name>hbase.dir</name>
+    <value>/mnt/moom/hbase</value>
+    <description>Temporary directory on the local filesystem.</description>
+  </property>
+
+  <property>
+    <name>hbase.zookeeper.property.dataDir</name>
+    <value>${hbase.dir}/zookeeper/data</value>
+    <description>Property from ZooKeeper's config zoo.cfg.
+    The directory where the snapshot is stored.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.zookeeper.property.clientPort</name>
+    <value>6181</value>
+    <description>Property from ZooKeeper's config zoo.cfg.
+    The port at which the clients will connect.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.zookeeper.quorum</name>
+    <value>MasterNode</value>
+    <description>Comma separated list of servers in the ZooKeeper Quorum.
+    For example, "host1.mydomain.com,host2.mydomain.com,host3.mydomain.com".
+    By default this is set to localhost for local and pseudo-distributed modes
+    of operation. For a fully-distributed setup, this should be set to a full
+    list of ZooKeeper quorum servers. If HBASE_MANAGES_ZK is set in hbase-env.sh
+    this is the list of servers which we will start/stop ZooKeeper on.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.cluster.distributed</name>
+    <value>true</value>
+    <description>The mode the cluster will be in. Possible values are
+      false: standalone and pseudo-distributed setups with managed Zookeeper
+      true: fully-distributed with unmanaged Zookeeper Quorum (see hbase-env.sh)
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.regions.slop</name>
+    <value>0.05</value>
+    <description>Rebalance if regionserver has average + (average * slop) regions.
+    Default is 10% slop.
+    </description>
+  </property>
+
+  <property>
+    <name>hfile.min.blocksize.size</name>
+    <value>65536</value>
+    <description>Minimum store file block size.  The smaller you make this, the
+    bigger your index and the less you fetch on a random-access.  Set size down
+    if you have small cells and want faster random-access of individual cells.
+    </description>
+  </property>
+
+  <property>
+    <name>hfile.block.cache.size</name>
+    <value>0.2</value>
+    <description>
+      Percentage of maximum heap (-Xmx setting) to allocate to block cache
+      used by HFile/StoreFile. Default of 0.2 means allocate 20%.
+      Set to 0 to disable.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.regions.percheckin</name>
+    <value>10</value>
+    <description>Maximum number of regions that can be assigned in a single go
+    to a region server.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.hregion.max.filesize</name>
+    <!--
+    <value>134217728</value>
+    <value>268435456</value>
+    <value>536870912</value>
+    -->
+    <value>536870912</value>
+    <description>
+    Maximum HStoreFile size. If any one of a column families' HStoreFiles has
+    grown to exceed this value, the hosting HRegion is split in two.
+    Default: 256M.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.regionserver.global.memstore.upperLimit</name>
+    <value>0.4</value>
+    <description>Maximum size of all memstores in a region server before new 
+      updates are blocked and flushes are forced. Defaults to 40% of heap
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.regionserver.global.memstore.lowerLimit</name>
+    <value>0.35</value>
+    <description>When memstores are being forced to flush to make room in
+      memory, keep flushing until we hit this mark. Defaults to 30% of heap. 
+      This value equal to hbase.regionserver.global.memstore.upperLimit causes
+      the minimum possible flushing to occur when updates are blocked due to 
+      memstore limiting.
+    </description>
+  </property>  
+
+  <property>
+    <name>hbase.regionserver.lease.period</name>
+    <value>120000</value>
+    <description>HRegion server lease period in milliseconds. Default is
+    60 seconds. Clients must report in within this period else they are
+    considered dead.</description>
+  </property>
+
+  <property>
+    <name>hbase.regionserver.handler.count</name>
+    <value>25</value>
+    <description>Count of RPC Server instances spun up on RegionServers
+    Same property is used by the HMaster for count of master handlers.
+    Default is 25.
+    </description>
+  </property>
+
+  <property>
+    <name>zookeeper.session.timeout</name>
+    <value>300000</value>
+    <description>ZooKeeper session timeout.
+      HBase passes this to the zk quorum as suggested maximum time for a
+      session.  See http://hadoop.apache.org/zookeeper/docs/current/zookeeperProgrammers.html#ch_zkSessions
+      "The client sends a requested timeout, the server responds with the
+      timeout that it can give the client. The current implementation
+      requires that the timeout be a minimum of 2 times the tickTime
+      (as set in the server configuration) and a maximum of 20 times
+      the tickTime." Set the zk ticktime with hbase.zookeeper.property.tickTime.
+      In milliseconds.(default 60000)
+    </description>
+  </property>
+  <property>
+    <name>hbase.zookeeper.property.tickTime</name>
+    <value>3000</value>
+    <description>Property from ZooKeeper's config zoo.cfg.
+    The number of milliseconds of each tick.  See
+    zookeeper.session.timeout description.(default 3000)
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.zookeeper.property.initLimit</name>
+    <value>20</value>
+    <description>Property from ZooKeeper's config zoo.cfg.
+    The number of ticks that the initial synchronization phase can take.(default 10)
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.zookeeper.property.maxClientCnxns</name>
+    <value>30</value>
+    <description>Property from ZooKeeper's config zoo.cfg.
+    Limit on number of concurrent connections (at the socket level) that a
+    single client, identified by IP address, may make to a single member of
+    the ZooKeeper ensemble. Set high to avoid zk connection issues running
+    standalone and pseudo-distributed.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.hstore.compactionThreshold</name>
+    <value>3</value>
+    <description>
+    If more than this number of HStoreFiles in any one HStore
+    (one HStoreFile is written per flush of memstore) then a compaction
+    is run to rewrite all HStoreFiles files as one.  Larger numbers
+    put off compaction but when it runs, it takes longer to complete.
+    During a compaction, updates cannot be flushed to disk.  Long
+    compactions require memory sufficient to carry the logging of
+    all updates across the duration of the compaction.
+    If too large, clients timeout during compaction.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.hregion.memstore.flush.size</name>
+    <!--
+    <value>33554432</value>
+    <value>67108864</value>
+    -->
+    <value>67108864</value>
+    <description>
+    Memstore will be flushed to disk if size of the memstore
+    exceeds this number of bytes.  Value is checked by a thread that runs
+    every hbase.server.thread.wakefrequency.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.hstore.blockingWaitTime</name>
+    <value>180000</value>
+    <description>
+    The time an HRegion will block updates for after hitting the StoreFile
+    limit defined by hbase.hstore.blockingStoreFiles.
+    After this time has elapsed, the HRegion will stop blocking updates even
+    if a compaction has not been completed.  Default: 90 seconds.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.hstore.blockingStoreFiles</name>
+    <value>7</value>
+    <description>
+    If more than this number of StoreFiles in any one Store
+    (one StoreFile is written per flush of MemStore) then updates are
+    blocked for this HRegion until a compaction is completed, or
+    until hbase.hstore.blockingWaitTime has been exceeded.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.client.scanner.caching</name>
+    <value>256</value>
+    <description>Number of rows that will be fetched when calling next
+    on a scanner if it is not served from memory. Higher caching values
+    will enable faster scanners but will eat up more memory and some
+    calls of next may take longer and longer times when the cache is empty.
+    </description>
+  </property>
+
+  <property>
+    <name>hbase.client.pause</name>
+    <value>1000</value>
+    <description>General client pause value.  Used mostly as value to wait
+    before running a retry of a failed get, region lookup, etc.</description>
+  </property>
+
+  <property>
+    <name>hbase.client.retries.number</name>
+    <value>10</value>
+    <description>Maximum retries.  Used as maximum for all retryable
+    operations such as fetching of the root region from root region
+    server, getting a cell's value, starting a row update, etc.
+    Default: 10.
+    </description>
+  </property>
+</configuration>

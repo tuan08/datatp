@@ -1,11 +1,5 @@
 archivesBaseName = 'module.elasticsearch'
 
-project.ext {
-  elasticsearchVersion = "2.3.3"
-  luceneVersion = "5.5.0"
-  releaseDir = "${buildDir}/release"
-}
-
 eclipse {
   project {
     name = 'module.elasticsearch'

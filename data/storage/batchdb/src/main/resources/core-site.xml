@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Do not modify this file directly.  Instead, copy entries that you -->
+<!-- wish to modify from this file into core-site.xml and change them -->
+<!-- there.  If core-site.xml does not already exist, create it.      -->
+
+<configuration>
+  <!--- global properties -->
+  <property>
+    <name>hadoop.dir</name>
+    <value>/mnt/moom/hadoop/0.20.1</value>
+    <description>A base for other temporary directories.</description>
+  </property>
+
+  <property>
+    <name>hadoop.dfs.dir</name>
+    <value>${hadoop.dir}/dfs</value>
+    <description>A base for other temporary directories.</description>
+  </property>
+
+  <property>
+    <name>hadoop.mapred.dir</name>
+    <value>${hadoop.dir}/mapred</value>
+    <description>A base for other temporary directories.</description>
+  </property>
+
+  <property>
+    <name>hadoop.working.dir</name>
+    <value>${hadoop.dir}/working</value>
+    <description>A base for other temporary directories.</description>
+  </property>
+
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>${hadoop.working.dir}</value>
+    <description>A base for other temporary directories.</description>
+  </property>
+
+  <!-- file system properties -->
+
+  <property>
+    <name>fs.default.name</name>
+    <value>file:///</value>
+    <!--
+    <value>hdfs://MasterNode:9000</value>
+    -->
+    <description>The name of the default file system.  A URI whose
+      scheme and authority determine the FileSystem implementation.  The
+      uri's scheme determines the config property (fs.SCHEME.impl) naming
+      the FileSystem implementation class.  The uri's authority is used to
+      determine the host, port, etc. for a filesystem.</description>
+  </property>
+
+  <property>
+    <name>fs.checkpoint.dir</name>
+    <value>${hadoop.dfs.dir}/namesecondary</value>
+    <description>Determines where on the local filesystem the DFS secondary
+      name node should store the temporary images to merge.
+      If this is a comma-delimited list of directories then the image is
+      replicated in all of the directories for redundancy.
+    </description>
+  </property>
+
+  <property>
+    <name>io.compression.codecs</name>
+    <value>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,com.hadoop.compression.lzo.LzoCodec,com.hadoop.compression.lzo.LzopCodec,org.apache.hadoop.io.compress.BZip2Codec</value>
+  </property>
+
+  <property>
+    <name>io.compression.codec.lzo.class</name>
+    <value>com.hadoop.compression.lzo.LzoCodec</value>
+  </property>
+
+  <property>
+    <name>io.file.buffer.size</name>
+    <value>65536</value>
+    <description>The size of buffer for use in sequence files.
+    The size of this buffer should probably be a multiple of hardware
+    page size (4096 on Intel x86), and it determines how much data is
+    buffered during read and write operations.</description>
+  </property>
+
+  <property>
+    <name>io.seqfile.compress.blocksize</name>
+    <value>262144</value>
+    <description>The minimum block size for compression in block compressed SequenceFiles.</description>
+  </property>
+</configuration>
