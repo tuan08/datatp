@@ -18,7 +18,7 @@ subprojects {
     }
 
     project {
-      linkedResource name: 'src-main-resources', type: '2', locationUri: 'src/main/resources'
+      //linkedResource name: 'src-main-resources', type: '2', locationUri: 'src/main/resources'
     }
   }
   

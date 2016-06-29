@@ -25,6 +25,7 @@ dependencies {
     exclude module : 'spring-boot-starter-logging'
   }
 
+  compile ('org.springframework.boot:spring-boot-loader')
 
   compile ('commons-logging:commons-logging')
 
