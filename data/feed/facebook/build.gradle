@@ -1,0 +1,25 @@
+archivesBaseName = 'data.feed.facebook'
+
+eclipse {
+  project {
+    name = 'data.feed.facebook'
+  }
+}
+
+project.ext {
+  releaseDir = "${buildDir}/release"
+}
+
+configurations {
+  deployJars {
+    transitive = false
+  }
+}
+
+
+dependencies {
+  compile project(':lib/utils')
+  compile project(':module/commons')
+
+  compile group: 'com.restfb', name: 'restfb', version: '1.25.0'
+}

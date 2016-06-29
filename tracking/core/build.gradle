@@ -1,0 +1,157 @@
+archivesBaseName = 'tracking.core'
+
+project.ext {
+  elasticsearchVersion = "2.3.1"
+  luceneVersion = "5.5.0"
+  releaseDir = "${buildDir}/release"
+}
+
+eclipse {
+  project {
+    name = 'tracking.core'
+  }
+}
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+}
+
+configurations {
+  trackingAppDeployJars {
+    transitive = false
+  }
+}
+
+dependencies {
+  compile project(':lib/utils')
+  compile project(':lib/buffer')
+  compile project(':lib/yara')
+  compile project(':registry/core')
+  compile project(':module/kafka')
+  compile project(':module/elasticsearch')
+
+  /*************************Scribengin runtime deploy jars***************************/
+  trackingAppDeployJars project(':lib/utils')
+  trackingAppDeployJars project(':lib/buffer')
+  trackingAppDeployJars project(':lib/yara')
+  trackingAppDeployJars project(':registry/core')
+  trackingAppDeployJars project(':module/commons')
+  trackingAppDeployJars project(':module/zookeeper')
+  trackingAppDeployJars project(':module/kafka')
+  trackingAppDeployJars project(':module/elasticsearch')
+
+  trackingAppDeployJars group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.6.2'
+  trackingAppDeployJars group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.6.2'
+  trackingAppDeployJars group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.6.2'
+  trackingAppDeployJars group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-smile', version: '2.6.2'
+  trackingAppDeployJars group: 'com.hubspot.jackson', name: 'jackson-datatype-protobuf', version: '0.6.0'
+
+  trackingAppDeployJars group: 'org.hdrhistogram', name: 'HdrHistogram', version: '2.1.7'
+
+  //trackingAppDeployJars group: 'aopalliance', name: 'aopalliance', version: '1.0'
+  //trackingAppDeployJars group: 'commons-cli', name: 'commons-cli', version: '1.2'
+  //trackingAppDeployJars group: 'commons-collections', name: 'commons-collections', version: '3.2.1'
+  //trackingAppDeployJars group: 'commons-configuration', name: 'commons-configuration', version: '1.6'
+  //trackingAppDeployJars group: 'commons-lang', name: 'commons-lang', version: '2.6'
+  //trackingAppDeployJars group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
+  //trackingAppDeployJars group: 'commons-logging', name: 'commons-logging', version: '1.1.3'
+  //trackingAppDeployJars group: 'com.amazonaws', name: 'aws-java-sdk-core', version: '1.10.5.1'
+  //trackingAppDeployJars group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.10.5.1'
+  //trackingAppDeployJars group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.3.3'
+  //trackingAppDeployJars group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.3.3'
+
+
+  trackingAppDeployJars group: 'com.google.guava', name: 'guava', version: '18.0'
+  trackingAppDeployJars group: 'com.google.inject', name: 'guice', version: '3.0'
+  trackingAppDeployJars group: 'com.google.inject.extensions', name: 'guice-multibindings', version: '3.0'
+  trackingAppDeployJars group: 'com.google.inject.extensions', name: 'guice-servlet', version: '3.0'
+ 
+ //trackingAppDeployJars group: 'org.apache.hadoop', name: 'hadoop-auth', version: '2.4.0'
+  //trackingAppDeployJars group: 'org.apache.hadoop', name: 'hadoop-common', version: '2.4.0'
+  //trackingAppDeployJars group: 'org.apache.hadoop', name: 'hadoop-hdfs', version: '2.4.0'
+  //trackingAppDeployJars group: 'org.apache.hadoop', name: 'hadoop-yarn-api', version: '2.4.0'
+  //trackingAppDeployJars group: 'org.apache.hadoop', name: 'hadoop-yarn-client', version: '2.4.0'
+  //trackingAppDeployJars group: 'org.apache.hadoop', name: 'hadoop-yarn-common', version: '2.4.0'
+  
+  trackingAppDeployJars group: 'org.apache.zookeeper', name: 'zookeeper', version: '3.4.6'
+  trackingAppDeployJars group: 'com.101tec', name: 'zkclient', version: '0.7'
+
+  trackingAppDeployJars group: 'org.javassist', name: 'javassist', version: '3.16.1-GA'
+  trackingAppDeployJars group: 'javax.inject', name: 'javax.inject', version: '1'
+  trackingAppDeployJars group: 'com.beust', name: 'jcommander', version: '1.35'
+  trackingAppDeployJars group: 'junit', name: 'junit', version: '4.11'
+  trackingAppDeployJars group: 'org.apache.kafka', name: 'kafka-clients', version: '0.9.0.1'
+  trackingAppDeployJars group: 'org.apache.kafka', name: 'kafka_2.10', version: '0.9.0.1'
+  trackingAppDeployJars group: 'log4j', name: 'log4j', version: '1.2.17'
+  //trackingAppDeployJars group: 'com.yammer.metrics', name: 'metrics-core', version: '2.2.0'
+  trackingAppDeployJars group: 'com.mycila.guice', name: 'mycila-guice-all', version: '3.2.ga'
+  trackingAppDeployJars group: 'com.mycila', name: 'mycila-jmx', version: '1.1.ga'
+  //trackingAppDeployJars group: 'io.netty', name: 'netty-all', version: '4.0.23.Final'
+  trackingAppDeployJars group: 'io.netty', name: 'netty', version: '3.10.5.Final'
+  trackingAppDeployJars group: 'com.google.protobuf', name: 'protobuf-java', version: '2.6.0'
+  trackingAppDeployJars group: 'org.reflections', name: 'reflections', version: '0.9.9-RC1'
+  trackingAppDeployJars group: 'org.scala-lang', name: 'scala-library', version: '2.10.4'
+  trackingAppDeployJars group: 'org.tap4j', name: 'tap4j', version: '4.1'
+  trackingAppDeployJars group: 'net.sf.jopt-simple', name: 'jopt-simple', version: '3.2'
+  trackingAppDeployJars group: 'org.xerial.snappy', name: 'snappy-java', version: '1.1.2'
+  trackingAppDeployJars group: 'joda-time', name: 'joda-time', version: '2.7'
+
+  trackingAppDeployJars group: 'net.openhft', name: 'chronicle', version: '3.2.2'
+  trackingAppDeployJars group: 'net.openhft', name: 'compiler', version: '2.2.0'
+  trackingAppDeployJars group: 'net.openhft', name: 'lang', version: '6.4.6'
+
+  trackingAppDeployJars group: 'org.elasticsearch', name: 'elasticsearch', version: elasticsearchVersion
+
+  trackingAppDeployJars group: 'com.twitter', name: 'jsr166e', version: '1.1.0'
+  trackingAppDeployJars group: 'com.tdunning', name: 't-digest', version: '3.0'
+  trackingAppDeployJars group: 'com.carrotsearch', name: 'hppc', version: '0.7.1'
+  trackingAppDeployJars group: 'com.ning', name: 'compress-lzf', version: '1.0.2'
+
+  trackingAppDeployJars group: 'org.apache.lucene', name: 'lucene-core', version: luceneVersion
+  trackingAppDeployJars group: 'org.apache.lucene', name: 'lucene-analyzers-common', version: luceneVersion
+  trackingAppDeployJars group: 'org.apache.lucene', name: 'lucene-queries', version: luceneVersion
+  trackingAppDeployJars group: 'org.apache.lucene', name: 'lucene-join', version: luceneVersion
+  trackingAppDeployJars group: 'org.apache.lucene', name: 'lucene-queryparser', version: luceneVersion
+  trackingAppDeployJars group: 'org.apache.lucene', name: 'lucene-sandbox', version: luceneVersion
+  trackingAppDeployJars group: 'org.apache.lucene', name: 'lucene-highlighter', version: luceneVersion
+  trackingAppDeployJars group: 'org.apache.lucene', name: 'lucene-memory', version: luceneVersion
+  trackingAppDeployJars group: 'org.apache.lucene', name: 'lucene-suggest', version: luceneVersion
+  trackingAppDeployJars group: 'org.apache.lucene', name: 'lucene-codecs', version: luceneVersion
+
+  trackingAppDeployJars group: 'org.slf4j', name: 'slf4j-api', version: '1.7.6'
+  trackingAppDeployJars group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.5'
+}
+
+task release (dependsOn: 'build') << {
+  doReleaseTrackingApp();
+}
+
+def doReleaseTrackingApp() {
+  println "\n\n"
+  println "*************************************************"
+  println "Build release scribengin to ${releaseDir}"
+  println "*************************************************"
+  
+  def trackingAppReleaseDir = "${releaseDir}/tracking" 
+
+  println "Copy the scribengin dependency library"
+  configurations.trackingAppDeployJars.each { File file -> 
+    copy {
+      from file
+      into "${trackingAppReleaseDir}/libs"
+    }
+  }
+
+  println "Copy the scribengin library"
+  copy {
+    from "${buildDir}/libs"
+    into "${trackingAppReleaseDir}/libs"
+  }
+
+  println "Copy the scribengin home resources"
+  copy {
+    from "src/app"
+    into "${trackingAppReleaseDir}"
+  }
+}

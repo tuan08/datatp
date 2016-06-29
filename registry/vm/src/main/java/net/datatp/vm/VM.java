@@ -1,0 +1,252 @@
+package net.datatp.vm;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.slf4j.Logger;
+
+import com.mycila.guice.ext.closeable.CloseableInjector;
+
+import net.datatp.module.AppContainer;
+import net.datatp.module.AppModule;
+import net.datatp.module.ServiceModuleContainer;
+import net.datatp.module.VMModule;
+import net.datatp.sys.RuntimeEnv;
+import net.datatp.util.JSONSerializer;
+import net.datatp.util.io.IOUtil;
+import net.datatp.util.io.NetworkUtil;
+import net.datatp.util.log.LoggerFactory;
+import net.datatp.vm.VMApp.TerminateEvent;
+import net.datatp.vm.command.VMCommandWatcher;
+import net.datatp.vm.service.VMService;
+import net.datattp.registry.Registry;
+import net.datattp.registry.RegistryConfig;
+import net.datattp.registry.RegistryException;
+
+public class VM {
+  static private Map<String, VM> vms = new ConcurrentHashMap<String, VM>() ;
+  
+  private Logger                 logger  ;
+
+  private VMDescriptor           vmDescriptor;
+  private VMStatus               vmStatus = VMStatus.INIT;
+
+  private AppContainer           appContainer;
+  private ServiceModuleContainer vmModuleContainer;
+  
+  private VMApplicationRunner    vmApplicationRunner;
+  
+  private Thread terminateThread = null; 
+  
+  public VM(VMConfig vmConfig) throws Exception {
+    if(vmConfig.isSelfRegistration()) {
+      vmDescriptor = new VMDescriptor(vmConfig);
+      initContainer(vmDescriptor, vmConfig);
+      logger.info("Create VM with VMConfig:");
+      logger.info(JSONSerializer.INSTANCE.toString(vmConfig));
+      logger.info("Start self registration with the registry");
+      
+      Registry registry = vmModuleContainer.getInstance(Registry.class);
+      VMService.register(registry, vmDescriptor);
+      logger.info("Finish self registration with the registry");
+    } else {
+      vmDescriptor = initContainer(null, vmConfig);
+    }
+    init();
+  }
+  
+  public Logger getLogger() { return logger; }
+  
+  public AppContainer getAppContainer() { return appContainer ; }
+  
+  public ServiceModuleContainer getVMModuleServiceContainer() { return vmModuleContainer ; }
+  
+  public LoggerFactory getLoggerFactory() { return appContainer.getLoggerFactory(); }
+  
+  public RuntimeEnv getRuntimeEnv() { return appContainer.getRuntimeEnv(); }
+  
+  private VMDescriptor initContainer(VMDescriptor vmDescriptor, final VMConfig vmConfig) throws Exception {
+    final String vmDescriptorPath = VMService.ALL_PATH + "/" + vmConfig.getVmId();
+    final RegistryConfig rConfig = vmConfig.getRegistryConfig();
+    final Registry registry = rConfig.newInstance().connect();
+    
+    if(vmDescriptor == null) {
+      vmDescriptor = registry.getDataAs(vmDescriptorPath, VMDescriptor.class);
+    }
+    final VMDescriptor finalVMDescriptor  = vmDescriptor;
+    Map<String, String> props = vmConfig.getProperties();
+    props.put("vm.registry.allocated.path", vmDescriptorPath);
+    String hostname = NetworkUtil.getHostname();
+    String localAppHome = vmConfig.getLocalAppHome();
+    String localAppDataDir = localAppHome + "/data";
+    AppModule appModule = new AppModule(hostname, vmConfig.getVmId(), localAppHome, localAppDataDir, props) {
+      @Override
+      protected void configure(Map<String, String> properties) {
+        super.configure(properties);
+        try {
+          bindInstance(VMConfig.class, vmConfig);
+          bindInstance(VMDescriptor.class, finalVMDescriptor);
+          
+          bindInstance(Registry.class, registry);
+        } catch(Exception e) {
+          e.printStackTrace();
+        }
+      }
+    };
+    appContainer = new AppContainer(appModule);
+    appContainer.onInit();
+    logger = appContainer.getLoggerFactory().getLogger(getClass());
+    appContainer.install(new HashMap<String, String>(), VMModule.NAME) ;
+    
+    vmModuleContainer = appContainer.getModule("VMModule");
+    return finalVMDescriptor;
+  }
+  
+  public VMStatus getVMStatus() { return this.vmStatus ; }
+
+  public VMDescriptor getDescriptor() { return vmDescriptor; }
+  
+  public VMApp getVMApplication() {
+    if(vmApplicationRunner == null) return null;
+    return vmApplicationRunner.vmApplication;
+  }
+  
+  public VMRegistry getVMRegistry() { return appContainer.getInstance(VMRegistry.class) ; }
+
+  public void setVMStatus(VMStatus status) throws RegistryException {
+    vmStatus = status;
+    getVMRegistry().updateStatus(status);
+  }
+  
+  
+  public void init() throws RegistryException {
+    logger.info("Start init(...)");
+    VMRegistry vmRegistry = getVMRegistry();
+    setVMStatus(VMStatus.INIT);
+    vmRegistry.addCommandWatcher(new VMCommandWatcher(this));
+    vmRegistry.createHeartbeat();
+    logger.info("Finish init(...)");
+  }
+  
+  public void run() throws Exception {
+    logger.info("Start run()");
+    if(vmApplicationRunner != null) {
+      throw new Exception("VM Application is already started");
+    }
+    VMConfig vmConfig = vmDescriptor.getVmConfig();
+    Class<VMApp> vmAppType = (Class<VMApp>)Class.forName(vmConfig.getVmApplication()) ;
+    VMApp vmApp = vmAppType.newInstance();
+    vmApp.setVM(this);
+    setVMStatus(VMStatus.RUNNING);
+    String threadName = vmApp.getVM().getDescriptor().getVmId();
+    vmApplicationRunner = new VMApplicationRunner(threadName, vmApp, vmConfig.getProperties()) ;
+    vmApplicationRunner.start();
+    logger.info("Finish run()");
+  }
+  
+  public void shutdown() throws Exception {
+    terminate(TerminateEvent.Shutdown, 1000);
+  }
+  
+  public void terminate(final TerminateEvent event, final long delay) throws Exception {
+    if(vmApplicationRunner == null || !vmApplicationRunner.isAlive()) return;
+    terminateThread = new Thread() {
+      public void run() {
+        try {
+          if(delay > 0) Thread.sleep(delay);
+          vmApplicationRunner.vmApplication.terminate(event);
+          if(!vmApplicationRunner.vmApplication.isWaittingForTerminate()) {
+            vmApplicationRunner.interrupt();
+          }
+        } catch (InterruptedException e) {
+          logger.error("Error: cannot execute the event " + event + " due to the interrupt");
+        }
+      }
+    };
+    terminateThread.start();
+  }
+
+  synchronized public void notifyComplete() {
+    notifyAll();
+  }
+  
+  synchronized public void waitForComplete() throws InterruptedException {
+    long start = System.currentTimeMillis() ;
+    logger.info("Start waitForComplete()");
+    wait();
+    logger.info("Finish waitForComplete() in " + (System.currentTimeMillis() - start) + "ms");
+  }
+  
+  public class VMApplicationRunner extends Thread {
+    VMApp vmApplication;
+    Map<String, String> properties;
+    
+    public VMApplicationRunner(String threadName, VMApp vmApplication, Map<String, String> props) {
+      super(new ThreadGroup(threadName + "-group"), threadName);
+      this.vmApplication = vmApplication;
+      this.properties = props;
+    }
+    
+    public void run() {
+      try {
+        vmApplication.run();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } catch (Exception e) {
+        logger.error("Error in vm application", e);
+      } finally {
+        try {
+          setVMStatus(VMStatus.TERMINATED);
+          appContainer.getInstance(CloseableInjector.class).close();
+          appContainer.onDestroy();
+          logger.info("Destroyed: " + vmDescriptor.getVmId() );
+          System.err.println("Destroyed: " + vmDescriptor.getVmId() );
+        } catch (RegistryException e) {
+          System.err.println("Set terminated vm status for " + vmDescriptor.getVmId() );
+          logger.error("Error in vm registry", e);
+        }
+        notifyComplete();
+      }
+    }
+  }
+  
+  static public VM getVM(VMDescriptor descriptor) {
+    return vms.get(descriptor.getVmId());
+  }
+  
+  static public void trackVM(VM vm) {
+    vms.put(vm.getDescriptor().getVmId(), vm);
+  }
+  
+  static public VM run(VMConfig vmConfig) throws Exception {
+    VM vm = new VM(vmConfig);
+    vm.run();
+    return vm;
+  }
+  
+  static public void main(String[] args) throws Exception {
+    long start = System.currentTimeMillis() ;
+    System.out.println("VM: main(..) start");
+    VMConfig vmConfig = new VMConfig(args);
+    String vmDir = vmConfig.getLocalAppHome() ;
+    System.setProperty("vm.app.dir", vmDir);
+    System.setProperty("app.home", vmDir);
+    System.setProperty("app.es.connects", "elasticsearch-1:9300");
+    
+    Properties log4jProps = new Properties();
+    log4jProps.load(IOUtil.loadRes(vmConfig.getLog4jConfigUrl()));
+    System.setProperty("log4j.app.host", vmConfig.getVmId());
+    String app = vmConfig.getVmApplication();
+    app = app.substring(app.lastIndexOf('.') + 1);
+    System.setProperty("log4j.app.name", app);
+    LoggerFactory.log4jConfigure(log4jProps);
+    
+    VM vm = new VM(vmConfig);
+    vm.run();
+    vm.waitForComplete();
+    System.out.println("VM: main(..) finish in " + (System.currentTimeMillis() - start) + "ms");
+    System.exit(0);
+  }
+}

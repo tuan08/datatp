@@ -1,0 +1,22 @@
+include 'lib/utils'
+include 'lib/yara'
+include 'lib/buffer'
+
+include 'module/commons'
+include 'module/elasticsearch'
+include 'module/zookeeper'
+include 'module/kafka'
+include 'module/flink'
+include 'module/netty'
+include 'module/spring-boot'
+
+include 'registry/core'
+include 'registry/vm'
+include 'registry/vm-sample'
+
+include 'data/feed/facebook'
+
+include 'tracking/core'
+
+include 'app/wanalytic'
+

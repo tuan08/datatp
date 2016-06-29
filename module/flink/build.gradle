@@ -1,0 +1,35 @@
+archivesBaseName = 'module.flink'
+
+eclipse {
+  project {
+    name = 'module.flink'
+  }
+}
+
+project.ext {
+  releaseDir = "${buildDir}/release"
+}
+
+configurations {
+  deployJars {
+    transitive = false
+  }
+}
+
+
+dependencies {
+  compile project(':lib/utils')
+  compile project(':module/commons')
+  compile project(':module/zookeeper')
+  compile project(':module/kafka')
+
+  compile group: 'com.beust', name: 'jcommander', version: '1.35'
+
+  compile group: 'org.apache.flink', name: 'flink-java', version: '1.0.3'
+  compile group: 'org.apache.flink', name: 'flink-core', version: '1.0.3'
+  compile group: 'org.apache.flink', name: 'flink-streaming-java_2.10', version: '1.0.3'
+  compile group: 'org.apache.flink', name: 'flink-clients_2.10', version: '1.0.3'
+
+  compile group: 'io.dropwizard', name: 'dropwizard-core', version: '0.9.2'
+  compile group: 'io.dropwizard', name: 'dropwizard-jackson', version: '0.9.2'
+}

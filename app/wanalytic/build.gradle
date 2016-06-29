@@ -1,0 +1,20 @@
+archivesBaseName = 'app.wanalytic'
+
+project.ext {
+  releaseDir   = "${buildDir}/release"
+}
+
+eclipse {
+  project {
+    name = 'app.wanalytic'
+  }
+}
+
+dependencies {
+  compile project(':module/commons')
+  compile project(':module/kafka')
+  compile project(':module/elasticsearch')
+  compile project(':module/flink')
+
+  compile project(':data/feed/facebook')
+}

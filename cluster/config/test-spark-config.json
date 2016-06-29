@@ -1,0 +1,76 @@
+{
+  "properties": {
+    "account_dev":        "dev",
+    "projects_dir":       "/home/tuan/projects",
+    "app_release_dir":    "${projects_dir}/tuan/tuan08.net/neverwinterdp/release/build/release",
+    "app_repository_dir": "${projects_dir}/AppRepo",
+    "hadoop_home":        "/opt/hadoop",
+    "spark_home":         "/opt/spark"
+  },
+
+  "images": {
+    "base": { "repository": "ubuntu" }
+  },
+
+  "servers": {
+    "hadoop_master": { 
+      "useImage": "ubuntu:base", "hostname": "hadoop-master",  "instance": 1, "cpu": 1, "mem": "1GB", "priority": 1,
+      "services": {
+        "hadoop": {
+          "configure" : {
+            "execute": [ "${hadoop_home}/bin/hdfs namenode -format" ]
+          },
+          "processes": [ "namenode", "secondarynamenode", "resourcemanager" ]
+        },
+
+        "spark": { }
+      }
+    },
+
+    "hadoop_worker": { 
+      "useImage": "ubuntu:base", "hostname": "hadoop-worker", "instance": 3, "cpu": 1, "mem": "4GB", "priority": 2,
+      "services": {
+        "hadoop": {
+          "processes": ["datanode", "nodemanager"]
+        } 
+      }
+    }
+  },
+
+  "services": {
+    "hadoop": { 
+      "install": { 
+        "source": "${app_repository_dir}/hadoop-2.7.2.tar.gz", "destination": "${hadoop_home}", "type": "scptgz"
+      },
+      "configure": {
+        "patch": {
+          "resourceDir": "${base_dir}/config/hadoop",
+          "resources":[
+            {
+              "file": "etc/hadoop/masters",
+              "append": [ "@context.getHadoopMasterConfig()" ]
+            },
+            {
+              "file": "etc/hadoop/slaves",
+              "append": [ "@context.getHadoopSlaveConfig()" ]
+            }
+          ]
+        }
+      }
+    },
+
+
+    "spark": { 
+      "install": { 
+        "source": "${app_repository_dir}/spark-1.6.1-bin-hadoop2.6.tgz", "destination": "${spark_home}", "type": "scptgz"
+      },
+      "configure": {
+        "patch": {
+          "resourceDir": "${base_dir}/config/spark",
+          "resources":[
+          ]
+        }
+      }
+    }
+  }
+}

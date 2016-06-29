@@ -1,0 +1,20 @@
+archivesBaseName = 'module.spark'
+
+project.ext {
+  releaseDir   = "${buildDir}/release"
+  //sparkVersion = "1.6.1"
+  sparkVersion = "2.0.0-SNAPSHOT"
+}
+
+eclipse {
+  project {
+    name = 'module.spark'
+  }
+}
+
+dependencies {
+  compile group: 'org.apache.spark', name: 'spark-core_2.11', version: sparkVersion
+  compile group: 'org.apache.spark', name: 'spark-streaming_2.11', version: sparkVersion
+  compile group: 'org.apache.spark', name: 'spark-mllib_2.11', version: sparkVersion
+  compile group: 'org.apache.spark', name: 'spark-sql_2.11', version: sparkVersion
+}
