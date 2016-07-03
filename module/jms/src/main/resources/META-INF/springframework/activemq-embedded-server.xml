@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/jms 
+                           http://www.springframework.org/schema/jms/spring-jms.xsd
+                           http://activemq.apache.org/schema/core 
+                           http://activemq.apache.org/schema/core/activemq-core.xsd">
+ 
+<!--
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+        p:systemPropertiesModeName="SYSTEM_PROPERTIES_MODE_OVERRIDE">
+    <property name="locations">
+      <list>
+        <value>classpath:/activemq.properties</value>
+      </list>
+    </property>
+  </bean>
+-->
+
+  <!--  Embedded ActiveMQ Broker -->
+  <amq:broker id="broker" useJmx="true" persistent="true" dataDirectory="${activemq.db.directory}">
+    <amq:destinationPolicy>
+      <amq:policyMap>
+        <amq:policyEntries>
+          <amq:policyEntry topic=">" producerFlowControl="true" memoryLimit="25mb">
+            <amq:pendingSubscriberPolicy>
+              <amq:vmCursor />
+            </amq:pendingSubscriberPolicy>
+          </amq:policyEntry>
+          <amq:policyEntry queue=">" producerFlowControl="false" memoryLimit="25mb">
+            <amq:dispatchPolicy>
+              <amq:roundRobinDispatchPolicy />
+            </amq:dispatchPolicy>
+            <!-- Use VM cursor for better latency For more information, see: http://activemq.apache.org/message-cursors.html -->
+            <!--
+              <amq:vmQueueCursor/>
+              <amq:fileQueueCursor/>
+            -->
+            <amq:pendingQueuePolicy>
+              <amq:fileQueueCursor/>
+            </amq:pendingQueuePolicy>
+          </amq:policyEntry>
+        </amq:policyEntries>
+      </amq:policyMap>
+    </amq:destinationPolicy> 
+
+    <amq:persistenceAdapter>
+      <!--
+      <amq:amqPersistenceAdapter directory="${activemq.db.directory}" cleanupInterval="30000" maxFileLength="32mb"/>
+      -->
+      <amq:kahaDB directory="${activemq.db.directory}/kahadb"/>
+    </amq:persistenceAdapter>
+
+    <amq:systemUsage>
+      <amq:systemUsage>
+        <amq:memoryUsage>
+          <amq:memoryUsage limit="150 mb"/>
+        </amq:memoryUsage>
+        <amq:storeUsage>
+          <amq:storeUsage limit="100 gb"/>
+        </amq:storeUsage>
+        <amq:tempUsage>
+          <amq:tempUsage limit="100 gb"/>
+        </amq:tempUsage>
+      </amq:systemUsage>
+    </amq:systemUsage>
+
+    <amq:transportConnectors>
+      <amq:transportConnector name="tcp" uri="tcp://localhost:61616" />
+      <amq:transportConnector name="nio" uri="nio://localhost:61617" />
+      <amq:transportConnector name="vm"  uri="vm://localhost" />
+    </amq:transportConnectors>
+  </amq:broker>
+
+<!--
+  <import resource="classpath:/META-INF/springframework/activemq-connection-factory.xml"/>
+-->
+</beans>

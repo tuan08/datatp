@@ -10,6 +10,7 @@ include 'module/kafka'
 include 'module/flink'
 include 'module/netty'
 include 'module/spring-framework'
+include 'module/jms'
 
 include 'registry/core'
 include 'registry/vm'

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/jms 
+                           http://www.springframework.org/schema/jms/spring-jms.xsd
+                           http://activemq.apache.org/schema/core 
+                           http://activemq.apache.org/schema/core/activemq-core.xsd">
+ 
+  <import resource="classpath:/META-INF/springframework/activemq-connection-factory.xml"/>
+
+  <!--  ActiveMQ Destination  -->
+  <amq:queue id="destination" physicalName="jms.sample" />
+
+
+  <!-- JMS Producer Configuration -->
+  <bean id="jmsProducerTemplate" class="org.springframework.jms.core.JmsTemplate"
+        p:connectionFactory-ref="jmsCF" p:defaultDestination-ref="destination" />
+
+  <!-- JMS Consumer Configuration -->
+  <jms:listener-container container-type="default" connection-factory="jmsCF" acknowledge="auto">
+    <jms:listener destination="jms.sample" ref="jmsMessageListener" />
+  </jms:listener-container>
+
+  <!-- Counter for consumer to increment and test to verify count -->
+  <bean id="counter" class="java.util.concurrent.atomic.AtomicInteger" />
+</beans>

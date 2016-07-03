@@ -19,12 +19,12 @@ configurations {
 }
 
 dependencies {
-  compile("org.springframework.integration:spring-integration-core:${springIntegrationVersion}")
 
   compile("org.springframework.boot:spring-boot-starter:${springBootVersion}") {
     exclude module : "spring-boot-starter-logging"
   }
 
+  compile("org.springframework.integration:spring-integration-core:${springFrameworkVersion}")
   compile ("org.springframework.boot:spring-boot-loader:${springBootVersion}")
 
   compile ("commons-logging:commons-logging")

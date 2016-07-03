@@ -1,0 +1,23 @@
+archivesBaseName = "module.jms"
+
+eclipse {
+  project {
+    name = "module.jms"
+  }
+}
+
+configurations {
+  deployJars {
+    transitive = false
+  }
+}
+
+dependencies {
+  compile project(':lib/utils')
+  compile project(':module/spring-framework')
+
+  compile("org.springframework:spring-jms:${springFrameworkVersion}")
+  compile("org.apache.activemq:activemq-all:${activeMQVersion}")
+
+  testCompile("org.springframework:spring-test:${springFrameworkVersion}")
+}
