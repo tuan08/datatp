@@ -1,0 +1,43 @@
+archivesBaseName = "module.spring-framework"
+
+apply plugin: "spring-boot" 
+
+eclipse {
+  project {
+    name = "module.spring-framework"
+  }
+}
+
+springBoot {
+  mainClass = "net.datatp.springframework.MultipleApplication"
+}
+
+configurations {
+  deployJars {
+    transitive = false
+  }
+}
+
+dependencies {
+  compile("org.springframework.integration:spring-integration-core:${springIntegrationVersion}")
+
+  compile("org.springframework.boot:spring-boot-starter:${springBootVersion}") {
+    exclude module : "spring-boot-starter-logging"
+  }
+
+  compile ("org.springframework.boot:spring-boot-loader:${springBootVersion}")
+
+  compile ("commons-logging:commons-logging")
+
+  testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+}
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+  }
+}

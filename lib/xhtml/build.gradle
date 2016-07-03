@@ -1,0 +1,16 @@
+archivesBaseName = 'lib.xhtml'
+
+eclipse {
+  project {
+    name = 'lib.xhtml'
+  }
+}
+
+dependencies {
+  compile project(':lib/utils')
+
+  compile group: 'org.jsoup', name: 'jsoup', version: '1.9.2'
+  compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
+  compile group: 'net.sourceforge.htmlcleaner', name: 'htmlcleaner', version: '2.16'
+  compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.2'
+}
