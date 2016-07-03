@@ -7,7 +7,7 @@ import net.datatp.storage.batchdb.Database;
 import net.datatp.storage.batchdb.DatabaseConfiguration;
 import net.datatp.storage.batchdb.RowIdPartitioner;
 import net.datatp.storage.batchdb.RowDatas.RowData;
-import net.datatp.storage.batchdb.util.HDFSUtil;
+import net.datatp.storage.hdfs.HDFSUtil;
 import net.datatp.util.io.FileUtil;
 
 public class DatabaseNewUnitTest {

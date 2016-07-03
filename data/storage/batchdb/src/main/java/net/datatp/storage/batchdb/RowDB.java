@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.apache.hadoop.fs.FileSystem;
 
-import net.datatp.storage.batchdb.util.HDFSUtil;
+import net.datatp.storage.hdfs.HDFSUtil;
 
 public class RowDB {
   private String name ;

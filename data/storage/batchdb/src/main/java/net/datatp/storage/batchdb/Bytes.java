@@ -4,8 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 public class Bytes {
-	static Charset UTF8 = Charset.forName("UTF-8") ;
-	
+  static Charset UTF8 = Charset.forName("UTF-8") ;
+
   public static final int SIZEOF_BOOLEAN = Byte.SIZE/Byte.SIZE;
   public static final int SIZEOF_BYTE = SIZEOF_BOOLEAN;
   public static final int SIZEOF_CHAR = Character.SIZE/Byte.SIZE;
@@ -62,7 +62,7 @@ public class Bytes {
           result.append(String.format("\\x%02X", ch));
         }
       }
-    } catch ( UnsupportedEncodingException e) {
+    } catch (UnsupportedEncodingException e) {
       e.printStackTrace();
     }
     return result.toString();
@@ -328,7 +328,7 @@ public class Bytes {
 
   public static char toChar(byte[] bytes, int offset, final int length) {
     if (bytes == null || length != SIZEOF_CHAR ||
-      (offset + length > bytes.length)) {
+        (offset + length > bytes.length)) {
       return (char)-1;
     }
     char n = 0;

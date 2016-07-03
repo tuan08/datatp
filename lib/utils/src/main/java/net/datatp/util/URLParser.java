@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 import net.datatp.util.text.StringUtil;
 
-public class URLNormalizer {
+public class URLParser {
   private Pattern PARAM_SEPARATOR = Pattern.compile("&amp;|&") ;
 
   private String url ;
@@ -23,7 +23,7 @@ public class URLNormalizer {
 
   private TreeMap<String, String[]> params ;
 
-  public URLNormalizer(String url) {
+  public URLParser(String url) {
     this.url = url ;
     String string = url.trim() ;
 
@@ -58,9 +58,6 @@ public class URLNormalizer {
     if(questionMark > 0) {
       this.path = string.substring(0, questionMark) ;
       string = string.substring(questionMark + 1, string.length()) ;
-      //    } else if(string.indexOf(".htm") > 0){
-      //      this.path = string.substring(0, string.lastIndexOf('/'));
-      //      string = string.substring(string.lastIndexOf('/'), string.length()) ;
     } else {
       this.path = string ;
       string = null ;
@@ -177,7 +174,7 @@ public class URLNormalizer {
     }
   }
 
-  final public String[] getSources() { return getDomains(this.host) ; }
+  final public String[] getSources() { return getDomains(host) ; }
 
   public String[] getParamKeys() {
     if(params == null) return StringUtil.EMPTY_ARRAY ;
@@ -222,11 +219,6 @@ public class URLNormalizer {
     }
     return ext;
   }
-
-  //  public String getMD5Id() {
-  //  	MD5 md5 = MD5.digest(getNormalizeURL().toLowerCase()) ;
-  //  	return md5.toString();
-  //  }
 
   public List<String> getPathSegments() {
     return StringUtil.split(getPath(), '/') ;

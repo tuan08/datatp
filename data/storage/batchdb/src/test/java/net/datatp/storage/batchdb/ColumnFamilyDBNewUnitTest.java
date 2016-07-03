@@ -10,7 +10,7 @@ import net.datatp.storage.batchdb.ColumnDefinition;
 import net.datatp.storage.batchdb.ColumnFamilyDB;
 import net.datatp.storage.batchdb.ColumnFamilyIterator;
 import net.datatp.storage.batchdb.DatabaseConfiguration;
-import net.datatp.storage.batchdb.util.HDFSUtil;
+import net.datatp.storage.hdfs.HDFSUtil;
 import net.datatp.util.io.FileUtil;
 
 public class ColumnFamilyDBNewUnitTest {

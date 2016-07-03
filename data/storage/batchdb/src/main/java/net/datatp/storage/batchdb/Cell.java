@@ -49,7 +49,9 @@ public class Cell extends TreeMap<byte[], byte[]> implements Writable {
     if(value == null) {
       removeField(name) ;
       return null ;
-    } else return new Text(value) ;
+    } else {
+      return new Text(value) ;
+    }
   }
 
   public byte getFieldAsByte(String name) {

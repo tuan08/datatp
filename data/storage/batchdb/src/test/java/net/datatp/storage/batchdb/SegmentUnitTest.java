@@ -15,7 +15,7 @@ import net.datatp.storage.batchdb.MultiSegmentIterator;
 import net.datatp.storage.batchdb.RowId;
 import net.datatp.storage.batchdb.Segment;
 import net.datatp.storage.batchdb.TextUtil;
-import net.datatp.storage.batchdb.util.HDFSUtil;
+import net.datatp.storage.hdfs.HDFSUtil;
 import net.datatp.util.io.FileUtil;
 
 public class SegmentUnitTest {

@@ -5,6 +5,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import net.datatp.spark.examples.ml.DecisionTreeClassificationExample;
+import net.datatp.spark.examples.ml.DecisionTreeRegressionExample;
+
 public class SparkUnitTest {
   private SparkSession spark ;
 

@@ -12,11 +12,14 @@ subprojects {
   apply plugin: 'maven-publish'
 
   project.ext {
-    elasticsearchVersion = "2.3.3"
-    luceneVersion = "5.5.0"
-    hadoopVersion = "2.7.2"
-    flinkVersion = "1.0.3"
-    springBootVersion = '1.3.5.RELEASE'
+    luceneVersion            = "5.5.0"
+    elasticsearchVersion     = "2.3.3"
+    hadoopVersion            = "2.7.2"
+    flinkVersion             = "1.0.3"
+    springBootVersion        = '1.3.5.RELEASE'
+    springIntegrationVersion = '4.3.0.RELEASE'
+    activeMQVersion          = '5.13.0'
+
     releaseDir = "${buildDir}/release"
   }
 

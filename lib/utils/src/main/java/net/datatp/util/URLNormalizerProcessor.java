@@ -6,5 +6,5 @@ package net.datatp.util;
  * Aug 2, 2010  
  */
 public interface URLNormalizerProcessor {
-  public void process(URLNormalizer urlnorm) ;
+  public void process(URLParser urlnorm) ;
 }

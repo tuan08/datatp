@@ -1,4 +1,4 @@
-package net.datatp.storage.batchdb.util;
+package net.datatp.storage.hdfs;
 
 import java.io.IOException;
 import java.util.List;
@@ -63,7 +63,7 @@ public class HDFSUtil {
     FileStatus[] children = fs.listStatus(path) ;
     if(children == null) return ;
     for(int i = 0; i < children.length; i++) {
-      if(!children[i].isDir()) {
+      if(children[i].isFile()) {
         Path childPath = children[i].getPath() ;
         if(ext == null) {
           holder.add(childPath) ;

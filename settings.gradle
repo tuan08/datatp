@@ -1,6 +1,7 @@
 include 'lib/utils'
 include 'lib/yara'
 include 'lib/buffer'
+include 'lib/xhtml'
 
 include 'module/commons'
 include 'module/elasticsearch'
@@ -8,16 +9,16 @@ include 'module/zookeeper'
 include 'module/kafka'
 include 'module/flink'
 include 'module/netty'
-include 'module/spring-boot'
+include 'module/spring-framework'
 
 include 'registry/core'
 include 'registry/vm'
 include 'registry/vm-sample'
 
 include 'data/feed/facebook'
+include 'data/feed/webcrawler/core'
 include 'data/storage/batchdb'
 
 include 'tracking/core'
 
 include 'app/wanalytic'
-

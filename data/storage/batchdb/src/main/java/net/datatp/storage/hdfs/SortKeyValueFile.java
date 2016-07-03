@@ -1,4 +1,4 @@
-package net.datatp.storage.batchdb.util;
+package net.datatp.storage.hdfs;
 
 import java.io.IOException;
 
@@ -7,6 +7,7 @@ import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.SequenceFile;
+import org.apache.hadoop.io.SequenceFile.CompressionType;
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.io.compress.DefaultCodec;
@@ -15,26 +16,32 @@ import org.apache.hadoop.io.compress.DefaultCodec;
  *          tuan.nguyen@headvances.com
  * Apr 19, 2010  
  */
-public class SequenceFileUtil<K extends WritableComparable, V extends Writable> {
+public class SortKeyValueFile<K extends WritableComparable, V extends Writable> {
   static DefaultCodec CODEC = new DefaultCodec() ;
   
   private FileSystem fs ;
   private String path ;
   private Class<K> keyType ;
   private Class<V> valueType ;
+  private static DefaultCodec codec;
   
-  public SequenceFileUtil(FileSystem fs, String path, Class<K> keyType, Class<V> valueType) {
+  public SortKeyValueFile(FileSystem fs, String path, Class<K> keyType, Class<V> valueType) {
+    this(fs, path, keyType, valueType, CODEC);
+  }
+  
+  public SortKeyValueFile(FileSystem fs, String path, Class<K> keyType, Class<V> valueType, DefaultCodec codec) {
     this.fs = fs ;
     this.path = path ;
     this.keyType = keyType; 
     this.valueType = valueType ;
+    this.codec = codec ;
   }
   
-  public SequenceFileUtil(Configuration conf, String path, Class<K> keyType, Class<V> valueType) throws IOException {
+  public SortKeyValueFile(Configuration conf, String path, Class<K> keyType, Class<V> valueType) throws IOException {
     this(FileSystem.get(conf), path, keyType, valueType) ;
   }
 
-  public SequenceFileUtil(FileSystem fs, String dir, String fname, Class<K> keyType, Class<V> valueType) throws IOException {
+  public SortKeyValueFile(FileSystem fs, String dir, String fname, Class<K> keyType, Class<V> valueType) throws IOException {
     this(fs, dir + "/" + fname, keyType, valueType) ;
     HDFSUtil.mkdirs(fs, dir) ;
   }
@@ -51,7 +58,10 @@ public class SequenceFileUtil<K extends WritableComparable, V extends Writable> 
   public SequenceFile.Reader getReader() throws IOException {
     Path path = new Path(getPath()) ;
     if(!fs.exists(path)) return null ;
-    SequenceFile.Reader reader = new SequenceFile.Reader(fs, path, fs.getConf()) ;
+    SequenceFile.Reader.Option[] opts = {
+      SequenceFile.Reader.file(path)
+    };
+    SequenceFile.Reader reader = new SequenceFile.Reader(fs.getConf(), opts) ;
     return reader ;
   }
   
@@ -76,20 +86,17 @@ public class SequenceFileUtil<K extends WritableComparable, V extends Writable> 
       this.path = path ;
       this.sortAtClose = sortAtClose ;
       SequenceFile.Metadata meta = new SequenceFile.Metadata() ;
-      this.writer = SequenceFile.createWriter(
-          fs,                   //FileSystem 
-          fs.getConf(),  // configuration 
-          new Path(path + ".writer"),          // the path
-          keyType,            // Key Class
-          valueType,      // Value Class
-          fs.getConf().getInt("io.file.buffer.size", 4096), //buffer size 
-          fs.getDefaultReplication(),  //frequency of replication 
-          fs.getDefaultBlockSize(), // default to 32MB: large enough to minimize the impact of seeks 
-          SequenceFile.CompressionType.BLOCK,   //Compress method
-          CODEC,      // compression codec
-          null,       //progressor
-          meta        // File Metadata
-      ) ;
+      Path writePath = new Path(path + ".writer");
+      SequenceFile.Writer.Option[] opts = {
+        SequenceFile.Writer.file(writePath),
+        SequenceFile.Writer.keyClass(keyType),
+        SequenceFile.Writer.valueClass(valueType),
+        SequenceFile.Writer.compression(CompressionType.RECORD,  codec),
+        SequenceFile.Writer.replication(fs.getDefaultReplication(writePath)),
+        SequenceFile.Writer.blockSize(fs.getFileStatus(writePath).getBlockSize()),
+        SequenceFile.Writer.metadata(meta)
+      };
+      this.writer = SequenceFile.createWriter(fs.getConf(), opts);
     }
 
     public void append(K key, V value) throws IOException {

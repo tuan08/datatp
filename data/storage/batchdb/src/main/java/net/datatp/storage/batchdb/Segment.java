@@ -7,11 +7,12 @@ import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.SequenceFile;
+import org.apache.hadoop.io.SequenceFile.CompressionType;
 import org.apache.hadoop.io.compress.CompressionCodec ;
 import org.apache.hadoop.io.compress.DefaultCodec;
 import org.apache.hadoop.io.compress.GzipCodec ;
 
-import net.datatp.storage.batchdb.util.HDFSUtil;
+import net.datatp.storage.hdfs.HDFSUtil;
 
 /**
  * Author : Tuan Nguyen
@@ -107,20 +108,32 @@ public class Segment implements Comparable<Segment>{
       this.path = path ;
       this.fs = fs ;
       SequenceFile.Metadata meta = new SequenceFile.Metadata() ;
-      this.writer = SequenceFile.createWriter(
-          fs,                   //FileSystem 
-          fs.getConf(),  // configuration 
-          new Path(path + ".writer"),          // the path
-          RowId.class,            // Key Class
-          Cell.class,      // Value Class
-          fs.getConf().getInt("io.file.buffer.size", 4096), //buffer size 
-          fs.getDefaultReplication(),  //frequency of replication 
-          fs.getDefaultBlockSize(), // default to 32MB: large enough to minimize the impact of seeks 
-          SequenceFile.CompressionType.BLOCK,   //Compress method
-          codec,      // compression codec
-          null,                  //progressor
-          meta            // File Metadata
-          ) ;
+      Path writePath = new Path(path + ".writer");
+      FileStatus dbPathStatus = fs.getFileStatus(new Path(dblocation));
+      SequenceFile.Writer.Option[] opts = {
+        SequenceFile.Writer.file(writePath),
+        SequenceFile.Writer.keyClass(RowId.class),
+        SequenceFile.Writer.valueClass(Cell.class),
+        SequenceFile.Writer.compression(CompressionType.RECORD,  codec),
+        SequenceFile.Writer.replication(dbPathStatus.getReplication()),
+        SequenceFile.Writer.blockSize(dbPathStatus.getBlockSize()),
+        SequenceFile.Writer.metadata(meta)
+      };
+      this.writer = SequenceFile.createWriter(fs.getConf(), opts);
+//      this.writer = SequenceFile.createWriter(
+//          fs,                   //FileSystem 
+//          fs.getConf(),  // configuration 
+//          new Path(path + ".writer"),          // the path
+//          RowId.class,            // Key Class
+//          Cell.class,      // Value Class
+//          fs.getConf().getInt("io.file.buffer.size", 4096), //buffer size 
+//          fs.getDefaultReplication(),  //frequency of replication 
+//          fs.getDefaultBlockSize(), // default to 32MB: large enough to minimize the impact of seeks 
+//          SequenceFile.CompressionType.BLOCK,   //Compress method
+//          codec,      // compression codec
+//          null,                  //progressor
+//          meta            // File Metadata
+//          ) ;
     }
 
     public void append(RowId key, Cell value) throws IOException {
