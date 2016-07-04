@@ -12,13 +12,14 @@ configurations {
   }
 }
 
-
 dependencies {
   compile project(':lib/utils')
   compile project(':lib/xhtml')
-  compile project(':module/commons')
-  compile project(':module/spring-framework')
+  compile project(':module/spring-framework') 
+  compile project(':module/jms')
   compile project(':data/storage/batchdb')
 
   compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.2'
+
+  testCompile("org.springframework:spring-test:${springFrameworkVersion}")
 }

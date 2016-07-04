@@ -5,7 +5,7 @@ import net.datatp.webcrawler.site.SiteContext;
 
 /**
  * Author : Tuan Nguyen
- *          tuan.nguyen@headvances.com
+ *          tuan08@gmail.com
  * May 4, 2010  
  */
 public class URLContext {

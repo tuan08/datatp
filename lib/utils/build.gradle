@@ -12,7 +12,6 @@ project.ext {
 }
 
 dependencies {
-  compile group: 'com.google.guava', name: 'guava', version: '18.0'
 
   compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jacksonVersion
   compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion

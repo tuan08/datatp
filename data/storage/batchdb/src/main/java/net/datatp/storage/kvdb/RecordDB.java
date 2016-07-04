@@ -43,7 +43,9 @@ abstract public class RecordDB<K extends WritableComparable<?>, V extends Record
   
   synchronized public void reload() throws Exception {
     FileSystem fs = FileSystem.get(configuration) ;
-    FileStatus[] status = fs.listStatus(new Path(dblocation)) ;
+    Path dbLocationPath = new Path(dblocation);
+    if(!fs.exists(dbLocationPath)) fs.mkdirs(dbLocationPath);
+    FileStatus[] status = fs.listStatus(dbLocationPath) ;
     List<Segment<K, V>> holder = new ArrayList<Segment<K,V>>() ;
     for(int i = 0; i < status.length; i++) {
       Path path = status[i].getPath() ;

@@ -21,10 +21,13 @@ configurations {
 dependencies {
 
   compile("org.springframework.boot:spring-boot-starter:${springBootVersion}") {
-    exclude module : "spring-boot-starter-logging"
+    exclude module: "spring-boot-starter-logging"
+    exclude module: "logback-classic"
   }
 
   compile("org.springframework.integration:spring-integration-core:${springFrameworkVersion}")
+  compile("org.springframework.integration:spring-integration-jmx:${springFrameworkVersion}")
+
   compile ("org.springframework.boot:spring-boot-loader:${springBootVersion}")
 
   compile ("commons-logging:commons-logging")

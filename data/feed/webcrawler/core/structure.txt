@@ -1,0 +1,2791 @@
+:data/feed/webcrawler/core:dependencies
+
+------------------------------------------------------------
+Project :data/feed/webcrawler/core
+------------------------------------------------------------
+
+archives - Configuration for archive artifacts.
+No dependencies
+
+compile - Dependencies for source set 'main'.
++--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
++--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    \--- log4j:log4j:1.2.17
++--- org.reflections:reflections:0.9.9-RC1
+|    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    +--- org.javassist:javassist:3.16.1-GA
+|    \--- dom4j:dom4j:1.6.1
+|         \--- xml-apis:xml-apis:1.0.b2 -> 1.4.01
++--- project :lib/utils
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.7.2
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.7.0 -> 2.7.2
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    \--- com.fasterxml.jackson.core:jackson-annotations:2.7.2
++--- project :lib/xhtml
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.jsoup:jsoup:1.9.2
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.22
+|    |    \--- xerces:xercesImpl:2.11.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    +--- net.sourceforge.htmlcleaner:htmlcleaner:2.16
+|    |    \--- org.jdom:jdom2:2.0.5
+|    \--- org.apache.httpcomponents:httpclient:4.5.2
+|         +--- org.apache.httpcomponents:httpcore:4.4.4
+|         +--- commons-logging:commons-logging:1.2
+|         \--- commons-codec:commons-codec:1.9
++--- project :module/commons
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :lib/yara
+|    |    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    |    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    |    \--- project :lib/utils (*)
+|    +--- com.google.guava:guava:18.0
+|    +--- com.beust:jcommander:1.35
+|    +--- com.google.inject:guice:3.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    \--- org.sonatype.sisu.inject:cglib:2.2.1-v20090111
+|    |         \--- asm:asm:3.1
+|    +--- org.hdrhistogram:HdrHistogram:2.1.7
+|    +--- org.tap4j:tap4j:4.1
+|    |    \--- org.yaml:snakeyaml:1.11 -> 1.16
+|    +--- com.google.inject.extensions:guice-jmx:3.0
+|    |    \--- com.google.inject:guice:3.0 (*)
+|    +--- com.mycila.guice:mycila-guice-all:3.6.ga
+|    |    +--- org.sonatype.sisu:sisu-guice:3.2.3
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- com.google.guava:guava:18.0
+|    |    +--- org.codehaus.groovy:groovy-all:2.1.6
+|    |    \--- com.mycila.guice:guice-servlet:3.6.ga
+|    |         +--- org.sonatype.sisu:sisu-guice:3.2.3 (*)
+|    |         \--- com.google.guava:guava:18.0
+|    \--- com.mycila:mycila-jmx:1.1.ga
+|         +--- org.sonatype.sisu:sisu-guice:3.1.0 -> 3.2.3 (*)
+|         \--- com.google.guava:guava:14.0.1 -> 18.0
++--- project :module/spring-framework
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.3.5.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |    |    \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-context:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.2.6.RELEASE
+|    |    |         |    +--- aopalliance:aopalliance:1.0
+|    |    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         \--- org.springframework:spring-expression:4.2.6.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    \--- org.yaml:snakeyaml:1.16
+|    +--- org.springframework.integration:spring-integration-core:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-core:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-tx:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.retry:spring-retry:1.1.2.RELEASE
+|    |    |    \--- org.springframework:spring-core:4.0.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-messaging:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-loader:1.3.5.RELEASE
+|    \--- commons-logging:commons-logging: -> 1.2
++--- project :module/jms
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :module/spring-framework (*)
+|    +--- org.springframework:spring-jms:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-messaging:4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.6.RELEASE (*)
+|    \--- org.apache.activemq:activemq-all:5.13.0
++--- project :data/storage/batchdb
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.apache.hadoop:hadoop-common:2.7.2
+|    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- org.apache.commons:commons-math3:3.1.1
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- commons-httpclient:commons-httpclient:3.1
+|    |    |    +--- commons-logging:commons-logging:1.0.4 -> 1.2
+|    |    |    \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-net:commons-net:3.1
+|    |    +--- commons-collections:commons-collections:3.2.2
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.mortbay.jetty:jetty:6.1.26
+|    |    |    \--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- javax.servlet.jsp:jsp-api:2.1
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-json:1.9
+|    |    |    +--- org.codehaus.jettison:jettison:1.1
+|    |    |    +--- com.sun.xml.bind:jaxb-impl:2.2.3-1
+|    |    |    |    \--- javax.xml.bind:jaxb-api:2.2.2
+|    |    |    |         +--- javax.xml.stream:stax-api:1.0-2
+|    |    |    |         \--- javax.activation:activation:1.1
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.3 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.3 -> 1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-jaxrs:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    +--- org.codehaus.jackson:jackson-xc:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9
+|    |    |    +--- asm:asm:3.1
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- net.java.dev.jets3t:jets3t:0.9.0
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.1.2 -> 4.5.2 (*)
+|    |    |    +--- org.apache.httpcomponents:httpcore:4.1.2 -> 4.4.4
+|    |    |    \--- com.jamesmurty.utils:java-xmlbuilder:0.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-configuration:commons-configuration:1.6
+|    |    |    +--- commons-collections:commons-collections:3.2.1 -> 3.2.2
+|    |    |    +--- commons-lang:commons-lang:2.4 -> 2.6
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- commons-digester:commons-digester:1.8
+|    |    |    |    +--- commons-beanutils:commons-beanutils:1.7.0
+|    |    |    |    |    \--- commons-logging:commons-logging:1.0.3 -> 1.2
+|    |    |    |    \--- commons-logging:commons-logging:1.1 -> 1.2
+|    |    |    \--- commons-beanutils:commons-beanutils-core:1.8.0
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- org.apache.avro:avro:1.7.4
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.8 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.8 -> 1.9.13 (*)
+|    |    |    +--- com.thoughtworks.paranamer:paranamer:2.3
+|    |    |    +--- org.xerial.snappy:snappy-java:1.0.4.1
+|    |    |    +--- org.apache.commons:commons-compress:1.4.1
+|    |    |    |    \--- org.tukaani:xz:1.0
+|    |    |    \--- org.slf4j:slf4j-api:1.6.4 -> 1.7.10
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- com.google.code.gson:gson:2.2.4
+|    |    +--- org.apache.hadoop:hadoop-auth:2.7.2
+|    |    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.2.5 -> 4.5.2 (*)
+|    |    |    +--- org.apache.directory.server:apacheds-kerberos-codec:2.0.0-M15
+|    |    |    |    +--- org.apache.directory.server:apacheds-i18n:2.0.0-M15
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-util:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6
+|    |    |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|    |    |    |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.10 (*)
+|    |    |    |    +--- log4j:log4j:1.2.16 -> 1.2.17
+|    |    |    |    +--- jline:jline:0.9.94
+|    |    |    |    \--- io.netty:netty:3.7.0.Final
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1
+|    |    |    |    +--- org.apache.curator:curator-client:2.7.1
+|    |    |    |    |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.10
+|    |    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    +--- log4j:log4j:1.2.17
+|    |    |    \--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- com.jcraft:jsch:0.1.42
+|    |    +--- org.apache.curator:curator-client:2.7.1 (*)
+|    |    +--- org.apache.curator:curator-recipes:2.7.1
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1 (*)
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- com.google.code.findbugs:jsr305:3.0.0
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    \--- org.apache.commons:commons-compress:1.4.1 (*)
+|    +--- org.apache.hadoop:hadoop-hdfs:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- org.mortbay.jetty:jetty:6.1.26 (*)
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- commons-daemon:commons-daemon:1.0.13
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
+|    |    +--- io.netty:netty-all:4.0.23.Final
+|    |    +--- xerces:xercesImpl:2.9.1 -> 2.11.0 (*)
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    \--- org.fusesource.leveldbjni:leveldbjni-all:1.8
+|    \--- org.apache.hadoop:hadoop-mapreduce-client-core:2.7.2
+|         +--- org.apache.hadoop:hadoop-yarn-common:2.7.2
+|         |    +--- org.apache.hadoop:hadoop-yarn-api:2.7.2
+|         |    |    +--- commons-lang:commons-lang:2.6
+|         |    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    |    \--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- javax.xml.bind:jaxb-api:2.2.2 (*)
+|         |    +--- org.apache.commons:commons-compress:1.4.1 (*)
+|         |    +--- commons-lang:commons-lang:2.6
+|         |    +--- javax.servlet:servlet-api:2.5
+|         |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|         |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|         |    +--- com.sun.jersey:jersey-core:1.9
+|         |    +--- com.sun.jersey:jersey-client:1.9
+|         |    |    \--- com.sun.jersey:jersey-core:1.9
+|         |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|         |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-jaxrs:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-xc:1.9.13 (*)
+|         |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    +--- commons-cli:commons-cli:1.2
+|         |    +--- org.slf4j:slf4j-api:1.7.10
+|         |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    +--- com.google.inject.extensions:guice-servlet:3.0
+|         |    |    \--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- commons-io:commons-io:2.4
+|         |    +--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    +--- com.sun.jersey:jersey-json:1.9 (*)
+|         |    +--- com.sun.jersey.contribs:jersey-guice:1.9
+|         |    |    +--- javax.inject:javax.inject:1
+|         |    |    +--- com.google.inject:guice:3.0 (*)
+|         |    |    +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         |    |    \--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    \--- log4j:log4j:1.2.17
+|         +--- com.google.protobuf:protobuf-java:2.5.0
+|         +--- org.apache.avro:avro:1.7.4 (*)
+|         +--- org.slf4j:slf4j-api:1.7.10
+|         +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|         +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         \--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
+\--- org.apache.httpcomponents:httpclient:4.5.2 (*)
+
+compileClasspath - Compile classpath for source set 'main'.
++--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
++--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    \--- log4j:log4j:1.2.17
++--- org.reflections:reflections:0.9.9-RC1
+|    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    +--- org.javassist:javassist:3.16.1-GA
+|    \--- dom4j:dom4j:1.6.1
+|         \--- xml-apis:xml-apis:1.0.b2 -> 1.4.01
++--- project :lib/utils
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.7.2
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.7.0 -> 2.7.2
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    \--- com.fasterxml.jackson.core:jackson-annotations:2.7.2
++--- project :lib/xhtml
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.jsoup:jsoup:1.9.2
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.22
+|    |    \--- xerces:xercesImpl:2.11.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    +--- net.sourceforge.htmlcleaner:htmlcleaner:2.16
+|    |    \--- org.jdom:jdom2:2.0.5
+|    \--- org.apache.httpcomponents:httpclient:4.5.2
+|         +--- org.apache.httpcomponents:httpcore:4.4.4
+|         +--- commons-logging:commons-logging:1.2
+|         \--- commons-codec:commons-codec:1.9
++--- project :module/commons
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :lib/yara
+|    |    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    |    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    |    \--- project :lib/utils (*)
+|    +--- com.google.guava:guava:18.0
+|    +--- com.beust:jcommander:1.35
+|    +--- com.google.inject:guice:3.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    \--- org.sonatype.sisu.inject:cglib:2.2.1-v20090111
+|    |         \--- asm:asm:3.1
+|    +--- org.hdrhistogram:HdrHistogram:2.1.7
+|    +--- org.tap4j:tap4j:4.1
+|    |    \--- org.yaml:snakeyaml:1.11 -> 1.16
+|    +--- com.google.inject.extensions:guice-jmx:3.0
+|    |    \--- com.google.inject:guice:3.0 (*)
+|    +--- com.mycila.guice:mycila-guice-all:3.6.ga
+|    |    +--- org.sonatype.sisu:sisu-guice:3.2.3
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- com.google.guava:guava:18.0
+|    |    +--- org.codehaus.groovy:groovy-all:2.1.6
+|    |    \--- com.mycila.guice:guice-servlet:3.6.ga
+|    |         +--- org.sonatype.sisu:sisu-guice:3.2.3 (*)
+|    |         \--- com.google.guava:guava:18.0
+|    \--- com.mycila:mycila-jmx:1.1.ga
+|         +--- org.sonatype.sisu:sisu-guice:3.1.0 -> 3.2.3 (*)
+|         \--- com.google.guava:guava:14.0.1 -> 18.0
++--- project :module/spring-framework
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.3.5.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |    |    \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-context:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.2.6.RELEASE
+|    |    |         |    +--- aopalliance:aopalliance:1.0
+|    |    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         \--- org.springframework:spring-expression:4.2.6.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    \--- org.yaml:snakeyaml:1.16
+|    +--- org.springframework.integration:spring-integration-core:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-core:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-tx:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.retry:spring-retry:1.1.2.RELEASE
+|    |    |    \--- org.springframework:spring-core:4.0.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-messaging:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-loader:1.3.5.RELEASE
+|    \--- commons-logging:commons-logging: -> 1.2
++--- project :module/jms
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :module/spring-framework (*)
+|    +--- org.springframework:spring-jms:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-messaging:4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.6.RELEASE (*)
+|    \--- org.apache.activemq:activemq-all:5.13.0
++--- project :data/storage/batchdb
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.apache.hadoop:hadoop-common:2.7.2
+|    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- org.apache.commons:commons-math3:3.1.1
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- commons-httpclient:commons-httpclient:3.1
+|    |    |    +--- commons-logging:commons-logging:1.0.4 -> 1.2
+|    |    |    \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-net:commons-net:3.1
+|    |    +--- commons-collections:commons-collections:3.2.2
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.mortbay.jetty:jetty:6.1.26
+|    |    |    \--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- javax.servlet.jsp:jsp-api:2.1
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-json:1.9
+|    |    |    +--- org.codehaus.jettison:jettison:1.1
+|    |    |    +--- com.sun.xml.bind:jaxb-impl:2.2.3-1
+|    |    |    |    \--- javax.xml.bind:jaxb-api:2.2.2
+|    |    |    |         +--- javax.xml.stream:stax-api:1.0-2
+|    |    |    |         \--- javax.activation:activation:1.1
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.3 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.3 -> 1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-jaxrs:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    +--- org.codehaus.jackson:jackson-xc:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9
+|    |    |    +--- asm:asm:3.1
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- net.java.dev.jets3t:jets3t:0.9.0
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.1.2 -> 4.5.2 (*)
+|    |    |    +--- org.apache.httpcomponents:httpcore:4.1.2 -> 4.4.4
+|    |    |    \--- com.jamesmurty.utils:java-xmlbuilder:0.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-configuration:commons-configuration:1.6
+|    |    |    +--- commons-collections:commons-collections:3.2.1 -> 3.2.2
+|    |    |    +--- commons-lang:commons-lang:2.4 -> 2.6
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- commons-digester:commons-digester:1.8
+|    |    |    |    +--- commons-beanutils:commons-beanutils:1.7.0
+|    |    |    |    |    \--- commons-logging:commons-logging:1.0.3 -> 1.2
+|    |    |    |    \--- commons-logging:commons-logging:1.1 -> 1.2
+|    |    |    \--- commons-beanutils:commons-beanutils-core:1.8.0
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- org.apache.avro:avro:1.7.4
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.8 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.8 -> 1.9.13 (*)
+|    |    |    +--- com.thoughtworks.paranamer:paranamer:2.3
+|    |    |    +--- org.xerial.snappy:snappy-java:1.0.4.1
+|    |    |    +--- org.apache.commons:commons-compress:1.4.1
+|    |    |    |    \--- org.tukaani:xz:1.0
+|    |    |    \--- org.slf4j:slf4j-api:1.6.4 -> 1.7.10
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- com.google.code.gson:gson:2.2.4
+|    |    +--- org.apache.hadoop:hadoop-auth:2.7.2
+|    |    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.2.5 -> 4.5.2 (*)
+|    |    |    +--- org.apache.directory.server:apacheds-kerberos-codec:2.0.0-M15
+|    |    |    |    +--- org.apache.directory.server:apacheds-i18n:2.0.0-M15
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-util:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6
+|    |    |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|    |    |    |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.10 (*)
+|    |    |    |    +--- log4j:log4j:1.2.16 -> 1.2.17
+|    |    |    |    +--- jline:jline:0.9.94
+|    |    |    |    \--- io.netty:netty:3.7.0.Final
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1
+|    |    |    |    +--- org.apache.curator:curator-client:2.7.1
+|    |    |    |    |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.10
+|    |    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    +--- log4j:log4j:1.2.17
+|    |    |    \--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- com.jcraft:jsch:0.1.42
+|    |    +--- org.apache.curator:curator-client:2.7.1 (*)
+|    |    +--- org.apache.curator:curator-recipes:2.7.1
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1 (*)
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- com.google.code.findbugs:jsr305:3.0.0
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    \--- org.apache.commons:commons-compress:1.4.1 (*)
+|    +--- org.apache.hadoop:hadoop-hdfs:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- org.mortbay.jetty:jetty:6.1.26 (*)
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- commons-daemon:commons-daemon:1.0.13
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
+|    |    +--- io.netty:netty-all:4.0.23.Final
+|    |    +--- xerces:xercesImpl:2.9.1 -> 2.11.0 (*)
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    \--- org.fusesource.leveldbjni:leveldbjni-all:1.8
+|    \--- org.apache.hadoop:hadoop-mapreduce-client-core:2.7.2
+|         +--- org.apache.hadoop:hadoop-yarn-common:2.7.2
+|         |    +--- org.apache.hadoop:hadoop-yarn-api:2.7.2
+|         |    |    +--- commons-lang:commons-lang:2.6
+|         |    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    |    \--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- javax.xml.bind:jaxb-api:2.2.2 (*)
+|         |    +--- org.apache.commons:commons-compress:1.4.1 (*)
+|         |    +--- commons-lang:commons-lang:2.6
+|         |    +--- javax.servlet:servlet-api:2.5
+|         |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|         |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|         |    +--- com.sun.jersey:jersey-core:1.9
+|         |    +--- com.sun.jersey:jersey-client:1.9
+|         |    |    \--- com.sun.jersey:jersey-core:1.9
+|         |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|         |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-jaxrs:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-xc:1.9.13 (*)
+|         |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    +--- commons-cli:commons-cli:1.2
+|         |    +--- org.slf4j:slf4j-api:1.7.10
+|         |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    +--- com.google.inject.extensions:guice-servlet:3.0
+|         |    |    \--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- commons-io:commons-io:2.4
+|         |    +--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    +--- com.sun.jersey:jersey-json:1.9 (*)
+|         |    +--- com.sun.jersey.contribs:jersey-guice:1.9
+|         |    |    +--- javax.inject:javax.inject:1
+|         |    |    +--- com.google.inject:guice:3.0 (*)
+|         |    |    +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         |    |    \--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    \--- log4j:log4j:1.2.17
+|         +--- com.google.protobuf:protobuf-java:2.5.0
+|         +--- org.apache.avro:avro:1.7.4 (*)
+|         +--- org.slf4j:slf4j-api:1.7.10
+|         +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|         +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         \--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
+\--- org.apache.httpcomponents:httpclient:4.5.2 (*)
+
+compileOnly - Compile dependencies for source set 'main'.
++--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
++--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    \--- log4j:log4j:1.2.17
++--- org.reflections:reflections:0.9.9-RC1
+|    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    +--- org.javassist:javassist:3.16.1-GA
+|    \--- dom4j:dom4j:1.6.1
+|         \--- xml-apis:xml-apis:1.0.b2 -> 1.4.01
++--- project :lib/utils
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.7.2
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.7.0 -> 2.7.2
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    \--- com.fasterxml.jackson.core:jackson-annotations:2.7.2
++--- project :lib/xhtml
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.jsoup:jsoup:1.9.2
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.22
+|    |    \--- xerces:xercesImpl:2.11.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    +--- net.sourceforge.htmlcleaner:htmlcleaner:2.16
+|    |    \--- org.jdom:jdom2:2.0.5
+|    \--- org.apache.httpcomponents:httpclient:4.5.2
+|         +--- org.apache.httpcomponents:httpcore:4.4.4
+|         +--- commons-logging:commons-logging:1.2
+|         \--- commons-codec:commons-codec:1.9
++--- project :module/commons
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :lib/yara
+|    |    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    |    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    |    \--- project :lib/utils (*)
+|    +--- com.google.guava:guava:18.0
+|    +--- com.beust:jcommander:1.35
+|    +--- com.google.inject:guice:3.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    \--- org.sonatype.sisu.inject:cglib:2.2.1-v20090111
+|    |         \--- asm:asm:3.1
+|    +--- org.hdrhistogram:HdrHistogram:2.1.7
+|    +--- org.tap4j:tap4j:4.1
+|    |    \--- org.yaml:snakeyaml:1.11 -> 1.16
+|    +--- com.google.inject.extensions:guice-jmx:3.0
+|    |    \--- com.google.inject:guice:3.0 (*)
+|    +--- com.mycila.guice:mycila-guice-all:3.6.ga
+|    |    +--- org.sonatype.sisu:sisu-guice:3.2.3
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- com.google.guava:guava:18.0
+|    |    +--- org.codehaus.groovy:groovy-all:2.1.6
+|    |    \--- com.mycila.guice:guice-servlet:3.6.ga
+|    |         +--- org.sonatype.sisu:sisu-guice:3.2.3 (*)
+|    |         \--- com.google.guava:guava:18.0
+|    \--- com.mycila:mycila-jmx:1.1.ga
+|         +--- org.sonatype.sisu:sisu-guice:3.1.0 -> 3.2.3 (*)
+|         \--- com.google.guava:guava:14.0.1 -> 18.0
++--- project :module/spring-framework
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.3.5.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |    |    \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-context:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.2.6.RELEASE
+|    |    |         |    +--- aopalliance:aopalliance:1.0
+|    |    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         \--- org.springframework:spring-expression:4.2.6.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    \--- org.yaml:snakeyaml:1.16
+|    +--- org.springframework.integration:spring-integration-core:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-core:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-tx:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.retry:spring-retry:1.1.2.RELEASE
+|    |    |    \--- org.springframework:spring-core:4.0.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-messaging:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-loader:1.3.5.RELEASE
+|    \--- commons-logging:commons-logging: -> 1.2
++--- project :module/jms
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :module/spring-framework (*)
+|    +--- org.springframework:spring-jms:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-messaging:4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.6.RELEASE (*)
+|    \--- org.apache.activemq:activemq-all:5.13.0
++--- project :data/storage/batchdb
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.apache.hadoop:hadoop-common:2.7.2
+|    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- org.apache.commons:commons-math3:3.1.1
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- commons-httpclient:commons-httpclient:3.1
+|    |    |    +--- commons-logging:commons-logging:1.0.4 -> 1.2
+|    |    |    \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-net:commons-net:3.1
+|    |    +--- commons-collections:commons-collections:3.2.2
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.mortbay.jetty:jetty:6.1.26
+|    |    |    \--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- javax.servlet.jsp:jsp-api:2.1
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-json:1.9
+|    |    |    +--- org.codehaus.jettison:jettison:1.1
+|    |    |    +--- com.sun.xml.bind:jaxb-impl:2.2.3-1
+|    |    |    |    \--- javax.xml.bind:jaxb-api:2.2.2
+|    |    |    |         +--- javax.xml.stream:stax-api:1.0-2
+|    |    |    |         \--- javax.activation:activation:1.1
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.3 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.3 -> 1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-jaxrs:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    +--- org.codehaus.jackson:jackson-xc:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9
+|    |    |    +--- asm:asm:3.1
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- net.java.dev.jets3t:jets3t:0.9.0
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.1.2 -> 4.5.2 (*)
+|    |    |    +--- org.apache.httpcomponents:httpcore:4.1.2 -> 4.4.4
+|    |    |    \--- com.jamesmurty.utils:java-xmlbuilder:0.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-configuration:commons-configuration:1.6
+|    |    |    +--- commons-collections:commons-collections:3.2.1 -> 3.2.2
+|    |    |    +--- commons-lang:commons-lang:2.4 -> 2.6
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- commons-digester:commons-digester:1.8
+|    |    |    |    +--- commons-beanutils:commons-beanutils:1.7.0
+|    |    |    |    |    \--- commons-logging:commons-logging:1.0.3 -> 1.2
+|    |    |    |    \--- commons-logging:commons-logging:1.1 -> 1.2
+|    |    |    \--- commons-beanutils:commons-beanutils-core:1.8.0
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- org.apache.avro:avro:1.7.4
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.8 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.8 -> 1.9.13 (*)
+|    |    |    +--- com.thoughtworks.paranamer:paranamer:2.3
+|    |    |    +--- org.xerial.snappy:snappy-java:1.0.4.1
+|    |    |    +--- org.apache.commons:commons-compress:1.4.1
+|    |    |    |    \--- org.tukaani:xz:1.0
+|    |    |    \--- org.slf4j:slf4j-api:1.6.4 -> 1.7.10
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- com.google.code.gson:gson:2.2.4
+|    |    +--- org.apache.hadoop:hadoop-auth:2.7.2
+|    |    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.2.5 -> 4.5.2 (*)
+|    |    |    +--- org.apache.directory.server:apacheds-kerberos-codec:2.0.0-M15
+|    |    |    |    +--- org.apache.directory.server:apacheds-i18n:2.0.0-M15
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-util:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6
+|    |    |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|    |    |    |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.10 (*)
+|    |    |    |    +--- log4j:log4j:1.2.16 -> 1.2.17
+|    |    |    |    +--- jline:jline:0.9.94
+|    |    |    |    \--- io.netty:netty:3.7.0.Final
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1
+|    |    |    |    +--- org.apache.curator:curator-client:2.7.1
+|    |    |    |    |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.10
+|    |    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    +--- log4j:log4j:1.2.17
+|    |    |    \--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- com.jcraft:jsch:0.1.42
+|    |    +--- org.apache.curator:curator-client:2.7.1 (*)
+|    |    +--- org.apache.curator:curator-recipes:2.7.1
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1 (*)
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- com.google.code.findbugs:jsr305:3.0.0
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    \--- org.apache.commons:commons-compress:1.4.1 (*)
+|    +--- org.apache.hadoop:hadoop-hdfs:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- org.mortbay.jetty:jetty:6.1.26 (*)
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- commons-daemon:commons-daemon:1.0.13
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
+|    |    +--- io.netty:netty-all:4.0.23.Final
+|    |    +--- xerces:xercesImpl:2.9.1 -> 2.11.0 (*)
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    \--- org.fusesource.leveldbjni:leveldbjni-all:1.8
+|    \--- org.apache.hadoop:hadoop-mapreduce-client-core:2.7.2
+|         +--- org.apache.hadoop:hadoop-yarn-common:2.7.2
+|         |    +--- org.apache.hadoop:hadoop-yarn-api:2.7.2
+|         |    |    +--- commons-lang:commons-lang:2.6
+|         |    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    |    \--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- javax.xml.bind:jaxb-api:2.2.2 (*)
+|         |    +--- org.apache.commons:commons-compress:1.4.1 (*)
+|         |    +--- commons-lang:commons-lang:2.6
+|         |    +--- javax.servlet:servlet-api:2.5
+|         |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|         |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|         |    +--- com.sun.jersey:jersey-core:1.9
+|         |    +--- com.sun.jersey:jersey-client:1.9
+|         |    |    \--- com.sun.jersey:jersey-core:1.9
+|         |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|         |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-jaxrs:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-xc:1.9.13 (*)
+|         |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    +--- commons-cli:commons-cli:1.2
+|         |    +--- org.slf4j:slf4j-api:1.7.10
+|         |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    +--- com.google.inject.extensions:guice-servlet:3.0
+|         |    |    \--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- commons-io:commons-io:2.4
+|         |    +--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    +--- com.sun.jersey:jersey-json:1.9 (*)
+|         |    +--- com.sun.jersey.contribs:jersey-guice:1.9
+|         |    |    +--- javax.inject:javax.inject:1
+|         |    |    +--- com.google.inject:guice:3.0 (*)
+|         |    |    +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         |    |    \--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    \--- log4j:log4j:1.2.17
+|         +--- com.google.protobuf:protobuf-java:2.5.0
+|         +--- org.apache.avro:avro:1.7.4 (*)
+|         +--- org.slf4j:slf4j-api:1.7.10
+|         +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|         +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         \--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
+\--- org.apache.httpcomponents:httpclient:4.5.2 (*)
+
+default - Configuration for default artifacts.
++--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
++--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    \--- log4j:log4j:1.2.17
++--- org.reflections:reflections:0.9.9-RC1
+|    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    +--- org.javassist:javassist:3.16.1-GA
+|    \--- dom4j:dom4j:1.6.1
+|         \--- xml-apis:xml-apis:1.0.b2 -> 1.4.01
++--- project :lib/utils
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.7.2
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.7.0 -> 2.7.2
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    \--- com.fasterxml.jackson.core:jackson-annotations:2.7.2
++--- project :lib/xhtml
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.jsoup:jsoup:1.9.2
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.22
+|    |    \--- xerces:xercesImpl:2.11.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    +--- net.sourceforge.htmlcleaner:htmlcleaner:2.16
+|    |    \--- org.jdom:jdom2:2.0.5
+|    \--- org.apache.httpcomponents:httpclient:4.5.2
+|         +--- org.apache.httpcomponents:httpcore:4.4.4
+|         +--- commons-logging:commons-logging:1.2
+|         \--- commons-codec:commons-codec:1.9
++--- project :module/commons
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :lib/yara
+|    |    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    |    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    |    \--- project :lib/utils (*)
+|    +--- com.google.guava:guava:18.0
+|    +--- com.beust:jcommander:1.35
+|    +--- com.google.inject:guice:3.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    \--- org.sonatype.sisu.inject:cglib:2.2.1-v20090111
+|    |         \--- asm:asm:3.1
+|    +--- org.hdrhistogram:HdrHistogram:2.1.7
+|    +--- org.tap4j:tap4j:4.1
+|    |    \--- org.yaml:snakeyaml:1.11 -> 1.16
+|    +--- com.google.inject.extensions:guice-jmx:3.0
+|    |    \--- com.google.inject:guice:3.0 (*)
+|    +--- com.mycila.guice:mycila-guice-all:3.6.ga
+|    |    +--- org.sonatype.sisu:sisu-guice:3.2.3
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- com.google.guava:guava:18.0
+|    |    +--- org.codehaus.groovy:groovy-all:2.1.6
+|    |    \--- com.mycila.guice:guice-servlet:3.6.ga
+|    |         +--- org.sonatype.sisu:sisu-guice:3.2.3 (*)
+|    |         \--- com.google.guava:guava:18.0
+|    \--- com.mycila:mycila-jmx:1.1.ga
+|         +--- org.sonatype.sisu:sisu-guice:3.1.0 -> 3.2.3 (*)
+|         \--- com.google.guava:guava:14.0.1 -> 18.0
++--- project :module/spring-framework
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.3.5.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |    |    \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-context:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.2.6.RELEASE
+|    |    |         |    +--- aopalliance:aopalliance:1.0
+|    |    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         \--- org.springframework:spring-expression:4.2.6.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    \--- org.yaml:snakeyaml:1.16
+|    +--- org.springframework.integration:spring-integration-core:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-core:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-tx:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.retry:spring-retry:1.1.2.RELEASE
+|    |    |    \--- org.springframework:spring-core:4.0.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-messaging:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-loader:1.3.5.RELEASE
+|    \--- commons-logging:commons-logging: -> 1.2
++--- project :module/jms
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :module/spring-framework (*)
+|    +--- org.springframework:spring-jms:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-messaging:4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.6.RELEASE (*)
+|    \--- org.apache.activemq:activemq-all:5.13.0
++--- project :data/storage/batchdb
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.apache.hadoop:hadoop-common:2.7.2
+|    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- org.apache.commons:commons-math3:3.1.1
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- commons-httpclient:commons-httpclient:3.1
+|    |    |    +--- commons-logging:commons-logging:1.0.4 -> 1.2
+|    |    |    \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-net:commons-net:3.1
+|    |    +--- commons-collections:commons-collections:3.2.2
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.mortbay.jetty:jetty:6.1.26
+|    |    |    \--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- javax.servlet.jsp:jsp-api:2.1
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-json:1.9
+|    |    |    +--- org.codehaus.jettison:jettison:1.1
+|    |    |    +--- com.sun.xml.bind:jaxb-impl:2.2.3-1
+|    |    |    |    \--- javax.xml.bind:jaxb-api:2.2.2
+|    |    |    |         +--- javax.xml.stream:stax-api:1.0-2
+|    |    |    |         \--- javax.activation:activation:1.1
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.3 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.3 -> 1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-jaxrs:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    +--- org.codehaus.jackson:jackson-xc:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9
+|    |    |    +--- asm:asm:3.1
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- net.java.dev.jets3t:jets3t:0.9.0
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.1.2 -> 4.5.2 (*)
+|    |    |    +--- org.apache.httpcomponents:httpcore:4.1.2 -> 4.4.4
+|    |    |    \--- com.jamesmurty.utils:java-xmlbuilder:0.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-configuration:commons-configuration:1.6
+|    |    |    +--- commons-collections:commons-collections:3.2.1 -> 3.2.2
+|    |    |    +--- commons-lang:commons-lang:2.4 -> 2.6
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- commons-digester:commons-digester:1.8
+|    |    |    |    +--- commons-beanutils:commons-beanutils:1.7.0
+|    |    |    |    |    \--- commons-logging:commons-logging:1.0.3 -> 1.2
+|    |    |    |    \--- commons-logging:commons-logging:1.1 -> 1.2
+|    |    |    \--- commons-beanutils:commons-beanutils-core:1.8.0
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- org.apache.avro:avro:1.7.4
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.8 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.8 -> 1.9.13 (*)
+|    |    |    +--- com.thoughtworks.paranamer:paranamer:2.3
+|    |    |    +--- org.xerial.snappy:snappy-java:1.0.4.1
+|    |    |    +--- org.apache.commons:commons-compress:1.4.1
+|    |    |    |    \--- org.tukaani:xz:1.0
+|    |    |    \--- org.slf4j:slf4j-api:1.6.4 -> 1.7.10
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- com.google.code.gson:gson:2.2.4
+|    |    +--- org.apache.hadoop:hadoop-auth:2.7.2
+|    |    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.2.5 -> 4.5.2 (*)
+|    |    |    +--- org.apache.directory.server:apacheds-kerberos-codec:2.0.0-M15
+|    |    |    |    +--- org.apache.directory.server:apacheds-i18n:2.0.0-M15
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-util:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6
+|    |    |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|    |    |    |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.10 (*)
+|    |    |    |    +--- log4j:log4j:1.2.16 -> 1.2.17
+|    |    |    |    +--- jline:jline:0.9.94
+|    |    |    |    \--- io.netty:netty:3.7.0.Final
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1
+|    |    |    |    +--- org.apache.curator:curator-client:2.7.1
+|    |    |    |    |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.10
+|    |    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    +--- log4j:log4j:1.2.17
+|    |    |    \--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- com.jcraft:jsch:0.1.42
+|    |    +--- org.apache.curator:curator-client:2.7.1 (*)
+|    |    +--- org.apache.curator:curator-recipes:2.7.1
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1 (*)
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- com.google.code.findbugs:jsr305:3.0.0
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    \--- org.apache.commons:commons-compress:1.4.1 (*)
+|    +--- org.apache.hadoop:hadoop-hdfs:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- org.mortbay.jetty:jetty:6.1.26 (*)
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- commons-daemon:commons-daemon:1.0.13
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
+|    |    +--- io.netty:netty-all:4.0.23.Final
+|    |    +--- xerces:xercesImpl:2.9.1 -> 2.11.0 (*)
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    \--- org.fusesource.leveldbjni:leveldbjni-all:1.8
+|    \--- org.apache.hadoop:hadoop-mapreduce-client-core:2.7.2
+|         +--- org.apache.hadoop:hadoop-yarn-common:2.7.2
+|         |    +--- org.apache.hadoop:hadoop-yarn-api:2.7.2
+|         |    |    +--- commons-lang:commons-lang:2.6
+|         |    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    |    \--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- javax.xml.bind:jaxb-api:2.2.2 (*)
+|         |    +--- org.apache.commons:commons-compress:1.4.1 (*)
+|         |    +--- commons-lang:commons-lang:2.6
+|         |    +--- javax.servlet:servlet-api:2.5
+|         |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|         |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|         |    +--- com.sun.jersey:jersey-core:1.9
+|         |    +--- com.sun.jersey:jersey-client:1.9
+|         |    |    \--- com.sun.jersey:jersey-core:1.9
+|         |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|         |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-jaxrs:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-xc:1.9.13 (*)
+|         |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    +--- commons-cli:commons-cli:1.2
+|         |    +--- org.slf4j:slf4j-api:1.7.10
+|         |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    +--- com.google.inject.extensions:guice-servlet:3.0
+|         |    |    \--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- commons-io:commons-io:2.4
+|         |    +--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    +--- com.sun.jersey:jersey-json:1.9 (*)
+|         |    +--- com.sun.jersey.contribs:jersey-guice:1.9
+|         |    |    +--- javax.inject:javax.inject:1
+|         |    |    +--- com.google.inject:guice:3.0 (*)
+|         |    |    +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         |    |    \--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    \--- log4j:log4j:1.2.17
+|         +--- com.google.protobuf:protobuf-java:2.5.0
+|         +--- org.apache.avro:avro:1.7.4 (*)
+|         +--- org.slf4j:slf4j-api:1.7.10
+|         +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|         +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         \--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
+\--- org.apache.httpcomponents:httpclient:4.5.2 (*)
+
+deployJars
+No dependencies
+
+published
+No dependencies
+
+runtime - Runtime dependencies for source set 'main'.
++--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
++--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    \--- log4j:log4j:1.2.17
++--- org.reflections:reflections:0.9.9-RC1
+|    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    +--- org.javassist:javassist:3.16.1-GA
+|    \--- dom4j:dom4j:1.6.1
+|         \--- xml-apis:xml-apis:1.0.b2 -> 1.4.01
++--- project :lib/utils
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.7.2
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.7.0 -> 2.7.2
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    \--- com.fasterxml.jackson.core:jackson-annotations:2.7.2
++--- project :lib/xhtml
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.jsoup:jsoup:1.9.2
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.22
+|    |    \--- xerces:xercesImpl:2.11.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    +--- net.sourceforge.htmlcleaner:htmlcleaner:2.16
+|    |    \--- org.jdom:jdom2:2.0.5
+|    \--- org.apache.httpcomponents:httpclient:4.5.2
+|         +--- org.apache.httpcomponents:httpcore:4.4.4
+|         +--- commons-logging:commons-logging:1.2
+|         \--- commons-codec:commons-codec:1.9
++--- project :module/commons
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :lib/yara
+|    |    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    |    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    |    \--- project :lib/utils (*)
+|    +--- com.google.guava:guava:18.0
+|    +--- com.beust:jcommander:1.35
+|    +--- com.google.inject:guice:3.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    \--- org.sonatype.sisu.inject:cglib:2.2.1-v20090111
+|    |         \--- asm:asm:3.1
+|    +--- org.hdrhistogram:HdrHistogram:2.1.7
+|    +--- org.tap4j:tap4j:4.1
+|    |    \--- org.yaml:snakeyaml:1.11 -> 1.16
+|    +--- com.google.inject.extensions:guice-jmx:3.0
+|    |    \--- com.google.inject:guice:3.0 (*)
+|    +--- com.mycila.guice:mycila-guice-all:3.6.ga
+|    |    +--- org.sonatype.sisu:sisu-guice:3.2.3
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- com.google.guava:guava:18.0
+|    |    +--- org.codehaus.groovy:groovy-all:2.1.6
+|    |    \--- com.mycila.guice:guice-servlet:3.6.ga
+|    |         +--- org.sonatype.sisu:sisu-guice:3.2.3 (*)
+|    |         \--- com.google.guava:guava:18.0
+|    \--- com.mycila:mycila-jmx:1.1.ga
+|         +--- org.sonatype.sisu:sisu-guice:3.1.0 -> 3.2.3 (*)
+|         \--- com.google.guava:guava:14.0.1 -> 18.0
++--- project :module/spring-framework
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.3.5.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |    |    \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-context:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.2.6.RELEASE
+|    |    |         |    +--- aopalliance:aopalliance:1.0
+|    |    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         \--- org.springframework:spring-expression:4.2.6.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    \--- org.yaml:snakeyaml:1.16
+|    +--- org.springframework.integration:spring-integration-core:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-core:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-tx:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.retry:spring-retry:1.1.2.RELEASE
+|    |    |    \--- org.springframework:spring-core:4.0.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-messaging:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-loader:1.3.5.RELEASE
+|    \--- commons-logging:commons-logging: -> 1.2
++--- project :module/jms
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :module/spring-framework (*)
+|    +--- org.springframework:spring-jms:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-messaging:4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.6.RELEASE (*)
+|    \--- org.apache.activemq:activemq-all:5.13.0
++--- project :data/storage/batchdb
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.apache.hadoop:hadoop-common:2.7.2
+|    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- org.apache.commons:commons-math3:3.1.1
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- commons-httpclient:commons-httpclient:3.1
+|    |    |    +--- commons-logging:commons-logging:1.0.4 -> 1.2
+|    |    |    \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-net:commons-net:3.1
+|    |    +--- commons-collections:commons-collections:3.2.2
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.mortbay.jetty:jetty:6.1.26
+|    |    |    \--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- javax.servlet.jsp:jsp-api:2.1
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-json:1.9
+|    |    |    +--- org.codehaus.jettison:jettison:1.1
+|    |    |    +--- com.sun.xml.bind:jaxb-impl:2.2.3-1
+|    |    |    |    \--- javax.xml.bind:jaxb-api:2.2.2
+|    |    |    |         +--- javax.xml.stream:stax-api:1.0-2
+|    |    |    |         \--- javax.activation:activation:1.1
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.3 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.3 -> 1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-jaxrs:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    +--- org.codehaus.jackson:jackson-xc:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9
+|    |    |    +--- asm:asm:3.1
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- net.java.dev.jets3t:jets3t:0.9.0
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.1.2 -> 4.5.2 (*)
+|    |    |    +--- org.apache.httpcomponents:httpcore:4.1.2 -> 4.4.4
+|    |    |    \--- com.jamesmurty.utils:java-xmlbuilder:0.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-configuration:commons-configuration:1.6
+|    |    |    +--- commons-collections:commons-collections:3.2.1 -> 3.2.2
+|    |    |    +--- commons-lang:commons-lang:2.4 -> 2.6
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- commons-digester:commons-digester:1.8
+|    |    |    |    +--- commons-beanutils:commons-beanutils:1.7.0
+|    |    |    |    |    \--- commons-logging:commons-logging:1.0.3 -> 1.2
+|    |    |    |    \--- commons-logging:commons-logging:1.1 -> 1.2
+|    |    |    \--- commons-beanutils:commons-beanutils-core:1.8.0
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- org.apache.avro:avro:1.7.4
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.8 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.8 -> 1.9.13 (*)
+|    |    |    +--- com.thoughtworks.paranamer:paranamer:2.3
+|    |    |    +--- org.xerial.snappy:snappy-java:1.0.4.1
+|    |    |    +--- org.apache.commons:commons-compress:1.4.1
+|    |    |    |    \--- org.tukaani:xz:1.0
+|    |    |    \--- org.slf4j:slf4j-api:1.6.4 -> 1.7.10
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- com.google.code.gson:gson:2.2.4
+|    |    +--- org.apache.hadoop:hadoop-auth:2.7.2
+|    |    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.2.5 -> 4.5.2 (*)
+|    |    |    +--- org.apache.directory.server:apacheds-kerberos-codec:2.0.0-M15
+|    |    |    |    +--- org.apache.directory.server:apacheds-i18n:2.0.0-M15
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-util:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6
+|    |    |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|    |    |    |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.10 (*)
+|    |    |    |    +--- log4j:log4j:1.2.16 -> 1.2.17
+|    |    |    |    +--- jline:jline:0.9.94
+|    |    |    |    \--- io.netty:netty:3.7.0.Final
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1
+|    |    |    |    +--- org.apache.curator:curator-client:2.7.1
+|    |    |    |    |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.10
+|    |    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    +--- log4j:log4j:1.2.17
+|    |    |    \--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- com.jcraft:jsch:0.1.42
+|    |    +--- org.apache.curator:curator-client:2.7.1 (*)
+|    |    +--- org.apache.curator:curator-recipes:2.7.1
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1 (*)
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- com.google.code.findbugs:jsr305:3.0.0
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    \--- org.apache.commons:commons-compress:1.4.1 (*)
+|    +--- org.apache.hadoop:hadoop-hdfs:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- org.mortbay.jetty:jetty:6.1.26 (*)
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- commons-daemon:commons-daemon:1.0.13
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
+|    |    +--- io.netty:netty-all:4.0.23.Final
+|    |    +--- xerces:xercesImpl:2.9.1 -> 2.11.0 (*)
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    \--- org.fusesource.leveldbjni:leveldbjni-all:1.8
+|    \--- org.apache.hadoop:hadoop-mapreduce-client-core:2.7.2
+|         +--- org.apache.hadoop:hadoop-yarn-common:2.7.2
+|         |    +--- org.apache.hadoop:hadoop-yarn-api:2.7.2
+|         |    |    +--- commons-lang:commons-lang:2.6
+|         |    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    |    \--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- javax.xml.bind:jaxb-api:2.2.2 (*)
+|         |    +--- org.apache.commons:commons-compress:1.4.1 (*)
+|         |    +--- commons-lang:commons-lang:2.6
+|         |    +--- javax.servlet:servlet-api:2.5
+|         |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|         |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|         |    +--- com.sun.jersey:jersey-core:1.9
+|         |    +--- com.sun.jersey:jersey-client:1.9
+|         |    |    \--- com.sun.jersey:jersey-core:1.9
+|         |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|         |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-jaxrs:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-xc:1.9.13 (*)
+|         |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    +--- commons-cli:commons-cli:1.2
+|         |    +--- org.slf4j:slf4j-api:1.7.10
+|         |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    +--- com.google.inject.extensions:guice-servlet:3.0
+|         |    |    \--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- commons-io:commons-io:2.4
+|         |    +--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    +--- com.sun.jersey:jersey-json:1.9 (*)
+|         |    +--- com.sun.jersey.contribs:jersey-guice:1.9
+|         |    |    +--- javax.inject:javax.inject:1
+|         |    |    +--- com.google.inject:guice:3.0 (*)
+|         |    |    +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         |    |    \--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    \--- log4j:log4j:1.2.17
+|         +--- com.google.protobuf:protobuf-java:2.5.0
+|         +--- org.apache.avro:avro:1.7.4 (*)
+|         +--- org.slf4j:slf4j-api:1.7.10
+|         +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|         +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         \--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
+\--- org.apache.httpcomponents:httpclient:4.5.2 (*)
+
+testCompile - Dependencies for source set 'test'.
++--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
++--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    \--- log4j:log4j:1.2.17
++--- org.reflections:reflections:0.9.9-RC1
+|    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    +--- org.javassist:javassist:3.16.1-GA
+|    \--- dom4j:dom4j:1.6.1
+|         \--- xml-apis:xml-apis:1.0.b2 -> 1.4.01
++--- project :lib/utils
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.7.2
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.7.0 -> 2.7.2
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    \--- com.fasterxml.jackson.core:jackson-annotations:2.7.2
++--- project :lib/xhtml
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.jsoup:jsoup:1.9.2
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.22
+|    |    \--- xerces:xercesImpl:2.11.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    +--- net.sourceforge.htmlcleaner:htmlcleaner:2.16
+|    |    \--- org.jdom:jdom2:2.0.5
+|    \--- org.apache.httpcomponents:httpclient:4.5.2
+|         +--- org.apache.httpcomponents:httpcore:4.4.4
+|         +--- commons-logging:commons-logging:1.2
+|         \--- commons-codec:commons-codec:1.9
++--- project :module/commons
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :lib/yara
+|    |    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    |    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    |    \--- project :lib/utils (*)
+|    +--- com.google.guava:guava:18.0
+|    +--- com.beust:jcommander:1.35
+|    +--- com.google.inject:guice:3.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    \--- org.sonatype.sisu.inject:cglib:2.2.1-v20090111
+|    |         \--- asm:asm:3.1
+|    +--- org.hdrhistogram:HdrHistogram:2.1.7
+|    +--- org.tap4j:tap4j:4.1
+|    |    \--- org.yaml:snakeyaml:1.11 -> 1.16
+|    +--- com.google.inject.extensions:guice-jmx:3.0
+|    |    \--- com.google.inject:guice:3.0 (*)
+|    +--- com.mycila.guice:mycila-guice-all:3.6.ga
+|    |    +--- org.sonatype.sisu:sisu-guice:3.2.3
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- com.google.guava:guava:18.0
+|    |    +--- org.codehaus.groovy:groovy-all:2.1.6
+|    |    \--- com.mycila.guice:guice-servlet:3.6.ga
+|    |         +--- org.sonatype.sisu:sisu-guice:3.2.3 (*)
+|    |         \--- com.google.guava:guava:18.0
+|    \--- com.mycila:mycila-jmx:1.1.ga
+|         +--- org.sonatype.sisu:sisu-guice:3.1.0 -> 3.2.3 (*)
+|         \--- com.google.guava:guava:14.0.1 -> 18.0
++--- project :module/spring-framework
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.3.5.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |    |    \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-context:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.2.6.RELEASE
+|    |    |         |    +--- aopalliance:aopalliance:1.0
+|    |    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         \--- org.springframework:spring-expression:4.2.6.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    \--- org.yaml:snakeyaml:1.16
+|    +--- org.springframework.integration:spring-integration-core:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-core:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-tx:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.retry:spring-retry:1.1.2.RELEASE
+|    |    |    \--- org.springframework:spring-core:4.0.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-messaging:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-loader:1.3.5.RELEASE
+|    \--- commons-logging:commons-logging: -> 1.2
++--- project :module/jms
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :module/spring-framework (*)
+|    +--- org.springframework:spring-jms:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-messaging:4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.6.RELEASE (*)
+|    \--- org.apache.activemq:activemq-all:5.13.0
++--- project :data/storage/batchdb
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.apache.hadoop:hadoop-common:2.7.2
+|    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- org.apache.commons:commons-math3:3.1.1
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- commons-httpclient:commons-httpclient:3.1
+|    |    |    +--- commons-logging:commons-logging:1.0.4 -> 1.2
+|    |    |    \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-net:commons-net:3.1
+|    |    +--- commons-collections:commons-collections:3.2.2
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.mortbay.jetty:jetty:6.1.26
+|    |    |    \--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- javax.servlet.jsp:jsp-api:2.1
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-json:1.9
+|    |    |    +--- org.codehaus.jettison:jettison:1.1
+|    |    |    +--- com.sun.xml.bind:jaxb-impl:2.2.3-1
+|    |    |    |    \--- javax.xml.bind:jaxb-api:2.2.2
+|    |    |    |         +--- javax.xml.stream:stax-api:1.0-2
+|    |    |    |         \--- javax.activation:activation:1.1
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.3 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.3 -> 1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-jaxrs:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    +--- org.codehaus.jackson:jackson-xc:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9
+|    |    |    +--- asm:asm:3.1
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- net.java.dev.jets3t:jets3t:0.9.0
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.1.2 -> 4.5.2 (*)
+|    |    |    +--- org.apache.httpcomponents:httpcore:4.1.2 -> 4.4.4
+|    |    |    \--- com.jamesmurty.utils:java-xmlbuilder:0.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-configuration:commons-configuration:1.6
+|    |    |    +--- commons-collections:commons-collections:3.2.1 -> 3.2.2
+|    |    |    +--- commons-lang:commons-lang:2.4 -> 2.6
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- commons-digester:commons-digester:1.8
+|    |    |    |    +--- commons-beanutils:commons-beanutils:1.7.0
+|    |    |    |    |    \--- commons-logging:commons-logging:1.0.3 -> 1.2
+|    |    |    |    \--- commons-logging:commons-logging:1.1 -> 1.2
+|    |    |    \--- commons-beanutils:commons-beanutils-core:1.8.0
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- org.apache.avro:avro:1.7.4
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.8 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.8 -> 1.9.13 (*)
+|    |    |    +--- com.thoughtworks.paranamer:paranamer:2.3
+|    |    |    +--- org.xerial.snappy:snappy-java:1.0.4.1
+|    |    |    +--- org.apache.commons:commons-compress:1.4.1
+|    |    |    |    \--- org.tukaani:xz:1.0
+|    |    |    \--- org.slf4j:slf4j-api:1.6.4 -> 1.7.10
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- com.google.code.gson:gson:2.2.4
+|    |    +--- org.apache.hadoop:hadoop-auth:2.7.2
+|    |    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.2.5 -> 4.5.2 (*)
+|    |    |    +--- org.apache.directory.server:apacheds-kerberos-codec:2.0.0-M15
+|    |    |    |    +--- org.apache.directory.server:apacheds-i18n:2.0.0-M15
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-util:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6
+|    |    |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|    |    |    |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.10 (*)
+|    |    |    |    +--- log4j:log4j:1.2.16 -> 1.2.17
+|    |    |    |    +--- jline:jline:0.9.94
+|    |    |    |    \--- io.netty:netty:3.7.0.Final
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1
+|    |    |    |    +--- org.apache.curator:curator-client:2.7.1
+|    |    |    |    |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.10
+|    |    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    +--- log4j:log4j:1.2.17
+|    |    |    \--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- com.jcraft:jsch:0.1.42
+|    |    +--- org.apache.curator:curator-client:2.7.1 (*)
+|    |    +--- org.apache.curator:curator-recipes:2.7.1
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1 (*)
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- com.google.code.findbugs:jsr305:3.0.0
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    \--- org.apache.commons:commons-compress:1.4.1 (*)
+|    +--- org.apache.hadoop:hadoop-hdfs:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- org.mortbay.jetty:jetty:6.1.26 (*)
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- commons-daemon:commons-daemon:1.0.13
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
+|    |    +--- io.netty:netty-all:4.0.23.Final
+|    |    +--- xerces:xercesImpl:2.9.1 -> 2.11.0 (*)
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    \--- org.fusesource.leveldbjni:leveldbjni-all:1.8
+|    \--- org.apache.hadoop:hadoop-mapreduce-client-core:2.7.2
+|         +--- org.apache.hadoop:hadoop-yarn-common:2.7.2
+|         |    +--- org.apache.hadoop:hadoop-yarn-api:2.7.2
+|         |    |    +--- commons-lang:commons-lang:2.6
+|         |    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    |    \--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- javax.xml.bind:jaxb-api:2.2.2 (*)
+|         |    +--- org.apache.commons:commons-compress:1.4.1 (*)
+|         |    +--- commons-lang:commons-lang:2.6
+|         |    +--- javax.servlet:servlet-api:2.5
+|         |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|         |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|         |    +--- com.sun.jersey:jersey-core:1.9
+|         |    +--- com.sun.jersey:jersey-client:1.9
+|         |    |    \--- com.sun.jersey:jersey-core:1.9
+|         |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|         |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-jaxrs:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-xc:1.9.13 (*)
+|         |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    +--- commons-cli:commons-cli:1.2
+|         |    +--- org.slf4j:slf4j-api:1.7.10
+|         |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    +--- com.google.inject.extensions:guice-servlet:3.0
+|         |    |    \--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- commons-io:commons-io:2.4
+|         |    +--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    +--- com.sun.jersey:jersey-json:1.9 (*)
+|         |    +--- com.sun.jersey.contribs:jersey-guice:1.9
+|         |    |    +--- javax.inject:javax.inject:1
+|         |    |    +--- com.google.inject:guice:3.0 (*)
+|         |    |    +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         |    |    \--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    \--- log4j:log4j:1.2.17
+|         +--- com.google.protobuf:protobuf-java:2.5.0
+|         +--- org.apache.avro:avro:1.7.4 (*)
+|         +--- org.slf4j:slf4j-api:1.7.10
+|         +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|         +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         \--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
++--- org.apache.httpcomponents:httpclient:4.5.2 (*)
++--- junit:junit:4.11
+|    \--- org.hamcrest:hamcrest-core:1.3
+\--- org.springframework:spring-test:4.2.6.RELEASE
+     \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+
+testCompileClasspath - Compile classpath for source set 'test'.
++--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
++--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    \--- log4j:log4j:1.2.17
++--- org.reflections:reflections:0.9.9-RC1
+|    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    +--- org.javassist:javassist:3.16.1-GA
+|    \--- dom4j:dom4j:1.6.1
+|         \--- xml-apis:xml-apis:1.0.b2 -> 1.4.01
++--- project :lib/utils
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.7.2
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.7.0 -> 2.7.2
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    \--- com.fasterxml.jackson.core:jackson-annotations:2.7.2
++--- project :lib/xhtml
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.jsoup:jsoup:1.9.2
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.22
+|    |    \--- xerces:xercesImpl:2.11.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    +--- net.sourceforge.htmlcleaner:htmlcleaner:2.16
+|    |    \--- org.jdom:jdom2:2.0.5
+|    \--- org.apache.httpcomponents:httpclient:4.5.2
+|         +--- org.apache.httpcomponents:httpcore:4.4.4
+|         +--- commons-logging:commons-logging:1.2
+|         \--- commons-codec:commons-codec:1.9
++--- project :module/commons
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :lib/yara
+|    |    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    |    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    |    \--- project :lib/utils (*)
+|    +--- com.google.guava:guava:18.0
+|    +--- com.beust:jcommander:1.35
+|    +--- com.google.inject:guice:3.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    \--- org.sonatype.sisu.inject:cglib:2.2.1-v20090111
+|    |         \--- asm:asm:3.1
+|    +--- org.hdrhistogram:HdrHistogram:2.1.7
+|    +--- org.tap4j:tap4j:4.1
+|    |    \--- org.yaml:snakeyaml:1.11 -> 1.16
+|    +--- com.google.inject.extensions:guice-jmx:3.0
+|    |    \--- com.google.inject:guice:3.0 (*)
+|    +--- com.mycila.guice:mycila-guice-all:3.6.ga
+|    |    +--- org.sonatype.sisu:sisu-guice:3.2.3
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- com.google.guava:guava:18.0
+|    |    +--- org.codehaus.groovy:groovy-all:2.1.6
+|    |    \--- com.mycila.guice:guice-servlet:3.6.ga
+|    |         +--- org.sonatype.sisu:sisu-guice:3.2.3 (*)
+|    |         \--- com.google.guava:guava:18.0
+|    \--- com.mycila:mycila-jmx:1.1.ga
+|         +--- org.sonatype.sisu:sisu-guice:3.1.0 -> 3.2.3 (*)
+|         \--- com.google.guava:guava:14.0.1 -> 18.0
++--- project :module/spring-framework
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.3.5.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |    |    \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-context:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.2.6.RELEASE
+|    |    |         |    +--- aopalliance:aopalliance:1.0
+|    |    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         \--- org.springframework:spring-expression:4.2.6.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    \--- org.yaml:snakeyaml:1.16
+|    +--- org.springframework.integration:spring-integration-core:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-core:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-tx:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.retry:spring-retry:1.1.2.RELEASE
+|    |    |    \--- org.springframework:spring-core:4.0.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-messaging:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-loader:1.3.5.RELEASE
+|    \--- commons-logging:commons-logging: -> 1.2
++--- project :module/jms
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :module/spring-framework (*)
+|    +--- org.springframework:spring-jms:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-messaging:4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.6.RELEASE (*)
+|    \--- org.apache.activemq:activemq-all:5.13.0
++--- project :data/storage/batchdb
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.apache.hadoop:hadoop-common:2.7.2
+|    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- org.apache.commons:commons-math3:3.1.1
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- commons-httpclient:commons-httpclient:3.1
+|    |    |    +--- commons-logging:commons-logging:1.0.4 -> 1.2
+|    |    |    \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-net:commons-net:3.1
+|    |    +--- commons-collections:commons-collections:3.2.2
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.mortbay.jetty:jetty:6.1.26
+|    |    |    \--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- javax.servlet.jsp:jsp-api:2.1
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-json:1.9
+|    |    |    +--- org.codehaus.jettison:jettison:1.1
+|    |    |    +--- com.sun.xml.bind:jaxb-impl:2.2.3-1
+|    |    |    |    \--- javax.xml.bind:jaxb-api:2.2.2
+|    |    |    |         +--- javax.xml.stream:stax-api:1.0-2
+|    |    |    |         \--- javax.activation:activation:1.1
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.3 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.3 -> 1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-jaxrs:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    +--- org.codehaus.jackson:jackson-xc:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9
+|    |    |    +--- asm:asm:3.1
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- net.java.dev.jets3t:jets3t:0.9.0
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.1.2 -> 4.5.2 (*)
+|    |    |    +--- org.apache.httpcomponents:httpcore:4.1.2 -> 4.4.4
+|    |    |    \--- com.jamesmurty.utils:java-xmlbuilder:0.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-configuration:commons-configuration:1.6
+|    |    |    +--- commons-collections:commons-collections:3.2.1 -> 3.2.2
+|    |    |    +--- commons-lang:commons-lang:2.4 -> 2.6
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- commons-digester:commons-digester:1.8
+|    |    |    |    +--- commons-beanutils:commons-beanutils:1.7.0
+|    |    |    |    |    \--- commons-logging:commons-logging:1.0.3 -> 1.2
+|    |    |    |    \--- commons-logging:commons-logging:1.1 -> 1.2
+|    |    |    \--- commons-beanutils:commons-beanutils-core:1.8.0
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- org.apache.avro:avro:1.7.4
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.8 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.8 -> 1.9.13 (*)
+|    |    |    +--- com.thoughtworks.paranamer:paranamer:2.3
+|    |    |    +--- org.xerial.snappy:snappy-java:1.0.4.1
+|    |    |    +--- org.apache.commons:commons-compress:1.4.1
+|    |    |    |    \--- org.tukaani:xz:1.0
+|    |    |    \--- org.slf4j:slf4j-api:1.6.4 -> 1.7.10
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- com.google.code.gson:gson:2.2.4
+|    |    +--- org.apache.hadoop:hadoop-auth:2.7.2
+|    |    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.2.5 -> 4.5.2 (*)
+|    |    |    +--- org.apache.directory.server:apacheds-kerberos-codec:2.0.0-M15
+|    |    |    |    +--- org.apache.directory.server:apacheds-i18n:2.0.0-M15
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-util:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6
+|    |    |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|    |    |    |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.10 (*)
+|    |    |    |    +--- log4j:log4j:1.2.16 -> 1.2.17
+|    |    |    |    +--- jline:jline:0.9.94
+|    |    |    |    \--- io.netty:netty:3.7.0.Final
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1
+|    |    |    |    +--- org.apache.curator:curator-client:2.7.1
+|    |    |    |    |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.10
+|    |    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    +--- log4j:log4j:1.2.17
+|    |    |    \--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- com.jcraft:jsch:0.1.42
+|    |    +--- org.apache.curator:curator-client:2.7.1 (*)
+|    |    +--- org.apache.curator:curator-recipes:2.7.1
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1 (*)
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- com.google.code.findbugs:jsr305:3.0.0
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    \--- org.apache.commons:commons-compress:1.4.1 (*)
+|    +--- org.apache.hadoop:hadoop-hdfs:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- org.mortbay.jetty:jetty:6.1.26 (*)
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- commons-daemon:commons-daemon:1.0.13
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
+|    |    +--- io.netty:netty-all:4.0.23.Final
+|    |    +--- xerces:xercesImpl:2.9.1 -> 2.11.0 (*)
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    \--- org.fusesource.leveldbjni:leveldbjni-all:1.8
+|    \--- org.apache.hadoop:hadoop-mapreduce-client-core:2.7.2
+|         +--- org.apache.hadoop:hadoop-yarn-common:2.7.2
+|         |    +--- org.apache.hadoop:hadoop-yarn-api:2.7.2
+|         |    |    +--- commons-lang:commons-lang:2.6
+|         |    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    |    \--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- javax.xml.bind:jaxb-api:2.2.2 (*)
+|         |    +--- org.apache.commons:commons-compress:1.4.1 (*)
+|         |    +--- commons-lang:commons-lang:2.6
+|         |    +--- javax.servlet:servlet-api:2.5
+|         |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|         |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|         |    +--- com.sun.jersey:jersey-core:1.9
+|         |    +--- com.sun.jersey:jersey-client:1.9
+|         |    |    \--- com.sun.jersey:jersey-core:1.9
+|         |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|         |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-jaxrs:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-xc:1.9.13 (*)
+|         |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    +--- commons-cli:commons-cli:1.2
+|         |    +--- org.slf4j:slf4j-api:1.7.10
+|         |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    +--- com.google.inject.extensions:guice-servlet:3.0
+|         |    |    \--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- commons-io:commons-io:2.4
+|         |    +--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    +--- com.sun.jersey:jersey-json:1.9 (*)
+|         |    +--- com.sun.jersey.contribs:jersey-guice:1.9
+|         |    |    +--- javax.inject:javax.inject:1
+|         |    |    +--- com.google.inject:guice:3.0 (*)
+|         |    |    +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         |    |    \--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    \--- log4j:log4j:1.2.17
+|         +--- com.google.protobuf:protobuf-java:2.5.0
+|         +--- org.apache.avro:avro:1.7.4 (*)
+|         +--- org.slf4j:slf4j-api:1.7.10
+|         +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|         +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         \--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
++--- org.apache.httpcomponents:httpclient:4.5.2 (*)
++--- junit:junit:4.11
+|    \--- org.hamcrest:hamcrest-core:1.3
+\--- org.springframework:spring-test:4.2.6.RELEASE
+     \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+
+testCompileOnly - Compile dependencies for source set 'test'.
++--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
++--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    \--- log4j:log4j:1.2.17
++--- org.reflections:reflections:0.9.9-RC1
+|    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    +--- org.javassist:javassist:3.16.1-GA
+|    \--- dom4j:dom4j:1.6.1
+|         \--- xml-apis:xml-apis:1.0.b2 -> 1.4.01
++--- project :lib/utils
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.7.2
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.7.0 -> 2.7.2
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    \--- com.fasterxml.jackson.core:jackson-annotations:2.7.2
++--- project :lib/xhtml
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.jsoup:jsoup:1.9.2
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.22
+|    |    \--- xerces:xercesImpl:2.11.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    +--- net.sourceforge.htmlcleaner:htmlcleaner:2.16
+|    |    \--- org.jdom:jdom2:2.0.5
+|    \--- org.apache.httpcomponents:httpclient:4.5.2
+|         +--- org.apache.httpcomponents:httpcore:4.4.4
+|         +--- commons-logging:commons-logging:1.2
+|         \--- commons-codec:commons-codec:1.9
++--- project :module/commons
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :lib/yara
+|    |    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    |    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    |    \--- project :lib/utils (*)
+|    +--- com.google.guava:guava:18.0
+|    +--- com.beust:jcommander:1.35
+|    +--- com.google.inject:guice:3.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    \--- org.sonatype.sisu.inject:cglib:2.2.1-v20090111
+|    |         \--- asm:asm:3.1
+|    +--- org.hdrhistogram:HdrHistogram:2.1.7
+|    +--- org.tap4j:tap4j:4.1
+|    |    \--- org.yaml:snakeyaml:1.11 -> 1.16
+|    +--- com.google.inject.extensions:guice-jmx:3.0
+|    |    \--- com.google.inject:guice:3.0 (*)
+|    +--- com.mycila.guice:mycila-guice-all:3.6.ga
+|    |    +--- org.sonatype.sisu:sisu-guice:3.2.3
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- com.google.guava:guava:18.0
+|    |    +--- org.codehaus.groovy:groovy-all:2.1.6
+|    |    \--- com.mycila.guice:guice-servlet:3.6.ga
+|    |         +--- org.sonatype.sisu:sisu-guice:3.2.3 (*)
+|    |         \--- com.google.guava:guava:18.0
+|    \--- com.mycila:mycila-jmx:1.1.ga
+|         +--- org.sonatype.sisu:sisu-guice:3.1.0 -> 3.2.3 (*)
+|         \--- com.google.guava:guava:14.0.1 -> 18.0
++--- project :module/spring-framework
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.3.5.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |    |    \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-context:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.2.6.RELEASE
+|    |    |         |    +--- aopalliance:aopalliance:1.0
+|    |    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         \--- org.springframework:spring-expression:4.2.6.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    \--- org.yaml:snakeyaml:1.16
+|    +--- org.springframework.integration:spring-integration-core:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-core:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-tx:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.retry:spring-retry:1.1.2.RELEASE
+|    |    |    \--- org.springframework:spring-core:4.0.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-messaging:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-loader:1.3.5.RELEASE
+|    \--- commons-logging:commons-logging: -> 1.2
++--- project :module/jms
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :module/spring-framework (*)
+|    +--- org.springframework:spring-jms:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-messaging:4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.6.RELEASE (*)
+|    \--- org.apache.activemq:activemq-all:5.13.0
++--- project :data/storage/batchdb
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.apache.hadoop:hadoop-common:2.7.2
+|    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- org.apache.commons:commons-math3:3.1.1
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- commons-httpclient:commons-httpclient:3.1
+|    |    |    +--- commons-logging:commons-logging:1.0.4 -> 1.2
+|    |    |    \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-net:commons-net:3.1
+|    |    +--- commons-collections:commons-collections:3.2.2
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.mortbay.jetty:jetty:6.1.26
+|    |    |    \--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- javax.servlet.jsp:jsp-api:2.1
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-json:1.9
+|    |    |    +--- org.codehaus.jettison:jettison:1.1
+|    |    |    +--- com.sun.xml.bind:jaxb-impl:2.2.3-1
+|    |    |    |    \--- javax.xml.bind:jaxb-api:2.2.2
+|    |    |    |         +--- javax.xml.stream:stax-api:1.0-2
+|    |    |    |         \--- javax.activation:activation:1.1
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.3 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.3 -> 1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-jaxrs:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    +--- org.codehaus.jackson:jackson-xc:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9
+|    |    |    +--- asm:asm:3.1
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- net.java.dev.jets3t:jets3t:0.9.0
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.1.2 -> 4.5.2 (*)
+|    |    |    +--- org.apache.httpcomponents:httpcore:4.1.2 -> 4.4.4
+|    |    |    \--- com.jamesmurty.utils:java-xmlbuilder:0.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-configuration:commons-configuration:1.6
+|    |    |    +--- commons-collections:commons-collections:3.2.1 -> 3.2.2
+|    |    |    +--- commons-lang:commons-lang:2.4 -> 2.6
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- commons-digester:commons-digester:1.8
+|    |    |    |    +--- commons-beanutils:commons-beanutils:1.7.0
+|    |    |    |    |    \--- commons-logging:commons-logging:1.0.3 -> 1.2
+|    |    |    |    \--- commons-logging:commons-logging:1.1 -> 1.2
+|    |    |    \--- commons-beanutils:commons-beanutils-core:1.8.0
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- org.apache.avro:avro:1.7.4
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.8 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.8 -> 1.9.13 (*)
+|    |    |    +--- com.thoughtworks.paranamer:paranamer:2.3
+|    |    |    +--- org.xerial.snappy:snappy-java:1.0.4.1
+|    |    |    +--- org.apache.commons:commons-compress:1.4.1
+|    |    |    |    \--- org.tukaani:xz:1.0
+|    |    |    \--- org.slf4j:slf4j-api:1.6.4 -> 1.7.10
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- com.google.code.gson:gson:2.2.4
+|    |    +--- org.apache.hadoop:hadoop-auth:2.7.2
+|    |    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.2.5 -> 4.5.2 (*)
+|    |    |    +--- org.apache.directory.server:apacheds-kerberos-codec:2.0.0-M15
+|    |    |    |    +--- org.apache.directory.server:apacheds-i18n:2.0.0-M15
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-util:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6
+|    |    |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|    |    |    |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.10 (*)
+|    |    |    |    +--- log4j:log4j:1.2.16 -> 1.2.17
+|    |    |    |    +--- jline:jline:0.9.94
+|    |    |    |    \--- io.netty:netty:3.7.0.Final
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1
+|    |    |    |    +--- org.apache.curator:curator-client:2.7.1
+|    |    |    |    |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.10
+|    |    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    +--- log4j:log4j:1.2.17
+|    |    |    \--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- com.jcraft:jsch:0.1.42
+|    |    +--- org.apache.curator:curator-client:2.7.1 (*)
+|    |    +--- org.apache.curator:curator-recipes:2.7.1
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1 (*)
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- com.google.code.findbugs:jsr305:3.0.0
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    \--- org.apache.commons:commons-compress:1.4.1 (*)
+|    +--- org.apache.hadoop:hadoop-hdfs:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- org.mortbay.jetty:jetty:6.1.26 (*)
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- commons-daemon:commons-daemon:1.0.13
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
+|    |    +--- io.netty:netty-all:4.0.23.Final
+|    |    +--- xerces:xercesImpl:2.9.1 -> 2.11.0 (*)
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    \--- org.fusesource.leveldbjni:leveldbjni-all:1.8
+|    \--- org.apache.hadoop:hadoop-mapreduce-client-core:2.7.2
+|         +--- org.apache.hadoop:hadoop-yarn-common:2.7.2
+|         |    +--- org.apache.hadoop:hadoop-yarn-api:2.7.2
+|         |    |    +--- commons-lang:commons-lang:2.6
+|         |    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    |    \--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- javax.xml.bind:jaxb-api:2.2.2 (*)
+|         |    +--- org.apache.commons:commons-compress:1.4.1 (*)
+|         |    +--- commons-lang:commons-lang:2.6
+|         |    +--- javax.servlet:servlet-api:2.5
+|         |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|         |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|         |    +--- com.sun.jersey:jersey-core:1.9
+|         |    +--- com.sun.jersey:jersey-client:1.9
+|         |    |    \--- com.sun.jersey:jersey-core:1.9
+|         |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|         |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-jaxrs:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-xc:1.9.13 (*)
+|         |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    +--- commons-cli:commons-cli:1.2
+|         |    +--- org.slf4j:slf4j-api:1.7.10
+|         |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    +--- com.google.inject.extensions:guice-servlet:3.0
+|         |    |    \--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- commons-io:commons-io:2.4
+|         |    +--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    +--- com.sun.jersey:jersey-json:1.9 (*)
+|         |    +--- com.sun.jersey.contribs:jersey-guice:1.9
+|         |    |    +--- javax.inject:javax.inject:1
+|         |    |    +--- com.google.inject:guice:3.0 (*)
+|         |    |    +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         |    |    \--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    \--- log4j:log4j:1.2.17
+|         +--- com.google.protobuf:protobuf-java:2.5.0
+|         +--- org.apache.avro:avro:1.7.4 (*)
+|         +--- org.slf4j:slf4j-api:1.7.10
+|         +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|         +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         \--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
++--- org.apache.httpcomponents:httpclient:4.5.2 (*)
++--- junit:junit:4.11
+|    \--- org.hamcrest:hamcrest-core:1.3
+\--- org.springframework:spring-test:4.2.6.RELEASE
+     \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+
+testRuntime - Runtime dependencies for source set 'test'.
++--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
++--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-api:1.7.10
+|    \--- log4j:log4j:1.2.17
++--- org.reflections:reflections:0.9.9-RC1
+|    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    +--- org.javassist:javassist:3.16.1-GA
+|    \--- dom4j:dom4j:1.6.1
+|         \--- xml-apis:xml-apis:1.0.b2 -> 1.4.01
++--- project :lib/utils
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    +--- com.fasterxml.jackson.core:jackson-databind:2.7.2
+|    |    +--- com.fasterxml.jackson.core:jackson-annotations:2.7.0 -> 2.7.2
+|    |    \--- com.fasterxml.jackson.core:jackson-core:2.7.2
+|    \--- com.fasterxml.jackson.core:jackson-annotations:2.7.2
++--- project :lib/xhtml
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.jsoup:jsoup:1.9.2
+|    +--- net.sourceforge.nekohtml:nekohtml:1.9.22
+|    |    \--- xerces:xercesImpl:2.11.0
+|    |         \--- xml-apis:xml-apis:1.4.01
+|    +--- net.sourceforge.htmlcleaner:htmlcleaner:2.16
+|    |    \--- org.jdom:jdom2:2.0.5
+|    \--- org.apache.httpcomponents:httpclient:4.5.2
+|         +--- org.apache.httpcomponents:httpcore:4.4.4
+|         +--- commons-logging:commons-logging:1.2
+|         \--- commons-codec:commons-codec:1.9
++--- project :module/commons
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :lib/yara
+|    |    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    |    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    |    \--- project :lib/utils (*)
+|    +--- com.google.guava:guava:18.0
+|    +--- com.beust:jcommander:1.35
+|    +--- com.google.inject:guice:3.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    \--- org.sonatype.sisu.inject:cglib:2.2.1-v20090111
+|    |         \--- asm:asm:3.1
+|    +--- org.hdrhistogram:HdrHistogram:2.1.7
+|    +--- org.tap4j:tap4j:4.1
+|    |    \--- org.yaml:snakeyaml:1.11 -> 1.16
+|    +--- com.google.inject.extensions:guice-jmx:3.0
+|    |    \--- com.google.inject:guice:3.0 (*)
+|    +--- com.mycila.guice:mycila-guice-all:3.6.ga
+|    |    +--- org.sonatype.sisu:sisu-guice:3.2.3
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    +--- aopalliance:aopalliance:1.0
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- javax.inject:javax.inject:1
+|    |    +--- aopalliance:aopalliance:1.0
+|    |    +--- com.google.guava:guava:18.0
+|    |    +--- org.codehaus.groovy:groovy-all:2.1.6
+|    |    \--- com.mycila.guice:guice-servlet:3.6.ga
+|    |         +--- org.sonatype.sisu:sisu-guice:3.2.3 (*)
+|    |         \--- com.google.guava:guava:18.0
+|    \--- com.mycila:mycila-jmx:1.1.ga
+|         +--- org.sonatype.sisu:sisu-guice:3.1.0 -> 3.2.3 (*)
+|         \--- com.google.guava:guava:14.0.1 -> 18.0
++--- project :module/spring-framework
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- org.springframework.boot:spring-boot-starter:1.3.5.RELEASE
+|    |    +--- org.springframework.boot:spring-boot:1.3.5.RELEASE
+|    |    |    +--- org.springframework:spring-core:4.2.6.RELEASE
+|    |    |    |    \--- commons-logging:commons-logging:1.2
+|    |    |    \--- org.springframework:spring-context:4.2.6.RELEASE
+|    |    |         +--- org.springframework:spring-aop:4.2.6.RELEASE
+|    |    |         |    +--- aopalliance:aopalliance:1.0
+|    |    |         |    +--- org.springframework:spring-beans:4.2.6.RELEASE
+|    |    |         |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |         +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    |         \--- org.springframework:spring-expression:4.2.6.RELEASE
+|    |    |              \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.boot:spring-boot-autoconfigure:1.3.5.RELEASE
+|    |    |    \--- org.springframework.boot:spring-boot:1.3.5.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    \--- org.yaml:snakeyaml:1.16
+|    +--- org.springframework.integration:spring-integration-core:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-core:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-tx:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    |    \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework.retry:spring-retry:1.1.2.RELEASE
+|    |    |    \--- org.springframework:spring-core:4.0.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-aop:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.4.RELEASE -> 4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-messaging:4.2.4.RELEASE -> 4.2.6.RELEASE
+|    |         +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |         +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |         \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    +--- org.springframework.boot:spring-boot-loader:1.3.5.RELEASE
+|    \--- commons-logging:commons-logging: -> 1.2
++--- project :module/jms
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- project :module/spring-framework (*)
+|    +--- org.springframework:spring-jms:4.2.6.RELEASE
+|    |    +--- org.springframework:spring-aop:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-beans:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-context:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-core:4.2.6.RELEASE (*)
+|    |    +--- org.springframework:spring-messaging:4.2.6.RELEASE (*)
+|    |    \--- org.springframework:spring-tx:4.2.6.RELEASE (*)
+|    \--- org.apache.activemq:activemq-all:5.13.0
++--- project :data/storage/batchdb
+|    +--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    +--- org.slf4j:slf4j-log4j12:1.7.5 -> 1.7.10 (*)
+|    +--- org.reflections:reflections:0.9.9-RC1 (*)
+|    +--- project :lib/utils (*)
+|    +--- org.apache.hadoop:hadoop-common:2.7.2
+|    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- org.apache.commons:commons-math3:3.1.1
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- commons-httpclient:commons-httpclient:3.1
+|    |    |    +--- commons-logging:commons-logging:1.0.4 -> 1.2
+|    |    |    \--- commons-codec:commons-codec:1.2 -> 1.9
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-net:commons-net:3.1
+|    |    +--- commons-collections:commons-collections:3.2.2
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.mortbay.jetty:jetty:6.1.26
+|    |    |    \--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- javax.servlet.jsp:jsp-api:2.1
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-json:1.9
+|    |    |    +--- org.codehaus.jettison:jettison:1.1
+|    |    |    +--- com.sun.xml.bind:jaxb-impl:2.2.3-1
+|    |    |    |    \--- javax.xml.bind:jaxb-api:2.2.2
+|    |    |    |         +--- javax.xml.stream:stax-api:1.0-2
+|    |    |    |         \--- javax.activation:activation:1.1
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.3 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.3 -> 1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-jaxrs:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    +--- org.codehaus.jackson:jackson-xc:1.8.3 -> 1.9.13
+|    |    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    |    |    \--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9
+|    |    |    +--- asm:asm:3.1
+|    |    |    \--- com.sun.jersey:jersey-core:1.9
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- net.java.dev.jets3t:jets3t:0.9.0
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.1.2 -> 4.5.2 (*)
+|    |    |    +--- org.apache.httpcomponents:httpcore:4.1.2 -> 4.4.4
+|    |    |    \--- com.jamesmurty.utils:java-xmlbuilder:0.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-configuration:commons-configuration:1.6
+|    |    |    +--- commons-collections:commons-collections:3.2.1 -> 3.2.2
+|    |    |    +--- commons-lang:commons-lang:2.4 -> 2.6
+|    |    |    +--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    |    +--- commons-digester:commons-digester:1.8
+|    |    |    |    +--- commons-beanutils:commons-beanutils:1.7.0
+|    |    |    |    |    \--- commons-logging:commons-logging:1.0.3 -> 1.2
+|    |    |    |    \--- commons-logging:commons-logging:1.1 -> 1.2
+|    |    |    \--- commons-beanutils:commons-beanutils-core:1.8.0
+|    |    |         \--- commons-logging:commons-logging:1.1.1 -> 1.2
+|    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- org.apache.avro:avro:1.7.4
+|    |    |    +--- org.codehaus.jackson:jackson-core-asl:1.8.8 -> 1.9.13
+|    |    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.8.8 -> 1.9.13 (*)
+|    |    |    +--- com.thoughtworks.paranamer:paranamer:2.3
+|    |    |    +--- org.xerial.snappy:snappy-java:1.0.4.1
+|    |    |    +--- org.apache.commons:commons-compress:1.4.1
+|    |    |    |    \--- org.tukaani:xz:1.0
+|    |    |    \--- org.slf4j:slf4j-api:1.6.4 -> 1.7.10
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- com.google.code.gson:gson:2.2.4
+|    |    +--- org.apache.hadoop:hadoop-auth:2.7.2
+|    |    |    +--- org.slf4j:slf4j-api:1.7.10
+|    |    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    |    +--- org.apache.httpcomponents:httpclient:4.2.5 -> 4.5.2 (*)
+|    |    |    +--- org.apache.directory.server:apacheds-kerberos-codec:2.0.0-M15
+|    |    |    |    +--- org.apache.directory.server:apacheds-i18n:2.0.0-M15
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-asn1-api:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    +--- org.apache.directory.api:api-util:1.0.0-M20
+|    |    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    |    \--- org.slf4j:slf4j-api:1.7.5 -> 1.7.10
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6
+|    |    |    |    +--- org.slf4j:slf4j-api:1.6.1 -> 1.7.10
+|    |    |    |    +--- org.slf4j:slf4j-log4j12:1.6.1 -> 1.7.10 (*)
+|    |    |    |    +--- log4j:log4j:1.2.16 -> 1.2.17
+|    |    |    |    +--- jline:jline:0.9.94
+|    |    |    |    \--- io.netty:netty:3.7.0.Final
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1
+|    |    |    |    +--- org.apache.curator:curator-client:2.7.1
+|    |    |    |    |    +--- org.slf4j:slf4j-api:1.7.6 -> 1.7.10
+|    |    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    |    +--- log4j:log4j:1.2.17
+|    |    |    \--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|    |    +--- com.jcraft:jsch:0.1.42
+|    |    +--- org.apache.curator:curator-client:2.7.1 (*)
+|    |    +--- org.apache.curator:curator-recipes:2.7.1
+|    |    |    +--- org.apache.curator:curator-framework:2.7.1 (*)
+|    |    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    |    \--- com.google.guava:guava:16.0.1 -> 18.0
+|    |    +--- com.google.code.findbugs:jsr305:3.0.0
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    +--- org.apache.zookeeper:zookeeper:3.4.6 (*)
+|    |    \--- org.apache.commons:commons-compress:1.4.1 (*)
+|    +--- org.apache.hadoop:hadoop-hdfs:2.7.2
+|    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|    |    +--- org.mortbay.jetty:jetty:6.1.26 (*)
+|    |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|    |    +--- com.sun.jersey:jersey-core:1.9
+|    |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|    |    +--- commons-cli:commons-cli:1.2
+|    |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|    |    +--- commons-io:commons-io:2.4
+|    |    +--- commons-lang:commons-lang:2.6
+|    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|    |    +--- commons-daemon:commons-daemon:1.0.13
+|    |    +--- log4j:log4j:1.2.17
+|    |    +--- com.google.protobuf:protobuf-java:2.5.0
+|    |    +--- javax.servlet:servlet-api:2.5
+|    |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|    |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|    |    +--- xmlenc:xmlenc:0.52
+|    |    +--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
+|    |    +--- io.netty:netty-all:4.0.23.Final
+|    |    +--- xerces:xercesImpl:2.9.1 -> 2.11.0 (*)
+|    |    +--- org.apache.htrace:htrace-core:3.1.0-incubating
+|    |    \--- org.fusesource.leveldbjni:leveldbjni-all:1.8
+|    \--- org.apache.hadoop:hadoop-mapreduce-client-core:2.7.2
+|         +--- org.apache.hadoop:hadoop-yarn-common:2.7.2
+|         |    +--- org.apache.hadoop:hadoop-yarn-api:2.7.2
+|         |    |    +--- commons-lang:commons-lang:2.6
+|         |    |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    |    \--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- javax.xml.bind:jaxb-api:2.2.2 (*)
+|         |    +--- org.apache.commons:commons-compress:1.4.1 (*)
+|         |    +--- commons-lang:commons-lang:2.6
+|         |    +--- javax.servlet:servlet-api:2.5
+|         |    +--- commons-codec:commons-codec:1.4 -> 1.9
+|         |    +--- org.mortbay.jetty:jetty-util:6.1.26
+|         |    +--- com.sun.jersey:jersey-core:1.9
+|         |    +--- com.sun.jersey:jersey-client:1.9
+|         |    |    \--- com.sun.jersey:jersey-core:1.9
+|         |    +--- org.codehaus.jackson:jackson-core-asl:1.9.13
+|         |    +--- org.codehaus.jackson:jackson-mapper-asl:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-jaxrs:1.9.13 (*)
+|         |    +--- org.codehaus.jackson:jackson-xc:1.9.13 (*)
+|         |    +--- com.google.guava:guava:11.0.2 -> 18.0
+|         |    +--- commons-logging:commons-logging:1.1.3 -> 1.2
+|         |    +--- commons-cli:commons-cli:1.2
+|         |    +--- org.slf4j:slf4j-api:1.7.10
+|         |    +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         |    +--- com.google.inject.extensions:guice-servlet:3.0
+|         |    |    \--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.google.protobuf:protobuf-java:2.5.0
+|         |    +--- commons-io:commons-io:2.4
+|         |    +--- com.google.inject:guice:3.0 (*)
+|         |    +--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    +--- com.sun.jersey:jersey-json:1.9 (*)
+|         |    +--- com.sun.jersey.contribs:jersey-guice:1.9
+|         |    |    +--- javax.inject:javax.inject:1
+|         |    |    +--- com.google.inject:guice:3.0 (*)
+|         |    |    +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         |    |    \--- com.sun.jersey:jersey-server:1.9 (*)
+|         |    \--- log4j:log4j:1.2.17
+|         +--- com.google.protobuf:protobuf-java:2.5.0
+|         +--- org.apache.avro:avro:1.7.4 (*)
+|         +--- org.slf4j:slf4j-api:1.7.10
+|         +--- org.slf4j:slf4j-log4j12:1.7.10 (*)
+|         +--- org.apache.hadoop:hadoop-annotations:2.7.2
+|         +--- com.google.inject.extensions:guice-servlet:3.0 (*)
+|         \--- io.netty:netty:3.6.2.Final -> 3.7.0.Final
++--- org.apache.httpcomponents:httpclient:4.5.2 (*)
++--- junit:junit:4.11
+|    \--- org.hamcrest:hamcrest-core:1.3
+\--- org.springframework:spring-test:4.2.6.RELEASE
+     \--- org.springframework:spring-core:4.2.6.RELEASE (*)
+
+tests
+No dependencies
+
+BUILD SUCCESSFUL
+
+Total time: 6.351 secs

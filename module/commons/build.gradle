@@ -8,8 +8,9 @@ eclipse {
 
 dependencies {
   compile project(':lib/utils')
-  compile project(':lib/yara')
+  compile(project(':lib/yara'))
 
+  compile group: 'com.google.guava', name: 'guava', version: '18.0'
   compile group: 'com.beust', name: 'jcommander', version: '1.35'
 
   compile group: 'com.google.inject', name: 'guice', version: '3.0'

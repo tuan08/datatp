@@ -1,0 +1,231 @@
+{
+  "maxConnection" : 3,
+  "hostname" : "5giay.vn",
+  "injectUrl" : ["http://www.5giay.vn"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "lamchame.com",
+  "injectUrl" : ["http://www.lamchame.com/forum"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "handheld.vn",
+  "injectUrl" : ["http://handheld.vn/forum.php"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "saigonmobile.vn",
+  "injectUrl" : ["http://saigonmobile.vn/forum"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "ledmobile.net",
+  "injectUrl" : ["http://ledmobile.net/diendan"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "tinhte.vn",
+  "injectUrl" : ["http://tinhte.vn/forum"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "forum.cuasotinhoc.vn",
+  "injectUrl" : ["http://forum.cuasotinhoc.vn"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "vn-zoom.com",
+  "injectUrl" : ["http://www.vn-zoom.com"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "pdaviet.net",
+  "injectUrl" : ["http://www.pdaviet.net/forum.php"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "gsm.vn",
+  "injectUrl" : ["http://gsm.vn/forum.php"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "webtretho.com",
+  "injectUrl" : ["http://www.webtretho.com/forum"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "nhatnghe.com",
+  "injectUrl" : ["http://nhatnghe.com/forum"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "diendan.yeulaptop.com",
+  "injectUrl" : ["http://diendan.yeulaptop.com"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "forum.dienmay.com",
+  "injectUrl" : ["http://forum.dienmay.com/forum.php"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "forum.hdvnbits.org",
+  "injectUrl" : ["http://forum.hdvnbits.org"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "forum.tech24.vn",
+  "injectUrl" : ["http://forum.tech24.vn"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "ttvnol.com",
+  "injectUrl" : ["http://www.ttvnol.com"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "congngheso.vn",
+  "injectUrl" : ["http://congngheso.vn/forum.php"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "otofun.net",
+  "injectUrl" : ["http://www.otofun.net"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "product.vietnamwebsite.net",
+  "injectUrl" : ["http://product.vietnamwebsite.net"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "voz.vn",
+  "injectUrl" : ["http://voz.vn"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "vnreview.vn",
+  "injectUrl" : ["http://vnreview.vn/home"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "nhipsongso.tuoitre.vn",
+  "injectUrl" : ["http://nhipsongso.tuoitre.vn"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "thegioitinhoc.vn",
+  "injectUrl" : ["http://thegioitinhoc.vn/home"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "kythuatlaptop.com",
+  "injectUrl" : ["http://www.kythuatlaptop.com/forum"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "linkhay.com",
+  "injectUrl" : ["http://linkhay.com"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "thongtinmayanh.com",
+  "injectUrl" : ["http://thongtinmayanh.com"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "thongtincongnghe.com",
+  "injectUrl" : ["http://www.thongtincongnghe.com"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+    "hostname" : "shoptinhoc.com",
+  "injectUrl" : ["http://shoptinhoc.com/diendan"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "diendantinhoc.vn",
+  "injectUrl" : ["http://www.diendantinhoc.vn/forum.php"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "free4vn.org",
+  "injectUrl" : ["http://www.free4vn.org/forums"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "khoahocphothong.net",
+  "injectUrl" : ["http://www.khoahocphothong.net"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "hoiquantinhoc.com",
+  "injectUrl" : ["http://hoiquantinhoc.com/forum.php"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "truongton.net",
+  "injectUrl" : ["http://truongton.net/forum/"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "vnexpress.net",
+  "injectUrl" : ["http://vnexpress.net"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "dantri.com.vn",
+  "injectUrl" : ["http://dantri.com.vn"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "tuoitre.vn",
+  "injectUrl" : ["http://tuoitre.vn"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "vtc.vn",
+  "injectUrl" : ["http://vtc.vn/default.aspx"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "zing.vn",
+  "injectUrl" : ["http://www.zing.vn"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "www.thanhnien.com.vn",
+  "injectUrl" : ["http://www.thanhnien.com.vn/pages/default.aspx"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "nhandan.org.vn",
+  "injectUrl" : ["http://nhandan.org.vn"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "nld.com.vn",
+  "injectUrl" : ["http://nld.com.vn"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "ictnews.vn",
+  "injectUrl" : ["http://www.ictnews.vn/Home/"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "pcworld.com.vn",
+  "injectUrl" : ["http://www.pcworld.com.vn"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "cafef.vn",
+  "injectUrl" : ["http://cafef.vn"],
+  "crawlDeep" : 8
+} {
+  "maxConnection" : 3,
+  "hostname" : "baodatviet.vn",
+  "injectUrl" : ["http://baodatviet.vn/dv/"],
+  "crawlDeep" : 8
+} 

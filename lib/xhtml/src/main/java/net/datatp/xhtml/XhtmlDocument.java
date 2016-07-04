@@ -1,5 +1,6 @@
 package net.datatp.xhtml;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,7 +8,9 @@ import org.jsoup.nodes.Document;
 
 import net.datatp.xhtml.parser.JSoupParser;
 
-public class XhtmlDocument {
+public class XhtmlDocument implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   private String              url;
   private String              anchorText;
   private String              xhtml;

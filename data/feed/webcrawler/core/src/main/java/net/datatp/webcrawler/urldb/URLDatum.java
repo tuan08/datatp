@@ -23,7 +23,7 @@ import net.datatp.webcrawler.ErrorCode;
 import net.datatp.webcrawler.ResponseCode;
 /**
  * Author : Tuan Nguyen
- *          tuan.nguyen@headvances.com
+ *          tuan08@gmail.com
  * Apr 13, 2010  
  */
 public class URLDatum implements Record, Serializable  {
