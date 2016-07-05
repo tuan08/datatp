@@ -7,31 +7,31 @@ import net.datatp.xhtml.XhtmlDocument;
 
 /**
  * Author : Tuan Nguyen
- *          tuan.nguyen@headvances.com
+ *          tuan08@gmail.com
  * Apr 14, 2010  
  */
 public class FetchData implements Serializable {
   private static final long serialVersionUID = 1L;
 
   final static byte[] EMPTY = new byte[0] ;
-  
-	private URLDatum datum ;
-	private XhtmlDocument document ;
-	
+
+  private URLDatum datum ;
+  private XhtmlDocument document ;
+
   public FetchData() {} 
-  
+
   public FetchData(URLDatum datum) {
     this.datum = datum ;
   }
-  
-  
+
+
   public URLDatum getURLDatum() { return this.datum ; }
-  
+
   public XhtmlDocument getDocument() { return this.document ; }
   public void setDocument(XhtmlDocument doc) { this.document = doc ; } 
-  
+
   public void setResponseCode(short code) { this.datum.setLastResponseCode(code) ; }
-  
+
   public void setDownloadTime(long time) { this.datum.setLastFetchDownloadTime(time) ; }
 
 }

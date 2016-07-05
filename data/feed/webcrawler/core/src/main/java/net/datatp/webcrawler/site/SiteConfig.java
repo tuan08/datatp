@@ -15,6 +15,7 @@ public class SiteConfig implements Serializable {
   final public static String STATUS_DELETED  = "deleted" ;
   final public static String STATUS_MOVED    = "moved" ;
   final public static String STATUS_EMPTY    = "empty" ;
+  
   final public static String[] STATUS_ALL    = {
       STATUS_GOOD, STATUS_OK, STATUS_NEW, STATUS_PENDING, 
       STATUS_REVIEW, STATUS_DELETED, STATUS_MOVED, STATUS_EMPTY 

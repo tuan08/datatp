@@ -87,13 +87,14 @@ public class SortKeyValueFile<K extends WritableComparable, V extends Writable> 
       this.sortAtClose = sortAtClose ;
       SequenceFile.Metadata meta = new SequenceFile.Metadata() ;
       Path writePath = new Path(path + ".writer");
+      Path parentPath = writePath.getParent();
       SequenceFile.Writer.Option[] opts = {
         SequenceFile.Writer.file(writePath),
         SequenceFile.Writer.keyClass(keyType),
         SequenceFile.Writer.valueClass(valueType),
         SequenceFile.Writer.compression(CompressionType.RECORD,  codec),
-        SequenceFile.Writer.replication(fs.getDefaultReplication(writePath)),
-        SequenceFile.Writer.blockSize(fs.getFileStatus(writePath).getBlockSize()),
+        SequenceFile.Writer.replication(fs.getDefaultReplication(parentPath)),
+        SequenceFile.Writer.blockSize(fs.getFileStatus(parentPath).getBlockSize()),
         SequenceFile.Writer.metadata(meta)
       };
       this.writer = SequenceFile.createWriter(fs.getConf(), opts);

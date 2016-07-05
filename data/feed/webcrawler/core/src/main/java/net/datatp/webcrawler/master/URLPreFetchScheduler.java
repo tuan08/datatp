@@ -173,23 +173,35 @@ public class URLPreFetchScheduler {
     }
   }
 
+//  private int flush(MultiListHolder<URLDatum> urlDatumBuffer, SortKeyValueFile<Text, URLDatum>.Writer writer) throws Exception {
+//    MultiListHolder<URLDatum>.RandomIterator iterator = urlDatumBuffer.getRandomIterator() ;
+//    URLDatum datum = null ;
+//    int scheduleCount = 0 ;
+//    ArrayList<URLDatum> holder = new ArrayList<URLDatum>(100) ;
+//    while((datum = iterator.next()) != null) {
+//      writer.append(datum.getId(), datum) ;
+//      holder.add(datum) ;
+//      if(holder.size() == 100) {
+//        urldatumFetchGateway.send(holder);
+//        holder.clear() ;
+//      }
+//      scheduleCount++ ;
+//    }
+//    if(holder.size() > 0) {
+//      urldatumFetchGateway.send(holder) ;
+//      holder.clear() ;
+//    }
+//    urlDatumBuffer.assertEmpty() ;
+//    return scheduleCount ;
+//  }
   private int flush(MultiListHolder<URLDatum> urlDatumBuffer, SortKeyValueFile<Text, URLDatum>.Writer writer) throws Exception {
     MultiListHolder<URLDatum>.RandomIterator iterator = urlDatumBuffer.getRandomIterator() ;
     URLDatum datum = null ;
     int scheduleCount = 0 ;
-    ArrayList<URLDatum> holder = new ArrayList<URLDatum>(100) ;
     while((datum = iterator.next()) != null) {
       writer.append(datum.getId(), datum) ;
-      holder.add(datum) ;
-      if(holder.size() == 100) {
-        urldatumFetchGateway.send(holder);
-        holder.clear() ;
-      }
+      urldatumFetchGateway.send(datum);
       scheduleCount++ ;
-    }
-    if(holder.size() > 0) {
-      urldatumFetchGateway.send(holder) ;
-      holder.clear() ;
     }
     urlDatumBuffer.assertEmpty() ;
     return scheduleCount ;

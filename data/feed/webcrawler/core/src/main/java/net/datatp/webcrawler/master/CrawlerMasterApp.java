@@ -2,6 +2,7 @@ package net.datatp.webcrawler.master;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 import net.datatp.springframework.SpringAppLauncher;
@@ -15,10 +16,14 @@ import net.datatp.springframework.SpringAppLauncher;
 @ComponentScan({ "net.datatp.webcrawler.master", "net.datatp.webcrawler.site" })
 @EnableConfigurationProperties
 public class CrawlerMasterApp {
-  static public void run(String[] args) throws Exception {
+  static private ApplicationContext appContext;
+  
+  static public ApplicationContext getApplicationContext() { return appContext; }
+  
+  static public ApplicationContext run(String[] args) throws Exception {
     if(args == null || args.length == 0) {
       args = new String[]{
-        "--activemq.broker.url=vm://localhost",
+        "--activemq.broker.url=tcp://localhost:61616",
         
         "--crawler.data.dir=build/crawler/data",
         "--crawler.master.urldb.dir=${crawler.data.dir}/urldb",
@@ -40,7 +45,8 @@ public class CrawlerMasterApp {
       "classpath:/META-INF/springframework/crawler-master.xml",
       "classpath:/META-INF/springframework/crawler-integration.xml"
     };
-    SpringAppLauncher.launch(CrawlerMasterApp.class, config, args);
+    appContext = SpringAppLauncher.launch(CrawlerMasterApp.class, config, args);
+    return appContext;
   }
   
   public static void main(String[] args) throws Exception {

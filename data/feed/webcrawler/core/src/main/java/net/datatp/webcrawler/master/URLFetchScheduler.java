@@ -43,11 +43,12 @@ public class URLFetchScheduler {
   @Autowired
   private URLPostFetchScheduler postFetchScheduler ;
 
-  private boolean      exist = false ;
-  private ManageThread manageThread ;
-  private LinkedList<URLDatumScheduleInfo> urldatumScheduleInfos ;
-  private LinkedList<URLDatumCommitInfo>   urldatumCommitInfos ;
-  private String state = "INIT";
+  private boolean                          exist = false;
+  private ManageThread                     manageThread;
+  private LinkedList<URLDatumScheduleInfo> urldatumScheduleInfos;
+  private LinkedList<URLDatumCommitInfo>   urldatumCommitInfos;
+  private String                           state       = "INIT";
+  private boolean                          injectUrl = false;
 
   public URLFetchScheduler() {
     urldatumScheduleInfos = new LinkedList<URLDatumScheduleInfo>() ;
@@ -70,9 +71,9 @@ public class URLFetchScheduler {
   }
 
   @ManagedOperation(description="URLDatum Commit info as formatted text")
-  public String formatURLDatumCommitInfosAsText() {
+  public String formatURLCommitInfosAsText() {
     String[] header = {
-        "Time", "Exec Time", "Commit URL", "New URL", "URL List", "URL Detail"
+      "Time", "Exec Time", "Commit URL", "New URL", "URL List", "URL Detail"
     } ;
     TabularFormater formatter = new TabularFormater(header) ;
     Iterator<URLDatumCommitInfo> i = urldatumCommitInfos.iterator() ;
@@ -119,11 +120,12 @@ public class URLFetchScheduler {
       long updatePeriod =  1 * 24 * 3600 * 1000l ;
       URLDatumCommitInfo commitInfo = null ;
       while(!exist) {
-        if(commitInfo == null || commitInfo.getURLCommitCount() > 0) {
+        if(injectUrl || commitInfo == null || commitInfo.getURLCommitCount() > 0) {
           state = "SCHEDULING" ;
           URLDatumScheduleInfo sheduleInfo = preFetchScheduler.schedule() ;
           urldatumScheduleInfos.addFirst(sheduleInfo) ;
           if(urldatumScheduleInfos.size() >= MAX_HISTORY) urldatumScheduleInfos.removeLast() ;
+          if(injectUrl) injectUrl = false;
         }
         state = "COMMITING" ; 
         commitInfo = postFetchScheduler.process() ;
@@ -137,7 +139,7 @@ public class URLFetchScheduler {
         //        	logger.info("\n" + updater.getUpdateInfo()) ;
         //        	lastUpdateDB = System.currentTimeMillis() ;
         //        }
-        Thread.sleep(500) ;
+        Thread.sleep(1000) ;
       }
     } catch(Throwable ex) {
       logger.error("URLDatumgFetchScheduler Error", ex) ;
@@ -173,6 +175,7 @@ public class URLFetchScheduler {
     }
     writer.close() ;
     urlDatumDB.autoCompact() ;
+    injectUrl = true;
     logger.info("inject/update " + count + " urls") ;
   }
 

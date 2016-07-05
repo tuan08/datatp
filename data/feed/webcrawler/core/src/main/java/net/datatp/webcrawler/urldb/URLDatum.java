@@ -6,11 +6,11 @@ import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.DataOutput;
 import java.io.DataOutputStream;
+import java.io.Externalizable;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.PrintStream;
-import java.io.Serializable;
 import java.util.Date;
 
 import org.apache.hadoop.io.Text;
@@ -26,7 +26,7 @@ import net.datatp.webcrawler.ResponseCode;
  *          tuan08@gmail.com
  * Apr 13, 2010  
  */
-public class URLDatum implements Record, Serializable  {
+public class URLDatum implements Record, Externalizable  {
   final static public byte STATUS_NEW            = 0 ;
   final static public byte STATUS_WAITING        = 1 ;
   final static public byte STATUS_FETCHING       = 2 ;
@@ -182,15 +182,11 @@ public class URLDatum implements Record, Serializable  {
   }
 
   public void readFields(DataInput in) throws IOException {
-    this.id  = new Text() ;
-    this.id.readFields(in) ;
+    this.id  = new Text() ; id.readFields(in) ;
     this.createdTime = in.readLong() ;
-    this.url = new Text()  ;
-    this.url.readFields(in) ;
-    this.redirectUrl = new Text() ;
-    this.redirectUrl.readFields(in) ;
-    this.anchorText = new Text()  ;
-    this.anchorText.readFields(in) ;
+    this.url = new Text(); this.url.readFields(in) ;
+    this.redirectUrl = new Text() ; this.redirectUrl.readFields(in) ;
+    this.anchorText = new Text(); this.anchorText.readFields(in) ;
 
     this.nextFetchTime = in.readLong() ;
     this.fetchCount = in.readInt() ;
@@ -233,11 +229,13 @@ public class URLDatum implements Record, Serializable  {
     this.contentType.write(out) ;
   }
 
-  private void writeObject(ObjectOutputStream out) throws IOException {
+  @Override
+  public void writeExternal(ObjectOutput out) throws IOException {
     write(out) ;
   }
 
-  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+  @Override
+  public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
     readFields(in) ;
   }
 

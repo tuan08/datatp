@@ -15,11 +15,16 @@ import net.datatp.springframework.SpringAppLauncher;
 @ComponentScan({ "net.datatp.webcrawler.fetcher", "net.datatp.webcrawler.site" })
 @EnableConfigurationProperties
 public class CrawlerFetcherApp {
+  static public String SERIALIZABLE_PACKAGES = "net.datatp.webcrawler.urldb,net.datatp.webcrawler.fetcher,java.util";
+  static {
+    System.setProperty("org.apache.activemq.SERIALIZABLE_PACKAGES",SERIALIZABLE_PACKAGES);
+  }
+  
   static public void run(String[] args) throws Exception {
     if(args == null || args.length == 0) {
       args = new String[]{
         "--spring.jmx.enabled=true",
-        "--activemq.broker.url=vm://localhost",
+        "--activemq.broker.url=tcp://localhost:61616",
         
         "--crawler.data.dir=build/crawler/data",
         "--crawler.master.urldb.dir=${crawler.data.dir}/urldb",
