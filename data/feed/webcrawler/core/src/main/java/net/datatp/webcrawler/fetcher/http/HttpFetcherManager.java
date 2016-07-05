@@ -53,28 +53,15 @@ public class HttpFetcherManager  {
     return holder ;
   }
 
-//  public void schedule(Serializable data) throws InterruptedException {
-//    System.err.println("Got data: " + data.getClass());
-//    if(data instanceof List) {
-//      List<URLDatum> holder = (List<URLDatum>) data ;
-//      for(int i = 0; i < holder.size(); i++) {
-//        urldatumFetchQueue.add(holder.get(i)) ;
-//      }
-//    } else {
-//      urldatumFetchQueue.add((URLDatum) data) ;
-//    }
-//  }
-  
-//  public void schedule(List<URLDatum> data) throws InterruptedException {
-//    List<URLDatum> holder = (List<URLDatum>) data ;
-//    for(int i = 0; i < holder.size(); i++) {
-//      urldatumFetchQueue.add(holder.get(i)) ;
-//    }
-//  }
-
-  public void schedule(URLDatum data) throws InterruptedException {
-    System.err.println("schedule: " + data.getFetchUrl());
-    urldatumFetchQueue.add(data) ;
+  public void schedule(Serializable data) throws InterruptedException {
+    if(data instanceof List) {
+      List<URLDatum> holder = (List<URLDatum>) data ;
+      for(int i = 0; i < holder.size(); i++) {
+        urldatumFetchQueue.add(holder.get(i)) ;
+      }
+    } else {
+      urldatumFetchQueue.add((URLDatum) data) ;
+    }
   }
   
   public void setNumberOfFetcher(int value) { this.numberOfFetcher = value ; }

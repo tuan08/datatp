@@ -42,8 +42,9 @@ public class URLPostFetchScheduler {
   private SiteContextManager siteConfigManager ;
   @Autowired
   protected URLFetchSchedulerPlugins fetcherPlugins ;
+  
   private LinkedBlockingQueue<URLDatum> commitURLDatumQueue = new LinkedBlockingQueue<URLDatum>(10000);
-  private Map<Text, URLDatumEntry> newURLDatums = new ConcurrentHashMap<Text, URLDatumEntry>() ;	
+  private Map<Text, URLDatumEntry>      newURLDatums = new ConcurrentHashMap<Text, URLDatumEntry>() ;	
 
   private int maxWaitTime = 3000 ;
 
@@ -54,9 +55,9 @@ public class URLPostFetchScheduler {
 
   public SiteContextManager getSiteConfigManager() { return this.siteConfigManager ; }
 
-  public void schedule(List<URLDatum> urldatum) throws InterruptedException {
-    for(int i = 0; i < urldatum.size(); i++) {
-      URLDatum datum = urldatum.get(i) ;
+  public void schedule(List<URLDatum> urls) throws InterruptedException {
+    for(int i = 0; i < urls.size(); i++) {
+      URLDatum datum = urls.get(i) ;
       if(datum.getStatus() == URLDatum.STATUS_NEW) {
         URLDatumEntry entry = newURLDatums.get(datum.getId()) ;
         if(entry == null) {
@@ -91,14 +92,16 @@ public class URLPostFetchScheduler {
         if(noneDequeueCount == 100) break ;
         Thread.sleep(500) ;
         continue ;
+      } else {
+        if(writer == null) writer = urlDatumDB.newSegment().getWriter() ;
+        processCount += write(writer, urls) ;
       }
-      if(writer == null) {
-        Segment<Text, URLDatum> segment = urlDatumDB.newSegment() ;
-        writer = segment.getWriter() ;
-      }
-      processCount += write(writer, urls) ;
+      
       urls = dequeueNewURLDatums(250000);
-      newURLFoundCount += write(writer, urls) ;
+      if(urls.length > 0) {
+        if(writer == null) writer = urlDatumDB.newSegment().getWriter() ;
+        newURLFoundCount += write(writer, urls) ;
+      }
     }
 
     if(writer != null) {
@@ -149,10 +152,6 @@ public class URLPostFetchScheduler {
         continue ;
       }
       SiteContext siteConfigContext = context.getSiteContext() ;
-      if(writer == null) {
-        Segment<Text, URLDatum> segment = urlDatumDB.newSegment() ;
-        writer = segment.getWriter() ;
-      }
       if(urlDatum.getStatus() != URLDatum.STATUS_NEW) {
         fetcherPlugins.postFetch(context, urlDatum, System.currentTimeMillis()) ;
         SiteScheduleStat scheduleStat = siteConfigContext.getAttribute(SiteScheduleStat.class) ;

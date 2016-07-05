@@ -27,6 +27,7 @@ public class Segment<K extends WritableComparable, V extends Record> implements 
   private Configuration          configuration;
   private Class<K>               keyType;
   private Class<V>               valueType;
+  private FileSystem             fs;
   private SortKeyValueFile<K, V> segmentFile;
 
   public Segment(Configuration configuration, String dblocation, String name, 
@@ -37,7 +38,7 @@ public class Segment<K extends WritableComparable, V extends Record> implements 
     this.index = Integer.parseInt(name.substring(name.indexOf('-') + 1)) ;
     this.keyType = keyType; 
     this.valueType = valueType ;
-    FileSystem fs = FileSystem.get(configuration) ;
+    fs = FileSystem.get(configuration) ;
     HDFSUtil.mkdirs(fs, dblocation + "/" + name) ;
     segmentFile = new SortKeyValueFile<K, V>(fs, getDatFilePath(), keyType, valueType);
   }
@@ -64,6 +65,7 @@ public class Segment<K extends WritableComparable, V extends Record> implements 
   
   public void delete() throws IOException {
     segmentFile.delete();
+    HDFSUtil.removeIfExists(fs, dblocation + "/" + name) ;
   }
   
   public SortKeyValueFile<K, V>.Writer getWriter() throws Exception {

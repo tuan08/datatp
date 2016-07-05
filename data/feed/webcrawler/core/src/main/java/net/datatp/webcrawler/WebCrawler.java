@@ -23,7 +23,10 @@ public class WebCrawler {
     master.getURLFetchScheduler().injectURL() ;
     master.start();
     
-    CrawlerFetcherApp.run(null);
+    ApplicationContext fetcherAppContext = CrawlerFetcherApp.run(null);
+    siteContextManager = fetcherAppContext.getBean(SiteContextManager.class);
+    siteContextManager.addCongfig("vnexpress.net", "http://vnexpress.net", 2, "ok");
+    siteContextManager.addCongfig("dantri.com.vn", "http://dantri.com.vn", 2, "ok");
     Thread.currentThread().join();
   }
-}   
+}

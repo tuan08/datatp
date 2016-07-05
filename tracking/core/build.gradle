@@ -27,7 +27,7 @@ dependencies {
   compile project(':lib/utils')
   compile project(':lib/buffer')
   compile project(':lib/yara')
-  compile project(':registry/core')
+  compile project(':module/registry/core')
   compile project(':module/kafka')
   compile project(':module/elasticsearch')
 
@@ -35,9 +35,9 @@ dependencies {
   trackingAppDeployJars project(':lib/utils')
   trackingAppDeployJars project(':lib/buffer')
   trackingAppDeployJars project(':lib/yara')
-  trackingAppDeployJars project(':registry/core')
   trackingAppDeployJars project(':module/commons')
   trackingAppDeployJars project(':module/zookeeper')
+  trackingAppDeployJars project(':module/registry/core')
   trackingAppDeployJars project(':module/kafka')
   trackingAppDeployJars project(':module/elasticsearch')
 

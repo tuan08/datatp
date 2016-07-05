@@ -2,6 +2,7 @@ package net.datatp.webcrawler.fetcher;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 import net.datatp.springframework.SpringAppLauncher;
@@ -15,12 +16,19 @@ import net.datatp.springframework.SpringAppLauncher;
 @ComponentScan({ "net.datatp.webcrawler.fetcher", "net.datatp.webcrawler.site" })
 @EnableConfigurationProperties
 public class CrawlerFetcherApp {
-  static public String SERIALIZABLE_PACKAGES = "net.datatp.webcrawler.urldb,net.datatp.webcrawler.fetcher,java.util";
+  static public String SERIALIZABLE_PACKAGES = 
+      "net.datatp.webcrawler.urldb,net.datatp.webcrawler.fetcher,java.util," +
+      "net.datatp.xhtml";
+  
   static {
     System.setProperty("org.apache.activemq.SERIALIZABLE_PACKAGES",SERIALIZABLE_PACKAGES);
   }
   
-  static public void run(String[] args) throws Exception {
+  static private ApplicationContext appContext;
+  
+  static public ApplicationContext getApplicationContext() { return appContext; }
+  
+  static public ApplicationContext run(String[] args) throws Exception {
     if(args == null || args.length == 0) {
       args = new String[]{
         "--spring.jmx.enabled=true",
@@ -45,7 +53,7 @@ public class CrawlerFetcherApp {
       "classpath:/META-INF/springframework/activemq-connection-factory.xml",
       "classpath:/META-INF/springframework/crawler-fetcher.xml"
     };
-    SpringAppLauncher.launch(CrawlerFetcherApp.class, config, args);
+    return SpringAppLauncher.launch(CrawlerFetcherApp.class, config, args);
   }
 
   static public void main(String[] args) throws Exception {

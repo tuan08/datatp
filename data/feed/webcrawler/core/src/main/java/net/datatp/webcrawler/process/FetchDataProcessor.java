@@ -32,7 +32,7 @@ public class FetchDataProcessor {
 
   @Autowired
   @Qualifier("URLFetchCommitGateway")
-  private ChannelGateway urldatumFetchGateway ;
+  private ChannelGateway urlFetchCommitGateway ;
 
   private DataProcessInfo info = new DataProcessInfo() ;
 
@@ -45,7 +45,7 @@ public class FetchDataProcessor {
     if(xdoc == null) {
       ArrayList<URLDatum> urlList = new ArrayList<URLDatum>() ;
       urlList.add(fdata.getURLDatum()) ;
-      urldatumFetchGateway.send(urlList) ;
+      urlFetchCommitGateway.send(urlList) ;
       return ;
     }
     try {
@@ -61,7 +61,7 @@ public class FetchDataProcessor {
       urlList.add(fdata.getURLDatum()) ;
       urlList.addAll(urls.values()) ;
 
-      urldatumFetchGateway.send(urlList) ;
+      urlFetchCommitGateway.send(urlList) ;
       xhtmlDataGateway.send(fdata.getDocument()) ;
     } catch(Exception ex) {
       ex.printStackTrace() ;

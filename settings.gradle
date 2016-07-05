@@ -4,17 +4,18 @@ include 'lib/buffer'
 include 'lib/xhtml'
 
 include 'module/commons'
-include 'module/elasticsearch'
 include 'module/zookeeper'
+
+include 'module/registry/core'
+include 'module/registry/vm'
+include 'module/registry/vm-sample'
+
+include 'module/elasticsearch'
 include 'module/kafka'
 include 'module/flink'
 include 'module/netty'
 include 'module/spring-framework'
 include 'module/jms'
-
-include 'registry/core'
-include 'registry/vm'
-include 'registry/vm-sample'
 
 include 'data/feed/facebook'
 include 'data/feed/webcrawler/core'

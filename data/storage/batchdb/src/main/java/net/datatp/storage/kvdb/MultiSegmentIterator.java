@@ -7,7 +7,7 @@ import org.apache.hadoop.io.WritableComparable;
 
 /**
  * Author : Tuan Nguyen
- *          tuan.nguyen@headvances.com
+ *          tuan@gmail.com
  * Apr 20, 2010  
  */
 abstract public class MultiSegmentIterator<K extends WritableComparable, V extends Record> {
