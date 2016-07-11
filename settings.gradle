@@ -15,6 +15,7 @@ include 'module/kafka'
 include 'module/flink'
 include 'module/netty'
 include 'module/spring-framework'
+include 'module/spring-cloud'
 include 'module/jms'
 
 include 'data/feed/facebook'

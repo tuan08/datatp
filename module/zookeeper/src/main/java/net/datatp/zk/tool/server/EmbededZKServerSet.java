@@ -1,4 +1,4 @@
-package net.datatp.zookeeper.tool.server;
+package net.datatp.zk.tool.server;
 
 import java.util.HashMap;
 import java.util.Map;

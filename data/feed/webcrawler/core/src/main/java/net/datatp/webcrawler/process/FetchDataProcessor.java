@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jms.annotation.JmsListener;
 
 import net.datatp.channel.ChannelGateway;
 import net.datatp.webcrawler.fetcher.FetchData;
@@ -38,6 +39,7 @@ public class FetchDataProcessor {
 
   public DataProcessInfo getDataProcessInfo() { return this.info; }
 
+  @JmsListener(destination = "crawler.fetchdata")
   public void process(FetchData fdata) {
     info.incrProcessCount() ;
     final long start = System.currentTimeMillis() ;

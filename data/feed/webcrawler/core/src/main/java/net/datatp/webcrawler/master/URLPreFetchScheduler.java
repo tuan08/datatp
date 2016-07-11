@@ -2,13 +2,17 @@ package net.datatp.webcrawler.master;
 
 import java.util.ArrayList;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.hadoop.io.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedResource;
+import org.springframework.stereotype.Component;
 
 import net.datatp.channel.ChannelGateway;
 import net.datatp.storage.hdfs.SortKeyValueFile;
@@ -31,6 +35,7 @@ import net.datatp.webcrawler.urldb.URLDatumStatisticMap;
   objectName="net.datatp.webcrawler.fetcher:name=URLPreFetchScheduler", 
   description="This bean is responsible to schedule the urls"
 )
+@Component
 public class URLPreFetchScheduler {
   private static final Logger logger = LoggerFactory.getLogger(URLPreFetchScheduler.class);
 
@@ -47,9 +52,12 @@ public class URLPreFetchScheduler {
   @Autowired
   protected URLFetchSchedulerPlugins fetcherPlugins ;
   private URLFetchSchedulerVerifier  verifier = new URLFetchSchedulerVerifier () ;
+  
+  @Value("${crawler.master.scheduler.prefetch.max-per-site}")
   private int maxSchedulePerSite = 50 ;
   private int scheduleCounter = 0;
 
+  @PostConstruct
   public void onInit() {
   }
 

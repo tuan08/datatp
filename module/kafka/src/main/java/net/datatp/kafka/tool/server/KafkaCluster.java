@@ -5,7 +5,7 @@ import java.util.Map;
 
 import net.datatp.tool.server.Server;
 import net.datatp.util.io.FileUtil;
-import net.datatp.zookeeper.tool.server.EmbededZKServerSet;
+import net.datatp.zk.tool.server.EmbededZKServerSet;
 
 public class KafkaCluster {
   private EmbededZKServerSet zkServers ;

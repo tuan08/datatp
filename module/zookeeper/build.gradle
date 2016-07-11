@@ -9,5 +9,9 @@ eclipse {
 dependencies {
   compile project(':module/commons')
 
-  compile group: 'org.apache.zookeeper', name: 'zookeeper', version: '3.4.6'
+  compile group: 'org.apache.zookeeper', name: 'zookeeper', version: '3.4.8'
+  compile group: 'org.apache.curator', name: 'curator-recipes', version: '2.11.0'
+  compile group: 'org.apache.curator', name: 'curator-x-discovery', version: '2.11.0'
+
+  testCompile group: 'org.apache.curator', name: 'curator-test', version: '2.11.0'
 }

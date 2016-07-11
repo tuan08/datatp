@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import net.datatp.util.io.FileUtil;
-import net.datatp.zookeeper.tool.server.EmbededZKServer;
+import net.datatp.zk.tool.server.EmbededZKServer;
 import net.datattp.registry.RegistryConfig;
 import net.datattp.registry.SequenceNumberTrackerService;
 import net.datattp.registry.zk.RegistryImpl;

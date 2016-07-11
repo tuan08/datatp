@@ -4,17 +4,21 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jms.annotation.JmsListener;
 
 import net.datatp.channel.ChannelGateway;
 import net.datatp.webcrawler.site.SiteContextManager;
 import net.datatp.webcrawler.urldb.URLDatum;
 /**
  * Author : Tuan Nguyen
- *          tuan.nguyen@headvances.com
+ *          tuan08@gmail.com
  * Apr 14, 2010  
  */
 public class HttpFetcherManager  {
@@ -35,8 +39,11 @@ public class HttpFetcherManager  {
   @Autowired
   private SiteSessionManager siteSessionManager ;
 
+  @Value("${crawler.fetcher.num-of-threads}")
+  private int numOfThreads = 1 ;
+  
   private FetcherThread[] thread ;
-  private int numberOfFetcher = 1 ;
+  
 
   public String getName() { return name ; }
   public void   setName(String name) { this.name = name ; }
@@ -53,6 +60,7 @@ public class HttpFetcherManager  {
     return holder ;
   }
 
+  @JmsListener(destination = "crawler.url.fetch")
   public void schedule(Serializable data) throws InterruptedException {
     if(data instanceof List) {
       List<URLDatum> holder = (List<URLDatum>) data ;
@@ -64,10 +72,11 @@ public class HttpFetcherManager  {
     }
   }
   
-  public void setNumberOfFetcher(int value) { this.numberOfFetcher = value ; }
+  public void setNumberOfFetcher(int value) { this.numOfThreads = value ; }
 
+  @PostConstruct
   public void onInit() {
-    thread = new FetcherThread[numberOfFetcher] ;
+    thread = new FetcherThread[numOfThreads] ;
   }
 
   public void start() {

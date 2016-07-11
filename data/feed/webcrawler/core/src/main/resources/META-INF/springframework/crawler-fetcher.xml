@@ -17,17 +17,17 @@
                            http://www.springframework.org/schema/jms 
                            http://www.springframework.org/schema/jms/spring-jms.xsd">
 
+<!--
   <bean id="HttpFetcherManager" class="net.datatp.webcrawler.fetcher.http.HttpFetcherManager" init-method="onInit">
     <property name="numberOfFetcher" value="${crawler.fetcher.number-of-threads}" />
     <property name="name" value="HttpFetchers" />
   </bean>
-
-  <jms:listener-container container-type="default" connection-factory="jmsCF" acknowledge="auto" prefetch="100">
-    <jms:listener destination="crawler.url.fetch" ref="HttpFetcherManager" method="schedule" />
-  </jms:listener-container>
-
+-->
+<!--
   <amq:queue id="FetchDataQueue" physicalName="crawler.fetchdata" />
+-->
 
+<!--
   <bean id="FetchDataGateway" class="net.datatp.jms.channel.JMSChannelGateway">
     <property name="destination" ref="FetchDataQueue" />
     <property name="jmsTemplate">
@@ -36,7 +36,14 @@
       </bean>
     </property>
   </bean>
+-->
+
+<!--
+  <jms:listener-container container-type="default" connection-factory="jmsCF" acknowledge="auto" prefetch="100">
+    <jms:listener destination="crawler.url.fetch" ref="HttpFetcherManager" method="schedule" />
+  </jms:listener-container>
+-->
 
   <context:mbean-export default-domain="net.datatp.webcrawler.fetcher"/>
-  <si-jmx:mbean-export  default-domain="net.datatp.webcrawler.fetcher"  managed-components="*"/>
+  <si-jmx:mbean-export  default-domain="net.datatp.webcrawler.fetcher" managed-components="*"/>
 </beans>

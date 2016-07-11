@@ -17,7 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import net.datatp.util.io.FileUtil;
-import net.datatp.zookeeper.tool.server.EmbededZKServer;
+import net.datatp.zk.tool.server.EmbededZKServer;
 
 public class ZookeeperUnitTest {
   public final Id ANYONE_ID = new Id("world", "anyone");

@@ -14,7 +14,7 @@ import net.datatp.tracking.TrackingValidatorService;
 import net.datatp.tracking.inmem.InMemTrackingStorage;
 import net.datatp.util.io.FileUtil;
 import net.datatp.util.log.LoggerFactory;
-import net.datatp.zookeeper.tool.server.EmbededZKServer;
+import net.datatp.zk.tool.server.EmbededZKServer;
 import net.datattp.registry.Registry;
 import net.datattp.registry.RegistryConfig;
 import net.datattp.registry.RegistryException;

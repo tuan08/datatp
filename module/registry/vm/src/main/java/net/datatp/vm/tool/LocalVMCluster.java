@@ -3,7 +3,7 @@ package net.datatp.vm.tool;
 import net.datatp.util.io.FileUtil;
 import net.datatp.vm.client.LocalVMClient;
 import net.datatp.vm.client.VMClient;
-import net.datatp.zookeeper.tool.server.EmbededZKServer;
+import net.datatp.zk.tool.server.EmbededZKServer;
 
 public class LocalVMCluster {
   private String baseDir = "./build/vm-cluster";

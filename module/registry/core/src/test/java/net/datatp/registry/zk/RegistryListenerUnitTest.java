@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import net.datatp.util.io.FileUtil;
-import net.datatp.zookeeper.tool.server.EmbededZKServer;
+import net.datatp.zk.tool.server.EmbededZKServer;
 import net.datattp.registry.Node;
 import net.datattp.registry.Registry;
 import net.datattp.registry.RegistryConfig;

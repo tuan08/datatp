@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import net.datatp.util.URLParser;
 import net.datatp.webcrawler.urldb.URLContext;
@@ -25,7 +28,9 @@ public class URLExtractor {
   final static URLSessionIdCleaner URL_CLEANER = new URLSessionIdCleaner() ;
   private static final Logger logger = LoggerFactory.getLogger(URLExtractor.class);
 
-  private List<String> excludePatterns;
+  //@Value("${crawler.processor.urlextractor.exclude-pattern}")
+  @Value("#{'${crawler.processor.urlextractor.exclude-pattern}'.split(',')}")
+  private List<String> excludePatterns = new ArrayList<String>();
 
   private Pattern[]    excludePatternMatchers         ;
   private URLRewriter  urlRewriter = new URLRewriter();
@@ -33,18 +38,21 @@ public class URLExtractor {
   public URLExtractor() {
   }
 
+  @PostConstruct
   public void onInit() {
-    if (excludePatterns != null && excludePatterns.size() > 0) {
+    if(excludePatterns != null && excludePatterns.size() > 0) {
       excludePatternMatchers = new Pattern[excludePatterns.size()];
       for (int i = 0; i < excludePatternMatchers.length; i++) {
-        excludePatternMatchers[i] = Pattern.compile(excludePatterns.get(i));
+        String pattern = excludePatterns.get(i).trim();
+        if(pattern.length() == 0) continue;
+        System.err.println("add pattern = " + pattern);
+        excludePatternMatchers[i] = Pattern.compile(pattern);
       }
     }
   }
 
   public void addExcludePattern(String string) {
-    if (excludePatterns == null)
-      excludePatterns = new ArrayList<String>();
+    if (excludePatterns == null) excludePatterns = new ArrayList<String>();
     excludePatterns.add(string);
   }
 

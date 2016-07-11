@@ -17,7 +17,7 @@ import com.mycila.guice.ext.jsr250.Jsr250Module;
 
 import net.datatp.module.AppServiceModule;
 import net.datatp.util.io.FileUtil;
-import net.datatp.zookeeper.tool.server.EmbededZKServer;
+import net.datatp.zk.tool.server.EmbededZKServer;
 import net.datattp.registry.Node;
 import net.datattp.registry.NodeCreateMode;
 import net.datattp.registry.Registry;

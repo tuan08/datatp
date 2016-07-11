@@ -22,7 +22,7 @@ import net.datatp.vm.environment.yarn.AppClient;
 import net.datatp.vm.environment.yarn.MiniClusterUtil;
 import net.datatp.vm.service.VMServiceApp;
 import net.datatp.vm.service.VMServiceCommand;
-import net.datatp.zookeeper.tool.server.EmbededZKServer;
+import net.datatp.zk.tool.server.EmbededZKServer;
 import net.datattp.registry.Registry;
 import net.datattp.registry.RegistryConfig;
 import net.datattp.registry.zk.RegistryImpl;

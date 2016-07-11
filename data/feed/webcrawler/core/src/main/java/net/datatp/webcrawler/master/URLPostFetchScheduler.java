@@ -11,11 +11,11 @@ import org.apache.hadoop.io.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Component;
 
 import net.datatp.storage.hdfs.SortKeyValueFile;
-import net.datatp.storage.kvdb.Segment;
 import net.datatp.webcrawler.site.SiteContext;
 import net.datatp.webcrawler.site.SiteContextManager;
 import net.datatp.webcrawler.site.SiteScheduleStat;
@@ -55,6 +55,7 @@ public class URLPostFetchScheduler {
 
   public SiteContextManager getSiteConfigManager() { return this.siteConfigManager ; }
 
+  @JmsListener(destination = "crawler.url.fetch.commit")
   public void schedule(List<URLDatum> urls) throws InterruptedException {
     for(int i = 0; i < urls.size(); i++) {
       URLDatum datum = urls.get(i) ;

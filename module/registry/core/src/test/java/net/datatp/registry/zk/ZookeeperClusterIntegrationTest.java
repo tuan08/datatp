@@ -18,7 +18,7 @@ import org.junit.Test;
 
 import net.datatp.util.io.FileUtil;
 import net.datatp.util.io.IOUtil;
-import net.datatp.zookeeper.tool.server.EmbededZKServer;
+import net.datatp.zk.tool.server.EmbededZKServer;
 /**
  * This test doesn't work with gradle, no idea why
  */

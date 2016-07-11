@@ -26,7 +26,7 @@ import net.datatp.module.AppServiceModule;
 import net.datatp.registry.task.TaskDescriptor;
 import net.datatp.util.io.FileUtil;
 import net.datatp.util.text.TabularFormater;
-import net.datatp.zookeeper.tool.server.EmbededZKServer;
+import net.datatp.zk.tool.server.EmbededZKServer;
 import net.datattp.registry.ErrorCode;
 import net.datattp.registry.Registry;
 import net.datattp.registry.RegistryConfig;

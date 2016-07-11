@@ -9,19 +9,17 @@ import javax.jms.TextMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
-/**
- * Consumes messages from a JMS queue.
- * @author David Winterfeldt
- */
+
 @Component
 public class JmsMessageListener implements MessageListener { 
   private static final Logger logger = LoggerFactory.getLogger(JmsMessageListener.class);
 
-  @Autowired
-  private AtomicInteger counter = null;
+  //@Autowired
+  private AtomicInteger counter = new AtomicInteger();
 
+  @JmsListener(destination = "jms.sample", containerFactory = "jmsSampleContainerFactory")
   public void onMessage(Message message) {
     try {   
       int messageCount = message.getIntProperty(JmsMessageProducer.MESSAGE_COUNT);

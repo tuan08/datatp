@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.datatp.activemq.ActiveMQEmbeddedServer;
+import net.datatp.activemq.EmbeddedActiveMQServer;
 import net.datatp.springframework.SpringAppLauncher;
 
 public class JmsMessageListenerTest {
@@ -12,9 +12,14 @@ public class JmsMessageListenerTest {
 
   @Test
   public void testMessage() throws Exception {
-    ActiveMQEmbeddedServer.run(null);
-    String[] args = { "--activemq.broker.url=nio://localhost:61617" };
-    SpringAppLauncher.launch(JMSSample.class, new String[] {"classpath:/META-INF/springframework/jms-samples.xml"}, args);
+    EmbeddedActiveMQServer.run(null);
+    String[] args = {
+        "spring.jmx.default-domain=net.datatp.jms.sample",
+        "--activemq.client.brokerUrl=nio://localhost:61617",
+    };
+    //String[] config = new String[] {"classpath:/META-INF/springframework/jms-samples.xml"};
+    String[] config = new String[] {};
+    SpringAppLauncher.launch(JMSSample.class, config, args);
     // give listener a chance to process messages
     Thread.sleep(2 * 1000);
   }

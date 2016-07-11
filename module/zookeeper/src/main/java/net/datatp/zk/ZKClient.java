@@ -1,4 +1,4 @@
-package net.datatp.zookeeper;
+package net.datatp.zk;
 
 import java.io.IOException;
 import java.util.List;

@@ -14,17 +14,6 @@
                            http://activemq.apache.org/schema/core 
                            http://activemq.apache.org/schema/core/activemq-core.xsd">
  
-<!--
-  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-        p:systemPropertiesModeName="SYSTEM_PROPERTIES_MODE_OVERRIDE">
-    <property name="locations">
-      <list>
-        <value>classpath:/activemq.properties</value>
-      </list>
-    </property>
-  </bean>
--->
-
   <!--  Embedded ActiveMQ Broker -->
   <amq:broker id="broker" useJmx="true" persistent="true" dataDirectory="${activemq.db.directory}">
     <amq:destinationPolicy>
@@ -79,8 +68,4 @@
       <amq:transportConnector name="vm"  uri="vm://localhost" />
     </amq:transportConnectors>
   </amq:broker>
-
-<!--
-  <import resource="classpath:/META-INF/springframework/activemq-connection-factory.xml"/>
--->
 </beans>

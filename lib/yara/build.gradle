@@ -12,6 +12,8 @@ dependencies {
   testCompile group: 'com.clearspring.analytics', name: 'stream', version: '2.7.0'
   testCompile('io.dropwizard:dropwizard-core:0.9.2') {
     exclude module: "logback-classic"
+    exclude module: "logback-core"
+    exclude module: "metrics-logback"
   }
   testCompile("io.dropwizard:dropwizard-jackson:0.9.2") {
     exclude module: "logback-classic"

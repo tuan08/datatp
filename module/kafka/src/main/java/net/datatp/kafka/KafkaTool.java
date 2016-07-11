@@ -17,7 +17,7 @@ import kafka.javaapi.TopicMetadata;
 import kafka.javaapi.TopicMetadataRequest;
 import kafka.javaapi.TopicMetadataResponse;
 import kafka.javaapi.consumer.SimpleConsumer;
-import net.datatp.zookeeper.ZKClient;
+import net.datatp.zk.ZKClient;
 
 @Singleton
 public class KafkaTool  {
