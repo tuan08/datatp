@@ -164,8 +164,7 @@ public class IOUtil {
   }
 
   static public Object deserialize(byte[] bytes) throws Exception {
-    if (bytes == null)
-      return null;
+    if (bytes == null) return null;
     ByteArrayInputStream is = new ByteArrayInputStream(bytes);
     ObjectInputStream in = new ObjectInputStream(is);
     Object obj = in.readObject();

@@ -1,7 +1,0 @@
-activemq:
-  embedded:
-    enabled: true
-    name: localhost
-    home: build/activemq-custom
-    dataDir: ${activemq.home}/data
-    brokerUrl: vm://localhost

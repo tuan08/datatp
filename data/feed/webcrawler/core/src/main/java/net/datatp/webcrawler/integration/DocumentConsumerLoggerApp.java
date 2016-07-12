@@ -14,18 +14,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
-import org.springframework.integration.annotation.Poller;
-import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.QueueChannel;
-import org.springframework.integration.jms.DynamicJmsTemplate;
-import org.springframework.integration.jms.JmsSendingMessageHandler;
-import org.springframework.integration.scheduling.PollerMetadata;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.PollableChannel;
-import org.springframework.scheduling.support.PeriodicTrigger;
 
 import net.datatp.springframework.SpringAppLauncher;
+import net.datatp.util.text.StringUtil;
+import net.datatp.webcrawler.CrawlerApp;
 
 /**
  * Author : Tuan Nguyen
@@ -42,12 +36,9 @@ import net.datatp.springframework.SpringAppLauncher;
 @EnableConfigurationProperties
 @EnableAutoConfiguration
 @ConfigurationProperties
-public class DocumentConsumerLoggerApp {
-  @Value("${activemq.client.broker-url}")
-  private String brokerUrl = "vm://localhost";
-  
+public class DocumentConsumerLoggerApp extends CrawlerApp {
   @Bean(name="jmsCF")
-  public ConnectionFactory createConnectionFactory() {
+  public ConnectionFactory createConnectionFactory(@Value("${crawler.activemq.client.broker-url}") String brokerUrl) {
     return new ActiveMQConnectionFactory(brokerUrl);
   }
   
@@ -90,26 +81,25 @@ public class DocumentConsumerLoggerApp {
 //    return source;
 //  }
 //  
-  static private ApplicationContext appContext;
-
-  static public ApplicationContext getApplicationContext() { return appContext; }
 
   static public ApplicationContext run(String[] args) throws Exception {
-    if(args == null || args.length == 0) {
-      args = new String[] {
-          "--server.port=-1",
-          "--spring.jmx.enabled=true",
-          "--spring.jmx.default-domain=net.datatp.webcrawler.integration"
-      };
-    }
     String[] config = { 
-     // "classpath:/META-INF/connection-factory-activemq.xml",
+      // "classpath:/META-INF/connection-factory-activemq.xml",
       "classpath:/META-INF/springframework/crawler-integration-logger.xml"
     };
-    return SpringAppLauncher.launch(DocumentConsumerLoggerApp.class, config, args);
+    return run(config, args);
+  }
+  
+  static public ApplicationContext run(String[] config, String[] args) throws Exception {
+    String[] defaultArgs = new String[] {
+       "--server.port=-1",
+       "--spring.cloud.zookeeper.enabled=false",
+       "--spring.jmx.enabled=true",
+       "--spring.jmx.default-domain=net.datatp.webcrawler.integration"
+    };
+    return SpringAppLauncher.launch(DocumentConsumerLoggerApp.class, config, StringUtil.join(defaultArgs, args));
   }
 
   static public void main(String[] args) throws Exception {
   }
-
 }

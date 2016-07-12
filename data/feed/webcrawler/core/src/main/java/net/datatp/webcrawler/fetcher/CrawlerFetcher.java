@@ -20,7 +20,7 @@ public class CrawlerFetcher {
   @Autowired
   private HttpFetcherManager fetcherManager ;
 
-  private boolean startOnInit = true;
+  private boolean startOnInit = false;
 
   public HttpFetcherManager getFetcherManager() { return fetcherManager ; }
 

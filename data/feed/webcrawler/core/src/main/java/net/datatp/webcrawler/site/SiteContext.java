@@ -17,7 +17,7 @@ public class SiteContext implements Serializable {
   private Modify modify = Modify.NONE ;
   private SiteConfig siteConfig ;
   private Map<String, Serializable> attributes = new HashMap<String, Serializable>() ;
-  
+
   public SiteContext(SiteConfig config) {
     this.siteConfig = config ;
   }
@@ -27,28 +27,28 @@ public class SiteContext implements Serializable {
 
   public SiteConfig getSiteConfig() { return this.siteConfig ; }
   public void setSiteConfig(SiteConfig config) { this.siteConfig = config ; }
-  
+
   public <T extends Serializable> boolean hasAttribute(Class<T> clazz) {
-  	return attributes.containsKey(clazz.getName())  ;
+    return attributes.containsKey(clazz.getName())  ;
   }
-  
+
   public <T extends Serializable> T getAttribute(Class<T> clazz) {
-  	return getAttribute(clazz, true) ;
+    return getAttribute(clazz, true) ;
   }
-  
+
   public <T extends Serializable> T getAttribute(Class<T> clazz, boolean create) {
-  	T instance = (T) attributes.get(clazz.getName()) ;
-  	if(instance == null && create) {
-  		try {
-	      instance = clazz.newInstance() ;
-	      attributes.put(clazz.getName(), instance) ;
-  		} catch (InstantiationException e) {
-      	throw new RuntimeException(e) ;
+    T instance = (T) attributes.get(clazz.getName()) ;
+    if(instance == null && create) {
+      try {
+        instance = clazz.newInstance() ;
+        attributes.put(clazz.getName(), instance) ;
+      } catch (InstantiationException e) {
+        throw new RuntimeException(e) ;
       } catch (IllegalAccessException e) {
-	      throw new RuntimeException(e) ;
+        throw new RuntimeException(e) ;
       }
-  	}
-  	return instance ;
+    }
+    return instance ;
   }
 
   public int getMaxConnection() { 

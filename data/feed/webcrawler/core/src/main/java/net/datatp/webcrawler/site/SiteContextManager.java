@@ -6,8 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.stereotype.Component;
 
 import net.datatp.util.URLParser;
@@ -17,31 +15,26 @@ import net.datatp.webcrawler.urldb.URLDatumStatisticMap;
 
 /**
  * Author : Tuan Nguyen
- *          tuan.nguyen@headvances.com
+ *          tuan08@gmail.com
  * Apr 19, 2010  
  */
 @Component
 public class SiteContextManager {
   private Map<String, SiteContext> siteContexts = new HashMap<String, SiteContext>();
 
-  public  SiteContextManager() { }
-
-  @PostConstruct
-  public void onInit() throws Exception {
+  public void addCongfig(String site, String injectUrl, int crawlDeep) {
+    addConfig(new SiteConfig("default", site, injectUrl, crawlDeep));
   }
 
-  public void addCongfig(String site, String injectUrl, int crawlDeep, String status) {
-    SiteConfig config = new SiteConfig() ;
-    config.setHostname(site) ;
-    config.setInjectUrl(new String[] {injectUrl}) ;
-    config.setCrawlDeep(crawlDeep) ;
-    config.setStatus(status) ;
-    config.setRefreshPeriod(60 * 60 * 24) ;
+  public void addConfig(SiteConfig config) {
     siteContexts.put(config.getHostname(), new SiteContext(config)) ;
   }
-
-  public void addCongfig(SiteConfig config) {
-    siteContexts.put(config.getHostname(), new SiteContext(config)) ;
+  
+  public void addConfig(List<SiteConfig> configs) {
+    for(int i = 0; i < configs.size(); i++) {
+      SiteConfig config = configs.get(i);
+      siteContexts.put(config.getHostname(), new SiteContext(config)) ;
+    }
   }
 
   public void modify(List<SiteContext> contexts) {

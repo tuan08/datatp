@@ -51,7 +51,7 @@ public class YarnVMServicePlugin implements VMServicePlugin {
       
       public String toString() {
         StringBuilder b = new StringBuilder();
-        b.append("Command: " + vmConfig.buildCommand());
+        b.append("Event: " + vmConfig.buildCommand());
         return b.toString();
       }
     };

@@ -10,7 +10,7 @@ public class XpathConfig implements Serializable {
   private String urlPattern ;
   private Map<String, String> xpath ;
 
-  private transient Pattern compiledUrlPattern ;
+  transient private Pattern compiledUrlPattern ;
 
   public String getName() { return name ;}
   public void setName(String name) { this.name = name ; }

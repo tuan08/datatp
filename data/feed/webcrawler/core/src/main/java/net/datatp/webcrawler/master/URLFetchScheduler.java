@@ -30,8 +30,8 @@ import net.datatp.webcrawler.urldb.URLDatumScheduleInfo;
  **/
 @Component
 @ManagedResource(
-    objectName="net.datatp.webcrawler.fetcher:name=URLFetchScheduler", 
-    description="This bean is responsible to schedule the urls and commit the downloaded urls"
+  objectName="net.datatp.webcrawler.fetcher:name=URLFetchScheduler", 
+  description="This bean is responsible to schedule the urls and commit the downloaded urls"
 )
 public class URLFetchScheduler {
   private static final Logger logger = LoggerFactory.getLogger(URLPreFetchScheduler.class);
@@ -158,8 +158,8 @@ public class URLFetchScheduler {
     while(i.hasNext()) {
       Map.Entry<String, SiteContext> entry = i.next() ;
       SiteContext context = entry.getValue() ;
-      String status = context.getSiteConfig().getStatus() ;
-      if(!SiteConfig.STATUS_OK.equals(status)) continue ;
+      SiteConfig.Status status = context.getSiteConfig().getStatus() ;
+      if(status != SiteConfig.Status.Ok) continue ;
       String[] url = context.getSiteConfig().getInjectUrl() ;
       for(String selUrl : url) {
         selUrl = selUrl.trim() ;

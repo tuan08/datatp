@@ -6,32 +6,9 @@ import net.datatp.util.text.StringUtil;
 import net.datatp.xhtml.extract.XpathConfig;
 
 public class SiteConfig implements Serializable {
-  final public static String STATUS_GOOD     = "good" ;
-  final public static String STATUS_OK       = "ok" ;
+  static public enum Status {Good, Ok, New, Pending, Review, Deleted, Moved, Empty}
 
-  final public static String STATUS_NEW      = "new" ;
-  final public static String STATUS_PENDING  = "pending" ;
-  final public static String STATUS_REVIEW   = "review" ;
-  final public static String STATUS_DELETED  = "deleted" ;
-  final public static String STATUS_MOVED    = "moved" ;
-  final public static String STATUS_EMPTY    = "empty" ;
-  
-  final public static String[] STATUS_ALL    = {
-      STATUS_GOOD, STATUS_OK, STATUS_NEW, STATUS_PENDING, 
-      STATUS_REVIEW, STATUS_DELETED, STATUS_MOVED, STATUS_EMPTY 
-  };
-
-  final public static String IMPORT_PAGE     = "import-page" ;
-  final public static String TAG             = "tag" ;
-  final public static String CRAWL_SUB_DOMAIN= "crawl-sub-domain" ;
-  final public static String CRAWLER_DEEP    = "crawl-deep" ;
-  final public static String REFRESH_PERIOD  = "refresh-period" ;
-  final public static String MAX_CONNECTION  = "max-connection" ;
-  final public static String STATUS          = "status" ;
-  final public static String LANGUAGE        = "language" ;
-
-  final static public String FIELD_SEPARATOR = "|" ;
-
+  private String               group = "default";
   private String               hostname;
   private String[]             injectUrl;
   private String[]             ignoreUrlPattern;
@@ -41,7 +18,7 @@ public class SiteConfig implements Serializable {
   private int                  refreshPeriod;
   private int                  maxConnection;
   private XpathConfig[]        xpathConfig;
-  private String               status           = STATUS_OK;
+  private Status               status           = Status.Ok;
   private String               language;
   private String               description;
 
@@ -51,6 +28,18 @@ public class SiteConfig implements Serializable {
   public SiteConfig(String hostname) {
     this.hostname = hostname ;
   }
+
+  public SiteConfig(String group, String site, String injectUrl, int crawlDeep) {
+    setGroup(group);
+    setHostname(site) ;
+    setInjectUrl(new String[] {injectUrl}) ;
+    setCrawlDeep(crawlDeep) ;
+    setStatus(Status.Ok) ;
+    setRefreshPeriod(60 * 60 * 24) ;
+  }
+  
+  public String getGroup() { return group; }
+  public void setGroup(String group) { this.group = group; }
 
   public String getHostname() { return hostname ; }
   public void   setHostname(String value) { hostname = value ; }
@@ -88,12 +77,12 @@ public class SiteConfig implements Serializable {
   public XpathConfig[] getXpathConfig() { return this.xpathConfig ; }
   public void setXpathConfig(XpathConfig[] config) { this.xpathConfig = config ; }
 
-  public String getStatus() { 
-    if(status == null) return STATUS_REVIEW ;
+  public Status getStatus() { 
+    if(status == null) return Status.Review ;
     return status ; 
   }
 
-  public void   setStatus(String status) { this.status = status ; }
+  public void   setStatus(Status status) { this.status = status ; }
 
   public String getLanguage() { return this.language ; }
   public void setLanguage(String language) { this.language = language ; }

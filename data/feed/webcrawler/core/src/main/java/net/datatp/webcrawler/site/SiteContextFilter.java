@@ -89,15 +89,15 @@ abstract public class SiteContextFilter implements Serializable {
   }
 
   static public class StatusFilter extends SiteContextFilter {
-    private String status;
+    private SiteConfig.Status status;
 
-    public StatusFilter(String status) {
+    public StatusFilter(SiteConfig.Status status) {
       this.status = status;
     }
 
     public boolean include(int index, SiteContext context) {
-      String status = context.getSiteConfig().getStatus();
-      return this.status.equals(status);
+      SiteConfig.Status status = context.getSiteConfig().getStatus();
+      return this.status == status;
     }
   }
 

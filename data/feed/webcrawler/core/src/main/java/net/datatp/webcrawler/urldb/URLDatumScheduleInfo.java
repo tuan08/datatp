@@ -17,7 +17,7 @@ public class URLDatumScheduleInfo implements Serializable {
   public URLDatumScheduleInfo() {} 
   
   public URLDatumScheduleInfo(long time, long execTime, int urlCount, int scheduleCount, 
-  		                         int delayScheduleCount, int pendingCount, int waitingCount) {
+  		                        int delayScheduleCount, int pendingCount, int waitingCount) {
     this.time = time; 
     this.execTime = execTime ;
     this.urlCount = urlCount; 

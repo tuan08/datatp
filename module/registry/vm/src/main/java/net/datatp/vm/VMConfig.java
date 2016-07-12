@@ -276,7 +276,7 @@ public class VMConfig {
     b.append(" ").append(VM.class.getName()).append(" ") ;
     addParameters(b);
    
-    System.out.println("Command: " + b.toString());
+    System.out.println("Event: " + b.toString());
     return b.toString() ;
   }
   
