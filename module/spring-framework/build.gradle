@@ -12,11 +12,11 @@ springBoot {
   mainClass = "net.datatp.springframework.MultipleApplication"
 }
 
-configurations {
-  deployJars {
-    transitive = false
-  }
-}
+//configurations {
+//  deployJars {
+//    transitive = false
+//  }
+//}
 
 dependencies {
   compile(project(':module/zookeeper')) {

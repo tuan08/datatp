@@ -11,7 +11,6 @@ public class ApplicationConfiguration {
   @LoadBalanced
   RestTemplate createBalancedRestTemplate() { 
     RestTemplate rest =  new RestTemplate(); 
-    System.err.println("create rest template " + rest.hashCode());
     return rest;
   }
 }

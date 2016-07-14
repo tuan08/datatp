@@ -19,7 +19,7 @@ include 'module/spring-cloud'
 include 'module/jms'
 
 include 'data/feed/facebook'
-include 'data/feed/webcrawler/core'
+include 'data/feed/webcrawler'
 include 'data/storage/batchdb'
 
 include 'tracking/core'

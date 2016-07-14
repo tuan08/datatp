@@ -1,31 +1,58 @@
 package net.datatp.util.stat;
 
-import java.io.Serializable;
-
-public class Statistic implements Serializable {
-	final static public String DOCUMENT = "Document" ;
-	final static public String ALL      = "All" ;
-	final static public String COUNT    = "count" ;
-	
+import java.util.Iterator;
+import java.util.TreeMap;
+/**
+ * $Author: Tuan Nguyen$ 
+ **/
+public class Statistic extends TreeMap<String, StatisticEntry> {
   private String name ;
-	private long   frequency ;
-	private String relateTo ;
-	private Object model ;
 
-	public Statistic(String name, String relateTo, long freq)  { 
-		this.name = name ; 
-		this.relateTo = relateTo ;
-		this.frequency = freq ; 
-	}
-	
-	public String getName() { return this.name ; }
+  public Statistic(String name) {
+    this.name = name ;
+  }
 
-	public long getFrequency() { return this.frequency ; }
-	
-	public String getRelateTo(){ return this.relateTo; }
+  public String getName() { return this.name ; }
 
-	public void incr(long value) { this.frequency += value ; }
+  public void incr(String name, String relateTo, long amount) {
+    if(name == null || name.length() == 0) name = "other" ;
+    StatisticEntry value = get(name) ;
+    if(value == null) put(name, new StatisticEntry(name, relateTo, amount)) ;
+    else value.incr(amount) ;
+  }
 
-	public <T> T getModel() { return (T) model ; }
-	public void  setModel(Object object) { this.model = object ; }
+  public void incr(String[] name, long amount) {
+    if(name == null || name.length == 0) {
+      incr((String) null, null, amount) ;
+      return ;
+    } else {
+      for(int i = 0; i < name.length; i++) {
+        incr(name[i], null, amount) ;
+      }
+    }
+  }
+
+  public void incr(String[] name, String relateTo, long amount) {
+    if(name == null || name.length == 0) {
+      incr((String) null, relateTo, amount) ;
+      return ;
+    } else {
+      for(int i = 0; i < name.length; i++) {
+        incr(name[i], relateTo, amount) ;
+      }
+    }
+  }
+
+  public Object[] getModels() {
+    Object[] models = new Object[size()] ;
+    Iterator<StatisticEntry> i = values().iterator() ;
+    int idx = 0 ;
+    while(i.hasNext()) models[idx++] = i.next() ;
+    return models ;
+  }
+
+  public void traverse(StatisticVisitor visitor) {
+    Iterator<StatisticEntry> i = values().iterator() ;
+    while(i.hasNext()) visitor.onVisit(this, i.next()) ;
+  }
 }

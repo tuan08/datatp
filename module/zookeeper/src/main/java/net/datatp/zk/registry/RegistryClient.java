@@ -1,6 +1,7 @@
 package net.datatp.zk.registry;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,9 +11,12 @@ import org.apache.curator.framework.api.BackgroundCallback;
 import org.apache.curator.framework.api.CreateBuilder;
 import org.apache.curator.framework.api.CuratorListener;
 import org.apache.curator.framework.api.transaction.CuratorTransaction;
+import org.apache.curator.framework.api.transaction.CuratorTransactionFinal;
 import org.apache.curator.framework.recipes.cache.PathChildrenCache;
 import org.apache.curator.retry.ExponentialBackoffRetry;
+import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.Watcher;
+
 
 public class RegistryClient {
   private CuratorFramework curatorClient;
@@ -46,16 +50,7 @@ public class RegistryClient {
   
   public void createIfNotExists(String path) throws Exception {
     if(exists(path)) return ;
-    StringBuilder pathB = new StringBuilder();
-    String[] pathParts = path.split("/");
-    for(String pathEle : pathParts) {
-      if(pathEle.length() == 0) continue ; //root
-      pathB.append("/").append(pathEle);
-      String pathString = pathB.toString();
-      //bother with the exists call or not?
-      if(exists(pathString)) continue;
-      create(pathString);
-    }
+    curatorClient.checkExists().creatingParentContainersIfNeeded().forPath(path + "/anode");
   }
   
   
@@ -122,7 +117,27 @@ public class RegistryClient {
     if(data == null || data.length == 0) return null;
     return payloadConverter.fromBytes(data, type);
   }
-
+  
+  public <T extends Serializable> List<T> getChildrenAs(String path, Class<T> type) throws Exception {
+    List<T> holder = new ArrayList<>();
+    List<String> names = getChildren(path);
+    for(int i = 0; i < names.size(); i++) {
+      byte[] data = curatorClient.getData().forPath(path + "/" + names.get(i));
+      if(data == null || data.length == 0) return null;
+      holder.add(payloadConverter.fromBytes(data, type));
+    }
+    return holder;
+  }
+  
+  public <T extends Serializable> List<T> getChildrenAs(String path, List<String> names, Class<T> type) throws Exception {
+    List<T> holder = new ArrayList<>();
+    for(int i = 0; i < names.size(); i++) {
+      byte[] data = curatorClient.getData().forPath(path + "/" + names.get(i));
+      if(data == null || data.length == 0) return null;
+      holder.add(payloadConverter.fromBytes(data, type));
+    }
+    return holder;
+  }
   
   public List<String> getChildren(String path) throws Exception {
     return curatorClient.getChildren().forPath(path);
@@ -144,6 +159,28 @@ public class RegistryClient {
     return new PathChildrenCache(curatorClient, path, cachedData);
   }
   
+  public <T extends Serializable> void createChildren(String path, List<String> names, List<T> holder) throws Exception {
+    CuratorTransaction trans = startTransaction();
+    CuratorTransactionFinal transFinal = trans.check().forPath(path).and();
+    for(int i = 0; i < holder.size(); i++) {
+      T obj = holder.get(i);
+      String childPath =  path + "/" + names.get(i);
+      transFinal = transFinal.create().withMode(CreateMode.PERSISTENT).forPath(childPath, payloadConverter.toBytes(obj)).and();
+    }
+    transFinal.commit();
+  }
+  
+  public void deleteChildren(String path, List<String> names) throws Exception {
+    CuratorTransaction trans = startTransaction();
+    CuratorTransactionFinal transFinal = trans.check().forPath(path).and();
+    for(int i = 0; i < names.size(); i++) {
+      String childPath = path + "/" + names.get(i);
+      transFinal = transFinal.delete().forPath(childPath).and();
+    }
+    transFinal.commit();
+  }
+  
+  
   public CuratorTransaction startTransaction() {
     return curatorClient.inTransaction();
   }
@@ -153,6 +190,11 @@ public class RegistryClient {
     return client.inTransaction();
   }
   
+  public String formatRegistryAsText() throws Exception {
+    StringBuilder out = new StringBuilder();
+    dump(out);
+    return out.toString();
+  }
   
   public void dump(Appendable out) throws Exception  {
     out.append("/").append("\n");
