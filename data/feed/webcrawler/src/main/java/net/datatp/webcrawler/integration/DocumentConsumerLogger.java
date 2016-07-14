@@ -36,18 +36,18 @@ public class DocumentConsumerLogger {
 
   static public class DocumentLog {
     private String url ;
-    private String responseCode ;
+    private int responseCode ;
     private long   contentLength ;
     
     public String getUrl() { return url ; }
     
     public long getContentLength()  { return contentLength ; }
     
-    public String getResponseCode() { return responseCode ; }
+    public int getResponseCode() { return responseCode ; }
     
     public DocumentLog(XhtmlDocument doc) {
       url = doc.getUrl();
-      responseCode = doc.getHeaders().get("response-code") ;
+      responseCode = doc.getHeaders().getResponseCode() ;
       contentLength = (long)doc.getXhtml().length();
     }
   }

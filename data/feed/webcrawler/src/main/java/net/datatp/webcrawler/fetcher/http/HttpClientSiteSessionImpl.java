@@ -144,9 +144,9 @@ public class HttpClientSiteSessionImpl implements SiteSession {
   void copyHeaders(XhtmlDocument xdoc, HttpResponse response) {
     Header[] headers = response.getAllHeaders() ;
     for(int i = 0; i < headers.length; i++) {
-      xdoc.addHeader(headers[i].getName(), headers[i].getValue()) ;
+      xdoc.getHeaders().setHeader(headers[i].getName(), headers[i].getValue()) ;
     }
-    xdoc.addHeader("response-code", Integer.toString(response.getStatusLine().getStatusCode())) ;
+    xdoc.getHeaders().setResponseCode(response.getStatusLine().getStatusCode()) ;
   }
 
   void handleContent(URLContext context, URLDatum datum, XhtmlDocument xdoc, HttpResponse response) throws Exception {

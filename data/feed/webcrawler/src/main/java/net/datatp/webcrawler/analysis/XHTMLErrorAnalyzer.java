@@ -22,15 +22,13 @@ public class XHTMLErrorAnalyzer implements Analyzer {
   }
 
   public void analyze(XhtmlDocument xdoc, TDocument tdoc) {
-    String responseCode = (String)xdoc.getHeaders().get("response-code") ;
-    if(responseCode != null) {
-      int rcode = Integer.parseInt(responseCode) ;
-      if(rcode < 200) xdoc.addTag("error:response:100") ;
-      else if(rcode >= 500) xdoc.addTag("error:response:500") ;
-      else if(rcode >= 400) xdoc.addTag("error:response:400") ;
-      else if(rcode >= 300) xdoc.addTag("error:response:300") ;
-      if(rcode != 200) return ;
-    }
+    int rcode = xdoc.getHeaders().getResponseCode() ;
+    if(rcode < 200) xdoc.addTag("error:response:100") ;
+    else if(rcode >= 500) xdoc.addTag("error:response:500") ;
+    else if(rcode >= 400) xdoc.addTag("error:response:400") ;
+    else if(rcode >= 300) xdoc.addTag("error:response:300") ;
+    if(rcode != 200) return ;
+
     String content = xdoc.getXhtml() ;
     if(content == null || content.length() < 1000) {
       xdoc.addTag("error:content:length") ;

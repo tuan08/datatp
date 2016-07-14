@@ -15,7 +15,7 @@ public class TNodeGroupByXPath {
 
   TNodeGroupByXPath(TNodeXPath xpath) {
     this.xpathNode = xpath ;
-    this.xpath = xpath.toString() ;
+    this.xpath     = xpath.toString() ;
   }
 
   public void add(TNode node) { holder.add(node) ; }

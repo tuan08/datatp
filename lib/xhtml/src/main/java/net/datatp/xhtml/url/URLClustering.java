@@ -31,10 +31,8 @@ public class URLClustering {
                 cluster.add(urls.get(j));
               }
             }
-
           }
         }
-
         clusters.put(urls.get(i).getURL(), cluster);
       }
     }

@@ -1,8 +1,6 @@
 package net.datatp.xhtml;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.jsoup.nodes.Document;
 
@@ -16,7 +14,7 @@ public class XhtmlDocument implements Serializable {
   private String              anchorText;
   private String              xhtml;
   private String              contentType;
-  private Map<String, String> headers = new HashMap<String, String>();
+  private ResponseHeaders     headers = new ResponseHeaders();
   private String[]            tag ;
   private Document            jsoupDocument;
   
@@ -37,11 +35,7 @@ public class XhtmlDocument implements Serializable {
   public String getXhtml() { return xhtml; }
   public void   setXhtml(String xhtml) { this.xhtml = xhtml; }
 
-  public Map<String, String> getHeaders() { return headers; }
-  
-  public void addHeader(String name, String value) {
-    headers.put(name, value);
-  }
+  public ResponseHeaders getHeaders() { return headers; }
   
   public String getContentType() { return contentType; }
   public void setContentType(String contentType) {

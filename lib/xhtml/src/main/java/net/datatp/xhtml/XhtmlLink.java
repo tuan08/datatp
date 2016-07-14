@@ -8,7 +8,7 @@ import net.datatp.util.text.StringUtil;
 
 /**
  * Author : Tuan Nguyen
- *          tuan.nguyen@headvances.com
+ *          tuan08@gmail.com
  * Apr 27, 2010  
  */
 public class XhtmlLink implements Serializable {
