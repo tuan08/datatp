@@ -25,11 +25,17 @@ public class URLDatumDB extends RecordDB<Text, URLDatum> {
   
   public URLDatumDB() {}
 
+  public URLDatumDB(String dbLocation, boolean cleanDb) throws Exception {
+    this.dbLocation = dbLocation;
+    this.cleandb    = cleanDb;
+    onInit();
+  }
+  
   @PostConstruct
   public void onInit() throws Exception {
     Configuration conf = HDFSUtil.getDaultConfiguration() ;
     FileSystem fs = FileSystem.get(conf) ;
-    if(cleandb) HDFSUtil.removeIfExists(fs, getDbLocation()) ;
+    if(cleandb) HDFSUtil.removeIfExists(fs, dbLocation) ;
     onInit(conf, dbLocation, Text.class, URLDatum.class);
     reload() ;
   }

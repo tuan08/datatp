@@ -27,7 +27,7 @@ public class DocumentConsumerLogger {
     if(siteLogHolder.size() > maxLogPerSite) {
       siteLogHolder.removeFirst() ;
     }
-    System.out.println("consume: " + doc.getUrl());
+    //System.out.println("consume: " + doc.getUrl());
   }
   
   public Map<String, LinkedList<DocumentLog>> getLogs() {

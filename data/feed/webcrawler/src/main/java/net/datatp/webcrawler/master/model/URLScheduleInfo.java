@@ -1,8 +1,5 @@
 package net.datatp.webcrawler.master.model;
 
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
 import java.io.Serializable;
 
 public class URLScheduleInfo implements Serializable {
@@ -48,23 +45,13 @@ public class URLScheduleInfo implements Serializable {
   public int getWaitingCount() { return waitingCount; }
   public void setWaitingCount(int waitingCount) { this.waitingCount = waitingCount; }
 
-  public void readFields(DataInput in) throws IOException {
-    this.time = in.readLong() ;
-    this.execTime = in.readLong() ;
-    this.urlCount = in.readInt() ;
-    this.scheduleCount = in.readInt() ;
-    this.delayScheduleCount = in.readInt() ;
-    this.pendingCount = in.readInt() ;
-    this.waitingCount = in.readInt() ;
-  }
-
-  public void write(DataOutput out) throws IOException {
-    out.writeLong(time) ;
-    out.writeLong(execTime) ;
-    out.writeInt(urlCount) ;
-    out.writeInt(scheduleCount) ;
-    out.writeInt(delayScheduleCount) ;
-    out.writeInt(pendingCount) ;
-    out.writeInt(waitingCount) ;
+  public boolean isChangedCompareTo(URLScheduleInfo info) {
+    if(info == null) return true;
+    if(scheduleCount > 0) return true;
+    if(urlCount != info.urlCount || delayScheduleCount != info.delayScheduleCount || 
+       pendingCount != info.pendingCount || waitingCount != info.waitingCount) {
+      return true;
+    }
+    return false;
   }
 }

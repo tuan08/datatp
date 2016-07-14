@@ -56,8 +56,8 @@ public class URLDatum implements Record, Externalizable  {
   private long  lastFetchDownloadTime ;
   private int   lastDownloadDataSize  ;
   private byte  pageType ;
-  private byte  deep ;
-  private byte  status = STATUS_NEW ;
+  private byte  deep;
+  private byte  status      = STATUS_NEW ;
   private Text  contentType = DEFAULT_CONTENT_TYPE;
 
   public URLDatum() {
@@ -71,7 +71,7 @@ public class URLDatum implements Record, Externalizable  {
   public void setId(Text id) { this.id = id ; }
 
   public long getCreatedTime() { return this.createdTime ; }
-
+  
   public String getOriginalUrlAsString() { 
     if(url == null) return null ;
     return url.toString(); 

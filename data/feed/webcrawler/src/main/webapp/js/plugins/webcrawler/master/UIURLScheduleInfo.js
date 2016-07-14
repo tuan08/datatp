@@ -13,6 +13,10 @@ define([
       toolbar: {
         dflt: {
           actions: [
+            {
+              icon: "refresh", label: "Refresh",
+              onClick: function(thisTable) { thisTable.refresh() ; } 
+            }
           ]
         }
       },
@@ -37,16 +41,16 @@ define([
             field: "urlCount",   label: "URL Count", toggled: true, filterable: true
           },
           { 
-            field: "sheduleCount",   label: "Schedule Count", toggled: true, filterable: true
+            field: "scheduleCount",   label: "Schedule Count", toggled: true, filterable: true
           },
           { 
-            field: "delaySheduleCount",   label: "Delay Schedule Count", toggled: true, filterable: true
+            field: "delayScheduleCount",   label: "Delay Schedule Count", toggled: true, filterable: true
           },
           { 
-            field: "pendingCount",   label: "Pendding Count", toggled: true, filterable: true
+            field: "pendingCount",   label: "Pending Count", toggled: true, filterable: true
           },
           { 
-            field: "waittingCount",   label: "Waitting Count", toggled: true, filterable: true
+            field: "waitingCount",   label: "Waiting Count", toggled: true, filterable: true
           },
         ],
         actions:[
@@ -61,9 +65,13 @@ define([
       }
     },
 
-    onInit: function(options) {
-      var urlCommitInfos = Rest.master.getURLScheduleInfos(100) ;
-      this.setBeans(urlCommitInfos) ;
+    onInit: function(options) { 
+      this.setBeans(Rest.master.getURLScheduleInfos(100)) ;
+    },
+
+    refresh: function() {
+      this.setBeans(Rest.master.getURLScheduleInfos(100)) ;
+      this.render();
     }
   });
   

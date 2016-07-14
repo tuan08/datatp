@@ -1,10 +1,8 @@
 package net.datatp.xhtml.dom;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import junit.framework.Assert;
-import net.datatp.xhtml.dom.TDocument;
-import net.datatp.xhtml.dom.TNode;
 import net.datatp.xhtml.dom.processor.CleanEmptyNodeProcessor;
 import net.datatp.xhtml.dom.processor.TNodePrinter;
 import net.datatp.xhtml.dom.tagger.LinkBlockTagger;

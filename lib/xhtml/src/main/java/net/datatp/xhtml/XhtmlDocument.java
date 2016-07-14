@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.jsoup.nodes.Document;
 
+import net.datatp.util.text.StringUtil;
 import net.datatp.xhtml.parser.JSoupParser;
 
 public class XhtmlDocument implements Serializable {
@@ -16,7 +17,9 @@ public class XhtmlDocument implements Serializable {
   private String              xhtml;
   private String              contentType;
   private Map<String, String> headers = new HashMap<String, String>();
-
+  private String[]            tag ;
+  private Document            jsoupDocument;
+  
   public XhtmlDocument(String xhtml) {
     this.xhtml = xhtml;
   }
@@ -45,7 +48,28 @@ public class XhtmlDocument implements Serializable {
     this.contentType = contentType;
   }
 
+  public void addTag(String tag) {
+    this.tag = StringUtil.merge(this.tag, tag) ;
+  }
+  
+  public void addTag(String[] tag) {
+    this.tag = StringUtil.merge(this.tag, tag) ;
+  }
+  
+  public void addTag(String prefix, String[] tag) {
+    if(tag == null) return ;
+    String[] newTag = new String[tag.length] ;
+    for(int i = 0; i < tag.length; i++) newTag[i] = prefix +  tag[i] ;
+    this.tag = StringUtil.merge(this.tag, newTag) ;
+  }
+  
+  public boolean hasTag(String tag) { return StringUtil.isIn(tag, this.tag) ; }
+  
+  public String[] getTags() { return tag ; }
+  public void     setTags(String[] tag) { this.tag = tag ; }
+  
   public Document getJsoupDocument() { 
-    return JSoupParser.INSTANCE.parse(xhtml);
+    if(jsoupDocument == null) jsoupDocument = JSoupParser.INSTANCE.parse(xhtml);
+    return jsoupDocument;
   }
 }

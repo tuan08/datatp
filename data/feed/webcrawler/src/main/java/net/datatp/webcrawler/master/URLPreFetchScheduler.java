@@ -56,7 +56,9 @@ public class URLPreFetchScheduler {
   @Value("${crawler.master.scheduler.prefetch.max-per-site}")
   private int maxSchedulePerSite = 50 ;
   private int scheduleCounter = 0;
-
+  
+  private URLScheduleInfo lastScheduleInfo = null;
+  
   @PostConstruct
   public void onInit() {
   }
@@ -76,16 +78,16 @@ public class URLPreFetchScheduler {
   public int getScheduleCounter() { return this.scheduleCounter ; }
 
   public URLScheduleInfo schedule() throws Exception {
-    logger.info("Start scheduling the fetch request!!!!!!!!!!!!!!") ;
+    logger.info("Start scheduling the fetch request!") ;
     scheduleCounter += 1 ;
-
+    
     MergeMultiSegmentIterator<Text, URLDatum> mitr = urlDatumDB.getMergeRecordIterator() ;
     SortKeyValueFile<Text, URLDatum>.Writer writer = null ;
     long currentTime = System.currentTimeMillis() ;
     int urlCount = 0;
     int errorCount = 0, delayScheduleCount = 0 ;
     int pendingCount = 0, expiredPendingCount = 0, waitingCount = 0, scheduleCount = 0 ;
-    MultiListHolder<URLDatum> requestBuffer = new MultiListHolder<URLDatum>(300000) ;
+    MultiListHolder<URLDatum> requestBuffer = new MultiListHolder<URLDatum>(300000);
     PriorityURLDatumHolder priorityUrlHolder = null ;
     while(mitr.next()) {
       urlCount++ ;
@@ -95,7 +97,7 @@ public class URLPreFetchScheduler {
       URLContext urlContext = siteContextManager.getURLContext(datum.getOriginalUrlAsString()) ;
       if(urlContext == null) {
         errorCount++ ;
-        logger.info("Scheduler: URLContext for " + datum.getOriginalUrlAsString() + " is null !!!!!!!!!!!!!") ;
+        logger.info("Scheduler: URLContext for " + datum.getOriginalUrlAsString() + " is null!") ;
         continue ;
       }
       
@@ -116,7 +118,8 @@ public class URLPreFetchScheduler {
           waitingCount++ ;
         }
       }
-      if(!doFetch) continue ;
+      
+      if(!doFetch) continue;
       SiteScheduleStat scheduleStat = siteContext.getAttribute(SiteScheduleStat.class) ;
       if(!scheduleStat.canSchedule(maxSchedulePerSite, siteContext)) {
         delayScheduleCount++ ;
@@ -137,7 +140,7 @@ public class URLPreFetchScheduler {
         flushPriorityURLDatumHolder(priorityUrlHolder, requestBuffer) ;
         delayScheduleCount += priorityUrlHolder.getDelayCount() ;
         priorityUrlHolder = 
-            new PriorityURLDatumHolder(siteContext, scheduleStat.getMaxSchedule(maxSchedulePerSite, siteContext), 3) ;
+          new PriorityURLDatumHolder(siteContext, scheduleStat.getMaxSchedule(maxSchedulePerSite, siteContext), 3) ;
       } 
       priorityUrlHolder.insert(datum) ;
     }
@@ -157,9 +160,9 @@ public class URLPreFetchScheduler {
     }
     siteContextManager.onPostPreSchedule() ;
     logger.info(
-        "Check {} urls, error {}, fetch pending {}, expired fetch pending {}, fetch waiting {}, schedule {}, delay schedule {}", 
-        new Object[] {urlCount, errorCount, pendingCount, expiredPendingCount, waitingCount, scheduleCount, delayScheduleCount} 
-        ) ;
+      "Check {} urls, error {}, fetch pending {}, expired fetch pending {}, fetch waiting {}, schedule {}, delay schedule {}", 
+      new Object[] {urlCount, errorCount, pendingCount, expiredPendingCount, waitingCount, scheduleCount, delayScheduleCount} 
+    );
     int checkCount = errorCount + pendingCount + waitingCount + scheduleCount + delayScheduleCount ;
     if(urlCount != checkCount) {
       logger.warn("The frequency of check url is " + checkCount + ", but frequency of url in the db is " + urlCount) ;
@@ -169,7 +172,14 @@ public class URLPreFetchScheduler {
     long execTime = System.currentTimeMillis() - currentTime ;
     URLScheduleInfo info = 
         new URLScheduleInfo(currentTime, execTime, urlCount, scheduleCount, delayScheduleCount, pendingCount, waitingCount) ;
-    return info ;
+    if(info.isChangedCompareTo(lastScheduleInfo)) {
+      lastScheduleInfo = info;
+      System.err.println("return schedule info!");
+      return info;
+    } else {
+      lastScheduleInfo = info;
+      return null;
+    }
   }
 
   private void flushPriorityURLDatumHolder(PriorityURLDatumHolder holder, MultiListHolder<URLDatum> fRequestBuffer) throws Exception {

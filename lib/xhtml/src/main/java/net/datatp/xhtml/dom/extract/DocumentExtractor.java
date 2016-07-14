@@ -30,7 +30,7 @@ public class DocumentExtractor {
     "Ngày đăng"
   } ;
 
-  static public enum Type {article, blog, forum, product, classified , job, other, ignore} 
+  static public enum Type { article, blog, forum, product, classified , job, other, ignore } 
 
   private Map<Type, ContentExtractor> extractors = new HashMap<Type, ContentExtractor>() ;
   private MainContentExtractor defaultExtractor  = new MainContentExtractor("content:other") ;

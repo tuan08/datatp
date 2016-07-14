@@ -7,10 +7,11 @@ import net.datatp.webcrawler.urldb.URLDatum;
 
 /**
  * Author : Tuan Nguyen
- *          tuan.nguyen@headvances.com
+ *          tuan08@gmail.com
  * May 4, 2010  
  */
 public class URLFetchStateManagerPlugin implements URLFetchSchedulerPlugin {
+  
   public void preFetch(URLContext context, URLDatum datum, long atTime) {
     datum.setStatus(URLDatum.STATUS_FETCHING) ;
     if(datum.getLastFetchFinishAt() <= 0) {

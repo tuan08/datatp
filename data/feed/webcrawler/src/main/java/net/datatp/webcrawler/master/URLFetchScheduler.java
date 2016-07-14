@@ -90,7 +90,7 @@ public class URLFetchScheduler {
         }
         state = "COMMITING" ; 
         commitInfo = postFetchScheduler.process() ;
-        if(commitInfo != null) reporter.report(commitInfo);
+        reporter.report(commitInfo);
         //        if(lastUpdateDB + updatePeriod < System.currentTimeMillis()) {
         //        	URLDatumDB urldatumDB = postFetchScheduler.getURLDatumDB() ;
         //        	URLDatumDBUpdater updater = new URLDatumDBUpdater(postFetchScheduler.getSiteConfigManager()) ;

@@ -76,10 +76,7 @@ public class URLPostFetchScheduler {
     int inQueue = siteConfigManager.getInQueueCount() ;
     int maxProcess = inQueue ;
     if(maxProcess > 100) maxProcess = maxProcess/2 ;
-    logger.info(
-      "Start processing date!!!!!!  MaxWaitTime = " + maxWaitTime + "ms # MaxProcess = " + maxProcess + 
-      " # In Queue " + inQueue
-    ) ;
+    logger.info("Start processing date!!!!!!  MaxWaitTime = " + maxWaitTime + "ms # MaxProcess = " + maxProcess + " # In Queue " + inQueue) ;
 
     long startTime = System.currentTimeMillis() ;
     SortKeyValueFile<Text, URLDatum>.Writer writer = null ;
@@ -111,7 +108,9 @@ public class URLPostFetchScheduler {
       writer.close() ;
       urlDatumDB.autoCompact() ;
     }
+    
     if(processCount == 0 && newURLFoundCount == 0) return null;
+    
     logger.info("Process {} fetch request, found {} new urls!", processCount, newURLFoundCount) ;
     long execTime = System.currentTimeMillis() - startTime ;
     URLCommitInfo info = 

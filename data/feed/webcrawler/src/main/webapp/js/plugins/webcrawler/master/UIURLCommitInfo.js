@@ -13,6 +13,10 @@ define([
       toolbar: {
         dflt: {
           actions: [
+            {
+              icon: "refresh", label: "Refresh",
+              onClick: function(thisTable) { thisTable.refresh() ; } 
+            }
           ]
         }
       },
@@ -58,9 +62,13 @@ define([
       }
     },
 
-    onInit: function(options) {
-      var urlCommitInfos = Rest.master.getURLCommitInfos(100) ;
-      this.setBeans(urlCommitInfos) ;
+    onInit: function(options) { 
+      this.setBeans(Rest.master.getURLCommitInfos(100)) ;
+    },
+
+    refresh: function() {
+      this.setBeans(Rest.master.getURLCommitInfos(100)) ;
+      this.render();
     }
   });
   

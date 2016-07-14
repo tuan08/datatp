@@ -2,7 +2,7 @@ package net.datatp.storage.kvdb;
 
 /**
  * Author : Tuan Nguyen
- *          tuan.nguyen@headvances.com
+ *          tuan08@gmail.com
  * Apr 20, 2010  
  */
 public interface RecordMerger<R extends Record> {

@@ -13,10 +13,12 @@ public class CrawlerMasterReporter {
   private WebCrawlerRegistry wcRegistry;
   
   public void report(URLScheduleInfo info) throws Exception {
+    if(info == null) return;
     wcRegistry.getMasterRegistry().addReportURLScheduleInfo(info);
   }
   
   public void report(URLCommitInfo info) throws Exception {
+    if(info == null) return;
     wcRegistry.getMasterRegistry().addReport(info);
   }
   

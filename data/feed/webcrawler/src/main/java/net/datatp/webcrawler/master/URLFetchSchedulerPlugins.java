@@ -1,6 +1,5 @@
 package net.datatp.webcrawler.master;
 
-import java.util.List;
 import org.springframework.stereotype.Component;
 
 import net.datatp.webcrawler.site.URLContext;
@@ -12,14 +11,7 @@ import net.datatp.webcrawler.urldb.URLDatum;
  */
 @Component
 public class URLFetchSchedulerPlugins {
-  private URLFetchSchedulerPlugin[] plugins = {new URLFetchStateManagerPlugin() } ;
-  
-  public void setPlugins(List<URLFetchSchedulerPlugin> plugins) {
-    this.plugins = new URLFetchSchedulerPlugin[plugins.size()] ;
-    for(int i = 0; i < this.plugins.length; i++) {
-      this.plugins[i] = plugins.get(i) ;
-    }
-  }
+  private URLFetchSchedulerPlugin[] plugins = { new URLFetchStateManagerPlugin() } ;
   
   public void preFetch(URLContext context, URLDatum frequest, long atTime) {
     for(int i = 0; i < plugins.length; i++) {

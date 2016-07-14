@@ -76,7 +76,7 @@ abstract public class RecordDB<K extends WritableComparable<?>, V extends Record
  
   synchronized public MultiSegmentIterator<K, V> getDatumIterator() throws Exception {
     final RecordDB<K, V> db = this; 
-    MultiSegmentIterator<K, V> iterator = new MultiSegmentIterator<K, V>(this.segments) {
+    MultiSegmentIterator<K, V> iterator = new MultiSegmentIterator<K, V>(segments) {
       public K createKey() { return db.createKey() ; }
       public V createValue() { return db.createValue() ; }
     };

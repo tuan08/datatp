@@ -1,18 +1,13 @@
 package net.datatp.webcrawler.master;
 
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Iterator;
+import java.io.Serializable;
 import java.util.LinkedList;
-
-import org.apache.hadoop.io.Writable;
 
 import net.datatp.webcrawler.master.model.URLCommitInfo;
 import net.datatp.webcrawler.master.model.URLScheduleInfo;
 
-public class CrawlerMasterInfo implements Writable {
+public class CrawlerMasterInfo implements Serializable {
   final static public int MAX_INFO_SIZE =  100 ;
 
   final static public int STOP_STATUS = 0 ;
@@ -62,40 +57,6 @@ public class CrawlerMasterInfo implements Writable {
     fetchDataProcessInfo.addFirst(info);
     if(fetchDataProcessInfo.size() == MAX_INFO_SIZE) {
       fetchDataProcessInfo.removeLast() ;
-    }
-  }
-
-  public void readFields(DataInput in) throws IOException {
-    this.startTime = in.readLong() ;
-    this.status = in.readInt() ;
-    int size = in.readInt() ;
-    for(int i = 0; i < size; i++) {
-      URLScheduleInfo info = new URLScheduleInfo();
-      info.readFields(in);
-      sheduleInfo.add(info) ;
-    }
-    size = in.readInt() ;
-    for(int i = 0; i < size; i++) {
-      URLCommitInfo info = new URLCommitInfo();
-      info.readFields(in);
-      fetchDataProcessInfo.add(info) ;
-    }
-  }
-
-  public void write(DataOutput out) throws IOException {
-    out.writeLong(startTime) ;
-    out.writeInt(status) ;
-
-    out.writeInt(this.sheduleInfo.size()) ;
-    Iterator<URLScheduleInfo>  scheduleInfoItr = sheduleInfo.iterator() ;
-    while(scheduleInfoItr.hasNext()) {
-      scheduleInfoItr.next().write(out) ;
-    }
-
-    out.writeInt(this.fetchDataProcessInfo.size()) ;
-    Iterator<URLCommitInfo> fetchDataProcessInfoItr = fetchDataProcessInfo.iterator() ;
-    while(fetchDataProcessInfoItr.hasNext()) {
-      fetchDataProcessInfoItr.next().write(out) ;
     }
   }
 

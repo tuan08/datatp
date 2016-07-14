@@ -12,7 +12,7 @@ public class MergeMultiSegmentIterator <K extends WritableComparable, V extends 
   private MultiSegmentIterator<K, V> iterator ;
   private RecordMerger<V> merger ;
   
-  private K currentKey, nextKey ;
+  private K currentKey,   nextKey ;
   private V currentValue, nextValue ;
   
   public MergeMultiSegmentIterator(MultiSegmentIterator<K, V> iterator, RecordMerger<V> merger) {
