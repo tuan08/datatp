@@ -15,14 +15,15 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Component;
 
+import net.datatp.http.crawler.URLDatum;
 import net.datatp.storage.hdfs.SortKeyValueFile;
 import net.datatp.webcrawler.master.model.URLCommitInfo;
 import net.datatp.webcrawler.site.SiteContext;
 import net.datatp.webcrawler.site.SiteContextManager;
 import net.datatp.webcrawler.site.SiteScheduleStat;
 import net.datatp.webcrawler.site.URLContext;
-import net.datatp.webcrawler.urldb.URLDatum;
 import net.datatp.webcrawler.urldb.URLDatumDB;
+import net.datatp.webcrawler.urldb.URLDatumRecord;
 /**
  * Author : Tuan Nguyen
  *          tuan.nguyen@headvances.com
@@ -62,7 +63,7 @@ public class URLPostFetchScheduler {
       if(datum.getStatus() == URLDatum.STATUS_NEW) {
         URLDatumEntry entry = newURLDatums.get(datum.getId()) ;
         if(entry == null) {
-          newURLDatums.put(datum.getId(), new URLDatumEntry(datum)) ;
+          newURLDatums.put(new Text(datum.getId()), new URLDatumEntry(datum)) ;
         } else {
           entry.hit++ ;
         }
@@ -79,12 +80,12 @@ public class URLPostFetchScheduler {
     logger.info("Start processing date!!!!!!  MaxWaitTime = " + maxWaitTime + "ms # MaxProcess = " + maxProcess + " # In Queue " + inQueue) ;
 
     long startTime = System.currentTimeMillis() ;
-    SortKeyValueFile<Text, URLDatum>.Writer writer = null ;
+    SortKeyValueFile<Text, URLDatumRecord>.Writer writer = null ;
     int processCount = 0, newURLFoundCount = 0, newURLTypeList =0, newURLTypeDetail = 0 ;
 
     int noneDequeueCount = 0 ;
     while(processCount < maxProcess) {
-      URLDatum[] urls = dequeueCommitURLDatums();
+      URLDatumRecord[] urls = dequeueCommitURLDatums();
       if(urls.length == 0) {
         noneDequeueCount++ ;
         if(noneDequeueCount == 100) break ;
@@ -103,7 +104,7 @@ public class URLPostFetchScheduler {
     }
 
     if(writer != null) {
-      URLDatum[] urls = dequeueNewURLDatums(0);
+      URLDatumRecord[] urls = dequeueNewURLDatums(0);
       newURLFoundCount += write(writer, urls) ;
       writer.close() ;
       urlDatumDB.autoCompact() ;
@@ -118,35 +119,35 @@ public class URLPostFetchScheduler {
     return info ;
   }
 
-  private URLDatum[] dequeueCommitURLDatums() throws InterruptedException {
-    List<URLDatum> urls = new ArrayList<URLDatum>() ;
-    URLDatum datum = null;
-    while((datum = commitURLDatumQueue.poll()) != null) {
+  private URLDatumRecord[] dequeueCommitURLDatums() throws InterruptedException {
+    List<URLDatumRecord> urls = new ArrayList<URLDatumRecord>() ;
+    URLDatumRecord datum = null;
+    while((datum = (URLDatumRecord)commitURLDatumQueue.poll()) != null) {
       urls.add(datum) ;
     }
-    return urls.toArray(new URLDatum[urls.size()]) ;
+    return urls.toArray(new URLDatumRecord[urls.size()]) ;
   }
 
-  private URLDatum[] dequeueNewURLDatums(int keep) throws InterruptedException {
-    List<URLDatum> urls = new ArrayList<URLDatum>() ;
+  private URLDatumRecord[] dequeueNewURLDatums(int keep) throws InterruptedException {
+    List<URLDatumRecord> urls = new ArrayList<URLDatumRecord>() ;
     int hit = 1 ;
     while(newURLDatums.size() > keep) {
       Iterator<URLDatumEntry> i = newURLDatums.values().iterator() ;
       while(newURLDatums.size() > keep && i.hasNext()) {
         URLDatumEntry entry = i.next() ;
         if(entry.hit <= hit) {
-          urls.add(entry.urldatum) ;
+          urls.add((URLDatumRecord)entry.urldatum) ;
           i.remove();
         }
       }
       hit++ ;
     }
-    return urls.toArray(new URLDatum[urls.size()]) ;
+    return urls.toArray(new URLDatumRecord[urls.size()]) ;
   }
 
-  private int write(SortKeyValueFile<Text, URLDatum>.Writer writer, URLDatum[] urls) throws Exception {
+  private int write(SortKeyValueFile<Text, URLDatumRecord>.Writer writer, URLDatumRecord[] urls) throws Exception {
     for(int i = 0 ; i < urls.length; i++) {
-      URLDatum urlDatum = urls[i] ;
+      URLDatumRecord urlDatum = urls[i] ;
       URLContext context = siteConfigManager.getURLContext(urlDatum.getOriginalUrlAsString()) ;
       if(context == null) {
         logger.warn("SiteConfig is not found for the url ", urlDatum.getOriginalUrlAsString()) ;
@@ -159,7 +160,7 @@ public class URLPostFetchScheduler {
         scheduleStat.addProcessCount(1) ;
       } else {
       }
-      writer.append(urlDatum.getId(), urlDatum) ;
+      writer.append(new Text(urlDatum.getId()), urlDatum) ;
     }
     return urls.length ;
   }

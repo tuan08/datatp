@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import net.datatp.http.ErrorCode;
-import net.datatp.webcrawler.urldb.URLDatum;
+import net.datatp.http.crawler.URLDatum;
 
 public class HttpFetcherInfo implements Serializable {
   private static final long serialVersionUID = 1L;

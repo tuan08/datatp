@@ -2,8 +2,8 @@ package net.datatp.webcrawler.master;
 
 import org.springframework.stereotype.Component;
 
+import net.datatp.http.crawler.URLDatum;
 import net.datatp.webcrawler.site.URLContext;
-import net.datatp.webcrawler.urldb.URLDatum;
 /**
  * Author : Tuan Nguyen
  *          tuan.nguyen@headvances.com

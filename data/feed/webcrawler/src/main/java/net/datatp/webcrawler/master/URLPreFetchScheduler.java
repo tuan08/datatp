@@ -15,6 +15,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Component;
 
 import net.datatp.channel.ChannelGateway;
+import net.datatp.http.crawler.URLDatum;
 import net.datatp.storage.hdfs.SortKeyValueFile;
 import net.datatp.storage.kvdb.MergeMultiSegmentIterator;
 import net.datatp.storage.kvdb.Segment;
@@ -23,8 +24,8 @@ import net.datatp.webcrawler.site.SiteContext;
 import net.datatp.webcrawler.site.SiteContextManager;
 import net.datatp.webcrawler.site.SiteScheduleStat;
 import net.datatp.webcrawler.site.URLContext;
-import net.datatp.webcrawler.urldb.URLDatum;
 import net.datatp.webcrawler.urldb.URLDatumDB;
+import net.datatp.webcrawler.urldb.URLDatumRecord;
 import net.datatp.webcrawler.urldb.URLStatisticMap;
 /**
  * Author : Tuan Nguyen
@@ -81,8 +82,8 @@ public class URLPreFetchScheduler {
     logger.info("Start scheduling the fetch request!") ;
     scheduleCounter += 1 ;
     
-    MergeMultiSegmentIterator<Text, URLDatum> mitr = urlDatumDB.getMergeRecordIterator() ;
-    SortKeyValueFile<Text, URLDatum>.Writer writer = null ;
+    MergeMultiSegmentIterator<Text, URLDatumRecord> mitr = urlDatumDB.getMergeRecordIterator() ;
+    SortKeyValueFile<Text, URLDatumRecord>.Writer writer = null ;
     long currentTime = System.currentTimeMillis() ;
     int urlCount = 0;
     int errorCount = 0, delayScheduleCount = 0 ;
@@ -132,7 +133,7 @@ public class URLPreFetchScheduler {
       } else if(priorityUrlHolder.getSiteConfigContext() != siteContext) {
         if(requestBuffer.getCurrentSize() + priorityUrlHolder.getSize() > requestBuffer.getCapacity()) {
           if(writer == null) {
-            Segment<Text, URLDatum> segment = urlDatumDB.newSegment() ;
+            Segment<Text, URLDatumRecord> segment = urlDatumDB.newSegment() ;
             writer = segment.getWriter() ;
           }
           scheduleCount += flush(requestBuffer, writer) ;
@@ -149,7 +150,7 @@ public class URLPreFetchScheduler {
     if(priorityUrlHolder != null) delayScheduleCount += priorityUrlHolder.getDelayCount() ;
     if(requestBuffer.getCurrentSize() > 0) {
       if(writer == null) {
-        Segment<Text, URLDatum> segment = urlDatumDB.newSegment() ;
+        Segment<Text, URLDatumRecord> segment = urlDatumDB.newSegment() ;
         writer = segment.getWriter() ;
       }
       scheduleCount += flush(requestBuffer, writer) ;
@@ -193,13 +194,13 @@ public class URLPreFetchScheduler {
     }
   }
 
-  private int flush(MultiListHolder<URLDatum> urlDatumBuffer, SortKeyValueFile<Text, URLDatum>.Writer writer) throws Exception {
+  private int flush(MultiListHolder<URLDatum> urlDatumBuffer, SortKeyValueFile<Text, URLDatumRecord>.Writer writer) throws Exception {
     MultiListHolder<URLDatum>.RandomIterator iterator = urlDatumBuffer.getRandomIterator() ;
-    URLDatum datum = null ;
+    URLDatumRecord datum = null ;
     int scheduleCount = 0 ;
-    ArrayList<URLDatum> holder = new ArrayList<URLDatum>(100) ;
-    while((datum = iterator.next()) != null) {
-      writer.append(datum.getId(), datum) ;
+    ArrayList<URLDatumRecord> holder = new ArrayList<>(100) ;
+    while((datum = (URLDatumRecord)iterator.next()) != null) {
+      writer.append(new Text(datum.getId()), datum) ;
       holder.add(datum) ;
       if(holder.size() == 100) {
         urldatumFetchGateway.send(holder);

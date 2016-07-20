@@ -6,12 +6,12 @@ import org.slf4j.LoggerFactory;
 import net.datatp.channel.ChannelGateway;
 import net.datatp.http.ErrorCode;
 import net.datatp.http.ResponseCode;
+import net.datatp.http.crawler.URLDatum;
 import net.datatp.webcrawler.fetcher.FetchData;
 import net.datatp.webcrawler.fetcher.Fetcher;
 import net.datatp.webcrawler.fetcher.model.HttpFetcherInfo;
 import net.datatp.webcrawler.site.SiteContextManager;
 import net.datatp.webcrawler.site.URLContext;
-import net.datatp.webcrawler.urldb.URLDatum;
 /**
  * Author: Tuan Nguyen
  *         tuan08@gmail.com

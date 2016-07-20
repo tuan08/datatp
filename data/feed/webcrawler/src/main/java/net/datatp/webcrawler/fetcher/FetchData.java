@@ -2,7 +2,7 @@ package net.datatp.webcrawler.fetcher;
 
 import java.io.Serializable;
 
-import net.datatp.webcrawler.urldb.URLDatum;
+import net.datatp.http.crawler.URLDatum;
 import net.datatp.xhtml.XhtmlDocument;
 
 /**

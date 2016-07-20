@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import net.datatp.http.ErrorCode;
 import net.datatp.http.ResponseCode;
+import net.datatp.http.crawler.URLDatum;
 import net.datatp.util.stat.Statistics;
 
 public class URLStatisticMap implements Serializable {
@@ -43,7 +44,7 @@ public class URLStatisticMap implements Serializable {
 
   private void logStatus(URLDatum urldatum) {
     writable.incr(FETCH_STATUS, "All", 1) ;
-    if (urldatum.getRedirectUrl().getLength() != 0) {
+    if (urldatum.getRedirectUrl() != null) {
       writable.incr(FETCH_STATUS, "wRedirect", 1) ;
     } else if (urldatum.getStatus() == URLDatum.STATUS_FETCHING) {
       writable.incr(FETCH_STATUS, "Pending", 1) ;

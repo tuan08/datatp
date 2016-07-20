@@ -11,6 +11,7 @@ import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Component;
 
+import net.datatp.http.crawler.URLDatum;
 import net.datatp.storage.hdfs.SortKeyValueFile;
 import net.datatp.storage.kvdb.Segment;
 import net.datatp.util.URLParser;
@@ -19,8 +20,8 @@ import net.datatp.webcrawler.master.model.URLScheduleInfo;
 import net.datatp.webcrawler.site.SiteConfig;
 import net.datatp.webcrawler.site.SiteContext;
 import net.datatp.webcrawler.site.SiteContextManager;
-import net.datatp.webcrawler.urldb.URLDatum;
 import net.datatp.webcrawler.urldb.URLDatumDB;
+import net.datatp.webcrawler.urldb.URLDatumRecord;
 /**
  * $Author: Tuan Nguyen$ 
  **/
@@ -107,8 +108,8 @@ public class URLFetchScheduler {
 
   public void injectURL() throws Exception {
     URLDatumDB urlDatumDB = postFetchScheduler.getURLDatumDB() ;
-    Segment<Text, URLDatum> segment = urlDatumDB.newSegment() ;
-    SortKeyValueFile<Text, URLDatum>.Writer writer = segment.getWriter() ;
+    Segment<Text, URLDatumRecord> segment = urlDatumDB.newSegment() ;
+    SortKeyValueFile<Text, URLDatumRecord>.Writer writer = segment.getWriter() ;
     long currentTime = System.currentTimeMillis() ;
     int count = 0 ;
 
@@ -124,11 +125,11 @@ public class URLFetchScheduler {
         selUrl = selUrl.trim() ;
         if(selUrl.length() == 0) continue ;
         URLParser newURLParser = new URLParser(selUrl) ;
-        URLDatum datum = new URLDatum(currentTime) ;
+        URLDatumRecord datum = new URLDatumRecord(currentTime) ;
         datum.setDeep((byte) 1) ;
         datum.setOriginalUrl(selUrl, newURLParser) ;
         datum.setPageType(URLDatum.PAGE_TYPE_LIST) ;
-        writer.append(datum.getId(), datum);
+        writer.append(new Text(datum.getId()), datum);
         count++ ;
       }
     }

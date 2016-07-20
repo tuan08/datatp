@@ -4,13 +4,14 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 
 import net.datatp.http.ResponseCode;
+import net.datatp.http.crawler.URLDatum;
 import net.datatp.storage.kvdb.RecordUpdater;
 import net.datatp.util.URLNormalizerProcessor;
 import net.datatp.webcrawler.site.SiteContextManager;
 import net.datatp.webcrawler.site.URLContext;
 import net.datatp.xhtml.util.URLSessionIdCleaner;
 
-public class URLDatumDBUpdater implements RecordUpdater<URLDatum> {
+public class URLDatumDBUpdater implements RecordUpdater<URLDatumRecord> {
   static URLNormalizerProcessor[] URL_PROCESSORS = { new URLSessionIdCleaner()} ;
 
   private long currentTime ;
@@ -66,7 +67,7 @@ public class URLDatumDBUpdater implements RecordUpdater<URLDatum> {
     return b.toString() ;
   }
 
-  public URLDatum update(Writable key, URLDatum datum) {
+  public URLDatumRecord update(Writable key, URLDatumRecord datum) {
     count++ ;
 
     if(datum.getErrorCount() >= 3) {
@@ -94,7 +95,7 @@ public class URLDatumDBUpdater implements RecordUpdater<URLDatum> {
     return datum;
   } 
 
-  private URLDatum updateBySiteConfig(URLContext context, URLDatum datum) {
+  private URLDatumRecord updateBySiteConfig(URLContext context, URLDatumRecord datum) {
     //SiteConfig database is no longer maintain this url configuration, delete the record
     if(context == null) {
       noConfigCount++ ;
@@ -103,7 +104,7 @@ public class URLDatumDBUpdater implements RecordUpdater<URLDatum> {
     return datum ;
   }
 
-  private URLDatum updatePageList(URLDatum datum) {
+  private URLDatumRecord updatePageList(URLDatumRecord datum) {
     //keep the list page in the database for only 7 days
     final long keep7days = 7 * 24 * 3600 * 1000l ;
     if(datum.getCreatedTime() + keep7days < currentTime) {
@@ -113,7 +114,7 @@ public class URLDatumDBUpdater implements RecordUpdater<URLDatum> {
     return datum ;
   }
 
-  private URLDatum updatePageDetail(URLDatum datum) {
+  private URLDatumRecord updatePageDetail(URLDatumRecord datum) {
     //Client error 4xx
     if(ResponseCode.isIn4XXGroup(datum.getLastResponseCode())) {
       rc4xxCount++ ;

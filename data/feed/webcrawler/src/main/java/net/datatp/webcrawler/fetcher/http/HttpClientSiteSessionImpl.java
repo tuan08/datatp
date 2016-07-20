@@ -28,11 +28,11 @@ import org.slf4j.LoggerFactory;
 import net.datatp.http.ErrorCode;
 import net.datatp.http.HttpClientFactory;
 import net.datatp.http.ResponseCode;
+import net.datatp.http.crawler.URLDatum;
 import net.datatp.util.io.IOUtil;
 import net.datatp.util.text.StringUtil;
 import net.datatp.webcrawler.fetcher.FetchData;
 import net.datatp.webcrawler.site.URLContext;
-import net.datatp.webcrawler.urldb.URLDatum;
 import net.datatp.xhtml.XhtmlDocument;
 /**
  * Author : Tuan Nguyen

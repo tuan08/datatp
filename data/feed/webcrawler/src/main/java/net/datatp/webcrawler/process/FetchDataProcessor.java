@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.annotation.JmsListener;
 
 import net.datatp.channel.ChannelGateway;
+import net.datatp.http.crawler.URLDatum;
 import net.datatp.webcrawler.fetcher.FetchData;
 import net.datatp.webcrawler.site.SiteContextManager;
 import net.datatp.webcrawler.site.URLContext;
-import net.datatp.webcrawler.urldb.URLDatum;
 import net.datatp.xhtml.XhtmlDocument;
 import net.datatp.xhtml.dom.TDocument;
 /**

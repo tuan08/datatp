@@ -1,6 +1,6 @@
 package net.datatp.webcrawler.fetcher;
 
-import net.datatp.webcrawler.urldb.URLDatum;
+import net.datatp.http.crawler.URLDatum;
 
 /**
  * Author : Tuan Nguyen

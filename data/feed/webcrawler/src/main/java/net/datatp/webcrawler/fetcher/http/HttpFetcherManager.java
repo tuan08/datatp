@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 
 import net.datatp.channel.ChannelGateway;
+import net.datatp.http.crawler.URLDatum;
 import net.datatp.webcrawler.fetcher.model.HttpFetcherInfo;
 import net.datatp.webcrawler.site.SiteContextManager;
-import net.datatp.webcrawler.urldb.URLDatum;
 /**
  * Author : Tuan Nguyen
  *          tuan08@gmail.com

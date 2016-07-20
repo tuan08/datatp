@@ -16,7 +16,7 @@ import net.datatp.storage.kvdb.RecordMerger;
  *          tuan08@gmail.com
  * Apr 21, 2010  
  */
-public class URLDatumDB extends RecordDB<Text, URLDatum> {
+public class URLDatumDB extends RecordDB<Text, URLDatumRecord> {
   @Value("${crawler.master.urldb.cleandb}")
   private boolean cleandb ;
   
@@ -36,7 +36,7 @@ public class URLDatumDB extends RecordDB<Text, URLDatum> {
     Configuration conf = HDFSUtil.getDaultConfiguration() ;
     FileSystem fs = FileSystem.get(conf) ;
     if(cleandb) HDFSUtil.removeIfExists(fs, dbLocation) ;
-    onInit(conf, dbLocation, Text.class, URLDatum.class);
+    onInit(conf, dbLocation, Text.class, URLDatumRecord.class);
     reload() ;
   }
 
@@ -44,17 +44,17 @@ public class URLDatumDB extends RecordDB<Text, URLDatum> {
   public void setCleanDB(boolean b) { cleandb = b ; }
 
   public URLDatumDB(Configuration configuration, String dblocation) throws Exception {
-    super(configuration, dblocation, Text.class, URLDatum.class);
+    super(configuration, dblocation, Text.class, URLDatumRecord.class);
   }
 
   public Text createKey() { return new Text(); }
 
-  public URLDatum createValue() { return new URLDatum(); }
+  public URLDatumRecord createValue() { return new URLDatumRecord(); }
 
-  protected RecordMerger<URLDatum> createRecordMerger() { return new SegmentRecordMerger() ; }
+  protected RecordMerger<URLDatumRecord> createRecordMerger() { return new SegmentRecordMerger() ; }
 
-  static public class SegmentRecordMerger implements RecordMerger<URLDatum> {
-    public URLDatum merge(URLDatum r1, URLDatum r2) {
+  static public class SegmentRecordMerger implements RecordMerger<URLDatumRecord> {
+    public URLDatumRecord merge(URLDatumRecord r1, URLDatumRecord r2) {
       if(r2.getCreatedTime() <= r1.getCreatedTime()) {
         return r2 ;
       }

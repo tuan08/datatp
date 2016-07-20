@@ -12,9 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
+import net.datatp.http.crawler.URLDatum;
 import net.datatp.util.URLParser;
 import net.datatp.webcrawler.site.URLContext;
-import net.datatp.webcrawler.urldb.URLDatum;
+import net.datatp.webcrawler.urldb.URLDatumRecord;
 import net.datatp.xhtml.XhtmlLink;
 import net.datatp.xhtml.dom.TDocument;
 import net.datatp.xhtml.dom.TNodeUtil;
@@ -125,9 +126,9 @@ public class URLExtractor {
     if(exist == null) {
       urls.put(url, datum);
     } else {
-      if(datum.getAnchorText().getLength() > exist.getAnchorText().getLength()) {
-        urls.put(url, datum);
-      }
+      int anchorTextLength = datum.getAnchorText() == null ? 0 : datum.getAnchorText().length();
+      int existAnchorTextLength = exist.getAnchorText() == null? 0 : exist.getAnchorText().length();
+      if(anchorTextLength > existAnchorTextLength) urls.put(url, datum);
     }
   }
 
@@ -153,7 +154,7 @@ public class URLExtractor {
   }
 
   private URLDatum createURLDatum(URLDatum parent, String origUrl, URLParser urlNorm, String anchorText) {
-    URLDatum urlDatum = new URLDatum(System.currentTimeMillis());
+    URLDatumRecord urlDatum = new URLDatumRecord(System.currentTimeMillis());
     urlDatum.setOriginalUrl(origUrl, urlNorm);
     byte deep = (byte) (1 + parent.getDeep());
     urlDatum.setDeep(deep);

@@ -2,9 +2,9 @@ package net.datatp.webcrawler.master;
 
 import java.util.Comparator;
 
+import net.datatp.http.crawler.URLDatum;
 import net.datatp.util.HeapTree;
 import net.datatp.webcrawler.site.SiteContext;
-import net.datatp.webcrawler.urldb.URLDatum;
 
 
 public class PriorityURLDatumHolder {

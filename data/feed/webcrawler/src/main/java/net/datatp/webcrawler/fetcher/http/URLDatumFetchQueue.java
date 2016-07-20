@@ -3,7 +3,7 @@ package net.datatp.webcrawler.fetcher.http;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import net.datatp.webcrawler.urldb.URLDatum;
+import net.datatp.http.crawler.URLDatum;
 
 /**
  * $Author: Tuan Nguyen$ 

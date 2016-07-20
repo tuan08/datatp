@@ -9,8 +9,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.CookieStore;
 import org.apache.http.cookie.Cookie;
 
+import net.datatp.http.crawler.URLDatum;
 import net.datatp.util.io.IOUtil;
-import net.datatp.webcrawler.urldb.URLDatum;
 /**
  * Author : Tuan Nguyen
  *          tuan.nguyen@headvances.com

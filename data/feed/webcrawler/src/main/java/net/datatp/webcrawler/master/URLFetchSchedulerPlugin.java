@@ -1,7 +1,7 @@
 package net.datatp.webcrawler.master;
 
+import net.datatp.http.crawler.URLDatum;
 import net.datatp.webcrawler.site.URLContext;
-import net.datatp.webcrawler.urldb.URLDatum;
 
 /**
  * Author : Tuan Nguyen
