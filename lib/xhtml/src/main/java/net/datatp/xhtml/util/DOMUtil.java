@@ -10,7 +10,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import net.datatp.util.URLParser;
-import net.datatp.util.text.StringMatcher;
+import net.datatp.util.text.StringExpMatcher;
 
 /**
  * Author : Tuan Nguyen
@@ -139,13 +139,13 @@ public class DOMUtil {
     return false ;
   }
 
-  static public boolean hasAttr(Element e, String checkAttr, StringMatcher[] attrs, int checkBackLevel) {
+  static public boolean hasAttr(Element e, String checkAttr, StringExpMatcher[] attrs, int checkBackLevel) {
     int backLevel = 0 ;
     while(e != null && backLevel < checkBackLevel) {
       String attr = e.getAttribute(checkAttr) ;
       if(!isEmpty(attr)) {
         attr = attr.toLowerCase() ;
-        for(StringMatcher sel : attrs) {
+        for(StringExpMatcher sel : attrs) {
           if(sel.matches(attr)) return true ;
         }
       }

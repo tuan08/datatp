@@ -1,4 +1,4 @@
-package net.datatp.xhtml.fetcher;
+package net.datatp.http.crawler;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;

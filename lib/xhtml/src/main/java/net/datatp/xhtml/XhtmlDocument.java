@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.jsoup.nodes.Document;
 
+import net.datatp.http.ResponseHeaders;
 import net.datatp.util.text.StringUtil;
 import net.datatp.xhtml.parser.JSoupParser;
 
@@ -16,7 +17,6 @@ public class XhtmlDocument implements Serializable {
   private String              contentType;
   private ResponseHeaders     headers = new ResponseHeaders();
   private String[]            tag ;
-  private Document            jsoupDocument;
   
   public XhtmlDocument(String xhtml) {
     this.xhtml = xhtml;
@@ -62,8 +62,5 @@ public class XhtmlDocument implements Serializable {
   public String[] getTags() { return tag ; }
   public void     setTags(String[] tag) { this.tag = tag ; }
   
-  public Document getJsoupDocument() { 
-    if(jsoupDocument == null) jsoupDocument = JSoupParser.INSTANCE.parse(xhtml);
-    return jsoupDocument;
-  }
+  public Document createJsoupDocument() { return JSoupParser.INSTANCE.parse(xhtml);}
 }

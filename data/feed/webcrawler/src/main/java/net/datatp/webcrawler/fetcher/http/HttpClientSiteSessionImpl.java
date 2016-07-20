@@ -25,10 +25,11 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.datatp.http.ErrorCode;
+import net.datatp.http.HttpClientFactory;
+import net.datatp.http.ResponseCode;
 import net.datatp.util.io.IOUtil;
 import net.datatp.util.text.StringUtil;
-import net.datatp.webcrawler.ErrorCode;
-import net.datatp.webcrawler.ResponseCode;
 import net.datatp.webcrawler.fetcher.FetchData;
 import net.datatp.webcrawler.site.URLContext;
 import net.datatp.webcrawler.urldb.URLDatum;
@@ -51,7 +52,7 @@ public class HttpClientSiteSessionImpl implements SiteSession {
 
   public HttpClientSiteSessionImpl(String hostname) {
     this.hostname = hostname ;
-    this.httpclient = HttpClientFactory.getInstance() ;
+    this.httpclient = HttpClientFactory.createInstance() ;
     this.cookieStore = new BasicCookieStore();
   }
 
@@ -77,11 +78,13 @@ public class HttpClientSiteSessionImpl implements SiteSession {
       long startTime = System.currentTimeMillis() ;
       URLDatum urldatum = fdata.getURLDatum() ;
       String fetchUrl = urldatum.getFetchUrl();
+      
       HttpGet httpget = new HttpGet(fetchUrl); 
       BasicHttpContext httpContext = new BasicHttpContext();
       httpContext.setAttribute("crawler.site", hostname) ;
       httpContext.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
       HttpResponse response = httpclient.execute(httpget, httpContext);
+      
       String redirectUrl = (String)httpContext.getAttribute("url.redirect") ;
       if(redirectUrl != null) {
         urldatum.setRedirectUrl(redirectUrl) ;
@@ -104,7 +107,6 @@ public class HttpClientSiteSessionImpl implements SiteSession {
     } catch(Throwable t) {
       handleError(fdata, context, getRootCause(t)) ;
     } finally {
-      httpclient.getConnectionManager().closeExpiredConnections() ;
       if(getpage == 0 && destroy) onDestroy() ;
       lock = false ;
     }

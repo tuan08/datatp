@@ -2,9 +2,7 @@ package net.datatp.xhtml.dom.extract;
 
 import org.junit.Test;
 
-import net.datatp.xhtml.dom.extract.DocumentExtractor;
-import net.datatp.xhtml.fetcher.Fetcher;
-import net.datatp.xhtml.fetcher.HttpClientFetcher;
+import net.datatp.http.SimpleHttpFetcher;
 /**
  * $Author: Tuan Nguyen$ 
  **/
@@ -36,7 +34,7 @@ public class ForumContentExtractorUnitTest {
       DocumentExtractor.Type.forum, EXPECT_FORUM_TAG_DETAIL
   );
   
-  private void verifyAll(Fetcher fetcher) throws Exception {
+  private void verifyAll(SimpleHttpFetcher fetcher) throws Exception {
     URLVerifier[] all = {
        DIENDANTINHOC, TRUONGTON, VNZOOM, WEBTRETHO
     };
@@ -45,11 +43,11 @@ public class ForumContentExtractorUnitTest {
   
   @Test
   public void test() throws Exception {
-    Fetcher fetcher = new HttpClientFetcher();
+    SimpleHttpFetcher fetcher = new SimpleHttpFetcher();
     //verifyAll(fetcher) ;
     //DIENDANTINHOC.verify(fetcher, true) ;
     //VNZOOM.verify(fetcher, true) ;
-    //TRUONGTON.verify(fetcher, true) ;
-    WEBTRETHO.verify(fetcher, true) ;
+    TRUONGTON.verify(fetcher, true) ;
+    //WEBTRETHO.verify(fetcher, true) ;
   }
 }

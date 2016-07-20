@@ -10,6 +10,7 @@ import net.datatp.xhtml.dom.tagger.TextBlockTagger;
  **/
 public class MainContentExtractor extends ContentExtractor {
   private String mainContentTag ;
+  
   private Tagger textBlockTagger ;
   private Tagger listBlockTagger ;
 

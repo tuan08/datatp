@@ -1,6 +1,6 @@
 package net.datatp.webcrawler.master;
 
-import net.datatp.webcrawler.ResponseCode;
+import net.datatp.http.ResponseCode;
 import net.datatp.webcrawler.site.SiteContext;
 import net.datatp.webcrawler.site.URLContext;
 import net.datatp.webcrawler.urldb.URLDatum;

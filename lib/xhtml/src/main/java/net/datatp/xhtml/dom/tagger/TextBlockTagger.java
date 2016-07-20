@@ -13,6 +13,8 @@ import net.datatp.xhtml.dom.selector.TextLengthSelector;
  **/
 public class TextBlockTagger extends Tagger {
   final static public String BLOCK_TEXT = "block:text" ;
+  
+  final static public TextBlockTagger INSTANCE = new TextBlockTagger();
 
   public TNode[] tag(TDocument tdoc, TNode node) {
     Selector selector = new TextLengthSelector(100, Integer.MAX_VALUE) ;

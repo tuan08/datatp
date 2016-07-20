@@ -1,6 +1,5 @@
 package net.datatp.xhtml.dom.selector;
 
-import junit.framework.Assert;
 import net.datatp.xhtml.dom.TDocument;
 import net.datatp.xhtml.dom.TNode;
 import net.datatp.xhtml.dom.processor.CleanEmptyNodeProcessor;
@@ -15,6 +14,7 @@ import net.datatp.xhtml.dom.selector.TextSimilaritySelector;
 import net.datatp.xhtml.dom.tagger.LinkBlockTagger;
 import net.datatp.xhtml.dom.tagger.TitleBlockTagger;
 
+import org.junit.Assert;
 import org.junit.Test;
 /**
  * $Author: Tuan Nguyen$ 

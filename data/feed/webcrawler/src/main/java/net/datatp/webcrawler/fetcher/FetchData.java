@@ -13,8 +13,6 @@ import net.datatp.xhtml.XhtmlDocument;
 public class FetchData implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  final static byte[] EMPTY = new byte[0] ;
-
   private URLDatum datum ;
   private XhtmlDocument document ;
 

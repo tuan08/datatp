@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import net.datatp.util.text.StringMatcher;
+import net.datatp.util.text.StringExpMatcher;
 import net.datatp.util.text.StringUtil;
 import net.datatp.xhtml.dom.selector.Selector;
 /**
@@ -292,16 +292,16 @@ public class TNode {
   }
 
   public List<TNode> findDescendantByElementId(String matcher) {
-    return findDescendantByElementId(new StringMatcher(matcher.toLowerCase()));
+    return findDescendantByElementId(new StringExpMatcher(matcher.toLowerCase()));
   }
 
-  public List<TNode> findDescendantByElementId(StringMatcher matcher) {
+  public List<TNode> findDescendantByElementId(StringExpMatcher matcher) {
     List<TNode> holder = new ArrayList<TNode>() ;
     findDescendantByElementId(holder, matcher) ;
     return holder ;
   }
 
-  void findDescendantByElementId(List<TNode> holder, StringMatcher matcher) {
+  void findDescendantByElementId(List<TNode> holder, StringExpMatcher matcher) {
     if(matcher.matches(this.elementId)) {
       holder.add(this) ;
     }
@@ -314,10 +314,10 @@ public class TNode {
 
 
   public TNode findFirstDescendantByElementId(String matcher) {
-    return findFirstDescendantByElementId(new StringMatcher(matcher.toLowerCase())) ;
+    return findFirstDescendantByElementId(new StringExpMatcher(matcher.toLowerCase())) ;
   }
 
-  public TNode findFirstDescendantByElementId(StringMatcher matcher) {
+  public TNode findFirstDescendantByElementId(StringExpMatcher matcher) {
     if(matcher.matches(this.elementId)) return this ;
     if(children != null) {
       for(int i = 0; i < children.size(); i++) {
@@ -331,17 +331,17 @@ public class TNode {
 
   public List<TNode> findDescendantByCssClass(String matcher) {
     List<TNode> holder = new ArrayList<TNode>() ;
-    findDescendantByCssClass(holder, new StringMatcher(matcher.toLowerCase())) ;
+    findDescendantByCssClass(holder, new StringExpMatcher(matcher.toLowerCase())) ;
     return holder ;
   }
 
-  public List<TNode> findDescendantByCssClass(StringMatcher matcher) {
+  public List<TNode> findDescendantByCssClass(StringExpMatcher matcher) {
     List<TNode> holder = new ArrayList<TNode>() ;
     findDescendantByCssClass(holder, matcher) ;
     return holder ;
   }
 
-  void findDescendantByCssClass(List<TNode> holder,StringMatcher matcher) {
+  void findDescendantByCssClass(List<TNode> holder,StringExpMatcher matcher) {
     if(matcher.matches(this.cssClass)) holder.add(this) ;
     if(children != null) {
       for(int i = 0; i < children.size(); i++) {
@@ -352,10 +352,10 @@ public class TNode {
   }
 
   public TNode findFirstDescendantByCssClass(String matcher) {
-    return findFirstDescendantByCssClass(new StringMatcher(matcher.toLowerCase())) ;
+    return findFirstDescendantByCssClass(new StringExpMatcher(matcher.toLowerCase())) ;
   }
 
-  public TNode findFirstDescendantByCssClass(StringMatcher matcher) {
+  public TNode findFirstDescendantByCssClass(StringExpMatcher matcher) {
     if(matcher.matches(this.cssClass)) return this ;
     if(children != null) {
       for(int i = 0; i < children.size(); i++) {

@@ -12,15 +12,12 @@ import net.datatp.xhtml.dom.tagger.TitleBlockTagger;
  * $Author: Tuan Nguyen$ 
  **/
 abstract public class ContentExtractor {
-  static String[] DETAIL_JUNK_TEXT_TAG = {
-      JunkTextBlockTagger.BLOCK_TEXT_JUNK, 
-      LinkBlockTagger.BLOCK_LINK_ACTION, 
-      LinkBlockTagger.BLOCK_LINK_RELATED
+  static public String[] DETAIL_JUNK_TEXT_TAG = { 
+      JunkTextBlockTagger.BLOCK_TEXT_JUNK,  LinkBlockTagger.BLOCK_LINK_ACTION, LinkBlockTagger.BLOCK_LINK_RELATED
   } ;
 
-  static String[] OTHER_JUNK_TEXT_TAG = {
-      JunkTextBlockTagger.BLOCK_TEXT_JUNK, 
-      LinkBlockTagger.BLOCK_LINK_ACTION, 
+  static public String[] OTHER_JUNK_TEXT_TAG = {
+      JunkTextBlockTagger.BLOCK_TEXT_JUNK,  LinkBlockTagger.BLOCK_LINK_ACTION, 
   } ;
 
   abstract protected ExtractContent extractDetail(TDocument tdoc) ;

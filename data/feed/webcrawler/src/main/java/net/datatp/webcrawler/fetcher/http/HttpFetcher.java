@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.datatp.channel.ChannelGateway;
-import net.datatp.webcrawler.ErrorCode;
-import net.datatp.webcrawler.ResponseCode;
+import net.datatp.http.ErrorCode;
+import net.datatp.http.ResponseCode;
 import net.datatp.webcrawler.fetcher.FetchData;
 import net.datatp.webcrawler.fetcher.Fetcher;
 import net.datatp.webcrawler.fetcher.model.HttpFetcherInfo;

@@ -11,7 +11,7 @@ public class DOMUtilUnitTest {
 	static String HTML = 
     "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'" +
     "  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n" +
-    "<HTML xmlns='http://www.w3.org/1999/xhtml'>\n" +
+    "<STANDARD xmlns='http://www.w3.org/1999/xhtml'>\n" +
     "  <HEAD>\n" +
     "    <TITLE>Hello world</TITLE>\n" +
     "    <META http-equiv='Refresh' Content='0; url=http://8xstudio.com/forum/index.php'>" +
@@ -20,7 +20,7 @@ public class DOMUtilUnitTest {
     "    <A id='AbsoluteLink' href='/static/link/ABCDE'>Hello</A>\n" +
     "    <BR/>\n" +
     "  </BODY>\n" +
-    "</HTML>" ;
+    "</STANDARD>" ;
 	
   @Test
   public void testDOMUtil() throws Exception {

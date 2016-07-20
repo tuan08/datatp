@@ -2,10 +2,9 @@ package net.datatp.xhtml.dom.extract;
 
 import org.junit.Test;
 
+import net.datatp.http.SimpleHttpFetcher;
 import net.datatp.xhtml.XhtmlDocument;
 import net.datatp.xhtml.dom.TDocument;
-import net.datatp.xhtml.fetcher.Fetcher;
-import net.datatp.xhtml.fetcher.HttpClientFetcher;
 /**
  * $Author: Tuan Nguyen$ 
  **/
@@ -14,7 +13,7 @@ public class MainContentExtractorUnitTest {
   public void test() throws Exception {
     String url = "http://www.aia.com.vn/vn/recruitment/for-consultants/agents/agent-recruitment" ;
 
-    Fetcher fetcher = new HttpClientFetcher();
+    SimpleHttpFetcher fetcher = new SimpleHttpFetcher();
     XhtmlDocument xdoc = fetcher.fetch(url);
 
     DocumentExtractor extractor = new DocumentExtractor() ;

@@ -2,10 +2,7 @@ package net.datatp.xhtml.dom.extract;
 
 import org.junit.Test ;
 
-import net.datatp.xhtml.dom.extract.DocumentExtractor;
-import net.datatp.xhtml.dom.extract.DocumentExtractor.Type;
-import net.datatp.xhtml.fetcher.Fetcher;
-import net.datatp.xhtml.fetcher.HttpClientFetcher;
+import net.datatp.http.SimpleHttpFetcher;
 
 public class OtherContentExtractorUnitTest {
   static String[] EXPECT_OTHER_TAG_DETAIL = {"content:other", "content:detail"} ;
@@ -70,7 +67,7 @@ public class OtherContentExtractorUnitTest {
       DocumentExtractor.Type.other, EXPECT_OTHER_TAG_DETAIL
   );
   
-  private void verifyAll(Fetcher fetcher) throws Exception {
+  private void verifyAll(SimpleHttpFetcher fetcher) throws Exception {
     URLVerifier[] all = {
        SUZUKI, HONDA, LUATHOANGMINH, VNPACK, LACVIET,
        INTAICHINH, TUVANTAICHINH, VINACHEM, BIDIPHAR, BAOHIEMAIA
@@ -80,7 +77,7 @@ public class OtherContentExtractorUnitTest {
   
   @Test
   public void test() throws Exception {
-    Fetcher fetcher = new HttpClientFetcher();
+    SimpleHttpFetcher fetcher = new SimpleHttpFetcher();
     //verifyAll(fetcher) ;
     //SUZUKI.verify(fetcher, true);
     //HONDA.verify(fetcher, true);

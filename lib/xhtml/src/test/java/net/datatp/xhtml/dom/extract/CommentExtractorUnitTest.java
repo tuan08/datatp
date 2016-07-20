@@ -1,13 +1,9 @@
 package net.datatp.xhtml.dom.extract;
 
-import junit.framework.Assert;
-import net.datatp.xhtml.dom.extract.DocumentExtractor;
-import net.datatp.xhtml.dom.extract.ExtractBlock;
-import net.datatp.xhtml.dom.extract.ExtractContent;
-import net.datatp.xhtml.fetcher.Fetcher;
-import net.datatp.xhtml.fetcher.HttpClientFetcher;
-
 import org.junit.Test;
+
+import junit.framework.Assert;
+import net.datatp.http.SimpleHttpFetcher;
 /**
  * $Author: Tuan Nguyen$ 
  **/
@@ -28,12 +24,12 @@ public class CommentExtractorUnitTest {
 
   @Test
   public void test() throws Exception {
-  	Fetcher fetcher = new HttpClientFetcher();
+    SimpleHttpFetcher fetcher = new SimpleHttpFetcher();
   	verify(fetcher, THEGIOIDIDONG) ;
   	//verify(fetcher, VNEXPRESS) ;
   }
   
-  private void verify(Fetcher fetcher, URLVerifier verifier) throws Exception {
+  private void verify(SimpleHttpFetcher fetcher, URLVerifier verifier) throws Exception {
   	ExtractContent extract = verifier.extract(fetcher) ;
   	ExtractBlock comment = extract.getExtractBlock("comment") ;
   	Assert.assertNotNull(comment) ;

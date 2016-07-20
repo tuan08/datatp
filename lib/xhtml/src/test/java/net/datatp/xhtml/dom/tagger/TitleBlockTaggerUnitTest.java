@@ -2,14 +2,13 @@ package net.datatp.xhtml.dom.tagger;
 
 import org.junit.Test;
 
+import net.datatp.http.SimpleHttpFetcher;
 import net.datatp.util.text.CosineSimilarity;
 import net.datatp.xhtml.XhtmlDocument;
 import net.datatp.xhtml.dom.TDocument;
 import net.datatp.xhtml.dom.TNode;
 import net.datatp.xhtml.dom.processor.CleanEmptyNodeProcessor;
 import net.datatp.xhtml.dom.selector.TagSelector;
-import net.datatp.xhtml.fetcher.Fetcher;
-import net.datatp.xhtml.fetcher.HttpClientFetcher;
 
 public class TitleBlockTaggerUnitTest {
   static String HTML = 
@@ -60,7 +59,7 @@ public class TitleBlockTaggerUnitTest {
   //@Test
   public void testSite() throws Exception  {
     String url = "http://dantri.com.vn/";    
-    Fetcher fetcher = new HttpClientFetcher();
+    SimpleHttpFetcher fetcher = new SimpleHttpFetcher();
     XhtmlDocument xdoc = fetcher.fetch(url);
     TDocument tdoc = new TDocument(url, url, xdoc.getXhtml()) ;
     TNode root = tdoc.getRoot() ;

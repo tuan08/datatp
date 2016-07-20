@@ -3,7 +3,6 @@ package net.datatp.webcrawler.site;
 import java.io.Serializable;
 
 import net.datatp.util.text.StringUtil;
-import net.datatp.xhtml.extract.XpathConfig;
 
 public class SiteConfig implements Serializable {
   static public enum Status {Good, Ok, New, Pending, Review, Deleted, Moved, Empty}
@@ -17,7 +16,6 @@ public class SiteConfig implements Serializable {
   private int                  crawlDeep;
   private int                  refreshPeriod;
   private int                  maxConnection;
-  private XpathConfig[]        xpathConfig;
   private Status               status           = Status.Ok;
   private String               language;
   private String               description;
@@ -73,9 +71,6 @@ public class SiteConfig implements Serializable {
 
   public int getMaxConnection() { return maxConnection ; }
   public void setMaxConnection(int value) { maxConnection = value ; }
-
-  public XpathConfig[] getXpathConfig() { return this.xpathConfig ; }
-  public void setXpathConfig(XpathConfig[] config) { this.xpathConfig = config ; }
 
   public Status getStatus() { 
     if(status == null) return Status.Review ;

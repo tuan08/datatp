@@ -9,30 +9,11 @@ import net.datatp.xhtml.parser.NekoParser;
 import net.datatp.xhtml.visitor.NodeDeleteVisitor;
 
 public class HtmlParserUnitTest {
-  static String HTML = 
-    "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'" +
-    "  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>" +
-    "<html xmlns='http://www.w3.org/1999/xhtml'>\n" +
-    "  <head>\n" +
-    "    <base href='http://www.vnexpress.net'/>" +
-    "    <title>Hello world</title>\n" +
-    "  </head>\n" +
-    "  <body>\n" +
-    "    <a id='AbsoluteLink' href='/static/link/ABCDE'>Hello</a>\n" +
-    "    <a id='RelativeLink' href='link/ABCDE'>Hello</a>\n" +
-    "    <A id='ExternalLink' href='http://vnexpress.net/static/link/ABCDE'>Hello</A>\n" +
-    "    <img id='AbsoluteImgSrc' href='/image/image.jpg' />\n" +
-    "    <script id='Script' type='text/javascript'>" +
-    "      window.alert('hello') ;" +
-    "    </script>" +
-    "    <br />" +
-    "  </body>\n" +
-    "</html>" ;
 
   @Test
   public void testHtmlParser() throws Exception {
     NekoParser parser = new NekoParser() ;
-    Document doc = parser.parseNonWellForm(HTML) ;
+    Document doc = parser.parseNonWellForm(Html.STANDARD) ;
     HtmlAssert.assertLink(doc, "AbsoluteLink", "/static/link/ABCDE") ;
     HtmlAssert.assertNodeContent(doc, "AbsoluteLink", "Hello") ;
     TransformDomWriter writer = new TransformDomWriter() ;
@@ -42,7 +23,7 @@ public class HtmlParserUnitTest {
   @Test
   public void testNodeDeleteVisitor() throws Exception {
     NekoParser parser = new NekoParser() ;
-    Document doc = parser.parseNonWellForm(HTML) ;
+    Document doc = parser.parseNonWellForm(Html.STANDARD) ;
     HtmlAssert.assertNode(doc, "Script") ;
     NodeDeleteVisitor visitor = new NodeDeleteVisitor() {
       protected boolean shouldDelete(Node node) {

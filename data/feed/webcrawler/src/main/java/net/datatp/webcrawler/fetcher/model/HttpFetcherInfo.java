@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
-import net.datatp.webcrawler.ErrorCode;
+import net.datatp.http.ErrorCode;
 import net.datatp.webcrawler.urldb.URLDatum;
 
 public class HttpFetcherInfo implements Serializable {

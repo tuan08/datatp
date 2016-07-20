@@ -13,7 +13,8 @@ import net.datatp.xhtml.dom.selector.Selector;
  **/
 public class ContentListBlockTagger extends Tagger {
   final static public String BLOCK_LIST = "block:list" ;
-
+  final static public ContentListBlockTagger INSTANCE = new ContentListBlockTagger();
+  
   public TNode[] tag(TDocument tdoc, TNode root) {
     Selector selector = new TNodeSelector() ;
     TNodeGroup[] groups = select(root, selector, 3) ;

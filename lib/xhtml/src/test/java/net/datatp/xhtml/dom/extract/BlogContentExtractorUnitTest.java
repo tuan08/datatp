@@ -2,9 +2,7 @@ package net.datatp.xhtml.dom.extract;
 
 import org.junit.Test;
 
-import net.datatp.xhtml.dom.extract.DocumentExtractor;
-import net.datatp.xhtml.fetcher.Fetcher;
-import net.datatp.xhtml.fetcher.HttpClientFetcher;
+import net.datatp.http.SimpleHttpFetcher;
 
 public class BlogContentExtractorUnitTest {
   static String[] EXPECT_BLOG_TAG_DETAIL = {"content:blog", "content:detail"} ;
@@ -71,7 +69,7 @@ public class BlogContentExtractorUnitTest {
       DocumentExtractor.Type.blog, EXPECT_BLOG_TAG_DETAIL
   );
   
-  private void verifyAll(Fetcher fetcher) throws Exception {
+  private void verifyAll(SimpleHttpFetcher fetcher) throws Exception {
     URLVerifier[] all = {
        WORDPRESS, MINHMEO, HUTRUC, _123YEUCUOCSONG, YUME,
        YAHOOPLUS, TAMTAY, BLOGVIET, P212PRO, OPERA
@@ -81,7 +79,7 @@ public class BlogContentExtractorUnitTest {
   
   @Test
   public void test() throws Exception {
-    Fetcher fetcher = new HttpClientFetcher();
+    SimpleHttpFetcher fetcher = new SimpleHttpFetcher();
     //verifyAll(fetcher) ;
     //WORDPRESS.verify(fetcher, true) ;
     //MINHMEO.verify(fetcher, true) ;

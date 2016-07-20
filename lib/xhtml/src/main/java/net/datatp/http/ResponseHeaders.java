@@ -1,9 +1,10 @@
-package net.datatp.xhtml;
+package net.datatp.http;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResponseHeaders {
+public class ResponseHeaders implements Serializable {
   private Map<String, String> headers = new HashMap<>();
 
   public String getHeader(String name, String defaultVal) {

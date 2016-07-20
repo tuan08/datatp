@@ -22,7 +22,9 @@ import net.datatp.xhtml.dom.visitor.ExtractLinkVisitor;
 import net.datatp.xhtml.util.URLRewriter;
 import net.datatp.xhtml.util.URLSessionIdCleaner;
 /**
- * Author : Tuan Nguyen tuan.nguyen@headvances.com Jun 23, 2010
+ * Author : Tuan Nguyen
+ *          tuan08@gmail.com 
+ *          Jun 23, 2010
  */
 public class URLExtractor {
   final static URLSessionIdCleaner URL_CLEANER = new URLSessionIdCleaner() ;

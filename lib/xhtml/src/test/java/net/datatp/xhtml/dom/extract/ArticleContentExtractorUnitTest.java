@@ -2,9 +2,7 @@ package net.datatp.xhtml.dom.extract;
 
 import org.junit.Test ;
 
-import net.datatp.xhtml.dom.extract.DocumentExtractor;
-import net.datatp.xhtml.fetcher.Fetcher;
-import net.datatp.xhtml.fetcher.HttpClientFetcher;
+import net.datatp.http.SimpleHttpFetcher;
 /**
  * $Author: Tuan Nguyen$ 
  **/
@@ -74,17 +72,17 @@ public class ArticleContentExtractorUnitTest {
 //      DocumentExtractor.Type.article, EXPECT_ARTICLE_TAG_DETAIL
 //  );
   
-  private void verifyAll(Fetcher fetcher) throws Exception {
+  private void verifyAll(SimpleHttpFetcher fetcher) throws Exception {
     URLVerifier[] all = {
        VNEXPRESS, DANTRI, 
        //_24H, BEENET, NGOISAONET, BONGDA, VIETNAMNET, DOCBAO, XALUAN, VIETBAO
     };
-    for(URLVerifier sel : all) sel.verify(fetcher, false) ;
+    for(URLVerifier sel : all) sel.verify(fetcher, true /*dump*/) ;
   }
   
   @Test
   public void test() throws Exception {
-    Fetcher fetcher = new HttpClientFetcher();
+    SimpleHttpFetcher fetcher = new SimpleHttpFetcher();
     verifyAll(fetcher) ;
   }
 }

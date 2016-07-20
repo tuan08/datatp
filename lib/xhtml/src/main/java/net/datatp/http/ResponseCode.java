@@ -1,4 +1,4 @@
-package net.datatp.webcrawler;
+package net.datatp.http;
 
 import java.util.HashMap;
 

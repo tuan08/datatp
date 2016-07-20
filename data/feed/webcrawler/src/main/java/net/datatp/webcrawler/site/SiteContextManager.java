@@ -9,7 +9,6 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 import net.datatp.util.URLParser;
-import net.datatp.webcrawler.site.SiteContext.Modify;
 import net.datatp.webcrawler.urldb.URLStatisticMap;
 
 /**
@@ -35,26 +34,6 @@ public class SiteContextManager {
       siteContexts.put(config.getHostname(), new SiteContext(config)) ;
     }
   }
-
-  public void modify(List<SiteContext> contexts) {
-    for(int i = 0; i < contexts.size(); i++) {
-      modify(contexts.get(i)) ;
-    }
-  }
-
-  private void modify(SiteContext context) {
-    if(context.getModify() == Modify.ADD) {
-      siteContexts.put(context.getSiteConfig().getHostname(), context) ;
-    } else if(context.getModify() == Modify.DELETE) {
-      siteContexts.remove(context.getSiteConfig().getHostname()) ;
-    } else if(context.getModify() == Modify.MODIFIED) {
-      SiteContext exist = siteContexts.get(context.getSiteConfig().getHostname()) ;
-      if(exist != null) exist.update(context) ;
-      else siteContexts.put(context.getSiteConfig().getHostname(), context) ;
-    }
-    context.setModify(Modify.NONE) ;
-  }
-
 
   public int clear() { 
     int size = siteContexts.size() ;

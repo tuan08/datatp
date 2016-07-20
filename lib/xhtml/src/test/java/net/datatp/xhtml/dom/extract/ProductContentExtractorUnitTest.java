@@ -2,9 +2,7 @@ package net.datatp.xhtml.dom.extract;
 
 import org.junit.Test;
 
-import net.datatp.xhtml.dom.extract.DocumentExtractor;
-import net.datatp.xhtml.fetcher.Fetcher;
-import net.datatp.xhtml.fetcher.HttpClientFetcher;
+import net.datatp.http.SimpleHttpFetcher;
 /**
  * $Author: Tuan Nguyen$ 
  **/
@@ -24,8 +22,8 @@ public class ProductContentExtractorUnitTest {
   );
   
   static URLVerifier TRANANH = new URLVerifier(
-  		"Máy tính để bàn TRANANH PC - Model: SVi334",
-  		"http://www.trananh.vn/May-tinh-de-ban-TRANANH-PC-Model-SVi334_19199.html",
+  		"ĐIỀU HÒA 1 CHIỀU DAIKIN 8500BTU INVERTER FTKC25QVMV",
+  		"http://www.trananh.vn/dien-lanh/dieu-hoa-1-chieu-daikin-8500btu-inverter-ftkc25qvmv-pid192790cid537",
   		DocumentExtractor.Type.product, EXPECT_PRODUCT_TAG_DETAIL
   );
   
@@ -41,7 +39,7 @@ public class ProductContentExtractorUnitTest {
       DocumentExtractor.Type.product, EXPECT_PRODUCT_TAG_DETAIL
   );
   
-  private void verifyAll(Fetcher fetcher) throws Exception {
+  private void verifyAll(SimpleHttpFetcher fetcher) throws Exception {
   	URLVerifier[] all = {
   		ANHNGHIA, PICO, TRANANH, BEN	
   	};
@@ -50,7 +48,7 @@ public class ProductContentExtractorUnitTest {
   
 	@Test
   public void test() throws Exception {
-  	Fetcher fetcher = new HttpClientFetcher();
+	  SimpleHttpFetcher fetcher = new SimpleHttpFetcher();
   	//verifyAll(fetcher) ;
   	//PICO.verify(fetcher, true) ;
   	TRANANH.verify(fetcher , true);

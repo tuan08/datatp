@@ -1,9 +1,8 @@
-package net.datatp.xhtml.fetcher;
+package net.datatp.http;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.protocol.BasicHttpContext;
 
 import net.datatp.util.URLParser;
@@ -11,14 +10,14 @@ import net.datatp.util.io.IOUtil;
 import net.datatp.xhtml.XhtmlDocument;
 /**
  * Author : Tuan Nguyen
- *          tuan.nguyen@headvances.com
+ *          tuan08@gmail.com
  * Apr 25, 2010  
  */
-public class HttpClientFetcher implements Fetcher {
+public class SimpleHttpFetcher {
   private CloseableHttpClient  httpclient ;
 
-  public HttpClientFetcher() {
-    this.httpclient =  HttpClients.createDefault();
+  public SimpleHttpFetcher() {
+    this.httpclient =  HttpClientFactory.createInstance();
   }
 
   public XhtmlDocument fetch(String urlString) throws Exception {

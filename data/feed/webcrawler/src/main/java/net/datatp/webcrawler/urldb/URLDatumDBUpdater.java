@@ -3,9 +3,9 @@ package net.datatp.webcrawler.urldb;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 
+import net.datatp.http.ResponseCode;
 import net.datatp.storage.kvdb.RecordUpdater;
 import net.datatp.util.URLNormalizerProcessor;
-import net.datatp.webcrawler.ResponseCode;
 import net.datatp.webcrawler.site.SiteContextManager;
 import net.datatp.webcrawler.site.URLContext;
 import net.datatp.xhtml.util.URLSessionIdCleaner;

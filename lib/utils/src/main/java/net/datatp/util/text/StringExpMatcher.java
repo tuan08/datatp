@@ -3,7 +3,7 @@ package net.datatp.util.text;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringMatcher {
+public class StringExpMatcher {
   final static byte EXACT_MATCH = 0 ;
   final static byte EXPRESSION_MATCH = 1 ;
   
@@ -11,7 +11,7 @@ public class StringMatcher {
   private String expression ;
   private Matcher[] matcher ;
   
-  public StringMatcher(String expression) {
+  public StringExpMatcher(String expression) {
     this.expression = expression ;
     if(expression.indexOf("*") >= 0) {
       matchType = EXPRESSION_MATCH ;
@@ -87,16 +87,16 @@ public class StringMatcher {
     }
   }
   
-  final static public StringMatcher[] create(String ... exp) {
-  	StringMatcher[] array = new StringMatcher[exp.length] ;
+  final static public StringExpMatcher[] create(String ... exp) {
+  	StringExpMatcher[] array = new StringExpMatcher[exp.length] ;
   	for(int i = 0; i < exp.length; i++) {
-  		array[i] = new StringMatcher(exp[i]) ;
+  		array[i] = new StringExpMatcher(exp[i]) ;
   	}
   	return array ;
   }
   
-  final static public boolean matches(StringMatcher[] matcher, String string) {
-  	for(StringMatcher sel : matcher) {
+  final static public boolean matches(StringExpMatcher[] matcher, String string) {
+  	for(StringExpMatcher sel : matcher) {
   		if(sel.matches(string)) return true ;
   	}
   	return false; 

@@ -2,9 +2,9 @@ package net.datatp.xhtml.dom.extract;
 
 import org.junit.Assert;
 
+import net.datatp.http.SimpleHttpFetcher;
 import net.datatp.xhtml.XhtmlDocument;
 import net.datatp.xhtml.dom.TDocument;
-import net.datatp.xhtml.fetcher.Fetcher;
 
 /**
  * $Author: Tuan Nguyen$ 
@@ -23,7 +23,7 @@ public class URLVerifier {
     this.expectTags = expectTag ;
   }
 
-  public ExtractContent extract(Fetcher fetcher) throws Exception {
+  public ExtractContent extract(SimpleHttpFetcher fetcher) throws Exception {
     XhtmlDocument xdoc = fetcher.fetch(url);
     DocumentExtractor extractor = new DocumentExtractor() ;
     TDocument tdoc = new TDocument(url, anchorText, xdoc.getXhtml()) ;
@@ -33,7 +33,7 @@ public class URLVerifier {
     return extractContent ;
   }
 
-  public void verify(Fetcher fetcher, boolean dump) throws Exception {
+  public void verify(SimpleHttpFetcher fetcher, boolean dump) throws Exception {
     ExtractContent extractContent = extract(fetcher) ;
     if(dump) extractContent.dump(System.out) ;
     ExtractBlock mainBlock = extractContent.getExtractBlock("mainContent") ;

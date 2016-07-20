@@ -1,4 +1,4 @@
-package net.datatp.webcrawler.fetcher.http;
+package net.datatp.http;
 
 import org.apache.http.Header;
 import org.apache.http.HttpRequest;

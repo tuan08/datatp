@@ -35,9 +35,10 @@ public class DocumentExtractor {
   private Map<Type, ContentExtractor> extractors = new HashMap<Type, ContentExtractor>() ;
   private MainContentExtractor defaultExtractor  = new MainContentExtractor("content:other") ;
 
-  private Tagger titleTagger = new TitleBlockTagger() ;
-  private Tagger linkTagger  = new LinkBlockTagger() ;
+  private Tagger titleTagger     = new TitleBlockTagger() ;
+  private Tagger linkTagger      = new LinkBlockTagger() ;
   private Tagger junkTextTagger  = new JunkTextBlockTagger() ;
+  
   private CommentExtractor commentExtractor = new CommentExtractor() ;
 
   public DocumentExtractor() {

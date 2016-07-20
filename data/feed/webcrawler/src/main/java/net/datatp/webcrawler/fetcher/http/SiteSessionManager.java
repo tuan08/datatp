@@ -9,13 +9,13 @@ import net.datatp.webcrawler.site.SiteContext;
 
 /**
  * Author : Tuan Nguyen
- *          tuan.nguyen@headvances.com
+ *          tuan08@gmail.com
  * Apr 23, 2010  
  */
 @Component
 public class SiteSessionManager {
   private LinkedHashMap<String, SiteSessions> sessions ;
-  
+
   public SiteSessionManager() {
     sessions = new LinkedHashMap<String, SiteSessions>(1000) {
       protected boolean removeEldestEntry(Map.Entry<String, SiteSessions> eldest) {
@@ -27,22 +27,22 @@ public class SiteSessionManager {
       }
     } ;
   }
-  
+
   public SiteSessions getSiteSession(SiteContext context) {
     String hostname = context.getSiteConfig().getHostname() ;
     SiteSessions siteSessions = sessions.get(hostname) ;
     if(siteSessions == null) {
-    	synchronized(this) {
-    		siteSessions = sessions.get(hostname) ;
-    		if(siteSessions == null) {
-    			siteSessions = createSiteSessions(hostname, context.getMaxConnection()) ;
-    			sessions.put(hostname, siteSessions) ;
-    		}
-    	}
+      synchronized(this) {
+        siteSessions = sessions.get(hostname) ;
+        if(siteSessions == null) {
+          siteSessions = createSiteSessions(hostname, context.getMaxConnection()) ;
+          sessions.put(hostname, siteSessions) ;
+        }
+      }
     }
     return siteSessions;
   }
-  
+
   public SiteSessions createSiteSessions(String hostname, int maxConnection) {
     return new SiteSessions(hostname, maxConnection) ;
   }

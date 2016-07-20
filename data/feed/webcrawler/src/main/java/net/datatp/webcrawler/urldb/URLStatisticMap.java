@@ -2,10 +2,9 @@ package net.datatp.webcrawler.urldb;
 
 import java.io.Serializable;
 
+import net.datatp.http.ErrorCode;
+import net.datatp.http.ResponseCode;
 import net.datatp.util.stat.Statistics;
-import net.datatp.webcrawler.ErrorCode;
-import net.datatp.webcrawler.ResponseCode;
-
 
 public class URLStatisticMap implements Serializable {
   final static public String FETCH_STATUS  = "fetchStatus";

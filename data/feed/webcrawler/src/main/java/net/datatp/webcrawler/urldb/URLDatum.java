@@ -1,32 +1,26 @@
 package net.datatp.webcrawler.urldb;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.DataInput;
-import java.io.DataInputStream;
 import java.io.DataOutput;
-import java.io.DataOutputStream;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import java.io.PrintStream;
 import java.util.Date;
 
 import org.apache.hadoop.io.Text;
 
+import net.datatp.http.ErrorCode;
+import net.datatp.http.ResponseCode;
 import net.datatp.storage.kvdb.Record;
 import net.datatp.util.URLParser;
-import net.datatp.util.text.DateUtil;
 import net.datatp.util.text.StringUtil;
-import net.datatp.webcrawler.ErrorCode;
-import net.datatp.webcrawler.ResponseCode;
 /**
  * Author : Tuan Nguyen
  *          tuan08@gmail.com
  * Apr 13, 2010  
  */
-public class URLDatum implements Record, Externalizable  {
+public class URLDatum implements  Externalizable, Record {
   final static public byte STATUS_NEW            = 0 ;
   final static public byte STATUS_WAITING        = 1 ;
   final static public byte STATUS_FETCHING       = 2 ;
@@ -228,7 +222,22 @@ public class URLDatum implements Record, Externalizable  {
     out.writeByte(status) ;
     this.contentType.write(out) ;
   }
-
+  
+  void writeString(DataOutput out, String string) throws IOException {
+    if(string == null) {
+      out.writeBoolean(false);
+    } else {
+      out.writeBoolean(true);
+      out.writeUTF(string);
+    }
+  }
+  
+  String readString(DataInput in) throws IOException {
+    boolean present = in.readBoolean();
+    if(!present) return null;
+    return in.readUTF();
+  }
+  
   @Override
   public void writeExternal(ObjectOutput out) throws IOException {
     write(out) ;
@@ -237,25 +246,6 @@ public class URLDatum implements Record, Externalizable  {
   @Override
   public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
     readFields(in) ;
-  }
-
-  public void dump(PrintStream out) {
-    out.println(toString()) ;
-  }
-
-  public String encodeString() {
-    StringBuilder b = new StringBuilder() ;
-    b.append("url=").append(this.url).append(" | ") ;
-    b.append("next-fetch-time=").append(DateUtil.asCompactDateTime(nextFetchTime)).append(" | ") ;
-    b.append("error-counter=").append(errorCount).append(" | ") ;
-    b.append("last-response-code=").append(lastResponseCode).append(" | ") ;
-    b.append("last-error-code=").append(lastErroCode).append(" | ") ;
-    b.append("last-fetch-schedule-at=").append(this.lastFetchScheduleAt).append(" | ") ;
-    b.append("last-fetch-finish-at").append(this.lastFetchFinishAt).append(" | ") ;
-    b.append("last-fetch-download-time=").append(lastFetchDownloadTime).append(" | ") ;
-    b.append("deep=").append(deep).append(" | ") ;
-    b.append("status=").append(status) ;
-    return b.toString() ;
   }
 
   public String toString() {
@@ -271,19 +261,5 @@ public class URLDatum implements Record, Externalizable  {
     b.append("Deep: ").append(deep).append("\n") ;
     b.append("Status: ").append(status).append("\n") ;
     return b.toString() ;
-  }
-
-  public byte[] toBytes() throws IOException {
-    ByteArrayOutputStream bos = new ByteArrayOutputStream() ;
-    DataOutputStream out = new DataOutputStream(bos) ;
-    write(out) ;
-    out.close() ;
-    return bos.toByteArray() ;
-  }
-
-  public void fromBytes(byte[] data) throws IOException {
-    DataInputStream in = new DataInputStream(new ByteArrayInputStream(data)) ;
-    readFields(in) ;
-    in.close() ;
   }
 }

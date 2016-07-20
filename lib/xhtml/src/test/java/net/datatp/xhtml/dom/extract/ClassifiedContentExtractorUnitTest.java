@@ -2,9 +2,7 @@ package net.datatp.xhtml.dom.extract;
 
 import org.junit.Test;
 
-import net.datatp.xhtml.dom.extract.DocumentExtractor;
-import net.datatp.xhtml.fetcher.Fetcher;
-import net.datatp.xhtml.fetcher.HttpClientFetcher;
+import net.datatp.http.SimpleHttpFetcher;
 /**
  * $Author: Tuan Nguyen$ 
  **/
@@ -71,7 +69,7 @@ public class ClassifiedContentExtractorUnitTest {
       DocumentExtractor.Type.classified, EXPECT_CLASSIFIED_TAG_DETAIL
   );
   
-  private void verifyAll(Fetcher fetcher) throws Exception {
+  private void verifyAll(SimpleHttpFetcher fetcher) throws Exception {
     URLVerifier[] all = {
        RAOVAT, RONGBAY, ENBAC, RAOVAT123, RAOVATCOM,
        NEGEMART, RAOVATNGAY, RAOVATCUATUI, MUONRAOVAT, RAOVATDTDD
@@ -81,7 +79,7 @@ public class ClassifiedContentExtractorUnitTest {
   
   @Test
   public void test() throws Exception {
-    Fetcher fetcher = new HttpClientFetcher();
+    SimpleHttpFetcher fetcher = new SimpleHttpFetcher();
     //verifyAll(fetcher) ;
     //RAOVAT.verify(fetcher, true) ;
     //RONGBAY.verify(fetcher, true) ;
