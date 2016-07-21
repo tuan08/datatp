@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import net.datatp.webcrawler.fetcher.http.HttpFetcherManager;
 import net.datatp.webcrawler.registry.WebCrawlerRegistry;
 
 @Component
@@ -31,7 +30,7 @@ public class CrawlerFetcherReporter implements Runnable {
     if("unknown".equals(vmName)) {
       vmName = InetAddress.getLocalHost().getHostName();
     }
-    wcRegistry.getFetcherRegistry().initReport(vmName, httpFetcherManager.getFetcherInfo());
+    wcRegistry.getFetcherRegistry().initReport(vmName, httpFetcherManager.getFetcherMetrics());
   }
   
   @PreDestroy
@@ -41,7 +40,7 @@ public class CrawlerFetcherReporter implements Runnable {
   }
   
   void reportHttpFetchers() throws Exception {
-    wcRegistry.getFetcherRegistry().report(vmName, httpFetcherManager.getFetcherInfo());
+    wcRegistry.getFetcherRegistry().report(vmName, httpFetcherManager.getFetcherMetrics());
   }
 
   @Override

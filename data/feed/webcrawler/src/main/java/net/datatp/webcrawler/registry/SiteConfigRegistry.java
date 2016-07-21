@@ -8,8 +8,8 @@ import org.apache.curator.framework.api.transaction.CuratorTransaction;
 import org.apache.curator.framework.api.transaction.CuratorTransactionFinal;
 import org.apache.zookeeper.CreateMode;
 
+import net.datatp.http.crawler.site.SiteConfig;
 import net.datatp.webcrawler.registry.event.CrawlerEventContext;
-import net.datatp.webcrawler.site.SiteConfig;
 import net.datatp.zk.registry.PayloadConverter;
 import net.datatp.zk.registry.RegistryClient;
 import net.datatp.zk.registry.event.EventBroadcaster;

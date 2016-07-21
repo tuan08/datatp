@@ -6,8 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import net.datatp.webcrawler.fetcher.http.HttpFetcherManager;
 /**
  * Author : Tuan Nguyen
  *          tuan08@gmail.com

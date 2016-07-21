@@ -4,8 +4,8 @@ import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-import net.datatp.webcrawler.master.model.URLCommitInfo;
-import net.datatp.webcrawler.master.model.URLScheduleInfo;
+import net.datatp.http.crawler.scheduler.metric.URLCommitMetric;
+import net.datatp.http.crawler.scheduler.metric.URLScheduleMetric;
 
 public class CrawlerMasterInfo implements Serializable {
   final static public int MAX_INFO_SIZE =  100 ;
@@ -15,8 +15,8 @@ public class CrawlerMasterInfo implements Serializable {
 
   private long startTime ;
   private int  status ;
-  private LinkedList<URLScheduleInfo> sheduleInfo = new LinkedList<URLScheduleInfo>() ;
-  private LinkedList<URLCommitInfo> fetchDataProcessInfo = new LinkedList<URLCommitInfo>() ;
+  private LinkedList<URLScheduleMetric> sheduleMetric = new LinkedList<URLScheduleMetric>() ;
+  private LinkedList<URLCommitMetric>   fetchURLCommitMetric = new LinkedList<URLCommitMetric>() ;
 
   public CrawlerMasterInfo() {
 
@@ -38,25 +38,25 @@ public class CrawlerMasterInfo implements Serializable {
     return "STOP" ;
   }
 
-  public URLScheduleInfo[] getSheduleInfo() { 
-    return sheduleInfo.toArray(new URLScheduleInfo[sheduleInfo.size()]);
+  public URLScheduleMetric[] getSheduleMetric() { 
+    return sheduleMetric.toArray(new URLScheduleMetric[sheduleMetric.size()]);
   }
 
-  public void addSheduleInfo(URLScheduleInfo info) {
-    sheduleInfo.addFirst(info) ;
-    if(this.sheduleInfo.size() == MAX_INFO_SIZE) {
-      this.sheduleInfo.removeLast() ;
+  public void addSheduleMetric(URLScheduleMetric info) {
+    sheduleMetric.addFirst(info) ;
+    if(this.sheduleMetric.size() == MAX_INFO_SIZE) {
+      this.sheduleMetric.removeLast() ;
     }
   }
 
-  public URLCommitInfo[] getFetchDataProcessInfo() {
-    return fetchDataProcessInfo.toArray(new URLCommitInfo[fetchDataProcessInfo.size()]);
+  public URLCommitMetric[] getFetchURLCommitMetrics() {
+    return fetchURLCommitMetric.toArray(new URLCommitMetric[fetchURLCommitMetric.size()]);
   }
 
-  public void addFetchDataProcessInfo(URLCommitInfo info) {
-    fetchDataProcessInfo.addFirst(info);
-    if(fetchDataProcessInfo.size() == MAX_INFO_SIZE) {
-      fetchDataProcessInfo.removeLast() ;
+  public void addFetchDataProcessInfo(URLCommitMetric info) {
+    fetchURLCommitMetric.addFirst(info);
+    if(fetchURLCommitMetric.size() == MAX_INFO_SIZE) {
+      fetchURLCommitMetric.removeLast() ;
     }
   }
 
@@ -65,7 +65,7 @@ public class CrawlerMasterInfo implements Serializable {
     String[] scheduleHeader   =  { "url", "schedule", "delay", "pending", "waiting"	} ;
     int[] scheduleHeaderWidth =  {    10,         10,      10,        10,        10 } ;
     printRow(out, scheduleHeader, scheduleHeaderWidth) ;
-    for(URLScheduleInfo sel :  this.sheduleInfo) {
+    for(URLScheduleMetric sel :  this.sheduleMetric) {
       String[] value = { 
           Integer.toString(sel.getUrlCount()),
           Integer.toString(sel.getScheduleCount()),
@@ -79,7 +79,7 @@ public class CrawlerMasterInfo implements Serializable {
     String[] processHeader   =  { "url", "new url", "new url list", "new url detail"} ;
     int[] processHeaderWidth =  {    10,        10,             15,              15} ;
     printRow(out, processHeader, processHeaderWidth) ;
-    for(URLCommitInfo sel : fetchDataProcessInfo) {
+    for(URLCommitMetric sel : fetchURLCommitMetric) {
       String[] value = { 
           Integer.toString(sel.getCommitURLCount()),
           Integer.toString(sel.getNewURLFoundCount()),

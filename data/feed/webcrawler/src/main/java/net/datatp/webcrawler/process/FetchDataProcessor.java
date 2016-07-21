@@ -1,5 +1,6 @@
 package net.datatp.webcrawler.process;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -10,10 +11,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.annotation.JmsListener;
 
 import net.datatp.channel.ChannelGateway;
-import net.datatp.http.crawler.URLDatum;
-import net.datatp.webcrawler.fetcher.FetchData;
-import net.datatp.webcrawler.site.SiteContextManager;
-import net.datatp.webcrawler.site.URLContext;
+import net.datatp.http.crawler.fetcher.FetchData;
+import net.datatp.http.crawler.site.URLContext;
+import net.datatp.http.crawler.urldb.URLDatum;
+import net.datatp.webcrawler.site.WebCrawlerSiteContextManager;
 import net.datatp.xhtml.XhtmlDocument;
 import net.datatp.xhtml.dom.TDocument;
 /**
@@ -25,7 +26,7 @@ public class FetchDataProcessor {
   @Autowired
   private URLExtractor urlExtractor ;
   @Autowired
-  private SiteContextManager siteConfigManager ;
+  private WebCrawlerSiteContextManager siteConfigManager ;
 
   @Autowired
   @Qualifier("XHTMLDataGateway")
@@ -43,15 +44,22 @@ public class FetchDataProcessor {
   public void process(FetchData fdata) {
     info.incrProcessCount() ;
     final long start = System.currentTimeMillis() ;
-    XhtmlDocument xdoc = fdata.getDocument() ;
-    if(xdoc == null) {
+    URLDatum urldatum = fdata.getURLDatum() ;
+    byte[] data = fdata.getData();
+    XhtmlDocument xdoc = new XhtmlDocument(urldatum.getOriginalUrl(), urldatum.getAnchorText(), null) ;
+    if(data == null) {
       ArrayList<URLDatum> urlList = new ArrayList<URLDatum>() ;
       urlList.add(fdata.getURLDatum()) ;
       urlFetchCommitGateway.send(urlList) ;
       return ;
     }
     try {
-      URLDatum urldatum = fdata.getURLDatum() ;
+      if(data != null) {
+        Charset charset = EncodingDetector.INSTANCE.detect(data, data.length);
+        String xhtml = new String(data, charset);
+        xdoc.setXhtml(xhtml);
+      }
+      
       TDocument  tdoc = 
           new TDocument(urldatum.getAnchorTextAsString(), urldatum.getOriginalUrlAsString(), xdoc.getXhtml()) ;
       URLContext context =  siteConfigManager.getURLContext(fdata.getURLDatum().getFetchUrl()) ;
@@ -64,7 +72,7 @@ public class FetchDataProcessor {
       urlList.addAll(urls.values()) ;
 
       urlFetchCommitGateway.send(urlList) ;
-      xhtmlDataGateway.send(fdata.getDocument()) ;
+      xhtmlDataGateway.send(xdoc) ;
     } catch(Exception ex) {
       ex.printStackTrace() ;
       logger.error("Cannot process HtmlDocument: " + xdoc.getUrl()) ;

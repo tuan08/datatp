@@ -12,9 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
-import net.datatp.http.crawler.URLDatum;
+import net.datatp.http.crawler.site.URLContext;
+import net.datatp.http.crawler.urldb.URLDatum;
 import net.datatp.util.URLParser;
-import net.datatp.webcrawler.site.URLContext;
 import net.datatp.webcrawler.urldb.URLDatumRecord;
 import net.datatp.xhtml.XhtmlLink;
 import net.datatp.xhtml.dom.TDocument;
@@ -31,7 +31,6 @@ public class URLExtractor {
   final static URLSessionIdCleaner URL_CLEANER = new URLSessionIdCleaner() ;
   private static final Logger logger = LoggerFactory.getLogger(URLExtractor.class);
 
-  //@Value("${crawler.processor.urlextractor.exclude-pattern}")
   @Value("#{'${crawler.processor.urlextractor.exclude-pattern}'.split(',')}")
   private List<String> excludePatterns = new ArrayList<String>();
 

@@ -4,19 +4,19 @@ import org.apache.hadoop.io.Text;
 import org.junit.Before;
 import org.junit.Test;
 
-import net.datatp.http.crawler.URLDatum;
+import net.datatp.http.crawler.urldb.URLDatum;
 import net.datatp.storage.hdfs.SortKeyValueFile;
 import net.datatp.storage.kvdb.MergeMultiSegmentIterator;
 import net.datatp.storage.kvdb.Segment;
 import net.datatp.util.io.FileUtil;
 
 public class URLDatumDBUnitTest {
-  URLDatumDB db ;
+  URLDatumRecordDB db ;
   
   @Before
   public void setup() throws Exception {
     FileUtil.mkdirs("build/urldb");
-    db = new URLDatumDB("build/urldb", true);
+    db = new URLDatumRecordDB("build/urldb", true);
   }
   
   @Test
@@ -51,7 +51,7 @@ public class URLDatumDBUnitTest {
     writer.close();
   }
   
-  void dumpDB(URLDatumDB db) throws Exception {
+  void dumpDB(URLDatumRecordDB db) throws Exception {
     MergeMultiSegmentIterator<Text, URLDatumRecord> i = db.getMergeRecordIterator();
     while(i.next()) {
       URLDatum urlDatum = i.currentValue();

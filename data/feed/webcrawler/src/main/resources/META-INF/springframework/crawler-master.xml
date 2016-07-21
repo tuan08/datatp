@@ -25,7 +25,7 @@
 
   <bean id="FetchDataProcessor" class="net.datatp.webcrawler.process.FetchDataProcessor" />
 
-  <bean id="URLDatumDB" class="net.datatp.webcrawler.urldb.URLDatumDB" init-method="onInit" >
+  <bean id="URLDatumDB" class="net.datatp.webcrawler.urldb.URLDatumRecordDB" init-method="onInit" >
     <property name="dbLocation" value="${crawler.master.urldb.dir}" />
     <property name="cleanDB"    value="${crawler.master.urldb.cleandb}" />
   </bean>

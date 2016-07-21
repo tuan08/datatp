@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import net.datatp.webcrawler.master.model.URLCommitInfo;
-import net.datatp.webcrawler.master.model.URLScheduleInfo;
+import net.datatp.http.crawler.scheduler.metric.URLCommitMetric;
+import net.datatp.http.crawler.scheduler.metric.URLScheduleMetric;
 import net.datatp.webcrawler.registry.event.CrawlerEventContext;
 import net.datatp.zk.registry.RegistryClient;
 import net.datatp.zk.registry.event.EventBroadcaster;
@@ -42,11 +42,11 @@ public class MasterRegistry {
     eventListener = new EventListener<>(context, registryClient, EVENTS);
   }
   
-  public List<URLCommitInfo> getURLCommitInfo(int max) throws Exception {
+  public List<URLCommitMetric> getURLCommitInfo(int max) throws Exception {
     List<String> names = registryClient.getChildren(URL_COMMIT_REPORT);
     Collections.sort(names, Collections.reverseOrder());
     if(names.size() > max) names = names.subList(0, max);
-    return registryClient.getChildrenAs(URL_COMMIT_REPORT, names, URLCommitInfo.class);
+    return registryClient.getChildrenAs(URL_COMMIT_REPORT, names, URLCommitMetric.class);
   }
   
   public void cleanURLCommitInfo(int keepMax) throws Exception {
@@ -57,15 +57,15 @@ public class MasterRegistry {
     registryClient.deleteChildren(URL_COMMIT_REPORT, names);
   }
   
-  public void addReport(URLCommitInfo info) throws Exception {
+  public void addReport(URLCommitMetric info) throws Exception {
     registryClient.create(URL_COMMIT_REPORT + "/" + info.getTime(), info);
   }
   
-  public List<URLScheduleInfo> getURLScheduleInfo(int max) throws Exception {
+  public List<URLScheduleMetric> getURLScheduleInfo(int max) throws Exception {
     List<String> names = registryClient.getChildren(URL_SCHEDULE_REPORT);
     Collections.sort(names, Collections.reverseOrder());
     if(names.size() > max) names = names.subList(0, max);
-    return registryClient.getChildrenAs(URL_SCHEDULE_REPORT, names, URLScheduleInfo.class);
+    return registryClient.getChildrenAs(URL_SCHEDULE_REPORT, names, URLScheduleMetric.class);
   }
   
   public void cleanURLScheduleInfo(int keepMax) throws Exception {
@@ -76,7 +76,7 @@ public class MasterRegistry {
     registryClient.deleteChildren(URL_COMMIT_REPORT, names);
   }
   
-  public void addReportURLScheduleInfo(URLScheduleInfo info) throws Exception {
+  public void addReportURLScheduleInfo(URLScheduleMetric info) throws Exception {
     registryClient.create(URL_SCHEDULE_REPORT + "/" + info.getTime(), info);
   }
 }

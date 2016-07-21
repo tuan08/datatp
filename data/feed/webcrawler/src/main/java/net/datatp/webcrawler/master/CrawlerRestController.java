@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.datatp.webcrawler.master.model.URLCommitInfo;
-import net.datatp.webcrawler.master.model.URLScheduleInfo;
+import net.datatp.http.crawler.scheduler.metric.URLCommitMetric;
+import net.datatp.http.crawler.scheduler.metric.URLScheduleMetric;
+import net.datatp.http.crawler.site.SiteConfig;
 import net.datatp.webcrawler.registry.WebCrawlerRegistry;
-import net.datatp.webcrawler.site.SiteConfig;
-import net.datatp.webcrawler.site.SiteContextManager;
+import net.datatp.webcrawler.site.WebCrawlerSiteContextManager;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -21,7 +21,7 @@ public class CrawlerRestController {
   private WebCrawlerRegistry wcRegistry;
   
   @Autowired
-  private SiteContextManager siteContextManager ;
+  private WebCrawlerSiteContextManager siteContextManager ;
   
   @RequestMapping("/ping")
   public String ping() { return "Hi!"; }
@@ -32,12 +32,12 @@ public class CrawlerRestController {
   }
   
   @RequestMapping("/master/report/url-commit")
-  public List<URLCommitInfo> masterGetURLCommitReport(@RequestParam(value="max", defaultValue="100") int max) throws Exception {
+  public List<URLCommitMetric> masterGetURLCommitReport(@RequestParam(value="max", defaultValue="100") int max) throws Exception {
     return wcRegistry.getMasterRegistry().getURLCommitInfo(max);
   }
   
   @RequestMapping("/master/report/url-schedule")
-  public List<URLScheduleInfo> masterGetURLScheduleReport(@RequestParam(value="max", defaultValue="100") int max) throws Exception {
+  public List<URLScheduleMetric> masterGetURLScheduleReport(@RequestParam(value="max", defaultValue="100") int max) throws Exception {
     return wcRegistry.getMasterRegistry().getURLScheduleInfo(max);
   }
   

@@ -20,11 +20,11 @@ import org.springframework.jms.config.SimpleJmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
 
 import net.datatp.activemq.ActiveMQUtil;
+import net.datatp.http.crawler.fetcher.SiteSessionManager;
 import net.datatp.jms.channel.JMSChannelGateway;
 import net.datatp.springframework.SpringAppLauncher;
 import net.datatp.util.text.StringUtil;
 import net.datatp.webcrawler.CrawlerApp;
-import net.datatp.webcrawler.fetcher.http.HttpFetcherManager;
 import net.datatp.webcrawler.registry.WebCrawlerRegistry;
 import net.datatp.webcrawler.registry.event.CrawlerEventContext;
 import net.datatp.zk.registry.RegistryClient;
@@ -71,6 +71,9 @@ public class CrawlerFetcherApp extends CrawlerApp {
     gw.setJmsTemplate(template);
     return gw;
   }
+  
+  @Bean(name = "SiteSessionManager")
+  public SiteSessionManager createSiteSessionManager() { return new SiteSessionManager(); }
   
   @Bean(name = "HttpFetcherManager")
   public HttpFetcherManager createHTTPFetchermanager(ApplicationContext context) {

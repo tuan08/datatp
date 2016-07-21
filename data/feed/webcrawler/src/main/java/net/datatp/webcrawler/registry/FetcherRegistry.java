@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.datatp.webcrawler.fetcher.model.HttpFetcherInfo;
+import net.datatp.http.crawler.fetcher.metric.HttpFetcherMetric;
 import net.datatp.webcrawler.registry.event.CrawlerEventContext;
 import net.datatp.zk.registry.RegistryClient;
 import net.datatp.zk.registry.event.EventBroadcaster;
@@ -39,31 +39,31 @@ public class FetcherRegistry {
     eventListener = new EventListener<>(context, registryClient, EVENTS);
   }
   
-  public void report(String machine, HttpFetcherInfo info) throws Exception {
-    String path = REPORTS + "/" + machine + "/fetcher/" + info.getName();
+  public void report(String machine, HttpFetcherMetric metric) throws Exception {
+    String path = REPORTS + "/" + machine + "/fetcher/" + metric.getName();
     if(!registryClient.exists(path)) {
       registryClient.createIfNotExists(path);
     }
-    registryClient.setData(path, info);
+    registryClient.setData(path, metric);
   }
   
-  public void initReport(String vmName, List<HttpFetcherInfo> infos) throws Exception {
+  public void initReport(String vmName, List<HttpFetcherMetric> metrics) throws Exception {
     String reportPath = REPORTS + "/" + vmName + "/fetcher";
     registryClient.createIfNotExists(reportPath);
-    for(HttpFetcherInfo info : infos) {
-      String path = reportPath + "/" + info.getName();
+    for(HttpFetcherMetric metric : metrics) {
+      String path = reportPath + "/" + metric.getName();
       if(!registryClient.exists(path)) {
-        registryClient.create(path, info);
+        registryClient.create(path, metric);
       }
     }
   }
   
-  public void report(String vmName, List<HttpFetcherInfo> infos) throws Exception {
+  public void report(String vmName, List<HttpFetcherMetric> metrics) throws Exception {
     String reportPath = REPORTS + "/" + vmName + "/fetcher";
     List<String> names = new ArrayList<>();
-    for(HttpFetcherInfo info : infos) {
-      names.add(info.getName());
+    for(HttpFetcherMetric sel : metrics) {
+      names.add(sel.getName());
     }
-    registryClient.createChildren(reportPath, names, infos);
+    registryClient.createChildren(reportPath, names, metrics);
   }
 }

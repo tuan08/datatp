@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import org.apache.activemq.util.ClassLoadingAwareObjectInputStream;
 import org.junit.Test;
 
-import net.datatp.http.crawler.URLDatum;
+import net.datatp.http.crawler.urldb.URLDatum;
 import net.datatp.util.io.IOUtil;
 
 public class URLDatumSerializationUnitTest {

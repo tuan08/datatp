@@ -4,11 +4,11 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 
 import net.datatp.http.ResponseCode;
-import net.datatp.http.crawler.URLDatum;
+import net.datatp.http.crawler.site.SiteContextManager;
+import net.datatp.http.crawler.site.URLContext;
+import net.datatp.http.crawler.urldb.URLDatum;
 import net.datatp.storage.kvdb.RecordUpdater;
 import net.datatp.util.URLNormalizerProcessor;
-import net.datatp.webcrawler.site.SiteContextManager;
-import net.datatp.webcrawler.site.URLContext;
 import net.datatp.xhtml.util.URLSessionIdCleaner;
 
 public class URLDatumDBUpdater implements RecordUpdater<URLDatumRecord> {
@@ -54,16 +54,16 @@ public class URLDatumDBUpdater implements RecordUpdater<URLDatumRecord> {
 
   public String getUpdateInfo() {
     StringBuilder b = new StringBuilder() ;
-    b.append("Update URLDatumDB, total " + count + " records \n") ;
-    b.append("Update URLDatumDB, delete  "  + getDeleteCount() + " records\n") ;
-    b.append("Update URLDatumDB, no config " + getNoConfigCount() + " records\n") ;
-    b.append("Update URLDatumDB, ignore domain " + getIgnoreDomainCount() + " records\n") ;
-    b.append("Update URLDatumDB, ignore page " + getIgnorePageCount() + " records\n") ;
-    b.append("Update URLDatumDB, expire page list " + getExpirePageListCount() + " records\n") ;
-    b.append("Update URLDatumDB, expire page detail " + getExpirePageDetailCount() + " records\n") ;
-    b.append("Update URLDatumDB, rc 300 " + getRC3xxCount() + " records") ;
-    b.append("Update URLDatumDB, rc 400 " + getRC4xxCount() + " records") ;
-    b.append("Update URLDatumDB, > 3 errors " + this.moreThan3ErrorCount + " records") ;
+    b.append("Update URLDatumRecordDB, total " + count + " records \n") ;
+    b.append("Update URLDatumRecordDB, delete  "  + getDeleteCount() + " records\n") ;
+    b.append("Update URLDatumRecordDB, no config " + getNoConfigCount() + " records\n") ;
+    b.append("Update URLDatumRecordDB, ignore domain " + getIgnoreDomainCount() + " records\n") ;
+    b.append("Update URLDatumRecordDB, ignore page " + getIgnorePageCount() + " records\n") ;
+    b.append("Update URLDatumRecordDB, expire page list " + getExpirePageListCount() + " records\n") ;
+    b.append("Update URLDatumRecordDB, expire page detail " + getExpirePageDetailCount() + " records\n") ;
+    b.append("Update URLDatumRecordDB, rc 300 " + getRC3xxCount() + " records") ;
+    b.append("Update URLDatumRecordDB, rc 400 " + getRC4xxCount() + " records") ;
+    b.append("Update URLDatumRecordDB, > 3 errors " + this.moreThan3ErrorCount + " records") ;
     return b.toString() ;
   }
 

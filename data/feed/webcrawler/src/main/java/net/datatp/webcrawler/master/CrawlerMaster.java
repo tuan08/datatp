@@ -8,8 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import net.datatp.webcrawler.registry.WebCrawlerRegistry;
-import net.datatp.webcrawler.site.SiteContextManager;
+import net.datatp.http.crawler.scheduler.URLScheduler;
 /**
  * Author : Tuan Nguyen
  *          tuan@gmail.com
@@ -20,19 +19,12 @@ public class CrawlerMaster {
   private static final Logger logger = LoggerFactory.getLogger(CrawlerMaster.class);
 
   @Autowired
-  private URLFetchScheduler urlFetchScheduler ;
-  
-  @Autowired
-  private SiteContextManager siteContextManager ;
-  
-  private WebCrawlerRegistry webCrawlerRegistry;
+  private URLScheduler urlFetchScheduler ;
   
   private CrawlerMasterInfo crawlerMasterInfo ;
   private boolean startOnInit = false ; 
 
-  public SiteContextManager getSiteContextManager() { return siteContextManager ; }
-
-  public URLFetchScheduler getURLFetchScheduler() { return urlFetchScheduler ; }
+  public URLScheduler getURLFetchScheduler() { return urlFetchScheduler ; }
 
   public CrawlerMasterInfo getCrawlerMasterInfo()  { return crawlerMasterInfo ; }
 

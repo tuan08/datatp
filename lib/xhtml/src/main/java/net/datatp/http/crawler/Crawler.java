@@ -3,19 +3,25 @@ package net.datatp.http.crawler;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import net.datatp.xhtml.XhtmlDocument;
+import net.datatp.http.crawler.fetcher.FetchData;
+import net.datatp.http.crawler.site.SiteConfig;
+import net.datatp.http.crawler.site.SiteContextManager;
+import net.datatp.http.crawler.urldb.URLDatum;
+import net.datatp.http.crawler.urldb.URLDatumDB;
 
 public class Crawler {
-  private CrawlerConfig                crawlerConfig;
+  private CrawlerConfig            crawlerConfig;
 
-  private BlockingQueue<URLDatum>      urlFetchQueue;
-  private BlockingQueue<URLDatum>      urlCommitQueue;
-  private BlockingQueue<XhtmlDocument> dataFetchQueue;
-  
-  private HttpFetcherManager           httpFetcherManager;
-  private URLDatumDB                   urlDatumDB;
+  private BlockingQueue<URLDatum>  urlFetchQueue;
+  private BlockingQueue<URLDatum>  urlCommitQueue;
+  private BlockingQueue<FetchData> dataFetchQueue;
+
+  private SiteContextManager       siteContextManager = new SiteContextManager();
+  private HttpFetcherManager       httpFetcherManager;
+  private URLDatumDB               urlDatumDB;
 
   public Crawler addSiteConfig(SiteConfig config) {
+    siteContextManager.addConfig(config);
     return this;
   }
   
@@ -26,7 +32,7 @@ public class Crawler {
     urlCommitQueue     = new LinkedBlockingQueue<>(crawlerConfig.getMaxUrlQueueSize());
     dataFetchQueue     = new LinkedBlockingQueue<>(crawlerConfig.getMaxDataFetchQueueSize());
     
-    httpFetcherManager = new HttpFetcherManager(crawlerConfig, urlFetchQueue, urlCommitQueue, dataFetchQueue);
+    httpFetcherManager = new HttpFetcherManager(crawlerConfig, urlFetchQueue, urlCommitQueue, dataFetchQueue, siteContextManager);
     
     urlDatumDB = new URLDatumDB();
     return this;

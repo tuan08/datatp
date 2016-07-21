@@ -21,6 +21,7 @@ import org.springframework.jms.config.SimpleJmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
 
 import net.datatp.activemq.ActiveMQUtil;
+import net.datatp.http.crawler.scheduler.URLSchedulerPluginManager;
 import net.datatp.jms.channel.JMSChannelGateway;
 import net.datatp.springframework.SpringAppLauncher;
 import net.datatp.util.text.StringUtil;
@@ -29,7 +30,7 @@ import net.datatp.webcrawler.process.FetchDataProcessor;
 import net.datatp.webcrawler.process.URLExtractor;
 import net.datatp.webcrawler.registry.WebCrawlerRegistry;
 import net.datatp.webcrawler.registry.event.CrawlerEventContext;
-import net.datatp.webcrawler.urldb.URLDatumDB;
+import net.datatp.webcrawler.urldb.URLDatumRecordDB;
 import net.datatp.zk.registry.RegistryClient;
 
 /**
@@ -43,7 +44,7 @@ import net.datatp.zk.registry.RegistryClient;
     @PropertySource("classpath:crawler-config.properties")
   }
 )
-@ComponentScan(basePackages = {"net.datatp.webcrawler.master", "net.datatp.webcrawler.site"})
+@ComponentScan(basePackages = {"net.datatp.webcrawler.master", "net.datatp.webcrawler.scheduler", "net.datatp.webcrawler.site"})
 @EnableConfigurationProperties
 @EnableAutoConfiguration
 @ConfigurationProperties
@@ -114,6 +115,11 @@ public class CrawlerMasterApp extends CrawlerApp {
     return factory;
   }
   
+  @Bean(name = "URLSchedulerPluginManager")
+  public  URLSchedulerPluginManager createURLSchedulerPluginManager() {
+    return new URLSchedulerPluginManager();
+  }
+  
   @Bean(name = "URLExtractor")
   public URLExtractor createHTTPFetchermanager(ApplicationContext context) {
     URLExtractor urlExtractor = context.getAutowireCapableBeanFactory().createBean(URLExtractor.class);
@@ -126,9 +132,9 @@ public class CrawlerMasterApp extends CrawlerApp {
     return fetchDataProcessor;
   }
   
-  @Bean(name = "URLDatumDB")
-  public URLDatumDB createURLDatumDB(ApplicationContext context) {
-    URLDatumDB db = context.getAutowireCapableBeanFactory().createBean(URLDatumDB.class);
+  @Bean(name = "URLDatumRecordDB")
+  public URLDatumRecordDB createURLDatumDB(ApplicationContext context) {
+    URLDatumRecordDB db = context.getAutowireCapableBeanFactory().createBean(URLDatumRecordDB.class);
     return db;
   }
   

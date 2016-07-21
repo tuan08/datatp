@@ -7,9 +7,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import net.datatp.http.crawler.site.SiteConfig;
 import net.datatp.util.io.FileUtil;
 import net.datatp.webcrawler.registry.event.CrawlerEventContext;
-import net.datatp.webcrawler.site.SiteConfig;
 import net.datatp.zk.registry.RegistryClient;
 import net.datatp.zk.registry.event.Event;
 import net.datatp.zk.tool.server.EmbededZKServer;
