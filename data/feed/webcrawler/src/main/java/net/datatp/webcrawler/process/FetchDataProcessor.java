@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.annotation.JmsListener;
 
 import net.datatp.channel.ChannelGateway;
+import net.datatp.http.crawler.URLExtractor;
 import net.datatp.http.crawler.fetcher.FetchData;
 import net.datatp.http.crawler.site.URLContext;
 import net.datatp.http.crawler.urldb.URLDatum;
@@ -25,6 +26,7 @@ public class FetchDataProcessor {
 
   @Autowired
   private URLExtractor urlExtractor ;
+  
   @Autowired
   private WebCrawlerSiteContextManager siteConfigManager ;
 

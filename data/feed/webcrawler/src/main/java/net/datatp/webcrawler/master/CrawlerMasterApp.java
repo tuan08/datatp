@@ -1,5 +1,7 @@
 package net.datatp.webcrawler.master;
 
+import java.util.List;
+
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 
@@ -21,13 +23,14 @@ import org.springframework.jms.config.SimpleJmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
 
 import net.datatp.activemq.ActiveMQUtil;
+import net.datatp.http.crawler.URLExtractor;
 import net.datatp.http.crawler.scheduler.URLSchedulerPluginManager;
 import net.datatp.jms.channel.JMSChannelGateway;
 import net.datatp.springframework.SpringAppLauncher;
 import net.datatp.util.text.StringUtil;
 import net.datatp.webcrawler.CrawlerApp;
 import net.datatp.webcrawler.process.FetchDataProcessor;
-import net.datatp.webcrawler.process.URLExtractor;
+import net.datatp.webcrawler.process.WebCrawlerURLExtractor;
 import net.datatp.webcrawler.registry.WebCrawlerRegistry;
 import net.datatp.webcrawler.registry.event.CrawlerEventContext;
 import net.datatp.webcrawler.urldb.URLDatumRecordDB;
@@ -121,10 +124,7 @@ public class CrawlerMasterApp extends CrawlerApp {
   }
   
   @Bean(name = "URLExtractor")
-  public URLExtractor createHTTPFetchermanager(ApplicationContext context) {
-    URLExtractor urlExtractor = context.getAutowireCapableBeanFactory().createBean(URLExtractor.class);
-    return urlExtractor;
-  }
+  public URLExtractor createURLExtractor() { return  new WebCrawlerURLExtractor(); }
   
   @Bean(name = "FetchDataProcessor")
   public FetchDataProcessor createFetchDataProcessor(ApplicationContext context) {
