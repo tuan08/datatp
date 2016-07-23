@@ -3,6 +3,7 @@ package net.datatp.http;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.protocol.BasicHttpContext;
 
 import net.datatp.util.URLParser;
@@ -17,7 +18,7 @@ public class SimpleHttpFetcher {
   private CloseableHttpClient  httpclient ;
 
   public SimpleHttpFetcher() {
-    this.httpclient =  HttpClientFactory.createInstance();
+    this.httpclient =  HttpClients.createDefault();
   }
 
   public XhtmlDocument fetch(String urlString) throws Exception {

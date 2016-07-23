@@ -1,11 +1,11 @@
-package net.datatp.webcrawler.process;
+package net.datatp.http.crawler.processor.metric;
 
 import java.io.Serializable;
 
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class DataProcessInfo implements Serializable {
+public class ProcessMetric implements Serializable {
   private int  processCount ;
   private int  htmlProcessCount ;
   private long sumHtmlProcessTime;

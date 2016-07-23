@@ -37,5 +37,4 @@ public class BasicHttpFetcher extends HttpFetcher {
   protected URLDatum nextURLDatum(long maxWaitTime) throws Exception {
     return urlFetchQueue.poll(1, TimeUnit.SECONDS);
   }
-
 }

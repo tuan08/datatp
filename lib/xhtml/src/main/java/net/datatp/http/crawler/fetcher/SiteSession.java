@@ -48,7 +48,7 @@ public class SiteSession implements Comparable<SiteSession> {
 
   public boolean isLocked() { return lock  ; }
 
-  synchronized public FetchData fetch(CloseableHttpClient httpclient, URLDatum urldatum, URLContext context)  {
+  synchronized public FetchData fetch(CloseableHttpClient httpClient, URLDatum urldatum, URLContext context)  {
     FetchData fdata = new FetchData(urldatum);
     if(errorCheckCondition != null) {
       if(errorCheckCondition.isExpired()) {
@@ -67,8 +67,7 @@ public class SiteSession implements Comparable<SiteSession> {
       BasicHttpContext httpContext = new BasicHttpContext();
       httpContext.setAttribute("crawler.site", hostname) ;
       httpContext.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
-      HttpResponse response = httpclient.execute(httpget, httpContext);
-      
+      HttpResponse response = httpClient.execute(httpget, httpContext);
       String redirectUrl = (String)httpContext.getAttribute("url.redirect") ;
       if(redirectUrl != null) {
         urldatum.setRedirectUrl(redirectUrl) ;
@@ -90,6 +89,7 @@ public class SiteSession implements Comparable<SiteSession> {
       handleError(fdata.getURLDatum(), context, getRootCause(t)) ;
     } finally {
       lock = false ;
+      httpClient.getConnectionManager().closeExpiredConnections();
     }
     return fdata;
   }

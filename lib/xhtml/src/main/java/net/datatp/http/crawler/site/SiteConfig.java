@@ -16,6 +16,7 @@ public class SiteConfig implements Serializable {
   private int      crawlDeep;
   private int      refreshPeriod;
   private int      maxConnection;
+  private int      maxFetchSchedule = 100;
   private Status   status = Status.Ok;
   private String   language;
   private String   description;
@@ -71,6 +72,11 @@ public class SiteConfig implements Serializable {
   public int getMaxConnection() { return maxConnection ; }
   public void setMaxConnection(int value) { maxConnection = value ; }
 
+  public int getMaxFetchSchedule() { return maxFetchSchedule; }
+  public void setMaxFetchSchedule(int maxFetchSchedule) {
+    this.maxFetchSchedule = maxFetchSchedule;
+  }
+
   public Status getStatus() { 
     if(status == null) return Status.Review ;
     return status ; 
@@ -83,15 +89,4 @@ public class SiteConfig implements Serializable {
 
   public String getDescription() { return this.description ; }
   public void setDescription(String desc) { this.description = desc ; }
-
-  public String reverseHostName() {
-    String result = null ;
-    String hostName = getHostname() ;
-    String[] array = StringUtil.toStringArray(hostName, "\\.") ;
-    for(int i = array.length - 1; i >= 0; i--) {
-      if(result == null) result = array[i] ; 
-      else result += "." + array[i] ;
-    }
-    return result ;
-  }
 }

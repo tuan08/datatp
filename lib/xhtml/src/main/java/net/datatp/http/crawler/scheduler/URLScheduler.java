@@ -31,6 +31,16 @@ public class URLScheduler {
   protected String                           state       = "INIT";
   protected boolean                          injectUrl = false;
 
+  public URLScheduler() { }
+  
+  public URLScheduler(URLPreFetchScheduler preFetchScheduler, 
+                      URLPostFetchScheduler postFetchScheduler, 
+                      SchedulerReporter reporter) { 
+    this.preFetchScheduler = preFetchScheduler;
+    this.postFetchScheduler = postFetchScheduler;
+    this.reporter = reporter;
+  }
+  
   public String getState() { return this.state ; }
 
   synchronized public void start() {
@@ -62,13 +72,13 @@ public class URLScheduler {
       long updatePeriod =  1 * 24 * 3600 * 1000l ;
       URLCommitMetric commitInfo = null ;
       while(!exist) {
-        if(injectUrl || commitInfo == null || commitInfo.getCommitURLCount() > 0) {
+        if(injectUrl || commitInfo == null) {
           state = "SCHEDULING" ;
           URLScheduleMetric sheduleInfo = preFetchScheduler.schedule() ;
           reporter.report(sheduleInfo);
           if(injectUrl) injectUrl = false;
         }
-        state = "COMMITING" ; 
+        state = "COMMITING" ;
         commitInfo = postFetchScheduler.process() ;
         reporter.report(commitInfo);
         //        if(lastUpdateDB + updatePeriod < System.currentTimeMillis()) {
@@ -86,13 +96,13 @@ public class URLScheduler {
   }
 
   public void injectURL() throws Exception {
-    URLDatumDBWriter writer = postFetchScheduler.createURLDatumDBWriter();
+    URLDatumDBWriter writer = postFetchScheduler.getURLDatumDB().createURLDatumDBWriter();
     
     long currentTime = System.currentTimeMillis() ;
     int count = 0 ;
 
-    SiteContextManager siteConfigManager = postFetchScheduler.getSiteConfigManager() ;
-    Iterator<Map.Entry<String, SiteContext>> i = siteConfigManager.getSiteConfigContexts().entrySet().iterator() ;
+    SiteContextManager siteContextManager = postFetchScheduler.getSiteContextManager() ;
+    Iterator<Map.Entry<String, SiteContext>> i = siteContextManager.getSiteConfigContexts().entrySet().iterator() ;
     while(i.hasNext()) {
       Map.Entry<String, SiteContext> entry = i.next() ;
       SiteContext context = entry.getValue() ;

@@ -1,4 +1,4 @@
-package net.datatp.webcrawler.process;
+package net.datatp.http.crawler.processor;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,8 +1,6 @@
 package net.datatp.http.crawler.site;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import net.datatp.util.URLParser;
 
@@ -14,9 +12,11 @@ import net.datatp.util.URLParser;
 public class SiteContext implements Serializable {
   static public enum Modify { NONE, ADD, DELETE, MODIFIED }
 
-  private Modify modify = Modify.NONE ;
-  private SiteConfig siteConfig ;
-  private Map<String, Serializable> attributes = new HashMap<String, Serializable>() ;
+  private Modify           modify           = Modify.NONE;
+  private SiteConfig       siteConfig;
+  private SiteScheduleStat siteScheduleStat = new SiteScheduleStat();
+  private URLStatistics    urlStatistics    = new URLStatistics();
+  
 
   public SiteContext(SiteConfig config) {
     this.siteConfig = config ;
@@ -26,35 +26,23 @@ public class SiteContext implements Serializable {
   public void setModify(Modify modify) { this.modify = modify ; }
 
   public SiteConfig getSiteConfig() { return this.siteConfig ; }
-  public void setSiteConfig(SiteConfig config) { this.siteConfig = config ; }
-
-  public <T extends Serializable> boolean hasAttribute(Class<T> clazz) {
-    return attributes.containsKey(clazz.getName())  ;
-  }
-
-  public <T extends Serializable> T getAttribute(Class<T> clazz) {
-    return getAttribute(clazz, true) ;
-  }
-
-  public <T extends Serializable> T getAttribute(Class<T> clazz, boolean create) {
-    T instance = (T) attributes.get(clazz.getName()) ;
-    if(instance == null && create) {
-      try {
-        instance = clazz.newInstance() ;
-        attributes.put(clazz.getName(), instance) ;
-      } catch (InstantiationException e) {
-        throw new RuntimeException(e) ;
-      } catch (IllegalAccessException e) {
-        throw new RuntimeException(e) ;
-      }
-    }
-    return instance ;
-  }
-
+  
+  public SiteScheduleStat getSiteScheduleStat() { return siteScheduleStat; }
+  
+  public URLStatistics getURLStatistics() { return urlStatistics ; }
+  
   public int getMaxConnection() { 
     int max = siteConfig.getMaxConnection() ;
     if(max < 1) max = 1 ;
     return max ;
+  }
+  
+  public int getMaxSchedule() {
+    return siteScheduleStat.getMaxSchedule(siteConfig.getMaxFetchSchedule(), getMaxConnection());
+  }
+  
+  public boolean canSchedule() {
+    return siteScheduleStat.canSchedule(siteConfig.getMaxFetchSchedule(), getMaxConnection());
   }
 
   public boolean allowURL(URLParser urlnorm) {

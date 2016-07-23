@@ -11,5 +11,4 @@ public interface URLDatumDBWriter {
   public void optimize() throws Exception ;
   
   public void close() throws IOException ;
-
 }

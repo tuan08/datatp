@@ -23,7 +23,7 @@
                            http://www.springframework.org/schema/integration/jmx
                            http://www.springframework.org/schema/integration/jmx/spring-integration-jmx.xsd">
 
-  <bean id="FetchDataProcessor" class="net.datatp.webcrawler.process.FetchDataProcessor" />
+  <bean id="FetchDataProcessor" class="net.datatp.webcrawler.processor.WCFetchDataProcessor" />
 
   <bean id="URLDatumDB" class="net.datatp.webcrawler.urldb.URLDatumRecordDB" init-method="onInit" >
     <property name="dbLocation" value="${crawler.master.urldb.dir}" />
@@ -31,7 +31,7 @@
   </bean>
 
 
-  <bean id="NewURLExtractor" class="net.datatp.webcrawler.process.URLExtractor" init-method="onInit">
+  <bean id="NewURLExtractor" class="net.datatp.webcrawler.processor.URLExtractor" init-method="onInit">
     <property name="excludePatterns">
       <list>
         <!-- office document -->

@@ -8,10 +8,9 @@ import org.slf4j.LoggerFactory;
 import net.datatp.http.crawler.scheduler.metric.URLScheduleMetric;
 import net.datatp.http.crawler.site.SiteContext;
 import net.datatp.http.crawler.site.SiteContextManager;
-import net.datatp.http.crawler.site.SiteScheduleStat;
 import net.datatp.http.crawler.site.URLContext;
-import net.datatp.http.crawler.site.URLStatistics;
 import net.datatp.http.crawler.urldb.URLDatum;
+import net.datatp.http.crawler.urldb.URLDatumDB;
 import net.datatp.http.crawler.urldb.URLDatumDBIterator;
 import net.datatp.http.crawler.urldb.URLDatumDBWriter;
 /**
@@ -22,22 +21,19 @@ import net.datatp.http.crawler.urldb.URLDatumDBWriter;
 abstract public class URLPreFetchScheduler {
   private static final Logger logger = LoggerFactory.getLogger(URLPreFetchScheduler.class);
 
-  protected   SiteContextManager siteContextManager ;
+  protected URLDatumDB         urlDatumDB;
+  protected SiteContextManager siteContextManager ;
 
   protected URLSchedulerPluginManager schedulerPluginManager ;
   
   protected URLFetchSchedulerVerifier  verifier = new URLFetchSchedulerVerifier () ;
   
-  protected int maxSchedulePerSite = 50 ;
+  protected int maxSchedulePerSite = 100 ;
 
   protected int scheduleCounter    = 0;
   
   private URLScheduleMetric lastScheduleMetric = null;
 
-  
-  abstract protected URLDatumDBIterator createURLDatumDBIterator() throws Exception ;
-  
-  abstract protected URLDatumDBWriter createURLDatumDBWriter() throws Exception ;
   
   abstract protected void onSchedule(ArrayList<URLDatum> holder) throws Exception ;
   
@@ -45,7 +41,7 @@ abstract public class URLPreFetchScheduler {
     logger.info("Start scheduling the fetch request!") ;
     scheduleCounter += 1 ;
     
-    URLDatumDBIterator urlDatumDBItr = createURLDatumDBIterator();
+    URLDatumDBIterator urlDatumDBItr = urlDatumDB.createURLDatumDBIterator();
     URLDatumDBWriter   writer = null ;
     
     long currentTime = System.currentTimeMillis() ;
@@ -67,7 +63,7 @@ abstract public class URLPreFetchScheduler {
       }
       
       SiteContext siteContext = urlContext.getSiteContext() ;
-      siteContext.getAttribute(URLStatistics.class).log(datum) ;
+      siteContext.getURLStatistics().log(datum) ;
       
       boolean doFetch = false ;
 
@@ -85,24 +81,23 @@ abstract public class URLPreFetchScheduler {
       }
       
       if(!doFetch) continue;
-      SiteScheduleStat scheduleStat = siteContext.getAttribute(SiteScheduleStat.class) ;
-      if(!scheduleStat.canSchedule(maxSchedulePerSite, siteContext)) {
+      if(!siteContext.canSchedule()) {
         delayScheduleCount++ ;
         continue ;
       }
 
       if(priorityUrlHolder == null) {
         priorityUrlHolder = 
-            new PriorityURLDatumHolder(siteContext, scheduleStat.getMaxSchedule(maxSchedulePerSite, siteContext), 3) ;
+            new PriorityURLDatumHolder(siteContext, siteContext.getMaxSchedule(), 3) ;
       } else if(priorityUrlHolder.getSiteConfigContext() != siteContext) {
         if(requestBuffer.getCurrentSize() + priorityUrlHolder.getSize() > requestBuffer.getCapacity()) {
-          if(writer == null) writer = createURLDatumDBWriter() ;
+          if(writer == null) writer = urlDatumDB.createURLDatumDBWriter() ;
           scheduleCount += flush(requestBuffer, writer) ;
         }
         flushPriorityURLDatumHolder(priorityUrlHolder, requestBuffer) ;
         delayScheduleCount += priorityUrlHolder.getDelayCount() ;
         priorityUrlHolder = 
-          new PriorityURLDatumHolder(siteContext, scheduleStat.getMaxSchedule(maxSchedulePerSite, siteContext), 3) ;
+          new PriorityURLDatumHolder(siteContext, siteContext.getMaxSchedule(), 3) ;
       } 
       priorityUrlHolder.insert(datum) ;
     }
@@ -110,7 +105,7 @@ abstract public class URLPreFetchScheduler {
     flushPriorityURLDatumHolder(priorityUrlHolder, requestBuffer) ;
     if(priorityUrlHolder != null) delayScheduleCount += priorityUrlHolder.getDelayCount() ;
     if(requestBuffer.getCurrentSize() > 0) {
-      if(writer == null) writer = createURLDatumDBWriter();
+      if(writer == null) writer = urlDatumDB.createURLDatumDBWriter();
       scheduleCount += flush(requestBuffer, writer) ;
     }
     
@@ -135,12 +130,10 @@ abstract public class URLPreFetchScheduler {
         new URLScheduleMetric(currentTime, execTime, urlCount, scheduleCount, delayScheduleCount, pendingCount, waitingCount) ;
     if(info.isChangedCompareTo(lastScheduleMetric)) {
       lastScheduleMetric = info;
-      System.err.println("return schedule info!");
       return info;
-    } else {
-      lastScheduleMetric = info;
-      return null;
-    }
+    } 
+    lastScheduleMetric = info;
+    return null;
   }
 
   private void flushPriorityURLDatumHolder(PriorityURLDatumHolder holder, MultiListHolder<URLDatum> fRequestBuffer) throws Exception {
@@ -149,8 +142,7 @@ abstract public class URLPreFetchScheduler {
       URLContext selUrlContext = siteContextManager.getURLContext(sel.getOriginalUrlAsString()) ;
       schedulerPluginManager.preFetch(selUrlContext, sel, System.currentTimeMillis()) ;
       fRequestBuffer.add(selUrlContext.getUrlNormalizer().getHost(), sel) ;
-      SiteScheduleStat scheduleStat = selUrlContext.getSiteContext().getAttribute(SiteScheduleStat.class) ;
-      scheduleStat.addScheduleCount(1) ;
+      selUrlContext.getSiteContext().getSiteScheduleStat().addProcessCount(1); ;
     }
   }
 

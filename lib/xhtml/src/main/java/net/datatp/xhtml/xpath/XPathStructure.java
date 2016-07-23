@@ -1,7 +1,9 @@
 package net.datatp.xhtml.xpath;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -16,12 +18,12 @@ public class XPathStructure {
   private String                   url;
   private String                   anchorText;
   private Document                 document;
-  private XPathTree                xpaths;
+  private XPathTree                xpathTree;
   private XPathRepetions           xpathRepetions;
 
-  private Set<String>             taggedByTaggers = new HashSet<>();
-  private Map<String,CacheSelect> cacheSelects    = new HashMap<>();
-  
+  private Set<String>              taggedByTaggers = new HashSet<>();
+  private Map<String, CacheSelect> cacheSelects    = new HashMap<>();
+
   public XPathStructure(Document doc) {
     document = doc;
   }
@@ -39,11 +41,20 @@ public class XPathStructure {
   public Document getDocument() { return document; }
   
   public XPathTree getXPathTree() {
-    if(xpaths == null) xpaths = new XPathCollector().process(this);
-    return xpaths;
+    if(xpathTree == null) xpathTree = new XPathCollector().process(this);
+    return xpathTree;
   }
   
-  public XPath getXPath(String xpath) { return getXPathTree().getXPath(xpath); }
+  public XPath getXPath(String xpath) { 
+    if(xpathTree == null) xpathTree = new XPathCollector().process(this);
+    return xpathTree.getXPath(xpath); 
+  }
+  
+  public XPath getXPath(Node node) {
+    if(xpathTree == null) xpathTree = new XPathCollector().process(this);
+    XPath xpath = xpathTree.getXPath(node.attr(XPathTagger.XPATH_ATTR)); 
+    return xpath;
+  }
   
   public XPath findCommonAncestorXPath(XPath ...  xpath) {
     if(xpath == null || xpath.length == 0) return null;
@@ -102,7 +113,25 @@ public class XPathStructure {
     return this;
   }
   
-  public String findTitle() { return this.findFirstElementText("html > head > title"); }
+  public String findTitle() { return findFirstElementText("html > head > title"); }
+  
+  public String findBase()  {
+    Element baseEle = findFirstElement("html > head > base");
+    if(baseEle == null) return null ;
+    return baseEle.attr("href") ;
+  }
+
+  public List<XPath> findAllLinks() { 
+    Elements elements = select("a[href]");
+    List<XPath> holder = new ArrayList<>();
+    for(int i = 0; i < elements.size(); i++) {
+      holder.add(getXPath(elements.get(i)));
+    }
+    return holder; 
+  }
+  
+  
+  public Element findFirstElement(String query) { return select(query).first(); }
   
   public String findFirstElementText(String query) {
     Element element = select(query).first();
@@ -119,6 +148,8 @@ public class XPathStructure {
     return elements;
   }
   
+  
+  
   static public class CacheSelect {
     private String   query;
     private Elements elements;
@@ -134,10 +165,10 @@ public class XPathStructure {
   }
   
   static public class XPathCollector implements NodeVisitor {
-    private TreeMap<String, XPath> xpaths = new TreeMap<>();
+    private TreeMap<String, XPath> xpaths ;
 
     public XPathTree process(XPathStructure doc) {
-      xpaths.clear();
+      xpaths = new TreeMap<>();
       doc.buildTag(new XPathTagger());
       doc.getDocument().traverse(this);
       return new XPathTree(xpaths);
@@ -145,7 +176,7 @@ public class XPathStructure {
     
     @Override
     public void head(Node node, int depth) {
-      String xpath = node.attr("xpath");
+      String xpath = node.attr(XPathTagger.XPATH_ATTR);
       xpaths.put(xpath, new XPath(xpath, node));
     }
     

@@ -114,11 +114,11 @@ public class IOUtil {
     byte[] data = new byte[4912];
     int available = -1, read = 0;
     while ((available = buffer.read(data)) > -1 && read < maxRead) {
-      if (maxRead - read < available)
-        available = maxRead - read;
+      if (maxRead - read < available) available = maxRead - read;
       output.write(data, 0, available);
       read += available;
     }
+    is.close();
     return output.toByteArray();
   }
 

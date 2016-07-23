@@ -13,12 +13,8 @@ import net.datatp.channel.ChannelGateway;
 import net.datatp.http.crawler.scheduler.URLPreFetchScheduler;
 import net.datatp.http.crawler.scheduler.URLSchedulerPluginManager;
 import net.datatp.http.crawler.urldb.URLDatum;
-import net.datatp.http.crawler.urldb.URLDatumDBIterator;
-import net.datatp.http.crawler.urldb.URLDatumDBWriter;
+import net.datatp.http.crawler.urldb.URLDatumDB;
 import net.datatp.webcrawler.site.WebCrawlerSiteContextManager;
-import net.datatp.webcrawler.urldb.URLDatumRecordDB;
-import net.datatp.webcrawler.urldb.URLDatumRecordDBIterator;
-import net.datatp.webcrawler.urldb.URLDatumRecordDBWriter;
 /**
  * Author : Tuan Nguyen
  *          tuan08@gmail.com
@@ -30,8 +26,6 @@ import net.datatp.webcrawler.urldb.URLDatumRecordDBWriter;
 )
 @Component
 public class WebCrawlerURLPreFetchScheduler extends URLPreFetchScheduler {
-  @Autowired
-  protected URLDatumRecordDB urlDatumDB ;
 
   @Autowired
   @Qualifier("URLFetchGateway")
@@ -64,13 +58,8 @@ public class WebCrawlerURLPreFetchScheduler extends URLPreFetchScheduler {
   @ManagedAttribute(description="The frequency of time this bean is invoked")
   public int getScheduleCounter() { return this.scheduleCounter ; }
 
-  protected URLDatumDBIterator createURLDatumDBIterator() throws Exception {
-    return new URLDatumRecordDBIterator(urlDatumDB);
-  }
-  
-  protected URLDatumDBWriter createURLDatumDBWriter() throws Exception {
-    return new URLDatumRecordDBWriter(urlDatumDB);
-  }
+  @Autowired
+  public void setURLDatumDB(URLDatumDB urlDatumDB) { this.urlDatumDB = urlDatumDB; }
   
   protected void onSchedule(ArrayList<URLDatum> holder) {
     urldatumFetchGateway.send(holder);

@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import net.datatp.http.ResponseHeaders;
 import net.datatp.http.crawler.urldb.URLDatum;
-import net.datatp.xhtml.XhtmlDocument;
 
 /**
  * Author : Tuan Nguyen
@@ -29,7 +28,9 @@ public class FetchData implements Serializable {
   public void setURLDatum(URLDatum datum) { this.datum = datum; }
 
   public ResponseHeaders getResponseHeaders() { return responseHeaders; }
-  public void setResponseHeaders(ResponseHeaders responseHeaders) { this.responseHeaders = responseHeaders; }
+  public void setResponseHeaders(ResponseHeaders responseHeaders) { 
+    this.responseHeaders = responseHeaders; 
+  }
 
   public String getContentType() { return contentType; }
   public void setContentType(String contentType) { this.contentType = contentType; }

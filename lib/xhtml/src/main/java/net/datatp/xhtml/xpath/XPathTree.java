@@ -4,10 +4,10 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class XPathTree {
-  private SortedMap<String, XPath> xpaths;
+  private TreeMap<String, XPath> xpaths;
   private XPath[] flatXpaths;
   
-  public XPathTree(SortedMap<String, XPath> xpaths) {
+  public XPathTree(TreeMap<String, XPath> xpaths) {
     this.xpaths = xpaths;
   }
   

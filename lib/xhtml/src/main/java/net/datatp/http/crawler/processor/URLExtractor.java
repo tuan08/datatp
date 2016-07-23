@@ -1,89 +1,81 @@
-package net.datatp.http.crawler;
+package net.datatp.http.crawler.processor;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.datatp.http.crawler.site.URLContext;
 import net.datatp.http.crawler.urldb.URLDatum;
+import net.datatp.http.crawler.urldb.URLDatumFactory;
 import net.datatp.util.URLParser;
-import net.datatp.xhtml.XhtmlLink;
-import net.datatp.xhtml.dom.TDocument;
-import net.datatp.xhtml.dom.TNodeUtil;
-import net.datatp.xhtml.dom.visitor.ExtractLinkVisitor;
+import net.datatp.util.text.StringUtil;
+import net.datatp.xhtml.XhtmlDocument;
 import net.datatp.xhtml.util.URLRewriter;
 import net.datatp.xhtml.util.URLSessionIdCleaner;
+import net.datatp.xhtml.xpath.XPath;
+import net.datatp.xhtml.xpath.XPathStructure;
 /**
  * Author : Tuan Nguyen
  *          tuan08@gmail.com 
  *          Jun 23, 2010
  */
 public class URLExtractor {
-  final static URLSessionIdCleaner URL_CLEANER = new URLSessionIdCleaner() ;
-  private static final Logger logger = LoggerFactory.getLogger(URLExtractor.class);
+  final static URLSessionIdCleaner URL_CLEANER     = new URLSessionIdCleaner();
+  final static Logger              logger          = LoggerFactory.getLogger(URLExtractor.class);
 
-  private List<String> excludePatterns = new ArrayList<String>();
-
-  private Pattern[]    excludePatternMatchers         ;
-  private URLRewriter  urlRewriter = new URLRewriter();
-
-  public URLExtractor() {
+  private Pattern[]                excludePatternMatchers = {};
+  private URLRewriter              urlRewriter     = new URLRewriter();
+  protected URLDatumFactory        urlDatumFactory;
+  
+  public URLExtractor() {}
+  
+  public URLExtractor(URLDatumFactory urlDatumFactory, String ... patterns) {
+    this.urlDatumFactory = urlDatumFactory;
+    setExcludePatterns(Arrays.asList(patterns));
   }
-
-  public void configure() {
-    if(excludePatterns != null && excludePatterns.size() > 0) {
-      excludePatternMatchers = new Pattern[excludePatterns.size()];
-      for (int i = 0; i < excludePatternMatchers.length; i++) {
-        String pattern = excludePatterns.get(i).trim();
-        if(pattern.length() == 0) continue;
-        System.err.println("add pattern = " + pattern);
-        excludePatternMatchers[i] = Pattern.compile(pattern);
-      }
+  
+  public void setExcludePatterns(List<String> excludePatterns) {
+    excludePatternMatchers = new Pattern[excludePatterns.size()];
+    for (int i = 0; i < excludePatternMatchers.length; i++) {
+      String pattern = excludePatterns.get(i).trim();
+      if(pattern.length() == 0) continue;
+      System.err.println("add pattern = " + pattern);
+      excludePatternMatchers[i] = Pattern.compile(pattern);
     }
   }
-
-  public void addExcludePattern(String string) {
-    if (excludePatterns == null) excludePatterns = new ArrayList<String>();
-    excludePatterns.add(string);
-  }
-
-  public void setExcludePatterns(List<String> list) {
-    this.excludePatterns = list;
-  }
-
-  public Map<String, URLDatum> extract(URLDatum urldatum, URLContext context, TDocument doc) {
+  
+  public Map<String, URLDatum> extract(URLDatum urldatum, URLContext context, XhtmlDocument xdoc, XPathStructure structure) {
     Map<String, URLDatum> urls = new HashMap<String, URLDatum>();
     try {
       if(context == null) return urls ;
+      
       String siteURL = context.getUrlNormalizer().getSiteURL();
-      String baseURL = TNodeUtil.getBase(doc.getRoot());
+      String baseURL = structure.findBase();
       if (baseURL == null || baseURL.length() == 0) {
         baseURL = context.getUrlNormalizer().getBaseURL();
       }
-      ExtractLinkVisitor linkSelector = new ExtractLinkVisitor();
-      doc.getRoot().visit(linkSelector) ;
-      List<XhtmlLink> links = linkSelector.getLinks();
-
+      
       if(urldatum.getDeep() == 1) {
-        String refreshUrl = TNodeUtil.findRefreshMetaNodeUrl(doc.getRoot()) ;
+        String refreshUrl = findRefreshMetaNodeUrl(structure) ;
         if(refreshUrl != null) {
-          links.add(new XhtmlLink("refresh url", refreshUrl)) ;
+          URLDatum newURLDatum = createURLDatum(urldatum, refreshUrl, new URLParser(refreshUrl), "refresh url");
+          addURL(urls, refreshUrl, newURLDatum);
         }
       }
 
-      for (int i = 0; i < links.size(); i++) {
-        XhtmlLink link = links.get(i);
-        String anchorText = link.getAnchorText();
-        if(link.getDeep() > 1 && (anchorText == null || anchorText.length() == 0)) {
-          continue;
-        }
-        String newURL = link.getURL();
-        newURL = urlRewriter.rewrite(siteURL, baseURL, newURL);
+      List<XPath> linkXPaths = structure.findAllLinks();
+      for (int i = 0; i < linkXPaths.size(); i++) {
+        XPath linkXPath = linkXPaths.get(i);
+        String anchorText = linkXPath.getText();
+        if(StringUtil.isEmpty(anchorText)) continue;
+        String newURL = urlRewriter.rewrite(siteURL, baseURL, linkXPath.getNode().attr("href"));
         if (!isAllowProtocol(newURL)) continue;
         URLParser newURLNorm = new URLParser(newURL);
         URL_CLEANER.process(newURLNorm) ;
@@ -113,7 +105,27 @@ public class URLExtractor {
     }
     return urls;
   }
-
+  
+  String findRefreshMetaNodeUrl(XPathStructure structure) {
+    Elements elements = structure.select("html > head > meta");
+    for(Element meta : elements) {
+      String httpEquiv = meta.attr("http-equiv") ;
+      if("refresh".equalsIgnoreCase(httpEquiv)) {
+        String content = meta.attr("content") ;
+        if(content == null) continue ;
+        String[] array = content.split(";") ;
+        for(String selStr : array) {
+          String normStr = selStr.trim().toLowerCase() ;
+          if(normStr.startsWith("url")) {
+            int idx = selStr.indexOf("=") ;
+            return selStr.substring(idx + 1) ;
+          }
+        }
+      }
+    }
+    return null ;
+  }
+  
   private void addURL(Map<String, URLDatum> urls, String url, URLDatum datum) {
     URLDatum exist = urls.get(url) ;
     if(exist == null) {
@@ -144,15 +156,11 @@ public class URLExtractor {
   }
 
   private URLDatum createURLDatum(URLDatum parent, String origUrl, URLParser urlNorm, String anchorText) {
-    URLDatum urlDatum = createURLDatumInstance(System.currentTimeMillis());
+    URLDatum urlDatum = urlDatumFactory.createInstance(System.currentTimeMillis());
     urlDatum.setOriginalUrl(origUrl, urlNorm);
     byte deep = (byte) (1 + parent.getDeep());
     urlDatum.setDeep(deep);
     urlDatum.setAnchorText(anchorText);
     return urlDatum;
-  }
-  
-  protected URLDatum createURLDatumInstance(long timestamp) {
-    return new URLDatum(timestamp);
   }
 }

@@ -1,11 +1,10 @@
 package net.datatp.http.crawler.scheduler;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +12,10 @@ import org.slf4j.LoggerFactory;
 import net.datatp.http.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.http.crawler.site.SiteContext;
 import net.datatp.http.crawler.site.SiteContextManager;
-import net.datatp.http.crawler.site.SiteScheduleStat;
 import net.datatp.http.crawler.site.URLContext;
+import net.datatp.http.crawler.urldb.NewURLDatumCache;
 import net.datatp.http.crawler.urldb.URLDatum;
-import net.datatp.http.crawler.urldb.URLDatumDBIterator;
+import net.datatp.http.crawler.urldb.URLDatumDB;
 import net.datatp.http.crawler.urldb.URLDatumDBWriter;
 /**
  * Author : Tuan Nguyen
@@ -26,57 +25,61 @@ import net.datatp.http.crawler.urldb.URLDatumDBWriter;
 abstract public class URLPostFetchScheduler {
   private static final Logger logger = LoggerFactory.getLogger(URLPostFetchScheduler.class);
 
-  protected SiteContextManager siteContextManager ;
+  protected URLDatumDB                 urlDatumDB;
+  protected SiteContextManager         siteContextManager;
+
+  protected URLSchedulerPluginManager  schedulerPluginManager;
+
+  protected BlockingQueue<URLDatum>    commitURLDatumQueue = new LinkedBlockingQueue<URLDatum>(10000);
+  protected NewURLDatumCache           newURLDatumCache        = new NewURLDatumCache(25000);
+
+  private int                          maxProcessTime      = 30000;
+
+  public URLDatumDB getURLDatumDB() { return this.urlDatumDB; }
   
-  protected URLSchedulerPluginManager schedulerPluginManager ;
-  
-  protected LinkedBlockingQueue<URLDatum> commitURLDatumQueue = new LinkedBlockingQueue<URLDatum>(10000);
-  protected Map<String, URLDatumEntry>      newURLDatums = new ConcurrentHashMap<String, URLDatumEntry>() ;	
+  public SiteContextManager getSiteContextManager() { return siteContextManager ; }
 
-  private int maxWaitTime = 3000 ;
-
-  public int getMaxWaitTime() { return this.maxWaitTime ; }
-  public void setMaxWaitTime(int value) { this.maxWaitTime = value ; }
-
-  public SiteContextManager getSiteConfigManager() { return this.siteContextManager ; }
-
-  abstract public URLDatumDBIterator createURLDatumDBIterator() throws Exception ;
-  
-  abstract public URLDatumDBWriter createURLDatumDBWriter() throws Exception ;
+  public void schedule(List<URLDatum> urls) throws InterruptedException {
+    for(int i = 0; i < urls.size(); i++) {
+      URLDatum datum = urls.get(i) ;
+      if(datum.getStatus() == URLDatum.STATUS_NEW) {
+        newURLDatumCache.add(datum) ;
+      } else {
+        commitURLDatumQueue.offer(datum, 3000, TimeUnit.SECONDS) ;
+      }
+    }
+  }
   
   public URLCommitMetric process() throws Exception {
-    int inQueue = siteContextManager.getInQueueCount() ;
-    int maxProcess = inQueue ;
-    if(maxProcess > 100) maxProcess = maxProcess/2 ;
-    logger.info("Start processing date!!!!!!  MaxWaitTime = " + maxWaitTime + "ms # MaxProcess = " + maxProcess + " # In Queue " + inQueue) ;
+    logger.info("Start processing date!!!!!!  MaxProcessTime = " + maxProcessTime + "ms") ;
 
     long startTime = System.currentTimeMillis() ;
     URLDatumDBWriter writer = null ;
     int processCount = 0, newURLFoundCount = 0, newURLTypeList =0, newURLTypeDetail = 0 ;
+    long expiredTime = System.currentTimeMillis() + maxProcessTime;
+    while(System.currentTimeMillis() < expiredTime) {
+      List<URLDatum> commitURLDatums = new ArrayList<URLDatum>() ;
+      commitURLDatumQueue.drainTo(commitURLDatums, 10000);
+      if(commitURLDatums.size() > 0) {
+        if(writer == null) writer = urlDatumDB.createURLDatumDBWriter() ;
+        processCount += write(writer, commitURLDatums) ;
+      }
 
-    int noneDequeueCount = 0 ;
-    while(processCount < maxProcess) {
-      URLDatum[] urls = dequeueCommitURLDatums();
-      if(urls.length == 0) {
-        noneDequeueCount++ ;
-        if(noneDequeueCount == 100) break ;
-        Thread.sleep(500) ;
-        continue ;
-      } else {
-        if(writer == null) writer = createURLDatumDBWriter() ;
-        processCount += write(writer, urls) ;
+      List<URLDatum> newURLDatums = newURLDatumCache.takeExpiredURLDatums();
+      if(newURLDatums.size() > 0) {
+        if(writer == null) writer = urlDatumDB.createURLDatumDBWriter() ;
+        newURLFoundCount += write(writer, newURLDatums) ;
       }
-      
-      urls = dequeueNewURLDatums(250000);
-      if(urls.length > 0) {
-        if(writer == null) writer = createURLDatumDBWriter() ;
-        newURLFoundCount += write(writer, urls) ;
-      }
+      if(commitURLDatums.size() == 0 && newURLDatums.size() == 0) break;
     }
-
+    
+    List<URLDatum> newURLDatums = newURLDatumCache.takeAllURLDatums();
+    if(newURLDatums.size() > 0) {
+      if(writer == null) writer = urlDatumDB.createURLDatumDBWriter() ;
+      newURLFoundCount += write(writer, newURLDatums) ;
+    }
+    
     if(writer != null) {
-      URLDatum[] urls = dequeueNewURLDatums(0);
-      newURLFoundCount += write(writer, urls) ;
       writer.close() ;
       writer.optimize() ;
     }
@@ -90,59 +93,22 @@ abstract public class URLPostFetchScheduler {
     return info ;
   }
 
-  private URLDatum[] dequeueCommitURLDatums() throws InterruptedException {
-    List<URLDatum> urls = new ArrayList<URLDatum>() ;
-    URLDatum datum = null;
-    while((datum = commitURLDatumQueue.poll()) != null) {
-      urls.add(datum) ;
-    }
-    return urls.toArray(new URLDatum[urls.size()]) ;
-  }
-
-  private URLDatum[] dequeueNewURLDatums(int keep) throws InterruptedException {
-    List<URLDatum> urls = new ArrayList<URLDatum>() ;
-    int hit = 1 ;
-    while(newURLDatums.size() > keep) {
-      Iterator<URLDatumEntry> i = newURLDatums.values().iterator() ;
-      while(newURLDatums.size() > keep && i.hasNext()) {
-        URLDatumEntry entry = i.next() ;
-        if(entry.hit <= hit) {
-          urls.add(entry.urldatum) ;
-          i.remove();
-        }
-      }
-      hit++ ;
-    }
-    return urls.toArray(new URLDatum[urls.size()]) ;
-  }
-
-  private int write(URLDatumDBWriter writer, URLDatum[] urls) throws Exception {
-    for(int i = 0 ; i < urls.length; i++) {
-      URLDatum urlDatum = urls[i] ;
+  private int write(URLDatumDBWriter writer, List<URLDatum> urlDatums) throws Exception {
+    for(int i = 0 ; i < urlDatums.size(); i++) {
+      URLDatum urlDatum = urlDatums.get(i) ;
       URLContext context = siteContextManager.getURLContext(urlDatum.getOriginalUrlAsString()) ;
       if(context == null) {
         logger.warn("SiteConfig is not found for the url ", urlDatum.getOriginalUrlAsString()) ;
         continue ;
       }
-      SiteContext siteConfigContext = context.getSiteContext() ;
+      SiteContext siteContext = context.getSiteContext() ;
       if(urlDatum.getStatus() != URLDatum.STATUS_NEW) {
         schedulerPluginManager.postFetch(context, urlDatum, System.currentTimeMillis()) ;
-        SiteScheduleStat scheduleStat = siteConfigContext.getAttribute(SiteScheduleStat.class) ;
-        scheduleStat.addProcessCount(1) ;
+        siteContext.getSiteScheduleStat().addProcessCount(1); ;
       } else {
       }
       writer.write(urlDatum) ;
     }
-    return urls.length ;
-  }
-
-  static public class URLDatumEntry {
-    public int hit  ;
-    public URLDatum urldatum ;
-
-    public URLDatumEntry(URLDatum urldatum) {
-      this.urldatum = urldatum ;
-      this.hit = 1 ;
-    }
+    return urlDatums.size() ;
   }
 }
