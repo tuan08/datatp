@@ -22,7 +22,7 @@ import org.slf4j.Logger;
 
 import com.google.inject.Inject;
 
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 import net.datatp.util.log.LoggerFactory;
 import net.datattp.registry.BatchOperations;
 import net.datattp.registry.DataMapperCallback;

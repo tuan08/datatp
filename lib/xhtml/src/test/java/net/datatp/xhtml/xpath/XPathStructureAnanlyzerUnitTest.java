@@ -4,7 +4,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.junit.Test ;
 
-import net.datatp.http.SimpleHttpFetcher;
+import net.datatp.xhtml.SimpleHttpFetcher;
 import net.datatp.xhtml.XhtmlDocument;
 import net.datatp.xhtml.xpath.XPathRepetions;
 import net.datatp.xhtml.xpath.XPathStructure;

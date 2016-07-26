@@ -24,7 +24,7 @@ import io.netty.handler.codec.http.HttpHeaders.Values;
 import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpVersion;
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 import net.datatp.util.text.StringUtil;
 /**
  * @author Tuan Nguyen

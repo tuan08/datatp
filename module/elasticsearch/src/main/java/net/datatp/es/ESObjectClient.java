@@ -20,8 +20,8 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 
-import net.datatp.util.JSONSerializer;
 import net.datatp.util.io.IOUtil;
+import net.datatp.util.json.JSONSerializer;
 
 //TODO: reimplement with retry mechanism
 public class ESObjectClient<T> {

@@ -140,6 +140,6 @@ public class TabularFormater implements TextFormater {
     for (int i = 0; i < 10; i++) {
       formater.addRow("column 1", "this is the column 2", "my column 3");
     }
-    System.out.println(formater.getFormatText());
+    System.out.println(formater.getFormattedText());
   }
 }

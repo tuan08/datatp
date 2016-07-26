@@ -7,10 +7,10 @@ import org.apache.flink.api.java.typeutils.GenericTypeInfo;
 import org.apache.flink.api.java.typeutils.ResultTypeQueryable;
 import org.apache.flink.streaming.api.functions.source.RichSourceFunction;
 
-import net.datatp.util.JSONSerializer;
 import net.datatp.kafka.consumer.KafkaMessageConsumerConnector;
 import net.datatp.kafka.consumer.MessageConsumerHandler;
 import net.datatp.model.message.Message;
+import net.datatp.util.json.JSONSerializer;
 
 public class KafkaMessageStreamFunction extends RichSourceFunction<Message> implements ResultTypeQueryable<Message> {
   private static final long serialVersionUID = 1L;

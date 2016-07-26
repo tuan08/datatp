@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 import net.datattp.registry.NodeCreateMode;
 import net.datattp.registry.Registry;
 import net.datattp.registry.RegistryException;

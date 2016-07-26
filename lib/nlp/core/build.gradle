@@ -1,0 +1,19 @@
+archivesBaseName = 'lib.nlp.core'
+
+eclipse {
+  project {
+    name = 'lib.nlp.core'
+  }
+}
+
+configurations {
+  deployJars {
+    transitive = false
+  }
+}
+
+dependencies {
+  compile project(':lib/utils')
+}
+
+

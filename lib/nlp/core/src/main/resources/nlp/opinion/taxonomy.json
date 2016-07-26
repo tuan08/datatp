@@ -1,0 +1,97 @@
+{
+  "otype": "synset",
+  "name": "product:taxonomy", 
+  "type": ["electronic", "battery"],
+  "variant" : ["pin", "sạc pin", "battery", "thời lượng pin", "thời gian pin", "năng lượng", "điện năng", "power ngon", "sạc nhanh"]
+} {
+  "otype": "synset",
+  "name": "product:taxonomy", 
+  "type": ["electronic", "design"],
+  "variant" : ["thiết kế", "hình dáng", "kiểu dáng", "mẫu mã", "màn hình", "vỏ sau", "vỏ ngoài", "bề ngoài", 
+    "hình thức", "nhìn", "trông", "ngoại hình", "màu sắc", "vẻ ngoài", "siêu mỏng", "bộ khung",
+    "màu sắc", "màu đen", "màu sáng", "màu trắng", "nhỏ gọn", "đường vân", "kim loại", "đen mượt", "bóng mượt",
+    "đẹp mà đắt", "khá mỏng", "mỏng đẹp", "thời trang", "sành điệu", "chỉ mỏng", "chỉ dày", "chắc chắn"]
+} {
+  "otype": "synset",
+  "name": "product:taxonomy", 
+  "type": ["electronic", "sound"],
+  "variant" : ["âm thanh", "âm lượng", "sound", "loa ngoài", "loa trong", "nghe nhạc", "bass", "treble"]
+} {
+  "otype": "synset",
+  "name": "product:taxonomy", 
+  "type": ["electronic", "display"],
+  "variant" : ["màn lcd", "hình ảnh", "hiển thị", "sắp xếp", "độ nét", "màn hình", "giao diện", "màu sắc", 
+    "độ phân giải", "ảnh thì rất đẹp", "đồ họa", "sắc nét", "trình chiếu", "điểm ảnh"]
+} {
+  "otype": "synset",
+  "name": "product:taxonomy", 
+  "type": ["electronic", "size"],
+  "variant" : ["kích thước", "chiều dài", "chiều rộng", "độ dày", "độ mỏng"]
+} {
+  "otype": "synset",
+  "name": "product:taxonomy", 
+  "type": ["electronic", "keypad" ],
+  "variant" : ["bàn phím", "qwerty", "bàn phím cảm ứng", "touchpad", "phím cứng"]
+} {
+  "otype": "synset",
+  "name": "product:taxonomy", 
+  "type": ["electronic", "weight"],
+  "variant" : ["trọng lượng", "khối lượng", "nhẹ hơn", "nặng hơn", "chắc tay", "đầm tay", "siêu nhẹ", "cân nặng", 
+    "gọn nhẹ"]
+} {
+  "otype": "synset",
+  "name": "product:taxonomy", 
+  "type": ["electronic", "price"],
+  "variant" : ["giá cả",  "túi tiền", "đồng tiền", "đắt giá", "giá đắt", "mức giá", "giá trị", "rẻ hơn", "đắt hơn",
+    "giá rẻ", "giá đó", "giá kia", "cho rẻ", "là rẻ", "cùng giá", "rẻ thế", "giá bèo", "giá cực bèo", "giá của",
+    "đắt lắm", "tầm giá", "giá cao", "đắt lắm", "tầm tiền", "giá thì", "đắt nhất", "rẻ nhất", "giá hơi cao", "giá tốt",
+    "down giá", "đẹp mà đắt", "đắt lè lưỡi", "đâu có rẻ", "đắt kinh", "giá không hề rẻ", "rẻ như", "giá chát", "siêu rẻ",
+    "giá khá cao", "giá ngon", "đắt lòi", "rẻ thật", "giá này", "bèo lắm", "mắc hơn", "giá khá đắt", "xuống giá nhanh", 
+    "rẻ đến khó tin", "dự đoán giá", "giảm giá", "giá cao quá", "giá hợp lý", "nhìn giá"
+  ]
+} {
+  "otype": "synset",
+  "name": "product:taxonomy", 
+  "type": ["electronic", "camera"],
+  "variant" : ["camera", "quay phim", "chất lượng ảnh", "chụp ảnh", "chụp hình", "ghi hình", "hình ảnh được chụp", 
+    "cho ảnh đẹp", "dễ chụp"]
+} {
+  "otype": "synset",
+  "name": "product:taxonomy", 
+  "type": ["electronic", "performance"],
+  "variant" : ["cpu", "ram", "bộ nhớ", "chipset", "tốc độ", "hiệu năng", "thời gian xử lý", "speed", "khởi động", "chạy mượt mà", "chạy đẹp", 
+    "đọc", "performance", "sức mạnh", "tải trang", "độ trâu bò", "chạy còn êm hơn", "hoạt động", "việc xử lý", "vừa êm vừa trâu"]
+} {
+  "otype": "synset",
+  "name": "product:taxonomy", 
+  "type": ["electronic", "usability"],
+  "variant" : ["tiện lợi", "sử dụng", "cầm tay", "portable", "di chuyển", "điều khiển",
+    "khả năng", "chơi game", "chơi games", "ứng dụng", "nâng cấp"]
+} {
+  "otype": "synset",
+  "name": "product:taxonomy", 
+  "type": ["electronic", "reception"],
+  "variant" : ["phát sóng", "tín hiệu", "thu phát", "bắt sóng", "wifi", "wi-fi", "bluetooth"]
+} {
+  "otype": "synset",
+  "name": "product:taxonomy", 
+  "type": ["electronic", "feature"],
+  "variant" : ["đặc trưng", "khác biệt", "cấu hình", "kết nối", "an ninh", "an toàn", 
+    "chức năng", "tính năng", "công nghệ", "cn", "giải trí", "chia sẻ", "hdh", "hệ điều hành", 
+    "vi xử lý", "vi xử lí", "bộ xử lý ", "tích hợp", "lướt web", "trang bị", "rẻ bền đẹp", "độ bền", "dịch vụ",
+    "nổi tiếng bền", "lưu trữ", "mát hơn", "nổi tiếng là mát", "đa nhiệm", "mỏng hơn", "sự ổn định", "ổ cứng", 
+    "cơ chế khử nhiễu", "tuổi thọ cao", "giải mã", "vừa êm vừa trâu", "phần mềm","hệ thống làm mát", "cảm biến ánh sáng"]
+} {
+  "otype": "synset",
+  "name": "product:taxonomy", 
+  "type": ["electronic", "problem"],
+  "variant" : ["vấn đề", "hạn chế", "nhược điểm", "bất cập", "yếu điểm", "nhiệt độ", "tản nhiệt", 
+    "hay nóng", "nhiều lỗi", "nóng vô đối", "quá nóng", "hay nóng", "rất nóng", "khá nóng", "nóng lắm", "chạy cực cùi", 
+    "chạy độc quyền", "chậm hơn", "nóng hơn", "tỷ lệ bảo hành", "lỗi của", "độ ồn", "nóng là phải", 
+    "nhiều bug", "nóng thấy bà", "nóng bỏ bà", "nhạy với điện áp", "ọp ẹp", "kém tương thích"]
+} {
+  "otype": "synset",
+  "name": "product:taxonomy", 
+  "type": ["electronic", "general"],
+  "variant" : ["chất lượng", "BH"]
+}

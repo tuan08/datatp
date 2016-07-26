@@ -104,7 +104,7 @@ public class KafkaTopicReport {
       reportFormater.addRow(cells);
     }
     out.append("\n");
-    out.append(reportFormater.getFormatText());
+    out.append(reportFormater.getFormattedText());
 
   }
 

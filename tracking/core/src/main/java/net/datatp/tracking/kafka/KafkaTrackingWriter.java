@@ -9,7 +9,7 @@ import net.datatp.kafka.producer.AckKafkaWriter;
 import net.datatp.tracking.TrackingMessage;
 import net.datatp.tracking.TrackingRegistry;
 import net.datatp.tracking.TrackingWriter;
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 
 public class KafkaTrackingWriter extends TrackingWriter {
   @Parameter(names = "--zk-connect", description = "The zk connect string")

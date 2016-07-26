@@ -147,7 +147,7 @@ public class PartitionMessageTracker {
       formater.addRow(cells);
       prevSeqMap = seqMap;
     }
-    out.append(formater.getFormatText());
+    out.append(formater.getFormattedText());
   }
 
   static public class SequenceMap {

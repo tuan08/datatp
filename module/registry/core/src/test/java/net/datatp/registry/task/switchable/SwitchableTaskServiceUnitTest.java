@@ -165,7 +165,7 @@ public class SwitchableTaskServiceUnitTest {
         TaskLog taskLog = entry.getValue();
         formatter.addRow(entry.getKey(), taskLog.availableCount, taskLog.assignCount, taskLog.failCount, taskLog.finishCount);
       }
-      System.out.println(formatter.getFormatText());
+      System.out.println(formatter.getFormattedText());
     }
   }
   

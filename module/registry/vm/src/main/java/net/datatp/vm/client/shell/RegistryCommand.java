@@ -6,7 +6,7 @@ import java.util.List;
 import com.beust.jcommander.Parameter;
 import com.fasterxml.jackson.databind.JsonNode;
 
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 import net.datatp.vm.client.VMClient;
 import net.datattp.registry.Node;
 import net.datattp.registry.Registry;

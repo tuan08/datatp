@@ -115,7 +115,7 @@ public class MessageTracker {
         prevSeqMap = seqMap;
       }
     }
-    out.append(formater.getFormatText()).append("\n");
+    out.append(formater.getFormattedText()).append("\n");
     out.append("\nLog Count: " + getLogCount() + "\n");
     return out.toString();
   }

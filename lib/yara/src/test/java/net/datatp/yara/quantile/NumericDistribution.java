@@ -85,7 +85,7 @@ public class NumericDistribution {
       String accPercentile = pFormater.format(sel.accPercentile * 100) + "%" ;
       tformater.addRow(i + 1, sel.getValue(), sel.getCount(), percentile, accPercentile);
     }
-    System.out.println(tformater.getFormatText());
+    System.out.println(tformater.getFormattedText());
   }
   
   public double getValueByPercentile(double percent) {

@@ -1,6 +1,6 @@
 package net.datattp.registry;
 
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 
 public class JSONDataMapperCallback<T> implements DataMapperCallback<T> {
   final static public JSONDataMapperCallback<?> INSTANCE = new JSONDataMapperCallback<>();

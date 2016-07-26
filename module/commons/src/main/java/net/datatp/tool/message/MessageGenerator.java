@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 
 public interface MessageGenerator {
   

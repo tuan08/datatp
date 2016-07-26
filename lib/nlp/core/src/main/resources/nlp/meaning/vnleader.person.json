@@ -1,0 +1,388 @@
+{
+  "otype": "person",
+  "name":  "Nguyễn Tấn Dũng", 
+  "udescription": "Nguyễn Tấn Dũng sinh ngày 17/11/1949 tại Cà Mau là Thủ tướng đương nhiệm của Việt Nam"
+
+} {
+  "otype": "person",
+  "name":  "Phạm Văn Đồng",
+  "udescription": "Phạm Văn Đồng sinh ngày 1/3/1906 mất ngày 29/4/2000 ông sinh ra ở xã Đức Tân, huyện Mộ Đức, tỉnh Quảng Ngãi. Ông là thủ tướng Việt Nam tại vị lâu nhất (1955–1987)"
+  
+} {
+  "otype": "person",
+  "name":  "Võ Nguyên Giáp",
+  "udescription": "Võ Nguyên Giáp sinh ngày 25/8/1911 sinh ở làng An Xá, xã Lộc Thủy, huyện Lệ Thủy, tỉnh Quảng Bình. Ông là một nhà chỉ huy quân sự và nhà hoạt động chính trị Việt Nam. Là đại tướng đầu tiên của Quân đội Nhân dân Việt Nam"
+  
+} {
+  "otype": "person",
+  "name":  "Lê Ngọc Hiền",
+  "udescription": "Thượng tướng Lê Ngọc Hiền sinh năm 1928 mất 18/4/2006 quê ở xã Đức Thượng, huyện Hoài Đức, tỉnh Hà Đông. Là một tướng lĩnh Quân đội Nhân dân Việt Nam"
+
+} {
+  "otype": "person",
+  "name":  "Lê Trọng Tấn",
+  "udescription": "Đại tướng Lê Trọng Tấn sinh ngày 10/1/1914 mất 5/12/1986 sinh tại làng Yên Nghĩa, thôn An Định, xã Nghĩa Lộ, huyện Hoài Đức, tỉnh Hà Đông, Ông là viện trưởng Học viện Quân sự Cao cấp, Tổng tham mưu trưởng Quân đội Nhân dân Việt Nam, Thứ trưởng Bộ Quốc phòng"
+  
+} {
+  "otype": "person",
+  "name":  "Phạm Hùng",
+  "variant": ["Phạm Văn Thiện"],
+  "udescription": "Phạm Hùng sinh ngày 11/6/1912, tại làng Long Hồ, huyện Châu Thành, tỉnh Vĩnh Long. Ông từng giữ Chủ tịch Hội đồng Bộ trưởng của nước Việt Nam thống nhất, từ (1987_1988)"
+  
+} {
+  "otype": "person",
+  "name":  "Võ Văn Kiệt",
+  "variant": ["Phan Văn Hòa"],
+  "udescription": "Võ Văn Kiệt sinh ngày 23/11/1922 mất ngày 11/6/2008. Ông sinh ra tại xã Trung Hiệp, huyện Vũng Liêm, tỉnh Cửu Long. Ông là Thủ tướng nước Việt Nam (8/8/1991-25/9/1997)"
+  
+} {
+  "otype": "person",
+  "name":  "Đỗ Mười",
+  "variant": ["Nguyễn Duy Cống"],
+  "udescription": "Đỗ Mười sinh ngày 2/2/1917 nguyên là Tổng Bí thư Ban Chấp hành Trung ương Đảng Cộng sản Việt Nam từ (6/1991-12/1997).Ông sinh tại xã Đông Mỹ, huyện Thanh Trì, Hà Nội"
+  
+} {
+  "otype": "person",
+  "name":  "Phan Văn Khải",
+  "udescription": "Phan Văn Khải sinh ngày 25/12/1933 là Thủ tướng Việt Nam từ (25/9/1997-27/6/2006).  Ông quê tại xã Tân Thông Hội, huyện Củ Chi, Thành phố Hồ Chí Minh"
+} {
+  "otype": "person",
+  "name":  "Hồ Chí Minh",
+  "variant": ["Nguyễn Sinh Cung"],
+  "udescription": "Hồ Chí Minh sinh ngày 19/5/1890 mất ngày 2/9/1969. Ông quê làng Kim Liên tại Nam Đàn, Nghệ An. Ông là chủ tịch nước trong thời gian (1945 – 1969)"
+} {
+  "otype": "person",
+  "name":  "Nguyễn Văn Thinh",
+  "udescription": "Nguyễn Văn Thinh sinh năm 1888 mất ngày 10/11/1946. Ông sinh ra trong một gia đình đại điền chủ Nam Kỳ, có quốc tịch Pháp. Ông cũng là thủ tướng đầu tiên của chính phủ Cộng hòa Nam Kỳ"
+  
+} {
+  "otype": "person",
+  "name": "Lê Văn Hoạch",
+  "udescription": "Lê Văn Hoạch sinh năm 1896 mất năm 1978.Ông sinh tại Phong Điền (Cần Thơ). Là Thủ tướng Nam Kỳ Quốc từ (11/1946-9/1947)"
+   
+} {
+  "otype": "person",
+  "name":  "Nguyễn Văn Xuân",
+  "udescription": "Nguyễn Văn Xuân sinh năm 1892 mất năm 1989 là thủ tướng Nam phần Việt Nam từ (8/10/1947-27/5/1948)sau đó giữ chức thủ tướng lâm thời của Quốc gia Việt Nam(27/5/1948-14/7/1949)"
+  
+} {
+  "otype": "person",
+  "name":  "Huỳnh Thúc Kháng",
+  "udescription": "Huỳnh Thúc Kháng sinh năm 1876 mất năm 1947. Ông người làng Thạnh Bình, xã Tiên Cảnh, huyện Tiên Phước, tỉnh Quảng Nam. Năm 1946 ông được cử làm quyền Chủ tịch nước, cuối năm 1946, ông là đặc phái viên của chính phủ"
+  
+} {
+  "otype": "person",
+  "name":  "Mỹ Tâm",
+  "variant": ["Phan Thị Mỹ Tâm"],
+  "udescription": "Mỹ Tâm sinh ngày 16/1 /1981. Mỹ Tâm sinh ra tại Đà Nẵng, quê gốc của ở Điện Thọ, Điện Bàn, tỉnh Quảng Nam. Từ năm 2002 cho đến nay, Mỹ Tâm luôn là ca sĩ số 1 của Việt Nam"
+  
+} {
+  "otype": "person",
+  "name":  "Hồng Nhung",
+  "variant": ["Lê Hồng Nhung"],
+  "udescription": "Hồng Nhung sinh ngày 15/3/1970 tại Hà Nội. Cô có tên thân mật là Bống. Hồng Nhung là ca sĩ tiêu biểu của nhạc nhẹ Việt Nam suốt hơn 2 thập niên vừa qua"
+  
+} {
+  "otype": "person",
+  "name":  "Thanh Lam",
+  "udescription": "Thanh Lam sinh ngày 19 /6/1969 quê gốc ở Huyện Điên Bàn tỉnh Quảng Nam. Là một nữ ca sĩ nhạc nhẹ nổi tiếng của Việt Nam. Là ca sỹ hát tự do đầu tiên được phong tặng danh hiệu Nghệ sĩ ưu tú (11/1/2007)"
+  
+} {
+  "otype": "person",
+  "name":  "Đàm Vĩnh Hưng",
+  "variant": ["Huỳnh Minh Hưng"],
+  "udescription": "Đàm Vĩnh Hưng sinh ngày 2/10/1971, Quê gốc ở Đại Lộc, Quảng Nam. Anh tham gia sinh hoạt văn nghệ từ CLB Ca Sĩ Trẻ tại Trung tâm văn hoá quận 10 từ năm 1991.Giọt nước mắt cho đời (Vol.05) là album đưa anh thật sự bật thành sao trong làng nhạc Việt"
+  
+} {
+  "otype": "person",
+  "name":  "Lam Trường",
+  "variant": ["Tiêu Lam Trường"],
+  "udescription": "Lam Trường sinh: 14/10/1974 Anh là con út trong một gia đình người Việt gốc Hoa (Triều Châu).Năm 2003 anh kết hôn với cô gái Việt Kiều tên Ngô Ý An (Jenny Phạm)cư ngụ tại thành phố Houston, tiểu bang Texas của nước Mỹ"
+} {
+  "otype": "person",
+  "name":  "Siu Black",
+  "udescription": "Siu Black sinh ngày 27 /8/1967 tại buôn Pleitơnghia, thị xã Kon Tum, tỉnh Kon Tum, thuộc vùng Tây Nguyên và là người dân tộc Ba Na. Siu Black là một nữ ca sĩ nhạc trẻ Việt Nam"
+  
+} {
+  "otype": "person",
+  "name":  "Trọng Tấn",
+  "udescription": "Trọng Tấn sinh năm 1976 người Thanh Hóa, sở trường của anh là nhạc truyền thống và cách mạng. Anh nổi tiếng khi đoạt giải nhất Giọng hát hay Hà Nội năm 1997 và giải nhất Giọng hát hay Truyền hình Toàn quốc năm 1999"
+  
+} {
+  "otype": "person",
+  "name":  "Đan Trường",
+  "udescription": "Đan Trường sinh ngày 29/11/1976, sinh trưởng trong một gia đình họ Phạm sinh sống ở Quận 6, TP HCM.Từ những năm cuối thập niên 1990, anh được các khán giả yêu nhạc trẻ luôn nhắc đến"
+  
+} {
+  "otype": "person",
+  "name":  "Đăng Khôi",
+  "udescription": "Đăng Khôi sinh ngày 28 /11/1983 sinh ra tại Hà Nội. Cựu thành viên nhóm New Stars, hiện tại là ca sĩ hoạt động độc lập"
+  
+} {
+  "otype": "person",
+  "name":  "Hồ Ngọc Hà",
+  "udescription": "Hồ Ngọc Hà sinh ngày 25 /11/1984/. Sinh ra ở An Cựu, Huế. Cô là người Việt lai Pháp. Là một ca sĩ, người mẫu và diễn viên. Hiện tại được biết đến với tư cách ca sĩ bởi khả năng tốt trong giọng hát và biểu diễn vũ đạo"
+  
+} {
+  "otype": "person",
+  "name":  "Hồ Quỳnh Hương",
+  "udescription": "Hồ Quỳnh Hương sinh ngày 16 /10/1980 tại TP Hạ Long, tỉnh Quảng Ninh; là một nữ ca sĩ nhạc trẻ Việt Nam. Cô tốt nghiệp thủ khoa Thanh nhạc trường Cao đẳng nghệ thuật quân đội năm 2002"
+  
+} {
+  "otype": "person",
+  "name":  "Quang Dũng",
+  "variant": ["Thái Văn Dũng"],
+  "udescription": "Quang Dũng sinh ngày 8/8/1976 tại Quy Nhơn, Bình Định là một ca sĩ Việt Nam dòng nhạc nhẹ, nhạc trữ tình, nhạc tiền chiến và nhạc Trịnh Công Sơn"
+} {
+  "otype": "person",
+  "name":  "Thủy Tiên",
+  "variant": ["Trần Thị Thủy Tiên"],
+  "udescription": "Thủy Tiên sinh năm 1985 tại Kiên Giang, là một nữ ca sĩ người Việt gốc Hoa. Cô cũng được biết đến với vai trò là diễn viên điện ảnh khi tham gia trong phim điện ảnh như: Nụ hôn thần chết, Đẹp từng centimet"
+} {
+  "otype": "person",
+  "name":  "Đông Nhi",
+  "udescription": "Đông Nhi sinh ngày 13/10/1988 là một ca sĩ, diễn viên điện ảnh. Cô được biết đến với một số ca khúc dành cho lứa tuổi teen như: \"Chàng Baby Milo\", \"Khóc\", album đầu tay The First Step được phát hành vào tháng 9/2010"
+} {
+  "otype": "person",
+  "name":  "Dương Thụ",
+  "udescription": "Nhạc sĩ Dương Thụ sinh ngày 10/2/1943 tại thị trấn Vân Đình, huyện Ứng Hòa, Hà Nội. Ông là một nhạc sĩ nhạc nhẹ và nhạc trữ tình Việt Nam"
+} {
+  "otype": "person",
+  "name":  "Phó Đức Phương",
+  "udescription": "Nhạc sĩ Phó Đức Phương sinh năm 1944 là một nhạc sĩ sáng tác ca khúc quần chúng dòng nhạc trữ tình Việt Nam. Ông hiện là Giám đốc Trung tâm Bảo vệ quyền tác giả âm nhạc Việt Nam, phó chủ tịch Hội âm nhạc Hà Nội"
+} {
+  "otype": "person",
+  "name":  "Trần Tiến",
+  "udescription": "Nhạc sĩ Trần Tiến sinh ngày 16/5/1947 sinh ra trong một gia đình khá giả Hà Nội. Là một nhạc sĩ dòng nhạc trữ tình Việt Nam. Ông vừa là nhạc sĩ sáng tác ca khúc quần chúng, vừa là ca sĩ. Người ta gọi ông là \"người du ca\" của Việt Nam"
+} {
+  "otype": "person",
+  "name":  "Văn Cao",
+  "udescription": "Nhạc sĩ Văn Cao sinh ngày 15/11/1923 mất 10/7/1995 quê gốc ở thôn An Lễ, xã Liên Minh, huyện Vụ Bản, tỉnh Nam Định. Là một nhạc sĩ Việt Nam nổi tiếng. Ông là tác giả của Tiến quân ca, quốc ca của Việt Nam. Ông còn là một họa sĩ, nhà thơ với nhiều tác phẩm giá trị"
+} {
+  "otype": "person",
+  "name":  "Phú Quang",
+  "udescription": " Nhạc sĩ Phú Quang sinh ngày 13/10/1949, ông sinh tại Hải Phòng, người gốc Hà Nội, có nhà ở phố Khâm Thiên. Ông là một nhạc sĩ dòng nhạc trữ tình Việt Nam"
+} {
+  "otype": "person",
+  "name":  "Ngô Bảo Châu",
+  "udescription": "Ngô Bảo Châu sinh ngày 15/11/1972 tại Hà Nội. Là nhà toán học Việt Nam đầu tiên giành được Huy chương Fields. Ông nổi tiếng với công trình chứng minh Bổ đề cơ bản Langlands. Tính đến năm 2010, ông là nhà khoa học trẻ nhất được phong học hàm giáo sư"
+
+} {
+  "otype": "person",
+  "name":  "Chu Văn An",
+  "udescription": "Chu Văn An sinh năm 1292 mất năm 1370 quê ở làng Văn Thôn, xã Quang Liệt, huyện Thanh Đàm (Thanh Trì)là một nhà giáo, thầy thuốc, đại quan nhà Trần trong lịch sử Việt Nam, được phong tước Văn Trinh Công "
+  
+} {
+  "otype": "person",
+  "name":  "Tuệ Tĩnh",
+  "udescription": "Tuệ Tĩnh sinh năm 1330, người làng Nghĩa Phú, tổng Văn Thái, huyện Cẩm Giàng. Được phong là ông tổ ngành dược Việt Nam và là người mở đầu cho nền y dược cổ truyền Việt Nam"
+  
+} {
+  "otype": "person",
+  "name":  "Lý Thái Tổ",
+  "variant": ["Lý Công Uẩn"],
+  "udescription": "Lý Thái Tổ sinh năm 974 mất 1028 là người ở hương Diên Uẩn, châu Cổ Pháp, lộ Bắc Giang. Ông là vị Hoàng đế đầu tiên của nhà Hậu Lý trong lịch sử Việt Nam, trị vì từ năm 1009"
+  
+} {
+  "otype": "person",
+  "name":  "Trần Quốc Tuấn",
+  "udescription": "Hưng Đạo Đại Vương Trần Quốc Tuấn sinh năm 1232 mất 1300, sinh ra tại Kiếp Bạc, xã Hưng Đạo, huyện Chí Linh, tỉnh Hải Dương,là danh tướng thời nhà Trần và cũng là danh tướng trong lịch sử Việt Nam, có công lớn trong hai lần kháng chiến chống Nguyên Mông (lần 2 và 3)"
+
+} {
+  "otype": "person",
+  "name":  "Lý Bí",
+  "variant": ["Lý Nam Đế"],
+  "udescription": "Lý Nam Đế sinh năm 503 mất năm 548, người làng Thái Bình, phủ Long Hưng. là vị hoàng đế sáng lập nhà Tiền Lý và khai sinh nhà nước Vạn Xuân"
+  
+} {
+  "otype": "person",
+  "name":  "Nguyễn Huệ", 
+  "variant": ["Quang Trung"],
+  "udescription": "Nguyễn Huệ sinh năm 1753 mất 1792, còn được biết đến là Quang Trung Hoàng đế, vua Quang Trung hay Bắc Bình Vương, là vị hoàng đế thứ hai của nhà Tây Sơn. Ở ngôi từ 1788-1792 sau Thái Đức Hoàng đế Nguyễn Nhạc"
+  
+} {
+  "otype": "person",
+  "name":  "Lại Văn Sâm",
+  "udescription": "Lại Văn Sâm sinh năm 1957, là một nhà báo, người dẫn chương trình (MC), biên tập viên của Đài truyền hình Việt Nam. Ông là một trong những người đưa các gameshow trên kênh VTV3 và hiện là trưởng ban biên tập VTV3"
+  
+} {
+  "otype": "person",
+  "name":  "Nguyễn Ngọc Ngạn",
+  "udescription": "Nguyễn Ngọc Ngạn, sinh ngày 9/3/1945, Ông sinh tại Sơn Tây, Hà Nội, di cư vào Sài Gòn năm 1954, hiện sống tại Toronto, Canada là một nhà văn và là người dẫn chương trình của Paris By Night"
+  
+} {
+  "otype": "person",
+  "name":  "Nguyễn Cao Kỳ Duyên",
+  "udescription": "Nguyễn Cao Kỳ Duyên sinh ngày 30/6/1969/tại Sài Gòn, quê gốc Sơn Tây, Hà Tây là một người Mỹ gốc Việt, và là người dẫn chương trình của Paris by Night"
+  
+} {
+  "otype": "person",
+  "name":  "Lê Huỳnh Đức",
+  "udescription": "Lê Huỳnh Đức sinh ngày 20/4/1972 tại TP Hồ Chí Minh. Anh là một cựu cầu thủ bóng đá của đội bóng đá Quân khu 7, đội bóng đá Công an TP Hồ Chí Minh và đội tuyển bóng đá quốc gia Việt Nam. Hiện tại, anh là huấn luyện viên trưởng câu lạc bộ bóng đá SHB Đà Nẵng" 
+  
+} {
+  "otype": "person",
+  "name":  "Nguyễn Hồng Sơn",
+  "udescription": "Nguyễn Hồng Sơn sinh ngày 9/10/1970 tại Hà Nội là một trong những cầu thủ xuất sắc nhất của đội tuyển bóng đá quốc gia Việt Nam từ 1995-2001. Anh gia nhập đội Thể Công năm 1988 và vào đội tuyển quốc gia năm 1994"
+  
+} {   
+  "otype": "person",
+  "name":  "Cù Huy Hà Vũ", 
+  "udescription": "Cù Huy Hà Vũ sinh ngày 2/12/1957 quê xã Ân Phú, huyện Vũ Quang, tỉnh Hà Tĩnh là một tiến sĩ luật, thạc sĩ văn chương, họa sĩ, và là nhân vật bất đồng chính kiến với Nhà nước Cộng hòa Xã hội chủ nghĩa Việt Nam. Ông là con của nhà thơ Huy Cận và cũng gọi Xuân Diệu là cậu"
+
+} {
+  "otype": "person",
+  "name":  "Neil Armstrong", 
+  "udescription": "Neil Armstrong sinh ngày 5/8/1930 là một phi hành gia người Mỹ, người đầu tiên đặt chân lên Mặt Trăng ngày 20/7/1969, trong chuyến du hành trên tàu Apollo 11 cùng Buzz Aldrin và Michael Collins"
+  
+} {
+  "otype": "person",
+  "name":  "Buzz Aldrin", 
+  "udescription": "Buzz Aldrin sinh ngày 20/1/1930 tại Glen Ridge, Ông là một phi công và phi hành gia Hoa Kỳ trên tàu Apollo 11, chuyến du hành đầu tiên hạ cánh xuống Mặt Trăng. Ông là người thứ hai đặt chân lên Mặt Trăng, chỉ sau phi công chỉ huy Neil Armstrong"
+  
+} {
+  "otype": "person",
+  "name":  "Jean Yersin",
+  "variant": ["Alexandre Émile Jean Yersin"],
+  "udescription": "Jean Yersin sinh 22/9/1863 tại Lavaux, bang Vaud, Thụy Sĩ mất 1/3/1943 tại Nha Trang, Việt Nam. Là một bác sĩ và nhà vi khuẩn học người Pháp gốc Thụy Sĩ"
+  
+} {
+  "otype": "person",
+  "name":  "William Harvey",
+  "udescription": "William Harvey sinh ngày 1/4/1578 mất ngày 3/6/1657. Harvey sinh ra trong một gia đình nông dân ở Folkestone, miền Nam nước Anh. Ông được tôn vinh là đã giải thích chính xác những thông tin về sự tuần hoàn có hệ thống của máu, trong đó chỉ rõ việc máu được truyền qua tim và bơm đi khắp cơ thể"
+  
+} {
+  "otype": "person",
+  "name":  "Andre Vesalius",
+  "udescription": "Andre Vesalius sinh ngày 1/1/1514 mất năm 1564. Sinh ra ở Bruselles (Bỉ). Cha của ông là dược sư của Hoàng Ðế Charles thứ V. Ông là nhà giải phẩu học lớn nhất của thời phục hưng, ông tổ của giải phẩu học hiện đại"
+  
+} {
+  "otype": "person",
+  "name":  "Louis Pasteur",
+  "udescription": "Louis Pasteur sinh ngày 27/12/1822 mất 28/9/1895. Ông sinh ra ở Dole, Jura, Pháp. Là nhà khoa học nổi tiếng người Pháp, người đi tiên phong trong lĩnh vực vi sinh vật học"
+  
+} {
+  "otype": "person",
+  "name":  "Claude Bernard",
+  "udescription": "Claude Bernard sinh ngày 12 /7/1813 mất 10/2/1878. Sinh ra tại Saint-Julien (Lyonnais). Là nhà Sinh lý học nổi tiếng, khám phá chức vụ tạo đường glycogen của gan, nghiên cứu các diếu tố(enzyme) trong dịch tiêu hóa, gan, thần kinh hệ, máu và chức năng của nó trong sự hô hấp"
+  
+} {
+  "otype": "person",
+  "name":  "Henry Cavendish ",
+  "udescription": "Henry Cavendish sinh ngày 10/10/1731 mất 24/3/1810. Ông sinh ở Nice,Pháp, là một nhà vật lý, hóa học người Anh người đã phát hiện ra hydrogen, tính ra được một hằng số hấp dẫn và tính được khối lượng trái đất"
+  
+} {
+  "otype": "person",
+  "name":  "Linus Pauling",
+  "udescription": "Linus Pauling sinh ngày 28/02/1901 tại Porland. Ông tốt nghiệp Viện Nông Nghiệp Oregon (nay là trường Đại học Tổng hợp bang Oregon) năm 1922, và nhận học vị Tiến sĩ Hóa học tại Caltech năm 1925. Là nhà hóa học vĩ đại của Mỹ thế kỉ 20"
+  
+} {
+  "otype": "person",
+  "name":  "Humphry Davy",
+  "udescription": "Humphry Davy sinh ngày 17/12/1778 mất 29 /5/1829 Ông sinh ra tại Penzanc Cornwall, Vương quốc Anh. Ông là một nhà vật lý và nhà hóa học người Cornwall"
+  
+} {
+  "otype": "person",
+  "name":  "Michael Faraday",
+  "udescription": "Michael Faraday sih ngày 22/9/1791 mất 25/8/1867 là nhà vật lý và nhà hóa học người Anh. Ông có nhiều cống hiến to lớn trong lĩnh vực điện từ học"
+  
+} {
+  "otype": "person",
+  "name":  "Dmitri Ivanovich Mendeleev",
+  "udescription": "Dmitri Ivanovich Mendeleev sinh ngày 27/1/1834 mất 2/2/1907 là một nhà hóa học người Nga. Ông là người đã phát minh ra bảng tuần hoàn các nguyên tố hóa học"
+  
+} {
+  "otype": "person",
+  "name":  "Van 't Hoff",
+  "udescription": "Van 't Hoff sinh ngày 30 /8 /1852 ở Rotterdam. Ông là nhà hóa học Hà Lan, người đầu tiên được tặng giải thưởng Nobel về hóa học năm 1901"
+
+} {
+  "otype": "person",
+  "name":  "Aristotle",
+  "udescription": "Aristotle sinh năm 384 mất năm 322 (Tr. CN)là nhà triết học và tự nhiên học tiêu biểu nhất và lẫy lừng nhất của nền văn minh Hy-lạp Cổ. Ông sinh tại vùng Stagyvre ở Hy Lạp, trên bờ Tây Bắc biển Egée. Bố Aristotle là ngự y ở Hoàng cung" 
+  
+} {
+  "otype": "person",
+  "name":  "Archimedes",
+  "udescription": "Archimedes sinh năm 287 mất 212(Tr.C.N). Ông sinh tại đảo Sicile (nay thuộc Italia). Ông là một nhà cơ học vĩ đại tác giả của rất nhiều sáng chế và phát minh cơ học nổi tiếng"
+  
+} {
+  "otype": "person",
+  "name":  "Marie Curie",
+  "udescription": "Marie Curie sinh ngày 7/11/1867 mất 4/7/1934. Bà sinh ra ở Warszawa, Ba Lan, là một nhà hóa học, một người đi đầu trong ngành tia X đã hai lần nhận giải Nobel (Vật lý năm 1903 và Hóa học năm 1911). Bà đã thành lập Viện Curie ở Paris và Warszawa"
+
+} {
+  "otype": "person",
+  "name":  "Vladimir Putin",
+  "udescription": "Vladimir Putin sinh ngày 7/10/1952 .Putin sinh tại Leningrad, St. Petersburg. Ông là Tổng thống Nga từ 26/3/2000-7/5/2008"
+  
+} {
+  "otype": "person",
+  "name":  "George Walker Bush",
+  "udescription": "George Walker Bush, sinh ngày 6/7/1946,Ông là con trai của tổng thống Hoa Kỳ thứ 41 George H. W. Bush và Barbara Bush, sinh tại New Haven, Connecticut. Là chính khách và tổng thống thứ 43 của Hoa Kỳ"
+  
+} {
+  "otype": "person",
+  "name":  "Fidel Castro",
+  "udescription": "Fidel Castro sinh ngày 13/8/1926 là một trong những nhà lãnh đạo chủ chốt của cuộc Cách mạng Cuba, Thủ tướng của Cuba từ tháng 2/1959 -12/1976, sau đó là Chủ tịch Hội đồng Nhà nước Cuba cho tới khi ông từ chức tháng 2 năm 2008, Hiện là Bí thư thứ nhất của Đảng Cộng sản Cuba"
+  
+} {
+  "otype": "person",
+  "name":  "Jacques René Chirac",
+  "udescription": "Jacques René Chirac sinh ngày 29/11/1932 tại Paris là một nhà chính trị người Pháp. Ông đã được bầu làm Tổng thống Pháp vào năm 1995 và 2002.Ông đương nhiên kiêm tước vị Đồng hoàng tử của Andorra và Tổng Chỉ huy Binh đoàn Danh dự"
+  
+} {
+  "otype": "person",
+  "name":  "Saddam Hussein",
+  "udescription": "Saddam Hussein sinh 28/4/1937 mất 30/12/2006 là người Ả Rập.Ông là nhà độc tài và Tổng thống Iraq từ 1979-2003, khi Mỹ tấn công Iraq ông đã bị bắt và phải ở tù. Tháng 11/2005 ông bị đem ra tòa án xét xử"
+  
+} {
+  "otype": "person",
+  "name":  "Winston Churchill",
+  "udescription": "Winston Churchill sinh ngày 30/11/1874 mất 24/1/1965 sinh tại Lâu đài Blenheim ở Woodstock, Oxfordshire. Ông là Thủ tướng Anh trong Thế chiến thứ hai. Và là Thủ tướng Anh duy nhất nhận giải Nobel Văn học, là người đầu tiên được công nhận là Công dân danh dự Hoa Kỳ"
+  
+} {
+  "otype": "person",
+  "name":  "Adam Smith",
+  "udescription": "Adam Smith sinh ngày 16/6/1723 mất 17/7/1790là nhà kinh tế chính trị học và triết gia đạo đức học lớn người Scotland. Ông là nhân vật mở đường cho phát triển lý luận kinh tế"
+  
+} {
+  "otype": "person",
+  "name":  "David Ricardo",
+  "udescription": "David Ricardo sinh ngày 18/4/1772 mất 11/9/1823, sinh ra ở London. Ônglà một nhà kinh tế học người Anh, có ảnh hưởng lớn trong kinh tế học cổ điển"
+  
+} {
+  "otype": "person",
+  "name":  "Barack Obama",
+  "udescription": "Barack Obama sinh ngày 4/8/1961 tại Honolulu, Hawaii, Hoa Kỳ. Ông là tổng thống thứ 44 và đương nhiệm của Hoa Kỳ. Ngày 9/10/2009, ông được Ủy ban Nobel Na Uy tuyên bố trao giải Nobel Hòa bình"
+  
+} {
+  "otype": "person",
+  "name":  "George Washington",
+  "udescription": "George Washington sinh ngày 22/2/1732 mất 14/12/1799 sinh ra tại trang trại Pope's Creek, Colonial Beach, Quận Westmoreland, Virginia. Ông là Tổng thống đầu tiên của Hoa Kỳ, nhà lãnh đạo chính trị, quân sự có ảnh hưởng lớn đối với Hoa Kỳ từ năm 1775-1799"
+  
+} {
+  "otype": "person",
+  "name":  "Thomas Edison",
+  "udescription": "Thomas Alva Edison sinh ngày 11/2/1847 mất 18/10/1931. Gia đình Edison ở Hà Lan đã nhập cư tới New Jersey năm 1730. Ông là nhà phát minh, thương nhân đã phát triển rất nhiều thiết bị có ảnh hưởng lớn trong thế kỷ 20. Ông được một nhà báo đặt danh hiệu Thầy phù thủy ở Menlo Park"
+  
+} {
+  "otype": "person",
+  "name":  "Alexandro Volta",
+  "udescription": "Alexandro Volta sinh ngày 18/2/1745 mất 5/5/1827, sinh ra tại Como nước Ý. Ônglà một nhà vật lý, là người đã có công phát minh ra pin điện và tên của ông được đặt theo đơn vị điện thế volt (ký hiệu V)"
+  
+} {
+  "otype": "person",
+  "name":  "Martin Cooper",
+  "udescription": "Martin Cooper là người phát minh ra điện thoại di động. Ông là giám đốc điều hành (CEO) và người sáng lập ra ArrayComm, một công ty hoạt động trong công nghệ anten thông minh và cải tiến mạng không dây"
+  
+} {
+  "otype": "person",
+  "name":  "Thành Cát Tư Hãn",
+  "udescription": "Thành Cát Tư Hãninh vào khoảng năm 1155/1162/1167 và mất ngày 18/8/1227, là Hãn vương của Mông Cổ và là người sáng lập ra Đế quốc Mông Cổ sau khi hợp nhất các bộ lạc độc lập ở vùng đông bắc châu Á năm 1206."
+} {
+  "otype": "person",
+  "name":  "Napoléon Bonaparte",
+  "udescription": "Napoléon Bonaparte sinh ngày 15/8/1769 mất 5/5/1821 là vị tướng của Cách mạng Pháp và là người cai trị nước Pháp với tư cách là Đệ nhất Tổng tài (Premier Consul) của Cộng hòa Pháp từ (11/11/1799-18/5/1804), sau đó là Hoàng đế Pháp đến 22/6/1815"
+}
+  

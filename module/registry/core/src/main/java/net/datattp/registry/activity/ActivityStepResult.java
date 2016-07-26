@@ -1,6 +1,6 @@
 package net.datattp.registry.activity;
 
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 
 public class ActivityStepResult {
   private String type ;

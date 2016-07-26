@@ -2,7 +2,7 @@ package net.datatp.xhtml.dom.extract;
 
 import org.junit.Test ;
 
-import net.datatp.http.SimpleHttpFetcher;
+import net.datatp.xhtml.SimpleHttpFetcher;
 
 public class OtherContentExtractorUnitTest {
   static String[] EXPECT_OTHER_TAG_DETAIL = {"content:other", "content:detail"} ;

@@ -1,6 +1,6 @@
 package net.datatp.tool.message;
 
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 
 public interface MessageExtractor {
   static public MessageExtractor DEFAULT_MESSAGE_EXTRACTOR = new MessageExtractor() {

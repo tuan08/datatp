@@ -1,0 +1,61 @@
+{
+  "otype": "entity", 
+  "name":"product",
+  "type":["product","mobile"],
+  "variant":[ "product", "headvances product", "PRODUCT"]
+} {
+  "otype": "entity", 
+  "name":"iphone",
+  "type":["product","mobile"],
+  "variant":[ "iphone", "apple iphone", "Iphone"]
+} {
+  "otype": "entity", 
+  "name":"iphone 3g",
+  "type":["product","mobile"],
+  "variant":[ "apple iphone 3g", "iphone 3g", "iphone-3g", "iphone3g", "iphone 3g 8g"]
+} {
+  "otype": "entity", 
+  "name":"iphone 3gs",
+  "type":["product","mobile"],
+  "variant":[ "apple iphone 3gs", "iphone 3gs 16gb", "iphone 3gs 32g", "iphone 3gs 32gb", "iphone-3gs", "iphone3gs", "iphone 3gs"]
+} {
+  "otype": "entity", 
+  "name":"iphone 4g",
+  "type":["product","mobile"],
+  "variant":[ "apple iphone 4g", "iphone-4g", "iphone4g", "iphone 4g"]
+} {
+  "otype": "entity", 
+  "name":"iphone 4gs",
+  "type":["product","mobile"],
+  "variant":[ "apple iphone 4gs", "iphone-4gs", "iphone4gs", "iphone 4gs"]
+} {
+  "otype": "entity", 
+  "name":"nokia",
+  "type":["product","mobile"],
+  "variant":["nokia", "đt nokia", "dien thoai nokia", "điện thoại nokia"]
+} {
+  "otype": "entity", 
+  "name":"nokia N9",
+  "type":["product","mobile"],
+  "variant":["nokia n9", "đt nokia n9", "dien thoai nokia n9", "điện thoại nokia n9"]
+} {
+  "otype": "entity", 
+  "name":"samsung",
+  "type":["product","mobile"],
+  "variant":[ "samsung", "đt samsung", "điện thoại samsung", "dien thoai samsung"]
+} {
+  "otype": "entity", 
+  "name":"samsung galaxy",
+  "type":["product","mobile"],
+  "variant":[ "samsung galaxy", "samsung galaxy s", "samsung galaxy s2", "galaxy s", "galaxy s2", "galaxy y"]
+} {
+  "otype": "entity", 
+  "name":"htc",
+  "type":["product","mobile"],
+  "variant":[ "htc", "điện thoại htc", "đt htc", "dien thoai htc"]
+} {
+  "otype": "entity", 
+  "name":"htc desire",
+  "type":["product","mobile"],
+  "variant":[ "htc desire", "htc desire android ", "htc-desire-hd"]
+}

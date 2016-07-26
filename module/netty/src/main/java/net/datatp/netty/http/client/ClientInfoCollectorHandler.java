@@ -10,7 +10,7 @@ import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.QueryStringDecoder;
 import net.datatp.netty.http.rest.RestRouteHandler;
 import net.datatp.util.ExceptionUtil;
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 
 public class ClientInfoCollectorHandler extends RestRouteHandler {
   

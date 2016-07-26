@@ -1,6 +1,6 @@
 package net.datatp.model.message;
 
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 
 public class Message {
   private byte[]          id;

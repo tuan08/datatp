@@ -9,7 +9,7 @@ import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
 
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 import net.datattp.registry.ErrorCode;
 import net.datattp.registry.MultiDataGet;
 import net.datattp.registry.Node;

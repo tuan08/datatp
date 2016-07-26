@@ -17,8 +17,7 @@ import org.apache.kafka.common.TopicPartition;
 import kafka.cluster.BrokerEndPoint;
 import kafka.javaapi.PartitionMetadata;
 import net.datatp.kafka.KafkaTool;
-import net.datatp.util.JSONSerializer;
-
+import net.datatp.util.json.JSONSerializer;
 
 public class KafkaPartitionReader {
   final static public int DEFAULT_FETCH_SIZE = 512 * 1024;

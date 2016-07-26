@@ -7,7 +7,7 @@ import kafka.server.KafkaConfig;
 import kafka.server.KafkaServer;
 import kafka.utils.Time;
 import net.datatp.tool.server.Server;
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 /**
  * @author Tuan Nguyen
  * @email tuan08@gmail.com

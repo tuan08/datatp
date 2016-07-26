@@ -8,7 +8,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import net.datatp.http.SimpleHttpFetcher;
+import net.datatp.xhtml.SimpleHttpFetcher;
 import net.datatp.xhtml.XhtmlDocument;
 import net.datatp.xhtml.util.HTMLUtils;
 

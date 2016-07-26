@@ -5,8 +5,8 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.kafka.clients.producer.Callback;
+import net.datatp.util.json.JSONSerializer;
 
-import net.datatp.util.JSONSerializer;
 /**
  * @author Tuan Nguyen
  * @email tuan08@gmail.com

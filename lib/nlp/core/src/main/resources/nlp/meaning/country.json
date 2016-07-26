@@ -1,0 +1,1286 @@
+{
+  "otype": "country",
+  "name":  "Afghanistan",
+  "variant": ["A Phú Hãn"],
+  "udescription": "Afghanistan là một quốc gia nằm giữa lục địa châu Á, có đường biên giới dài với Pakistan ở phía nam và phía đông, Iran ở phía tây, Turkmenistan, Uzbekistan và Tajikistan ở phía bắc, và Cộng hòa Nhân dân Trung Hoa ở khu vực viễn đông bắc, Diện tích: 647.500 km². Là nước lớn thứ 41 trên thế giới (sau Myanma), Dân số: 29.863.000"
+} {
+  "otype": "country",
+  "name":  "Albania",
+  "variant":["Anbani"],
+  "udescription": "Albania là quốc gia tại Đông nam Âu, giáp biên giới với Montenegro phía bắc, Serbia ở phía đông bắc. Cộng hoà Macedonia ở phía đông, và Hy Lạp ở phía nam. Có bờ Biển Adriatic ở phía tây và bờ Biển Ionian ở phía tây nam. Diện tích: 28,748 km², Dân số: 3.581.655"
+} {
+  "otype": "country",
+  "name":  "Algérie",
+  "variant": ["Algeria", "An-giê-ri"],
+  "udescription": "Algérie là một nước tại Bắc Phi, là nước lớn thứ hai trên lục địa Châu Phi, có chung biên giới với Tunisia phía đông bắc, Libya phía đông, Niger phía đông nam, Mali và Mauritania phía tây nam. Diện tích: 2,381,740 km², Dân số: 32.531.853"
+} {
+  "otype": "country",
+  "name":  "American Samoa",
+  "variant": ["Samoa"],
+  "udescription": "American Samoa là một lãnh thổ của Hoa Kỳ nằm ở Nam Thái Bình Dương, là một phần của Quần đảo Samoa, nằm về phía tây của Quần đảo Cook, phía bắc Tonga, và cách 300 dặm Anh (500 km) về phía nam của Tokelau. Phía tây của nó là nhóm đảo Wallis và Futuna. Dân số(năm 2000)là 57.291. Diện tích: 200.22 km² (77.305 sq mi)"
+} {
+  "otype": "country",
+  "name":  "Andorra",
+  "udescription": "Andorra là một nước trong lục địa nhỏ ở tây nam Châu Âu, nằm ở phía đông dãy Pyrenees, tiếp giáp với Tây Ban Nha và Pháp. Diện tích: 468 km², Dân số(Ước lượng 2007):71.882 người"
+} {
+  "otype": "country",
+  "name":  "Angola",
+  "variant": ["Ăng-gô-la"],
+  "udescription": "Angola là một quốc gia ở miền nam châu Phi, nằm bên bờ Đại Tây Dương. Có chung biên giới với Namibia, Cộng hòa Dân chủ Congo, và Zambia. Diện tích: 1,246,700 km², Dân số: 18.498.000"
+} {
+  "otype": "country",
+  "name":  "Anguilla",
+  "udescription": "Anguilla là một lãnh thổ hải ngoại của Anh trong vùng Caribê, một trong những đảo xa nhất về phía bắc của quần đảo Leeward trong khu vực Antilles. Thủ phủ của đảo là The Valley. Diện tích: 102 km²(39,4 dặm vuông), dân số: 13.500 (năm 2006)"
+} {
+  "otype": "country",
+  "name":  "Hoa Kỳ",
+  "variant": ["Mỹ", "US", "USA"],
+  "udescription": "Mỹ nằm gần hoàn toàn trong tây bán cầu, giữa Bắc Mỹ, giáp Thái Bình Dương phía tây, Đại Tây Dương phía đông, Canada phía bắc, Mexico phía nam. Mỹ cũng có 14 lãnh thổ hay được gọi là vùng quốc hải rải rác trong vùng biển Caribbe và Thái Bình Dương. Với 3,79 triệu dặm vuông (9,83 triệu km²) và 305 triệu dân"
+} {
+  "otype": "country",
+  "name":  "Antarctic Lands",
+  "udescription": "Antarctic Lands là tập hợp các đảo núi lửa nằm ở Ấn Độ Dương, phía Nam châu Phi, có khoảng cách gần như đều so với châu Á, châu Nam Cực và Úc, vùng đất này là một phần của châu Nam cực, nơi người Pháp vẫn luôn khẳng định sự cai quản của họ thông qua bản Hiệp ước Châu Nam cực, Dân số: 140 người"
+} {
+  "otype": "country",
+  "name":  "Châu Nam Cực",
+  "variant": ["Antarctica"],
+  "udescription": "Antarctica là lục địa nằm xung quanh Nam Cực của Trái Đất. Đây là nơi lạnh nhất trên Trái Đất và thường xuyên được bao phủ gần như toàn bộ bởi băng. Có diện tích khoảng 14.100.000 km2"
+} {
+  "otype": "country",
+  "name":  "Antigua and Barbuda",
+  "variant": ["Antigua và Barbuda"],
+  "udescription": "Antigua và Barbuda là một quốc đảo ở phía đông biển Caribbean, gồm 2 đảo chính là Antigua và Barbuda. Quốc đảo nằm giữa quần đảo Leeward, gần với Trinidad và Tobago, Montserrat và Anguilla. Diện tích: 442 km², Dân số(Ước lượng 2005): 82786 người"
+} {
+  "otype": "country",
+  "name":  "Argentina",
+  "variant": ["Ác-hen-ti-na", "Á Căn Đình"],
+  "udescription": "Argentina là quốc gia thuộc Nam Mỹ, nằm giữa dãy Andes về phía tây và Đại Tây Dương về phía đông và nam. Argentina có ranh giới với Paraguay và Bolivia về phía bắc, Brasil và Uruguay về phía đông bắc, và Chile về phía tây và nam. Diện tích: 3,761,274 km². Dân số: 39.538.000"
+} {
+  "otype": "country",
+  "name":  "Armenia", 
+  "variant": ["Ác-mê-ni"],
+  "udescription": "Armenia là một quốc gia nhiều đồi núi nằm kín trong lục địa ở phía nam Caucasus. Có biên giới với Thổ Nhĩ Kỳ ở phía tây, Gruzia ở phía bắc, Azerbaijan ở phía đông và Iran cùng phần lãnh thổ tách biệt Nakhchivan của Azerbaijan ở phía nam. Diện tích: 29,8001 km². Dân số: 2.976.372"
+} {
+  "otype": "country",
+  "name":  "Aruba",
+  "udescription": "Aruba là một hòn đảo dài 32 km của Antilles nhỏ trong Biển Caribbean, cách 27 km về phía bắc Bán đảo Paraguaná, Bang Falcón, Venezuela. Nằm trong Vương quốc Hà Lan, bao gồm phần châu Âu (Hà Lan) và phần châu Mỹ-Caribbean. Diện tích: 193 km2. Dân số: 103.484"
+} {
+  "otype": "country",
+  "name":  "Ashmore Islands",
+  "variant": ["Đảo quốc", "Quốc đảo"],
+  "udescription": "là quốc gia nằm trọn trên một hay nhiều hòn đảo và không có một phần lãnh thổ nào trên lục địa. Có 47 đảo quốc, chiếm phần lớn các quốc gia nhỏ nhất trên thế giới. Phần lớn các nước thuộc châu Đại Dương là đảo quốc"
+} {
+  "otype": "country",
+  "name":  "Australia",
+  "variant": ["Úc", "Úc Đại Lợi", "Ốt-xtrây-li-a"],
+  "udescription": "Úc là một quốc gia nằm ở Nam bán cầu. Là nước lớn thứ sáu trên thế giới và duy nhất chiếm toàn bộ một lục địa, cũng là nước lớn nhất trong khu vực Úc-Á. Nó gồm một đảo lớn là Tasmania, một tiểu bang của Úc và nhiều hòn đảo nhỏ ở Thái Bình Dương và Ấn Độ Dương. Diện tích 7.868.850 km2. Dân số: 21,714,000"
+} {
+  "otype": "country",
+  "name":  "Áo",
+  "variant": ["Austria", "Ehrarri"],
+  "udescription": "Áo là một quốc gia liên bang ở Trung Âu. Giáp Đức và Cộng hoà Séc ở phía bắc, Slovakia và Hungaria về phía đông, Slovenia và Ý về phía nam, và Thụy Sĩ và Liechtenstein về phía tây. Diện tích: 83,871 km². Dân số: 8.279.571"
+} {
+  "otype": "country",
+  "name":  "Azerbaijan",
+  "variant": ["A-giéc-bai-gian"],
+  "udescription": "Azerbaijan là một quốc gia vùng Caucasus ở Âu Á. Nằm trên ngã tư đường giữa Đông Âu và Tây Á, giáp với Biển Caspia ở phía đông, Nga ở phía bắc, Gruzia ở phía tây bắc, Armenia ở phía tây và Iran ở phía nam. Diện tích: 86,600 km². Dân số: 9.000.000"
+} {
+  "otype": "country",
+  "name":  "Ấn Độ",
+  "variant": ["India"],
+  "udescription": "Ấn Độ là một quốc gia Nam Á, chiếm hầu hết bán đảo Ấn Độ. Có ranh giới với Pakistan, Trung Quốc, Myanma, Bangladesh, Nepal, Bhutan và Afghanistan. Là nước đông dân thứ nhì trên thế giới. Diện tích: 3,287,590 km². Dân số: 1.099 tỉ người"
+} {
+  "otype": "country",
+  "name":  "Bahamas",
+  "udescription": "Bahamas Là một quần đảo với 700 hòn đảo và đảo nhỏ, nằm trong Đại Tây Dương, ở phía đông Hoa Kỳ, phía bắc Cuba và vùng Caribe, phía tây lãnh thổ phụ thộc Anh Turks and Caicos Islands. Diện tích: 13,940 km². Dân số: 301.790"
+} {
+  "otype": "country",
+  "name":  "Bahrain", 
+  "variant": ["Ba-ranh"],
+  "udescription": "Bahrain là một đảo quốc không có biên giới tại Vịnh Ba Tư. Ả Rập Xê-út nằm ở phía tây và nối với Bahrain bởi Đường đê Vua Fahd, Qua-ta ở phía nam qua Vịnh Ba Tư. Chiếc Cầu hữu nghị Qatar–Bahrain, hiện đang được lên kế hoạch, với đường nối Ba-ranh tới Qua-ta là đường nối dài nhất thế giới. Diện tích: 665 km². Dân số: 688.345"
+} {
+  "otype": "country",
+  "name":  "Bangladesh", 
+  "variant": ["Băng-la-đét"],
+  "udescription": "Bangladesh là một quốc gia ở vùng Nam Á. Địa giới Bangladesh giáp Ấn Độ ở phía tây, bắc, và đông nên gần như bị bao vây trừ một đoạn biên giới giáp với Myanma ở phía cực đông nam và Vịnh Bengal ở phía nam. Diện tích gần 144.000 km². Dân số: 144.319.628"
+} {
+  "otype": "country",
+  "name":  "Ba Lan",
+  "variant": ["Poland"], 
+  "udescription": "Ba Lan là một quốc gia ở Trung Âu, tiếp giáp với các nước Đức, Slovakia, Séc, Ukraina, Belarus, Litva, Nga và biển Baltic. Diện tích: 312.685 km². Dân số: 38,56 triệu "
+} {
+  "otype": "country",
+  "name":  "Barbados", 
+  "udescription": "Barbados là một đảo quốc độc lập ở phía tây của Đại Tây Dương, phía đông của biển Caribe. Là đảo cực nhỏ trong số các đảo thuộc khu vực Caribe. Tương đối phẳng, nó hơi lồi lên tại khu vực trung tâm, với điểm cao nhất là núi Hillaby, trong quận Scotland, có độ cao 340 m (1.100 ft) trên mực nước biển. Diện tích: 431 km². Dân số: 279254"
+
+} {
+  "otype": "country",
+  "name":  "Belarus",
+  "variant": ["Bê-la-rút", "Bạch Nga"],
+  "udescription": "Belarus là quốc gia nằm ở phía đông châu Âu. Belarus đã từng là một trong 15 nước cộng hòa của Liên Xô trong 70 năm cho đến khi tách ra và tuyên bố độc lập năm 1991. Diện tích tổng cộng 207.600 km². Dân số: 9,648,533"
+
+} {
+  "otype": "country",
+  "name":  "Bỉ", 
+  "variant": ["Belgium"], 
+  "udescription": "Bỉ là một quốc gia tại Tây Âu. Là một thành viên sáng lập của Liên minh châu Âu và là nơi đóng trụ sở của tổ chức này, cũng như nhiều tổ chức quốc tế lớn khác, gồm cả NATO. Bỉ có diện tích: 30.528km2. Dân số khoảng: 10.7 triệu người"
+
+} {
+  "otype": "country",
+  "name":  "Belize", 
+  "udescription": "Belize là một quốc gia ở Trung Mỹ, phía bắc giáp Mexico, tây và nam giáp Guatemala, đông là Vịnh Honduras, một nhánh của biển Caribe. Belize là nước duy nhất ở Trung Mỹ dùng tiếng Anh làm ngôn ngữ chính thức. Diện tích: 22,966 km². Dân số(năm 2006) 291.500"
+
+} {
+  "otype": "country",
+  "name":  "Benin", 
+  "variant": ["Bê-nanh"],
+  "udescription": " Benin là một quốc gia Tây Phi, tên cũ là Dahomey hay Dahomania. Có chung biên giới với Togo ở phía tây, Nigeria ở phía đông và Burkina Faso cùng Niger ở phía bắc, bờ biển ngắn ở phía nam nước này dẫn tới Eo Benin. Diện tích: 112,620 km². Dân số: 7.862.944"
+
+} {
+  "otype": "country",
+  "name":  "Bermuda", 
+  "variant": ["Quần đảo Bermuda", "Đảo Somers"],
+  "udescription": "Bermuda là lãnh thổ hải ngoại của Anh nằm trong Bắc Đại Tây Dương. Nằm về phía bờ đông Hoa Kỳ, cách khoảng 1770 km về phía đông bắc của Miami, Florida và 1350 km (840 mi) về phía nam của Halifax, Nova Scotia. Cách Bermuda gần nhất(đất liền) là Cape Hatteras, Bắc Carolina, khoảng 1030 km về phía tây-tây bắc. Diện tích: 53.3 km². Dân số: 67.163"
+
+} {
+  "otype": "country",
+  "name":  "Bhutan", 
+  "variant": ["Bu-tan"],
+  "udescription": "Bhutan là một quốc gia nằm kín trong lục địa tại Nam Á nằm giữa Ấn Độ và Trung Quốc. Toàn bộ nước này đều là đồi núi ngoại trừ một dải đồng bằng cận nhiệt đới nhỏ ở vũng viễn nam bị phân cắt bởi các thung lũng được gọi là Duars. Diện tích: 47,500 km². Dân số: 2.279.723"
+
+} {
+  "otype": "country",
+  "name":  "Bolivia", 
+  "variant": ["Bô-li-vi-a"],
+  "udescription": "Bolivia là một quốc gia nằm kín trong lục địa ở trung tâm Nam Mỹ, có biên giới với Brasil ở phía bắc và phía đông, Paraguay và Argentina ở phía nam, Chile và Peru ở phía tây. Diện tích: 1,098,581 km². Dân số: 8.857.870"
+
+} {
+  "otype": "country",
+  "name":  "Borneo",
+  "variant": ["Kalimantan"],
+  "udescription": "Borneo là đảo lớn thứ 3 thế giới với diện tích lên đến 743.330 km² tại Đông Nam Á. Đảo chia làm ba phần thuộc chủ quyền của ba nước Brunei, Indonesia và Malaysia.Phần đảo thuộc chủ quyền của Indonesia được gọi là Kalimantan, phần thuộc chủ quyền thuộc Malaysia được gọi là Đông Malaysia. Gần như toàn bộ lãnh thổ Brunei là một phần nhỏ của đảo Borneo. Dân số: 18.590.000"
+
+} {
+  "otype": "country",
+  "name":  "Bosna và Hercegovina",
+  "udescription": "Là một quốc gia tại Đông Nam Âu, trên Bán đảo Balkan, giáp biên giới với Croatia ở phía bắc, tây và nam, Serbia ở phía đông, và Montenegro ở phía nam, Bosnia và Herzegovina là một quốc gia hầu như nằm kín trong lục địa, ngoại trừ 26 kilômét bờ Biển Adriatic, tại trên thị trấn Neum. Diện tích: 51,129 km². Dân số: 4.025.476"
+
+} {
+  "otype": "country",
+  "name":  "Botswana",
+  "udescription": "Botswana là một quốc gia nằm kín trong lục địa tại Nam Phi. Trước là quốc gia bị bảo hộ Bechuanaland bởi Vương quốc Anh, sau đã đổi tên mới và trở thành một quốc gia độc lập bên trong Khối thịnh vượng chung Anh Quốc. Diện tích: 600,370 km². Dân số: 1.573.267"
+
+} {
+  "otype": "country",
+  "name":  "Đảo Bouvet", 
+  "variant": ["Bouvet Island", "Đảo Liverpool", "Đảo Lindsay"], 
+  "udescription": "Là một hòn đảo núi lửa ở cận Nam cực không có người ở phía Nam Đại Tây Dương, về phía nam - đông nam của Mũi Hảo Vọng (Nam Phi). Nó là khu vực tự trị của Na Uy. Nằm ở 54°26′N 3°24′Đ. Có diện tích 49 km²"
+
+} {
+  "otype": "country",
+  "name":  "Brazil", 
+  "variant": ["Braxin", "Ba Tây"],
+  "udescription": "Là quốc gia lớn nhất Nam Mỹ, lớn thứ năm trên thế giới về diện tích 8,514,877 km², dân số hơn 190 triệu người. Brazil tiếp giáp với 11 quốc gia và vùng lãnh thổ Nam Mỹ"
+
+} {
+  "otype": "country",
+  "name":  "Britain",
+  "udescription": "Đảo Anh hay đảo Britain là một hòn đảo nằm trên biển Bắc Đại Tây Dương, gần bờ biển tây bắc của Âu Châu, bao gồm ba xứ của Vương quốc Anh, đó là Anh, Scotland, và Wales, trừ một số quần đảo nằm xa, tất cả thuộc về Vương quốc Liên hiệp Anh và Bắc Ireland. Với diện tích là 218.595 km²"
+
+} {
+  "otype": "country",
+  "name":  "Bắc Síp", 
+  "udescription": "Bắc Síp là nước cộng hòa độc lập trên thực tế nằm ở phía bắc của đảo Síp. Bắc Síp tuyên bố độc lập năm 1983.Quốc gia này chỉ được công nhận về mặt ngoại giao từ Thổ Nhĩ Kỳ, một nước mà Bắc Síp lệ thuộc về kinh tế, chính trị và quân sự. Diện tích: 3.355 km². Dân số: 264172"
+
+} {
+  "otype": "country",
+  "name":  "British Indian Ocean Territory",
+  "udescription": "Lãnh thổ Ấn Độ Dương thuộc Anh là vùng lãnh thổ hải ngoại thuộc Vương quốc Liên hiệp Anh và Bắc Ireland, nằm trong lòng Ấn Độ Dương, ở giữa châu Phi và quốc gia vạn đảo, Indonesia. Diego Garcia là đảo lớn nhất của vùng lãnh thổ này. Diện tích: 60 km². Dân số: 3.500"
+
+} {
+  "otype": "country",
+  "name":  "British Virgin Islands",
+  "udescription": "Quần đảo Virgin thuộc Anh, là lãnh thổ hải ngoại của Anh ở Carribean. Nó bao gồm một 15 đảo trong quần đảo Virgin. Phần còn lại của quần đảo Virgin gọi là quần đảo Virgin thuộc Mỹ. Quần đảo Virgin thuộc Anh nằm ở phía Đông của Puerto Rico. Tổng diện tích: 153 km². Dân số khoảng 22 nghìn người (năm 2005)"
+  
+} {
+ "otype": "country",
+  "name":  "United States Virgin Islands",
+  "udescription": "Quần đảo Virgin thuộc Mỹ là nhóm đảo nằm trong vùng Caribbean và là một vùng quốc hải Hoa Kỳ. quần đảo này là một phần của chuỗi quần đảo Virgin và nằm trong Quần đảo Leeward thuộc nhóm Lesser Antilles. Bao gồm bốn đảo chính St. Croix, Saint John, St. Thomas và Đảo Water, cùng nhiều đảo nhỏ hơn. Diện tích: 346,36 km². Dân số: 108.612"
+
+} {
+  "otype": "country",
+  "name":  "Brunei", 
+  "udescription": "Brunei là một nước nằm trên đảo Borneo, ở Đông Nam Á. Ngoài đường bờ biển ở Biển Đông, nước này hoàn toàn bị Đông Malaysia bao bọc. Diện tích: 5,765 km², Dân số: 374.000"
+
+} {
+  "otype": "country",
+  "name":  "Bulgaria",
+  "variant": ["Bungary", "Bungari", "Bảo Gia Lợi"],
+  "udescription": "Bulgaria là quốc gia nằm tại khu vực đông nam châu Âu, giáp với Romania về phía bắc, giáp với Serbia và Cộng hòa Macedonia về phía tây, giáp với Hy Lạp và Thổ Nhĩ Kỳ về phía nam và cuối cùng giáp với Biển Đen về phía đông. Diện tích: 111,001.9 km². Dân số: 7.761.000"
+} {
+  "otype": "country",
+  "name":  "Burkina Faso",
+  "udescription": "Burkina Faso là quốc gia nằm ở Tây Phi. Có biên giới với Mali về phía bắc, Niger về phía đông, Bénin về phía đông nam, Togo và Ghana về phía đông nam, và Côte d'Ivoire về phía tây nam. Diện tích: 274,200 km². Dân số: 13.925.313"
+
+} {
+  "otype": "country",
+  "name":  "Myanma", 
+  "variant": ["Burma", "Miến Điện", "Diến Điện"],
+  "udescription": "Myanma là quốc gia ở Đông Nam Á, tây bắc bán đảo Trung-Ấn. Có 5.876 km đường biên giới với Trung Quốc (2.185 km), Thái Lan (1.800 km), Ấn Độ (1.463 km), Lào (235 km) và Bangladesh (193 km). Đường bờ biển dài 1.930 km. Diện tích: 676.577 km².Dân số: 55,4 triệu người"
+} {
+  "otype": "country",
+  "name":  "Burundi",
+  "udescription": "Burundi là quốc gia ở đông châu Phi. Burundi lập quan hệ ngoại giao với Việt Nam ngày 16/4/1973. Diện tích27,830 km². Dân số: 6.054.714"
+
+} {
+  "otype": "country",
+  "name":  "Caicos Islands",
+  "udescription": "Quần đảo Turks và Caicos,là một vùng lãnh thổ nằm trong quần đảo Angti (hay còn gọi là quần đảo Caribe) thuộc Vương quốc Liên hiệp Anh và Bắc Ireland. Diện tích khoảng 417 km². Dân số xấp xỉ 21.726 người"
+
+} {
+  "otype": "country",
+  "name":  "Campuchia", 
+  "variant": ["Cambodia", "Căm bốt", "Cao Miên"],
+  "udescription": "Campuchia là quốc gia nằm trên bán đảo Đông Dương ở vùng Đông Nam Á, giáp với vịnh Thái Lan ở phía Nam, Thái Lan ở phía Tây, Lào ở phía Bắc và Việt Nam ở phía Đông. Có ngôn ngữ chính thức là tiếng Khmer, thuộc nhóm Môn-Khmer trong hệ Nam Á. Diện tích: 181,040 km². Dân số: 13.388.910"
+
+} {
+  "otype": "country",
+  "name":  "Cameroon",
+  "variant": ["Ca-mê-run", "Kamerun", "Kamêrun"],
+  "udescription": "Cameroon là nước cộng hòa nhất thể tại miền trung Châu Phi. Nằm bên Vịnh Guinea, Cameroon giáp giới các nước Nigeria, Tchad, Cộng hòa Trung Phi, Cộng hòa Congo, Gabon và Guinea Xích đạo. Từng là một thuộc địa Đức. Diện tích: 475,440 km². Dân số: 16.380.005"
+
+} {
+  "otype": "country",
+  "name":  "Canada",
+  "variant": ["Can-na-đa", "Gia Nã Đại"],
+  "udescription": "Canada là quốc gia lớn thứ hai trên thế giới sau Nga, nằm ở cực bắc của Bắc Mỹ. Lãnh thổ trải dài từ Đại Tây Dương ở phía đông sang Thái Bình Dương ở phía tây, và giáp Bắc Băng Dương ở phía bắc. Về phía nam, giáp với Hoa Kỳ. Phía tây bắc của giáp với tiểu bang Alaska của Hoa Kỳ. Đông bắc có đảo Greenland. Diện tích: 9,970,000 km². Dân số: 32,8 triệu"
+
+} {
+  "otype": "country",
+  "name":  "Cabo Verde", 
+  "variant": ["Cape Verde", "Cáp Ve", "Cap Ve"],
+  "udescription": "Cabo Verde là một quốc gia ở tây Châu Phi. Diện tích: 4,033 km². Dân số: 418.224"
+} {
+  "otype": "country",
+  "name":  "Cayman Islands",
+  "udescription": "Quần đảo Cayman thuộc lãnh thổ hải ngoại của Vương quốc Liên hiệp Anh và Bắc Ireland, nằm ở phía Tây vùng biển Caribe, bao gồm 3 đảo: Grand Cayman, Cayman Brac và đảo Little Cayman. Diện tích: 260 km². Dân số: 45.017"
+} {
+  "otype": "country",
+  "name":  "Central African Republic",
+  "udescription": "Cộng hòa Trung Phi là một quốc gia tại miền trung châu Phi, giáp Chad về phía bắc, phía đông giáp Sudan, phía nam giáp Cộng hòa Dân chủ Congo và Cộng hòa Congo, phía tây giáp Cameroon. Là quốc gia không có bờ biển và có diện tích 622.436 km². Dân số: 3.683.538" 
+} {
+  "otype": "country",
+  "name":  "Chad",
+  "udescription": "Cộng hoà Tchad là quốc gia nằm trong lục địa của miền trung châu Phi. Có biên giới với vùng Darfur của Sudan về phía đông, Libya về phía bắc, Niger về phía tây, Cộng hoà Trung Phi về phía nam, và Cameroon và Nigeria về phía tây nam. Diện tích: 1,284,000 km². Dân số: 9.826.419"
+} {
+  "otype": "country",
+  "name":  "Chile", 
+  "variant": ["Chi-lê", "Chí Lợi"],
+  "udescription": "Chile là quốc gia tại Nam Mỹ, có dải bờ biển dài và hẹp xen vào giữa dãy núi Andes và biển Thái Bình Dương. Với Thái Bình Dương là giới hạn phía Tây, giáp Peru phía bắc, giáp Bolivia phía đông-bắc và giáp Argentina phía đông.Diện tích : 756,950 km². Dân số: 16.598.074"
+} {
+  "otype": "country",
+  "name":  "China", 
+  "variant": ["Trung Quốc", "Trung Hoa"],
+  "udescription": "Lãnh thổ Trung Quốc bành trướng ra từ một vùng đất chính tại Bình nguyên Hoa Bắc và lan ra tận các vùng phía Đông, Đông Bắc, và Trung Á. 67% diện tích Trung Quốc là cao nguyên và núi cao, ở phía tây, cao nguyên Thanh Hải - Tây Tạng chiếm 25% diện tích. Trung Quốc được chia thành hai miền Bắc và Nam, với ranh giới  là sông Hoài và dãy Tần Lĩnh. Diện tích: 9,596,960 km². Dân hiện nay là 1,3 tỉ "
+} {
+  "otype": "country",
+  "name":  "Christmas Island",
+  "variant": ["Đảo Christmas"],
+  "udescription": "Đảo Christmas là lãnh thổ của Úc nằm ở Ấn Độ Dương, 2600 kilômét (1600 mi) về phía tây bắc của Perth ở Tây Úc và 500 kilômét (300 mi) về phía nam của Jakarta, Indonesia. Diện tích:135 km2. Dân số: 1.493"
+} {
+  "otype": "country",
+  "name":  "Clipperton",
+  "variant": ["Đảo Clipperton"],
+  "udescription": "Clipperton là một đảo san hô vòng rộng chín kilômét vuông về phía Bắc Thái Bình Dương, phía tây nam Mexico và phía tây Costa Rica, tại tọa độ 10°18′B 109°13′T. Diện tích: 9 km² "
+} {
+  "otype": "country",
+  "name":  "Colombia",
+  "variant": ["Cô-lôm-bi-a"],
+  "udescription": "Colombia là quốc gia tại Nam Mỹ. Giáp Venezuela và Brazil về phía đông, giáp Ecuador và Peru về phía nam, giáp Đại Tây Dương phía bắc, qua Biển Caribe, và phía tây giáp Panama và Thái Bình Dương. Colombia là quốc gia duy nhất ở Nam Mỹ giáp cả Đại Tây Dương và Thái Bình Dương. Diện tích: 1,141,748 km². Dân số: 45.600.000" 
+} {
+  "otype": "country",
+  "name":  "Comoros", 
+  "variant": ["Cô mo"],
+  "udescription": "Comoros là một quốc gia ở Châu Phi. Thủ đô và cũng là thành phố lớn nhất là Moroni. Diện tích: 2,170 km². Dân số: 596.202"
+} {
+  "otype": "country",
+  "name":  "Congo-Kinshasa",
+  "udescription": "Cộng hòa Dân chủ Congo là một quốc gia ở Trung Châu Phi.Còn được gọi là Nhà nước Tự do Congo, Congo Bỉ, Congo-Leopoldville, hay Congo-Kinshasa vì thủ đô là Kinshasa, hay Zaire. Diện tích: 2,345,410 km². Dân số: 59.319.660"
+} {
+  "otype": "country",
+  "name":  "Congo-Brazzaville",
+  "udescription": "Cộng hòa Congo là một quốc gia ở Trung Châu Phi.Cộng hòa Congo không phải là Cộng hòa Dân chủ Congo vì thủ đô là Brazzaville. Quốc gia này đã từng theo chủ nghĩa xã hội, có quan hệ mật thiết với Liên Xô và các quốc gia xã hội chủ nghĩa khác nhưng chỉ trong một thời gian ngắn. Diện tích: 342,000 km². Dân số: 2.954.258"
+} {
+  "otype": "country",
+  "name":  "Cook Islands", 
+  "variant": ["Quần đảo Cook"],
+  "udescription": "Quần đảo Cook là một nền dân chủ nghị viện tự trị trong liên minh tự do với New Zealand. 15 đảo nhỏ trong quốc gia ở Nam Thái Bình Dương này có diện tích đất liền tổng cộng 240 kilômét vuôngDân số18.700"
+} {
+  "otype": "country",
+  "name":  "Coral Sea Islands",
+  "variant": ["Biển San hô"],
+  "udescription": "Biển San hô là một biển ven lục địa ở ngoài bờ đông bắc Úc. Ranh giới về phía tây của biển này là bờ phía đông của bang Queensland, biển này gồm cả Rạn san hô Great Barrier, ranh giới phía đông là Vanuatu và Nouvelle-Calédonie, ranh giới phía bắc ở khoảng cực nam của Quần đảo Solomon. Phía nam của biển này là Biển Tasman"
+} {
+  "otype": "country",
+  "name":  "Costa Rica",
+  "udescription": "Costa Rica là một nước cộng hoà tại Trung Mỹ, giáp giới với Nicaragua ở mặt bắc, Panamá ở phía nam và đông nam, Thái Bình Dương ở phía tây và nam, và Biển Caribe ở phía đông. Là nước đầu tiên trên thế giới tự bãi bỏ lực lượng quân đội theo hiến pháp. Diện tích:51,100 km². Dân số: 4.016.173 "
+} {
+  "otype": "country",
+  "name":  "Cote D 'Ivoire",
+  "variant": ["Cốt Đi-voa", "Ivory Coast"],
+  "udescription": "Bờ Biển Ngà là một quốc gia nằm ở Tây Phi có biên giới giáp với Liberia, Guinea, Mali, Burkina Faso, và Ghana về phía tây, bắc, đông, và nằm bên cạnh Vịnh Guinea về phía nam. Diện tích: 322,460 km². Dân số: 20.617.068 người"
+} {
+  "otype": "country",
+  "name":  "Croatia", 
+  "udescription": "Croatia là quốc gia ở Đông Nam Âu, tại ngã tư đường giữa Đồng bằng Pannonian, Balkan, và Biển Địa Trung Hải. Thủ đô là Zagreb. Croatia giáp biên giới với Slovenia và Hungary ở phía bắc, Bosnia và Herzegovina ở phía đông nam và Serbia và Montenegro ở phía đông. Diện tích: 56,542 km². Dân số: 4.496.869"
+} {
+  "otype": "country",
+  "name":  "Cuba", 
+  "variant": ["Quy Ba"],
+  "udescription": "Cuba là Quốc gia bao gồm đảo Cuba, cùng với đảo Thanh Niên (Isla de la Juventud) và các đảo nhỏ xung quanh. Nằm ở phía bắc Vùng Caribe ở giao điểm của của ba miền biển lớn: Biển Caribe, Vịnh Mexico và Đại Tây Dương. Cuba nằm ở phía nam miền đông Hoa Kỳ và Bahamas, phía tây Quần đảo Turks and Caicos và Haiti và phía đông Mexico. Diện tích: 110,860 km². Dân số: 11.239.363"
+} {
+  "otype": "country",
+  "name":  "Cyprus", 
+  "variant": ["Síp"],
+  "udescription": "Síp là một quốc đảo Âu Á nằm ở phía đông Địa Trung Hải, phía nam Thổ Nhĩ Kỳ và phía tây Syria và Liban. Là hòn đảo lớn thứ ba ở Địa Trung Hải, và là một trong những địa điểm thu hút nhiều khách du lịch nhất, với hơn 2.4 triệu du khách mỗi năm. Là một cựu thuộc địa Anh. Diện tích: 9.251 km². Dân số: 801600"
+} {
+  "otype": "country",
+  "name":  "Czech Republic",
+  "variant": ["Tiệp Khắc", "Tiệp"],
+  "udescription": "Cộng hòa Séc là một quốc gia thuộc khu vực Trung Âu và không giáp biển. Séc giáp Ba Lan về phía bắc, giáp Đức về phía tây, giáp Áo về phía nam và giáp Slovakia về phía đông. Diện tích: 78,866 km². Dân số: 10.228.744"
+} {
+  "otype": "country",
+  "name":  "Czechoslovakia",
+  "udescription": "Tiệp Khắc là nước có chủ quyền tại Trung Âu tồn tại từ 10/1918, khi nó tuyên bố độc lập khỏi Đế chế Áo-Hung, tới năm 1992. Ngày 1/1/1993 Tiệp Khắc phân chia trong hòa bình thành Cộng hòa Séc và Slovakia. Cộng hòa Séc hiện nay kế thừa Tiệp Khắc về mặt pháp lý. Diện tích: 140.446 km². Dân số: 13.607.385 "
+} {
+  "otype": "country",
+  "name":  "Denmark", 
+  "variant": ["Đan Mạch"],
+  "udescription": "Đan Mạch là quốc gia thuộc vùng Scandinavia ở Bắc Âu, nằm ở vùng cực nam của các nước Nordic, phía Tây Nam của Thụy Điển, phía Nam của Na Uy và giáp với Đức về phía Nam. Đan Mạch giáp cả biển Baltic và biển Bắc, bao gồm một bán đảo lớn, Jutland và nhiều đảo, được biết đến nhiều nhất là Zealand. Diện tích43,0: 94 km². Dân số: 5.443.084"
+} {
+  "otype": "country",
+  "name":  "Djibouti", 
+  "udescription": "Djibouti là quốc gia ở Đông Châu Phi, giáp Eritrea về phía bắc, Ethiopia về phía tây và nam, và Somalia về phía đông nam. Phần còn lại của biên giới là Biển Đỏ và vịnh Aden. Diện tích: 23,000 km2. Dân số: 476.703"
+} {
+  "otype": "country",
+  "name":  "Dominica",
+  "udescription": "Dominica là một đảo quốc trong vùng Biển Caribê. Không nên nhầm lẫn nước này với Cộng hoà Dominica, một quốc gia khác trong vùng Caribê. Nó có tên hiệu \"Hòn đảo thiên nhiên của vùng Caribê\" vì vẻ đẹp tự nhiên chưa bị xâm phạm. Diện tích: 754 km². Dân số: 69.029"
+} {
+  "otype": "country",
+  "name":  "Dominican Republic",
+  "udescription": "Cộng hoà Dominica là quốc gia tại Caribe. 1/3 phía tây hòn đảo Hispaniola thuộc Haiti, khiến cho Hispaniola một trong hai hòn đảo Caribê thuộc hai quốc gia. Cả về diện tích và dân số, Cộng hòa Dominica là đất nước Caribê lớn thứ nhì (sau Cuba), với 48.442 km ² và có dân số ước tính 10 triệu người"
+} {
+  "otype": "country",
+  "name":  "East Timor",
+  "variant": ["Đông Timor", "Timor-Leste"],
+  "udescription": "Đông Timor là quốc gia ở khu vực châu Đại Dương, bao gồm nửa phía đông của đảo Timor, những đảo lân cận của Atauro và Jaco và Oecussi-Ambeno, một phần nằm ở phía tây bắc của đảo, trong Tây Timor của Indonesia. Đông Timor là một đất nước nhỏ bé với diện tích: 15.410 km². Dân số: 947.000"
+} {
+  "otype": "country",
+  "name":  "Ecuador",
+  "udescription": "Ecuador là một nước cộng hoà đại diện dân chủ ở Nam Mỹ, có biên giới với Colombia ở phía bắc, Peru ở phía đông và nam, và với Thái Bình Dương ở phía tây. Nước này gồm Quần đảo Galápagos tại Thái Bình Dương, Diện tích: 199,235 km². Dân số: 13.363.593"
+} {
+  "otype": "country",
+  "name":  "Egypt",
+  "variant": ["Ai Cập", "Y Diệp"], 
+  "udescription": "Ai Cập là một nước cộng hòa nằm ở Bắc Phi, Trung Đông và Tây Nam Á. Nước này còn được người Việt trước thế kỷ 20 phiên âm là Y Diệp. Diện tích: 1,001,450 km². Dân số:79.089.650"
+} {
+  "otype": "country",
+  "name":  "El Salvador", 
+  "udescription": "El Salvador là một quốc gia tại Trung Mỹ. El Salvador nằm bên bờ Thái Bình Dương, giữa Guatemala và Honduras. Diện tích: 21,040 km². Dân số: 6.822.378 "
+} {
+  "otype": "country",
+  "name":  "England",
+  "variant": ["Anh", "Anh Cát Lợi"],
+  "udescription": "Anh là quốc gia rộng lớn và đông dân nhất trong Vương quốc Liên hiệp Anh và Bắc Ireland, nằm về phía tây bắc của châu Âu, tiếp giáp với Scotland về phía bắc và Wales ở phía tây. Anh còn giáp với biển Bắc, biển Ireland, Đại Tây Dương và eo biển Măng-sơ. Diện tích: 130,395 km². Dân số: 50,1 triệu "
+} {
+  "otype": "country",
+  "name":  "Equatorial Guinea", 
+  "variant": ["Guinea Xích Đạo"],
+  "udescription": "Guinea Xích Đạo là một quốc gia ở Tây Châu Phi. Thủ đô(và là thành phố lớn nhất)là Malabo. Diện tích: 28,051 km². Dân số: 535.881"
+} {
+  "otype": "country",
+  "name":  "Eritrea", 
+  "udescription": "Eritrea là quốc gia Phi Châu, giáp Sudan về phía tây, Ethiopia về phía nam , và Djibouti về phía đông nam. Phần phía đông và đông bắc Eriteria còn có các đảo ven bờ trong biển Đỏ. Diện tích: 117,600 km². Dân số: 4.401.009"
+} {
+  "otype": "country",
+  "name":  "Estonia",
+  "udescription": "Estonia là quốc gia ở khu vực Bắc Âu, tiếp giáp với Liên bang Nga về phía đông, với Latvia về phía nam, với vịnh Phần Lan về phía bắc và giáp với biển Baltic về phía tây. Diện tích: 45,226 km². Dân số: 1.315.912 người"
+} {
+  "otype": "country",
+  "name":  "Ethiopia",
+  "udescription": "Ethiopia là nước ở phía đông châu Phi. Phía bắc giáp Eritrea, phía đông bắc giáp Djibouti, phía đông giáp Somalia, giáp Sudan ở phía tây, và phía nam giáp Kenya. Diện tích: 1,127,127 km2. Dân số: 73.053.286"
+} {
+  "otype": "country",
+  "name":  "European Union",
+  "variant": ["EU"], 
+  "udescription": "Liên minh châu Âu là một liên minh kinh tế chính trị bao gồm 27 quốc gia thành viên thuộc Châu Âu. Được thành lập bởi Hiệp ước Maastricht vào ngày 1/11/1993 dựa trên Cộng đồng châu Âu (EC). Diện tích: 4.324.782 km². Dân số: 501,259,840"
+} {
+  "otype": "country",
+  "name":  "Falkland Islands", 
+  "udescription": "Quần đảo Falkland là quần đảo ở Nam Đại Tây Dương, cách bờ biển Argentina 300 dặm (483 km), cách Shag Rocks 671 dặm (1.080 km) về phía tây, và cách phía bắc châu Nam Cực (Đảo Voi) 584 dặm (940 km) về phía bắc. Gồm hai đảo chính, Đông Falkland và Tây Falkland. Diện tích: 12,173 km². Dân số: 3.060"
+} {
+  "otype": "country",
+  "name":  "Faroe Islands", 
+  "variant": ["Quần đảo Faroe", "Quần đảo Faeroe"],
+  "udescription": "Quần đảo Faeroe là một nhóm đảo nằm trong vùng biển Na Uy, phía Bắc Đại Tây Dương, ở giữa Iceland, Na Uy và Scotland.Quần đảo Faroe là lãnh thổ được chính thức tách ra từ Na Uy từ 1814. Diện tích: 1,399 km². Dân số: 48.317"
+} {
+  "otype": "country",
+  "name":  "Federated States of Micronesia",
+  "udescription": "Liên bang Micronesia là một đảo quốc nằm ở Thái Bình Dương, phía đông bắc của Papua New Guinea. Là một quốc gia có chủ quyền liên kết tự do với Hoa Kỳ. Diện tích:702 km². Dân số: 108.500"
+} {
+  "otype": "country",
+  "name":  "Fiji",
+  "udescription": "Fiji là một đảo quốc tại châu Đại Dương, thuộc phía nam Thái Bình Dương, phía tây Vanuatu, phía đông Tonga và phía nam Tuvalu. Đảo quốc này bao gồm 322 đảo. Có 2 đảo chính là Viti Levu và Vanua Levu. Diện tích: 18,274 km². Dân số: 837.271"
+} {
+  "otype": "country",
+  "name":  "Finland",
+  "variant": ["Phần Lan"],
+  "udescription": "Phần Lan là quốc gia thuộc khu vực Bắc Âu, giáp với Thụy Điển về phía tây, Nga về phía đông, Na Uy về phía bắc và Estonia về phía nam qua Vịnh Phần Lan. Diện tích: 338,145 km². Dân số: 5.252.778 "
+} {
+  "otype": "country",
+  "name":  "Macedonia", 
+  "udescription": "Macedonia là quốc gia thuộc khu vực đông nam châu Âu, giáp với Serbia và vùng lãnh thổ Kosovo về phía bắc, giáp với Albania về phía tây, giáp với Hy Lạp về phía nam và giáp với Bulgaria về phía đông. Dân số khoảng 2 triệu người. Diện tích: 25,333 km²"
+} {
+  "otype": "country",
+  "name":  "France", 
+  "variant": ["Pháp", "Phú Lãng Sa"],
+  "udescription": "Pháp là quốc gia nằm tại Tây Âu, có một số đảo và lãnh thổ nằm rải rác trên nhiều lục địa khác. Pháp có biên giới với Bỉ, Luxembourg, Đức, Thuỵ Sĩ, Ý, Monaco, Andorra và Tây Ban Nha. Diện tích: 674,843 km². Dân số: 63.044.000"
+} {
+  "otype": "country",
+  "name":  "French Guiana",
+  "variant": ["Gai-a-na thuộc Pháp", "Nguy Gian"],
+  "udescription": "Guyane thuộc Pháp nằm ở bờ bắc của Nam Mỹ, cũng là một vùng hải ngoại của Pháp, một trong 26 vùng của Pháp. Là một phần của nước Pháp, Guyane thuộc Pháp là một phần của lãnh thổ Liên minh châu Âu. Diện tích: 83.534 km². Dân số: 202.000"
+} {
+  "otype": "country",
+  "name":  "French Polynesia",
+  "udescription": "Polynésie thuộc Pháp là vùng lãnh thổ hải ngoại thuộc Pháp, nằm ở phía nam Thái Bình Dương. Ngày nay Tahiti là khu vực đông dân nhất của nhóm đảo này và đồng thời cũng là thủ đô của vùng lãnh thổ Papeete. Diện tích: 4,167 km². Dân số: 259.596"
+} {
+  "otype": "country",
+  "name":  "French Southern", 
+  "udescription": "Vùng đất phía Nam và châu Nam cực thuộc Pháp Tập hợp các đảo núi lửa nằm ở Ấn Độ Dương, phía Nam châu Phi, có khoảng cách gần như đều so với châu Á, châu Nam Cực và Úc. Dân số: 140 người"
+} {
+  "otype": "country",
+  "name":  "Gabon",
+  "variant": ["Ga-bông"],
+  "udescription": "Gabon là quốc gia ở Trung Châu Phi, giáp với vịnh Guinea về phía tây, Equatorial Guinea về phía tây bắc và Cameroon về phía bắc, còn Cộng hòa Congo bao quanh phía đông và nam. Thủ đô và thành phố lớn nhất là Libreville. Diện tích: 267,667 km². Dân số: 1.389.201"
+} {
+  "otype": "country",
+  "name":  "Gambia",
+  "variant": ["Găm-bi-a"],
+  "udescription": "Gambia là quốc gia ở Tây Châu Phi, là quốc gia nhỏ nhất ở châu Phi, giáp Senegal về phía bắc, đông, và nam. Có một bờ biển ngắn trông ra Đại Tây Dương về phía tây. Sông Gambia chảy suốt chiều dọc nước này và đổ ra biển Đại Tây Dương. Diện tích: 10,380 km². Dân số: 1.593.256"
+} {
+  "otype": "country",
+  "name":  "Georgia", 
+  "udescription": "Georgia là một tiểu bang tại Đông Nam Hoa Kỳ, nằm giáp với Florida về phía nam, với Đại Tây Dương và Nam Carolina về phía đông, với Alabama về phía tây, và với Tennessee và Bắc Carolina về phía bắc. Diện tích: 154.077 km². Dân số: 8.186.453 người"
+} {
+  "otype": "country",
+  "name":  "Germany", 
+  "variant": ["Đức"], 
+  "udescription": "Đức là quốc gia liên bang nằm ở Trung Âu và có chung đường biên giới với các nước Đan Mạch (về phía Bắc), Ba Lan và Séc (phía Đông), Áo và Thụy Sĩ (về phía Nam), Pháp, Luxembourg, Bỉ và Hà Lan (về phía Tây). Diện tích: 357,050 km². Dân số: 82.443.000"
+} {
+  "otype": "country",
+  "name":  "Ghana",
+  "udescription": "Ghana là một quốc gia tại Tây Phi, có biên giới với Côte d'Ivoire về phía tây, Burkina Faso về phía bắc, Togo về phía đông, còn về phía nam là Vịnh Guinea. Thủ đô và cũng là thành phố lớn nhất là Accra. Diện tích: 238,540 km². Dân số: 21.029.853"
+} {
+  "otype": "country",
+  "name":  "Gibraltar",
+  "udescription": "Gibraltar là vùng lãnh thổ hải ngoại thuộc Liên hiệp Vương quốc Anh và bắc Ireland, nằm gần cực Nam bán đảo Iberia, bên trên eo biển Gibraltar, giáp Tây Ban Nha ở phía Bắc. Trước là một căn cứ quân sự quan trọng của lực lượng vũ trang và hải quân Hoàng gia Anh. Diện tích: 6.5 km². Dân số: 27.967"
+} {
+  "otype": "country",
+  "name":  "Glorioso Islands",
+  "variant": ["Ấn Độ Dương"],
+  "udescription": "Ấn Độ Dương có diện tích 75.000.000 km2. Đại dương này về hướng Bắc được giới hạn bởi bán đảo Ấn Độ, Pakistan và Iran, về hướng Đông bởi Đông Nam Á (cụ thể là Myanma, Thái Lan, Malaysia, Indonesia) và châu Đại Dương), về phía Tây bởi bán đảo Ả Rập và châu Phi"
+} {
+  "otype": "country",
+  "name":  "Greece",
+  "variant": ["Hy Lạp"],
+  "udescription": "Hy Lạp là quốc gia thuộc khu vực châu Âu, nằm phía nam bán đảo Balkan, giáp với các nước Albania, Cộng hòa Macedonia và Bulgaria về phía bắc, giáp với Thổ Nhĩ Kỳ về phía đông. Biển Aegaeum bao bọc phía đông và phía nam, còn biển Ionia nằm ở phía tây. Diện tích:131,940 km². Dân số: 10.706.290 người"
+} {
+  "otype": "country",
+  "name":  "Greenland",
+  "udescription": "Greenland là một quốc gia thuộc Châu MĩĐại Tây Dương bao quanh Greenland ở phía đông nam; Biển Greenland ở phía đông; Bắc Băng Dương ở phía bắc; và Vịnh Baffin ở phía tây. Greenland là hòn đảo lớn nhất thế giới và có vườn quốc gia lớn nhất thế giới. Diện tích: 2,166,086 km². Dân số: 56.375. Thủ đô(thành phố lớn nhất) là Nuuk"
+} {
+  "otype": "country",
+  "name":  "Guadeloupe",
+  "udescription": "Guadeloupe là một quần đảo nằm ở ở phía đông Biển Caribe có tọa độ 16°15′B, 61°35′T, với diện tích đất liền 1.628 km² (629 mi²). Nó là một lãnh phận hải ngoại của Pháp. Dân số: 452.776"
+} {
+  "otype": "country",
+  "name":  "Guam",
+  "udescription": "Guam là một đảo trong miền tây Thái Bình Dương và là một lãnh thổ có tổ chức nhưng chưa hợp nhất của Hoa Kỳ. Là đảo lớn nhất và ở tận phía nam nhất của Quần đảo Mariana. Diện tích: 541,30 km². Dân số: 178.000"
+} {
+  "otype": "country",
+  "name":  "Guatemala",
+  "udescription": "Guatemala là một quốc gia tại Trung Mỹ, ở phần phía nam Bắc Mỹ, giáp biên giới với Mexico ở phía tây bắc, Thái Bình Dương ở phía tây nam, Belize và Biển Caribe ở phía đông bắc, và Honduras cùng El Salvador ở phía đông nam. Diện tích: 108,890 km². Dân số: 13.276.517"
+} {
+  "otype": "country",
+  "name":  "Guernsey",
+  "udescription": "Địa hạt Guernseylà một thuộc địa Hoàng gia của Anh trong eo biển Măng-sơ về phía bờ biển Normandie. Diện tích: 78 km². Dân số: 65.573"
+} {
+  "otype": "country",
+  "name":  "Guinea",
+  "variant": ["Guinée"],
+  "udescription": "Guinée là một đất nước nằm ở miền Tây Phi. Diện tích Guinée vào khoảng 246.000 kilomet vuông (94.981 dặm vuông). Guinée biên giới với Guiné-Bissau, Sénégal và Mali về phía bắc, phía nam giáp Bờ Biển Ngà, Liberia và Sierra Leone. Con sông Niger bắt nguồn từ Guinée và chảy về hướng đông.Dân số: 9.467.866"
+} {
+  "otype": "country",
+  "name":  "Guinea-Bissau",
+  "udescription": "Guinea-Bissau là quốc gia ở Tây Châu Phi và trong những nước nhỏ nhất trên lục địa này. Guiné-Bissau giáp Sénégal về phía bắc, Guinée về phía nam và đông. Phía tây là Đại Tây Dương. Là một cựu thuộc địa của Bồ Đào Nha. Diện tích: 36,120 km². Dân số: 1.416.027"
+} {
+  "otype": "country",
+  "name":  "Guyana",
+  "udescription": "Guyana là quốc gia duy nhất thuộc Khối thịnh vượng chung Anh nằm trên lục địa Nam Mỹ. Nước này ở phía bắc xích đạo trong vùng nhiệt đới và nằm trên Đại Tây Dương. Guyana có biên giới phía đông với Suriname, phía nam và tây nam với Brasil và phía tây với Venezuela. Diện tích: 214,970 km2. Dân số 765.283"
+} {
+  "otype": "country",
+  "name":  "Haiti",
+  "udescription": "Haiti là quốc gia ở vùng biển Ca ri bê nói tiếng Creole Haiti và tiếng Pháp, quốc gia này nằm ở đảo Hispaniola, trong quần đảo Đại Antilles. Điểm cao nhất quốc gia này là Pic la Selle, với độ cao 2.680 mét (8.793 ft). Diện tích là 27.750 km² và thủ đô là Port-au-Prince. Dân số: 9.035.536"
+} {
+  "otype": "country",
+  "name":  "Heard Island",
+  "udescription": "Đảo Heard và quần đảo McDonald là quần đảo cằn cỗi không người ở nằm ở Nam Đại Dương, khoảng hai phần ba khoảng cách từ Madagascar đến châu Nam Cực, hoặc 7718 km từ phía nam Rajapur, Maharashtra. Tổng kích thước của nhóm đảo là 372 km²"
+} {
+  "otype": "country",
+  "name":  "Herzegovina",
+  "udescription": "Bosnia và Herzegovina là một quốc gia tại Đông Nam Âu, trên Bán đảo Balkan, giáp biên giới với Croatia ở phía bắc, tây và nam, Serbia ở phía đông, và Montenegro ở phía nam, Bosnia và Herzegovina là một quốc gia hầu như nằm kín trong lục địa, ngoại trừ 26 kilômét bờ Biển Adriatic, tại trên thị trấn Neum. Diện tích: 51,129 km². Dân số: 4.025.476"
+} {
+  "otype": "country",
+  "name":  "Noord-Holland",
+  "udescription": "Bắc Hà Lan là một tỉnh của Hà Lan, tọa lạc ở vùng tây bắc của quốc gia này. Tỉnh lỵ của tỉnh này là Haarlem. Các thành phố khác là huyện lỵ có Amsterdam, Hilversum, Den Helder Alkmaar, Zaandam và Hoorn. Bắc Hà Lan là một bán đảo giữa biển Bắc và IJsselmeer. Diện tích: 1.421 km². Dân số: 2.595.294"
+} {
+  "otype": "country",
+  "name":  "Vatican City",
+  "variant": ["Va-ti-căng", "Va-ti-căn"],
+  "udescription": "Thành Vaticanlà một quốc gia có chủ quyền với lãnh thổ bao gồm một vùng đất được xây tường bao kín, nằm trong lòng thành phố Rôma, Ý. Với diện tích xấp xỉ 44 hécta (108,7 mẫu Anh), đây là quốc gia độc lập nhỏ nhất thế giới. Dân số: 921 "
+} {
+  "otype": "country",
+  "name":  "Honduras",
+  "udescription": "Honduras trước kia được gọi là Honduras Tây Ban Nha, là quốc gia tại Trung Mỹ, giáp biên giới với Guatemala ở phía tây, El Salvador ở phía tây nam, Nicaragua ở phía đông nam, phía nam giáp với Thái Bình Dương và phía bắc là Vịnh Honduras và Biển Caribe, Belize, nằm cách 75 kilômét (50 dặm), phía bên kia vịnh Honduras. Diện tích: 112,492 km². Dân số: 6.975.204"
+} {
+  "otype": "country",
+  "name":  "Hong Kong",
+  "variant": ["Hương Cảng"],
+  "udescription": "Hong Kong là đặc khu hành chính thuộc Cộng hòa Nhân dân Trung Hoa nằm trên bờ biển Đông Nam của Trung Quốc. Lãnh thổ này, gồm hơn 260 hòn đảo, nằm về phía Đông của Đồng bằng châu thổ Châu Giang, giáp với tỉnh Quảng Đông về phía Bắc và nhìn ra Biển Nam Trung Hoa ở phía Đông, Tây và Nam. Diện tích: 1,103 km². Dân số: 7.055.071"
+} {
+  "otype": "country",
+  "name":  "Howland Island",
+  "udescription": "Đảo Howland là đảo san hô không có người ở, nằm ở ngay phía bắc đường xích đạo trong Trung Thái Bình Dương, khoảng 3.100 km (1.670 hải lý) phía tây nam Honolulu. Nằm giữa đường từ Hawaii đến Úc và là lãnh thổ chưa sát nhập và chưa tổ chức của Hoa Kỳ. Diện tích: 1,84 km²"
+} {
+  "otype": "country",
+  "name":  "Hungary", 
+  "variant": ["Hung Gia Lợi"],
+  "udescription": "Hungary là quốc gia không giáp biển thuộc khu vực Trung Âu. Nước này tiếp giáp với Slovakia về phía bắc, Áo về phía tây, Slovenia về phía tây nam, Croatia và Serbia về phía nam, Romania về phía đông và Ukraina về phía đông bắc. Thủ đô là thành phố Budapest. Diện tích: 93,030 km². Dân số: 10.082.000"
+} {
+  "otype": "country",
+  "name":  "Iceland", 
+  "variant": ["Ai xơ len, Băng Đảo"],
+  "udescription": "Iceland là đảo quốc thuộc khu vực châu Âu theo thể chế cộng hòa. Là một trong những quốc gia thưa dân nhất thế giới, nằm giáp vòng Cực Bắc nên có khí hậu rất lạnh giá, nằm trên vành đai núi lửa Đại Tây Dương, nên có rất nhiều núi lửa, suối nước nóng và nguồn địa nhiệt khổng lồ. Diện tích: 103,000 km². Dân số: 300.000"
+} {
+  "otype": "country",
+  "name":  "Indonesia", 
+  "variant": ["Nam Dương"],
+  "udescription": "Indonesialà một quốc gia nằm giữa hai lục địa Đông Nam Á và Châu Đại Dương. Indonesia gồm 17.508 hòn đảo và với dân số khoảng 237 triệu người, đứng thứ tư thế giới về dân số. Diện tích: 1.919.440 km²"
+} {
+  "otype": "country",
+  "name":  "Iran", 
+  "variant": ["Ba Tư"],
+  "udescription": "Iran là quốc gia ở Trung Đông, phía tây nam của châu Á, giáp với Armenia, Azerbaijan, và Turkmenistan về phía bắc, Pakistan và Afghanistan về phía đông, Thổ Nhĩ Kỳ và Iraq về phía tây. Nó cũng giáp biển Caspia về phía Bắc. Diện tích: 1,648,195 km². Dân số: 68.688.433"
+} {
+  "otype": "country",
+  "name":  "Iraq", 
+  "variant": ["Irắc"], 
+  "udescription": "Irắc là một quốc gia ở miền Trung Đông, ở phía tây nam của châu Á. Nước này giáp với Ả Rập Saudi, Kuwait về phía nam, Thổ Nhĩ Kỳ về phía bắc, Syria về phía tây bắc, Jordan về phía tây, và Iran về phía đông. Diện tích: 437,072 km². Dân số: 26 triệu"
+} {
+  "otype": "country",
+  "name":  "Ireland",
+  "variant": ["Ai len", "Ái Nhĩ Lan"],
+  "udescription": "Ireland là quốc gia nằm tại phía tây bắc châu Âu, chiếm khoảng 5/6 phía nam diện tích của đảo Ireland. Giáp với Bắc Ireland (thuộc Vương quốc Liên hiệp Anh và Bắc Ireland) về phía Bắc, giáp với Đại Tây Dương về phía Tây và phía Nam, giáp với biển Ireland về phía đông. Diện tích: 70.273 km². Dân số: 4.130.000"
+} {
+  "otype": "country",
+  "name":  "Islas Malvinas",
+  "udescription": "Quần đảo Falkland là quần đảo ở Nam Đại Tây Dương, cách bờ biển Argentina 300 dặm, cách Shag Rocks (Nam Georgia) 671 dặm về phía tây, và cách phía bắc châu Nam Cực (Đảo Voi) 584 dặm về phía bắc. Gồm hai đảo chính, Đông Falkland và Tây Falkland, cùng hơn 776 đảo nhỏ. Diện tích: 12,173 km2. Dân số: 3.060"
+} {
+  "otype": "country",
+  "name":  "Isle of Man",
+  "udescription": " Đảo Man là một vùng đất tự trị, lãnh thổ phụ thuộc của Hoàng gia Anh, nằm ở vị trí trung tâm các đảo của Anh trong vùng biển Ai Len. Diện tích: 572 km². Dân số: 80.058"
+} {
+  "otype": "country",
+  "name":  "Israel", 
+  "variant": ["Do Thái"],
+  "udescription": "Israel là quốc gia theo chế độ cộng hòa ở vùng Trung Đông bên cạnh Địa Trung Hải, có chung biên giới với Liban ở phía bắc, Syria, Jordan và Bờ Tây ở phía đông, Ai Cập và Dải Gaza ở phía tây nam. Có đường bờ biển trông ra Địa Trung Hải ở phía tây và Vịnh Eilatờ phía nam. Diện tích: 20,770 km². Dân số: 7,653,600"
+} {
+  "otype": "country",
+  "name":  "Italy",
+  "variant": ["Ý", "Ý Đại Lợi"],
+  "udescription": "Italy nằm ở Bán đảo Ý phía Nam Châu Âu, và trên hai hòn đảo lớn nhất tại Địa Trung Hải, Sicily và Sardinia. Ý có chung biên giới phía bắc là dãy Alpine với Pháp, Thuỵ Sĩ, Áo và Slovenia. Diện tích: 301,336 km². Dân số: 58.462.375"
+} {
+  "otype": "country",
+  "name":  "Jamaica",
+  "udescription": "Jamaica, là một quốc đảo ở Greater Antilles, có chiều dài 234 kilômét (145 mi) và chiều rộng 80 kilômét (50 mi) với diện tích 11.100 km2. Quốc gia này nằm ở biển Caribbean,đảo có các quốc gia Haiti và Cộng hòa Dominica. Diện tích: 10,991 km². Dân số: 2.731.832"
+} {  
+  "otype": "country",
+  "name":  "Jan Mayen",
+  "udescription": "Đảo Jan Mayen, một phần của Vương quốc Na Uy, là một đảo núi lửa bắc cực có chiều dài 55 km và có diện tích 373 km², sông băng bao phủ một phần, nằm cách Iceland 600 km về phía bắc, cách Greenland 500 km về phía đông và cách Na Uy lục địa 1.000 km về phía tây"
+} {
+  "otype": "country",
+  "name":  "Japan", 
+  "variant": ["Nhật Bản", "Nhật Bản quốc", "Nhật"],
+  "udescription": "Nhật Bản là quốc gia hải đảo hình vòng cung, có diện tích tổng là 379.954 km² nằm xoải theo bên sườn phía đông lục địa châu Á. Nằm ở phía đông của Hàn Quốc, Nga và Trung Quốc và trải từ biển Okhotsk ở phía bắc đến biển đông Trung Quốc ở phía nam. Dân số: 126,804,433"
+} {
+  "otype": "country",
+  "name":  "Jarvis Island", 
+  "variant": ["Đảo Bunker"],
+  "udescription": "Đảo Jarvis là đảo san hô không người ở rộng khoảng 4,5 km² nằm trong vùng Nam Thái Bình Dương, khoảng nữa đường từ Hawaii đến Quần đảo Cook. Nó là một trong các đảo thuộc Quần đảo Line và nằm giữa trong nhóm. Diện tích : 4,5 km²"
+} {
+  "otype": "country",
+  "name":  "Jersey",
+  "udescription": "Jersey là một lãnh thổ thuộc Vương quốc Liên hiệp Anh, được tách ra từ vùng Normandie, Pháp. Phần lớn vùng đất này bao gồm nhiều đảo hoang (Minquiers, Écréhous, Pierres de Lecq) và các đảo đá ngầm nằm sâu dưới mặt nước biển. Diện tích: 116 km². Dân số: 88.200"
+} {
+  "otype": "country",
+  "name":  "Johnston Atoll",
+  "udescription": "Đảo Johnston là một đảo san hô rộng 130 km² trong Bắc Thái Bình Dương ở 16°45′B 169°31′T, khoảng 1400 km (750 hải lý) phía tây Hawaii. Có bốn đảo nằm trong nền đá san hô là Johnston, Sand (Cát), Bắc Đảo (Akau) và Tây Đảo (Hikina). Có tổng diện tích là 2,67 km²"
+} {
+  "otype": "country",
+  "name":  "Jordan", 
+  "udescription": "Jordan là một quốc gia Ả Rập tại Trung Đông trải dài từ phần phía nam của sa mạc Syria tới vịnh Aqaba. Có chung biên giới với Syria ở phía bắc, Iraq ở phía đông bắc, Israel và lãnh thổ của người Palestine về phía tây và nam. Diện tích: 92,300 km². Dân số: 5.759.732"
+} {
+  "otype": "country",
+  "name":  "Kazakhstan", 
+  "variant": ["Ca-giắc-xtan"],
+  "udescription": "Kazakhstan là quốc gia trải rộng trên phần phía bắc và trung tâm của lục địa Á-Âu. Diện tích của Kazakhstan là 2.717.300 km², rộng lớn hơn cả Tây Âu, có một phần nhỏ lãnh thổ nằm ở bờ phía tây sông Ural, thuộc phần châu Âu. Dân số: 15.185.844 "
+} {
+  "otype": "country",
+  "name":  "Keeling Islands",
+  "udescription": "Quần đảo Cocos là một lãnh thổ của Úc. Có hai đảo san hô vòng và hai mươi bảy đảo san hô. Các đảo này nằm ở Ấn Độ Dương, khoảng một nửa quãng đường từ Úc đến Sri Lanka, tại tọa độ 12°07′N, 96°54′Đ. Diện tích: 14 km². Dân số: 628"
+} {
+  "otype": "country",
+  "name":  "Kenya",
+  "variant": ["Kê-nhi-a"],
+  "udescription": "Kenya là một quốc gia tại miền đông châu Phi, Thủ đô (và là thành phố lớn nhất) Nairobi. Diện tích: 582,650 km2. Dân số: 33.829.590"
+} {
+  "otype": "country",
+  "name":  "Kingman Reef",
+  "udescription": "Đảo đá Kingman là đảo san hô hình vòng nhiệt đới, không người ở và phần nhiều đã bị chìm. Nằm trong Bắc Thái Bình Dương khoảng nửa đường từ Quần đảo Hawaii và Samoa thuộc Mỹ ở Tọa độ: 6°24′B 162°24′T. Là đảo cận bắc nhất của Quần đảo Line và nằm 65 km hướng bắc tây bắc Đảo san hô Palmyra, đảo gần nhất kế tiếp"
+} {
+  "otype": "country",
+  "name":  "Kiribati",
+  "udescription": "Kiribati là một quốc đảo có khí hậu nhiệt đới nằm ở vùng trung tâm Thái Bình Dương. Nước này có tổng cộng 32 đảo san hô vòng và một đảo san hô cao, chiếm tổng cộng một diện tích khoảng 3.5 triệu kilomet vuông. Diện tích: 811 km². Dân số: 103.092"
+} {
+  "otype": "country",
+  "name":  "Korea",
+  "variant": ["Triều Tiên", "Hàn Quốc", "South Korea"],
+  "udescription": "Korea là một nền văn hóa và khu vực địa lý nằm tại bán đảo Triều Tiên tại Đông Á. Khu vực này giáp liền với Trung Quốc về hướng tây bắc và Nga về hướng đông bắc, với Nhật Bản ở đông nam qua eo biển Triều Tiên. Dân số khoảng 73 triệu người"
+} {
+ "otype": "country",
+  "name":  "Kuwait",
+  "variant": ["Cô-oét"],
+  "udescription": "Kuwait là quốc gia tại Trung Đông. Nằm trên bờ Vịnh Péc-xích (Persia), giáp với Arập-Xêút phía nam và với Irắc ở hướng Tây và hướng Bắc. Là một trong những nước có diện tích nhỏ nhất trên thế giới. Sa mạc Arap bao trùm phần lớn diện tích của đất nước này. Dân số: 3.1 triệu người. Diện tích: 17.818 km²"
+} {
+  "otype": "country",
+  "name":  "Kyrgyzstan",
+  "variant": ["Cư-rơ-gư-xtan", "Kirgizia", "Kirghizia"],
+  "udescription": "Kyrgyzstan là quốc gia tại Trung Á. Nằm kín trong lục địa và nhiều đồi núi, nước này giáp biên giới với Kazakhstan ở phía bắc, Uzbekistan ở phía tây, Tajikistan ở phía tây nam và Trung Hoa ở phía đông nam. Dân số: 5.264.000. Diện tích: 198,500 km²"
+} {
+  "otype": "country",
+  "name":  "Laos",
+  "variant": ["Lào", "Ai Lao", "Lão Qua"],
+  "udescription": "Laos là quốc gia không giáp biển duy nhất tại vùng Đông Nam Á. Giáp giới nước Myanmar và Trung Quốc phía tây bắc, Việt Nam ở phía đông, Campuchia ở phía nam, và Thái Lan ở phía tây. Diện tích: 236,800 km². Dân số: 6.677.534 "
+} {
+ "otype": "country",
+  "name":  "Latvia",
+  "udescription": "Latvia là một quốc gia theo thế chế cộng hòa tại khu vực châu Âu. Giáp với Estonia về phía bắc, giáp với Litva về phía nam, giáp với Nga và Belarus về phía đông và giáp biển Baltic về phía tây. Diện tích: 64,589 km². Dân số: 2.259.810 người"
+} {
+  "otype": "country",
+  "name":  "Lebanon",
+  "variant": ["Li-băng"],
+  "udescription": "Lebanon là quốc gia nhỏ tại vùng Trung Đông, có nhiều núi, nằm cạnh bờ biển đông của Địa Trung Hải. Nó giáp với Syria về phía Bắc và Đông, và Israel về phía Nam, có bờ biển hẹp dọc theo ranh giới Tây. Diện tích: 10,452 km². Dân số: 3.826.018"
+} {
+  "otype": "country",
+  "name":  "Lesotho",
+  "udescription": "Lesotho là một quốc gia tại miền nam châu Phi. Nó nằm hoàn toàn bên trong nước Cộng hoà Nam Phi và là một thành viên nằm trong khối liên Hiệp Anh. Diện tích: 30,355 km². Dân số: 1.867.035"
+} {
+ "otype": "country",
+  "name": "Liberia",
+  "udescription": "Liberia là một quốc gia nằm ở Tây Phi. Nó có biên giới với Sierra Leone, Guinée, và Côte d'Ivoire. Liberia nghĩa là nước tự do. Diện tích: 96,320 km². Dân số: 3.482.211"
+} {
+  "otype": "country",
+  "name":  "Libya",
+  "variant": ["Libi"],
+  "udescription": "Libya là một quốc gia tại Bắc Phi. Nước này có biên giới giáp với Địa Trung Hải ở phía bắc, Ai Cập ở phía đông, Sudan ở phía đông nam, Tchad và Niger ở phía nam, Algérie và Tunisia ở phía tây. Diện tích: 1,759,541 km². Dân số: 6.420.000"
+} {
+  "otype": "country",
+  "name":  "Liechtenstein",
+  "udescription": "Liechtenstein là một quốc gia Alps nhỏ bị bao quanh bởi các nước không giáp biển ở Tây Âu, giáp với Thụy Sĩ ở phía tây và Áo ở phía đông. Diện tích: 160 km². Dân số: 35.365"
+} {
+ "otype": "country",
+  "name":  "Litva",
+  "variant": ["Lithuania"],
+  "udescription": "Litva là quốc gia thuộc khu vực châu Âu theo thể chế cộng hòa, được xếp vào nhóm Bắc Âu, giáp với Latvia về phía bắc, giáp với Belarus về phía đông nam, giáp với Ba Lan và tỉnh Kaliningrad thuộc Liên bang Nga về phía tây nam và giáp với biển Baltic về phía tây. Diện tích: 65,303 km². Dân số: 3.596.617"
+} {
+  "otype": "country",
+  "name":  "Luxembourg",
+  "variant": ["Lúcxămbua", "Lục Xâm Bảo"],
+  "udescription": "Luxembourg là một quốc gia nhỏ nằm trong lục địa ở tây Âu, giáp với Bỉ, Pháp, và Đức. Luxembourg là một nước với ba thứ tiếng, tiếng Pháp, tiếng Đức và tiếng Luxembourg là những ngôn ngữ chính thức. Diện tích: 2,586 km². Dân số: 468.571"
+} {
+  "otype": "country",
+  "name":  "Macau",
+  "variant": ["Ma Cao"],
+  "udescription": "Ma Cao là một đặc khu hành chính của CHND Trung Hoa. Là một vùng lãnh thổ nhỏ bé nằm ở vùng duyên hải phía đông – nam Trung Hoa Đại lục, được bao bọc bởi tỉnh Quảng Đông của CHND Trung Hoa và biển nam Trung Hoa ở phía nam. Diện tích: 28,2 km². Dân số: 513.400"
+} {
+ "otype": "country",
+  "name":  "Macedonia",
+  "variant": ["Ma-kê-đô-ni-a", "Mã Cơ Đốn"],
+  "udescription": "Macedonia là miền địa lý và lịch sử trên bán đảo Balkan ở Nam Âu, biên giới thay đổi vào đầu thế kỷ 20. Nó chiếm khoảng 67.000 kilômét vuông và có dân số 4,76 triệu người"
+} {
+  "otype": "country",
+  "name":  "Madagascar",
+  "variant": ["Mã Đảo"],
+  "udescription": "Madagascar là một quốc đảo nằm ở Ấn Độ Dương ngoài khơi phía đông châu Phi. Diện tích: 587,040 km². Dân số: 18.040.341"
+} {
+  "otype": "country",
+  "name":  "Malawi",
+  "udescription": "Malawi là một quốc gia tại miền đông châu Phi. Thủ đô là Lilongwe. Có thành phố lớn nhất là Blantyre. Tổng diện tích là 118,480 km2. Dân số: 12.158.924"
+} {
+ "otype": "country",
+  "name":  "Malaysia",
+  "variant": ["Mã Lai Tây Á"],
+  "udescription": "Malaysia là một liên bang gồm mười ba bang tại Đông Nam Á. Nước này gồm hai vùng địa lý bị chia tách bởi Biển Đông. Diện tích: 329,758 km². Dân số: 26.207.102"
+} {
+  "otype": "country",
+  "name":  "Maldives",
+  "variant": ["Man-đi-vơ"],
+  "udescription": "Maldiveslà một quốc đảo gồm nhóm các đảo san hô tại Ấn Độ Dương. Maldives nằm ở phía nam quần đảo Lakshadweep thuộc Ấn Độ, và cách khoảng 700 kilômét (435 mi) phía tây nam Sri Lanka. Diện tích: 300 km². Dân số: 349.106"
+} {
+  "otype": "country",
+  "name":  "Mali",
+  "udescription": "Mali là quốc gia nằm trong lục địa của miền tây châu Phi. Là nước có diện tích lớn thứ bảy châu Phi, và có chung đường biên giới Algérie về phía bắc, Niger về phía đông, Burkina Faso và Côte d'Ivoire về phía nam, Guinée về phía tây nam, Sénégal và Mauritania về phía tây. Diện tích khoảng 1.240.000 km². Dân số hơn 14 triệu người"
+} {
+ "otype": "country",
+  "name":  "Malta",
+  "udescription": "Malta là một đảo quốc nhỏ gồm bảy hòn đảo giữa Địa Trung Hải, cách đảo Sicilia của Ý 93 km về phía nam, cách Tunisia 288 km về phía bắc, vịnh Gibralta 1826km về phía tây và Alexandria 1510km về phía đông. Diện tích: 316 km². Dân số: 402.668"
+} {
+  "otype": "country",
+  "name":  "Marshall Islands",
+  "udescription": "Quần đảo Marshallà một đảo quốc của người Micronesia nằm ở phía Tây Thái Bình Dương, phía Bắc Nauru và Kiribati, phía Đông Liên bang Micronesia, phía Nam đảo Wake, lãnh thổ Hoa Kỳ. Diện tích: 181 km². Dân số: 61.963"
+} {
+  "otype": "country",
+  "name":  "Martinique",
+  "udescription": "Martinique là hòn đảo nằm ở phía Đông vùng biển Caribbean, một trong 26 vùng lãnh thổ hải ngoại thuộc Pháp, có diện tích khoảng 1,128 km². Dân số ước tính 1/1/2006 là 399.000"
+} {
+  "otype": "country",
+  "name":  "Mauritania",
+  "udescription": "Mauritania là đất nước nằm ở Tây Phi. Giáp với Đại Tây Dương về hướng Tây, giáp với Senegal về phía tây nam, với Mali ở hướng đông và đông nam, với Algeria ở hướng đông bắc, và với Maroc cùng khu vực Tây Sahara ở hướng tây bắc. Diện tích: 1,030,700 km². Dân số: 3.086.859"
+} {
+  "otype": "country",
+  "name":  "Mauritius",
+  "udescription": "Mauritius là đảo quốc nằm hướng tây nam Ấn Độ Dương, cách đảo Madagascar khoảng 900 km về hướng đông. Mauritius là một phần của quần đảo Mascarene, với đảo Réunion của Pháp 200 km (120 dặm) về phía tây nam và đảo của Rodrigues 570 km (350 dặm) phía đông bắc. Diện tích: 2,040 km². Dân số: 1.288.000"
+} {
+  "otype": "country",
+  "name":  "Mayotte",
+  "udescription": "Quần đảo này được chia thành 3 phần: Đảo Lớn, Đảo Nhỏ và các đảo phụ rải rác xung quanh. Mayotte nằm ở đỉnh cực Bắc eo Mozambique, ở giữa Bắc Madagascar và Bắc Mozambique. Diện tích: 374 km². Dân số: 201.234"
+} {
+ "otype": "country",
+  "name":  "Mexico",
+  "variant": ["Mêhicô", "Mễ Tây Cơ"],
+  "udescription": "Mexico là nước cộng hòa liên bang thuộc khu vực Bắc Mỹ. Là quốc gia rộng lớn với diện tích gần 2 triệu km², dân số khoảng 106 triệu người, giáp với Hoa Kỳ về phía bắc, giáp với Guatemala và Belize về phía đông nam, giáp với Thái Bình Dương về phía tây và tây nam, giáp với vịnh México về phía đông"
+} {
+  "otype": "country",
+  "name":  "Micronesia",
+  "udescription": "Micronesia là một phân vùng của châu Đại Dương, gồm hàng ngàn đảo nhỏ ở tây Thái Bình Dương. Nó phân biệt với Melanesia ở phía Nam, và Polynesia ở phía đông. Philippines và Indonesia nằm ở phía Tây"
+} {
+  "otype": "country",
+  "name":  "Midway Islands",
+  "variant": ["Đảo Midway"],
+  "udescription": "Đảo san hô Midway là một đảo san hô hình vòng diện tích khoảng 2,4 mi² (6,2 km²) nằm trong Bắc Thái Bình Dương (gần cực tây bắc Quần đảo Hawaiil) ở. Tọa độ: 28°13′B 177°22′T, khoảng 1/3 đường từ Honolulu đến Tokyo"
+} {
+ "otype": "country",
+  "name":  "Moldova",
+  "udescription": "Moldova là một quốc gia nằm kín trong lục địa ở Đông Âu, giữa Romania ở phía tây và Ukraine ở phía bắc, đông và nam. Diện tích: 33,843 km². Dân số: 3.395.600"
+} {
+  "otype": "country",
+  "name":  "Monaco", 
+  "udescription": "Monaco Là một eo biển nhỏ của nước Pháp nằm ở hướng nam, nhưng công quốc Monaco là một quốc gia độc lập .Công quốc Monaco rộng 2 km² (nhỏ thứ nhì thế giới, sau Vatican), có 32.000 dân hình thành từ năm 1297, khi Francois Grimaldi chỉ huy chiếm một pháo đài của Ý"
+} {
+  "otype": "country",
+  "name":  "Mongolia",
+  "variant": ["Mông Cổ"],
+  "udescription": "Mông Cổ là một quốc gia Trung Á giáp với Liên bang Nga về phía bắc và Cộng hòa Nhân dân Trung Hoa về phía nam, phía đông và phía tây. Dù không có biên giới chung với Kazakhstan nhưng điểm cực Tây của Mông Cổ chỉ cách điểm cực Đông của Kazakhstan 38 km (24 dặm). Diện tích: 1,564,116 km². Dân số: 2.951.786"
+} {
+  "otype": "country",
+  "name":  "Montenegro",
+  "udescription": "Montenegro là quốc gia tại miền đông nam châu Âu. Giáp với biển Adriatic về phía tây nam, và có chung đường biên giới với Croatia về phía tây, Bosna và Hercegovina về phía tây bắc, Serbia về phía đông bắc, Kosovo về phía đông và cuối cùng là Albania về phía đông nam. Diện tích: 14,026 km². Dân số: 630.548"
+} {
+  "otype": "country",
+  "name":  "Montserrat",
+  "udescription": "Montserrat là lãnh thổ hải ngoại thuộc Anh, tọa lạc trong quần đảo Leeward, một phần của chuỗi đảo Lesser Antilles, thuộc vùng biển Caribe. Vùng đất này rộng khoảng 11 km (tương đương với 7 dặm Anh), dài khoảng 16 km đường bộ và 40 km đường bờ biển"
+} {
+  "otype": "country",
+  "name":  "Morocco",
+  "variant": ["Ma Rốc"],
+  "udescription": "Morocco là một quốc gia tại miền Bắc Phi. Quốc gia này nằm ở tây bắc châu Phi, có biên giới quốc tế với Algérie về phía đông, đối diện với Tây Ban Nha qua eo biển Gibraltar, giáp Địa Trung Hải và Đại Tây Dương về phía bắc và đông và giáp Mauritania về phía nam. Diện tích 446,550 km2. Dân số: 32.725.847"
+} {
+ "otype": "country",
+  "name":  "Mozambique",
+  "variant": ["Mô-giăm-bích"],
+  "udescription": "Mozambique là một quốc gia ở đông nam châu Phi, giáp với Ấn Độ Dương về phía đông, Tanzania về phía bắc, Malawi và Zambia về phía tây bắc, Zimbabwe về phía tây, Swaziland và Nam Phi về phía tây nam. Diện tích: 801,590 km². Dân số: 19.406.703"
+} {
+  "otype": "country",
+  "name":  "Myanmar",
+  "variant": ["Miến Điện", "Diến Điện"],
+  "udescription": "Myanmar là một quốc gia ở Đông Nam Á, tây bắc bán đảo Trung-Ấn. Có 5.876 km đường biên giới với Trung Quốc (2.185 km), Thái Lan (1.800 km), Ấn Độ (1.463 km), Lào (235 km) và Bangladesh (193 km). Đường bờ biển dài 1.930 km. Diện tích 676.577 km². Dân số: 55,4 triệu"
+} {
+  "otype": "country",
+  "name":  "Namibia",
+  "udescription": "Namibialà một quốc gia tại miền nam châu Phi. Bắc giáp Angola, Nam giáp Nam Phi, Đông giáp Botswana, Tây giáp Đại Tây Dương. Tên cũ là Tây Nam Phi. Diện tích: 825,418 km2. Dân số: 2.030.692"
+} {
+  "otype": "country",
+  "name":  "Nauru",
+  "udescription": "Nauru là một quốc đảo thuộc Micronesia nằm ở Nam Thái Bình Dương. Nơi gần nhất với nước này là Đảo Banaba thuộc Kiribati, khoảng 300 km về phía đông. Là quốc đảo nhỏ nhất thế giới với diện tích 21 kilômét vuông. Dân số: 13.635"
+} {
+  "otype": "country",
+  "name":  "Navassa Island",
+  "udescription": "Đảo Navassa là một đảo nhỏ không cư dân trong Biển Caribbean và là một lãnh thổ chưa sát nhập chưa tổ chức của Hoa Kỳ, được quản lý bởi Cục Bảo vệ Cá và Hoang dã Hoa Kỳ. Haiti cũng tuyên bố chủ quyền trên đảo này. Diện tích : 5,2 km²"
+} {
+  "otype": "country",
+  "name":  "Nepal",
+  "udescription": "Nepal là một quốc gia nằm kín trong lục địa tại vùng Himalaya ở Nam Á có phần chồng gối với Đông Á, giáp biên giới với Tây Tạng của Trung Quốc ở phía bắc và Ấn Độ ở phía nam, đông và tây.Diện tích147.181 km² Dân số29,331,000"
+} {
+ "otype": "country",
+  "name":  "Netherlands",
+  "variant": ["Hà Lan", "Hòa Lan"],
+  "udescription": "Hà Lan là phần châu Âu của Vương quốc Hà Lan. Vương quốc này là một nước theo chế độ dân chủ nghị viện - quân chủ lập hiến. Hà Lan nằm ở phía tây bắc của châu Âu và có biên giới với Bỉ, Đức và nhìn ra biển Bắc. Diện tích: 41,848 km². Dân số: 16.607.148"
+} {
+  "otype": "country",
+  "name":  "Netherlands Antilles",
+  "variant": ["Tây Ấn Hà Lan", "Antilles"],
+  "udescription": "Antille thuộc Hà Lan, từng là một quốc gia tự trị ở vùng Caribe hình thành một quốc gia cấu thành của Vương quốc Hà Lan, bao gồm hai nhóm đảo nằm trong quần đảo Tiểu Antille: Aruba, Curaçao, và Bonaire thuộc Antille Ngược gió phía bờ biển Venezuela và Sint Eustatius, Saba, và Sint Maarten thuộc Antille Xuôi gió ở phía đông nam của quần đảo Virgin."
+} {
+  "otype": "country",
+  "name":  "Saint Kitts and Nevis",
+  "udescription": "Liên bang Saint Kitts và Nevislà một đảo quốc nằm trong Quần đảo Leeward, Tây Indies. Đây là một đảo quốc nhỏ nhất nằm trong cả hai danh sách của Hoa Kỳ. Diện tích: 261 km². Dân số: 42.696"
+} {
+  "otype": "country",
+  "name":  "Ben Nevis",
+  "udescription": "Ben Nevis là núi cao nhất tại Britain và cũng là đỉnh cao nhất tại Liên hiệp vương quốc Anh, thuộc dãy núi Grampian, vùng Lochaber, Scotland. Đỉnh Ben Nevis có độ cao 1.344 mét trên mực nước biển, mỗi năm có gần 100.000 người chinh phục đỉnh núi này"
+} {
+  "otype": "country",
+  "name":  "New Caledonia",
+  "variant": ["Tân Đảo"],
+  "udescription": "New Caledonialà lãnh thổ phụ thuộc của Pháp tại châu Đại Dương. Lãnh thổ này nằm trong khu vực tây nam Thái Bình Dương, vùng Melanesia, gồm đảo chính (Grand Terre), quần đảo Loyauté và một số đảo nhỏ. Tổng diện tích là 18.575 km² với dân số 240.400 người"
+} {
+  "otype": "country",
+  "name":  "Nagorno-Karabakh",
+  "udescription": "Nagorno-Karabakh là vùng đất không giáp biển tại Nam Caucasus, nằm giữa hạ Karabakh và Zangezur và bao phủ khu vực phía đông nam của núi Lesser Caucasus. Vùng này hầu hết là đồi núi và rừng và có diện tích 8.223 kilômét vuông. Dân số: 138,000"
+} {
+  "otype": "country",
+  "name":  "New Guinea",
+  "udescription": "Đảo New Guinea, nằm ở phía bắc Úc, là hòn đảo lớn thứ hai thế giới. Nửa phía tây hòn đảo là hai tỉnh của Indonesia: Papua và Tây Irian Jaya, còn nửa phía đông là lục địa của đảo quốc độc lập Papua New Guinea. Diện tích : 786.000 km². Dân số: 7,5 triệu"
+} {
+  "otype": "country",
+  "name":  "New Zealand",
+  "variant": ["Niu Dilân", "Tân Tây Lan"],
+  "udescription": "New Zealand là một quốc gia hải đảo nằm ở vùng Tây Nam Thái Bình Dương bao gồm hai đảo chính là đảo Bắc và đảo Nam và nhiều đảo nhỏ hơn, trong số đó được biết đến nhiều nhất là đảo Stewart/RakiuraLãnh thổ của New Zealand còn bao gồm cả quần đảo Cook và Niue. Diện tích: 268,680 km². Dân số: 4.165.600"
+} {
+  "otype": "country",
+  "name":  "Nicaragua",
+  "udescription": "Nicaragua là một quốc gia dân chủ cộng hoà tại Trung Mỹ. Đây là nước lớn nhất ở Trung Mỹ. Giáp với Honduras ở phía bắc, Costa Rica ở phía nam. Bờ biển phía tây trên bờ Thái Bình Dương, còn phía đông là Biển Caribe. Diện tích: 129,494 km². Dân số: 5.465.100"
+} {
+  "otype": "country",
+  "name":  "Niger",
+  "udescription": "Niger là quốc gia ở Tây Phi. Niger có chung đường biên giới với Nigeria và Bénin về phía nam, Burkina Faso và Mali về phía tây, Algérie và Libya về phía bắc, và Tchad về phía đông. Diện tích: 1,267,000 km². Dân số (năm 2005) là 13.957.000"
+} {
+  "otype": "country",
+  "name":  "Nigeria",
+  "udescription": "Nigeria là một quốc gia thuộc khu vực Tây Phi và cũng là nước đông dân nhất tại châu Phi với dân số đông thứ 8 trên thế giới. Giáp Benin về phía tây, Niger về phía bắc, với Chad về phía đông-bắc và với Cameroon về phía đông. Phía nam Nigeria là Vịnh Guinea, một bộ phận của Đại Tây Dương. Diện tích: 923.768 km². Dân số: 135.031.164 người" 
+} {
+  "otype": "country",
+  "name":  "Niue",
+  "udescription": "Niue là một đảo quốc ở Nam Thái Bình Dương, Thường được biết đến như “ Đảo đá Polynesia”. Niue cách 2.400 km về phía đông bắc New Zealand, trong một tam giác giữa Tonga ở phía tây nam, Samoa ở phía tây bắc và Quần đảo Cook ở đông nam. Diện tích đảo là 260 km² với khoảng 1400 dân chủ yếu là người Polynesia"
+} {
+  "otype": "country",
+  "name":  "Norfolk Island",
+  "udescription": "Đảo Norfolklà một trong những vùng lãnh thổ hải ngoại của Úc nằm ở Nam Thái Bình Dương, giữa các nước Úc, New Zealand và New Caledonia. Đảo Norfolk được ban thể chế tự trị. Diện tích: 34.6 km². Dân số2114"
+} {
+  "otype": "country",
+  "name":  "North Korea",
+  "variant": ["Bắc Triều Tiên"],
+  "udescription": "Bắc Triều Tiên là một quốc gia Đông Á trên phần phía bắc Bán đảo Triều Tiên Ở phía nam, giáp biên giới với Hàn Quốc. Biên giới phía bắc đa phần giáp với Cộng hoà nhân dân Trung Hoa. Liên bang Nga có chung biên giới dài 18.3 kilômét dọc theo sông Đồ Môn ở góc đông bắc đất nước. Diện tích: 120,540 km². Dân số: 22.900.000"
+} {
+  "otype": "country",
+  "name":  "Northern Mariana Islands",
+  "udescription": "Quần đảo Bắc Marianalà một nước thịnh vượng chung liên hiệp chính trị với Hoa Kỳ và nằm ở một vị trí chiến lược trong miền tây Thái Bình Dương. Nó bao gồm 15 đảo, nằm ở khoảng ba phần tư đường từ Hawaii tới Philippines. Diện tích: 477 km². Dân số: 80.801"
+} {
+  "otype": "country",
+  "name":  "Norway",
+  "variant": ["Na Uy"],
+  "udescription": "Na Uy là quốc gia theo thể chế quân chủ lập hiến tại Bắc Âu chiếm phần phía tây Bán đảo Scandinave. Giáp biên giới với Thuỵ Điển, Phần Lan, và Nga. Đường bờ biển dài dọc theo Bắc Đại Tây Dương của quốc gia này là nơi có những vịnh hẹp nổi tiếng. Diện tích: 385,199 km². Dân số: 4,850,440"
+} {
+  "otype": "country",
+  "name":  "Oman",
+  "udescription": "Oman là quốc gia tại Trung Đông, nằm ở Đông Nam bán đảo Ả Rập, Tây Bắc giáp Nhà nước Các Tiểu vương quốc Ả Rập Thống nhất, tây giáp Ả Rập Saudi, Tây Nam giáp Cộng hoà Yemen, Nam giáp Ấn Độ Dương. Ô-man có vị trí rất quan trọng, kiểm soát eo biển Hormuz. Diện tích: 212.460km2. Dân số: 3.001.583"
+} {
+  "otype": "country",
+  "name":  "Pakistan",
+  "variant": ["Ba Cơ Tư Thản", "Hồi Quốc"],
+  "udescription": "Pakistan là quốc gia ở Nam Á. Có bờ biển dài 1,046 kilômét dọc theo Biển Ả Rập và Vịnh Oman ở phía nam, phía tây giáp Afghanistan và Iran, phía đông giáp Ấn Độ, cực đông bắc giáp CHND Trung Hoa.Nằm gần với Pakistan nhưng bị ngăn cách bởi Hành lang Wakhan hẹp. Diện tích: 880,254 km². Dân số: 163.985.373 " 
+} {
+ "otype": "country",
+  "name":  "Palau",
+  "variant": ["Belau"],
+  "udescription": "Palau là một đảo quốc nằm ở Nam Thái Bình Dương, cách Philippines 500 dặm về phía đông, và Tokyo (Nhật Bản) 2000 dặm về phía Nam. Diện tích: 459 km2. Dân số: 20.842"
+} {
+  "otype": "country",
+  "name":  "Palestine",
+  "variant": ["PNA"],
+  "udescription": "Palestine là tổ chức hành chính được lập ra để cai quản các vùng của lãnh thổ Palestine gồm Bờ Tây và Dải Gaza. Dân số: 4.148.000"
+} {
+  "otype": "country",
+  "name":  "Palmyra Atoll",
+  "udescription": "Đảo san hô Palmyra, hay Đảo Palmyra, là đảo san hô hình vòng đã được hợp nhất và quản lý bởi Chính phủ Hoa Kỳ. Đảo này rộng 4,6 dặm vuông và nằm trong Bắc Thái Bình Dương ở tọa độ 5°53′B, 162°5′T, nằm gần như về phía nam của Quần đảo Hawaii, khoảng nữa đường từ Hawaii đến Samoa thuộc Mỹ"
+} {
+  "otype": "country",
+  "name":  "Panama",
+  "udescription": "Panama là nước nằm ở phía cực nam Trung Mỹ. Nằm trên một eo đất, Panama là quốc gia liên lục địa kết nối với cả Bắc Mỹ và Nam Mỹ. Có chung biên giới với Costa Rica ở phía tây bắc, Colombia ở đông nam, Biển Caribe ở phía bắc và Thái Bình Dương ở phía nam. Diện tích: 75,517 km2. Dân số: 3.232.000"
+} {
+  "otype": "country",
+  "name":  "Papua New Guinea",
+  "variant": ["Papua Tân Guinea", "Ba Bô Á Tân Cơ Nội Á"],
+  "udescription": "Papua New Guinea là một quốc gia ở châu Đại Dương, gồm phía Đông của đảo New Guinea và nhiều đảo xa bờ biển. Nằm vào phía Tây Nam Thái Bình Dương, ở một vùng được gọi là Mélanésie từ đầu thế kỷ 19. Diện tích: 462,840 km2. Dân số: 5.887.000"
+} {
+  "otype": "country",
+  "name":  "Paracel Islands",
+  "variant": ["Hoàng Sa"],
+  "udescription": "Quần đảo Hoàng Sa là một nhóm khoảng 30 đảo, bãi san hô và mỏm đá ngầm nhỏ ở Biển Đông. Nằm cách miền trung Việt Nam khoảng 1/3 khoảng cách đến những đảo phía bắc của Philippines. cách Cù lao Ré (đảo Lý Sơn) của Việt Nam khoảng 200 Hải lý và cách đảo Hải Nam của Trung Quốc khoảng 230 hải lý"
+} {
+  "otype": "country",
+  "name":  "Paraguay",
+  "variant": ["Ba Lạp Qua"],
+  "udescription": "Paraguay là quốc gia nằm trong đất liền tại Nam Mỹ, giáp với nước Bolivia, Argentina và Brazil. Nằm trên hai bờ sông Paraguay, chạy qua trung tâm của đất nước từ Bắc vào Nam. Do vị trí trung tâm của nó ở Nam Mỹ. Diện tích: 406,750 km2. Dân số: 6.347.884"
+} {
+  "otype": "country",
+  "name":  "Republic of China",
+  "variant": ["Đài Loan", "Trung Hoa Đài Bắc"],
+  "udescription": "Đài Loan là quốc gia thuộc Đông Á. Lãnh thổ của nó đã từng bao trùm toàn cõi Trung Quốc. Sau lệnh ngưng bắn tạm thời trong cuộc Nội chiến Trung Quốc, vào năm 1949 phe cộng sản đã nắm quyền kiểm soát Trung Hoa đại lục. Diện tích: 35,980 km2. Dân số: 23.069.000"
+} {
+  "otype": "country",
+  "name":  "Persia",
+  "udescription": "Đế quốc Ba Tư là một đế quốc tại Cao nguyên Iran và các khu vực xung quanh, đế quốc này bắt nguồn từ hai Vương quốc Đông Ba Tư (Parsua) và Tây Ba Tư (Anshan)do nhà Achaemenes (690–328 trước Công nguyên) trị vì"
+} {
+  "otype": "country",
+  "name":  "Peru",
+  "variant": ["Pê Ru"],
+  "udescription": "Peru là quốc gia nằm ở phía tây châu Nam Mỹ. Giáp Ecuador và Colombia phía bắc, giáp Brasil và Bolivia phía đông, giáp Chile phía nam và giáp Thái Bình Dương phía tây. Diện tích: 1,285,220 km². Dân số: 28.674.757 người"
+} {
+  "otype": "country",
+  "name":  "Philippines",
+  "variant": ["Phi Luật Tân"],
+  "udescription": "Philippines là nước ở Đông Nam Á có thủ đô là Manila. Nước này trải dài 1.210 kilômét (750 dặm) từ lục địa châu Á và gồm 7.107 hòn đảo được gọi là Quần đảo Philippines.Diện tích: 300,000 km². Dân số: 87.857.473"
+} {
+  "otype": "country",
+  "name":  "Pitcairn Islands",
+  "udescription": "Quần đảo Pitcairn là quần đảo nằm ở Nam Thái Bình Dương. Quần đảo là lãnh thổ hải ngoại của Anh, là vùng đất cuối cùng của Anh ở Thái Bình Dương. Chỉ có Đảo Pitcairn (đảo lớn thứ nhì) là có người ở. Diện tích5 km² Dân số (Ước lượng 1/7/2007) là 50 người"
+} {
+  "otype": "country",
+  "name":  "Portugal",
+  "variant": ["Bồ Đào Nha"],
+  "udescription": "Bồ Đào Nha là quốc gia nằm ở Tây Nam châu Âu trên bán đảo Iberia. Là nước cực Tây của lục địa châu Âu. Giáp với Đại Tây Dương ở phía Tây và phía Nam, giáp Tây Ban Nha ở phía Đông và phía Bắc. Các quần đảo Azores và Madeira ở ngoài khơi Đại Tây Dương cũng thuộc Bồ Đào Nha. Diện tích: 92,391 km². Dân số: 10.566.212"
+} {
+  "otype": "country",
+  "name":  "Puerto Rico",
+  "udescription": "Puerto Rico là vùng quốc hải thuộc chủ quyền của Hoa Kỳ nhưng chưa được hợp nhất vào Hoa Kỳ. Nằm ở phía đông bắc vùng biển Caribbean, phía đông nước Cộng hòa Dominicana và phía tây Quần đảo Virgin. Diện tích: 9,104 km². Dân số: 3.912.054"
+} {
+  "otype": "country",
+  "name":  "Qatar",
+  "variant": ["Ca-ta"],
+  "udescription": "Qatar là quốc gia tại Trung Đông. Nằm trên bán đảo nhỏ Qatar là phần phía Đông Bắc của bán đảo Ả Rập. Phía Nam giáp Ả Rập Xê Út, các mặt khác giáp vịnh Ba Tư. Diện tích: 11,437 km². Dân số: 863.051"
+} {
+  "otype": "country",
+  "name":  "Reunion",
+  "udescription": "Đảo Réunion là một hòn đảo nhỏ nằm trong Ấn Độ Dương, 700 km phía đông của Madagascar, cách Mauritius 200 km về phía tây nam. Có chiều dài là 63 km, rộng 45 km và diện tích khoảng 2.517 km², hiện thuộc quyền sở hữu của Pháp"
+} {
+  "otype": "country",
+  "name":  "Romania",
+  "variant": ["Lỗ Ma Ni", "Ru-ma-ni"],
+  "udescription": "Romania là quốc gia tại đông nam châu Âu. Giáp với Ukraina và Moldova về phía bắc và đông bắc, giáp với Hungary về phía tây bắc, giáp với Serbia về phía tây nam, với Bulgaria về phía nam và Biển Đen về phía đông. Nằm trên phần lớn diện tích của đồng bằng sông Danube. Diện tích: 238,392 km². Dân số: 22.276.056"
+} {
+  "otype": "country",
+  "name":  "USSR",
+  "variant": ["Liên Xô"],
+  "udescription": "là một cựu quốc gia chiếm phần lớn châu Âu và châu Á, tồn tại từ 30 tháng 12 năm 1922 cho đến khi chính thức tan rã vào ngày 25/12/1991. Diện tích: 22,402,200 km². Dân số: 293.047.571"
+} {
+  "otype": "country",
+  "name":  "Russia",
+  "variant": ["Nga"],
+  "udescription": "Nga là quốc gia ở phía bắc lục địa Á-Âu, là nước cộng hoà bán tổng thống, gồm 83 thực thể liên bang, giáp biên giới với những quốc gia sau: Na Uy, Phần Lan, Estonia, Latvia, Litva và Ba Lan Belarus, Ukraina, Gruzia, Azerbaijan, Kazakhstan, Trung Quốc, Mông Cổ, và Bắc Triều Tiên. Nga cũng có biên giới biển với Nhật Bản. Diện tích: 17,075,200 km². Dân số: 141.927.297"
+} {
+  "otype": "country",
+  "name":  "Rwanda",
+  "variant": ["Ruanda"],
+  "udescription": "Rwanda là quốc gia nhỏ nằm kín trong lục địa tại Vùng hồ lớn trung đông Phi. Giáp biên giới với Uganda, Burundi, Cộng hòa Dân chủ Congo và Tanzania. Diện tích: 26,338 km². Dân số xấp xỉ 9 triệu người."
+} {
+  "otype": "country",
+  "name":  "Saint Helena",
+  "udescription": "Saint Helena là đảo núi lửa nằm ở phía Nam Đại Tây Dương, lãnh thổ hải ngoại thuộc Anh. Vùng đất này bao gồm đảo Saint Helena và thuộc địa Đảo Ascension và Tristan da Cunha trải dài trên diện tích 425 km². Dân số: 3.926"
+} {
+  "otype": "country",
+  "name":  "Saint Lucia",
+  "udescription": "Saint Lucia là đảo quốc nằm trong lòng Đại Tây Dương, phía đông vùng biển Caribe. Một phần nằm trên Lesser Antilles, vùng lãnh thổ này toạ lạc phía bắc của quần đảo Saint Vincent và Grenadines, tây bắc Barbados và phía nam Martinique. Diện tích: 620 km². Dân số: 160.765"
+} {
+  "otype": "country",
+  "name":  "Saint Pierre and Miquelon",
+  "udescription": "Vùng lãnh thổ cộng đồng Saint-Pierre và Miquelonl à một quần đảo nhỏ, đảo chính Saint Pierre và Miquelon, nằm ở ngoài khơi phía Đông Canada gần Newfoundland. Một phần lãnh thổ của Saint-Pierre và Miquelon được đặt trong quyền kiểm soát của Pháp và Liên minh châu Âu. Diện tích: 242 km². Dân số: 6.125"
+} {
+  "otype": "country",
+  "name":  "Saint Vincent and the Grenadines",
+  "udescription": "Saint Vincent và Grenadines là một đảo quốc thuộc chuỗi đảo Tiểu Antilles trong lòng biển Caribe. Vùng lãnh thổ rộng 389 km² này bao gồm phần đảo chính Saint Vincent và phần lớn phía bắc Grenadines. Diện tích: 389 km². Dân số: 119.000"
+} {
+  "otype": "country",
+  "name":  "Samoa",
+  "udescription": "Samoa là quốc gia nằm ở phía Tây Quần đảo Samoa, thuộc Nam Thái Bình Dương. Giống như những người láng giềng Fiji, Tonga, cư dân sinh sống nơi đây có nguồn gốc là người Polynesia di cư sang đây 3500 năm trước. Diện tích: 2,831 km². Dân số: 214.265"
+} {
+  "otype": "country",
+  "name":  "San Marino",
+  "udescription": "San Marino là một trong những nước nhỏ nhất trên thế giới tại châu Âu, nằm hoàn toàn trong lãnh thổ nước Ý. Diện tích: 61 km². Dân số (Điều tra 2000 )27336"
+} {
+  "otype": "country",
+  "name":  "Sao Tome and Principe",
+  "udescription": "Sao Tome and Principe là một quốc gia đảo gần Gabon tại châu Phi. Thủ đô( và cũng làc thành phố lớn nhất) São Tomé. Diện tích: 964 km². Dân số(Ước lượng 2005) 169.000"
+} {
+  "otype": "country",
+  "name":  "Saudi Arabia",
+  "variant":["Ả Rập Saudi", "Ả Rập Xê Út"],
+  "udescription": "Saudi Arabia là quốc gia lớn nhất trên bán đảo Ả Rập. Quốc gia này có biên giới với Jordan về phía bắc, với Cô-oét, Qatar, Bahrain và Các Tiểu Vương quốc Ả Rập Thống nhất về phía đông, với Oman về phía nam và đông nam, với Yemen về phía nam, còn Vịnh Ba Tư nằm về phía đông bắc và Biển Đỏ nằm về phía tây. Diện tích: 1,960,582 km². Dân số: 26.417.599"
+} {
+  "otype": "country",
+  "name":  "Senegal",
+  "variant": ["Sénégal"],
+  "udescription": "Senegal là quốc gia phía Nam của sông Sénégal nằm ở Tây châu Phi. Có đường biên giới là biển Đại Tây Dương, Mauritania ở phía Bắc, Mali ở phía Đông, Guinée và Guiné-Bissau ở phía Nam. Gambia nằm trong Sénégal, theo con sông Gambia hơn 300 km. Diện tích: 196.190 km². Dân số: 11.658.000"
+} {
+  "otype": "country",
+  "name":  "Serbia",
+  "udescription": "Serbia là quốc gia không giáp biển thuộc khu vực đông nam châu Âu. Serbia nằm trên phần phía nam của đồng bằng Pannonia và phần trung tâm của bán đảo Balkan. Diện tích: 88,361 km². Dân số: 10.147.398" 
+} {
+  "otype": "country",
+  "name":  "Serbia and Montenegro",
+  "udescription": "Serbia và Montenegro là quốc gia hậu thân của Liên bang Nam Tư, tồn tại từ (2003-2006), liên bang giữa Serbia và Montenegro, tại Đông Nam châu Âu trên bán đảo Balkan. Thủ đô và thành phố lớn nhất là Beograd. Diện tích: 102.350 km². Dân số: 10.829.175 người"
+} {
+  "otype": "country",
+  "name":  "Seychelles",
+  "udescription": "Seychelles là quốc đảo với 155 hòn đảo lớn nhỏ thuộc châu Phi nằm trên Ấn Độ Dương, cách 1.500 km về hướng đông của đại lục Châu Phi, nằm ở phía đông bắc đảo Madagascar. Diện tích: 451 km². Dân số: 82.247"
+} {
+  "otype": "country",
+  "name":  "Sierra Leone",
+  "udescription": "Sierra Leone là một quốc gia nằm ở Tây Phi. Sierra Leone giáp Guinea về phía đông bắc, Liberia về phía đông nam và Đại Tây Dương về phía tây nam. Sierra Leone có diện tích 71.740 km². Dân số: 6.005.250"
+} {
+  "otype": "country",
+  "name":  "Singapore",
+  "variant": ["Tân Gia Ba"],
+  "udescription": "Singapore là quốc gia nhỏ nhất của Đông Nam Á, nằm phía nam của bán đảo Malaysia, phía nam bang Johor của Malaysia và phía bắc đảo Riau của Indonesia. Nằm cách xích đạo chỉ 137 km về hướng bắc. Diện tích: 692.7 km². Dân số: 4.987.6000"
+} {
+  "otype": "country",
+  "name":  "Slovakia",
+  "udescription": "Slovakialà một quốc gia nằm kín trong lục địa tại Đông Âu. Giáp biên giới với Cộng hoà Séc và Áo ở phía tây, Ba Lan ở phía bắc, Ukraina ở phía đông và Hungary ở phía nam. Dân số trên 5 triệu người. Diện tích khoảng 49,000 km2"
+} {
+  "otype": "country",
+  "name":  "Slovenia",
+  "udescription": "Slovenia là quốc gia thuộc khu vực Nam Âu. Giáp với Italia về phía tây, giáp với Áo về phía bắc, giáp với Hungary về phía đông bắc, giáp với Croatia về phía đông và phía nam. Slovenia còn tiếp giáp với biển Adriatic về phía tây nam. Diện tích: 20,273 km². Dân số: 2.009.245" 
+} {
+  "otype": "country",
+  "name":  "Solomon Islands",
+  "udescription": "Quần đảo Solomon là một đảo quốc của người Melanesia, nằm ở phía Đông Papua New Guinea, bao gồm gần một ngàn đảo nhỏ trải dài trên một diện tích khoảng 28.400 km². Dân số: 478.000"
+} {
+  "otype": "country",
+  "name":  "Somalia",
+  "udescription": "Somalia là quốc gia nằm ở Vùng sừng châu Phi. Giáp với Djibouti ở phía tây bắc, Kenya ở phía tây nan, Vịnh Aden và Yemen ở phía bắc, Ấn Độ Dương ở phía đông, và Ethiopia ở phía tây. Diện tích: 637,657 km². Dân số: 8.591.629"
+} {
+  "otype": "country",
+  "name":  "South Africa",
+  "variant": ["Nam Phi"],
+  "udescription": "Nam Phi là quốc gia nằm ở mũi phía nam lục địa Châu Phi. Giáp biên giới với Namibia, Botswana, Zimbabwe, Mozambique, Swaziland, và Lesotho, một lãnh thổ ngoài mẫu quốc bị lãnh thổ Nam Phi bao quanh. Diện tích: 1,219,912 km². Dân số: 46.888.200"
+} {
+  "otype": "country",
+  "name":  "South Georgia",
+  "udescription": "South Georgia là một lãnh thổ hải ngoại của Anh ở phía Nam Thái Bình Dương. Nó là một tập hợp các đảo xa xôi và khắc nghiệt, bao gồm Nam Georgia-có diện tích khoảng 170 km nhân với 29 km và là hòn đảo lớn nhất trong lãnh thổ và một nhóm các đảo nhỏ hơn được biết đến với tên Quần đảo Nam Sandwich. Diện tích: 3,903 km². Dân số xấp xỉ 20 người"
+} {
+  "otype": "country",
+  "name":  "Spain",
+  "variant": ["Tây Ban Nha"],
+  "udescription": "Spain là nước nằm trên bán đảo Iberia phía Tây Nam châu Âu. Vùng đất chính giáp Địa Trung Hải, và một phần nhỏ giáp lãnh thổ Vương quốc Anh Gibraltar, về phía Đông và phía Nam, giáp Pháp, Andorra và vịnh Biscay về phía Bắc và giáp Đại Tây Dương và Bồ Đào Nha về phía Tây và Tây Bắc. Diện tích: 504,782 km². Dân số: 45.116.894"
+} {
+  "otype": "country",
+  "name":  "Spratly Islands",
+  "udescription": "Quần đảo Trường Sa là nhóm gồm hơn 100 đảo nhỏ và đảo đá ngầm đang trong tình trạng tranh chấp ở Biển Đông. được bao quanh bởi những vùng đánh cá trù phú và giàu có về tài nguyên dầu mỏ và khí đốt. Diện tích: ít hơn 5km vuông"
+} {
+  "otype": "country",
+  "name":  "Sri Lanka",
+  "variant": ["Tích Lan"],
+  "udescription": "Sri Lanka là một đảo quốc với đa số dân theo Phật giáo ở Nam Á, nằm cách khoảng 31 kilômét ngoài khơi bờ biển phía nam Ấn Độ. Nước này thường được gọi là Hòn ngọc Ấn Độ Dương. Dân số Sri Lanka hơn 20 triệu người. Diện tích: 65,610 km²"
+} {
+  "otype": "country",
+  "name":  "Sudan",
+  "udescription": "Sudan là quốc gia có diện tích lớn nhất ở châu Phi. Nằm ở điểm giao giữa Sừng Châu Phi và Trung Đông. Tiếp giáp với Ai Cập ở phía Bắc, Biển Đỏ ở phía Đông Bắc, Eritrea và Ethiopia ở phía Đông, Kenya và Uganda ở phía Đông Nam, CHDC Congo và CH Trung Phi ở phía Tây Nam, Tchad ở phía Tây và Libya ở phía Tây Bắc. Diện tích: 2,505,810 km². Dân số: 41.236.378"
+} {
+  "otype": "country",
+  "name":  "Suriname",
+  "udescription": "Suriname là quốc gia tại Nam Mỹ. Toạ lạc giữa Guiana thuộc Pháp về phía đông và Guyana về phía tây. Biên giới phía nam chung với Brasil còn ranh giới phía bắc là bờ biển Đại Tây Dương. Biên giới cực nam với Guiana thuộc Pháp. Diện tích: 163,270 km². Dân số: 439.117"
+} {
+ "otype": "country",
+  "name":  "Svalbard",
+  "udescription": "Svalbard là quần đảo nằm ở Bắc Băng Dương phía bắc của châu Âu lục địa, khoảng giữa khoảng cách giữa Na Uy và Bắc cực. Nó gồm một nhóm đảo từ 74° đến 81° Bắc, và 10° đến 35° Đông. Diện tích61,020 km². Dân số: 2.214"
+} {
+  "otype": "country",
+  "name":  "Swaziland",
+  "udescription": "Swaziland là quốc gia thuộc khu vực châu Phi. Swaziland có diện tích tương đối nhỏ và không giáp biển. Giáp với Nam Phi về ba phía bắc, tây, nam và giáp với Mozambique về phía đông. Diện tích17,363 km². Dân số: 1.136.334"
+} {
+  "otype": "country",
+  "name":  "Sweden",
+  "variant": ["Thụy Điển"],
+  "udescription": "Thụy Điển là vương quốc ở Bắc Âu giáp Na Uy ở phía Tây và Phần Lan ở phía Đông Bắc, nối với Đan Mạch bằng cầu Öresund ở phía Nam, phần biên giới còn lại giáp Biển Baltic và Biển Kattegat. Diện tích: 449,964 km². Dân số: 9 373 379"
+} {
+  "otype": "country",
+  "name":  "Switzerland",
+  "variant": ["Thụy Sĩ"],
+  "udescription": "Thụy Sĩ là một quốc gia không giáp biển thuộc khu vực Tây Âu với dân số khoảng 7.5 triệu người. Thủ đô là thành phố Berne và hai trung tâm kinh tế lớn là Geneva và Zurich. Diện tích 41,285 km². Dân số 7.399.100"
+} {
+  "otype": "country",
+  "name":  "Syria",
+  "udescription": "Syria là quốc gia ở Tây Á, giáp biên giới với Liban và Biển Địa Trung Hải ở phía tây, Thổ Nhĩ Kỳ ở phía bắc, Iraq ở phía đông, Jordan ở phía nam, và Israel ở phía tây nam. Diện tích: 185,180 km². Dân số: 18.448.752" 
+} {
+  "otype": "country",
+  "name":  "Tajikistan",
+  "variant": ["Ta-di-kít-xtan"],
+  "udescription": "Tajikistan là một quốc gia ở vùng Trung Á. Tajikistan giáp với Afghanistan về phía nam, Uzbekistan về phía tây, Kyrgyzstan về phía bắc, và Trung Quốc về phía đông. Diện tích: 143,100 km². Dân số: 7.320.815" 
+} {
+  "otype": "country",
+  "name":  "Tanzania",
+  "udescription": "Tanzania là đất nước ở bờ biển phía đông châu Phi. Phía bắc giáp Kenya và Uganda, phía đông giáp Burundi và Cộng hòa Dân chủ Congo ở phía tây, và phía nam giáp Zambia, Malawi và Mozambique. Bờ biển phía đông là Ấn Độ dương. Diện tích: 954,090 km². Dân số: 36.588.225"
+} {
+  "otype": "country",
+  "name":  "Thailand",
+  "variant": ["Thái Lan"],
+  "udescription": "Thailand là quốc gia nằm ở vùng Đông Nam Á, phía Bắc giáp Lào và Myanma, phía Đông giáp Lào và Campuchia, phía Nam giáp vịnh Thái Lan và Malaysia, phía Tây giáp Myanma và biển Andaman. Diện tích: 514,000 km². Dân số: 66,404,688"
+} {
+  "otype": "country",
+  "name":  "Tibet",
+  "variant": ["Tây Tạng"],
+  "udescription": "Tibet nguyên là một lãnh thổ và là một quốc gia độc lập ở Trung Á và là nơi cư trú của người Tây Tạng. Với độ cao trung bình vào khoảng 4.900 m, vùng đất này thường được gọi là(Nóc nhà của thế giới)"
+} {
+  "otype": "country",
+  "name":  "Tobago",
+  "udescription": "Trinidad và Tobago là nước nằm ở phía nam Biển Caribe, 11 km ngoài khơi bờ biển Venezuela. Nằm trong khoảng 10°2'-11°12' Bắc và 60°30'-61°56' Tây. Là một đảo quốc gồm hai đảo chính, Trinidad và Tobago, và 21 đảo nhỏ với tổng diện tích 5.128 km². Dân số: 1.305.000"
+} {
+  "otype": "country",
+  "name":  "Togo",
+  "udescription": "Togo là quốc gia nằm ở phía Tây châu Phi có biên giới với Ghana ở phía Tây, Bénin ở phía Đông và Burkina Faso ở phía Bắc. Ở phia Nam Togo có bờ biển ngắn của vịnh Guinea, nơi mà đặt thủ đô Lomé của Togo. Diện tích: 56,785 km². Dân số: 6.619.000"
+} {
+  "otype": "country",
+  "name":  "Tokelau", 
+  "udescription": "Tokelau là một đảo quốc thuộc quyền cai quản của New Zealand. Vùng lãnh thổ này bao gồm các đảo san hô nằm ở phía nam Thái Bình Dương chỉ rộng 10 km². Dân số: 1.449"
+} {
+  "otype": "country",
+  "name":  "Tonga",
+  "udescription": "Tonga là quần đảo độc lập ở phía nam Thái Bình Dương. Nó nằm vào khoảng một phần ba từ New Zealand đến Hawaii, phía nam của Samoa và phía đông của Fiji. Diện tích: 748 km². Dân số: 102.000"
+} {
+  "otype": "country",
+  "name":  "Tunisia",
+  "udescription": "Tunisia là một quốc gia ở thượng châu Phi. Bắc Phi. Nước này giáp với Algeria ở phía tây, Libya ở phía đông nam, và Biển Địa Trung Hải ở phía bắc và phía đông. Tunisia có diện tích 165,000 km² với dân số ước tính chỉ hơn 10.3 triệu người"
+} {
+  "otype": "country",
+  "name":  "Turkmenistan",
+  "variant": ["Tuốc-mê-nít-xtan"],
+  "udescription": "Turkmenistan là quốc gia tại Trung Á. Nước này giáp với Afghanistan về phía đông nam, Iran về phía tây nam, Uzbekistan về phía đông bắc, Kazakhstan về phía tây bắc, và biển Caspi về phía tây. Diện tích: 488,100 km². Dân số: 5.042.920"
+} {
+ "otype": "country",
+  "name":  "Turks and Caicos Islands",
+  "udescription": "Quần đảo Turks và Caicos là một vùng lãnh thổ nằm trong quần đảo Angti (hay còn gọi là quần đảo Caribe) thuộc Vương quốc Liên hiệp Anh và Bắc Ireland. Diện tích nơi đây vào khoảng 417 km². Dân số xấp xỉ 21.726 người"
+} {
+  "otype": "country",
+  "name":  "Tuvalu",
+  "udescription": "Tuvalu còn được biết với tên Quần đảo Ellice, là một đảo quốc thuộc vùng phía Nam Thái Bình Dương, nằm giữa Hawaii và Úc. Diện tích Tuvalu bao gồm các đảo đá ngầm và san hô, và vùng rừng rậm chỉ rộng khoảng 26 km². Dân số: 10.441"
+} {
+  "otype": "country",
+  "name":  "United Kingdom",
+  "variant": ["UK"],
+  "udescription": "Vương quốc Liên hiệp Anh và Bắc Ireland, là một quốc gia nằm ở phía tây bắc châu Âu. Bao gồm 4 phần chính là Anh (England), Scotland, Wales và Bắc Ireland. Có chung đường biên giới với Cộng hòa Ireland. Diện tích: 244,820 km². Dân số: 60.776.238 người"
+} {
+  "otype": "country",
+  "name":  "Uganda",
+  "udescription": "Uganda là một quốc gia không giáp biển ở phía Đông của châu Phi.bao gồm phần phía nam của đất nước và cả thủ đô Kampala. Diện tích: 236,040 km². Dân số: 28.195.754"
+} {
+ "otype": "country",
+  "name":  "Ukraine",
+  "variant": ["U-crai-na"],
+  "udescription": "Ukraine là quốc gia thuộc khu vực Đông Âu, giáp với Liên bang Nga về phía đông, giáp với Belarus (Bạch Nga) về phía bắc, giáp với Ba Lan, Slovakia và Hungary về phía tây, giáp với Romania và Moldova về phía tây nam và giáp với Biển Đen và Biển Azov về phía nam. Diện tích: 603,700 km². Dân số: 47.425.336"
+} {
+  "otype": "country",
+  "name":  "United Arab Emirates",
+  "udescription": "Các Tiểu Vương quốc Ả Rập Thống nhất là một nước ở vùng Trung Đông nằm ở phía đông nam Bán đảo Ả Rập tại Tây Nam Á trên Vịnh Péc xích, gồm bảy tiểu vương quốc: Abu Dhabi, Ajmān, Dubai, Fujairah, Ras al-Khaimah, Sharjah và Umm al-Qaiwain. Diện tích: 83.600 km². Dân số: 4,496,000"
+} {
+  "otype": "country",
+  "name":  "Uruguay",
+  "udescription": "Uruguay là quốc gia tại Nam Mỹ, tiếp giáp với Brasil ở phía Bắc, Argentina ở phía Tây và Tây Nam qua Río de la Plata, với Đại Tây Dương ở phía Đông Nam. Đây là quốc gia độc lập có diện tích nhỏ thứ hai ở Nam Mỹ sau Suriname. Diện tích: 176,220 km². Dân số: 3.431.932"
+} {
+  "otype": "country",
+  "name":  "Uzbekistan",
+  "variant": ["U-giơ-be-kít-xtan", "Uzbekstan", "Ozbekistan"],
+  "udescription": "Uzbekistan là quốc gia nằm kín trong lục địa tại Trung Á, trước kia từng là một phần của Liên bang Xô viết. Nước này có chung biên giới với Kazakhstan ở phía tây và phía bắc, Kyrgyzstan và Tajikistan ở phía đông, và Afghanistan cùng Turkmenistan ở phía nam. Diện tích: 447,400 km². Dân số: 26.851.195"
+} {
+  "otype": "country",
+  "name":  "Vanuatu",
+  "udescription": "Vanuatu là đảo quốc gồm nhóm quần đảo vùng Melanesia, tây nam Thái Bình Dương. Quần đảo này nằm phía đông Úc cách 1.750 km, phía đông bắc Nouvelle-Calédonie cách 500 km, phía tây Fiji, và phía nam quần đảo Solomon. Diện tích: 12 200 km². Dân số: 205 754"
+} {
+  "otype": "country",
+  "name":  "Roma",
+  "variant": ["La Mã"],
+  "udescription": "Roma là thủ đô của nước Ý và thủ phủ của vùng Lazio thuộc miền trung nước nàyThành phố tọa lạc trên hợp lưu của sông Aniene vào sông Tiber. Roma là trung tâm kinh tế hàng đầu của Italia và là một trung tâm văn hóa, thương mại, chính trị của Italia. Diện tích: 1290 km². Số dân: 2.546.807"
+} {
+  "otype": "country",
+  "name":  "Venezuela",
+  "variant": ["Vê-nê-giu-ê-la"],
+  "udescription": "Venezuela là quốc gia thuộc khu vực Nam Mỹ, tiếp giáp với Guyana về phía đông, với Brazil về phía nam, Colombia về phía tây và biển Caribbean về phía bắc. Nhiều hòn đảo nhỏ ngoài khơi biển Caribbean cũng thuộc chủ quyền của Venezuela. Diện tích: 916,445 km². Dân số: 25.730.435 "
+} {
+  "otype": "country",
+  "name":  "Vietnam",
+  "variant": ["Việt Nam"],
+  "udescription": "Vietnam là quốc gia nằm ở phía đông bán đảo Đông Dương, thuộc khu vực Đông Nam Á. Việt Nam phía bắc giáp Trung Quốc, phía tây giáp Lào và Campuchia, phía tây nam giáp vịnh Thái Lan, phía đông và phía nam giáp biển Đông. Diện tích: 331 698 km². Dân số: 89 571 130"
+} {
+  "otype": "country",
+  "name":  "Wake Island",
+  "udescription": "Đảo Wake là đảo san hô hình vòng có bờ biển 12 dặm Anh trong Thái Bình Dương, khoảng 2/3 đường giữa Honolulu và Guam. Nó là lãnh thổ chưa chưa sát nhập và chưa tổ chức của Hoa Kỳ được quản lý bởi Phòng Quốc hải vụ thuộc Bộ Nội vụ Hoa Kỳ. Diện tích : 6,5 km2.Dân số: Hơn 75"
+} {
+  "otype": "country",
+  "name":  "Wallis and Futuna",
+  "udescription": "Wallis và Futuna,là một vùng lãnh thổ đảo trong khu vực Polynesia nằm ở Nam Thái Bình Dương giữa hai quốc đảo Fiji và Samoa. Gồm 3 đảo núi lửa nhiệt đới chính và một số cù lao nhỏ. Vùng lãnh thổ này được chia thành hai nhóm đảo nằm cách nhau 260 km. Diện tích: 264 km². Dân số: 15.480"
+} {
+  "otype": "country",
+  "name":  "Western Sahara",
+  "udescription": "Tây Sahara là một vùng lãnh thổ tại Bắc Phi, ven Đại Tây Dương và giáp với Ma Rốc, Angeri và Mauritani. Diện tích 226 nghìn km². Dân số 382,617 người"
+} {
+  "otype": "country",
+  "name":  "Yemen",
+  "variant": ["Diệp Môn"],
+  "udescription": "Yemen là quốc gia ở bán đảo Ả Rập, Tây Nam Á. Thủ đô là Sana'a. Yemen có khoảng 23 triệu dân và rộng gần 530.000 km2. Quốc gia này giáp với Ả Rập Saudi ở phía Bắc, Hồng hải ở phía Tây, biển Ả Rập và vịnh Aden ở phía Nam, và Oman ở phía Đông"
+} {
+  "otype": "country",
+  "name":  "Yugoslav Republic of Macedonia",
+  "udescription": "Cộng hòa Macedonia là quốc gia thuộc khu vực đông nam châu Âu. Giáp với Serbia và vùng lãnh thổ Kosovo về phía bắc, giáp với Albania về phía tây, giáp với Hy Lạp về phía nam và giáp với Bulgaria về phía đông. Dân số của nước này khoảng 2 triệu người. Diện tích: 25,333 km²"
+} {
+  "otype": "country",
+  "name":  "Yugoslavia",
+  "variant": ["Nam Tư"],
+  "udescription": "Nam Tư miêu tả ba thực thể chính trị tồn tại nối tiếp nhau trên Bán đảo Balkan ở Châu Âu, trong hầu hết thế kỷ 20. Cộng hòa Liên bang Nam Tư (FRY) được thành lập ngày 28/4/1992, gồm nước Cộng hòa Xã hội Chủ nghĩa Serbia và Cộng hòa Xã hội Chủ nghĩa Montenegro cũ"
+} {
+  "otype": "country",
+  "name":  "Zaire",
+  "udescription": "Zaire là tên của Cộng hòa Dân chủ Congo trong giữa 27/10/1971 và 17/5/1997 vẫn còn thường dùng không chính xác để chỉ quốc gia này. Diện tích: 2.345.410 km². Dân số: 46.498.539"
+} {
+  "otype": "country",
+  "name":  "Zambia",
+  "udescription": "Zambia là quốc gia Cộng Hòa nằm ở miền Nam châu Phi. Các nước láng giềng của Zambia bao gồm Cộng Hòa Dân Chủ Congo ở phía Bắc, Tanzania ở Đông Bắc, Malawi ở phía Đông, Mozambique, Zimbabwe, Botswana, Namibia ở phía Nam và Angola ở phía Tây. Thủ đô của Zambia là Lusaka. Diện tích: 752,614 km². Dân số: 11.261.795 "
+} {
+  "otype": "country",
+  "name":  "Zimbabwe",
+  "udescription": "Cộng hòa Zimbabwe, trước đây từng được gọi là Nam Rhodesia, là quốc gia không giáp biển nằm ở phía nam lục địa Phi, bị kẹp giữa hai con sông Zambize và Limpopo. Có chung đường biên giới với các nước Nam Phi ở phía nam, Botswana ở phía tây nam, Mozambique ở phía đông và Zambia tây bắc. Diện tích: 390.757 km². Dân số: 13,010,000"
+} {
+  "otype": "country",
+  "name":  "Wales",
+  "variant": ["Xứ Gan"],
+  "udescription": "Wales là một trong bốn quốc gia cấu thành Vương quốc Liên hiệp Anh và Bắc Ireland. Wales tọa lạc ở Tây-Nam Đảo Anh và giáp Anh về phía Đông, Eo biển Bristol về phía Nam và Biển Ireland về phía Tây và phía Bắc, và cũng nằm bên cửa sông Dee về phía Đông-Bắc. Wales là công quốc lớn nhất thế giới. Dân số: 2.958.600. Diện tích: 20,779 km²"
+} 

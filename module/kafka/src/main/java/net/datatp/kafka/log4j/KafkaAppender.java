@@ -9,7 +9,7 @@ import org.apache.log4j.spi.LoggingEvent;
 import net.datatp.buffer.chronicle.MultiSegmentQueue;
 import net.datatp.buffer.chronicle.Segment;
 import net.datatp.kafka.producer.AckKafkaWriter;
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 import net.datatp.util.log.Log4jRecord;
 
 public class KafkaAppender extends AppenderSkeleton {

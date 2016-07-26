@@ -94,6 +94,6 @@ public class KafkaProducerPartitionLeaderChangeBugUnitTest  {
       }
       formater.addRow(sel.partitionId(), sel.leader().port(), replicas.toString());
     }
-    System.out.println(formater.getFormatText());
+    System.out.println(formater.getFormattedText());
   }
 }

@@ -2,7 +2,7 @@ package net.datatp.zk.registry;
 
 import java.io.Serializable;
 
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 
 public interface PayloadConverter {
   public <T extends Serializable> byte[] toBytes(T obj) throws Exception ;

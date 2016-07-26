@@ -2,7 +2,7 @@ package net.datatp.xhtml.dom.extract;
 
 import org.junit.Test;
 
-import net.datatp.http.SimpleHttpFetcher;
+import net.datatp.xhtml.SimpleHttpFetcher;
 
 public class BlogContentExtractorUnitTest {
   static String[] EXPECT_BLOG_TAG_DETAIL = {"content:blog", "content:detail"} ;

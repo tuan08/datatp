@@ -22,7 +22,7 @@ import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpVersion;
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 /**
  * @author Tuan Nguyen
  * @email  tuan08@gmail.com

@@ -14,7 +14,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
+
 /**
  * @author Tuan Nguyen
  * @email  tuan08@gmail.com

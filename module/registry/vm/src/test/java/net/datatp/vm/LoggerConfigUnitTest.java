@@ -5,9 +5,8 @@ import java.util.Map;
 import org.junit.Test;
 import org.slf4j.Logger;
 
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 import net.datatp.util.log.LoggerFactory;
-import net.datatp.vm.LoggerConfig;
 
 public class LoggerConfigUnitTest {
   @Test

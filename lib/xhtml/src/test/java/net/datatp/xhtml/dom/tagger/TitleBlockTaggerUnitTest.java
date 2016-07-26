@@ -2,8 +2,8 @@ package net.datatp.xhtml.dom.tagger;
 
 import org.junit.Test;
 
-import net.datatp.http.SimpleHttpFetcher;
 import net.datatp.util.text.CosineSimilarity;
+import net.datatp.xhtml.SimpleHttpFetcher;
 import net.datatp.xhtml.XhtmlDocument;
 import net.datatp.xhtml.dom.TDocument;
 import net.datatp.xhtml.dom.TNode;

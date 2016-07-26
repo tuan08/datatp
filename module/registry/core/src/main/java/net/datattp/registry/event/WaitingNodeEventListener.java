@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 import net.datatp.util.text.TabularFormater;
 import net.datattp.registry.Node;
 import net.datattp.registry.Registry;
@@ -133,7 +133,7 @@ abstract public class WaitingNodeEventListener {
       }
       if(detectNodeEventCount != waitingNodeEventCount) {
         TabularFormater formater = getTabularFormaterEventLogInfo() ;
-        String msg = "Error: wait time = " + timeout + "ms\n" + formater.getFormatText() ;
+        String msg = "Error: wait time = " + timeout + "ms\n" + formater.getFormattedText() ;
         throw new Exception(msg);
       }
     } catch (InterruptedException e) {

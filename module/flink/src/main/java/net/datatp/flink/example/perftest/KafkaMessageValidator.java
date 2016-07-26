@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import net.datatp.kafka.consumer.KafkaMessageConsumerConnector;
 import net.datatp.kafka.consumer.MessageConsumerHandler;
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 
 public class KafkaMessageValidator {
   private String                        zkConnect;

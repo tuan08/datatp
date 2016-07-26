@@ -3,7 +3,7 @@ package net.datatp.xhtml.dom.extract;
 import org.junit.Test;
 
 import junit.framework.Assert;
-import net.datatp.http.SimpleHttpFetcher;
+import net.datatp.xhtml.SimpleHttpFetcher;
 /**
  * $Author: Tuan Nguyen$ 
  **/

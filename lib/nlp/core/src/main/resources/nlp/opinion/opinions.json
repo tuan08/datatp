@@ -1,0 +1,118 @@
+{
+  "name" : "opinion",
+  "type" : [ "neutral", "single-word"],
+  "otype" : "synset",
+  "variant" : [ "tạm"]
+} {
+  "name" : "opinion",
+  "type" : [ "neutral", "multi-word"],
+  "otype" : "synset",
+  "variant" : [ "bình thường", "tương đối"]
+} {
+  "name" : "opinion",
+  "type" : [ "negative", "single-word"],
+  "otype" : "synset",
+  "variant" : [ 
+		"chậm", "chấp", "đắt", "hư", "mắc", "mỏng",
+		"nhái", "chán", "nhạt", "nhẹ", "nóng", "ổn", "cao", "kém", "sai", "tâng", "trừ", "xấu",
+		"đuối", "dở", "mau", "nhòe", "tệ", "thua", "ngắn", "lỗi", "yếu", "hao"
+  ]
+} {
+  "name" : "opinion",
+  "type" : [ "negative", "multi-word"],
+  "otype" : "synset",
+  "variant" : [ 
+		"bất lợi", "bất lực", "bèo nhèo", "cầm không đằm tay", "cẩn thận", "càng chát", "chả là đâu", "chai pin wá nhanh", "chậm hơn", 
+		"chạy sau", "rất xa", "chú ý", "chưa đủ nổi bật", "chưa đủ trình", "cao quá", "cùi mía", "cứng quá", "cũng sẽ phải khổ sở", "dại dại", "đắt hơn", 
+		"đắt lòi", "đắt nhất", "đắt vãi", "đắt wé", "đắt lè lưỡi", "đầy hàng dựng", "dày hơn", "dễ bị lỗi", "dễ dàng bị biến dạng", "dễ dính dấu vân tay", "dễ hư", "điên điên", 
+		"điên tiết", "dỏm lắm", "down giá nhanh", "hơi kinh", "đuối hơn", "gặp vấn đề", "giá chát và đắng quá", "giá đắt hơn", "giá rẻ", "giấc mơ không có thật", 
+		"giảm đi đáng kể", "hạn chế", "hay nóng", "hết pin nhanh", "hết pin quá nhanh", "hoàn toàn bất lực", "hơi bị hấp", "hơi cao", "hơi đắt", "hơi dày", "hơi ít", 
+		"hơi mờ", "hơi nóng", "hơi to", "kém hấp dẫn", "kém hơn", "kém nhứt", "kém nhất", "kêu ồn", "khá cao", "khá nặng", "khiếu nại", "khó gắn", "khó lắm", "không bằng", 
+		"không chắc chắn", "không đánh giá cao", "không được đẹp", "không ngon lắm", "khủng khiếp", "ko được bền", "ko thích", "mạnh thì có mạnh nhưng", "mất sóng", 
+		"mờ đi một mảng", "mong manh dễ vỡ", "mục nát bộ não", "nặng hơn", "ngốn pin nhanh khủng khiếp", "nhàm chán", "nhanh hết", "nhanh hết pin", 
+		"nhanh hỏng", "chán lắm", "nhanh xuống", "nhếch nhác", "nhìn tệ hơn", "nóng hơn", "nóng tợn", "phải cẩn thận", "phiên bản khổng lồ", "quá đắt", "quá nóng", 
+		"quá xấu", "rẻ tiền", "số tiền không hề nhỏ", "tiêu giấc mộng", "tìm hiểu kỹ", "trông bẩn", "to đùng", "xấu kinh", "xí quá", "yếu hơn",
+		"cái dở", "bê bết", "hối tiếc", "khó chịu", "nghèo nàn", "lừa tình", "mờ mờ", "đục đục", "rối rắm", "nham nhở", "khiếm khuyết", "giá cắt cổ", "ồn ào", "đáng lo ngại", 
+		"đơ đơ", "ngông cuồng", "đồ sộ", "lạc hậu", "cồng kềnh", "lộn xộn", "có vấn đề", "rắc rối", "phiền toái", "giá chát", "dễ chết", "phàn nàn", "than vãn",
+    "lỗi hồng tâm", "chậm chạp", "trơn trượt", "thua xa"   
+  ]
+} {
+  "name" : "opinion",
+  "type" : [ "positive", "single-word"],
+  "otype" : "synset",
+  "variant" : [ 
+		"bền", "cao", "chắc", "chuẩn", "dễ", "đẹp", "đỉnh", "gọn", "hợp", "khá", 
+		"khỏe", "lành", "lâu", "mạnh", "mát", "ngon", "nhanh", "nhỏ", "rẻ", "to", "tốt", "tròn",
+		"ổn", "mượt", "nuột", "khoái", "nhạy", "nét", "sướng", "thích", "êm", "lẹ", "xịn"
+  ]
+} {
+  "name" : "opinion",
+  "type" : [ "positive", "multi-word"],
+  "otype" : "synset",
+  "variant" : [ 
+		"+1 cho", "ai cũng phải công nhận", "an toàn", "ấn tượng", "bắt sóng mạnh", "bền bỉ", "bền hơn", "bền nhất", "BH dài", "biểu tượng", "bỏ vừa cốp xe", 
+		"cải tiến đáng kể", "đầm tay", "cần thiết", "cao cấp", "cao cấp nhất", "cao hơn chút đỉnh", "cấu hình mạnh", "cấu hình tốt", "chắc chắn", "chất lượng ko thay đổi", 
+		"chạy được cả", "chạy ngon lành", "chạy nhanh hơn", "chỉ mỏng", "chỉ dày", "chỉ nặng", "chỉ nặng chưa đầy", "chính xác", "chịu lực", "chống rung quang học", "chống thấm nước", 
+		"chụp đẹp", "chụp hình đẹp lắm", "chuyên nghiệp", "cn cao", "có thể di chuyển", "còn cực lâu", "công nghệ cao", "công nghệ đột phá", "cực cao", "cực đẹp", "cực kì", 
+		"cực kì đa dạng", "cực kì hiệu quả", "cực kỳ nhỏ gọn", "cực kỳ pro", "cực kỳ sắc nét", "sắc nét", "cực mạnh", "cực ngon", "cực ổn", "cứng cáp", "cũng đẹp", "cũng được", 
+		"cũng hợp", "cũng mượt", "cũng thích", "cuốn hút", "đa dạng", "đa phương tiện", "đặc biệt", "đặc biệt cuốn hút", "đặc biệt hơn", "đặc biệt phù hợp", "đẳng cấp", 
+		"đánh giá cao", "đập chết", "đáp ứng nhu cầu và thị hiếu", "đầu tư thấp", "đầy cá tính", "dày chỉ", "đầy đủ", "đầy đủ nhất", "đầy sắc cạnh", "dễ dàng", 
+		"dễ dàng chia sẻ", "dễ dàng hơn", "dễ quảng cáo", "dễ sử dụng", "đẹp hơn", "đẹp khỏi phải giới thiệu", "đẹp long lanh", "đẹp long lảnh", "đẹp mã", "đẹp mắt", 
+		"đẹp một cách giản dị", "đẹp quá", "đẹp thời trang", "đẹp tinh xảo", "độ bền cao", "độ dày chưa tới", "độ lạnh cho ra rất sâu", "đo nhanh", "độ oách", "độ trâu bò", 
+		"độc của độc", "độc đáo", "đời mới", "đơn giản", "đơn giản hóa", "đồng bộ", "dung lượng cao hơn", "dùng ngon chán", "duy ngã độc tôn", "êm dịu", 
+		"giá thành chỉ tương đương", "giám giá mạnh", "giản dị", "gọn gàng", "gọn nhẹ", "hàng hiệu", "hàng khủng", "háo hức", "hấp dẫn", "hay nhất", 
+		"hiện đại", "hiện đại hơn", "hiệu năng cao", "hiệu quả", "hiệu quả cao", "hỗ trợ tốt", "hoàn hảo", "hoành tráng", "hợp lý", "hợp lý hơn", "hợp lý nhất", 
+		"hợp túi tiền", "ít kén đĩa", "khá ấm", "khá đầy đủ", "khá đẹp", "khá kỹ", "khá mềm", "khả năng chăm sóc", "khả năng di động", "khả năng ép xung cao", 
+		"khả năng hiển thị", "khá nhanh", "khá ổn", "khá pro", "khác biệt", "khỏi chê", "khỏi lo", "không chỉ đẹp", "không đau", "không hề kém cạnh", "không hề thua kém", 
+		"không kém", "không kém phần tinh tế", "không thua kém", "kịch độc", "kích hoạt dễ dàng", "lâu hết pin", "lịch lãm", "lớn hơn nhiều", "lớn hơn thấy rõ", "long lanh", 
+		"lộng lẫy", "luôn luôn mạnh", "luôn mát hơn", "lướt rất ổn", "mạnh hơn", "mạnh nhanh", "mạnh lắm", "mạnh mẽ", "mạnh mẽ nhất", "mạnh ngang ngửa", "mạnh nhất", "mát nhứt", 
+		"màu sắc trẻ trung", "máy đẹp", "mới chỉ đáp ứng", "mới hơn", "mỏng đến mức giới hạn", "mỏng đẹp", "mỏng dính", "mỏng hơn", "mỏng manh", "mỏng nhẹ", 
+		"múc ngay", "nằm gọn trong lòng bàn tay", "nâng cao đáng kể", "nâng cấp đáng kể", "nặng chỉ", "năng động", "nét hơn", "nét rất đặc trưng", "ngất ngây", "ngon hơn", 
+		"ngon lành hơn", "ngon nhất", "ngon nhỉ", "nhanh chóng", "nhanh gấp", "nhanh gấp đôi", "nhanh hơn", "nhanh nhất hiện nay", "nhanh như chớp", "nhẹ hơn", "nhẹ nhàng", 
+		"nhẹ nhất thế giới", "nhìn pro", "nhỏ gọn", "nhỏ gọn hơn rất nhiều", "nhỏ nhẹ", "nhu cầu cơ bản", "nổi bật", "nổi bật hơn", "nổi danh", "nổi tiếng", "nổi trội", 
+		"nuột lắm", "ổn định", "ổn hơn", "ổn nhất", "phát huy tối đa", "phím bấm thân thiện", "phối màu đẹp", "phong cách", "phù hợp", "quá ngon", "quyến rũ", 
+		"chắc chắn", "cơ động", "rất hợp lí", "rất mát", "rất ngon lành", "rất nhanh", "rất nổi tiếng", "rất phù hợp", "rất sang", "rất sáng", "rẻ gần bằng 1 nửa", 
+		"rẻ ghê", "rẻ hơn", "rẻ thế", "rõ nét", "rộng rãi", "rộng rãi hơn", "rực rỡ", "sản phẩm hot", "sáng đẹp", "sang trọng", "siêu bền", "siêu đẹp", "siêu mỏng", 
+		"siêu rẻ", "cực rẻ", "sướng tay", "tầm thấp", "thân mỏng", "thân thiện", "thật đẹp", "thèm muốn", "thiết kế đẹp", "thiết kế siêu mỏng", "thiết kế thời trang", 
+		"thời trang", "thơm mát", "thông minh", "thú vị", "tiện lợi", "tiết kiệm", "linh hoạt", "tính nhỏ gọn", "tính ổn định cao", "tính sắc sảo", "tinh tế", 
+		"tính tiện dụng", "tốc độ", "tốc độ cao", "tốc độ nhanh", "tốt nhất", "tốt thật", "tránh rủi ro", "trâu bò", "trẻ trung", "trông duyên dáng", "tương đối ngon", 
+		"tuyệt đẹp", "vãi đái", "vô cùng", "vô cùng mỏng", "vote cho", "xinh xắn", "yên tâm", 
+		"điển hình", "rõ dãi", "rỏ dãi", "cực đỉnh", "đồng bộ", "hứng thú", "êm ru", "hữu ích", "cực êm", "mượt mà", "bóng bẩy", "ngon lành", "bền chắc", "hữu dụng", "khả quan",
+		"siêu phẩm", "ầm ầm", "nhỏ gọn", "uyển chuyển", "mềm mại", "đáng giá", "thiện cảm", "thuận tiện", "tiện lợi", "giá cả phải chăng", "quan trọng", "thân thiện", "an tâm",
+		"tiện nghi", "đột phá", "hiệu suất hoạt động cao", "ưng ý", "lạ mắt", "lung linh", "đắt hàng", "đầy màu sắc", "hâm mộ", "cạnh tranh", "thanh mảnh", "tin cậy",
+		"siêu nhanh", "số 1", "sành điệu", "hữu hiệu", "đúng đắn", "dễ thao tác", "dùng ngon lành", "phấn khích", "mát rượi", "khỏe khoắn", "bền đẹp", "dễ bấm",
+		"ngang ngửa", "cải thiện", "đứng đầu", "thế mạnh"
+  ]
+} {
+  "name" : "opinion:subject",
+  "type" : [ "single-word"],
+  "otype" : "synset",
+  "variant" : [
+    "anh", "chị", "em", "tôi", "bác", "pác", "mình", "mềnh", "bạn", "chú", "vợ", "chồng", "tớ", "ông"
+  ]
+} {
+  "name" : "opinion:subject",
+  "type" : [ "multi-word"],
+  "otype" : "synset",
+  "variant" : [
+    "các anh", "các chị", "chúng tôi", "chúng ta", "các bác", "bọn mình", "bọn mềnh", "các bạn", "các chú" , "ông xã", "bà xã",
+    "người bạn", "thằng bạn", "đứa bạn", "con em", "bà chị", "bạn trẻ", "cô bạn", "con bạn", "thằng em", "anh em"
+  ]
+} {
+  "name" : "opinion:verb",
+  "type" : ["verb"],
+  "otype" : "synset",
+  "variant" : [
+    "nói", "thấy", "bảo", "theo", "khoái", "thích", "chọn", "lấy", "múc", "hỏi", "mua", "khuyên", "nhờ",
+    "cho rằng", "đánh giá", "cho điểm" , "có thể", "hi vọng", "tin rằng", "tính mua", "phân vân", "tư vấn",
+    "băn khoăn", "lăn tăn", "đang tính", "đang dùng", "đang định", "đang xài", "sử dụng","trải nghiệm", "miệt thị",
+    "giới thiệu", "tham khảo"
+  ]
+} {
+  "name" : "opinion:exclamation",
+  "type" : ["exclamation"],
+  "otype" : "synset",
+  "variant" : [
+    "à", "ơi", "này", "nhỉ", "kìa", "ồ", "ối", "ủa", "ặc", "nhá", "chứ", "ạ", "rồi"
+  ]
+}

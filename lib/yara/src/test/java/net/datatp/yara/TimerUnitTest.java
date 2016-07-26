@@ -7,10 +7,8 @@ import org.junit.Test;
 
 import com.codahale.metrics.Snapshot;
 
-import net.datatp.util.JSONSerializer;
 import net.datatp.util.io.IOUtil;
-import net.datatp.yara.MetricPrinter;
-import net.datatp.yara.Timer;
+import net.datatp.util.json.JSONSerializer;
 
 public class TimerUnitTest {
   @Test

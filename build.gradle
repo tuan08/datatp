@@ -88,4 +88,12 @@ subprojects {
   artifacts {
     tests testJar
   }
+
+  sourceSets {
+    main {
+      //if you truly want to override the defaults:
+      //output.resourcesDir = 'out/res'
+      output.classesDir   = 'build/classes'
+    }
+  }
 }

@@ -70,7 +70,7 @@ public class AlgorithmComparatorUnitTest {
         dist.getValueByPercentile(percent)
       );
     }
-    System.out.println(tformater.getFormatText());
+    System.out.println(tformater.getFormattedText());
     System.out.println("\n\n\n");
   }
   

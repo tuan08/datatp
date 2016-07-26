@@ -39,7 +39,7 @@ public class QDigestUnitTest {
         dist.getValueByPercentile(percent)
       );
     }
-    System.out.println(tformater.getFormatText());
+    System.out.println(tformater.getFormattedText());
   }
   
   @Test

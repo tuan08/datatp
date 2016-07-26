@@ -187,7 +187,7 @@ public class KafkaMessageCheckTool implements Runnable {
       }
 
       try {
-        out.append(formater.getFormatText()).append("\n");
+        out.append(formater.getFormattedText()).append("\n");
       } catch (IOException e) {
         e.printStackTrace();
       }

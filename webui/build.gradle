@@ -1,0 +1,18 @@
+archivesBaseName = 'webui'
+
+eclipse {
+  project {
+    name = 'webui'
+  }
+}
+
+configurations {
+  deployJars {
+    transitive = false
+  }
+}
+
+dependencies {
+  compile project(':data/feed/webcrawler/cluster')
+  testCompile("org.springframework:spring-test:${springFrameworkVersion}")
+}

@@ -74,15 +74,15 @@ public class ActivityFormatter{
     }
     
     if(verbose){
-      String result = stepFormatter.getFormatText()+"\n    Activity Logs\n"+
-          activityLogsFormatter.getFormatText()+"\n    Activity Step Logs\n";
+      String result = stepFormatter.getFormattedText()+"\n    Activity Logs\n"+
+          activityLogsFormatter.getFormattedText()+"\n    Activity Step Logs\n";
       for(TabularFormater f: stepLogsFormatterList){
-        result+=f.getFormatText()+"\n";
+        result+=f.getFormattedText()+"\n";
       }
       return result;
     }
     else{
-      return stepFormatter.getFormatText();
+      return stepFormatter.getFormattedText();
     }
   }
 }

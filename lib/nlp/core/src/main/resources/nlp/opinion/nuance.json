@@ -1,0 +1,19 @@
+{
+ "otype":"synset",
+ "name":"nuance",
+ "type":["increase"],
+ "variant":[
+ "biết bao", "biết chừng nào", "chắc", "chắc hẳn", "cực", "cực kì", "cực kỳ", "gần như", "ghê", "hơn",
+ "hơn nữa", "hết lòng", "hết mình", "hết mức", "hết sức", "luôn", "lắm", "luôn luôn",
+ "nhất", "nhất mực", "nhất quyết", "nhất định", "nức nở", "phết", "quá", "quá trời", "riết",
+ "rất", "rất đỗi", "thiệt", "thêm", "thật", "tuyệt", "vô cùng", "vô kể", "vãi", "vô đối", 
+ "hơn một chút"
+ ]
+} {
+ "otype":"synset",
+ "name":"nuance",
+ "type":["decrease"],
+ "variant":[
+ "chưa", "chả", "chẳng", "hơi", "khá", "ko", "không", "không được", "không thể", "lẽ ra",
+ "suýt", "đáng lẽ", "đáng ra", "được", "đỡ"]
+} 

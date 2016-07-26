@@ -2,7 +2,7 @@ package net.datattp.registry.txevent;
 
 import java.util.UUID;
 
-import net.datatp.util.JSONSerializer;
+import net.datatp.util.json.JSONSerializer;
 
 public class TXEvent {
   private String    id ;

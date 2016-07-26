@@ -1,0 +1,23 @@
+{
+  "otype": "synset",
+  "name": "product:sale:marketing", 
+  "type": ["single-word"],
+  "variant" : [
+    "100%", "99%", "99.9%", "99.5%", "99%", "98%", "98.99%", "97%", "96%", "95%", "90%",
+    ">HN", ">HCM", ">TQ", "HCM:", "HCM :", "HCM_", "HCM-", "HN:", "HN :", "HN_", "HN-", "TQ:", "TQ :", "TQ_", "TQ-",
+    "bán", "buôn", "clip", "sửa", "chữa", "fix", "+sửa", "+chữa", "cũ", "mới"
+  ]
+} {
+  "otype": "synset",
+  "name": "product:sale:marketing", 
+  "type": ["multi-word"],
+  "variant" : [
+    "bảo hành", "còn bảo hành", "còn bh", "hết bh", "hết bảo hành", "het bh", "bh gần",
+    "còn mới", "như mới", "nguyên tem", "chính hãng", "chính thức", "giá hot",
+    "thu mua", "cung cấp", "công bố", "ra mắt", "thanh lý", "phân phối", "trình làng", "khai trương", 
+    "tung ra", "cần mua", "cần bán", "muốn mua", "muốn bán", "cần tìm", "toàn quốc",
+    "cơ hội sở hữu", "co mua ko", "co ban ko", "có mua không", "có bán không", 
+    "có mua ko", "có bán ko", "giá rẻ", "giá siêu rẻ", "giá cực rẻ", "giá tốt", "giá cực tốt",
+    "giá gốc", "hàng hiệu", "đã qua sử dụng"
+  ]
+} 

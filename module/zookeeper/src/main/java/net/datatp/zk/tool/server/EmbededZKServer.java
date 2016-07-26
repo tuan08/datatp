@@ -13,8 +13,8 @@ import org.apache.zookeeper.server.quorum.QuorumPeerConfig.ConfigException;
 import org.apache.zookeeper.server.quorum.QuorumPeerMain;
 
 import net.datatp.tool.server.Server;
-import net.datatp.util.JSONSerializer;
 import net.datatp.util.io.FileUtil;
+import net.datatp.util.json.JSONSerializer;
 /**
  * @author Tuan Nguyen
  * @email tuan08@gmail.com

@@ -2,6 +2,7 @@ include 'lib/utils'
 include 'lib/yara'
 include 'lib/buffer'
 include 'lib/xhtml'
+include 'lib/nlp/core'
 
 include 'module/commons'
 include 'module/zookeeper'
@@ -19,8 +20,11 @@ include 'module/spring-cloud'
 include 'module/jms'
 
 include 'data/feed/facebook'
-include 'data/feed/webcrawler'
+include 'data/feed/webcrawler/core'
+include 'data/feed/webcrawler/cluster'
 include 'data/storage/batchdb'
+
+include 'webui'
 
 include 'tracking/core'
 
