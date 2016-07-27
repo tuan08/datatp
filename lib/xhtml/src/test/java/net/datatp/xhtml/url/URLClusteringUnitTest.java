@@ -9,7 +9,7 @@ import java.util.Set;
 import org.junit.Test;
 
 import net.datatp.xhtml.SimpleHttpFetcher;
-import net.datatp.xhtml.XhtmlDocument;
+import net.datatp.xhtml.WData;
 import net.datatp.xhtml.util.HTMLUtils;
 
 public class URLClusteringUnitTest {
@@ -17,10 +17,10 @@ public class URLClusteringUnitTest {
   public void testClustering() throws Exception {
     String url = "http://www.webtretho.com";
     SimpleHttpFetcher fetcher = new SimpleHttpFetcher();
-    XhtmlDocument hdoc = fetcher.fetch(url);
+    WData wPageData = fetcher.fetch(url);
     List<URLVector> urls = new ArrayList<URLVector>();
 
-    Set<String> links = HTMLUtils.extractLinks(hdoc.getXhtml());
+    Set<String> links = HTMLUtils.extractLinks(wPageData.getDataAsXhtml());
     for (String link : links) {
       urls.add(new URLVector(link));
     }

@@ -8,21 +8,21 @@ import net.datatp.crawler.processor.FetchDataProcessor;
 import net.datatp.crawler.processor.URLExtractor;
 import net.datatp.crawler.site.SiteContextManager;
 import net.datatp.crawler.urldb.URLDatum;
-import net.datatp.xhtml.XhtmlDocument;
+import net.datatp.xhtml.WData;
 
 public class InMemFetchDataProcessor extends FetchDataProcessor {
   
-  private BlockingQueue<URLDatum>      urlCommitQueue;
-  private BlockingQueue<XhtmlDocument> xhtmlDocumentQueue;
+  private BlockingQueue<URLDatum>  urlCommitQueue;
+  private BlockingQueue<WData> wPageDataQueue;
   
   public InMemFetchDataProcessor(SiteContextManager manager, 
                                  URLExtractor urlExtractor, 
                                  BlockingQueue<URLDatum>  urlCommitQueue,
-                                 BlockingQueue<XhtmlDocument> xhtmlDocumentQueue) {
+                                 BlockingQueue<WData> wPageDataQueue) {
     this.siteContextManager = manager;
     this.urlExtractor       = urlExtractor;
     this.urlCommitQueue     = urlCommitQueue;
-    this.xhtmlDocumentQueue = xhtmlDocumentQueue;
+    this.wPageDataQueue     = wPageDataQueue;
   }
   
   @Override
@@ -34,7 +34,7 @@ public class InMemFetchDataProcessor extends FetchDataProcessor {
   }
 
   @Override
-  protected void onSave(XhtmlDocument doc) throws Exception {
-    xhtmlDocumentQueue.offer(doc, 5, TimeUnit.SECONDS);
+  protected void onSave(WData wpData) throws Exception {
+    wPageDataQueue.offer(wpData, 5, TimeUnit.SECONDS);
   }
 }

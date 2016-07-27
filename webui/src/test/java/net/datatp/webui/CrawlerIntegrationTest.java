@@ -16,7 +16,7 @@ public class CrawlerIntegrationTest {
     crawler.siteAdd(new SiteConfig("vietnam", "vnexpress.net", "http://vnexpress.net", 3));
     crawler.siteAdd(new SiteConfig("vietnam", "dantri.com.vn", "http://dantri.com.vn", 3)); 
 
-    //crawler.setXhtmlDocumentProcessor(XhtmlDocumentProcessor.PRINT_URL);
+    //crawler.setXhtmlDocumentProcessor(WPageDataProcessor.PRINT_URL);
     crawler.start();
     
     Thread.currentThread().join();

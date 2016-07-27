@@ -12,14 +12,14 @@ import net.datatp.crawler.processor.FetchDataProcessor;
 import net.datatp.crawler.processor.URLExtractor;
 import net.datatp.crawler.site.SiteContextManager;
 import net.datatp.crawler.urldb.URLDatum;
-import net.datatp.xhtml.XhtmlDocument;
+import net.datatp.xhtml.WData;
 /**
  * $Author: Tuan Nguyen$ 
  **/
 public class FetchDataProcessorImpl extends FetchDataProcessor {
   @Autowired
-  @Qualifier("XhtmlDocumentGateway")
-  private ChannelGateway xhtmlDataGateway ;
+  @Qualifier("WPageDataGateway")
+  private ChannelGateway wPageDataGateway ;
 
   @Autowired
   @Qualifier("URLFetchCommitGateway")
@@ -42,8 +42,8 @@ public class FetchDataProcessorImpl extends FetchDataProcessor {
   }
 
   @Override
-  protected void onSave(XhtmlDocument xdoc) throws Exception {
-    xhtmlDataGateway.send(xdoc) ;
+  protected void onSave(WData wpData) throws Exception {
+    wPageDataGateway.send(wpData) ;
   }
   
   @JmsListener(destination = "crawler.fetchdata")

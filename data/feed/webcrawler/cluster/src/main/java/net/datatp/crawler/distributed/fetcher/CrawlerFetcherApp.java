@@ -110,14 +110,14 @@ public class CrawlerFetcherApp extends CrawlerApp {
     return wReg;
   }
   
-  @Bean(name="XhtmlDocumentQueue")
+  @Bean(name="WPageDataQueue")
   public Destination createXhtmlDocumentQueue(ConnectionFactory jmsCF) throws Exception {
     return ActiveMQUtil.createQueue(jmsCF, "crawler.output");
   }
   
-  @Bean(name="XhtmlDocumentGateway")
+  @Bean(name="WPageDataGateway")
   public JMSChannelGateway createXhtmlDocumentGateway(ConnectionFactory jmsCF,
-                                                      @Qualifier("XhtmlDocumentQueue") Destination queue) {
+                                                      @Qualifier("WPageDataQueue") Destination queue) {
     JMSChannelGateway gw = new JMSChannelGateway();
     gw.setDestination(queue);
     JmsTemplate template = new JmsTemplate(jmsCF);

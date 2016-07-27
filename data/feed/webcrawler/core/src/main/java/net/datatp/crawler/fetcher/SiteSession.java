@@ -27,7 +27,7 @@ import net.datatp.crawler.http.ResponseHeaders;
 import net.datatp.crawler.site.URLContext;
 import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.util.io.IOUtil;
-import net.datatp.xhtml.XhtmlDocument;
+import net.datatp.xhtml.WData;
 /**
  * Author : Tuan Nguyen
  *          tuan08@gmail.com
@@ -73,13 +73,13 @@ public class SiteSession implements Comparable<SiteSession> {
         urldatum.setRedirectUrl(redirectUrl) ;
       }
       String url = urldatum.getOriginalUrlAsString() ;
-      XhtmlDocument xdoc = new XhtmlDocument(url, urldatum.getAnchorTextAsString(), null) ;
+      WData wPageData = new WData(url, urldatum.getAnchorTextAsString(), (byte[])null) ;
 
       fdata.setResponseHeaders(getResponseHeaders(response));
       fdata.setContentType(HttpClientUtil.getContentType(response)) ;
       StatusLine sline = response.getStatusLine() ;
       urldatum.setLastResponseCode((short)sline.getStatusCode()) ;
-      urldatum.setContentType(xdoc.getContentType()) ;
+      urldatum.setContentType(wPageData.getContentType()) ;
       
       byte[] data = handleContent(context, urldatum, response);
       fdata.setData(data);
@@ -89,7 +89,6 @@ public class SiteSession implements Comparable<SiteSession> {
       handleError(fdata.getURLDatum(), context, getRootCause(t)) ;
     } finally {
       lock = false ;
-      httpClient.getConnectionManager().closeExpiredConnections();
     }
     return fdata;
   }

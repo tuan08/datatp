@@ -3,7 +3,7 @@ package net.datatp.xhtml.dom.tagger;
 import org.junit.Test;
 
 import net.datatp.xhtml.SimpleHttpFetcher;
-import net.datatp.xhtml.XhtmlDocument;
+import net.datatp.xhtml.WData;
 import net.datatp.xhtml.dom.TDocument;
 import net.datatp.xhtml.dom.TNode;
 import net.datatp.xhtml.dom.processor.CleanEmptyNodeProcessor;
@@ -15,8 +15,8 @@ public class RepeatBlockTaggerUnitTest {
   public void testSite() throws Exception  {
     String url      = "http://mediamart.vn/ProductDetail.aspx?ProductId=11623";    
     SimpleHttpFetcher fetcher = new SimpleHttpFetcher();
-    XhtmlDocument  xdoc  = fetcher.fetch(url);
-    TDocument tdoc  = new TDocument(url, url, xdoc.getXhtml()) ;
+    WData  xdoc  = fetcher.fetch(url);
+    TDocument tdoc  = new TDocument(url, url, xdoc.getDataAsXhtml()) ;
     TNode root = tdoc.getRoot() ;
     new CleanEmptyNodeProcessor().process(root) ;
     TNode[] nodes = new RepeatBlockTagger().tag(tdoc, root) ;

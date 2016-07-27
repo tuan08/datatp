@@ -16,7 +16,7 @@ import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.crawler.urldb.URLDatumFactory;
 import net.datatp.util.URLParser;
 import net.datatp.util.text.StringUtil;
-import net.datatp.xhtml.XhtmlDocument;
+import net.datatp.xhtml.WData;
 import net.datatp.xhtml.util.URLRewriter;
 import net.datatp.xhtml.util.URLSessionIdCleaner;
 import net.datatp.xhtml.xpath.XPath;
@@ -50,7 +50,7 @@ public class URLExtractor {
     }
   }
   
-  public Map<String, URLDatum> extract(URLDatum urldatum, URLContext context, XhtmlDocument xdoc, XPathStructure structure) {
+  public Map<String, URLDatum> extract(URLDatum urldatum, URLContext context, WData xdoc, XPathStructure structure) {
     Map<String, URLDatum> urls = new HashMap<String, URLDatum>();
     try {
       if(context == null) return urls ;

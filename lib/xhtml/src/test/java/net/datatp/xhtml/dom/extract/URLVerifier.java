@@ -3,7 +3,7 @@ package net.datatp.xhtml.dom.extract;
 import org.junit.Assert;
 
 import net.datatp.xhtml.SimpleHttpFetcher;
-import net.datatp.xhtml.XhtmlDocument;
+import net.datatp.xhtml.WData;
 import net.datatp.xhtml.dom.TDocument;
 
 /**
@@ -24,9 +24,9 @@ public class URLVerifier {
   }
 
   public ExtractContent extract(SimpleHttpFetcher fetcher) throws Exception {
-    XhtmlDocument xdoc = fetcher.fetch(url);
+    WData wPageData = fetcher.fetch(url);
     DocumentExtractor extractor = new DocumentExtractor() ;
-    TDocument tdoc = new TDocument(url, anchorText, xdoc.getXhtml()) ;
+    TDocument tdoc = new TDocument(url, anchorText, wPageData.getDataAsXhtml()) ;
     //TNodePrinter visitor = new TNodePrinter(System.out) ;
     //visitor.process(tdoc.getRoot()) ;
     ExtractContent extractContent = extractor.extract(type, tdoc) ;

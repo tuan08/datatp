@@ -12,7 +12,7 @@ import net.datatp.crawler.processor.metric.ProcessMetric;
 import net.datatp.crawler.site.SiteContextManager;
 import net.datatp.crawler.site.URLContext;
 import net.datatp.crawler.urldb.URLDatum;
-import net.datatp.xhtml.XhtmlDocument;
+import net.datatp.xhtml.WData;
 import net.datatp.xhtml.xpath.XPathStructure;
 /**
  * $Author: Tuan Nguyen$ 
@@ -29,14 +29,14 @@ abstract public class FetchDataProcessor {
   public ProcessMetric getProcessMetric() { return metric; }
 
   abstract protected void onSave(ArrayList<URLDatum> urlDatatums) throws Exception;
-  abstract protected void onSave(XhtmlDocument doc) throws Exception;
+  abstract protected void onSave(WData wPageData) throws Exception;
   
   public void process(FetchData fdata) {
     metric.incrProcessCount() ;
     final long start = System.currentTimeMillis() ;
     URLDatum urlDatum = fdata.getURLDatum() ;
     byte[] data = fdata.getData();
-    XhtmlDocument xdoc = new XhtmlDocument(urlDatum.getOriginalUrl(), urlDatum.getAnchorText(), null) ;
+    WData xdoc = new WData(urlDatum.getOriginalUrl(), urlDatum.getAnchorText(), (byte[])null) ;
     
     try {
       if(data == null) {
@@ -48,7 +48,7 @@ abstract public class FetchDataProcessor {
 
       Charset charset = EncodingDetector.INSTANCE.detect(data, data.length);
       String xhtml = new String(data, charset);
-      xdoc.setXhtml(xhtml);
+      xdoc.setData(xhtml);
       XPathStructure xpathStructure = new XPathStructure(xdoc.createJsoupDocument());
       
       URLContext context =  siteContextManager.getURLContext(fdata.getURLDatum().getFetchUrl()) ;

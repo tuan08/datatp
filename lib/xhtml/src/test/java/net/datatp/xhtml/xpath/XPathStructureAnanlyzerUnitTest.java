@@ -5,7 +5,7 @@ import org.jsoup.select.Elements;
 import org.junit.Test ;
 
 import net.datatp.xhtml.SimpleHttpFetcher;
-import net.datatp.xhtml.XhtmlDocument;
+import net.datatp.xhtml.WData;
 import net.datatp.xhtml.xpath.XPathRepetions;
 import net.datatp.xhtml.xpath.XPathStructure;
 /**
@@ -17,8 +17,8 @@ public class XPathStructureAnanlyzerUnitTest {
     String anchorText = "Việt Nam luôn sẵn sàng mọi biện pháp duy trì hòa bình ở Biển Đông";
     String url = "http://vnexpress.net/tin-tuc/the-gioi/viet-nam-luon-san-sang-moi-bien-phap-duy-tri-hoa-binh-o-bien-dong-3436403.html";
     SimpleHttpFetcher fetcher = new SimpleHttpFetcher();
-    XhtmlDocument xdoc = fetcher.fetch(anchorText, url);
-    Document doc = xdoc.createJsoupDocument();
+    WData wPageData = fetcher.fetch(anchorText, url);
+    Document doc = wPageData.createJsoupDocument();
     doc.traverse(new NodeCleanerVisitor(NodeCleaner.EMPTY_NODE_CLEANER, NodeCleaner.IGNORE_NODE_CLEANER));
     XPathStructure structure = new XPathStructure(doc);
     XPathRepetions repetions = structure.getXPathRepetions();

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 
-import net.datatp.xhtml.XhtmlDocument;
+import net.datatp.xhtml.WData;
 /**
  * Author : Tuan Nguyen
  *          tuan08@gmail.com
@@ -24,9 +24,9 @@ public class DocumentConsumer  {
   public void onDestroy() throws Exception {
   }
 
-  public void consume(XhtmlDocument doc) throws Exception {
+  public void consume(WData wpData) throws Exception {
     String tname = Thread.currentThread().getName() ;
-    System.out.println("Consume[" + tname + "]: " + doc.getUrl());
+    System.out.println("Consume[" + tname + "]: " + wpData.getUrl());
   } 
 
   static public ApplicationContext getApplicationContext() { return applicationContext ; }

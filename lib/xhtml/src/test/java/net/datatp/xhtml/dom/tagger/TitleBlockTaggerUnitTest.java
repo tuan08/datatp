@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import net.datatp.util.text.CosineSimilarity;
 import net.datatp.xhtml.SimpleHttpFetcher;
-import net.datatp.xhtml.XhtmlDocument;
+import net.datatp.xhtml.WData;
 import net.datatp.xhtml.dom.TDocument;
 import net.datatp.xhtml.dom.TNode;
 import net.datatp.xhtml.dom.processor.CleanEmptyNodeProcessor;
@@ -60,8 +60,8 @@ public class TitleBlockTaggerUnitTest {
   public void testSite() throws Exception  {
     String url = "http://dantri.com.vn/";    
     SimpleHttpFetcher fetcher = new SimpleHttpFetcher();
-    XhtmlDocument xdoc = fetcher.fetch(url);
-    TDocument tdoc = new TDocument(url, url, xdoc.getXhtml()) ;
+    WData xdoc = fetcher.fetch(url);
+    TDocument tdoc = new TDocument(url, url, xdoc.getDataAsXhtml()) ;
     TNode root = tdoc.getRoot() ;
     new CleanEmptyNodeProcessor().process(root) ;
     new ContentListBlockTagger().tag(tdoc, root) ;

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-import net.datatp.xhtml.XhtmlDocument;
+import net.datatp.xhtml.WData;
 /**
  * Author: Tuan Nguyen$ 
  *         tuan08@gmail.com
@@ -15,15 +15,15 @@ public class DocumentConsumerLogger {
   private Map<String, LinkedList<DocumentLog>> logHolder = new HashMap<String, LinkedList<DocumentLog>>() ;
 
   //@ServiceActivator(inputChannel = "CrawlerOutputChannel")
-  public void consume(XhtmlDocument doc) throws Exception {
-    String id  = doc.getUrl() ;
+  public void consume(WData wpData) throws Exception {
+    String id  = wpData.getUrl() ;
     String site = id.substring(0, id.indexOf(":")) ;
     LinkedList<DocumentLog> siteLogHolder = logHolder.get(site) ;
     if(siteLogHolder == null) {
       siteLogHolder = new LinkedList<DocumentLog>() ;
       logHolder.put(site, siteLogHolder) ;
     }
-    siteLogHolder.add(new DocumentLog(doc)) ;
+    siteLogHolder.add(new DocumentLog(wpData)) ;
     if(siteLogHolder.size() > maxLogPerSite) {
       siteLogHolder.removeFirst() ;
     }
@@ -45,10 +45,10 @@ public class DocumentConsumerLogger {
     
     public int getResponseCode() { return responseCode ; }
     
-    public DocumentLog(XhtmlDocument doc) {
-      url = doc.getUrl();
+    public DocumentLog(WData wpData) {
+      url = wpData.getUrl();
       responseCode  = 200 ;
-      contentLength = (long)doc.getXhtml().length();
+      contentLength = (long)wpData.getDataAsXhtml().length();
     }
   }
 }
