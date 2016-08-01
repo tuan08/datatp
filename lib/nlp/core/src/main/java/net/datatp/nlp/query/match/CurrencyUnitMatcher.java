@@ -5,7 +5,7 @@ import java.util.List;
 import net.datatp.nlp.token.IToken;
 import net.datatp.nlp.token.tag.CurrencyTag;
 import net.datatp.nlp.token.tag.TokenTag;
-import net.datatp.util.text.StringExpMatcher;
+import net.datatp.util.text.matcher.StringExpMatcher;
 
 
 public class CurrencyUnitMatcher extends UnitMatcher {

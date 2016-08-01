@@ -1,6 +1,7 @@
 package net.datatp.xhtml.xpath;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,22 +10,22 @@ import net.datatp.util.text.StringUtil;
 
 public class XPathRepetion {
   private String              xpathWithAncestorIndex;
-  private String              parentXPath;
+  private XPath               parentXPath;
   private List<XPath>         holder = new ArrayList<>();
   private Map<String, String> attrs  = new HashMap<>();
   private Info                info   = null;
 
-  public XPathRepetion(String xpathWithAncestorIndex) {
+  public XPathRepetion(XPathStructure structure, String xpathWithAncestorIndex) {
     this.xpathWithAncestorIndex = xpathWithAncestorIndex;
     int lastIndexOfSlash = xpathWithAncestorIndex.lastIndexOf('/');
     if(lastIndexOfSlash > 0) {
-      parentXPath = xpathWithAncestorIndex.substring(0, lastIndexOfSlash);
+      parentXPath = structure.getXPath(xpathWithAncestorIndex.substring(0, lastIndexOfSlash));
     }
   }
   
   public String getXPathWithAncestorIndex() { return xpathWithAncestorIndex; }
   
-  public String getParentXPath() { return parentXPath; }
+  public XPath getParentXPath() { return parentXPath; }
   
   public List<XPath> getXPaths() { return holder ; }
   
@@ -55,7 +56,7 @@ public class XPathRepetion {
     return info;
   }
   
-  public boolean hasAttr(String name, String[] values) {
+  public boolean hasAttr(String name, String ... values) {
     String val = attrs.get(name);
     if(val == null) return false;
     return StringUtil.isIn(val, values);
@@ -91,4 +92,13 @@ public class XPathRepetion {
     public int getMaxDepth() { return maxDepth; }
     public void setMaxDepth(int maxDepth) { this.maxDepth = maxDepth; }
   }
+  
+  static public Comparator<XPathRepetion> XPATH_DEPTH_COMPARATOR = new Comparator<XPathRepetion>() {
+    @Override
+    public int compare(XPathRepetion x1, XPathRepetion x2) {
+      if(x1.getParentXPath().getDepth() > x2.getParentXPath().getDepth()) return -1;
+      if(x1.getParentXPath().getDepth() < x2.getParentXPath().getDepth()) return  1;
+      return 0;
+    }
+  };
 }

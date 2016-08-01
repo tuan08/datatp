@@ -12,8 +12,8 @@ import net.datatp.nlp.token.tag.PosTag;
 import net.datatp.nlp.util.StringPool;
 import net.datatp.util.io.IOUtil;
 import net.datatp.util.json.JSONReader;
-import net.datatp.util.text.StringExpMatcher;
 import net.datatp.util.text.StringUtil;
+import net.datatp.util.text.matcher.StringExpMatcher;
 
 /**
  * $Author: Tuan Nguyen$ 

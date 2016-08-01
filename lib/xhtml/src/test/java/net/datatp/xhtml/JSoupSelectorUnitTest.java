@@ -6,7 +6,7 @@ import org.jsoup.select.Elements;
 import org.junit.Assert;
 import org.junit.Test;
 
-import net.datatp.xhtml.parser.JSoupParser;
+import net.datatp.xhtml.JSoupParser;
 
 public class JSoupSelectorUnitTest {
 

@@ -10,7 +10,7 @@ public class WDoc implements Serializable {
 
   private String                type;
   private String                data;
-  private Map<String, String>   attrs;
+  private Map<String, String>   attr;
   private Map<String, Entity>   entities;
   
   public String getType() { return type; }
@@ -19,9 +19,8 @@ public class WDoc implements Serializable {
   public String getData() { return data; }
   public void setData(String data) { this.data = data; }
 
-  public Map<String, String> getAttrs() { return attrs; }
-
-  public void setAttrs(Map<String, String> attrs) { this.attrs = attrs; }
+  public Map<String, String> getAttr() { return attr; }
+  public void setAttr(Map<String, String> attr) { this.attr = attr; }
 
   public Map<String, Entity> getEntities() { return entities; }
   public void setEntities(Map<String, Entity> entities) { this.entities = entities; }

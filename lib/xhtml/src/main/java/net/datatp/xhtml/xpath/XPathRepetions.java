@@ -1,19 +1,25 @@
 package net.datatp.xhtml.xpath;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import net.datatp.util.HeapTree;
+import net.datatp.xhtml.xpath.XPathRepetion.Info;
 
 public class XPathRepetions {
   private Map<String, XPathRepetion> holder = new LinkedHashMap<>();
   
-  public void add(XPath xpath) {
+  public void add(XPathStructure structure, XPath xpath) {
     String xpathWithAncestorIndex = xpath.getXPathWithAncestorIndex();
     XPathRepetion block = holder.get(xpathWithAncestorIndex);
     if(block == null) {
-      block = new XPathRepetion(xpathWithAncestorIndex);
+      block = new XPathRepetion(structure, xpathWithAncestorIndex);
       holder.put(xpathWithAncestorIndex, block);
     }
     block.add(xpath);
@@ -31,10 +37,36 @@ public class XPathRepetions {
     }
   }
   
-  public List<XPathRepetion> findXPathRepetionsWithTag(String tag, String ... value) {
+  public List<XPathRepetion> findXPathRepetionWithTag(String tag, String ... value) {
     List<XPathRepetion> founds = new ArrayList<>();
     for(XPathRepetion sel : holder.values()) {
       if(sel.hasAttr(tag, value)) founds.add(sel);
+    }
+    return founds;
+  }
+  
+  public List<XPathRepetion> findXPathRepetionThatContains(XPath xpath) {
+    String xpathWithAncestorIndex = xpath.getXPathWithAncestorIndex();
+    List<XPathRepetion> founds = new ArrayList<>();
+    for(XPathRepetion sel : holder.values()) {
+      String ancestorXPath = sel.getParentXPath().getXPathWithAncestorIndex();
+      if(xpathWithAncestorIndex.startsWith(ancestorXPath)) {
+        founds.add(sel);
+      }
+    }
+    return founds;
+  }
+  
+  public List<ClosestXPathRepetion> findClosestXPathRepetion(XPath xpath, int max) {
+    HeapTree<ClosestXPathRepetion> heapTree = new HeapTree<>(max, CLOSEST_XPATH_REPETION_COMPARATOR);
+    for(XPathRepetion sel : holder.values()) {
+      String commonAncestor = xpath.findClosestAncestor(sel.getParentXPath());
+      heapTree.insert(new ClosestXPathRepetion(commonAncestor, sel));
+    }
+    List<ClosestXPathRepetion> founds = new ArrayList<>();
+    ClosestXPathRepetion found = null;
+    while((found = heapTree.removeTop()) != null) {
+      founds.add(found);
     }
     return founds;
   }
@@ -56,4 +88,24 @@ public class XPathRepetions {
     }
     return b.toString();
   }
+  
+  static public class ClosestXPathRepetion {
+    final public String        commonAncestor;
+    final public XPathRepetion xpathRepetion;
+    
+    ClosestXPathRepetion(String commonAncestor, XPathRepetion xpathRepetion) {
+      this.commonAncestor = commonAncestor;
+      this.xpathRepetion  = xpathRepetion;
+    }
+  }
+  
+  static Comparator<ClosestXPathRepetion> CLOSEST_XPATH_REPETION_COMPARATOR = new Comparator<ClosestXPathRepetion>() {
+    @Override
+    public int compare(ClosestXPathRepetion x1, ClosestXPathRepetion x2) {
+      if(x1.commonAncestor.length() < x2.commonAncestor.length()) return -1;
+      if(x1.commonAncestor.length() > x2.commonAncestor.length()) return  1;
+      return 0;
+    }
+    
+  };
 }

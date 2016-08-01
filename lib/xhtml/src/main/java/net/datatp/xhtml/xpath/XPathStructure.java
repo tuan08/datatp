@@ -6,13 +6,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
+import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 import org.jsoup.select.NodeVisitor;
+
+import net.datatp.util.text.CosineSimilarity;
 
 public class XPathStructure {
   private String                   url;
@@ -66,6 +68,16 @@ public class XPathStructure {
     return commonAncestor;
   }
   
+  public XPath findCommonAncestorXPath(List<XPath> xpath) {
+    if(xpath == null || xpath.size() == 0) return null;
+    XPath commonAncestor = xpath.get(0);
+    for(int i = 1; i < xpath.size(); i++) {
+      String commonAncestorXPath = commonAncestor.findClosestAncestor(xpath.get(i));
+      commonAncestor = getXPathTree().getXPath(commonAncestorXPath);
+    }
+    return commonAncestor;
+  }
+  
   public XPath findClosestAncestor(XPath ... xpath) {
     int limit = Integer.MAX_VALUE;
     for(int i = 0; i < xpath.length; i++) {
@@ -93,12 +105,10 @@ public class XPathStructure {
   
   public XPathRepetions getXPathRepetions() {
     if(xpathRepetions != null) return xpathRepetions;
-    XPathRepetionAnalyzer[] analyzer = {
-      XPathRepetionAnalyzer.LINK_ANALYZER, XPathRepetionAnalyzer.TEXT_ANALYZER
-    };
+    XPathRepetionAnalyzer[] analyzer = { XPathRepetionAnalyzer.LINK_ANALYZER, XPathRepetionAnalyzer.TEXT_ANALYZER };
     xpathRepetions = new XPathRepetions();
-    for(XPath xpath : getXPathTree().getFlatXPaths()) {
-      xpathRepetions.add(xpath);
+    for(XPath xpath : getXPathTree().getXPaths()) {
+      xpathRepetions.add(this, xpath);
     }
     xpathRepetions.analyze(this, analyzer);
     return xpathRepetions;
@@ -115,12 +125,31 @@ public class XPathStructure {
   
   public String findTitle() { return findFirstElementText("html > head > title"); }
   
+
   public String findBase()  {
     Element baseEle = findFirstElement("html > head > base");
     if(baseEle == null) return null ;
     return baseEle.attr("href") ;
   }
 
+  public XPath findTitleHeaderCandidate() {
+    String title =  getAnchorText();
+    if(title == null) title = findTitle();
+    
+    XPath titleXPath = null;
+    for(XPath xpath : getXPathTree().getXPaths()) {
+      if(xpath.getSection() != XPath.Section.Body) continue;
+      if(xpath.isTextNode()) {
+        String text = xpath.getText();
+        if(CosineSimilarity.INSTANCE.similarity(text, title) > 0.75) {
+          titleXPath = xpath;
+          break;
+        }
+      }
+    }
+    return titleXPath;
+  }
+  
   public List<XPath> findAllLinks() { 
     Elements elements = select("a[href]");
     List<XPath> holder = new ArrayList<>();
@@ -165,10 +194,10 @@ public class XPathStructure {
   }
   
   static public class XPathCollector implements NodeVisitor {
-    private TreeMap<String, XPath> xpaths ;
+    private List<XPath> xpaths ;
 
     public XPathTree process(XPathStructure doc) {
-      xpaths = new TreeMap<>();
+      xpaths = new ArrayList<>();
       doc.buildTag(new XPathTagger());
       doc.getDocument().traverse(this);
       return new XPathTree(xpaths);
@@ -177,7 +206,7 @@ public class XPathStructure {
     @Override
     public void head(Node node, int depth) {
       String xpath = node.attr(XPathTagger.XPATH_ATTR);
-      xpaths.put(xpath, new XPath(xpath, node));
+      xpaths.add(new XPath(xpath, node));
     }
     
     @Override

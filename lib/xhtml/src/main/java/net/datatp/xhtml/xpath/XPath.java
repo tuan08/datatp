@@ -1,6 +1,5 @@
 package net.datatp.xhtml.xpath;
 
-import org.apache.commons.codec.binary.StringUtils;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
@@ -15,7 +14,7 @@ public class XPath {
   private Node       node;
   private XPathInfo  info;
   private Section    section = Section.Unknown;
-  
+  private String     normalizeText;
   Fragment[]         fragment;
   
   public XPath(String xpathWithIndex, Node node) {
@@ -42,10 +41,17 @@ public class XPath {
   
   public Node getNode() { return node; }
   
+  public int getDepth() { return fragment.length; }
+  
   public String getText() {
     if(node instanceof TextNode) return ((TextNode)node).text();
     else if(node instanceof Element) return ((Element)node).text();
     return null;
+  }
+  
+  public String getNormalizeText() {
+    if(normalizeText == null) normalizeText = getText().trim().toLowerCase();
+    return normalizeText;
   }
   
   public boolean hasAttr(String name) { return node.hasAttr(name); }
@@ -88,12 +94,22 @@ public class XPath {
     if(other.fragment.length < limit) limit = other.fragment.length ;
     StringBuilder b = new StringBuilder();
     for(int i = 0; i < limit; i++) {
-      if(fragment[i].name.equals(other.fragment[i].name)) {
+      if(fragment[i].name.equals(other.fragment[i].name) && fragment[i].index == other.fragment[i].index) {
         if(b.length() > 0) b.append("/");
         b.append(fragment[i].name).append('[').append(fragment[i].index).append(']');
       } else {
         break ;
       }
+    }
+    return b.toString();
+  }
+  
+  public String getAncestor(int backLevel) {
+    int limit = fragment.length - backLevel;
+    StringBuilder b = new StringBuilder();
+    for(int i = 0; i < limit; i++) {
+      if(b.length() > 0) b.append("/");
+      b.append(fragment[i].name).append('[').append(fragment[i].index).append(']');
     }
     return b.toString();
   }

@@ -7,8 +7,8 @@ import java.util.Map;
 import net.datatp.nlp.query.QueryContext;
 import net.datatp.nlp.query.QueryDocument;
 import net.datatp.nlp.query.match.RuleMatch;
-import net.datatp.util.text.StringExpMatcher;
 import net.datatp.util.text.StringUtil;
+import net.datatp.util.text.matcher.StringExpMatcher;
 
 public class ExtractCount implements EvalExpression {
   private StringExpMatcher[] tagmatcher;

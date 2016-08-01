@@ -4,26 +4,27 @@ import net.datatp.crawler.fetcher.FetchData;
 import net.datatp.crawler.http.ResponseHeaders;
 import net.datatp.crawler.site.URLContext;
 import net.datatp.xhtml.WData;
-import net.datatp.xhtml.xpath.XPathStructure;
+import net.datatp.xhtml.xpath.WDataContext;
 /**
  * $Author: Tuan Nguyen$ 
  **/
 public class FetchDataErrorAnalyzerPlugin implements FetchDataProcessorPlugin {
 
   @Override
-  public void process(FetchData fdata, URLContext context, WData wPageData, XPathStructure structure) {
+  public void process(FetchData fdata, URLContext urlContext, WDataContext context) {
+    WData wData = context.getWdata();
     ResponseHeaders responseHeaders = fdata.getResponseHeaders();
     int rcode = responseHeaders.getResponseCode() ;
-    if(rcode < 200)       wPageData.addTag("error:response:100") ;
-    else if(rcode >= 500) wPageData.addTag("error:response:500") ;
-    else if(rcode >= 400) wPageData.addTag("error:response:400") ;
-    else if(rcode >= 300) wPageData.addTag("error:response:300") ;
+    if(rcode < 200)       wData.addTag("error:response:100") ;
+    else if(rcode >= 500) wData.addTag("error:response:500") ;
+    else if(rcode >= 400) wData.addTag("error:response:400") ;
+    else if(rcode >= 300) wData.addTag("error:response:300") ;
     if(rcode != 200) return ;
-    if(wPageData == null) return;
+    if(wData == null) return;
     
-    String content = wPageData.getDataAsXhtml() ;
+    String content = wData.getDataAsXhtml() ;
     if(content == null || content.length() < 1000) {
-      wPageData.addTag("error:content:length") ;
+      wData.addTag("error:content:length") ;
     }
   }
 }

@@ -14,21 +14,20 @@ import net.datatp.util.URLParser;
  * Apr 19, 2010  
  */
 public class SiteContextManager {
-  private Map<String, SiteContext> siteContexts = new HashMap<String, SiteContext>();
-
+  private Map<String, SiteContext> siteContexts   = new HashMap<String, SiteContext>();
+  private AutoWDataExtractors autoWDataExtractors = new AutoWDataExtractors();
+  
   public void addCongfig(String site, String injectUrl, int crawlDeep) {
     addConfig(new SiteConfig("default", site, injectUrl, crawlDeep));
   }
 
   public void addConfig(SiteConfig config) {
-    siteContexts.put(config.getHostname(), new SiteContext(config)) ;
+    SiteExtractor siteExtractor = new SiteExtractor(config, autoWDataExtractors);
+    siteContexts.put(config.getHostname(), new SiteContext(config, siteExtractor)) ;
   }
   
   public void addConfig(List<SiteConfig> configs) {
-    for(int i = 0; i < configs.size(); i++) {
-      SiteConfig config = configs.get(i);
-      siteContexts.put(config.getHostname(), new SiteContext(config)) ;
-    }
+    for(int i = 0; i < configs.size(); i++) addConfig(configs.get(i));
   }
 
   public int clear() { 

@@ -1,16 +1,19 @@
-package net.datatp.webui;
+package net.datatp.crawler.basic;
 
 import org.junit.Test;
 
-import net.datatp.crawler.basic.Crawler;
-import net.datatp.crawler.basic.CrawlerApp;
 import net.datatp.crawler.site.ExtractConfig;
 import net.datatp.crawler.site.SiteConfig;
+import net.datatp.util.log.LoggerFactory;
 
-public class CrawlerIntegrationTest {
+public class CrawlerUnitTest {
   @Test
   public void test() throws Exception {
-    Crawler crawler = CrawlerApp.run(new String[] {}).getBean(Crawler.class);
+    LoggerFactory.log4jUseConsoleOutputConfig("INFO");
+    
+    Crawler crawler = new Crawler();
+    crawler.configure(new CrawlerConfig());
+        
     
     crawler.siteCreateGroup("vietnam");
     crawler.siteAdd(

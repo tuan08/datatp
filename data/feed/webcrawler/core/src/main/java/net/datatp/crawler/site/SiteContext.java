@@ -16,10 +16,13 @@ public class SiteContext implements Serializable {
   private SiteConfig       siteConfig;
   private SiteScheduleStat siteScheduleStat = new SiteScheduleStat();
   private URLStatistics    urlStatistics    = new URLStatistics();
+  private SiteExtractor    siteExtractor;
   
 
-  public SiteContext(SiteConfig config) {
-    this.siteConfig = config ;
+  public SiteContext(SiteConfig config, SiteExtractor siteExtractor) {
+    this.siteConfig    = config ;
+    this.siteExtractor = siteExtractor;
+    
   }
 
   public Modify getModify() { return this.modify ; }

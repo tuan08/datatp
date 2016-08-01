@@ -6,7 +6,6 @@ import java.util.Map;
 import org.jsoup.nodes.Document;
 
 import net.datatp.util.text.StringUtil;
-import net.datatp.xhtml.parser.JSoupParser;
 
 public class WData implements Serializable {
   private static final long serialVersionUID = 1L;

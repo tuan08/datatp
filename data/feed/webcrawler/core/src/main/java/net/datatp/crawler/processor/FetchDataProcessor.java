@@ -25,18 +25,20 @@ abstract public class FetchDataProcessor {
   protected SiteContextManager siteContextManager ;
 
   private ProcessMetric metric = new ProcessMetric() ;
+  
+  private FetchDataProcessorPlugin[] plugin;
 
   public ProcessMetric getProcessMetric() { return metric; }
 
   abstract protected void onSave(ArrayList<URLDatum> urlDatatums) throws Exception;
-  abstract protected void onSave(WData wPageData) throws Exception;
+  abstract protected void onSave(WData wData) throws Exception;
   
   public void process(FetchData fdata) {
     metric.incrProcessCount() ;
     final long start = System.currentTimeMillis() ;
     URLDatum urlDatum = fdata.getURLDatum() ;
     byte[] data = fdata.getData();
-    WData xdoc = new WData(urlDatum.getOriginalUrl(), urlDatum.getAnchorText(), (byte[])null) ;
+    WData wdata = new WData(urlDatum.getOriginalUrl(), urlDatum.getAnchorText(), (byte[])null) ;
     
     try {
       if(data == null) {
@@ -48,12 +50,12 @@ abstract public class FetchDataProcessor {
 
       Charset charset = EncodingDetector.INSTANCE.detect(data, data.length);
       String xhtml = new String(data, charset);
-      xdoc.setData(xhtml);
-      XPathStructure xpathStructure = new XPathStructure(xdoc.createJsoupDocument());
+      wdata.setData(xhtml);
+      XPathStructure xpathStructure = new XPathStructure(wdata.createJsoupDocument());
       
       URLContext context =  siteContextManager.getURLContext(fdata.getURLDatum().getFetchUrl()) ;
 
-      Map<String, URLDatum> urls = urlExtractor.extract(fdata.getURLDatum(), context, xdoc, xpathStructure) ;
+      Map<String, URLDatum> urls = urlExtractor.extract(fdata.getURLDatum(), context, wdata, xpathStructure) ;
       metric.addSumHtmlProcessTime(System.currentTimeMillis() - start) ;
 
       ArrayList<URLDatum> urlList = new ArrayList<URLDatum>() ;
@@ -61,10 +63,10 @@ abstract public class FetchDataProcessor {
       urlList.addAll(urls.values()) ;
       
       onSave(urlList) ;
-      onSave(xdoc) ;
+      onSave(wdata) ;
     } catch(Exception ex) {
       ex.printStackTrace() ;
-      logger.error("Cannot process HtmlDocument: " + xdoc.getUrl()) ;
+      logger.error("Cannot process HtmlDocument: " + wdata.getUrl()) ;
     }
     metric.addSumProcessTime(System.currentTimeMillis() - start) ;
   }

@@ -1,7 +1,7 @@
 package net.datatp.nlp.query.match;
 
 import net.datatp.nlp.token.IToken;
-import net.datatp.util.text.StringExpMatcher;
+import net.datatp.util.text.matcher.StringExpMatcher;
 
 /**
  * $Author: Tuan Nguyen$ 

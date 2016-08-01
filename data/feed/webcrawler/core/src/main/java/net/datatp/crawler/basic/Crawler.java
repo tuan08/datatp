@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import net.datatp.crawler.CrawlerApi;
 import net.datatp.crawler.processor.URLExtractor;
-import net.datatp.crawler.processor.WPageDataProcessor;
+import net.datatp.crawler.processor.WDataProcessor;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
 import net.datatp.crawler.site.SiteConfig;
@@ -16,25 +16,26 @@ import net.datatp.crawler.urldb.InMemURLDatumDB;
 import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.crawler.urldb.URLDatumFactory;
 import net.datatp.xhtml.WData;
+import net.datatp.xhtml.xpath.WDataContext;
 
 public class Crawler implements CrawlerApi {
-  private CrawlerConfig            crawlerConfig;
+  private CrawlerConfig           crawlerConfig;
 
-  private BlockingQueue<URLDatum>  urlFetchQueue;
-  private BlockingQueue<URLDatum>  urlCommitQueue;
-  private BlockingQueue<WData> wpageDataQueue;
+  private BlockingQueue<URLDatum> urlFetchQueue;
+  private BlockingQueue<URLDatum> urlCommitQueue;
+  private BlockingQueue<WData>    wpageDataQueue;
 
-  private SiteContextManager       siteContextManager = new SiteContextManager();
+  private SiteContextManager      siteContextManager = new SiteContextManager();
 
-  private HttpFetcherManager       httpFetcherManager;
+  private HttpFetcherManager      httpFetcherManager;
 
-  private InMemURLDatumDB          urlDatumDB;
-  private InMemURLScheduler        urlScheduler;
+  private InMemURLDatumDB         urlDatumDB;
+  private InMemURLScheduler       urlScheduler;
 
-  private InMemFetchDataProcessor  dataProcessor;
+  private InMemFetchDataProcessor dataProcessor;
 
-  private WPageDataProcessor       wpageDataProcessor = WPageDataProcessor.NONE;
-  private WPageDataProcessorThread xhtmlDocumentProcessorThread;
+  private WDataProcessor          wDataProcessor     = WDataProcessor.NONE;
+  private WDataProcessorThread    wDataProcessorThread;
 
   public Crawler configure(CrawlerConfig config) throws Exception {
     crawlerConfig      = config;
@@ -52,8 +53,8 @@ public class Crawler implements CrawlerApi {
     urlDatumDB   = new InMemURLDatumDB();
     urlScheduler = new InMemURLScheduler(urlDatumDB, siteContextManager, urlFetchQueue, urlCommitQueue);
     
-    xhtmlDocumentProcessorThread = new WPageDataProcessorThread();
-    xhtmlDocumentProcessorThread.start();
+    wDataProcessorThread = new WDataProcessorThread();
+    wDataProcessorThread.start();
     return this;
   }
   
@@ -102,8 +103,8 @@ public class Crawler implements CrawlerApi {
     httpFetcherManager.stop();
   }
   
-  public void setXhtmlDocumentProcessor(WPageDataProcessor processor) {
-    wpageDataProcessor = processor;
+  public void setWDataProcessor(WDataProcessor processor) {
+    wDataProcessor = processor;
   }
   
   public void start() throws Exception {
@@ -116,13 +117,16 @@ public class Crawler implements CrawlerApi {
     fetcherStop();
   }
   
-  public class WPageDataProcessorThread extends Thread {
+  public class WDataProcessorThread extends Thread {
     boolean terminate ;
     public void run() {
       while(!terminate) {
         try {
-          WData xdoc = wpageDataQueue.poll(1, TimeUnit.SECONDS);
-          if(xdoc != null) wpageDataProcessor.process(xdoc);
+          WData wdata = wpageDataQueue.poll(1, TimeUnit.SECONDS);
+          if(wdata != null) {
+            WDataContext context = new WDataContext(wdata);
+            wDataProcessor.process(context);
+          }
         } catch(InterruptedException ex) {
         } catch(Exception ex) {
           ex.printStackTrace();

@@ -2,9 +2,8 @@ package net.datatp.crawler.processor;
 
 import net.datatp.crawler.fetcher.FetchData;
 import net.datatp.crawler.site.URLContext;
-import net.datatp.xhtml.WData;
-import net.datatp.xhtml.xpath.XPathStructure;
+import net.datatp.xhtml.xpath.WDataContext;
 
 public interface FetchDataProcessorPlugin {
-  public void process(FetchData fdata, URLContext context, WData wPageData, XPathStructure structure) ;
+  public void process(FetchData fdata, URLContext urlContext, WDataContext context) ;
 }

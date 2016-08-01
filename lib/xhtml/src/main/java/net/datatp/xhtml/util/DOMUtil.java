@@ -10,7 +10,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import net.datatp.util.URLParser;
-import net.datatp.util.text.StringExpMatcher;
+import net.datatp.util.text.matcher.StringExpMatcher;
 
 /**
  * Author : Tuan Nguyen

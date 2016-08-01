@@ -5,22 +5,27 @@ import java.io.Serializable;
 import net.datatp.util.text.StringUtil;
 
 public class SiteConfig implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   static public enum Status {Good, Ok, New, Pending, Review, Deleted, Moved, Empty}
 
-  private String   group  = "default";
-  private String   hostname;
-  private String[] injectUrl;
-  private String[] ignoreUrlPattern;
-  private String[] tags;
-  private boolean  crawlSubDomain;
-  private int      crawlDeep;
-  private int      refreshPeriod;
-  private int      maxConnection;
-  private int      maxFetchSchedule = 100;
-  private Status   status = Status.Ok;
-  private String   language;
-  private String   description;
+  private String          group            = "default";
+  private String          hostname;
+  private String[]        injectUrl;
+  private String[]        ignoreUrlPattern;
+  private String[]        tags;
 
+  private boolean         crawlSubDomain;
+  private int             crawlDeep;
+  private int             refreshPeriod;
+  private int             maxConnection;
+  private int             maxFetchSchedule = 100;
+  private Status          status           = Status.Ok;
+  private String          language;
+  private String          description;
+
+  private ExtractConfig[] extractConfig;
+  
   public SiteConfig() {}
 
   public SiteConfig(String hostname) {
@@ -89,4 +94,11 @@ public class SiteConfig implements Serializable {
 
   public String getDescription() { return this.description ; }
   public void setDescription(String desc) { this.description = desc ; }
+
+  public ExtractConfig[] getExtractConfig() { return extractConfig; }
+
+  public SiteConfig setExtractConfig(ExtractConfig ... extractConfig) {
+    this.extractConfig = extractConfig; 
+    return this;
+  }
 }

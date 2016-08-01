@@ -1,7 +1,7 @@
 package net.datatp.nlp.query.match;
 
 import net.datatp.nlp.token.IToken;
-import net.datatp.util.text.RegexMatcher;
+import net.datatp.util.text.matcher.RegexMatcher;
 
 public class RegexUnitMatcher extends UnitMatcher {
   private RegexMatcher regex ;
