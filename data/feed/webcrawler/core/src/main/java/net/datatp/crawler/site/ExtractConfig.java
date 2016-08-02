@@ -1,6 +1,10 @@
 package net.datatp.crawler.site;
 
-public class ExtractConfig {
+import java.io.Serializable;
+
+public class ExtractConfig implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   static public enum MatchType   { url, title }
   static public enum ExtractAuto { content, article, comment, forum, product, job, classified }
   
@@ -21,7 +25,9 @@ public class ExtractConfig {
   public XPathPattern[] getExtractXPath() { return extractXPath; }
   public void setExtractXPath(XPathPattern[] extractXPath) { this.extractXPath = extractXPath; }
   
-  static public class Matcher {
+  static public class Matcher implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private MatchType type;
     private String[]  pattern;
 
@@ -32,7 +38,9 @@ public class ExtractConfig {
     public void setPattern(String[] pattern) { this.pattern = pattern;}
   }
   
-  static public class XPathPattern {
+  static public class XPathPattern implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String name;
     private String xpath;
     
@@ -46,7 +54,7 @@ public class ExtractConfig {
   static public ExtractConfig article() {
     ExtractConfig config  = new ExtractConfig();
     config.setName("article");
-    config.setExtractAuto(ExtractAuto.article, ExtractAuto.comment);
+    config.setExtractAuto(ExtractAuto.article);
     return config;
   }
   

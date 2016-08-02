@@ -15,4 +15,5 @@ configurations {
 dependencies {
   compile project(':lib/utils')
   compile project(':lib/xhtml')
+  compile project(':module/elasticsearch')
 }

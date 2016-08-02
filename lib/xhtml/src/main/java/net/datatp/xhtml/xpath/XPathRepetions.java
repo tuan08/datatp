@@ -2,15 +2,12 @@ package net.datatp.xhtml.xpath;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import net.datatp.util.HeapTree;
-import net.datatp.xhtml.xpath.XPathRepetion.Info;
 
 public class XPathRepetions {
   private Map<String, XPathRepetion> holder = new LinkedHashMap<>();

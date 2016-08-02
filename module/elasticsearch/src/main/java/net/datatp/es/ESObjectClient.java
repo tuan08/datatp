@@ -46,12 +46,16 @@ public class ESObjectClient<T> {
   public void createIndex() throws Exception {
     String settingUrl  = mappingType.getName().replace('.', '/') + ".setting.json";
     String mappingUrl  = mappingType.getName().replace('.', '/') + ".mapping.json";
-    String settingJson = IOUtil.getResourceAsString(settingUrl, "UTF-8");
-    String mappingJson = IOUtil.getResourceAsString(mappingUrl, "UTF-8");
-    createIndexWith(settingJson, mappingJson);
+    createIndexWithResourceConfig(settingUrl, mappingUrl);
   }
   
-  public void createIndexWith(String settings, String mapping) throws Exception {
+  public void createIndexWithResourceConfig(String settingUrl, String mappingUrl) throws Exception {
+    String settingJson = IOUtil.getResourceAsString(settingUrl, "UTF-8");
+    String mappingJson = IOUtil.getResourceAsString(mappingUrl, "UTF-8");
+    createIndexWithJSONConfig(settingJson, mappingJson);
+  }
+  
+  public void createIndexWithJSONConfig(String settings, String mapping) throws Exception {
     CreateIndexRequestBuilder req = esclient.client.admin().indices().prepareCreate(index);
     if (settings != null) {
       req.setSettings(settings);

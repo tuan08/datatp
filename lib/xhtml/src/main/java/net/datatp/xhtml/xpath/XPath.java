@@ -43,6 +43,8 @@ public class XPath {
   
   public int getDepth() { return fragment.length; }
   
+  public Fragment[] getFragment() { return fragment; }
+  
   public String getText() {
     if(node instanceof TextNode) return ((TextNode)node).text();
     else if(node instanceof Element) return ((Element)node).text();

@@ -80,7 +80,7 @@ public class URLDatumDBUpdater implements RecordUpdater<URLDatumRecord> {
       ignoreDomainCount++ ;
       return null ;
     }
-    URLContext context = manager.getURLContext(datum.getOriginalUrlAsString()) ;
+    URLContext context = manager.getURLContext(datum) ;
     datum = updateBySiteConfig(context, datum) ;
     if(datum == null) return null ;
 

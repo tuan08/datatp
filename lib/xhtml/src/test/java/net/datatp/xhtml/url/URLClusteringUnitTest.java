@@ -8,15 +8,15 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import net.datatp.xhtml.SimpleHttpFetcher;
 import net.datatp.xhtml.WData;
 import net.datatp.xhtml.util.HTMLUtils;
+import net.datatp.xhtml.util.WDataHttpFetcher;
 
 public class URLClusteringUnitTest {
   @Test
   public void testClustering() throws Exception {
     String url = "http://www.webtretho.com";
-    SimpleHttpFetcher fetcher = new SimpleHttpFetcher();
+    WDataHttpFetcher fetcher = new WDataHttpFetcher();
     WData wPageData = fetcher.fetch(url);
     List<URLVector> urls = new ArrayList<URLVector>();
 

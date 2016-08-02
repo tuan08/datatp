@@ -5,8 +5,8 @@ import java.util.Date;
 
 import javax.annotation.PreDestroy;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
+//import com.google.inject.Inject;
+//import com.google.inject.Singleton;
 
 import net.datatp.es.log.ObjectLoggerService;
 import net.datatp.model.sys.Sys;
@@ -14,7 +14,7 @@ import net.datatp.sys.JHiccupMeter;
 import net.datatp.sys.RuntimeEnv;
 import net.datatp.sys.SysInfoService;
 
-@Singleton
+//@Singleton
 public class SysInfoLoggerService extends ObjectLoggerService {
   private String                    serverName;
   private SysInfoService            sysInfoService;
@@ -22,7 +22,7 @@ public class SysInfoLoggerService extends ObjectLoggerService {
   private MetricInfoCollectorThread metricCollectorThread;
   private long                      logPeriod         = 15000;
   
-  @Inject
+  //nject
   public void onInit(RuntimeEnv runtimeEnv) throws Exception {
     this.serverName     = runtimeEnv.getVMName();
     this.sysInfoService = new SysInfoService();

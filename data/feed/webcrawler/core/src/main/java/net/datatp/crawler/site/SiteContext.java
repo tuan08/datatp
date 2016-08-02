@@ -34,6 +34,8 @@ public class SiteContext implements Serializable {
   
   public URLStatistics getURLStatistics() { return urlStatistics ; }
   
+  public SiteExtractor getSiteExtractor() { return siteExtractor; }
+  
   public int getMaxConnection() { 
     int max = siteConfig.getMaxConnection() ;
     if(max < 1) max = 1 ;

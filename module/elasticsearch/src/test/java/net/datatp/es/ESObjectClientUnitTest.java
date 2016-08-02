@@ -67,7 +67,7 @@ public class ESObjectClientUnitTest {
   @Test
   public void test() throws Exception {
     if (!esObjecclient.isCreated()) {
-      esObjecclient.createIndexWith( 
+      esObjecclient.createIndexWithJSONConfig( 
           IOUtil.getFileContentAsString("src/test/resources/record.setting.json", "UTF8"), 
           IOUtil.getFileContentAsString("src/test/resources/record.mapping.json", "UTF8")
       );

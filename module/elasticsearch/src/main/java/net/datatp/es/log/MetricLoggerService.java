@@ -3,7 +3,6 @@ package net.datatp.es.log;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import com.google.inject.Inject;
 
 import net.datatp.sys.RuntimeEnv;
 import net.datatp.yara.Counter;
@@ -16,7 +15,7 @@ import net.datatp.yara.snapshot.TimerSnapshot;
 
 public class MetricLoggerService  extends ObjectLoggerService {
   
-  @Inject
+  //@Inject
   private MetricRegistry            metricRegistry;
   private String                    serverName;
   private MetricInfoCollectorThread metricCollectorThread;
@@ -28,7 +27,7 @@ public class MetricLoggerService  extends ObjectLoggerService {
     init(serverName, bufferBaseDir, esConnect);
   }
   
-  @Inject
+  //@Inject
   public void onInit(RuntimeEnv runtimeEnv) throws Exception {
     serverName = runtimeEnv.getVMName();
     String bufferBaseDir = runtimeEnv.getDataDir() + "/buffer/metric-log" ;

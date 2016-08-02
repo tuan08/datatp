@@ -62,17 +62,14 @@ public class URLDatum implements  Externalizable {
 
   public long getCreatedTime() { return this.createdTime ; }
   
-  public String getOriginalUrlAsString() { 
-    if(url == null) return null ;
-    return url.toString(); 
-  }
+  public String getOriginalUrlAsString() { return url; }
 
   public void setOrginalUrl(String url) { 
     setOriginalUrl(url, new URLParser(url)) ;
   }
 
-  public void setOriginalUrl(String url, URLParser urlNorm) { 
-    this.id = urlNorm.getHostMD5Id() ;
+  public void setOriginalUrl(String url, URLParser urlParser) { 
+    this.id = urlParser.getHostMD5Id() ;
     this.url = url; 
   }
 

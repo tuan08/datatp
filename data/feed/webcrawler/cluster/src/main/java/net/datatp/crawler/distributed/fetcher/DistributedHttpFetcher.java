@@ -1,35 +1,46 @@
 package net.datatp.crawler.distributed.fetcher;
 
-import net.datatp.crawler.fetcher.FetchData;
+import java.util.ArrayList;
+
+import net.datatp.channel.ChannelGateway;
 import net.datatp.crawler.fetcher.HttpFetcher;
 import net.datatp.crawler.fetcher.SiteSessionManager;
 import net.datatp.crawler.processor.FetchDataProcessor;
 import net.datatp.crawler.site.SiteContextManager;
 import net.datatp.crawler.urldb.URLDatum;
+import net.datatp.xhtml.XDoc;
 /**
  * Author: Tuan Nguyen
  *         tuan08@gmail.com
  * Apr 14, 2010
  */
 public class DistributedHttpFetcher extends HttpFetcher {
-  private URLDatumFetchQueue  urldatumFetchQueue;
-  private FetchDataProcessor fetchDataProcessor;
+  private URLDatumFetchQueue urldatumFetchQueue;
+  private ChannelGateway     xDocGateway;
+  private ChannelGateway     urlFetchCommitGateway;
 
   public DistributedHttpFetcher(String name,
                      SiteContextManager manager,
                      SiteSessionManager siteSessionManager, 
-                     URLDatumFetchQueue urldatumFetchQueue, 
+                     URLDatumFetchQueue urldatumFetchQueue,
+                     ChannelGateway     urlFetchCommitGateway,
+                     ChannelGateway     xDocGateway,
                      FetchDataProcessor fetchDataProcessor) {
-    super(name, manager, siteSessionManager);
-    this.urldatumFetchQueue = urldatumFetchQueue ;
-    this.fetchDataProcessor = fetchDataProcessor ;
+    super(name, manager, siteSessionManager, fetchDataProcessor);
+    this.urldatumFetchQueue    = urldatumFetchQueue ;
+    this.urlFetchCommitGateway = urlFetchCommitGateway;
+    this.xDocGateway           = xDocGateway;
   }
 
   @Override
-  protected void onProcess(FetchData fdata) throws Exception {
-    fetchDataProcessor.process(fdata);
+  protected void onCommit(ArrayList<URLDatum> holder) throws Exception  {
+    urlFetchCommitGateway.send(holder);
   }
   
+  @Override
+  protected void onCommit(XDoc xDoc) throws Exception {
+    xDocGateway.send(xDoc);
+  }
   @Override
   protected void onDelay(URLDatum urlDatum) throws InterruptedException {
     urldatumFetchQueue.addBusy(urlDatum) ;

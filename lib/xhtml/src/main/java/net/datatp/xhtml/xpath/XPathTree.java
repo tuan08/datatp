@@ -33,6 +33,7 @@ public class XPathTree {
     return xpaths.toArray(new XPath[xpaths.size()]);
   }
   
+  
   public XPathTree subTree(XPath xpath) { return subTree(xpath.getXPathWithIndex()); }
   
   public XPathTree subTree(String fromXPath) {

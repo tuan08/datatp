@@ -48,49 +48,47 @@ public class SiteSession implements Comparable<SiteSession> {
 
   public boolean isLocked() { return lock  ; }
 
-  synchronized public FetchData fetch(CloseableHttpClient httpClient, URLDatum urldatum, URLContext context)  {
-    FetchData fdata = new FetchData(urldatum);
+  synchronized public FetchContext fetch(HttpFetcher fetcher, URLContext urlContext)  {
+    URLDatum urlDatum = urlContext.getURLDatum();
+    FetchContext fetchContext = new FetchContext(fetcher, this, urlContext);
     if(errorCheckCondition != null) {
       if(errorCheckCondition.isExpired()) {
         errorCheckCondition = null ;
       } else {
-        errorCheckCondition.handle(urldatum, context) ;
-        return fdata;
+        errorCheckCondition.handle(urlDatum, urlContext) ;
+        return fetchContext;
       }
     }
     try {
       lock = true ;
       long startTime = System.currentTimeMillis() ;
-      String fetchUrl = urldatum.getFetchUrl();
+      String fetchUrl = urlDatum.getFetchUrl();
       
       HttpGet httpget = new HttpGet(fetchUrl); 
       BasicHttpContext httpContext = new BasicHttpContext();
       httpContext.setAttribute("crawler.site", hostname) ;
       httpContext.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
-      HttpResponse response = httpClient.execute(httpget, httpContext);
+      HttpResponse response = fetcher.getHttpClient().execute(httpget, httpContext);
       String redirectUrl = (String)httpContext.getAttribute("url.redirect") ;
       if(redirectUrl != null) {
-        urldatum.setRedirectUrl(redirectUrl) ;
+        urlDatum.setRedirectUrl(redirectUrl) ;
       }
-      String url = urldatum.getOriginalUrlAsString() ;
-      WData wPageData = new WData(url, urldatum.getAnchorTextAsString(), (byte[])null) ;
-
-      fdata.setResponseHeaders(getResponseHeaders(response));
-      fdata.setContentType(HttpClientUtil.getContentType(response)) ;
+      fetchContext.setResponseHeaders(getResponseHeaders(response));
+      fetchContext.setContentType(HttpClientUtil.getContentType(response)) ;
       StatusLine sline = response.getStatusLine() ;
-      urldatum.setLastResponseCode((short)sline.getStatusCode()) ;
-      urldatum.setContentType(wPageData.getContentType()) ;
+      urlDatum.setLastResponseCode((short)sline.getStatusCode()) ;
+      urlDatum.setContentType(fetchContext.getContentType());
       
-      byte[] data = handleContent(context, urldatum, response);
-      fdata.setData(data);
+      byte[] data = handleContent(urlContext, urlDatum, response);
+      fetchContext.setData(data);
       long downloadTime = System.currentTimeMillis() - startTime ;
-      urldatum.setLastFetchDownloadTime(downloadTime) ;
+      urlDatum.setLastFetchDownloadTime(downloadTime) ;
     } catch(Throwable t) {
-      handleError(fdata.getURLDatum(), context, getRootCause(t)) ;
+      handleError(urlContext, getRootCause(t)) ;
     } finally {
       lock = false ;
     }
-    return fdata;
+    return fetchContext;
   }
 
   public int compareTo(SiteSession other) {
@@ -124,7 +122,8 @@ public class SiteSession implements Comparable<SiteSession> {
     return data;
   }
   
-  void handleError(URLDatum urlDatum, URLContext context, Throwable error) {
+  void handleError(URLContext urlContext, Throwable error) {
+    URLDatum urlDatum = urlContext.getURLDatum();
     if(error instanceof URISyntaxException) {
       urlDatum.setLastResponseCode(ResponseCode.ILLEGAL_URI) ;
     } else if(error instanceof SSLPeerUnverifiedException) {
@@ -135,11 +134,11 @@ public class SiteSession implements Comparable<SiteSession> {
       urlDatum.setLastResponseCode(ResponseCode.UNKNOWN_ERROR) ;
     } else if(error instanceof UnknownHostException) {
       errorCheckCondition = new ConnectionCheckCondition(ErrorCode.ERROR_CONNECTION_UNKNOWN_HOST, 5 * 60 *1000) ;
-      errorCheckCondition.handle(urlDatum, context) ;
+      errorCheckCondition.handle(urlDatum, urlContext) ;
     } else if(error instanceof ConnectTimeoutException) {
       //Cannot etablish the connection to the server
       errorCheckCondition = new ConnectionCheckCondition(ErrorCode.ERROR_CONNECTION_TIMEOUT, 5 * 60 *1000) ;
-      errorCheckCondition.handle(urlDatum, context) ;
+      errorCheckCondition.handle(urlDatum, urlContext) ;
     } else if(error instanceof ConnectException) {
       ConnectException cex = (ConnectException) error ;
       if(cex.getMessage().indexOf("timed out") >= 0) {

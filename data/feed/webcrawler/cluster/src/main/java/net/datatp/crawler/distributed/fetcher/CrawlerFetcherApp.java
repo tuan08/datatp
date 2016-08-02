@@ -21,7 +21,6 @@ import org.springframework.jms.core.JmsTemplate;
 
 import net.datatp.activemq.ActiveMQUtil;
 import net.datatp.crawler.distributed.CrawlerApp;
-import net.datatp.crawler.distributed.processor.FetchDataProcessorImpl;
 import net.datatp.crawler.distributed.processor.WCURLExtractor;
 import net.datatp.crawler.distributed.registry.CrawlerRegistry;
 import net.datatp.crawler.distributed.registry.event.CrawlerEventContext;
@@ -110,14 +109,14 @@ public class CrawlerFetcherApp extends CrawlerApp {
     return wReg;
   }
   
-  @Bean(name="WPageDataQueue")
+  @Bean(name="XDocQueue")
   public Destination createXhtmlDocumentQueue(ConnectionFactory jmsCF) throws Exception {
     return ActiveMQUtil.createQueue(jmsCF, "crawler.output");
   }
   
-  @Bean(name="WPageDataGateway")
+  @Bean(name="XDocGateway")
   public JMSChannelGateway createXhtmlDocumentGateway(ConnectionFactory jmsCF,
-                                                      @Qualifier("WPageDataQueue") Destination queue) {
+                                                      @Qualifier("XDocQueue") Destination queue) {
     JMSChannelGateway gw = new JMSChannelGateway();
     gw.setDestination(queue);
     JmsTemplate template = new JmsTemplate(jmsCF);
@@ -131,8 +130,8 @@ public class CrawlerFetcherApp extends CrawlerApp {
   public URLExtractor createURLExtractor() { return  new WCURLExtractor();  }
   
   @Bean(name = "FetchDataProcessor")
-  public FetchDataProcessor createFetchDataProcessor(ApplicationContext context) {
-    FetchDataProcessor fetchDataProcessor = context.getAutowireCapableBeanFactory().createBean(FetchDataProcessorImpl.class);
+  public FetchDataProcessor createFetchDataProcessor(URLExtractor urlExtractor) {
+    FetchDataProcessor fetchDataProcessor = new FetchDataProcessor(urlExtractor);
     return fetchDataProcessor;
   }
   

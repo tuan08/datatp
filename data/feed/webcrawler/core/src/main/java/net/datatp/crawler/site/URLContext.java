@@ -1,5 +1,6 @@
 package net.datatp.crawler.site;
 
+import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.util.URLParser;
 
 /**
@@ -8,19 +9,24 @@ import net.datatp.util.URLParser;
  * May 4, 2010  
  */
 public class URLContext {
+  private URLDatum    urlDatum;
   private URLParser   urlParser;
-  private SiteContext siteConfigContext;
-
-  public URLContext(URLParser urlParser, SiteContext siteConfigContext) {
+  private SiteContext siteContext;
+  
+  public URLContext(URLDatum urlDatum, URLParser urlParser, SiteContext siteContext) {
+    this.urlDatum    = urlDatum;
+    this.urlParser   = urlParser;
+    this.siteContext = siteContext;
+  }
+  
+  public URLContext(URLParser urlParser, SiteContext siteContext) {
     this.urlParser = urlParser ;
-    this.siteConfigContext = siteConfigContext ;
+    this.siteContext = siteContext ;
   }
-
+  
+  public URLDatum getURLDatum() { return urlDatum; }
+  
   public URLParser getUrlParser() { return urlParser; }
-  public void setUrlParser(URLParser urlParser) { this.urlParser = urlParser; }
 
-  public SiteContext getSiteContext() { return siteConfigContext ; }
-  public void setSiteConfig(SiteContext siteConfigContext) { 
-  	this.siteConfigContext = siteConfigContext; 
-  }
+  public SiteContext getSiteContext() { return siteContext ; }
 }

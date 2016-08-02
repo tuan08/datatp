@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.util.URLParser;
 
 /**
@@ -71,10 +72,10 @@ public class SiteContextManager {
     return null;
   }
 
-  public URLContext getURLContext(String url)  {
-    URLParser urlnorm = new  URLParser(url) ;
-    SiteContext context = getSiteConfigContext(urlnorm) ;
-    if(context != null) return new URLContext(urlnorm, context) ;
+  public URLContext getURLContext(URLDatum urlDatum)  {
+    URLParser urlParser = new  URLParser(urlDatum.getFetchUrl()) ;
+    SiteContext context = getSiteConfigContext(urlParser) ;
+    if(context != null) return new URLContext(urlDatum, urlParser, context) ;
     return null;
   }
 

@@ -8,8 +8,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 
 import net.datatp.es.ESClient;
-import net.datatp.es.tool.server.ElasticSearchServer;
-import net.datatp.es.tool.server.EmbededElasticSearchServerSet;
+import net.datatp.es.server.ElasticSearchServer;
+import net.datatp.es.server.EmbededElasticSearchServerSet;
 import net.datatp.util.io.FileUtil;
 
 public class ServerSetUnitTest {

@@ -16,7 +16,7 @@ import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.crawler.urldb.URLDatumFactory;
 import net.datatp.util.URLParser;
 import net.datatp.util.text.StringUtil;
-import net.datatp.xhtml.WData;
+import net.datatp.xhtml.extract.WDataExtractContext;
 import net.datatp.xhtml.util.URLRewriter;
 import net.datatp.xhtml.util.URLSessionIdCleaner;
 import net.datatp.xhtml.xpath.XPath;
@@ -50,21 +50,22 @@ public class URLExtractor {
     }
   }
   
-  public Map<String, URLDatum> extract(URLDatum urldatum, URLContext context, WData xdoc, XPathStructure structure) {
+  public Map<String, URLDatum> extract(URLContext urlCtx, WDataExtractContext wdataCtx) {
+    URLDatum urlDatum = urlCtx.getURLDatum();
+    XPathStructure structure = wdataCtx.getXpathStructure();
     Map<String, URLDatum> urls = new HashMap<String, URLDatum>();
     try {
-      if(context == null) return urls ;
-      
-      String siteURL = context.getUrlParser().getSiteURL();
+      if(urlCtx == null) return urls ;
+      String siteURL = urlCtx.getUrlParser().getSiteURL();
       String baseURL = structure.findBase();
       if (baseURL == null || baseURL.length() == 0) {
-        baseURL = context.getUrlParser().getBaseURL();
+        baseURL = urlCtx.getUrlParser().getBaseURL();
       }
       
-      if(urldatum.getDeep() == 1) {
+      if(urlDatum.getDeep() == 1) {
         String refreshUrl = findRefreshMetaNodeUrl(structure) ;
         if(refreshUrl != null) {
-          URLDatum newURLDatum = createURLDatum(urldatum, refreshUrl, new URLParser(refreshUrl), "refresh url");
+          URLDatum newURLDatum = createURLDatum(urlDatum, refreshUrl, new URLParser(refreshUrl), "refresh url");
           addURL(urls, refreshUrl, newURLDatum);
         }
       }
@@ -82,7 +83,7 @@ public class URLExtractor {
 
         if (newURLNorm.getRef() != null) continue;
 
-        if (!context.getSiteContext().allowURL(newURLNorm)) {
+        if (!urlCtx.getSiteContext().allowURL(newURLNorm)) {
           continue; // ignore the external link
         }
 
@@ -91,14 +92,14 @@ public class URLExtractor {
         }
 
         // CONTROL DEEP LIMIT
-        int maxCrawlDeep = context.getSiteContext().getSiteConfig().getCrawlDeep();
+        int maxCrawlDeep = urlCtx.getSiteContext().getSiteConfig().getCrawlDeep();
 
-        URLDatum newURLDatum = createURLDatum(urldatum, newNormalizeURL, newURLNorm, anchorText);
+        URLDatum newURLDatum = createURLDatum(urlDatum, newNormalizeURL, newURLNorm, anchorText);
         if (!isInDeepRange(newURLDatum, maxCrawlDeep)) continue;
         addURL(urls, newNormalizeURL, newURLDatum);
       }
     } catch (Throwable t) {
-      logger.error("Cannot extract url for " + urldatum.getFetchUrl(), t);
+      logger.error("Cannot extract url for " + urlDatum.getFetchUrl(), t);
     }
     return urls;
   }

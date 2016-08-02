@@ -96,9 +96,9 @@ abstract public class URLPostFetchScheduler {
   private int write(URLDatumDBWriter writer, List<URLDatum> urlDatums) throws Exception {
     for(int i = 0 ; i < urlDatums.size(); i++) {
       URLDatum urlDatum = urlDatums.get(i) ;
-      URLContext context = siteContextManager.getURLContext(urlDatum.getOriginalUrlAsString()) ;
+      URLContext context = siteContextManager.getURLContext(urlDatum) ;
       if(context == null) {
-        logger.warn("SiteConfig is not found for the url ", urlDatum.getOriginalUrlAsString()) ;
+        logger.warn("SiteConfig is not found for the url ", urlDatum.getFetchUrl()) ;
         continue ;
       }
       SiteContext siteContext = context.getSiteContext() ;

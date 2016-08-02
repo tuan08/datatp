@@ -16,7 +16,7 @@ dependencies {
   compile project(':lib/yara')
   compile project(':lib/buffer')
   compile project(':module/commons')
-  compile project(':module/registry/core')
+
   compile group: 'org.elasticsearch', name: 'elasticsearch', version: elasticsearchVersion
 
   /*************************ES runtime deploy jars***************************/

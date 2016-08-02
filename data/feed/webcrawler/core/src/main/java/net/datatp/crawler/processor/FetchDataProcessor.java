@@ -7,67 +7,72 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.datatp.crawler.fetcher.FetchData;
+import net.datatp.crawler.fetcher.FetchContext;
 import net.datatp.crawler.processor.metric.ProcessMetric;
-import net.datatp.crawler.site.SiteContextManager;
-import net.datatp.crawler.site.URLContext;
 import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.xhtml.WData;
-import net.datatp.xhtml.xpath.XPathStructure;
+import net.datatp.xhtml.extract.WDataExtractContext;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-abstract public class FetchDataProcessor {
+public class FetchDataProcessor {
   private static final Logger logger = LoggerFactory.getLogger(FetchDataProcessor.class);
 
   protected URLExtractor urlExtractor ;
   
-  protected SiteContextManager siteContextManager ;
-
   private ProcessMetric metric = new ProcessMetric() ;
   
-  private FetchDataProcessorPlugin[] plugin;
+  private FetchProcessorPlugin[] plugin = {
+    new FetchErrorAnalyzerPlugin(), new FetchContentExtractorPlugin()
+  };
 
+  public FetchDataProcessor() {}
+  
+  public FetchDataProcessor(URLExtractor urlExtractor) {
+    this.urlExtractor = urlExtractor;
+  }
+  
   public ProcessMetric getProcessMetric() { return metric; }
 
-  abstract protected void onSave(ArrayList<URLDatum> urlDatatums) throws Exception;
-  abstract protected void onSave(WData wData) throws Exception;
-  
-  public void process(FetchData fdata) {
+  public void process(FetchContext fetchCtx) {
     metric.incrProcessCount() ;
     final long start = System.currentTimeMillis() ;
-    URLDatum urlDatum = fdata.getURLDatum() ;
-    byte[] data = fdata.getData();
-    WData wdata = new WData(urlDatum.getOriginalUrl(), urlDatum.getAnchorText(), (byte[])null) ;
+    URLDatum urlDatum = fetchCtx.getURLContext().getURLDatum() ;
+    WDataExtractContext wDataCtx = null;
+    byte[] data = fetchCtx.getData();
     
     try {
-      if(data == null) {
-        ArrayList<URLDatum> urlList = new ArrayList<URLDatum>() ;
-        urlList.add(fdata.getURLDatum()) ;
-        onSave(urlList) ;
-        return ;
+      if(data != null) {
+        Charset charset = EncodingDetector.INSTANCE.detect(data, data.length);
+        String xhtml = new String(data, charset);
+        WData wdata = new WData(urlDatum.getFetchUrl(), urlDatum.getAnchorText(), xhtml) ;
+        wDataCtx = new WDataExtractContext(wdata);
       }
-
-      Charset charset = EncodingDetector.INSTANCE.detect(data, data.length);
-      String xhtml = new String(data, charset);
-      wdata.setData(xhtml);
-      XPathStructure xpathStructure = new XPathStructure(wdata.createJsoupDocument());
-      
-      URLContext context =  siteContextManager.getURLContext(fdata.getURLDatum().getFetchUrl()) ;
-
-      Map<String, URLDatum> urls = urlExtractor.extract(fdata.getURLDatum(), context, wdata, xpathStructure) ;
+      processUrls(fetchCtx, wDataCtx);
       metric.addSumHtmlProcessTime(System.currentTimeMillis() - start) ;
-
-      ArrayList<URLDatum> urlList = new ArrayList<URLDatum>() ;
-      urlList.add(urlDatum);
-      urlList.addAll(urls.values()) ;
-      
-      onSave(urlList) ;
-      onSave(wdata) ;
+      processPlugins(fetchCtx, wDataCtx);
     } catch(Exception ex) {
       ex.printStackTrace() ;
-      logger.error("Cannot process HtmlDocument: " + wdata.getUrl()) ;
+      logger.error("Cannot process : " + urlDatum.getOriginalUrl()) ;
     }
     metric.addSumProcessTime(System.currentTimeMillis() - start) ;
+  }
+  
+  private void processUrls(FetchContext fetchCtx, WDataExtractContext wDataCtx) throws Exception {
+    ArrayList<URLDatum> commitUrls = new ArrayList<URLDatum>() ;
+    commitUrls.add(fetchCtx.getURLContext().getURLDatum());
+    if(wDataCtx != null) {
+      Map<String, URLDatum> urls = urlExtractor.extract(fetchCtx.getURLContext(), wDataCtx) ;
+      commitUrls.addAll(urls.values()) ;
+    }
+    fetchCtx.getXDocMapper().setUrl(fetchCtx.getURLContext().getURLDatum().getOriginalUrl());
+    fetchCtx.getXDocMapper().setMD5Id(fetchCtx.getURLContext().getURLDatum().getId());
+    fetchCtx.setCommitURLs(commitUrls);
+  }
+  
+  private void processPlugins(FetchContext fetchCtx, WDataExtractContext wdataCtx) throws Exception {
+    for(FetchProcessorPlugin sel : plugin) {
+      sel.process(fetchCtx, wdataCtx);
+    }
   }
 }

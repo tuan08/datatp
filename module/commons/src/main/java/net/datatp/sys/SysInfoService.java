@@ -11,7 +11,6 @@ import java.util.Map;
 
 import javax.swing.filechooser.FileSystemView;
 
-import com.google.inject.Singleton;
 
 import net.datatp.model.sys.FileStore;
 import net.datatp.model.sys.GC;
@@ -21,7 +20,6 @@ import net.datatp.model.sys.OS;
 import net.datatp.model.sys.ThreadCount;
 
 @SuppressWarnings({"restriction"})
-@Singleton
 public class SysInfoService {
   
   private Map<String, GC> previousGCs = new HashMap<String, GC>() ;

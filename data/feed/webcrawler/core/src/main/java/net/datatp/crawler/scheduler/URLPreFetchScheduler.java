@@ -55,7 +55,7 @@ abstract public class URLPreFetchScheduler {
       URLDatum datum = urlDatumDBItr.next() ;
       //In case The url has been schedule to fetch 6 hours ago. It could happen when the queue has problem
       //or the fetcher has problem and url datum is not updated, shedule to refetch.
-      URLContext urlContext = siteContextManager.getURLContext(datum.getOriginalUrlAsString()) ;
+      URLContext urlContext = siteContextManager.getURLContext(datum) ;
       if(urlContext == null) {
         errorCount++ ;
         logger.info("Scheduler: URLContext for " + datum.getOriginalUrlAsString() + " is null!") ;
@@ -87,8 +87,7 @@ abstract public class URLPreFetchScheduler {
       }
 
       if(priorityUrlHolder == null) {
-        priorityUrlHolder = 
-            new PriorityURLDatumHolder(siteContext, siteContext.getMaxSchedule(), 3) ;
+        priorityUrlHolder = new PriorityURLDatumHolder(siteContext, siteContext.getMaxSchedule(), 3) ;
       } else if(priorityUrlHolder.getSiteConfigContext() != siteContext) {
         if(requestBuffer.getCurrentSize() + priorityUrlHolder.getSize() > requestBuffer.getCapacity()) {
           if(writer == null) writer = urlDatumDB.createURLDatumDBWriter() ;
@@ -139,10 +138,10 @@ abstract public class URLPreFetchScheduler {
   private void flushPriorityURLDatumHolder(PriorityURLDatumHolder holder, MultiListHolder<URLDatum> fRequestBuffer) throws Exception {
     if(holder == null) return ;
     for(URLDatum sel : holder.getURLDatum()) {
-      URLContext selUrlContext = siteContextManager.getURLContext(sel.getOriginalUrlAsString()) ;
-      schedulerPluginManager.preFetch(selUrlContext, sel, System.currentTimeMillis()) ;
-      fRequestBuffer.add(selUrlContext.getUrlParser().getHost(), sel) ;
-      selUrlContext.getSiteContext().getSiteScheduleStat().addProcessCount(1); ;
+      URLContext urlContext = siteContextManager.getURLContext(sel) ;
+      schedulerPluginManager.preFetch(urlContext, sel, System.currentTimeMillis()) ;
+      fRequestBuffer.add(urlContext.getUrlParser().getHost(), sel) ;
+      urlContext.getSiteContext().getSiteScheduleStat().addProcessCount(1); ;
     }
   }
 

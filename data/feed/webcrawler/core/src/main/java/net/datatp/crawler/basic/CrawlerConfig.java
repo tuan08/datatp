@@ -11,9 +11,9 @@ public class CrawlerConfig {
       ".*\\.(r0*|r1*|a0*|a1*|tif|tiff|msi|msu|ace|iso|ogg|7z|sea|sit|sitx|pps|bz2|xsl)"
   };
   
-  private int maxUrlQueueSize           = 10000;
-  private int maxXhtmlDocumentQueueSize = 1000;
-  private int numOfFetcher              = 3;
+  private int maxUrlQueueSize      = 10000;
+  private int maxXDocQueueSize     = 1000;
+  private int numOfFetcher         = 3;
 
   public int getMaxUrlQueueSize() { return maxUrlQueueSize; }
   public CrawlerConfig setMaxUrlQueueSize(int size) {
@@ -21,9 +21,9 @@ public class CrawlerConfig {
     return this;
   }
   
-  public int getMaxXhtmlDocumentQueueSize() { return maxXhtmlDocumentQueueSize; }
-  public CrawlerConfig setMaxXhtmlDocumentQueueSize(int maxXhtmlDocumentQueueSize) {
-    this.maxXhtmlDocumentQueueSize = maxXhtmlDocumentQueueSize;
+  public int getMaxXDocQueueSize() { return maxXDocQueueSize; }
+  public CrawlerConfig setMaxXDocQueueSize(int size) {
+    this.maxXDocQueueSize = size;
     return this;
   }
   

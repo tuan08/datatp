@@ -7,6 +7,7 @@ import net.datatp.crawler.fetcher.SiteSessionManager;
 import net.datatp.crawler.processor.FetchDataProcessor;
 import net.datatp.crawler.site.SiteContextManager;
 import net.datatp.crawler.urldb.URLDatum;
+import net.datatp.xhtml.XDoc;
 
 public class HttpFetcherManager {
   private CrawlerConfig      crawlerConfig;
@@ -18,13 +19,14 @@ public class HttpFetcherManager {
   public HttpFetcherManager(CrawlerConfig config,
                             BlockingQueue<URLDatum> urlFetchQueue, 
                             BlockingQueue<URLDatum> urlCommitQueue,
+                            BlockingQueue<XDoc>     xDocQueue,
                             FetchDataProcessor dataProcessor,
                             SiteContextManager siteContextManager) {
     crawlerConfig      = config;
     fetchers = new HttpFetcher[crawlerConfig.getNumOfFetcher()];
     for(int i = 0; i < fetchers.length; i++) {
       String name = "fetcher-" + (i);
-      fetchers[i] = new BasicHttpFetcher(name, siteContextManager, siteSessionManager, urlFetchQueue, dataProcessor);
+      fetchers[i] = new BasicHttpFetcher(name, siteContextManager, siteSessionManager, urlFetchQueue, urlCommitQueue, xDocQueue, dataProcessor);
     }
   }
   

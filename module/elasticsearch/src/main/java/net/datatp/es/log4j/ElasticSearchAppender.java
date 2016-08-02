@@ -103,7 +103,7 @@ public class ElasticSearchAppender extends AppenderSkeleton {
           
           String settingJson = IOUtil.getResourceAsString(settingUrl, "UTF-8");
           String mappingJson = IOUtil.getResourceAsString(mappingUrl, "UTF-8");
-          esLog4jRecordClient.createIndexWith(settingJson, mappingJson);
+          esLog4jRecordClient.createIndexWithJSONConfig(settingJson, mappingJson);
         }
       } catch(Exception ex) {
         ex.printStackTrace();

@@ -10,8 +10,6 @@ import javax.annotation.PreDestroy;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooKeeper;
 
-import com.google.inject.Singleton;
-
 import kafka.javaapi.PartitionMetadata;
 import kafka.javaapi.TopicMetadata;
 import kafka.javaapi.TopicMetadataRequest;
@@ -19,7 +17,6 @@ import kafka.javaapi.TopicMetadataResponse;
 import kafka.javaapi.consumer.SimpleConsumer;
 import net.datatp.zk.ZKClient;
 
-@Singleton
 public class KafkaTool  {
   private String name;
   private String zkConnects;

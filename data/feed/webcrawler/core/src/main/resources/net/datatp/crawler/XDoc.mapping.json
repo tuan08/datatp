@@ -1,0 +1,22 @@
+{
+  "XDoc": {
+    "_source": { "enabled": true },
+
+    "properties" : {
+      "timestamp" : { "type" : "date", "format" : "dd/MM/yyyy HH:mm:ss" },
+      "type" : { "type" : "string", "index":"not_analyzed" },
+      "attr": {
+         "type": "nested",
+         "properties" : {
+            "md5Id" : { "type" : "string", "index":"not_analyzed" }
+         }
+      },
+
+      "entities": {
+         "type": "nested",
+         "properties" : {
+         }
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ include 'lib/xhtml'
 include 'lib/nlp/core'
 
 include 'module/commons'
+include 'module/module'
 include 'module/zookeeper'
 
 include 'module/registry/core'

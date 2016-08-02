@@ -9,9 +9,11 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 
+import net.datatp.channel.ChannelGateway;
 import net.datatp.crawler.fetcher.SiteSessionManager;
 import net.datatp.crawler.fetcher.metric.HttpFetcherMetric;
 import net.datatp.crawler.processor.FetchDataProcessor;
@@ -30,12 +32,17 @@ public class HttpFetcherManager  {
 
   @Autowired
   private SiteContextManager manager ;
+  
+  @Autowired
+  @Qualifier("XDocGateway")
+  private ChannelGateway xDocGateway ;
+
+  @Autowired
+  @Qualifier("URLFetchCommitGateway")
+  private ChannelGateway urlFetchCommitGateway ;
+  
 
   private URLDatumFetchQueue urldatumFetchQueue = new URLDatumFetchQueue();
-
-//  @Autowired
-//  @Qualifier("FetchDataGateway")
-//  private ChannelGateway fetchDataGateway ;
 
   @Autowired
   private FetchDataProcessor fetchDataProcessor;
@@ -84,7 +91,7 @@ public class HttpFetcherManager  {
     for(int i = 0; i < thread.length; i++) {
       String fetcherName = "fetcher-" + i;
       DistributedHttpFetcher fetcher =  
-          new DistributedHttpFetcher(fetcherName, manager, siteSessionManager, urldatumFetchQueue, fetchDataProcessor) ;
+          new DistributedHttpFetcher(fetcherName, manager, siteSessionManager, urldatumFetchQueue, urlFetchCommitGateway, xDocGateway, fetchDataProcessor) ;
       thread[i] = new FetcherThread(fetcher) ;
       thread[i].setName(fetcherName) ;
     }

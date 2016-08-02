@@ -48,7 +48,6 @@ public class DistributedCrawlerIntegrationTest {
     
     ApplicationContext xhtmlLoggerAppContext = DocumentConsumerLoggerApp.run(null);
     
-    Thread.sleep(60000);
     System.out.println(registryClient.formatRegistryAsText());
     Thread.currentThread().join();
   }

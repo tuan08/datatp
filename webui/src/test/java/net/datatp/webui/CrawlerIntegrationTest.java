@@ -22,7 +22,7 @@ public class CrawlerIntegrationTest {
       setExtractConfig(ExtractConfig.article())
     ); 
 
-    //crawler.setXhtmlDocumentProcessor(WDataProcessor.PRINT_URL);
+    //crawler.setXhtmlDocumentProcessor(XDocProcessor.PRINT_URL);
     crawler.start();
     
     Thread.currentThread().join();

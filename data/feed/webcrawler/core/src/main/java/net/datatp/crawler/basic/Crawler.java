@@ -6,8 +6,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 import net.datatp.crawler.CrawlerApi;
+import net.datatp.crawler.processor.FetchDataProcessor;
 import net.datatp.crawler.processor.URLExtractor;
-import net.datatp.crawler.processor.WDataProcessor;
+import net.datatp.crawler.processor.XDocProcessor;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
 import net.datatp.crawler.site.SiteConfig;
@@ -15,15 +16,14 @@ import net.datatp.crawler.site.SiteContextManager;
 import net.datatp.crawler.urldb.InMemURLDatumDB;
 import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.crawler.urldb.URLDatumFactory;
-import net.datatp.xhtml.WData;
-import net.datatp.xhtml.xpath.WDataContext;
+import net.datatp.xhtml.XDoc;
 
 public class Crawler implements CrawlerApi {
   private CrawlerConfig           crawlerConfig;
 
   private BlockingQueue<URLDatum> urlFetchQueue;
   private BlockingQueue<URLDatum> urlCommitQueue;
-  private BlockingQueue<WData>    wpageDataQueue;
+  private BlockingQueue<XDoc>     xDocQueue;
 
   private SiteContextManager      siteContextManager = new SiteContextManager();
 
@@ -32,29 +32,29 @@ public class Crawler implements CrawlerApi {
   private InMemURLDatumDB         urlDatumDB;
   private InMemURLScheduler       urlScheduler;
 
-  private InMemFetchDataProcessor dataProcessor;
+  private FetchDataProcessor      dataProcessor;
 
-  private WDataProcessor          wDataProcessor     = WDataProcessor.NONE;
-  private WDataProcessorThread    wDataProcessorThread;
+  private XDocProcessor           xDocProcessor      = XDocProcessor.NONE;
+  private XDocProcessorThread     xDocProcessorThread;
 
   public Crawler configure(CrawlerConfig config) throws Exception {
     crawlerConfig      = config;
     
-    urlFetchQueue      = new LinkedBlockingQueue<>(crawlerConfig.getMaxUrlQueueSize());
-    urlCommitQueue     = new LinkedBlockingQueue<>(crawlerConfig.getMaxUrlQueueSize());
-    wpageDataQueue = new LinkedBlockingQueue<>(crawlerConfig.getMaxXhtmlDocumentQueueSize());
+    urlFetchQueue  = new LinkedBlockingQueue<>(crawlerConfig.getMaxUrlQueueSize());
+    urlCommitQueue = new LinkedBlockingQueue<>(crawlerConfig.getMaxUrlQueueSize());
+    xDocQueue      = new LinkedBlockingQueue<>(crawlerConfig.getMaxXDocQueueSize());
     
     URLExtractor urlExtractor = new URLExtractor(URLDatumFactory.DEFAULT, CrawlerConfig.EXCLUDE_URL_PATTERNS);
-    dataProcessor = new InMemFetchDataProcessor(siteContextManager, urlExtractor, urlCommitQueue, wpageDataQueue);
+    dataProcessor = new FetchDataProcessor(urlExtractor);
     
     httpFetcherManager = 
-      new HttpFetcherManager(crawlerConfig, urlFetchQueue, urlCommitQueue, dataProcessor, siteContextManager);
+      new HttpFetcherManager(crawlerConfig, urlFetchQueue, urlCommitQueue, xDocQueue, dataProcessor, siteContextManager);
     
     urlDatumDB   = new InMemURLDatumDB();
     urlScheduler = new InMemURLScheduler(urlDatumDB, siteContextManager, urlFetchQueue, urlCommitQueue);
     
-    wDataProcessorThread = new WDataProcessorThread();
-    wDataProcessorThread.start();
+    xDocProcessorThread = new XDocProcessorThread();
+    xDocProcessorThread.start();
     return this;
   }
   
@@ -103,8 +103,8 @@ public class Crawler implements CrawlerApi {
     httpFetcherManager.stop();
   }
   
-  public void setWDataProcessor(WDataProcessor processor) {
-    wDataProcessor = processor;
+  public void setXDocProcessor(XDocProcessor processor) {
+    xDocProcessor = processor;
   }
   
   public void start() throws Exception {
@@ -117,15 +117,14 @@ public class Crawler implements CrawlerApi {
     fetcherStop();
   }
   
-  public class WDataProcessorThread extends Thread {
+  public class XDocProcessorThread extends Thread {
     boolean terminate ;
     public void run() {
       while(!terminate) {
         try {
-          WData wdata = wpageDataQueue.poll(1, TimeUnit.SECONDS);
-          if(wdata != null) {
-            WDataContext context = new WDataContext(wdata);
-            wDataProcessor.process(context);
+          XDoc xdoc = xDocQueue.poll(1, TimeUnit.SECONDS);
+          if(xdoc != null) {
+            xDocProcessor.process(xdoc);
           }
         } catch(InterruptedException ex) {
         } catch(Exception ex) {
