@@ -22,7 +22,7 @@ import org.slf4j.Logger;
 
 import com.google.inject.Inject;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 import net.datatp.util.log.LoggerFactory;
 import net.datattp.registry.BatchOperations;
 import net.datattp.registry.DataMapperCallback;
@@ -170,7 +170,7 @@ public class RegistryImpl implements Registry {
   
   @Override
   public <T> Node create(String path, T data, NodeCreateMode mode) throws RegistryException {
-    return create(path, JSONSerializer.INSTANCE.toBytes(data), mode);
+    return create(path, DataSerializer.JSON.toBytes(data), mode);
   }
   
   @Override
@@ -238,7 +238,7 @@ public class RegistryImpl implements Registry {
       public T execute(ZooKeeper zkClient) throws InterruptedException, KeeperException {
         byte[] bytes =  zkClient.getData(realPath(path), null, new Stat()) ;
         if(bytes == null || bytes.length == 0) return null;
-        return JSONSerializer.INSTANCE.fromBytes(bytes, type);
+        return DataSerializer.JSON.fromBytes(bytes, type);
       }
     };
     return execute(retrieveDataAs, 3);
@@ -303,7 +303,7 @@ public class RegistryImpl implements Registry {
   }
   
   public <T> NodeInfo setData(String path, T data) throws RegistryException {
-    return setData(path, JSONSerializer.INSTANCE.toBytes(data));
+    return setData(path, DataSerializer.JSON.toBytes(data));
   }
   
   

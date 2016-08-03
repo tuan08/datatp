@@ -1,6 +1,6 @@
 package net.datatp.model.message;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 
 public class Message {
   private byte[]          id;
@@ -20,11 +20,11 @@ public class Message {
   }
 
   public Message(String key, Object obj) {
-    this(key.getBytes(), JSONSerializer.INSTANCE.toBytes(obj));
+    this(key.getBytes(), DataSerializer.JSON.toBytes(obj));
   }
   
   public Message(String key, Object obj, String type) {
-    this(key.getBytes(), JSONSerializer.INSTANCE.toBytes(obj));
+    this(key.getBytes(), DataSerializer.JSON.toBytes(obj));
     this.type = type;
   }
   
@@ -43,7 +43,7 @@ public class Message {
   }
   
   public <T> T getDataAs(Class<T> type) {
-    return JSONSerializer.INSTANCE.fromBytes(data, type) ;
+    return DataSerializer.JSON.fromBytes(data, type) ;
   }
   
   public String toString() {

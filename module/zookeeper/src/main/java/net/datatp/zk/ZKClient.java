@@ -9,7 +9,7 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 
 public class ZKClient {
   private String zkConnects;
@@ -97,7 +97,7 @@ public class ZKClient {
  
     protected <V> V getDataAs(ZooKeeper zkClient, String path, Class<V> type) throws KeeperException, InterruptedException {
       byte[] data = zkClient.getData(path, false, new Stat());
-      return JSONSerializer.INSTANCE.fromBytes(data, type);
+      return DataSerializer.JSON.fromBytes(data, type);
     }
     
     protected void dump(ZooKeeper zkClient, String path) throws KeeperException, InterruptedException {

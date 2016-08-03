@@ -6,7 +6,7 @@ import java.util.List;
 import com.beust.jcommander.Parameter;
 import com.fasterxml.jackson.databind.JsonNode;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 import net.datatp.vm.client.VMClient;
 import net.datattp.registry.Node;
 import net.datattp.registry.Registry;
@@ -37,8 +37,8 @@ public class RegistryCommand extends Command {
         Node node = registry.get(path);
         byte[] data = node.getData();
         if(data != null && data.length > 0) {
-          JsonNode jsonNode = JSONSerializer.INSTANCE.fromString(new String(data));
-          String prettyJson = JSONSerializer.INSTANCE.toString(jsonNode);
+          JsonNode jsonNode = DataSerializer.JSON.fromString(new String(data));
+          String prettyJson = DataSerializer.JSON.toString(jsonNode);
           shell.console.println(prettyJson);
         }
       }

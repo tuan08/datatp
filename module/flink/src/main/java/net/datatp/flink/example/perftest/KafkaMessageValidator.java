@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import net.datatp.kafka.consumer.KafkaMessageConsumerConnector;
 import net.datatp.kafka.consumer.MessageConsumerHandler;
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 
 public class KafkaMessageValidator {
   private String                        zkConnect;
@@ -41,7 +41,7 @@ public class KafkaMessageValidator {
     MessageConsumerHandler handler = new MessageConsumerHandler() {
       @Override
       public void onMessage(String topic, byte[] key, byte[] message) {
-        Message mObj = JSONSerializer.INSTANCE.fromBytes(message, Message.class);
+        Message mObj = DataSerializer.JSON.fromBytes(message, Message.class);
         messageTracker.log(mObj.getPartition(), mObj.getTrackId());
         long count = messageCount.incrementAndGet();
         long deliveryTime = mObj.getEndDeliveryTime() - mObj.getStartDeliveryTime();

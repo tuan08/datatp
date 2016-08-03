@@ -9,7 +9,7 @@ import net.datatp.kafka.producer.AckKafkaWriter;
 import net.datatp.tracking.TrackingMessage;
 import net.datatp.tracking.TrackingRegistry;
 import net.datatp.tracking.TrackingWriter;
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 
 public class KafkaTrackingWriter extends TrackingWriter {
   @Parameter(names = "--zk-connect", description = "The zk connect string")
@@ -46,7 +46,7 @@ public class KafkaTrackingWriter extends TrackingWriter {
   
   @Override
   public void write(TrackingMessage message) throws Exception {
-    String json = JSONSerializer.INSTANCE.toString(message);
+    String json = DataSerializer.JSON.toString(message);
     kafkaWriter.send(topic, json, 30 * 1000);
   }
   

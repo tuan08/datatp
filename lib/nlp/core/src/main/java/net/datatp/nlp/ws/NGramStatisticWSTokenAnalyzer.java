@@ -25,8 +25,8 @@ import net.datatp.nlp.token.TokenCollection;
 import net.datatp.nlp.token.TokenException;
 import net.datatp.nlp.token.analyzer.TokenAnalyzer;
 import net.datatp.nlp.token.tag.PunctuationTag;
+import net.datatp.util.dataformat.DataReader;
 import net.datatp.util.io.IOUtil;
-import net.datatp.util.json.JSONReader;
 
 public class NGramStatisticWSTokenAnalyzer implements TokenAnalyzer {
   private NGramStatisticDictionary ngramDict = new NGramStatisticDictionary();
@@ -38,7 +38,7 @@ public class NGramStatisticWSTokenAnalyzer implements TokenAnalyzer {
   }
 
   public NGramStatisticWSTokenAnalyzer(String res) throws Exception {
-    JSONReader reader = new JSONReader(IOUtil.loadRes(res), true);
+    DataReader reader = new DataReader(IOUtil.loadRes(res), true);
     ngramDict = reader.read(NGramStatisticDictionary.class);
     reader.close();
     ngramDict.buildIndex();

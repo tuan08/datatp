@@ -24,7 +24,7 @@ import io.netty.handler.codec.http.HttpHeaders.Values;
 import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpVersion;
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 import net.datatp.util.text.StringUtil;
 /**
  * @author Tuan Nguyen
@@ -32,14 +32,14 @@ import net.datatp.util.text.StringUtil;
  */
 public class RouteHandlerGeneric implements RouteHandler {
   protected Logger logger ;
-  protected JSONSerializer jsonSerializer = JSONSerializer.INSTANCE ;
+  protected DataSerializer jsonSerializer = DataSerializer.JSON ;
   
   public void configure(Map<String, String> props) {
   }
   
-  public JSONSerializer getJSONSerializer() { return this.jsonSerializer ; }
+  public DataSerializer getJSONSerializer() { return this.jsonSerializer ; }
   
-  public void setJSONSerializer(JSONSerializer jsonSerializer) {
+  public void setJSONSerializer(DataSerializer jsonSerializer) {
     this.jsonSerializer = jsonSerializer ;
   }
   

@@ -5,8 +5,8 @@ import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import net.datatp.util.json.JSONReader;
-import net.datatp.util.json.JSONWriter;
+import net.datatp.util.dataformat.DataReader;
+import net.datatp.util.dataformat.DataWriter;
 import net.datatp.util.text.TabularFormater;
 
 /**
@@ -64,13 +64,13 @@ public class IDFDictionary {
   }
 
   public void saveAsJSON(String file) throws Exception {
-    JSONWriter writer = new JSONWriter(file) ;
+    DataWriter writer = new DataWriter(file) ;
     writer.write(this) ;
     writer.close() ;
   }
 
   static public IDFDictionary load(InputStream is) throws Exception {
-    JSONReader reader = new JSONReader(is) ;
+    DataReader reader = new DataReader(is) ;
     IDFDictionary dict = reader.read(IDFDictionary.class) ;
     reader.close() ;
     return dict ;

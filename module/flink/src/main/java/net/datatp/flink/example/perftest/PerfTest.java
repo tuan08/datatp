@@ -9,7 +9,7 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SplitStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 
 public class PerfTest {
   
@@ -117,7 +117,7 @@ public class PerfTest {
     long start = System.currentTimeMillis() ;
     PerfTestConfig config = new PerfTestConfig(args) ;
     
-    System.out.println(JSONSerializer.INSTANCE.toString(config));
+    System.out.println(DataSerializer.JSON.toString(config));
     
     KafkaMessageGenerator messageGenerator = 
       new KafkaMessageGenerator(config.kafkaConnect, config.topicIn, config.numOPartition, config.numOfMessagePerPartition);

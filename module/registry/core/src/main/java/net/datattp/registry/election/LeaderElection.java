@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 import net.datattp.registry.ErrorCode;
 import net.datattp.registry.Node;
 import net.datattp.registry.NodeCreateMode;
@@ -35,7 +35,7 @@ public class LeaderElection {
   
   public <T> LeaderElection(Registry registry, String electionPath, T info) {
     this(registry, electionPath);
-    this.info = JSONSerializer.INSTANCE.toBytes(info);
+    this.info = DataSerializer.JSON.toBytes(info);
   }
   
   public Registry getRegistry() { return this.registry ; }

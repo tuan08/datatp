@@ -64,9 +64,9 @@ public class QueryUnitTest {
     query.compile(umFactory) ;
 
     QueryDocument document = createDocument(
-        "title: this is a document title",
-        "body:  liên hệ 186 trương định quận hai bà trưng hà nội việt nam"
-        ) ;
+      "title: this is a document title",
+      "body:  liên hệ 186 trương định quận hai bà trưng hà nội việt nam"
+    ) ;
     QueryContext context = new QueryContext() ;
     query.query(context, document) ;
     context.dump() ;

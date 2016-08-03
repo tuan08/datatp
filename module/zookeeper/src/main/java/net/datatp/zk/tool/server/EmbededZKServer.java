@@ -13,8 +13,8 @@ import org.apache.zookeeper.server.quorum.QuorumPeerConfig.ConfigException;
 import org.apache.zookeeper.server.quorum.QuorumPeerMain;
 
 import net.datatp.tool.server.Server;
+import net.datatp.util.dataformat.DataSerializer;
 import net.datatp.util.io.FileUtil;
-import net.datatp.util.json.JSONSerializer;
 /**
  * @author Tuan Nguyen
  * @email tuan08@gmail.com
@@ -71,7 +71,7 @@ public class EmbededZKServer implements Server {
     if (launcher != null) {
       throw new IllegalStateException("ZookeeperLaucher should be null");
     }
-    System.out.println("zookeeper config zkProperties: \n" + JSONSerializer.INSTANCE.toString(zkProperties));
+    System.out.println("zookeeper config zkProperties: \n" + DataSerializer.JSON.toString(zkProperties));
 
     zkThread = new Thread() {
       public void run() {

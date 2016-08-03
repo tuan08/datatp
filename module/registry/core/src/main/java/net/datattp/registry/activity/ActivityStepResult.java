@@ -1,6 +1,6 @@
 package net.datattp.registry.activity;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 
 public class ActivityStepResult {
   private String type ;
@@ -19,11 +19,11 @@ public class ActivityStepResult {
   public boolean hasError() { return error != null ; }
   
   public <T> T dataAs(Class<T> type) {
-    return JSONSerializer.INSTANCE.fromBytes(data, type);
+    return DataSerializer.JSON.fromBytes(data, type);
   }
   
   public <T> void withDataAs(T object) {
     type = object.getClass().getName();
-    data = JSONSerializer.INSTANCE.toBytes(object) ;
+    data = DataSerializer.JSON.toBytes(object) ;
   }
 }

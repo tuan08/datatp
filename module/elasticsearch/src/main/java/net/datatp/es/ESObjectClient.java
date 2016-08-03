@@ -20,8 +20,8 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 
+import net.datatp.util.dataformat.DataSerializer;
 import net.datatp.util.io.IOUtil;
-import net.datatp.util.json.JSONSerializer;
 
 //TODO: reimplement with retry mechanism
 public class ESObjectClient<T> {
@@ -76,7 +76,7 @@ public class ESObjectClient<T> {
 
   public void put(T idoc, String id) throws ElasticsearchException{
     BulkRequestBuilder bulkRequest = esclient.client.prepareBulk();
-    byte[] data = JSONSerializer.INSTANCE.toBytes(idoc);
+    byte[] data = DataSerializer.JSON.toBytes(idoc);
     bulkRequest.add(
       esclient.client.prepareIndex(index, mappingType.getSimpleName(), id).setSource(data)
     );
@@ -90,7 +90,7 @@ public class ESObjectClient<T> {
     BulkRequestBuilder bulkRequest = esclient.client.prepareBulk();
     for (Map.Entry<String, T> entry : records.entrySet()) {
       T idoc = entry.getValue();
-      byte[] data = JSONSerializer.INSTANCE.toBytes(idoc);
+      byte[] data = DataSerializer.JSON.toBytes(idoc);
       bulkRequest.add(
         esclient.client.prepareIndex(index, mappingType.getSimpleName(), entry.getKey()).setSource(data)
       );
@@ -104,7 +104,7 @@ public class ESObjectClient<T> {
   public T get(String id) throws ElasticsearchException {
     GetResponse response = esclient.client.prepareGet(index, mappingType.getSimpleName(), id).execute().actionGet();
     if (!response.isExists()) return null;
-    return JSONSerializer.INSTANCE.fromBytes(response.getSourceAsBytes(), mappingType);
+    return DataSerializer.JSON.fromBytes(response.getSourceAsBytes(), mappingType);
   }
 
   public boolean remove(String id) throws ElasticsearchException {
@@ -132,7 +132,7 @@ public class ESObjectClient<T> {
   }
 
   public T getIDocument(SearchHit hit) throws ElasticsearchException {
-    return JSONSerializer.INSTANCE.fromBytes(hit.source(), mappingType);
+    return DataSerializer.JSON.fromBytes(hit.source(), mappingType);
   }
 
   public SearchResponse search(QueryBuilder xqb, boolean explain, int from, int to) throws ElasticsearchException {

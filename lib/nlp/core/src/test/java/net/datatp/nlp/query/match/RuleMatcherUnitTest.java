@@ -41,12 +41,12 @@ public class RuleMatcherUnitTest {
         "/p word{word=liên hệ} .2. word{word=chúng tôi, tôi, anh}",
         "Hãy liên hệ chúng tôi vào những ngày trong tuần", 
         true
-        );
+    );
     assertRule(
         "/p word{word=liên hệ} .0. synset{name=person}",
         "Hãy liên hệ chúng tôi vào những ngày trong tuần", 
         true
-        );
+    );
     assertRule(
         "/p synset{name=lienhe} .2. synset{name=person}",
         "Hãy liên hệ với tôi vào những ngày trong tuần", 

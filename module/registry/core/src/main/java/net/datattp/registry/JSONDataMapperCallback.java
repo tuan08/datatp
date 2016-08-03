@@ -1,6 +1,6 @@
 package net.datattp.registry;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 
 public class JSONDataMapperCallback<T> implements DataMapperCallback<T> {
   final static public JSONDataMapperCallback<?> INSTANCE = new JSONDataMapperCallback<>();
@@ -10,6 +10,6 @@ public class JSONDataMapperCallback<T> implements DataMapperCallback<T> {
   
   @Override
   public T map(String path, byte[] data, Class<T> type) {
-    return JSONSerializer.INSTANCE.fromBytes(data, type);
+    return DataSerializer.JSON.fromBytes(data, type);
   }
 }

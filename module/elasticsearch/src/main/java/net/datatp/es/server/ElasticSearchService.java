@@ -10,8 +10,7 @@ import org.elasticsearch.node.NodeBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 
 /**
  * @author Tuan Nguyen
@@ -34,13 +33,13 @@ public class ElasticSearchService {
     properties.put("path.data",    "./build/elasticsearch");
     logger.info(
         "ElasticSearch default properties:\n" + 
-        JSONSerializer.INSTANCE.toString(properties)
+        DataSerializer.JSON.toString(properties)
     );
     if(esProperties != null) {
       properties.putAll(esProperties);
       logger.info(
           "ElasticSearch overrided properties:\n" + 
-          JSONSerializer.INSTANCE.toString(properties)
+          DataSerializer.JSON.toString(properties)
       );
     }
     

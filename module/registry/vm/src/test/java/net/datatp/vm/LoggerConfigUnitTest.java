@@ -5,7 +5,7 @@ import java.util.Map;
 import org.junit.Test;
 import org.slf4j.Logger;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 import net.datatp.util.log.LoggerFactory;
 
 public class LoggerConfigUnitTest {
@@ -17,7 +17,7 @@ public class LoggerConfigUnitTest {
     conf.getFileAppender().setFilePath("build/test-log.log");
     conf.getConsoleAppender().setEnable(true);
     Map<String, String> log4jProps = conf.getLog4jConfiguration() ;
-    System.out.println(JSONSerializer.INSTANCE.toString(log4jProps));
+    System.out.println(DataSerializer.JSON.toString(log4jProps));
     
     LoggerFactory lFactory = new LoggerFactory("[TEST] ");
     LoggerFactory.log4jConfigure(log4jProps);

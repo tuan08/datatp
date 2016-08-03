@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 
 public interface MessageGenerator {
   
@@ -24,7 +24,7 @@ public interface MessageGenerator {
     public byte[] nextMessage(String partition, int messageSize) {
       AtomicInteger idTracker = getIdTracker(partition) ;
       Message message = new Message(partition, idTracker.getAndIncrement(), messageSize) ;
-      return JSONSerializer.INSTANCE.toBytes(message) ;
+      return DataSerializer.JSON.toBytes(message) ;
     }
   
     @Override

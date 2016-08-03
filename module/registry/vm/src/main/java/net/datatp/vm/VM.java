@@ -14,9 +14,9 @@ import net.datatp.module.AppModule;
 import net.datatp.module.ServiceModuleContainer;
 import net.datatp.module.VMModule;
 import net.datatp.sys.RuntimeEnv;
+import net.datatp.util.dataformat.DataSerializer;
 import net.datatp.util.io.IOUtil;
 import net.datatp.util.io.NetworkUtil;
-import net.datatp.util.json.JSONSerializer;
 import net.datatp.util.log.LoggerFactory;
 import net.datatp.vm.VMApp.TerminateEvent;
 import net.datatp.vm.command.VMCommandWatcher;
@@ -45,7 +45,7 @@ public class VM {
       vmDescriptor = new VMDescriptor(vmConfig);
       initContainer(vmDescriptor, vmConfig);
       logger.info("Create VM with VMConfig:");
-      logger.info(JSONSerializer.INSTANCE.toString(vmConfig));
+      logger.info(DataSerializer.JSON.toString(vmConfig));
       logger.info("Start self registration with the registry");
       
       Registry registry = vmModuleContainer.getInstance(Registry.class);

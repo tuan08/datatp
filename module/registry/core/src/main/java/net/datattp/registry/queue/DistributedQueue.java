@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 import net.datattp.registry.NodeCreateMode;
 import net.datattp.registry.Registry;
 import net.datattp.registry.RegistryException;
@@ -60,12 +60,12 @@ public class DistributedQueue {
   }
   
   public <T> void offerAs(Transaction transaction, T object) throws RegistryException {
-    byte[] data = JSONSerializer.INSTANCE.toBytes(object);
+    byte[] data = DataSerializer.JSON.toBytes(object);
     transaction.create(path + "/", data, NodeCreateMode.PERSISTENT_SEQUENTIAL);
   }
   
   public <T> void offerAs(T object) throws RegistryException {
-    byte[] data = JSONSerializer.INSTANCE.toBytes(object);
+    byte[] data = DataSerializer.JSON.toBytes(object);
     offer(data);
   }
 
@@ -82,7 +82,7 @@ public class DistributedQueue {
 
   public <T> T removeAs(Class<T> type) throws RegistryException, Exception  {
     byte[] data = remove();
-    return JSONSerializer.INSTANCE.fromBytes(data, type);
+    return DataSerializer.JSON.fromBytes(data, type);
   }
   
   /**
@@ -100,7 +100,7 @@ public class DistributedQueue {
   
   public <T> T pollAs(Class<T> type) throws RegistryException {
     byte[] data = poll();
-    return JSONSerializer.INSTANCE.fromBytes(data, type);
+    return DataSerializer.JSON.fromBytes(data, type);
   }
   
   /**
@@ -115,7 +115,7 @@ public class DistributedQueue {
   public <T> T elementAs(Class<T> type) throws RegistryException {
     byte[] data = element();
     if(data == null || data.length == 0) return null;
-    return JSONSerializer.INSTANCE.fromBytes(data, type);
+    return DataSerializer.JSON.fromBytes(data, type);
   }
   
   /**
@@ -184,13 +184,13 @@ public class DistributedQueue {
   
   public <T> T takeAs(Class<T> type) throws RegistryException, InterruptedException, ShutdownException {
     byte[] data = take() ;
-    return JSONSerializer.INSTANCE.fromBytes(data, type);
+    return DataSerializer.JSON.fromBytes(data, type);
   }
   
   public <T> T takeAs(Class<T> type, long timeout) throws RegistryException, InterruptedException, ShutdownException {
     byte[] data = take(timeout) ;
     if(data == null) return null ;
-    return JSONSerializer.INSTANCE.fromBytes(data, type);
+    return DataSerializer.JSON.fromBytes(data, type);
   }
   
   public void shutdown() {

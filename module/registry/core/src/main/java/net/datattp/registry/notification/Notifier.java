@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import net.datatp.util.ExceptionUtil;
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 import net.datattp.registry.DataMapperCallback;
 import net.datattp.registry.Node;
 import net.datattp.registry.NodeCreateMode;
@@ -22,7 +22,7 @@ public class Notifier {
     public NotificationEvent map(String path, byte[] data, Class<NotificationEvent> type) {
       int idx = path.lastIndexOf('-') ;
       String seqId = path.substring(idx + 1, path.length());
-      NotificationEvent event = JSONSerializer.INSTANCE.fromBytes(data, type);
+      NotificationEvent event = DataSerializer.JSON.fromBytes(data, type);
       event.setSeqId(seqId);
       return event;
     }

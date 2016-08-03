@@ -22,7 +22,7 @@ import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpVersion;
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 /**
  * @author Tuan Nguyen
  * @email  tuan08@gmail.com
@@ -34,7 +34,7 @@ public class AsyncHttpClient {
   private EventLoopGroup group ;
   private ResponseHandler responseHandler ;
   private boolean connected = false ;
-  private JSONSerializer jsonSerializer = JSONSerializer.INSTANCE ;
+  private DataSerializer jsonSerializer = DataSerializer.JSON ;
   private HttpClientHandler httpClientHandler;
   
   public AsyncHttpClient(String host, int port, ResponseHandler handler) throws Exception {
@@ -48,7 +48,7 @@ public class AsyncHttpClient {
     if(connect) connect() ;
   }
   
-  public void setJSONSerializer(JSONSerializer serializer) {
+  public void setJSONSerializer(DataSerializer serializer) {
     jsonSerializer = serializer ;
   }
   

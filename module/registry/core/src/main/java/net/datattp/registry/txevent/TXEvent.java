@@ -2,7 +2,7 @@ package net.datattp.registry.txevent;
 
 import java.util.UUID;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 
 public class TXEvent {
   private String    id ;
@@ -22,11 +22,11 @@ public class TXEvent {
   }
 
   public <T> TXEvent(String name, T obj) {
-    this(name, System.currentTimeMillis() + 60000, JSONSerializer.INSTANCE.toBytes(obj));
+    this(name, System.currentTimeMillis() + 60000, DataSerializer.JSON.toBytes(obj));
   }
   
   public <T> TXEvent(String name, long expiredTime, T obj) {
-    this(name, expiredTime,JSONSerializer.INSTANCE.toBytes(obj));
+    this(name, expiredTime,DataSerializer.JSON.toBytes(obj));
   }
 
   public String getId() { return id; }
@@ -46,6 +46,6 @@ public class TXEvent {
   }
   
   public <T> T getDataAs(Class<T> type) {
-    return JSONSerializer.INSTANCE.fromBytes(data, type);
+    return DataSerializer.JSON.fromBytes(data, type);
   }
 }

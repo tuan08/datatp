@@ -1,24 +1,17 @@
 package net.datatp.nlp.query;
 
-import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import net.datatp.nlp.query.match.RuleMatch;
 import net.datatp.util.text.StringUtil;
 
-public class QueryContext implements Serializable {
-  private static final long serialVersionUID = 1L;
-  static Map<String, String[]> EMPTY = Collections.unmodifiableMap(new HashMap<String, String[]>()) ;
-
-  private boolean complete = false ;
-  private boolean isContinue = false ;
-  private RuleMatch[] ruleMatch ;
-  private HashSet<String> tags = new HashSet<String>() ;
-  private boolean debug = false ;
+public class QueryContext {
+  private boolean              complete         = false;
+  private boolean              isContinue       = false;
+  private RuleMatch[]          ruleMatch;
+  private HashSet<String>      tags             = new HashSet<String>();
+  private boolean              debug            = false;
 
   public QueryContext() {}
 

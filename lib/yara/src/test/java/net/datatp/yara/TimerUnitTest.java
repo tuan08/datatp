@@ -7,8 +7,8 @@ import org.junit.Test;
 
 import com.codahale.metrics.Snapshot;
 
+import net.datatp.util.dataformat.DataSerializer;
 import net.datatp.util.io.IOUtil;
-import net.datatp.util.json.JSONSerializer;
 
 public class TimerUnitTest {
   @Test
@@ -27,8 +27,8 @@ public class TimerUnitTest {
     }
     byte[] data = IOUtil.serialize(timer) ;
     Timer serialization = (Timer)IOUtil.deserialize(data) ;
-    String json = JSONSerializer.INSTANCE.toString(timer) ;
-    //Timer  jsonSerialization = JSONSerializer.INSTANCE.fromString(json, Timer.class) ;
+    String json = DataSerializer.JSON.toString(timer) ;
+    //Timer  jsonSerialization = YamlSerializer.INSTANCE.fromString(json, Timer.class) ;
     TimerPrinter printer = new TimerPrinter() ;
     printer.print("NeverwinterDP", timer);
     printer.print("Serialization", serialization);

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import net.datatp.nlp.util.StringPool;
 import net.datatp.util.MD5;
+import net.datatp.util.text.StringUtil;
 
 /**
  * $Author: Tuan Nguyen$ 
@@ -48,7 +49,11 @@ public class Meaning extends HashMap<String, Object> {
       return null ;
     }
   }
-  public void     setVariant(String[] variant) { put(VARIANT, variant) ; }
+  public void setVariant(String[] variant) { put(VARIANT, variant) ; }
+  public void setVariants(String variants) { 
+    String[] variant = StringUtil.splitAsArray(variants, ',');
+    put(VARIANT, variant) ; 
+  }
 
   public String   getTopic() { return (String) get(TOPIC) ; }
   public void     setTopic(String topic) { 

@@ -9,7 +9,7 @@ import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 import net.datattp.registry.ErrorCode;
 import net.datattp.registry.MultiDataGet;
 import net.datattp.registry.Node;
@@ -122,7 +122,7 @@ public class ZookeeperMultiDataGet<T> implements MultiDataGet<T>, AsyncCallback.
     String path = registry.path(realPath);
     DataGet<T> dataGet = results.get(path);
     if (rc == KeeperException.Code.OK.intValue()) {
-      dataGet.setData(JSONSerializer.INSTANCE.fromBytes(data, type));
+      dataGet.setData(DataSerializer.JSON.fromBytes(data, type));
     } else {
       processErrorCount++;
       dataGet.setErrorCode(ErrorCode.Unknown);

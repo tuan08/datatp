@@ -49,9 +49,9 @@ public class OpinionQueryUnitTest {
     query.compile(resFactory) ;
 
     QueryDocument document = createDocument(
-        "title: this is a document title",
-        "body:  chiếc iphone này đẹp"
-        ) ;
+      "title: this is a document title",
+      "body:  chiếc iphone này đẹp"
+    );
     QueryContext context = new QueryContext() ;
     query.query(context, document) ;
     context.dump() ;

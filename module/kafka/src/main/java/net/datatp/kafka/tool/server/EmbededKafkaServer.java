@@ -7,7 +7,7 @@ import kafka.server.KafkaConfig;
 import kafka.server.KafkaServer;
 import kafka.utils.Time;
 import net.datatp.tool.server.Server;
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 /**
  * @author Tuan Nguyen
  * @email tuan08@gmail.com
@@ -73,7 +73,7 @@ public class EmbededKafkaServer implements Server {
     properties.setProperty("log.dirs", logDir);
 
     if(verbose) {
-      System.out.println("kafka properties:\n" + JSONSerializer.INSTANCE.toString(properties));
+      System.out.println("kafka properties:\n" + DataSerializer.JSON.toString(properties));
     }
     thread = new Thread(kafkaGroup, "KafkaLauncher") {
       public void run() {

@@ -2,14 +2,15 @@ package net.datatp.netty.rpc;
 
 import org.junit.Test;
 
+import com.fasterxml.jackson.databind.MappingJsonFactory;
 import com.google.protobuf.ByteString;
 import com.hubspot.jackson.datatype.protobuf.ProtobufModule;
 
 import net.datatp.netty.rpc.protocol.Request;
 import net.datatp.netty.rpc.protocol.Response;
 import net.datatp.netty.rpc.protocol.WirePayload;
+import net.datatp.util.dataformat.DataSerializer;
 import net.datatp.util.io.IOUtil;
-import net.datatp.util.json.JSONSerializer;
 import net.datatp.yara.MetricPrinter;
 import net.datatp.yara.MetricRegistry;
 import net.datatp.yara.Timer;
@@ -17,7 +18,7 @@ import net.datatp.yara.Timer;
 public class SerializationPerformanceTest {
   @Test
   public void testJacksonSerialization() throws Exception {
-    JSONSerializer serializer = new JSONSerializer(new ProtobufModule()) ;
+    DataSerializer serializer = new DataSerializer(new MappingJsonFactory(), new ProtobufModule()) ;
     WirePayload payload = createWirePayload() ;
     System.out.println(serializer.toString(payload));
   }

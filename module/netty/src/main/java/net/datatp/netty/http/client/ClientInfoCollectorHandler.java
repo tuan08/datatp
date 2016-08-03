@@ -10,7 +10,7 @@ import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.QueryStringDecoder;
 import net.datatp.netty.http.rest.RestRouteHandler;
 import net.datatp.util.ExceptionUtil;
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 
 public class ClientInfoCollectorHandler extends RestRouteHandler {
   
@@ -21,7 +21,7 @@ public class ClientInfoCollectorHandler extends RestRouteHandler {
     QueryStringDecoder reqDecoder = new QueryStringDecoder(request.getUri()) ;
     List<String> values = reqDecoder.parameters().get("jsonp");
     String jsonp = values.get(0);
-    ClientInfo clientInfo = JSONSerializer.INSTANCE.fromString(jsonp, ClientInfo.class);
+    ClientInfo clientInfo = DataSerializer.JSON.fromString(jsonp, ClientInfo.class);
     clientInfo.user.ipAddress = getIpAddress(ctx);
     return onClientInfo(clientInfo, jsonp.length());
   }
@@ -31,7 +31,7 @@ public class ClientInfoCollectorHandler extends RestRouteHandler {
       ByteBuf bBuf = request.content();
       byte[] bytes = new byte[bBuf.readableBytes()];
       bBuf.readBytes(bytes);
-      ClientInfo clientInfo = JSONSerializer.INSTANCE.fromBytes(bytes, ClientInfo.class);
+      ClientInfo clientInfo = DataSerializer.JSON.fromBytes(bytes, ClientInfo.class);
       clientInfo.user.ipAddress = getIpAddress(ctx);
       return onClientInfo(clientInfo, bytes.length);
     } catch(Throwable t) {

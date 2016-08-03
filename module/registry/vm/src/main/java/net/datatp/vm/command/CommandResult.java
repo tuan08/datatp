@@ -3,7 +3,7 @@ package net.datatp.vm.command;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 
 public class CommandResult<T> {
   private T result ;
@@ -12,10 +12,10 @@ public class CommandResult<T> {
   
   public <V> V getResultAs(Class<V> type) { return (V) result; }
   
-  @JsonDeserialize(using=JSONSerializer.GenericTypeDeserializer.class)
+  @JsonDeserialize(using=DataSerializer.GenericTypeDeserializer.class)
   public T getResult() { return result; }
   
-  @JsonSerialize(using=JSONSerializer.GenericTypeSerializer.class)
+  @JsonSerialize(using=DataSerializer.GenericTypeSerializer.class)
   public void setResult(T result) { this.result = result; }
 
   public boolean isDiscardResult() { return discardResult; }

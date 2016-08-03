@@ -1,34 +1,9 @@
+{ "name" : "Nguyễn Văn Săng", "type" : [ "person" ], "otype" : "entity" } 
+{ "name" : "Nguyễn Đình Quân", "type" : [ "person" ], "otype" : "entity" } 
+{ "name" : "Trần Hưng Đạo", "type" : [ "person" ], "otype" : "entity" } 
+{ "name" : "Phạm Văn Nghị", "type" : [ "person" ], "otype" : "entity" } 
+{ "name" : "Đoàn Nguyên Phó", "type" : [ "person" ], "otype" : "entity" } 
 {
-  "name" : "Nguyễn Văn Săng",
-  "type" : [
-    "person"
-  ],
-  "otype" : "entity"
-} {
-  "name" : "Nguyễn Đình Quân",
-  "type" : [
-    "person"
-  ],
-  "otype" : "entity"
-} {
-  "name" : "Trần Hưng Đạo",
-  "type" : [
-    "person"
-  ],
-  "otype" : "entity"
-} {
-  "name" : "Phạm Văn Nghị",
-  "type" : [
-    "person"
-  ],
-  "otype" : "entity"
-} {
-  "name" : "Đoàn Nguyên Phó",
-  "type" : [
-    "person"
-  ],
-  "otype" : "entity"
-} {
   "name" : "Hoàng Đạo Thúy",
   "type" : [
     "person"

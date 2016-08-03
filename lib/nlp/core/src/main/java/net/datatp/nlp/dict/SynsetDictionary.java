@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.datatp.nlp.util.StringPool;
+import net.datatp.util.dataformat.DataReader;
 import net.datatp.util.io.IOUtil;
-import net.datatp.util.json.JSONReader;
 import net.datatp.util.text.StringUtil;
 
 /**
@@ -28,7 +28,7 @@ public class SynsetDictionary {
   public SynsetDictionary(String[] res) throws Exception { 
     for(String sel : res) {
       InputStream is = IOUtil.loadRes(sel) ;
-      JSONReader reader = new JSONReader(is) ;
+      DataReader reader = new DataReader(is) ;
       Meaning meaning = null ;
       while((meaning = reader.read(Meaning.class)) != null) {
         add(meaning) ;

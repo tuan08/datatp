@@ -17,7 +17,7 @@ import org.apache.kafka.common.TopicPartition;
 import kafka.cluster.BrokerEndPoint;
 import kafka.javaapi.PartitionMetadata;
 import net.datatp.kafka.KafkaTool;
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 
 public class KafkaPartitionReader {
   final static public int DEFAULT_FETCH_SIZE = 512 * 1024;
@@ -140,7 +140,7 @@ public class KafkaPartitionReader {
   public <T> T nextAs(Class<T> type, long maxWait) throws Exception {
     byte[] data = next(maxWait);
     if(data == null) return null;
-    return JSONSerializer.INSTANCE.fromBytes(data, type);
+    return DataSerializer.JSON.fromBytes(data, type);
   }
 
   public List<ConsumerRecord<String, byte[]>> fetch(int fetchSize, int maxRead, long maxWait) throws Exception {

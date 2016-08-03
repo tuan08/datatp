@@ -64,9 +64,7 @@ public class TreeWordMatcher extends UnitMatcher {
 
   public UnitMatch matches(IToken[] token, int pos) {
     TreeWordMatcher twm = trees.get(token[pos].getNormalizeForm()) ;
-    if(twm == null) {
-      return null ;
-    } 
+    if(twm == null) return null ;
 
     UnitMatch unitMatch = null ;
     if(pos + 1 < token.length) {

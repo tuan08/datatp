@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 import net.datatp.util.text.TabularFormater;
 import net.datattp.registry.Node;
 import net.datattp.registry.Registry;
@@ -232,7 +232,7 @@ abstract public class WaitingNodeEventListener {
     public String toString() {
       if(description != null) return description ;
       StringBuilder b = new StringBuilder() ; 
-      b.append("Waiting for the data on path = " + path + " data = " + JSONSerializer.INSTANCE.toString(expectData));
+      b.append("Waiting for the data on path = " + path + " data = " + DataSerializer.JSON.toString(expectData));
       return b.toString();
     }
   }

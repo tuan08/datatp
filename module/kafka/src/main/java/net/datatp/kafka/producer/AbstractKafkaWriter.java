@@ -5,7 +5,8 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.kafka.clients.producer.Callback;
-import net.datatp.util.json.JSONSerializer;
+
+import net.datatp.util.dataformat.DataSerializer;
 
 /**
  * @author Tuan Nguyen
@@ -50,13 +51,13 @@ abstract public class AbstractKafkaWriter implements KafkaWriter {
   @Override
   public <T> void send(String topic, T obj, long timeout) throws Exception {
     byte[] keyBytes     = nextKey(-1).getBytes(UTF8);
-    byte[] messageBytes = JSONSerializer.INSTANCE.toBytes(obj);
+    byte[] messageBytes = DataSerializer.JSON.toBytes(obj);
     send(topic, -1, keyBytes, messageBytes, null, timeout);
   }
   
   public <T> void send(String topic, String key, T obj, long timeout) throws Exception {
     byte[] keyBytes     = key.getBytes(UTF8);
-    byte[] messageBytes = JSONSerializer.INSTANCE.toBytes(obj);
+    byte[] messageBytes = DataSerializer.JSON.toBytes(obj);
     send(topic, -1, keyBytes, messageBytes, null, timeout);
   }
   

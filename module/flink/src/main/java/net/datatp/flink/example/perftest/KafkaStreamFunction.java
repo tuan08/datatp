@@ -9,7 +9,7 @@ import org.apache.flink.streaming.api.functions.source.RichSourceFunction;
 
 import net.datatp.kafka.consumer.KafkaMessageConsumerConnector;
 import net.datatp.kafka.consumer.MessageConsumerHandler;
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 
 public class KafkaStreamFunction<T> extends RichSourceFunction<T> implements ResultTypeQueryable<T> {
   private static final long serialVersionUID = 1L;
@@ -40,7 +40,7 @@ public class KafkaStreamFunction<T> extends RichSourceFunction<T> implements Res
     MessageConsumerHandler handler = new MessageConsumerHandler() {
       @Override
       public void onMessage(String topic, byte[] key, byte[] message) {
-        T obj = JSONSerializer.INSTANCE.fromBytes(message, type);
+        T obj = DataSerializer.JSON.fromBytes(message, type);
         beforeCollect(obj);
         ctx.collect(obj);
       }

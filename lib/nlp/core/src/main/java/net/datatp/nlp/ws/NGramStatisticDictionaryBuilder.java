@@ -26,9 +26,9 @@ import net.datatp.nlp.token.TokenCollection;
 import net.datatp.nlp.util.CharacterSet;
 import net.datatp.nlp.wtag.WTagDocumentReader;
 import net.datatp.nlp.wtag.WTagDocumentSet;
+import net.datatp.util.dataformat.DataReader;
+import net.datatp.util.dataformat.DataWriter;
 import net.datatp.util.io.IOUtil;
-import net.datatp.util.json.JSONReader;
-import net.datatp.util.json.JSONWriter;
 import net.datatp.util.stat.Statistics;
 
 public class NGramStatisticDictionaryBuilder {
@@ -78,7 +78,7 @@ public class NGramStatisticDictionaryBuilder {
 
     for(String selRes : Dictionary.DICT_RES) {
       InputStream is = IOUtil.loadRes(selRes) ;
-      JSONReader reader = new JSONReader(is) ;
+      DataReader reader = new DataReader(is) ;
       Meaning meaning = null ;
       while((meaning = reader.read(Meaning.class)) != null) {
         String name = meaning.getName().toLowerCase() ;
@@ -121,7 +121,7 @@ public class NGramStatisticDictionaryBuilder {
 
     NGramStatisticDictionary gram = new NGramStatisticDictionary(unigram, bigram);
 
-    JSONWriter writer = new JSONWriter("target/gram.json");
+    DataWriter writer = new DataWriter("target/gram.json");
     writer.write(gram);
     writer.close();
   }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.OpResult;
 
-import net.datatp.util.json.JSONSerializer;
+import net.datatp.util.dataformat.DataSerializer;
 import net.datattp.registry.Node;
 import net.datattp.registry.NodeCreateMode;
 import net.datattp.registry.PathFilter;
@@ -33,7 +33,7 @@ public class TransactionImpl implements Transaction {
   public <T> Transaction create(String path, T obj, NodeCreateMode mode) {
     byte[] data = null; ;
     if(obj != null) {
-      data = JSONSerializer.INSTANCE.toBytes(obj);
+      data = DataSerializer.JSON.toBytes(obj);
     } else {
       data = new byte[0] ;
     }
@@ -59,7 +59,7 @@ public class TransactionImpl implements Transaction {
   
   @Override
   public <T> Transaction createChild(Node node, String name, T obj, NodeCreateMode mode) {
-    return createChild(node, name, JSONSerializer.INSTANCE.toBytes(obj), mode);
+    return createChild(node, name, DataSerializer.JSON.toBytes(obj), mode);
   }
   
   @Override
@@ -73,7 +73,7 @@ public class TransactionImpl implements Transaction {
 
   @Override
   public <T> Transaction createDescendant(Node node, String relativePath, T obj , NodeCreateMode mode) {
-    return createDescendant(node, relativePath, JSONSerializer.INSTANCE.toBytes(obj), mode);
+    return createDescendant(node, relativePath, DataSerializer.JSON.toBytes(obj), mode);
   }
   
   @Override
@@ -125,7 +125,7 @@ public class TransactionImpl implements Transaction {
   
   @Override
   public <T> Transaction setData(final String path, T obj) {
-    zkTransaction.setData(registry.realPath(path), JSONSerializer.INSTANCE.toBytes(obj), -1);
+    zkTransaction.setData(registry.realPath(path), DataSerializer.JSON.toBytes(obj), -1);
     opCount++;
     return this ;
   }

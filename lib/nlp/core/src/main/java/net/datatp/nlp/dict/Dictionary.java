@@ -10,8 +10,8 @@ import java.util.Map;
 import net.datatp.nlp.token.tag.MeaningTag;
 import net.datatp.nlp.token.tag.PosTag;
 import net.datatp.nlp.util.StringPool;
+import net.datatp.util.dataformat.DataReader;
 import net.datatp.util.io.IOUtil;
-import net.datatp.util.json.JSONReader;
 import net.datatp.util.text.StringUtil;
 import net.datatp.util.text.matcher.StringExpMatcher;
 
@@ -33,7 +33,7 @@ public class Dictionary {
   public Dictionary(String[] res) throws Exception { 
     for(String sel : res) {
       InputStream is = IOUtil.loadRes(sel) ;
-      JSONReader reader = new JSONReader(is) ;
+      DataReader reader = new DataReader(is) ;
       Meaning meaning = null ;
       while((meaning = reader.read(Meaning.class)) != null) {
         add(meaning) ;
