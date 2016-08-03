@@ -5,8 +5,8 @@ import java.util.List;
 import net.datatp.crawler.fetcher.FetchContext;
 import net.datatp.crawler.site.SiteContext;
 import net.datatp.crawler.site.SiteExtractor;
-import net.datatp.xhtml.extract.WDataExtract;
 import net.datatp.xhtml.extract.WDataExtractContext;
+import net.datatp.xhtml.extract.entity.ExtractEntity;
 /**
  * $Author: Tuan Nguyen$ 
  **/
@@ -15,10 +15,10 @@ public class FetchContentExtractorPlugin implements FetchProcessorPlugin {
   public void process(FetchContext fetchCtx, WDataExtractContext wDataCtx) {
     SiteContext siteContext = fetchCtx.getURLContext().getSiteContext();
     SiteExtractor siteExtractor = siteContext.getSiteExtractor();
-    List<WDataExtract> extracts = siteExtractor.extract(wDataCtx);
+    List<ExtractEntity> extracts = siteExtractor.extract(wDataCtx);
     if(extracts == null) return;
-    for(WDataExtract sel : extracts) {
-      
+    for(ExtractEntity sel : extracts) {
+      fetchCtx.getXDocMapper().addEntity(sel.getType(), sel);
     }
   }
 }

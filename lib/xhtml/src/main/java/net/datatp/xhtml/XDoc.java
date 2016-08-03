@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class XDoc implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -37,9 +38,11 @@ public class XDoc implements Serializable {
     attrs.put(name, val);
   }
   
+  @JsonProperty("attr")
   public Map<String, String> getAttrs() { return attrs; }
   public void setAttrs(Map<String, String> attrs) { this.attrs = attrs; }
   
+  @JsonProperty("entity")
   public Map<String, Serializable> getEntities() { return entities;  }
   public void setEntities(Map<String, Serializable> entities) { this.entities = entities; }
   

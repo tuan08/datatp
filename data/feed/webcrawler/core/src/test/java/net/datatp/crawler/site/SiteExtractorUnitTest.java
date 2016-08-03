@@ -6,8 +6,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import net.datatp.xhtml.WData;
-import net.datatp.xhtml.extract.WDataExtract;
 import net.datatp.xhtml.extract.WDataExtractContext;
+import net.datatp.xhtml.extract.entity.ExtractEntity;
 import net.datatp.xhtml.util.WDataHttpFetcher;
 
 public class SiteExtractorUnitTest {
@@ -33,7 +33,7 @@ public class SiteExtractorUnitTest {
         "Những quy định nổi bật có hiệu lực từ 1/8", 
         "http://vnexpress.net/tin-tuc/thoi-su/giao-thong/nhung-quy-dinh-noi-bat-co-hieu-luc-tu-1-8-3445254.html");
     WDataExtractContext wdataContext = new WDataExtractContext(wdata);
-    List<WDataExtract> extracts  = vnexpressExtractor.extract(wdataContext);
-    System.out.println(WDataExtract.format(extracts));
+    List<ExtractEntity> extracts  = vnexpressExtractor.extract(wdataContext);
+    System.out.println(ExtractEntity.toString(extracts));
   }
 }

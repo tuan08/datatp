@@ -3,7 +3,6 @@ package net.datatp.xhtml.extract;
 import java.util.List;
 
 import net.datatp.xhtml.extract.entity.ContentEntity;
-import net.datatp.xhtml.extract.entity.ExtractEntity;
 import net.datatp.xhtml.xpath.XPath;
 import net.datatp.xhtml.xpath.XPathRepetion;
 import net.datatp.xhtml.xpath.XPathRepetions;

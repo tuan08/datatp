@@ -1,8 +1,13 @@
 package net.datatp.xhtml.extract.entity;
 
+import java.io.Serializable;
+import java.util.List;
+
 import net.datatp.util.text.StringUtil;
 
-public class ExtractEntity {
+abstract public class ExtractEntity implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   private String   type;
   private String[] tag;
   
@@ -29,4 +34,13 @@ public class ExtractEntity {
   public String[] getTags() { return tag ; }
   public void     setTags(String[] tag) { this.tag = tag ; }
 
+  abstract String getFormattedText() ;
+  
+  static public String toString(List<ExtractEntity> holder) {
+    StringBuilder b = new StringBuilder();
+    for(ExtractEntity sel : holder) {
+      b.append(sel.getFormattedText()).append("\n");
+    }
+    return b.toString();
+  }
 }

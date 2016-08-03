@@ -1,5 +1,6 @@
 package net.datatp.crawler;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import net.datatp.xhtml.XDoc;
@@ -32,4 +33,8 @@ public class XDocMapper {
   
   public String getErrorContent() { return xdoc.attr("error.content") ; }
   public void   setErrorContent(String content) { xdoc.attr("errorContent", content) ; }
+  
+  public void addEntity(String name, Serializable obj) {
+    xdoc.addEntity(name, obj);
+  }
 }

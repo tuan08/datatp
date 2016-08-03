@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.datatp.xhtml.WData;
-import net.datatp.xhtml.extract.WDataExtract;
 import net.datatp.xhtml.extract.WDataExtractContext;
 import net.datatp.xhtml.extract.WDataExtractors;
+import net.datatp.xhtml.extract.entity.ExtractEntity;
 
 public class SiteExtractor {
   private PageExtractor[] autoPageExtractors;
@@ -35,20 +35,20 @@ public class SiteExtractor {
     xpathPageExtractors = xpathHolder.toArray(new PageExtractor[xpathHolder.size()]);
   }
   
-  public List<WDataExtract> extract(WDataExtractContext context) {
+  public List<ExtractEntity> extract(WDataExtractContext context) {
     WData wdata = context.getWdata();
-    List<WDataExtract> extractResults = null ;
+    List<ExtractEntity> extractResults = null ;
     if(xpathPageExtractors.length > 0) {
       for(PageExtractor pExtractor : xpathPageExtractors) {
         if(pExtractor.matches(wdata)) {
-          extractResults = pExtractor.extract(context);
+          extractResults = pExtractor.extractEntity(context);
         }
       }
     }
     if(extractResults == null && autoPageExtractors.length > 0) {
       for(PageExtractor pExtractor : autoPageExtractors) {
         if(pExtractor.matches(wdata)) {
-          extractResults = pExtractor.extract(context);
+          extractResults = pExtractor.extractEntity(context);
         }
       }
     }
@@ -68,8 +68,8 @@ public class SiteExtractor {
       return pageMatcher.matches(wdata);
     }
     
-    public List<WDataExtract> extract(WDataExtractContext context) {
-      return extractor.extract(context);
+    public List<ExtractEntity> extractEntity(WDataExtractContext context) {
+      return extractor.extractEntity(context);
     }
   }
   
