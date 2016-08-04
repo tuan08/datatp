@@ -12,7 +12,7 @@ import net.datatp.util.text.StringUtil;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class TimeTokenAnalyzer implements TokenAnalyzer {
+public class TimeTokenAnalyzer extends TokenAnalyzer {
   public IToken[] analyze(IToken[] token) throws TokenException {
     for(int i = 0; i < token.length; i++) {
       if(token[i].hasTagType(WordTag.LETTER)) ;

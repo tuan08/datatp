@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import net.datatp.nlp.NLPResource;
-import net.datatp.nlp.dict.Dictionary;
+import net.datatp.nlp.dict.LexiconDictionary;
 import net.datatp.nlp.query.match.MatcherResourceFactory;
 import net.datatp.nlp.token.WordTokenizerVerifier;
 import net.datatp.nlp.token.analyzer.CommonTokenAnalyzer;
@@ -17,7 +17,7 @@ public class HintEntityChunkerUnitTest {
 
   @Before
   public void setup() throws Exception {
-    Dictionary dict = NLPResource.getInstance().getDictionary(Dictionary.DICT_RES) ;
+    LexiconDictionary dict = NLPResource.getInstance().getLexiconDictionary(LexiconDictionary.VI_LEXICON_RES) ;
     TokenAnalyzer[] wsanalyzer = {
         PunctuationTokenAnalyzer.INSTANCE, new CommonTokenAnalyzer(), 
         new WordTreeMatchingAnalyzer(dict),
@@ -28,13 +28,8 @@ public class HintEntityChunkerUnitTest {
 
   @Test
   public void testCase() throws Exception {
-    verify(
-        "ông Trần Hưng Đạo", 
-        "ông", "Trần Hưng Đạo{person}") ;
-
-    verify(
-        "phố Trần Hưng Đạo", 
-        "phố", "Trần Hưng Đạo{location}") ;
+    verify("ông Trần Hưng Đạo", "ông", "Trần Hưng Đạo{person}") ;
+    verify("phố Trần Hưng Đạo", "phố", "Trần Hưng Đạo{location}") ;
   }
 
   private void verify(String text, String ... expect) throws Exception {

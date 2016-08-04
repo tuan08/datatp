@@ -29,7 +29,7 @@ public class PhoneNumberChunker extends QueryChunker {
         "/ regex{\\d{2,4}} .0. regex{\\d{2,4}} .0. regex{\\d{2,4}}" , 
         // Common format
         "/ regex{(\\d{1,4}[.\\-]?){2,5}}"
-        ) ;
+    );
   }
 
   protected void onMatch(List<IToken> holder, RuleMatcher rmatcher, IToken[] token, int from, int to) {

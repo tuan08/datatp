@@ -11,7 +11,7 @@ import net.datatp.util.text.StringUtil;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class DateTokenAnalyzer implements TokenAnalyzer {
+public class DateTokenAnalyzer extends TokenAnalyzer {
   public IToken[] analyze(IToken[] token) throws TokenException {
     for(int i = 0; i < token.length; i++) {
       if(token[i].hasTagType(WordTag.LETTER)) ;

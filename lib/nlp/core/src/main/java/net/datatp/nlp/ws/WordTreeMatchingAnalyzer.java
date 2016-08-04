@@ -3,9 +3,9 @@ package net.datatp.nlp.ws;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.datatp.nlp.NLPResource;
-import net.datatp.nlp.dict.Dictionary;
+import net.datatp.nlp.NLP;
 import net.datatp.nlp.dict.Entry;
+import net.datatp.nlp.dict.LexiconDictionary;
 import net.datatp.nlp.dict.WordTree;
 import net.datatp.nlp.token.IToken;
 import net.datatp.nlp.token.Token;
@@ -15,22 +15,24 @@ import net.datatp.nlp.token.tag.PunctuationTag;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class WordTreeMatchingAnalyzer implements TokenAnalyzer {
+public class WordTreeMatchingAnalyzer extends TokenAnalyzer {
   private WordTree wtreeRoot ;
 
-  public WordTreeMatchingAnalyzer() throws Exception {
-    Dictionary dict = NLPResource.getInstance().getDictionary(Dictionary.DICT_RES) ;
-    wtreeRoot = dict.getWordTree() ;
-  }
+  public WordTreeMatchingAnalyzer() { }
 
-  public WordTreeMatchingAnalyzer(Dictionary dict) {
+  public WordTreeMatchingAnalyzer(LexiconDictionary dict) {
     wtreeRoot = dict.getWordTree() ;
   }
 
   public WordTreeMatchingAnalyzer(WordTree wtree) {
     wtreeRoot = wtree ;
   }
-
+  
+  public void configure(NLP nlp) {
+    LexiconDictionary dict = nlp.getLexiconDictionary() ;
+    wtreeRoot = dict.getWordTree() ;
+  }
+  
   public IToken[] analyze(IToken[] tokens)  {
     List<IToken> newList = new ArrayList<IToken>() ;
     int position = 0 ;

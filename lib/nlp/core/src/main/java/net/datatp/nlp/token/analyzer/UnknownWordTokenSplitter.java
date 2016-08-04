@@ -3,7 +3,8 @@ package net.datatp.nlp.token.analyzer;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.datatp.nlp.dict.Dictionary;
+import net.datatp.nlp.NLP;
+import net.datatp.nlp.dict.LexiconDictionary;
 import net.datatp.nlp.token.IToken;
 import net.datatp.nlp.token.Token;
 import net.datatp.nlp.token.TokenCollection;
@@ -15,12 +16,17 @@ import net.datatp.util.text.StringUtil;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class UnknownWordTokenSplitter implements TokenAnalyzer {
+public class UnknownWordTokenSplitter extends TokenAnalyzer {
   private TokenAnalyzer splitAnalyzer ;
-  private Dictionary    dict ;
 
-  public UnknownWordTokenSplitter(Dictionary dict) {
-    this.dict = dict ;
+  public UnknownWordTokenSplitter() { }
+  
+  public UnknownWordTokenSplitter(LexiconDictionary dict) {
+    splitAnalyzer = new ChainTokenAnalyzer(new CommonTokenAnalyzer(), new WordTreeMatchingAnalyzer(dict)) ;
+  }
+  
+  public void configure(NLP nlp) {
+    LexiconDictionary dict = nlp.getLexiconDictionary();
     splitAnalyzer = new ChainTokenAnalyzer(new CommonTokenAnalyzer(), new WordTreeMatchingAnalyzer(dict)) ;
   }
 

@@ -20,7 +20,7 @@ import net.datatp.util.text.NumberUtil;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class CommonTokenAnalyzer implements TokenAnalyzer {
+public class CommonTokenAnalyzer extends TokenAnalyzer {
   final static public CommonTokenAnalyzer INSTANCE = new CommonTokenAnalyzer() ;
 
   static private String[] suffix ;

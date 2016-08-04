@@ -1,0 +1,19 @@
+lexicons:
+  imports: 
+    - classpath:nlp/lexicon/vn.lexicon.json
+    - classpath:nlp/lexicon/vn.lexicon-uncategorized.json
+    - classpath:nlp/entity/vn.place.json
+    - classpath:nlp/entity/vn.person.json
+
+synsets:
+  imports:
+
+entities:
+  imports: 
+    - classpath:nlp/entity/vn.place.json
+    - classpath:nlp/entity/vn.person.json
+    - classpath:nlp/entity/mobile.product.json
+
+token-analyzers:
+
+queries:

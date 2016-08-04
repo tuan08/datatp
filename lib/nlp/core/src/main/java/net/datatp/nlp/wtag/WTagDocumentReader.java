@@ -8,9 +8,9 @@ import net.datatp.nlp.token.IToken;
 import net.datatp.nlp.token.TokenCollection;
 import net.datatp.nlp.token.TokenException;
 import net.datatp.nlp.token.analyzer.CommonTokenAnalyzer;
-import net.datatp.nlp.token.analyzer.LineAnalyzer;
-import net.datatp.nlp.token.analyzer.SentenceSplitterAnalyzer;
 import net.datatp.nlp.token.analyzer.TokenAnalyzer;
+import net.datatp.nlp.token.collection.LineAnalyzer;
+import net.datatp.nlp.token.collection.SentenceSplitterAnalyzer;
 import net.datatp.util.io.IOUtil;
 import net.datatp.util.text.StringUtil;
 

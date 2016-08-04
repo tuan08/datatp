@@ -9,7 +9,7 @@ import net.datatp.nlp.token.TokenException;
 import net.datatp.nlp.token.tag.NumberTag;
 import net.datatp.util.text.StringUtil;
 
-public class NumberTokenAnalyzer implements TokenAnalyzer {
+public class NumberTokenAnalyzer extends TokenAnalyzer {
   final static String[] DIGIT_TOKENS = {
       "không", "khong", "một", "mot", "hai", "ba", "bốn", "bon", "tư", "tu",
       "năm", "nam", "lăm", "nhăm", "nham", "lam", "sáu", "sau", "bảy", "bay",
@@ -17,12 +17,12 @@ public class NumberTokenAnalyzer implements TokenAnalyzer {
   };
 
   final static String[] UNIT_TOKENS = {
-      "đơn vị", "linh", "lẻ", "mươi", 
-      "chục", "chuc", "trăm", "tram", "ngàn", "ngan",
-      "nghìn", "nghin", "vạn", "van", "triệu", "trieu", "tỷ", "ty"
+    "đơn vị", "linh", "lẻ", "mươi", "chục", "chuc", "trăm", "tram", "ngàn", "ngan",
+    "nghìn", "nghin", "vạn", "van", "triệu", "trieu", "tỷ", "ty"
   };
 
-
+  final static char[] SPACE_CHARS  = { ' ' };
+  
   public IToken[] analyze(IToken[] token) throws TokenException {
     List<IToken> holder = new ArrayList<IToken>() ;
     int pos = 0;
@@ -59,14 +59,10 @@ public class NumberTokenAnalyzer implements TokenAnalyzer {
   }
 
   private double getNumberValue(IToken token){
-    String[] units = StringUtil.splitAsArray(token.getOriginalForm(), new char[]{' '});
+    String[] units = StringUtil.splitAsArray(token.getOriginalForm(), SPACE_CHARS);
     double value = 0;
     int i = 0;
     while(i < units.length){
-      if(StringUtil.isIn(units[i], new String[]{"linh", "lẻ", "le"})) {
-        i++; 
-        continue;
-      }
       double uValue = getUnitValue(units[i]);
       double nValue = 0;
       if(i + 1 < units.length) {
@@ -100,7 +96,7 @@ public class NumberTokenAnalyzer implements TokenAnalyzer {
 
   private double getUnitValue(String unit){
     if(StringUtil.isIn(unit, new String[]{"không", "khong", "linh", "lẻ"})) return 0;
-    if(StringUtil.isIn(unit, new String[]{"một", "mot", "đơn vị"})) return 1;
+    if(StringUtil.isIn(unit, new String[]{"một", "mot"})) return 1;
     if(StringUtil.isIn(unit, new String[]{"hai"})) return 2;
     if(StringUtil.isIn(unit, new String[]{"ba"})) return 3;
     if(StringUtil.isIn(unit, new String[]{"bốn", "tư", "bon"})) return 4;
@@ -117,6 +113,4 @@ public class NumberTokenAnalyzer implements TokenAnalyzer {
     if(StringUtil.isIn(unit, new String[]{"tỷ", "ty"})) return 10e9;
     return 0;
   }
-
-
 }

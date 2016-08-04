@@ -12,7 +12,7 @@ import net.datatp.util.text.StringUtil;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class USDTokenAnalyzer implements TokenAnalyzer {
+public class USDTokenAnalyzer extends TokenAnalyzer {
   final static public String[] USD_TOKENS =   { 
       "$", "usd",  "$/m2"
   } ;

@@ -20,7 +20,7 @@ public class DateChunkerUnitTest {
         new DateChunker(),
     };
     verifier = new WordTokenizerVerifier(analyzer) ;
-    //		Dictionary dict = NLPResource.getInstance().getDictionary(Dictionary.DICT_RES) ;
+    //		LexiconDictionary dict = NLPResource.getInstance().getDictionary(LexiconDictionary.VI_LEXICON_RES) ;
     TokenAnalyzer[] wsanalyzer = {
         PunctuationTokenAnalyzer.INSTANCE, new CommonTokenAnalyzer(), 
         //			new WordTreeMatchingAnalyzer(dict),
@@ -62,7 +62,7 @@ public class DateChunkerUnitTest {
     verify("November, 2011", "November , 2011{date}");
 
     //Verify fail 
-    //        verify("Feb 10201",  "Feb 10201{date}") ;
+    //verify("Feb 10201",  "Feb 10201{date}") ;
   }
 
   private void verify(String text, String ... expect) throws Exception {

@@ -19,7 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.datatp.nlp.NGram;
-import net.datatp.nlp.dict.Dictionary;
+import net.datatp.nlp.dict.LexiconDictionary;
 import net.datatp.nlp.dict.Meaning;
 import net.datatp.nlp.token.IToken;
 import net.datatp.nlp.token.TokenCollection;
@@ -76,7 +76,7 @@ public class NGramStatisticDictionaryBuilder {
       System.out.println("NGram: " + this.ngramStatistic.size()) ;
     }
 
-    for(String selRes : Dictionary.DICT_RES) {
+    for(String selRes : LexiconDictionary.VI_LEXICON_RES) {
       InputStream is = IOUtil.loadRes(selRes) ;
       DataReader reader = new DataReader(is) ;
       Meaning meaning = null ;

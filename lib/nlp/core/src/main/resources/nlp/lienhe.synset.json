@@ -7,44 +7,44 @@
 {
   "otype": "synset",
   "name": "liên hệ",
+  "type": ["phone"],
   "variant": ["điện thoại", "liên lạc", "liên hệ", "liện hệ", "lien hệ", "lh", "LHệ", "l/hệ", "tel", 
               "tel.", "phone", "Fone", "mobile", "call", "gọi điện", "gọi", "SĐT", "SDT", "đ/c", 
               "contact", "hotline", "mr", "mr.", "mrs", "miss", "sir", "alo", "di động", "DĐ", "D Đ", 
               "d.đ", "handphone", "hotline", "liên hê", "tell", "đtdđ", "NR", "pm",
               "số điện thoại", "dt", "ĐT", "điện thoai"
-             ],
-  "type": ["phone"]
+             ]
 } 
 {
   "otype": "synset",
   "name": "liên hệ",
-  "variant": ["người đăng", "người liên hệ", "người đăng tin"],
-  "type": ["người đăng"]
+  "type": ["người đăng"],
+  "variant": ["người đăng", "người liên hệ", "người đăng tin"]
 }
 {
   "otype": "synset",
   "name": "liên hệ",
-  "variant": ["fax"],
-  "type": ["fax"]
+  "type": ["fax"],
+  "variant": ["fax"]
 }
 {
   "otype": "synset",
   "name": "liên hệ",
-  "variant":  ["liên lạc", "liên hệ",  "lh", "email", "e-mail", "mail", "contact", "im", "ym" ],
-  "type": ["email"]
+  "type": ["email"],
+  "variant":  ["liên lạc", "liên hệ",  "lh", "email", "e-mail", "mail", "contact", "im", "ym" ]
 }
 {
   "otype": "synset",
   "name": "liên hệ",
-  "variant": ["địa chỉ", "Đia chỉ", "liên hệ", "lh", "address", "add", "addr", "đ/c", "đc"],
-  "type": ["địa chỉ", ""]
+  "type": ["địa chỉ"],
+  "variant": ["địa chỉ", "Đia chỉ", "liên hệ", "lh", "address", "add", "addr", "đ/c", "đc"]
 }
 {
   "otype": "synset",
   "name": "lienhe:diachi",
+  "type": ["informal"],
   "variant": ["phạm vi", "nơi ở", "location", "khu vực", "nơi cư ngụ", "cư ngụ", "showroom", 
               "cơ sở", "tỉnh/thành phố", "cửa hàng", "nơi rao", "nơi đăng", "nơi làm việc", 
               "địa điểm", "địa chỉ giao dịch", "VP", "VPĐD", "Trụ sở", "Đăng tại", "Tỉnh/Tp"
-             ],
-  "type": ["informal"]
+             ]
 }

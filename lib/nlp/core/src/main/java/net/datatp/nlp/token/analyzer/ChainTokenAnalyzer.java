@@ -6,7 +6,7 @@ import net.datatp.nlp.token.TokenException;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class ChainTokenAnalyzer implements TokenAnalyzer {
+public class ChainTokenAnalyzer extends TokenAnalyzer {
   private TokenAnalyzer[] analyzer ;
 
   public ChainTokenAnalyzer(TokenAnalyzer ... analyzer) {

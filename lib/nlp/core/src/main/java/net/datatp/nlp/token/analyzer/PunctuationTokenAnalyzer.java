@@ -14,7 +14,7 @@ import net.datatp.nlp.util.CharacterSet;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class PunctuationTokenAnalyzer implements TokenAnalyzer {
+public class PunctuationTokenAnalyzer extends TokenAnalyzer {
   final static public PunctuationTokenAnalyzer INSTANCE = new PunctuationTokenAnalyzer() ;
   static HashSet<String> ABBRS = new HashSet<String>() ;
   static {

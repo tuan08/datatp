@@ -1,5 +1,8 @@
 package net.datatp.nlp.query;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import net.datatp.nlp.NLP;
 import net.datatp.nlp.query.eval.EvalExpression;
 import net.datatp.nlp.query.eval.EvalExpressionParser;
 import net.datatp.nlp.query.match.MatcherResourceFactory;
@@ -7,23 +10,27 @@ import net.datatp.nlp.query.match.RuleMatch;
 import net.datatp.nlp.query.match.RuleMatchers;
 import net.datatp.nlp.query.match.UnitExtractors;
 import net.datatp.nlp.token.TokenCollection;
+import net.datatp.nlp.token.analyzer.TokenAnalyzer;
+import net.datatp.util.text.StringUtil;
 
 public class Query {
-  private String   name ;
-  private int      priority ;
-  private String   description ;
+  private String                     name;
+  private int                        priority;
+  private String                     description;
 
-  private int      matchmax = 1;
-  private String   matchselector = "first";
-  private String[] prematch ;
-  private String[] match ;
-  private String[] extract ;
-  private String[] postmatch ;
-
-  transient private EvalExpression[] preMatchEval ;
-  transient private RuleMatchers ruleMatchers ;
-  transient private UnitExtractors unitExtractors ;
-  transient private EvalExpression[] postMatchEval ;
+  private String                     useTokenAnalyzers;
+  private int                        matchmax      = 1;
+  private String                     matchselector = "first";
+  private String[]                   prematch;
+  private String[]                   match;
+  private String[]                   extract;
+  private String[]                   postmatch;
+  
+  transient private EvalExpression[] preMatchEval;
+  transient private RuleMatchers     ruleMatchers;
+  transient private UnitExtractors   unitExtractors;
+  transient private EvalExpression[] postMatchEval;
+  transient private TokenAnalyzer[]  tokenAnalyzers;
 
   public Query() { }
 
@@ -35,6 +42,10 @@ public class Query {
 
   public String getDescription() { return description; }
   public void   setDescription(String description) { this.description = description; }
+
+  @JsonProperty("use-token-analyzers")
+  public String getUseTokenAnalyzers() { return useTokenAnalyzers; }
+  public void setUseTokenAnalyzers(String useTokenAnalyzers) { this.useTokenAnalyzers = useTokenAnalyzers;}
 
   public int  getMatchmax() { return this.matchmax ; }
   public void setMatchmax(int max) { this.matchmax = max ; } 
@@ -54,6 +65,21 @@ public class Query {
   public String[] getPostmatch() { return postmatch; }
   public void setPostmatch(String[] postmatch) { this.postmatch = postmatch; }
 
+  public QueryDocument createQueryDocument() { return new QueryDocument(tokenAnalyzers) ; }
+  
+  public void compile(NLP nlp) throws Exception {
+    if(useTokenAnalyzers != null) {
+      String[] tokenAnalyzerNames = StringUtil.toStringArray(useTokenAnalyzers, ",");
+      tokenAnalyzers = new TokenAnalyzer[tokenAnalyzerNames.length];
+      for(int i = 0; i < tokenAnalyzerNames.length; i++) {
+       tokenAnalyzers[i] = nlp.createTokenAnalyzer(tokenAnalyzerNames[i]); 
+      }
+    } else {
+      tokenAnalyzers = nlp.getDefaultTokenAnalyzers();
+    }
+    compile(nlp.getMatcherResourceFactory());
+  }
+  
   public void compile(MatcherResourceFactory umFactory) throws Exception {
     if(prematch != null) {
       preMatchEval = new EvalExpression[prematch.length] ;

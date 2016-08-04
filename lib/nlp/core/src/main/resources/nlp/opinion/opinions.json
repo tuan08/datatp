@@ -112,7 +112,5 @@
   "name" : "opinion:exclamation",
   "type" : ["exclamation"],
   "otype" : "synset",
-  "variant" : [
-    "à", "ơi", "này", "nhỉ", "kìa", "ồ", "ối", "ủa", "ặc", "nhá", "chứ", "ạ", "rồi"
-  ]
+  "variant" : [ "à", "ơi", "này", "nhỉ", "kìa", "ồ", "ối", "ủa", "ặc", "nhá", "chứ", "ạ", "rồi" ]
 }

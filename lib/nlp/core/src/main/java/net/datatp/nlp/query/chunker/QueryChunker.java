@@ -16,7 +16,7 @@ import net.datatp.nlp.token.analyzer.TokenAnalyzer;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-abstract public class QueryChunker implements TokenAnalyzer {
+abstract public class QueryChunker extends TokenAnalyzer {
   private MatcherResourceFactory mrFactory ;
   private RuleMatcher[] matcher;
 

@@ -114,7 +114,8 @@ public class TokenCollection extends IToken {
     token = analyzer.analyze(token) ;
   }
 
-  public void analyze(TokenAnalyzer[] analyzer) throws TokenException {
+  public void analyze(TokenAnalyzer ... analyzer) throws TokenException {
+    if(analyzer == null) return;
     for(TokenAnalyzer sel : analyzer) {
       this.token = sel.analyze(this.token) ;
     }

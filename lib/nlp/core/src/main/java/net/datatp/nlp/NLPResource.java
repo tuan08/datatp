@@ -4,7 +4,7 @@ import java.io.ObjectInputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.datatp.nlp.dict.Dictionary;
+import net.datatp.nlp.dict.LexiconDictionary;
 import net.datatp.nlp.dict.EntityDictionary;
 import net.datatp.nlp.dict.SynsetDictionary;
 import net.datatp.nlp.dict.WordTreeDictionary;
@@ -45,11 +45,11 @@ public class NLPResource {
     }
   }
 
-  public <T> T getDictionary(String[] res) throws Exception {
+  public <T> T getLexiconDictionary(String[] res) throws Exception {
     String key = StringUtil.joinStringArray(res, ",");
-    Dictionary dict = (Dictionary) resCache.get(key) ;
+    LexiconDictionary dict = (LexiconDictionary) resCache.get(key) ;
     if(dict == null) {
-      dict = new Dictionary(res);
+      dict = new LexiconDictionary(res);
       resCache.put(key, dict) ;
     }
     return (T) dict ;

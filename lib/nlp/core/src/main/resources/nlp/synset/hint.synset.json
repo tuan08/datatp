@@ -1,0 +1,230 @@
+{
+  "otype": "synset",
+  "name":  "daitu", 
+  "variant" : [
+  "bố", "mẹ", "ba", "má", "mạ", "mễ", "anh", "em", "ông", "bà", "chị", "cô", "cháu", "dì", "dượng", "bác", "mr", "mr.", "miss", "Ms", "nó", "mày", "tao", "thằng"
+  ], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "tochuc:doanhnghiep", 
+  "variant" : [
+    "công ty", "ct", "cty", "tổng công ty", "tập đoàn", "hợp tác xã", "ngân hàng", "quỹ",
+	"quỹ đầu tư", "trung tâm", "nhà máy", "công xưởng", "xưởng", "nhà xưởng", "nhà xuất bản",
+	"xí nghiệp", "hãng", "hãng sản xuất", "đại lý"
+  ],  
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "tochuc:doanhnghiep:thanhvien", 
+  "variant" : [
+    "giám đốc", "trưởng phòng", "phó phòng", "quản lý", "đốc công", "nhân viên", "thuyền trưởng", 
+	"thuyền viên", "trạm trưởng", "điều phối viên", "thư ký", "kế toán", "kế toán trưởng", "môi giới",
+	"nhân viên", "phó tổng giám đốc", "phó tổng biên tập", "thương gia", "thương nhân"
+  ],  
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "tochuc:phongkien:thanhvien", 
+  "variant" : [
+    "vua", "hoàng đế", "quốc vương", "hoàng thượng", "nữ hoàng", "nữ vương", "hoàng tử", "sứ giả",
+	"công chúa", "tể tướng", "quận chúa", "quan", "thượng thư", "đề đốc", "lý trưởng", "lính",
+	"vị vua"
+  ], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "tochuc:tuongtuong",
+  "variant" : [
+    "cung đình", "thiên đình"
+  ], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "tochuc:tuongtuong:thanhvien", 
+  "variant" : [
+    "ngọc hoàng", "phù thủy", "thần linh", "tiên cô", "tiên nữ", "nam tào", "bắc đẩu", "táo quân",
+	"ông bụt", "bà tiên", "yêu tinh", "yêu quái", "thần chết", "chúa", "thiên lôi", "thần sấm", 
+	"thần sét", "bà chúa tuyết"
+  ], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "tochuc:nhanuoc", 
+  "variant" : [
+	"đảng", "đảng bộ", "sở", "bộ", "bộ chính trị", "bộ chỉ huy", "bộ ngoại giao", "chi bộ", "cục", "chi cục", "tổng cục", "ban", "ngành", "ủy ban", "cơ quan", "chính phủ", "thường vụ",
+	"viện kiểm sát", "viện hàn lâm", "chi đoàn", "chi ủy", "chi đội", "chuyên viên", "chuyên viên", "tổng cục", "trung ương", "tổ dân phố"
+  ], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "tochuc:nhanuoc:thanhvien", 
+  "variant" : [
+  "tổng thống", "thị trưởng", "thống đốc", "thủ tướng", "thứ trưởng", "tổng bí thư", "bộ trưởng", "bí thư", "cục trưởng", "ngoại trưởng", "chi cục trưởng", "đồn trưởng", "đội trưởng", "đội viên",
+  "ứng cử viên", "chánh án", "huyện ủy", "bí thư", "chánh văn phòng", "chính ủy", "chủ tịch",
+  "chủ tịch nước", "phó bí thư", "phó chánh văn phòng", "phó chính ủy", "phó chủ nhiệm", "thị trưởng",
+  "phó chủ tịch", "phó chủ tịch nước", "phó tổng thống", "phó thủ tướng", "phó trưởng ban",
+  "thống đốc", "lãnh sự"
+  ], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "tochuc:quân đội", 
+  "variant" : [
+  "tổ quốc", "bộ chỉ huy", "bộ tư lệnh", "cộng sản", "liên minh", "liên đoàn", "quân đội", "tiểu đội",
+  "đại đội", "tiểu đoàn", "sư đoàn", "tổng chỉ huy"
+  ], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "tochuc:quân đội:thanhvien", 
+  "variant" : [
+  "anh hùng", "bộ đội", "công an", "liệt sỹ", "thiếu tá", "thiếu tướng", "thương binh", "thượng tá",
+  "trinh sát", "trung sĩ", "trung tá", "đại tướng", "đại tá", "thủ lĩnh", "phi công", "thủy thủ",
+  "thuyền trưởng"
+  ], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "tochuc:giaoduc", 
+  "variant" : [
+	"trường", "đại học", "đh", "cao đẳng", "trung học", "tiểu học", "ptcs", "trung tâm", "trung cấp",
+	"mầm non", "mẫu giáo", "bán công", "tư thục", "công lập", "dân lập"
+	], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "tochuc:giaoduc:thanhvien", 
+  "variant" : [
+	"hiệu trưởng", "hiệu phó", "giáo sư", "sinh viên", "thạc sĩ", "thầy giáo", "thầy thuốc", 
+	"tiến sĩ", "y sĩ", "y tá", "đội viên", "bác học", "cô giáo", "dược sĩ", "dược tá", "hộ lý",
+	"kỹ sư", "luật sư", "nhà báo", "nhà văn", "tiến sĩ", "chủ bút", "chủ biên", "chủ nhiệm",
+	"giáo viên", "học sinh", "họa sĩ", "kiến trúc sư", "thẩm phán"
+	], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "tochuc:dichvu:xahoi", 
+  "variant" : [
+	"trung tâm", "bệnh viện", "tòa án", "bảo tàng", "viện bảo tàng", "đài phát thanh",
+	"đài truyền hình", "đại sứ quán", "tòa soạn báo"
+	], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "tochuc:dichvu:xahoi:thanhvien", 
+  "variant" : [
+	"viện trưởng", "viện phó", "trưởng khoa", "phó khoa", "phó chủ nhiệm", "phóng viên", "tác giả",
+	"đạo diễn", "diễn viên", "đồng nghiệp", "độc giả", "bảo vệ", "bệnh nhân", "bị can", "bị cáo",
+	"công nhân", "già làng", "hàng xóm", "hành khách", "lái xe", "lái đò", "lão nông", "thi sĩ",
+	"mục sư", "nghệ sĩ", "ngư dân", "nhà sư", "nhân chứng", "ni sư", "nông dân", "nạn nhân", "thợ hồ",
+	"thợ máy", "trưởng thôn", "hướng dẫn viên", "người phát ngôn", "phát ngôn viên", "tổng biên tập",
+	"đầu bếp", "điều dưỡng viên", "cấp dưỡng", "ca sĩ", "ca sỹ", "nghệ sỹ", "nhà báo", "tiếp tân",
+	"nhà ngôn ngữ học", "nhà sử học", "nhà thơ", "nhà văn", "nhạc sĩ", "thợ điện", "thợ cạo",
+	"thợ cắt tóc", "thợ chụp ảnh", "thợ khóa", "thợ kim hoàn", "thợ làm bánh", "thợ lặn", "thợ máy", "thợ mộc", "thợ may", "thợ nề", "thợ rèn", "thợ sơn", "thợ tiện", "thợ xây dựng", "tiếp viên"
+	], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "tochuc:thethao", 
+  "variant" : [
+	"đội bóng", "câu lạc bộ"
+	], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "tochuc:thethao:thanhvien", 
+  "variant" : [
+	"cầu thủ", "tiền vệ", "tiền đạo", "hậu vệ", "thủ môn", "tay vợt", "tay đua", "vận động viên"
+	], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "diadanh:hanhchinh", 
+  "variant" : [
+    "đất nước", "nước", "quốc gia", "bang", "liên bang", "thành phố", "tp", "tp.", "thị xã",
+    "quận", "q", "q.", "huyện", "thị trấn", "xã", "phường", "thôn", "làng", "đường", "phố", "ngõ",
+	"ngách", "buôn làng", "cảng", "cảng hàng không", "huyện lị", "quận lị", "phố", "phố phường", "quốc lộ", "thành phố", "lãnh sự quán", "tỉnh", "tỉnh lộ", "tỉnh thành", "vương quốc", "xa lộ",
+	"xóm", "xóm liều", "đường bay", "đường băng", "đường hầm", "đường mòn", "đường sông",
+	"đường sắt", "đường vành đai", "đồn", "ấp"
+  ], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "diadanh:thiennhien", 
+  "variant" : [
+    "rừng", "núi", "đồi", "đèo", "thung lũng", "cao nguyên", "bình nguyên", "sông", "suối", "hồ", "biển", "ao", "kênh", "rạch", "biên giới", "bán đảo", "bãi", "bãi bồi", "bến", "bến xe", "bờ",
+	"bến", "cù lao", "cố đô", "cống", "cồn", "cửa biển", "cửa khẩu", "cửa sông", "duyên hải",
+	"hang", "hạ lưu", "hạ nguồn", "hải cảng", "hải dương", "hải đảo", "kè", "kênh", "kênh rạch",
+	"làng", "lãnh hải", "lãnh thổ", "nông thôn", "núi rừng", "quảng trường", "quần đảo", "rừng núi",
+	"rừng phòng hộ", "rừng ngập mặn", "sa mạc", "sông cái", "tam đảo", "thung lũng", "trung du",
+	"vành đai", "vùng biển", "vùng cao", "vùng sâu", "vườn", "vườn quốc gia", "vựa lúa", "đê",
+	"đình", "đô thị", "đại dương", "đại lộ", "đảo", "đất liền", "đầm", "đồng bằng", "đồng cỏ",
+	"ốc đảo", "vịnh"
+  ], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "diadanh:ditich", 
+  "variant" : [
+    "chùa", "đền", "miếu", "đình", "tháp", "tòa tháp", "chiến khu", "chiến trường", "căn cứ địa",
+	"khu căn cứ", "hoàng cung", "hoành thành", "mặt trận", "quân khu", "thuộc địa", "tiểu khu", 
+	"tượng đài", "địa đạo"
+  ], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "diadanh:congtrinh", 
+  "variant" : [
+    "tượng đài", "công viên", "vườn hoa", "nghĩa trang", "bến tàu", "bến xe", "nhà ga", "cảng",
+	"bến cảng", "bến tàu", "chợ", "chợ nổi", "tháp", "tòa tháp", "bưu điện", "bảo tàng", "hành lang",
+	"công trường", "cầu", "cầu cảng", "cầu treo", "cầu vượt", "cửa hàng", "dinh", "giếng", "hải đăng",
+	"hầm", "hẻm", "hội trường", "kho", "khu chế xuất", "khu công nghiệp", "khu phố", "khu tập thể", "khu đô thị", "khuôn viên", "khách sạn", "lâm trường", "lò", "lò mổ", "ngõ", "sân vận động",  
+	"lòng sông", "lòng đường", "lề đường", "nghĩa trang", "nhà bè", "nhà ga", "nhà hàng", "nhà hát", "nhà khách", "nhà máy", "nhà nghỉ", "nhà riêng", "nhà thi đấu", "nhà thuốc", "nhà chùa", 
+	"nhà thờ", "nhà tù", "nhà vườn", "nhà xưởng", "nông trường", "thảo cầm viên", "thẩm mỹ viện",
+	"ruộng", "rạch", "rẫy", "siêu thị", "sân", "sân bay", "sân cỏ", "trang trại", "trường đua", "trại", "trạm", "trụ sở", "tàu điện ngầm", "từ đường", "văn phòng", "xưởng", "nhà xác",
+	"bar", "casino"
+  ], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "diadanh:choo", 
+  "variant" : [
+    "nhà", "biệt thự", "chung cư", "cccc", "tòa nhà", "khách sạn", "nhà ngỉ", "nhà trọ",
+	"trang trại", "cao ốc"
+  ], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "diadanh:tuongtuong", 
+  "variant" : [
+    "thiên đường", "địa ngục", "địa phủ", "âm ty", "chân mây"
+  ], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "sukien", 
+  "variant" : [
+    "khai mạc", "bế mạc", "hội", "hội chợ", "hội nghị", "hội thảo", "khai trương", "kỷ niệm",
+	"liên hoan", "lễ hội", "mít tinh", "tuần lễ vàng", "tết", "đại hội", "họp", "chiến tranh", 
+	"biểu tình", "cuộc chiến", "khánh thành", "khởi công", "động thổ", "tân gia", "khai mạc", 
+	"triển lãm"
+  ], 
+  "type": ["ent:hint:np"]
+} {
+  "otype": "synset",
+  "name":  "soluong:so", 
+  "variant" : [
+    "một", "hai", "ba", "bốn", "năm", "sáu", "bẩy", "bảy", "tám", "chín", "mười", "mươi", "mốt",
+    "chục", "trăm", "ngàn", "triệu", "tỷ", "lăm", "nhăm"
+  ], 
+  "type": ["ent:hint:num"]
+} {
+  "otype": "synset",
+  "name":  "soluong:thoigian", 
+  "variant" : [
+    "năm", "tháng", "tuần", "ngày", "giờ", "phút", "giây", "buổi", "tuổi",
+	"sáng", "trưa", "chiều", "tối", "đêm"
+  ], 
+  "type": ["ent:hint:num"]
+}

@@ -1,34 +1,30 @@
 package net.datatp.nlp.query.match;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.datatp.nlp.NLPResource;
 import net.datatp.nlp.dict.EntityDictionary;
+import net.datatp.nlp.dict.MeaningDictionary;
 import net.datatp.nlp.dict.SynsetDictionary;
 
 /**
  * $Author: Tuan Nguyen$ 
  **/
 public class MatcherResourceFactory {
-  private SynsetDictionary synsetDictionary ;
-  private EntityDictionary entityDictionary ;
-  private Map<String, UnitMatcher> cacheMatchers = new HashMap<String, UnitMatcher>() ;
+  private MeaningDictionary synsetDictionary ;
+  private MeaningDictionary entityDictionary ;
 
   public MatcherResourceFactory() throws Exception {
-    this.synsetDictionary = NLPResource.getInstance().getSynsetDictionary(SynsetDictionary.DICT_RES) ;
-    this.entityDictionary = NLPResource.getInstance().getEntityDictionary(EntityDictionary.DICT_RES) ;
+    synsetDictionary = NLPResource.getInstance().getSynsetDictionary(SynsetDictionary.DICT_RES) ;
+    entityDictionary = NLPResource.getInstance().getEntityDictionary(EntityDictionary.DICT_RES) ;
   }
 
-  public MatcherResourceFactory(SynsetDictionary synsetDictionary, 
-      EntityDictionary entityDictionary) {
-    this.synsetDictionary = synsetDictionary ;
-    this.entityDictionary = entityDictionary ;
+  public MatcherResourceFactory(MeaningDictionary synsetDict, MeaningDictionary entityDict) {
+    this.synsetDictionary = synsetDict ;
+    this.entityDictionary = entityDict ;
   }
 
-  public SynsetDictionary getSynsetDictionary() { return this.synsetDictionary ; }
+  public MeaningDictionary getSynsetDictionary() { return this.synsetDictionary ; }
 
-  public EntityDictionary getEntityDictionary() { return this.entityDictionary ; }
+  public MeaningDictionary getEntityDictionary() { return this.entityDictionary ; }
 
   public UnitMatcher create(String exp, String distanceString) throws Exception {
     int allowNextMatchDistance = 100000 ;

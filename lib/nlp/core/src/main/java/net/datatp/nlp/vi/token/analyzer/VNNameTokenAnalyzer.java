@@ -13,7 +13,7 @@ import net.datatp.nlp.token.tag.NameTag;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class VNNameTokenAnalyzer implements TokenAnalyzer {
+public class VNNameTokenAnalyzer extends TokenAnalyzer {
   static public HashSet<String> LASTNAMES  ;
   static {
     String[] LNAME = {

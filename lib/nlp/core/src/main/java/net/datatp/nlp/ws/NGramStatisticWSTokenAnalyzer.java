@@ -28,7 +28,7 @@ import net.datatp.nlp.token.tag.PunctuationTag;
 import net.datatp.util.dataformat.DataReader;
 import net.datatp.util.io.IOUtil;
 
-public class NGramStatisticWSTokenAnalyzer implements TokenAnalyzer {
+public class NGramStatisticWSTokenAnalyzer extends TokenAnalyzer {
   private NGramStatisticDictionary ngramDict = new NGramStatisticDictionary();
 
   private boolean debug = false ;

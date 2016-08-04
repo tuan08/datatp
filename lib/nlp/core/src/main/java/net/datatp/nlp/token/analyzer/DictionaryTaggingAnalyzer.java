@@ -1,6 +1,6 @@
 package net.datatp.nlp.token.analyzer;
 
-import net.datatp.nlp.dict.Dictionary;
+import net.datatp.nlp.dict.LexiconDictionary;
 import net.datatp.nlp.dict.Entry;
 import net.datatp.nlp.token.IToken;
 import net.datatp.nlp.token.TokenException;
@@ -9,10 +9,10 @@ import net.datatp.nlp.token.tag.WordTag;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class DictionaryTaggingAnalyzer implements TokenAnalyzer {
-  private Dictionary dict ;
+public class DictionaryTaggingAnalyzer extends TokenAnalyzer {
+  private LexiconDictionary dict ;
 
-  public DictionaryTaggingAnalyzer(Dictionary dict) {
+  public DictionaryTaggingAnalyzer(LexiconDictionary dict) {
     this.dict = dict ;
   }
 

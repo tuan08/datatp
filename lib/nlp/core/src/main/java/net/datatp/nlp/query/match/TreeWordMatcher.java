@@ -15,7 +15,6 @@ public class TreeWordMatcher extends UnitMatcher {
   private Map<String, TreeWordMatcher> trees = new HashMap<String, TreeWordMatcher>(5) ;
 
   public TreeWordMatcher() {
-
   }
 
   public TreeWordMatcher(String[] word) {

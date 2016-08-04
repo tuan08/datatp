@@ -14,9 +14,9 @@ import net.datatp.util.text.StringUtil;
  * $Author: Tuan Nguyen$ 
  **/
 public class WordTreeDictionary {
-  final static public String[] DICT_RES = {
-      "classpath:nlp/vn.lexicon.json",
-      "classpath:nlp/vn.lexicon2.json"
+  final static public String[] VI_DICT_RES = {
+    "classpath:nlp/lexicon/vn.lexicon.json",
+    "classpath:nlp/lexicon/vn.lexicon-uncategorized.json"
   } ;
 
   private WordTree root = new WordTree() ;

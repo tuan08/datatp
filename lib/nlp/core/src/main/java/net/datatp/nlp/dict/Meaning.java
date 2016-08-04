@@ -13,7 +13,9 @@ import net.datatp.util.text.StringUtil;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class Meaning extends HashMap<String, Object> {
+public class Meaning extends HashMap<String, Object>  {
+  private static final long serialVersionUID = 1L;
+
   final static public String OTYPE        = "otype" ;
   final static public String LANG         = "lang";
   final static public String NAME         = "name" ;
@@ -85,8 +87,13 @@ public class Meaning extends HashMap<String, Object> {
     if(value == null) {
       remove(key) ;
       return value ;
-    }
-    if(value instanceof List) {
+    } else if(value instanceof String) {
+      String string = ((String) value).trim();
+      if(string.startsWith("[") && string.endsWith("]")) {
+        string = string.substring(1, string.length() - 1);
+        put(key, StringUtil.splitAsArray(string, ','));
+      }
+    } else if(value instanceof List) {
       List<String> list = (List<String>) value ;
       value = list.toArray(new String[list.size()]) ;
     }

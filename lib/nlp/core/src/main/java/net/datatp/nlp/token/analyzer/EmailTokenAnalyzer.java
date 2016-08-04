@@ -8,7 +8,7 @@ import net.datatp.nlp.token.tag.WordTag;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class EmailTokenAnalyzer implements TokenAnalyzer {
+public class EmailTokenAnalyzer extends TokenAnalyzer {
   public IToken[] analyze(IToken[] token) throws TokenException {
     for(int i = 0; i < token.length; i++) {
       if(token[i].hasTagType(WordTag.LETTER)) ;

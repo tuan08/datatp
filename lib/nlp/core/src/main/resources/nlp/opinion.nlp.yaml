@@ -1,0 +1,59 @@
+synsets:
+  imports: 
+    - classpath:nlp/opinion/opinions.json
+    - classpath:nlp/opinion/nuance.json
+    - classpath:nlp/opinion/taxonomy.json
+    - classpath:nlp/opinion/marketingWords.json
+  entries:
+    - name: liên hệ
+      type:  [phone]
+      variant: [ điện thoại, liên lạc, liên hệ, liện hệ, lien hệ, lh, LHệ, l/hệ, tel, tel., phone, Fone, mobile, 
+                 call, gọi điện, gọi, SĐT, SDT, đ/c, contact, hotline, mr, mr., mrs, miss, sir, alo, di động, DĐ, D Đ, 
+                 d.đ, handphone, hotline, liên hê, tell, đtdđ, NR, pm, số điện thoạ, dt, ĐT, điện thoai ]
+
+    - name: liên hệ
+      type: [người đăng]
+      variant: [người đăng, người liên hệ, người đăng tin]
+
+    - name: liên hệ
+      type: [ fax ]
+      variant: [ fax ]
+
+    - name: liên hệ
+      type: [ email ]
+      variant:  [ liên lạc, liên hệ,  lh, email, e-mail, mail, contact, im, ym ]
+
+    - name: liên hệ
+      type: [ địa chỉ ]
+      variant: [ địa chỉ, Đia chỉ, liên hệ, lh, address, add, addr, đ/c, đc ]
+
+    - name: liên hệ
+      type: [ informal ]
+      variant: [ phạm vi, nơi ở, location, khu vực, nơi cư ngụ, cư ngụ, showroom, cơ sở, tỉnh/thành phố, cửa hàng, 
+                 nơi rao, nơi đăng, nơi làm việc, địa điểm, địa chỉ giao dịch, VP, VPĐD, Trụ sở, Đăng tại, Tỉnh/Tp ]
+entities:
+  imports: 
+    - classpath:nlp/entity/vn.place.json
+    - classpath:nlp/entity/vn.person.json
+    - classpath:nlp/entity/mobile.product.json
+
+token-analyzers:
+#  test1: Test1Class
+#  test2: Test1Class
+
+queries:
+  opinion:
+    name: "test query"
+    priority: 1
+    description: "extract the sentence opinion"
+    use-token-analyzers: common, punc, vnd, usd
+    matchmax: 3
+    matchselector: "first"
+    prematch:
+    - "print: call prematch for query test query"
+    - "if-match: / synset{name=opinion}  ? $print{match keyword opinion} : $exit "
+    match:
+    - "/p synset{name=opinion}"
+    extract: []
+    postmatch:
+    - "print: call postmatch for query test query"

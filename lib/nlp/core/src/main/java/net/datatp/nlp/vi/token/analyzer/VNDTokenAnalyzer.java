@@ -13,7 +13,7 @@ import net.datatp.util.text.StringUtil;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class VNDTokenAnalyzer implements TokenAnalyzer {
+public class VNDTokenAnalyzer extends TokenAnalyzer {
   final static public String[] VND_TOKENS =   { 
       "vnd", "đồng", "dong", "đ", "đ/m2", "đ/km", "₫", "₫/m2", "₫/km"
   } ;

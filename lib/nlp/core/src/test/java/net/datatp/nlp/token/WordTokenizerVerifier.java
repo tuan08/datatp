@@ -18,6 +18,7 @@ public class WordTokenizerVerifier {
     for(int i = 0; i < verifier.length; i++) {
       verifier[i] = new TokenVerifier(expect[i].trim()) ;
     }
+    
     WordTokenizer tokenizer = new WordTokenizer(text) ;
     IToken[] token = tokenizer.allTokens() ;
     for(TokenAnalyzer sel : analyzer) {

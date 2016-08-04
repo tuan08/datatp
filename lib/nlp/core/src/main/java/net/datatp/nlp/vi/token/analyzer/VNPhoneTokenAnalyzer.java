@@ -14,7 +14,7 @@ import net.datatp.nlp.token.tag.WordTag;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class VNPhoneTokenAnalyzer implements TokenAnalyzer {
+public class VNPhoneTokenAnalyzer extends TokenAnalyzer {
   final static String[] IGNORE_TYPE = {WordTag.WLETTER.getOType()} ;
 
   public IToken[] analyze(IToken[] token) throws TokenException {

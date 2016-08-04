@@ -12,7 +12,7 @@ import net.datatp.nlp.util.CharacterSet;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class NameTokenAnalyzer implements TokenAnalyzer {
+public class NameTokenAnalyzer extends TokenAnalyzer {
   public IToken[] analyze(IToken[] token) throws TokenException {
     List<IToken> holder = new ArrayList<IToken>() ;
     IToken previousToken = null ;

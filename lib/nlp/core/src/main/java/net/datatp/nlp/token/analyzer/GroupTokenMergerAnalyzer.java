@@ -11,7 +11,7 @@ import net.datatp.nlp.token.tag.DigitTag;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class GroupTokenMergerAnalyzer implements TokenAnalyzer {
+public class GroupTokenMergerAnalyzer extends TokenAnalyzer {
   public IToken[] analyze(IToken[] tokens) throws TokenException {
     int i = 0 ;
     List<IToken> holder = new ArrayList<IToken>() ;
