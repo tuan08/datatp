@@ -2,6 +2,7 @@ package net.datatp.nlp.query.chunker;
 
 import java.util.List;
 
+import net.datatp.nlp.NLP;
 import net.datatp.nlp.query.match.RuleMatcher;
 import net.datatp.nlp.token.IToken;
 import net.datatp.nlp.token.tag.TimeTag;
@@ -10,7 +11,11 @@ import net.datatp.nlp.token.tag.TimeTag;
  * $Author: Tuan Nguyen$ 
  **/
 public class TimeChunker extends QueryChunker {
-  public TimeChunker() throws Exception {
+  public TimeChunker() {
+  }
+  
+  public void configure(NLP nlp) throws Exception {
+    super.configure(nlp);
     String timeExp =  "\\d{2}[:h]\\d{2}(:\\d{2})?(am|pm)?" ;
     String gmtExp =  "(gmt|utc)([+-]\\d{1,2})?(:\\d{2})?" ;
     defineMatches(
@@ -22,6 +27,7 @@ public class TimeChunker extends QueryChunker {
       "/ regex{" + timeExp + "}"
     ) ;
   }
+
 
   protected void onMatch(List<IToken> holder, RuleMatcher rmatcher, IToken[] token, int from, int to) {
     IToken set = createChunking(token, from, to) ;

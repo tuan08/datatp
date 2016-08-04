@@ -1,9 +1,6 @@
 package net.datatp.nlp.query.match;
 
-import net.datatp.nlp.NLPResource;
-import net.datatp.nlp.dict.EntityDictionary;
 import net.datatp.nlp.dict.MeaningDictionary;
-import net.datatp.nlp.dict.SynsetDictionary;
 
 /**
  * $Author: Tuan Nguyen$ 
@@ -12,10 +9,6 @@ public class MatcherResourceFactory {
   private MeaningDictionary synsetDictionary ;
   private MeaningDictionary entityDictionary ;
 
-  public MatcherResourceFactory() throws Exception {
-    synsetDictionary = NLPResource.getInstance().getSynsetDictionary(SynsetDictionary.DICT_RES) ;
-    entityDictionary = NLPResource.getInstance().getEntityDictionary(EntityDictionary.DICT_RES) ;
-  }
 
   public MatcherResourceFactory(MeaningDictionary synsetDict, MeaningDictionary entityDict) {
     this.synsetDictionary = synsetDict ;

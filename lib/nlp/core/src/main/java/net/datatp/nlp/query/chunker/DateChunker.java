@@ -2,6 +2,7 @@ package net.datatp.nlp.query.chunker;
 
 import java.util.List;
 
+import net.datatp.nlp.NLP;
 import net.datatp.nlp.query.match.RuleMatcher;
 import net.datatp.nlp.token.IToken;
 import net.datatp.nlp.token.tag.DateTag;
@@ -10,7 +11,11 @@ import net.datatp.nlp.token.tag.DateTag;
  * $Author: Tuan Nguyen$ 
  **/
 public class DateChunker extends QueryChunker {
-  public DateChunker() throws Exception {
+  public DateChunker() {
+  }
+  
+  public void configure(NLP nlp) throws Exception {
+    super.configure(nlp);
     String[] month = {
         "tháng một", "tháng 1", "tháng giêng", "january", "jan",
         "tháng hai", "tháng 2", "february", "feb",

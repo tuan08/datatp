@@ -3,6 +3,7 @@ package net.datatp.nlp.query.chunker;
 import org.junit.Before;
 import org.junit.Test;
 
+import net.datatp.nlp.NLP;
 import net.datatp.nlp.token.WordTokenizerVerifier;
 import net.datatp.nlp.token.analyzer.CommonTokenAnalyzer;
 import net.datatp.nlp.token.analyzer.PunctuationTokenAnalyzer;
@@ -10,23 +11,15 @@ import net.datatp.nlp.token.analyzer.TokenAnalyzer;
 
 public class DateChunkerUnitTest {
   private WordTokenizerVerifier verifier ;
-  private WordTokenizerVerifier wsverifier ;
 
   @Before
   public void setup() throws Exception {
-    TokenAnalyzer[] analyzer = {
-        PunctuationTokenAnalyzer.INSTANCE, new CommonTokenAnalyzer(), 
-        //new DateTokenAnalyzer(), new TimeTokenAnalyzer(), 
-        new DateChunker(),
+    NLP nlp = new NLP("src/main/resources/nlp/vietnamese.nlp.yaml");
+    Class[] types = {
+      CommonTokenAnalyzer.class, PunctuationTokenAnalyzer.class, DateChunker.class
     };
+    TokenAnalyzer[] analyzer = nlp.createTokenAnalyzers(types) ;
     verifier = new WordTokenizerVerifier(analyzer) ;
-    //		LexiconDictionary dict = NLPResource.getInstance().getDictionary(LexiconDictionary.VI_LEXICON_RES) ;
-    TokenAnalyzer[] wsanalyzer = {
-        PunctuationTokenAnalyzer.INSTANCE, new CommonTokenAnalyzer(), 
-        //			new WordTreeMatchingAnalyzer(dict),
-        new DateChunker(),
-    };
-    wsverifier = new WordTokenizerVerifier(wsanalyzer) ;
   }
 
   @Test
@@ -67,6 +60,5 @@ public class DateChunkerUnitTest {
 
   private void verify(String text, String ... expect) throws Exception {
     verifier.verify(text, expect) ;
-    wsverifier.verify(text, expect) ;
   }
 }

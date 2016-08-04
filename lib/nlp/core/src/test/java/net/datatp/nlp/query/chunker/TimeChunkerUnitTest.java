@@ -2,6 +2,7 @@ package net.datatp.nlp.query.chunker;
 
 import org.junit.Test;
 
+import net.datatp.nlp.NLP;
 import net.datatp.nlp.token.WordTokenizerVerifier;
 import net.datatp.nlp.token.analyzer.CommonTokenAnalyzer;
 import net.datatp.nlp.token.analyzer.PunctuationTokenAnalyzer;
@@ -11,11 +12,12 @@ import net.datatp.nlp.ws.NGramStatisticWSTokenAnalyzer;
 public class TimeChunkerUnitTest {
   @Test
   public void test() throws Exception {
-    TokenAnalyzer[] analyzer = {
-        PunctuationTokenAnalyzer.INSTANCE, new CommonTokenAnalyzer(), 
-        new TimeChunker(),
-        new NGramStatisticWSTokenAnalyzer()
+    NLP nlp = new NLP("src/main/resources/nlp/vietnamese.nlp.yaml");
+    Class[] types = {
+      CommonTokenAnalyzer.class, PunctuationTokenAnalyzer.class, 
+      TimeChunker.class, NGramStatisticWSTokenAnalyzer.class
     };
+    TokenAnalyzer[] analyzer = nlp.createTokenAnalyzers(types) ;
     WordTokenizerVerifier verifier = new WordTokenizerVerifier(analyzer) ;
     // Regular time format
     verifier.verify("00:36",                 "00:36{time}") ;
