@@ -15,8 +15,9 @@ import net.datatp.util.text.StringUtil;
  **/
 public class VNDTokenAnalyzer extends TokenAnalyzer {
   final static public String[] VND_TOKENS =   { 
-      "vnd", "đồng", "dong", "đ", "đ/m2", "đ/km", "₫", "₫/m2", "₫/km"
-  } ;
+    "vnd", "đồng", "dong", "đ", "đ/m2", "đ/km", "₫", "₫/m2", "₫/km"
+  };
+  
   final static public String[] NGAN_TOKENS =  { "ngàn", "ngan", "k" } ;
   final static public String[] TRIEU_TOKENS = { "triệu", "trieu", "tr" } ;
   final static public String[] TY_TOKENS =    { "tỷ", "ty" } ;

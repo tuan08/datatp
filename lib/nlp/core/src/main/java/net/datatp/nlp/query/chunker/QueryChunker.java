@@ -3,8 +3,7 @@ package net.datatp.nlp.query.chunker;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.datatp.nlp.dict.EntityDictionary;
-import net.datatp.nlp.dict.SynsetDictionary;
+import net.datatp.nlp.NLP;
 import net.datatp.nlp.query.match.MatcherResourceFactory;
 import net.datatp.nlp.query.match.RuleMatch;
 import net.datatp.nlp.query.match.RuleMatcher;
@@ -21,11 +20,14 @@ abstract public class QueryChunker extends TokenAnalyzer {
   private RuleMatcher[] matcher;
 
   public QueryChunker() {
-    mrFactory = new MatcherResourceFactory(new SynsetDictionary(), new EntityDictionary()) ;
   }
 
   public QueryChunker(MatcherResourceFactory mrFactory) {
     this.mrFactory = mrFactory ;
+  }
+  
+  public void configure(NLP nlp) throws Exception {
+    this.mrFactory = nlp.getMatcherResourceFactory() ;
   }
 
   public void defineSynset(String name, String[] type, String[] variant) {

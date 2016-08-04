@@ -1,17 +1,9 @@
-package net.datatp.nlp;
+package net.datatp.nlp.token.analyzer;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import net.datatp.nlp.token.analyzer.CommonTokenAnalyzer;
-import net.datatp.nlp.token.analyzer.DateTokenAnalyzer;
-import net.datatp.nlp.token.analyzer.EmailTokenAnalyzer;
-import net.datatp.nlp.token.analyzer.GroupTokenMergerAnalyzer;
-import net.datatp.nlp.token.analyzer.PunctuationTokenAnalyzer;
-import net.datatp.nlp.token.analyzer.TimeTokenAnalyzer;
-import net.datatp.nlp.token.analyzer.TokenAnalyzer;
-import net.datatp.nlp.token.analyzer.USDTokenAnalyzer;
-import net.datatp.nlp.token.analyzer.UnknownWordTokenSplitter;
+import net.datatp.nlp.NLP;
 import net.datatp.nlp.vi.token.analyzer.VNDTokenAnalyzer;
 import net.datatp.nlp.vi.token.analyzer.VNMobileTokenAnalyzer;
 import net.datatp.nlp.vi.token.analyzer.VNPhoneTokenAnalyzer;
@@ -30,7 +22,7 @@ public class TokenAnalyzerFactory {
     add("usd",      USDTokenAnalyzer.class);
     add("vnphone",  VNPhoneTokenAnalyzer.class);
     add("vnmobile", VNMobileTokenAnalyzer.class);
-    add("group-token-merger", GroupTokenMergerAnalyzer.class);
+    add("group-token-merger",    GroupTokenMergerAnalyzer.class);
     add("word-tree-matching",    WordTreeMatchingAnalyzer.class);
     add("unknown-word-splitter", UnknownWordTokenSplitter.class);
   }

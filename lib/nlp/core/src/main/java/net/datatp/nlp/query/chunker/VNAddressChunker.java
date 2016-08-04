@@ -2,7 +2,7 @@ package net.datatp.nlp.query.chunker;
 
 import java.util.List;
 
-import net.datatp.nlp.query.match.MatcherResourceFactory;
+import net.datatp.nlp.NLP;
 import net.datatp.nlp.query.match.RuleMatcher;
 import net.datatp.nlp.token.IToken;
 import net.datatp.nlp.token.tag.EntityTag;
@@ -11,8 +11,10 @@ import net.datatp.nlp.token.tag.EntityTag;
  * $Author: Tuan Nguyen$ 
  **/
 public class VNAddressChunker extends QueryChunker {
-  public VNAddressChunker(MatcherResourceFactory mrFactory) throws Exception {
-    super(mrFactory) ;
+  public VNAddressChunker() { }
+  
+  public void configure(NLP nlp) throws Exception {
+    super.configure(nlp);
     String[] street   = {"đường", "phố", "ngõ", "nghách"} ;
     String[] quarter  = {"phường", "p.", "tổ", "thôn", "xã"} ;
     String[] district = {"quận", "q.", "huyện", "thị trấn"} ;

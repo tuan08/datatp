@@ -3,9 +3,7 @@ package net.datatp.nlp.query.chunker;
 import org.junit.Before;
 import org.junit.Test;
 
-import net.datatp.nlp.NLPResource;
-import net.datatp.nlp.dict.LexiconDictionary;
-import net.datatp.nlp.query.match.MatcherResourceFactory;
+import net.datatp.nlp.NLP;
 import net.datatp.nlp.token.WordTokenizerVerifier;
 import net.datatp.nlp.token.analyzer.CommonTokenAnalyzer;
 import net.datatp.nlp.token.analyzer.PunctuationTokenAnalyzer;
@@ -17,11 +15,13 @@ public class VNAddressChunkerUnitTest {
 
   @Before
   public void setup() throws Exception {
-    LexiconDictionary dict = NLPResource.getInstance().getLexiconDictionary(LexiconDictionary.VI_LEXICON_RES) ;
-    TokenAnalyzer[] wsanalyzer = {
-        PunctuationTokenAnalyzer.INSTANCE, new CommonTokenAnalyzer(), 
-        new WordTreeMatchingAnalyzer(dict), new VNAddressChunker(new MatcherResourceFactory()),
+    NLP nlp = new NLP("src/main/resources/nlp/vietnamese.nlp.yaml");
+    Class[] types = {
+      CommonTokenAnalyzer.class, PunctuationTokenAnalyzer.class, 
+      WordTreeMatchingAnalyzer.class, VNAddressChunker.class
     };
+    
+    TokenAnalyzer[] wsanalyzer = nlp.createTokenAnalyzers(types) ;
     wsverifier = new WordTokenizerVerifier(wsanalyzer) ;
   }
 

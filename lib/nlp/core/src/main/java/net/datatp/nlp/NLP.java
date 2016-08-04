@@ -8,6 +8,7 @@ import net.datatp.nlp.dict.MeaningDictionary;
 import net.datatp.nlp.query.Query;
 import net.datatp.nlp.query.match.MatcherResourceFactory;
 import net.datatp.nlp.token.analyzer.TokenAnalyzer;
+import net.datatp.nlp.token.analyzer.TokenAnalyzerFactory;
 import net.datatp.util.dataformat.DataSerializer;
 import net.datatp.util.io.IOUtil;
 import net.datatp.util.text.StringUtil;
@@ -68,6 +69,20 @@ public class NLP {
   
   public TokenAnalyzer createTokenAnalyzer(String name) throws Exception {
     return tokenAnalyzerFactory.createTokenAnalyzer(name, this);
+  }
+  public <T extends TokenAnalyzer> T createTokenAnalyzer(Class<T> type) throws Exception {
+    T instance = type.newInstance();
+    instance.configure(this);
+    return instance;
+  }
+  
+  public TokenAnalyzer[] createTokenAnalyzers(Class<? extends TokenAnalyzer> ... type) throws Exception {
+    TokenAnalyzer[] instances = new TokenAnalyzer[type.length];
+    for(int i = 0; i < type.length; i++) {
+      instances[i] = type[i].newInstance();
+      instances[i].configure(this);
+    }
+    return instances;
   }
   
   public TokenAnalyzer[] createTokenAnalyzers(String ... name) throws Exception {

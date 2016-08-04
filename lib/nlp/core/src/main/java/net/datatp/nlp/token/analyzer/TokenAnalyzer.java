@@ -8,7 +8,7 @@ import net.datatp.nlp.token.TokenException;
  * $Author: Tuan Nguyen$ 
  **/
 abstract public class TokenAnalyzer {
-  public void configure(NLP nlp) {
+  public void configure(NLP nlp) throws Exception {
   }
   
   abstract public IToken[] analyze(IToken[] unit) throws TokenException ;
