@@ -35,7 +35,7 @@ public class NLP {
   void init(NLPConfig config) throws Exception {
     lexiconDictionary      = new LexiconDictionary(config.getLexicons().allMeanings());
     synsetDictionary       = new MeaningDictionary("synset", config.getSynsets().allMeanings());
-    entityDictionary       = new MeaningDictionary("entity", config.getEntities().allMeanings());
+    entityDictionary       = new MeaningDictionary(null, config.getEntities().allMeanings());
     tokenAnalyzerFactory   = new TokenAnalyzerFactory(config.getTokenAnalyzers());
     matcherResourceFactory = new MatcherResourceFactory(synsetDictionary, entityDictionary);
     

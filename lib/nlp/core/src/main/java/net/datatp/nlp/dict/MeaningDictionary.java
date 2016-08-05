@@ -13,6 +13,9 @@ public class MeaningDictionary {
   private String               otype;
   private List<Meaning>        meangings = new ArrayList<>();
 
+  public MeaningDictionary() {  
+  }
+  
   public MeaningDictionary(String otype) {  
     this.otype = otype;
   }
@@ -24,7 +27,7 @@ public class MeaningDictionary {
 
   public void add(Meaning meaning) {
     if(meaning.getOType() == null) meaning.setOType(otype);
-    if(!otype.equals(meaning.getOType())) {
+    if(otype != null && !otype.equals(meaning.getOType())) {
       throw new RuntimeException(meaning.getName() + " is not an " + otype) ;
     }
     meangings.add(meaning) ;

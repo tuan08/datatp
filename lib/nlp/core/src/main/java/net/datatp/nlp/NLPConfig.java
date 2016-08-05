@@ -59,6 +59,7 @@ public class NLPConfig {
       
       if(imports != null) {
         for(String sel : imports) {
+          System.out.println("Load resources..." + sel);
           InputStream is = IOUtil.loadRes(sel) ;
           DataReader reader = new DataReader(is) ;
           Meaning meaning = null ;

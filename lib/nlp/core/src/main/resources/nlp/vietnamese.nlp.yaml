@@ -4,7 +4,6 @@ lexicons:
     - classpath:nlp/lexicon/vn.lexicon-uncategorized.json
     - classpath:nlp/entity/vn.place.json
     - classpath:nlp/entity/vn.person.json
-
 synsets:
   imports:
 

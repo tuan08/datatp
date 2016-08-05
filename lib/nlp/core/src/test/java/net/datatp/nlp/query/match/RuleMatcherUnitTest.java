@@ -4,8 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import net.datatp.nlp.dict.EntityDictionary;
-import net.datatp.nlp.dict.SynsetDictionary;
+import net.datatp.nlp.NLP;
+import net.datatp.nlp.dict.MeaningDictionary;
 import net.datatp.nlp.token.IToken;
 import net.datatp.nlp.token.TokenCollection;
 import net.datatp.nlp.token.TokenException;
@@ -28,11 +28,13 @@ public class RuleMatcherUnitTest {
 
   @Before
   public void setup() throws Exception {
-    SynsetDictionary dict = new SynsetDictionary() ;
-    dict.add("lienhe", new String[]{}, new String[]{"liên hệ"}) ;
-    dict.add("person", new String[]{}, new String[]{"chúng tôi", "tôi", "anh"}) ;
-    EntityDictionary entityDict = new EntityDictionary(EntityDictionary.DICT_RES) ;
-    umFactory = new MatcherResourceFactory(dict, entityDict) ;
+    NLP nlp = new NLP("src/main/resources/nlp/vietnamese.nlp.yaml");
+    
+    MeaningDictionary synsetDict = nlp.getSynsetDictionary() ;
+    synsetDict.add("lienhe", new String[]{}, new String[]{"liên hệ"}) ;
+    synsetDict.add("person", new String[]{}, new String[]{"chúng tôi", "tôi", "anh"}) ;
+    //EntityDictionary entityDict = new EntityDictionary(EntityDictionary.DICT_RES) ;
+    umFactory = nlp.getMatcherResourceFactory() ;
   }
 
   @Test
