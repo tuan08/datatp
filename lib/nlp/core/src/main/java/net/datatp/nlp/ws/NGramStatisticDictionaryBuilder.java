@@ -18,7 +18,6 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.datatp.nlp.NGram;
 import net.datatp.nlp.dict.LexiconDictionary;
 import net.datatp.nlp.dict.Meaning;
 import net.datatp.nlp.token.IToken;

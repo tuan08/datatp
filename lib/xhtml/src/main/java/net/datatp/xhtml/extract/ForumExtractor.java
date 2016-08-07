@@ -10,9 +10,6 @@ import net.datatp.xhtml.xpath.XPath;
 import net.datatp.xhtml.xpath.XPathSelector;
 import net.datatp.xhtml.xpath.XPathStructure;
 import net.datatp.xhtml.xpath.XPathTree;
-import net.datatp.xhtml.xpath.XPathSelector.AttrNodeSelector;
-import net.datatp.xhtml.xpath.XPathSelector.LinkNodeSelector;
-import net.datatp.xhtml.xpath.XPathSelector.TextNodeSelector;
 
 public class ForumExtractor implements WDataExtractor  {
   final static public String[] KEYWORD_LABELS = {

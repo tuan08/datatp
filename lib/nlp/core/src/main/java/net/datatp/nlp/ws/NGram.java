@@ -1,4 +1,4 @@
-package net.datatp.nlp;
+package net.datatp.nlp.ws;
 
 import java.util.ArrayList;
 import java.util.List;

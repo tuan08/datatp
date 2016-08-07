@@ -1,0 +1,29 @@
+<div>
+  <div>
+    <div id="UINavigation" class="colborder">
+      <h3 style="margin: 3px 0px">Categories</h3>
+      <hr/>
+      <div style="margin: 10px">
+        <div><span class="ui-action" name="">Article</span></div>
+        <div><span class="ui-action" name="">Forum</span></div>
+        <div><span class="ui-action" name="">Classified</span></div>
+        <div><span class="ui-action" name="">Social</span></div>
+      </div>
+
+      <h3 style="margin: 3px 0px">Tags</h3>
+      <hr/>
+      <div style="margin: 10px">
+        <div><span class="ui-action" name="">Article</span></div>
+        <div><span class="ui-action" name="">Forum</span></div>
+      </div>
+    </div>
+
+    <div id="UIWorkspace">
+      <div style="padding: 5px 0px">
+        <input name="search" value="" placeholder="Search Query" style="width: 600px; height: 20px; border: 1px solid lightgray" />
+        <span class="ui-action" name="">Search</span>
+      </div>
+    </div>
+    <div class="clearfix"><span/></div>
+  </div>
+</div>

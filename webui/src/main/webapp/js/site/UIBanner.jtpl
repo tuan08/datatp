@@ -1,14 +1,24 @@
-<div style="overflow: auto">
-  <div class="logo-text" style="float: left">
-    DataTP
-  </div>
-
-  <div style="float: right; padding-top: 3px">
-    <a class="ui-action onSelectPlugin" plugin="crawler">Web Crawler</a> |
-    <a class="ui-action onSelectPlugin" plugin="uidemo">UI Demo</a>
-  </div>
-
-  <div class="clearfix"><span/></div>
-  <hr/>
 <div>
+  <div style="height: 25px; padding: 5px 3px">
+    <div class="logo-text" style="float: left">
+      DataTP
+    </div>
 
+    <div style="float: right">
+      <form>
+        <input name="username" value="" placeholder="Username" style="border: 1px solid lightgray; width: 120px" />
+        <input name="passowrd" value="" placeholder="password" style="border: 1px solid lightgray; width: 120px"/>
+        <a class="ui-action onSelectPlugin">Login</a>
+      </form>
+    </div>
+    <div style="clear: both"><span/></div>
+    <hr/>
+  </div>
+
+  <div>
+    <a class="ui-action onSelectPlugin" plugin="search">Search</a> |
+    <a class="ui-action onSelectPlugin" plugin="crawler">Crawler</a> |
+    <a class="ui-action onSelectPlugin" plugin="uidemo">UI Demo</a>
+    <hr/>
+  </div>
+</div>
