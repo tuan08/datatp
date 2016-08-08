@@ -62,8 +62,8 @@ public class URLDatum implements  Externalizable {
 
   public long getCreatedTime() { return this.createdTime ; }
   
-  public String getOriginalUrlAsString() { return url; }
-
+  public String getOriginalUrl() { return this.url ; }
+  
   public void setOrginalUrl(String url) { 
     setOriginalUrl(url, new URLParser(url)) ;
   }
@@ -73,12 +73,10 @@ public class URLDatum implements  Externalizable {
     this.url = url; 
   }
 
-  public String getOriginalUrl() { return this.url ; }
-
   public String getRedirectUrl() { return this.redirectUrl ; }
   public void setRedirectUrl(String url) { this.redirectUrl = url; }
 
-  public String getFetchUrl() {
+  public String fetchUrl() {
     if(redirectUrl != null) return redirectUrl ;
     return url ;
   }

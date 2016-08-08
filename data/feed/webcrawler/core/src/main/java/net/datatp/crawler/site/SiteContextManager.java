@@ -73,7 +73,7 @@ public class SiteContextManager {
   }
 
   public URLContext getURLContext(URLDatum urlDatum)  {
-    URLParser urlParser = new  URLParser(urlDatum.getFetchUrl()) ;
+    URLParser urlParser = new  URLParser(urlDatum.getOriginalUrl()) ;
     SiteContext context = getSiteConfigContext(urlParser) ;
     if(context != null) return new URLContext(urlDatum, urlParser, context) ;
     return null;

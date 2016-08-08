@@ -62,7 +62,7 @@ public class SiteSession implements Comparable<SiteSession> {
     try {
       lock = true ;
       long startTime = System.currentTimeMillis() ;
-      String fetchUrl = urlDatum.getFetchUrl();
+      String fetchUrl = urlDatum.fetchUrl();
       
       HttpGet httpget = new HttpGet(fetchUrl); 
       BasicHttpContext httpContext = new BasicHttpContext();
@@ -148,7 +148,7 @@ public class SiteSession implements Comparable<SiteSession> {
       }
       urlDatum.setLastResponseCode(ResponseCode.UNKNOWN_ERROR) ;
     } else {
-      logger.error("Error For URL: " + urlDatum.getOriginalUrlAsString(), error) ;
+      logger.error("Error For URL: " + urlDatum.getOriginalUrl(), error) ;
       urlDatum.setLastResponseCode(ResponseCode.UNKNOWN_ERROR) ; 
     }
   }

@@ -16,7 +16,6 @@ public class MainContentExtractor implements WDataExtractor {
   
   public MainContentExtractor(String type) { this.type = type; }
   
-  
   @Override
   public WDataExtract extract(WDataExtractContext context) {
     XPathStructure structure = context.getXpathStructure();
@@ -28,15 +27,19 @@ public class MainContentExtractor implements WDataExtractor {
     XPath bodyXPath = findBody(structure, titleXPath, foundTextRepetions);
     if(bodyXPath == null) return null;
 
+    XPathTree bodyXPathTree = structure.getXPathTree().subTree(bodyXPath);
+    bodyXPathTree.removeXPathWithAttr("tag:repetion", new String[] { "link", "link:related" }, true);
+    XPath[] bodyXPathAsArray = bodyXPathTree.getXPathAsArray();
+    if(bodyXPathAsArray.length < 3 && bodyXPathTree.getText().length() < 500) return null;
+
     WDataExtract extract = new WDataExtract(type);
     if(titleXPath != null) {
       XPathTree titleXPathTree = structure.getXPathTree().subTree(titleXPath);
       extract.add(new XPathExtract("title", titleXPathTree.getXPathAsArray()));
     }
 
-    XPathTree bodyXPathTree = structure.getXPathTree().subTree(bodyXPath);
-    bodyXPathTree.removeXPathWithAttr("tag:repetion", new String[] { "link", "link:related" }, true);
-    extract.add(new XPathExtract("content", bodyXPathTree.getXPathAsArray()));
+    extract.add(new XPathExtract("content", bodyXPathAsArray));
+
     return extract;
   }
   
@@ -49,7 +52,12 @@ public class MainContentExtractor implements WDataExtractor {
         xpathRepetitions.findXPathRepetionWithTag("tag:text", "text:small", "text:medium", "text:small");
     XPath bodyXPath = findBody(structure, titleXPath, foundTextRepetions);
     if(bodyXPath == null) return null;
-
+    
+    XPathTree bodyXPathTree = structure.getXPathTree().subTree(bodyXPath);
+    bodyXPathTree.removeXPathWithAttr("tag:repetion", new String[] { "link", "link:related" }, true);
+    XPath[] bodyXPathAsArray = bodyXPathTree.getXPathAsArray();
+    if(bodyXPathAsArray.length < 3 &&  bodyXPathTree.getText().length() < 500) return null;
+    
     ContentEntity entity = new ContentEntity();
     entity.setType(type);
 
@@ -58,8 +66,6 @@ public class MainContentExtractor implements WDataExtractor {
       entity.setTitle(titleXPathTree.getText());
     }
 
-    XPathTree bodyXPathTree = structure.getXPathTree().subTree(bodyXPath);
-    bodyXPathTree.removeXPathWithAttr("tag:repetion", new String[] { "link", "link:related" }, true);
     entity.setContent(bodyXPathTree.getText());
     return entity;
   }

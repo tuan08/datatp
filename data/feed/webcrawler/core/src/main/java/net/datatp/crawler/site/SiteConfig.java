@@ -18,7 +18,7 @@ public class SiteConfig implements Serializable {
   private boolean         crawlSubDomain;
   private int             crawlDeep;
   private int             refreshPeriod;
-  private int             maxConnection;
+  private int             maxConnection    = 1;
   private int             maxFetchSchedule = 100;
   private Status          status           = Status.Ok;
   private String          language;

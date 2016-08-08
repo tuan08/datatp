@@ -49,7 +49,7 @@ public class HttpFetcherMetric implements Serializable {
   public String[] recentFetchUrl() {
     String[] array = new String[recentFetchUrls.size()] ;
     for(int i = 0; i < recentFetchUrls.size(); i++) {
-      array[i] = recentFetchUrls.get(i).getFetchUrl() ;
+      array[i] = recentFetchUrls.get(i).getOriginalUrl();
     }
     return array ; 
   }

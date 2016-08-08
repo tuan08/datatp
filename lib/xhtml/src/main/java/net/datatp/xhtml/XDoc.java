@@ -11,13 +11,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class XDoc implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy HH:mm:ss")
-  private Date                  timestamp;
-  
-  private String                    type;
-  private String                    data;
-  private Map<String, String>       attrs;
-  private Map<String, Serializable> entities;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+  private Date                    timestamp;
+
+  private String                  type;
+  private String                  data;
+  private Map<String, String>     attrs;
+  private Map<String, XDocEntity> entities;
 
   public Date getTimestamp() { return timestamp; }
   public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
@@ -27,7 +27,7 @@ public class XDoc implements Serializable {
 
   public String getData() { return data; }
   public void setData(String data) { this.data = data; }
-
+  
   public String attr(String name) {
     if(attrs == null) return null;
     return attrs.get(name);
@@ -43,11 +43,12 @@ public class XDoc implements Serializable {
   public void setAttrs(Map<String, String> attrs) { this.attrs = attrs; }
   
   @JsonProperty("entity")
-  public Map<String, Serializable> getEntities() { return entities;  }
-  public void setEntities(Map<String, Serializable> entities) { this.entities = entities; }
+  public Map<String, XDocEntity> getEntities() { return entities;  }
+  public void setEntities(Map<String, XDocEntity> entities) { this.entities = entities; }
   
-  public void addEntity(String name, Serializable obj) {
+  
+  public void addEntity(XDocEntity entity) {
     if(entities == null) entities = new HashMap<>();
-    entities.put(name, obj);
+    entities.put(entity.getName(), entity);
   }
 }

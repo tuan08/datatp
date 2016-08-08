@@ -57,7 +57,7 @@ public class URLDatumDBUnitTest {
     MergeMultiSegmentIterator<Text, URLDatumRecord> i = db.getMergeRecordIterator();
     while(i.next()) {
       URLDatum urlDatum = i.currentValue();
-      System.out.println(urlDatum.getFetchUrl() + ", status = " + urlDatum.getStatus());
+      System.out.println(urlDatum.getOriginalUrl() + ", status = " + urlDatum.getStatus());
     }
   }
 }

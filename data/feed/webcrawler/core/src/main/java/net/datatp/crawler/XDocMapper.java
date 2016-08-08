@@ -1,9 +1,10 @@
 package net.datatp.crawler;
 
-import java.io.Serializable;
 import java.util.Date;
+import java.util.Map;
 
 import net.datatp.xhtml.XDoc;
+import net.datatp.xhtml.XDocEntity;
 
 public class XDocMapper {
   final static public String URL   = "url";
@@ -29,12 +30,20 @@ public class XDocMapper {
   public void setUrl(String url) { xdoc.attr(URL, url); }
   
   public String getErrorResponseCode() { return xdoc.attr("errorResponseCode") ; }
-  public void   setErrorResponseCode(String code) { xdoc.attr("errorCesponseCode", code) ; }
+  public void   setErrorResponseCode(String code) { xdoc.attr("errorResponseCode", code) ; }
   
-  public String getErrorContent() { return xdoc.attr("error.content") ; }
+  public String getErrorContent() { return xdoc.attr("errorContent") ; }
   public void   setErrorContent(String content) { xdoc.attr("errorContent", content) ; }
   
-  public void addEntity(String name, Serializable obj) {
-    xdoc.addEntity(name, obj);
+  public void setPageType(String type) { xdoc.attr("pageType", type); }
+  
+  public boolean hasEntities() {
+    Map<String, XDocEntity> entities = xdoc.getEntities();
+    if(entities != null && entities.size() > 0) return true;
+    return false;
+  }
+  
+  public void addEntity(XDocEntity entity) { 
+    xdoc.addEntity(entity); 
   }
 }

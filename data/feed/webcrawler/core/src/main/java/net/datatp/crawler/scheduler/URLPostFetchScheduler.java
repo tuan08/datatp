@@ -98,7 +98,7 @@ abstract public class URLPostFetchScheduler {
       URLDatum urlDatum = urlDatums.get(i) ;
       URLContext context = siteContextManager.getURLContext(urlDatum) ;
       if(context == null) {
-        logger.warn("SiteConfig is not found for the url ", urlDatum.getFetchUrl()) ;
+        logger.warn("SiteConfig is not found for the url ", urlDatum.getOriginalUrl()) ;
         continue ;
       }
       SiteContext siteContext = context.getSiteContext() ;

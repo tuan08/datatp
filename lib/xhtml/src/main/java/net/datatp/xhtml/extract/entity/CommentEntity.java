@@ -1,7 +1,6 @@
 package net.datatp.xhtml.extract.entity;
 
 import java.io.Serializable;
-
 import net.datatp.util.text.StringUtil;
 
 public class CommentEntity extends ExtractEntity implements Serializable {
@@ -9,17 +8,21 @@ public class CommentEntity extends ExtractEntity implements Serializable {
 
   private String[] comment;
   
-  public CommentEntity() {}
+  public CommentEntity() {
+    setName("comment");
+  }
   
   public CommentEntity(String ... comment) {
+    setName("comment");
     this.comment = comment;
   }
   
   public String[] getComment() { return comment; }
   public void setComment(String ... comment) { this.comment = comment; }
 
+  
   @Override
-  String getFormattedText() {
+  public String getFormattedText() {
     StringBuilder b = new StringBuilder();
     b.append("Type: ").append(getType()).append("\n");
     b.append("Tags: ").append(StringUtil.joinStringArray(getTags())).append("\n");

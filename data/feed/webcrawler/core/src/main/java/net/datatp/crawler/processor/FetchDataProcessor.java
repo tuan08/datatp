@@ -45,12 +45,13 @@ public class FetchDataProcessor {
       if(data != null) {
         Charset charset = EncodingDetector.INSTANCE.detect(data, data.length);
         String xhtml = new String(data, charset);
-        WData wdata = new WData(urlDatum.getFetchUrl(), urlDatum.getAnchorText(), xhtml) ;
+        WData wdata = new WData(urlDatum.getOriginalUrl(), urlDatum.getAnchorText(), xhtml) ;
         wDataCtx = new WDataExtractContext(wdata);
       }
-      processUrls(fetchCtx, wDataCtx);
       metric.addSumHtmlProcessTime(System.currentTimeMillis() - start) ;
       processPlugins(fetchCtx, wDataCtx);
+      
+      processUrls(fetchCtx, wDataCtx);
     } catch(Exception ex) {
       ex.printStackTrace() ;
       logger.error("Cannot process : " + urlDatum.getOriginalUrl()) ;
@@ -59,8 +60,14 @@ public class FetchDataProcessor {
   }
   
   private void processUrls(FetchContext fetchCtx, WDataExtractContext wDataCtx) throws Exception {
+    URLDatum urlDatum = fetchCtx.getURLContext().getURLDatum();
+    if(fetchCtx.getXDocMapper().hasEntities()) {
+      urlDatum.setPageType(URLDatum.PAGE_TYPE_DETAIL);
+    } else {
+      urlDatum.setPageType(URLDatum.PAGE_TYPE_LIST);
+    }
     ArrayList<URLDatum> commitUrls = new ArrayList<URLDatum>() ;
-    commitUrls.add(fetchCtx.getURLContext().getURLDatum());
+    commitUrls.add(urlDatum);
     if(wDataCtx != null) {
       Map<String, URLDatum> urls = urlExtractor.extract(fetchCtx.getURLContext(), wDataCtx) ;
       commitUrls.addAll(urls.values()) ;

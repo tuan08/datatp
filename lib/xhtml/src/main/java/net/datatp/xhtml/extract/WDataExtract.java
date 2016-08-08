@@ -35,6 +35,7 @@ public class WDataExtract {
   }
   
   static public String format(List<WDataExtract> holder) {
+    if(holder == null) return "No Extract";
     StringBuilder b = new StringBuilder();
     for(int i = 0; i < holder.size(); i++) {
       b.append(holder.get(i).getFormattedText()).append("\n");

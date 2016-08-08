@@ -58,7 +58,7 @@ abstract public class URLPreFetchScheduler {
       URLContext urlContext = siteContextManager.getURLContext(datum) ;
       if(urlContext == null) {
         errorCount++ ;
-        logger.info("Scheduler: URLContext for " + datum.getOriginalUrlAsString() + " is null!") ;
+        logger.info("Scheduler: URLContext for " + datum.getOriginalUrl() + " is null!") ;
         continue ;
       }
       

@@ -99,7 +99,7 @@ public class URLExtractor {
         addURL(urls, newNormalizeURL, newURLDatum);
       }
     } catch (Throwable t) {
-      logger.error("Cannot extract url for " + urlDatum.getFetchUrl(), t);
+      logger.error("Cannot extract url for " + urlDatum.getOriginalUrl(), t);
     }
     return urls;
   }

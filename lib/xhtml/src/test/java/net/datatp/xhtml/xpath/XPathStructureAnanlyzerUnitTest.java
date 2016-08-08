@@ -30,6 +30,19 @@ public class XPathStructureAnanlyzerUnitTest {
   }
   
   @Test
+  public void testArticleList() throws Exception {
+    String anchorText = "Thế giới";
+    String url = "http://vnexpress.net/tin-tuc/the-gioi";
+    WDataHttpFetcher fetcher = new WDataHttpFetcher();
+    WData wPageData = fetcher.fetch(anchorText, url);
+    WDataExtractContext context = new WDataExtractContext(wPageData);
+    
+    WDataExtractors extractor = new WDataExtractors("content", new MainContentExtractor(), new CommentExtractor());
+    List<WDataExtract> extracts = extractor.extract(context);
+    System.out.println(WDataExtract.format(extracts));
+  }
+  
+  @Test
   public void testForum() throws Exception {
     String anchorText = "Thay bỏ thớt gỗ quá date mà còn bị vợ càu nhàu";
     String url = "http://www.webtretho.com/forum/f4519/thay-bo-thot-go-qua-date-ma-con-bi-vo-cau-nhau-2273789/";
