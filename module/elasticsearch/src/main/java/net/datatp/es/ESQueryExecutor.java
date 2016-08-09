@@ -27,7 +27,7 @@ public class ESQueryExecutor {
     this.esclient = esclient;
     searchReqBuilder = esclient.client.prepareSearch(index).setSearchType(SearchType.QUERY_THEN_FETCH);
     setQueryBuilder(QueryBuilders.matchAllQuery());
-    setFrom(0).setTo(100);
+    setFrom(0).setPageSize(100);
   }
   
   public ESQueryExecutor setExplain(boolean b) {
@@ -40,8 +40,8 @@ public class ESQueryExecutor {
     return this;
   }
   
-  public ESQueryExecutor setTo(int to) {
-    searchReqBuilder.setSize(to);
+  public ESQueryExecutor setPageSize(int pageSize) {
+    searchReqBuilder.setSize(pageSize);
     return this;
   }
   
@@ -78,6 +78,11 @@ public class ESQueryExecutor {
   
   public ESQueryExecutor matchTermByRegex(String field, String exp) throws ElasticsearchException {
     searchReqBuilder.setQuery(regexpQuery(field, exp));
+    return this;
+  }
+  
+  public ESQueryExecutor query(String query) throws ElasticsearchException {
+    searchReqBuilder.setQuery(QueryBuilders.queryStringQuery(query));
     return this;
   }
   

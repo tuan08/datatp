@@ -33,4 +33,6 @@ public class CrawlerRestController {
   public List<URLScheduleMetric> schedulerGetURLScheduleReport(@RequestParam(value="max", defaultValue="100") int max) throws Exception {
     return crawlerApi.schedulerGetURLScheduleReport(max);
   }
+  
+  
 }

@@ -18,7 +18,7 @@ define([
           }
         },
         { 
-          label: "Tab 2",  name: "tab2",
+          label: "Tab 2",  name: "tab2", closable: true,
           onSelect: function(thisUI, tabConfig) {
             var uiTab2 = new UIContent( { content: "Tab 2" }) ;
             thisUI.setSelectedTab(tabConfig.name, uiTab2) ;

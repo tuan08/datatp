@@ -17,7 +17,7 @@ define([
       } ;
       $(this.el).html(this._template(params));
       //this.selectPlugin("scribengin");
-      this.selectPlugin("crawler");
+      this.selectPlugin("search");
     },
     
     selectPlugin: function(name) {

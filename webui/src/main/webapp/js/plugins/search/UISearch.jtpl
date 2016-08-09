@@ -69,6 +69,10 @@
     </div>
   </div>
 
+  <div id="UISearchResult" style="padding-top: 15px">
+   Search Result Tabs
+  </div>
+
   <div style="padding-top: 15px">
     <%renderSearchResult(xdocQuery)%> 
   </div>

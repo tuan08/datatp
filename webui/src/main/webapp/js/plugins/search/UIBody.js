@@ -2,8 +2,8 @@ define([
   'jquery',
   'underscore', 
   'backbone',
-  'text!plugins/search/UIBody.jtpl'
-], function($, _, Backbone,  Template) {
+  'plugins/search/UISearch',
+], function($, _, Backbone, UISearch) {
   var UIBody = Backbone.View.extend({
     el: $("#UIBody"),
     
@@ -11,31 +11,16 @@ define([
       _.bindAll(this, 'render') ;
     },
     
-    _template: _.template(Template),
+    _template: _.template("<div id='UISearch'></div>"),
 
     render: function() {
-      var params = { } ;
+      var params = { xdocQuery: this.xdocQuery } ;
       $(this.el).html(this._template(params));
     },
 
     onActivate: function(evt) {
-    },
-
-    events: {
-      'click .onSelectUI': 'onSelectUI'
-    },
-    
-    onSelectUI: function(evt) {
-      var name = $(evt.target).closest('.onSelectUI').attr('name') ;
-      this._loadUI(name);
-    },
-
-    _loadUI: function(name) {
-      require(['plugins/crawler/' + name], function(UIDemoComponent) { 
-        $('#UIWorkspace').empty();
-        $('#UIWorkspace').unbind();
-        UIDemoComponent.setElement($('#UIWorkspace')).render();
-      }) ;
+      var uiSearch = new UISearch();
+      uiSearch.setElement($('#UISearch')).render();
     }
   });
   
