@@ -1,8 +1,5 @@
 package net.datatp.es;
 
-import static org.elasticsearch.index.query.QueryBuilders.regexpQuery;
-import static org.elasticsearch.index.query.QueryBuilders.termQuery;
-
 import java.io.IOException;
 
 import org.elasticsearch.ElasticsearchException;
@@ -12,9 +9,10 @@ import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.common.xcontent.ToXContent;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
-import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 
 public class ESQueryExecutor {
@@ -63,21 +61,18 @@ public class ESQueryExecutor {
   }
   
   public ESQueryExecutor matchTerm(String field, String term) throws ElasticsearchException {
-    searchReqBuilder.setQuery(termQuery(field, term));
+    searchReqBuilder.setQuery(QueryBuilders.termQuery(field, term));
     return this;
   }
   
-  public ESQueryExecutor matchTerm(String[] field, String term) throws ElasticsearchException {
-    BoolQueryBuilder boolQuery = new BoolQueryBuilder();
-    for(String selField : field) {
-      boolQuery.must(QueryBuilders.matchQuery(selField, term));
-    }
-    searchReqBuilder.setQuery(boolQuery);
+  public ESQueryExecutor matchTerms(String[] field, String terms) throws ElasticsearchException {
+    MultiMatchQueryBuilder multiMatch = QueryBuilders.multiMatchQuery(terms, field);
+    searchReqBuilder.setQuery(multiMatch);
     return this;
   }
   
   public ESQueryExecutor matchTermByRegex(String field, String exp) throws ElasticsearchException {
-    searchReqBuilder.setQuery(regexpQuery(field, exp));
+    searchReqBuilder.setQuery(QueryBuilders.regexpQuery(field, exp));
     return this;
   }
   
@@ -101,7 +96,9 @@ public class ESQueryExecutor {
   }
   
   public long countByMatchTerm(String field, String term) throws Exception {
-    SearchResponse response = esclient.client.prepareSearch(index).setQuery(termQuery(field, term)).setSize(0).execute().actionGet();
+    TermQueryBuilder termQuery = QueryBuilders.termQuery(field, term);
+    SearchResponse response = 
+      esclient.client.prepareSearch(index).setQuery(termQuery).setSize(0).execute().actionGet();
     return response.getHits().getTotalHits();
   }
 }

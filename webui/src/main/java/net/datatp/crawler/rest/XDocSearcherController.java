@@ -23,15 +23,10 @@ public class XDocSearcherController {
   
   @RequestMapping("/search/query")
   public String search(@RequestParam(value="query") String query, 
-                               @RequestParam(value="from", defaultValue="0") int from, 
-                               @RequestParam(value="pageSize",   defaultValue="100") int pageSize) throws Exception {
-    ESQueryExecutor executor = searcher.getQueryExecutor();
-    System.out.println("query = " + query);
-    System.out.println("range = " + from + " - " + pageSize);
-    executor.
-      query(query).
-      setFrom(from).
-      setPageSize(pageSize);
+                       @RequestParam(value="from", defaultValue="0") int from, 
+                       @RequestParam(value="pageSize",   defaultValue="100") int pageSize) throws Exception {
+    ESQueryExecutor executor = searcher.getContentQueryExecutor(query);
+    executor.setFrom(from).setPageSize(pageSize);
     return executor.executeAndReturnAsJson();
   }  
 }

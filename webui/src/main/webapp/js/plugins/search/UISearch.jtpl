@@ -1,64 +1,3 @@
-<%function renderPageIterator(pageItr) {%>
-  <div>
-    <div style="text-align: center;">
-      <a class="onSelectPage ui-action" page="<%=pageItr.getPrevPage()%>">Prev</a>
-      <%var cpage = pageItr.getCurrentPage(); %>
-      <%var range = pageItr.getSubRange(cpage, 10); %>
-      <%if(range[0] > 1) {%>
-        <a class="onSelectPage ui-action" page="1">First</a>
-        <a class="ui-disabled ui-action">..</a>
-      <%}%>
-      <%for(var i = range[0]; i <= range[1] ; i++) { %>
-        <%if(i == cpage) {%>
-          <a class="ui-disabled onSelectPage ui-action" page="<%=i%>"><%=i%></a>
-        <%} else {%>
-          <a class="onSelectPage ui-action" page="<%=i%>"><%=i%></a>
-        <%} %>
-      <%} %>
-      <%var lastPage =  pageItr.getAvailablePage()%>
-      <%if(range[1] < lastPage) {%>
-        <a class="ui-disabled ui-action">..</a>
-        <a class="onSelectPage ui-action" page="<%=lastPage%>">Last</a>
-      <%}%>
-      <a class="onSelectPage ui-action" page="<%=pageItr.getNextPage()%>">Next</a>
-    </div>
-  </div>
-<%}%>
-
-<%function renderHits(xdocQuery) { %>
-<%  var hits  = xdocQuery.getHits();%>
-<%  var index = xdocQuery.getPageIteratorModel().getFrom(); %>
-<%  for(var i = 0; i < hits.length; i++) { %>
-<%    var source = hits[i]._source; %>
-<%    var title = "No Entity found"; %>
-<%    var type  = ""; %>
-<%    if(source.entity != null && source.entity.content != null) { %>
-<%      title = source.entity.content.title; %>
-<%      type  = source.entity.content.type; %>
-<%    }%>
-      <div>
-        <div>
-          <strong><%=index + i + 1%>.</strong>
-          <span class="ui-action"><%=title%></span>
-        </div>
-        <div style="font-size: 75%; padding-left: 15px">
-          <strong>Info: </strong>
-          <span class="ui-action"><%=type%></span>
-        </div>
-      </div>
-<%  }%>
-<%}%>
-
-<%function renderSearchResult(xdocQuery) { %>
-<%  if(xdocQuery == null || !xdocQuery.hasSearchResult()) return;%>
-    <div>
-      <h6>Search Result For "<%=xdocQuery.query%>"</h6>
-      <hr/>
-    </div>
-    <%renderHits(xdocQuery)%> 
-    <%renderPageIterator(xdocQuery.getPageIteratorModel())%> 
-<%}%>
-
 <div style="padding: 10px">
   <div>
     <%var query = ""; %>
@@ -69,11 +8,5 @@
     </div>
   </div>
 
-  <div id="UISearchResult" style="padding-top: 15px">
-   Search Result Tabs
-  </div>
-
-  <div style="padding-top: 15px">
-    <%renderSearchResult(xdocQuery)%> 
-  </div>
+  <div id="UISearchResult" style="padding-top: 15px"></div>
 </div>

@@ -16,5 +16,14 @@ public class ESXDocSearcher {
     this.esXDocClient = new ESObjectClient<>(esclient, index, XDoc.class) ;
   }
   
-  public ESQueryExecutor getQueryExecutor() { return new ESQueryExecutor(index, esclient); }
+  public ESQueryExecutor getQueryExecutor() { 
+    return new ESQueryExecutor(index, esclient); 
+  }
+  
+  public ESQueryExecutor getContentQueryExecutor(String query) { 
+    ESQueryExecutor executor = new ESQueryExecutor(index, esclient); 
+    String[] field = {"entity.content.title^5", "entity.content.description^3", "entity.content.content" } ;
+    executor.matchTerms(field, query);
+    return executor;
+  }
 }

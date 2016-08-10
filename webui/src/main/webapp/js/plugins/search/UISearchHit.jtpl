@@ -1,0 +1,16 @@
+<div style="padding-top: 15px">
+  <div>
+    <div><strong>MD5 ID:</strong> <%=attr.md5Id%></div>
+    <div><strong>URL:</strong> <%=attr.url%></div>
+    <div><strong>Page Type:</strong> <%=attr.pageType%></div>
+  </div>
+
+  <div>
+    <div><strong>Title:</strong> <%=content.title%></div>
+    <div><strong>Description:</strong> <%=content.description%></div>
+    <div>
+      <strong>Content:</strong> 
+      <pre><%=content.content%></pre>
+    </div>
+  </div>
+</div>

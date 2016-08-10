@@ -64,7 +64,7 @@ public class CrawlerIntegrationTest {
     
     Thread.sleep(10000);
     ESXDocSearcher searcher = new ESXDocSearcher("xdoc", new String[] {"127.0.0.1:9300"});
-    for(int i = 0; i < 1000; i++) {
+    for(int i = 0; i < 5; i++) {
       ESQueryExecutor executor = searcher.getQueryExecutor();
       System.out.println("page list   = " + executor.matchTerm("attr.pageType", "list").execute().getHits().totalHits());
       System.out.println("page detail = " + executor.matchTerm("attr.pageType", "detail").execute().getHits().totalHits());

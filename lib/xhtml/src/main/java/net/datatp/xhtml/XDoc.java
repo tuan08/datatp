@@ -26,7 +26,7 @@ public class XDoc implements Serializable {
   public void setType(String type) { this.type = type; }
 
   public String getData() { return data; }
-  public void setData(String data) { this.data = data; }
+  public void   setData(String data) { this.data = data; }
   
   public String attr(String name) {
     if(attrs == null) return null;

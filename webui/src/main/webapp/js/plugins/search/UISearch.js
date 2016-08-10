@@ -3,10 +3,12 @@ define([
   'underscore', 
   'backbone',
   'ui/UITabbedPane',
-  'ui/UIContent',
+  'ui/UIUtil',
+  'plugins/search/UISearchHits',
+  'plugins/search/UISearchHit',
   'plugins/search/rest/Rest',
   'text!plugins/search/UISearch.jtpl'
-], function($, _, Backbone, UITabbedPane, UIContent, Rest, Template) {
+], function($, _, Backbone, UITabbedPane, UIUtil, UISearchHits, UISearchHit,  Rest, Template) {
   var UISearchResult = UITabbedPane.extend({
     label: 'Search',
 
@@ -15,23 +17,45 @@ define([
         { 
           label: "Serarch Result",  name: "searchResult",
           onSelect: function(thisUI, tabConfig) {
-            var uiTab1 = new UIContent( { content: "Tab 1" }) ;
-            thisUI.setSelectedTab(tabConfig.name, uiTab1) ;
+            thisUI.setSelectedTabUIComponent(tabConfig.name, thisUI.uiSearchHits) ;
           }
         }
       ]
     },
     
     onInit: function(options) {
+      this.uiSearchHits = new UISearchHits();
+      this.uiSearchHits.uiParent = this;
+    },
+    
+    onSearch: function(xdocQuery) {
+      this.uiSearchHits.setXDocQuery(xdocQuery);
+      this.setSelectedTab('searchResult');
+      this.render();
+    },
+
+    addHitView: function(hit) {
+      var label = "Unknown";
+      if(hit._source.entity != null) {
+        var entity = hit._source.entity;
+        if(entity.content != null && entity.content.title != null) {
+          label = entity.content.title;
+        }
+      }
+      if(label.length > 50) {
+        label = label.substring(0, 50) + "...";
+      }
+      this.addTab(UIUtil.guid(), label, new UISearchHit({searchHit: hit}), true);
+      this.render();
     }
   });
 
   var UISearch = Backbone.View.extend({
-    el: $("#UISearch"),
+    type: 'UISearch',
+    el:   $("#UISearch"),
     
     initialize: function () {
       _.bindAll(this, 'render') ;
-      this.uiSearchResult = new UISearchResult();
     },
     
     _template: _.template(Template),
@@ -39,28 +63,30 @@ define([
     render: function() {
       var params = { xdocQuery: this.xdocQuery } ;
       $(this.el).html(this._template(params));
-      var block = $('#UISearchResult') ;
-      console.log(block.html());
-      this.uiSearchResult.setElement($('#UISearchResult')).render();
+      $('#UISearchResult').unbind();
+      $('#UISearchResult').empty();
+      if(this.uiSearchResult != null) {
+        this.uiSearchResult.setElement($('#UISearchResult')).render();
+      }
     },
 
     events: {
-      'click .onSearch': 'onSearch',
-      'click .onSelectPage': 'onSelectPage'
+      'click .onSearch': 'onSearch'
     },
     
     onSearch: function(evt) {
       var query = $(evt.target).parent().find("input").val() ;
       this.xdocQuery = Rest.searcher.createXDocQuery(query, 10);
       this.xdocQuery.execute();
+      this.uiSearchResult = new UISearchResult();
+      this.uiSearchResult.uiParent = this;
       this.render();
+      this.uiSearchResult.onSearch(this.xdocQuery);
     },
 
-    onSelectPage: function(evt) {
-      var page = $(evt.target).attr("page") ;
-      this.xdocQuery.goToPage(parseInt(page));
-      this.render();
-    },
+    addHitView: function(hit) {
+      this.uiSearchResult.addHitView(hit);
+    }
   });
   
   return UISearch ;

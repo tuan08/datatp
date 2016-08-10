@@ -43,8 +43,8 @@ public class CrawlerIntegrationTest {
     
     crawler.siteCreateGroup("vietnam");
     crawler.siteAdd(
-        new SiteConfig("vietnam", "vnexpress.net", "http://vnexpress.net", 2).
-        setExtractConfig(ExtractConfig.article())
+      new SiteConfig("vietnam", "vnexpress.net", "http://vnexpress.net", 2).
+      setExtractConfig(ExtractConfig.article())
     );
     
     crawler.siteAdd(
