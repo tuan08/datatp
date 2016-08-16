@@ -6,7 +6,7 @@
         <h3 style="margin: 3px 0px">Site Config</h3>
         <hr/>
         <div style="margin: 10px">
-          <div><span class="ui-action onSelectUI" name="site/UISiteConfig">Site Config</span></div>
+          <div><span class="ui-action onSelectUI" name="site/UISiteConfigScreen">Site Config</span></div>
         </div>
 
         <h3 style="margin: 3px 0px">Master</h3>

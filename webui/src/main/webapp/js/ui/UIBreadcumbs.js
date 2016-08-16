@@ -6,44 +6,53 @@ define([
   'text!ui/UIBreadcumbs.jtpl'
 ], function($, _, Backbone, UIUtil, UIBreadcumbsTmpl) {
   var UIBreadcumbs = Backbone.View.extend({
+    type: 'UIBreadcumbs',
     
     initialize: function (options) {
-      this.el = options.el ;
-      this.type = 'UIBreadcumbs' ;
+      //this.el = options.el ;
       this.views = [] ;
-      
+      if(this.onInit) {
+        this.onInit(options) ;
+      }
       _.bindAll(this, 'render', 'onSelectView') ;
-      this.renderTmpl() ;
     },
     
     _template: _.template(UIBreadcumbsTmpl),
     
-    renderTmpl: function() {
+    render: function() {
       var params = {} ;
       $(this.el).html(this._template(params));
+
+      if(this.views.length > 0) {
+        var breadcumbs = this.$('.Breadcumbs') ;
+        for(var i = 0; i < this.views.length; i++) {
+          var view = this.views[i];
+          var label = view.label ;
+          if(label == null) label = "???" ;
+          if(i > 0) {
+            breadcumbs.append("<span style='font-weight: bold'> &gt;&gt; </span>");
+          }
+          if(i == this.views.length - 1) {
+            breadcumbs.find("a").removeClass('ui-disabled');
+	    breadcumbs.append(this._buttonTmpl({label: label}));
+            view.setElement(this.$('.BreadcumbsView')).render();
+          } else {
+            breadcumbs.append(this._buttonTmpl({label: label}));
+          }
+        }
+      }
     },
     
-    render: function() {
-      this.renderTmpl() ;
-      var view = this.views.pop() ;
-      if(view != null) view.render() ;
-    },
-    
-    _buttonTmpl: _.template(
-      "<a class='onSelectView ui-action ui-disabled'><%=label%></a>"
-    ),
+    _buttonTmpl: _.template("<a class='onSelectView ui-action ui-disabled'><%=label%></a>"),
 
-    add: function(uicomponent) {
-      this.push(uicomponent) ;
-    },
+    add: function(uicomponent) { this.push(uicomponent) ; },
 
-    remove: function(uicomponent) {
-      throw new Error('to implement') ;
-    },
+    remove: function(uicomponent) { throw new Error('to implement') ; },
     
     push: function(view) {
       view.uiParent = this ;
       this.views.push(view) ;
+
       var label = view.label ;
       if(label == null) label = "???" ;
       var breadcumbs = this.$('.Breadcumbs') ;

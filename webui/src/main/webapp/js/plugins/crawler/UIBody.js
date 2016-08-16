@@ -20,7 +20,7 @@ define([
     },
 
     onActivate: function(evt) {
-      this._loadUI('site/UISiteConfig');
+      this._loadUI('site/UISiteConfigScreen');
     },
 
     events: {
@@ -33,10 +33,10 @@ define([
     },
 
     _loadUI: function(name) {
-      require(['plugins/crawler/' + name], function(UIDemoComponent) { 
+      require(['plugins/crawler/' + name], function(uiComp) { 
         $('#UIWorkspace').empty();
         $('#UIWorkspace').unbind();
-        UIDemoComponent.setElement($('#UIWorkspace')).render();
+        uiComp.setElement($('#UIWorkspace')).render();
       }) ;
     }
   });

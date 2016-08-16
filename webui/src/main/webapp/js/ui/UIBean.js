@@ -40,9 +40,7 @@ define([
     };
   };
   
-  /**
-   *@type ui.UIBean 
-   */
+  /** *@type ui.UIBean */
   var UIBean = Backbone.View.extend({
     
     initialize: function (options) {
@@ -101,9 +99,7 @@ define([
       }
     },
     
-    getBean: function(name) {
-      return this.beanStates[name].bean ;
-    },
+    getBean: function(name) { return this.beanStates[name].bean ; },
     
     restoreBeanState: function(beanName) {
       var beanState = this.beanStates[beanName] ;
@@ -115,9 +111,7 @@ define([
       this.render() ;
     },
 
-    getAncestorOfType: function(type) {
-      return UIUtil.getAncestorOfType(this, type) ;
-    },
+    getAncestorOfType: function(type) { return UIUtil.getAncestorOfType(this, type) ; },
     
     _template: _.template(UIBeanTmpl),
     

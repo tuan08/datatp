@@ -26,18 +26,20 @@ define([
 
     setSelectedTab: function(name) {
       var tabConfig = this._getTabConfig(name) ;
-      tabConfig.onSelect(this, tabConfig) ;
+      if(tabConfig.onSelect) {
+        tabConfig.onSelect(this, tabConfig) ;
+      } else {
+        this.setSelectedTabUIComponent(tabConfig.name, tabConfig.uicomponent) ;
+      }
     },
 
     addTab: function(name, label, uiComponent, closable) {
+      uiComponent.uiParent = this;
       var tabConfig = {
-        name: name, label: label, closable: closable,
-        onSelect: function(thisUI, tabConfig) {
-          thisUI.setSelectedTabUIComponent(tabConfig.name, uiComponent) ;
-        }
+        name: name, label: label, uicomponent: uiComponent,  closable: closable
       };
       this.tabs.push(tabConfig);
-      tabConfig.onSelect(this, tabConfig) ;
+      this.setSelectedTabUIComponent(tabConfig.name, tabConfig.uicomponent) ;
     },
     
     _template: _.template(UITabbedPaneTmpl),
@@ -45,7 +47,7 @@ define([
     render: function() {
       if(this.state == null && this.tabs.length > 0) {
         var tabConfig = this.tabs[0] ;
-        tabConfig.onSelect(this, tabConfig) ;
+        this.setSelectedTab(tabConfig.name);
       }
       var params = { tabs: this.tabs, state: this.state } ;
       $(this.el).html(this._template(params));
@@ -62,8 +64,7 @@ define([
     
     onSelectTab: function(evt) {
       var tabName = $(evt.target).closest("a").attr('tab') ;
-      var tabConfig = this._getTabConfig(tabName) ;
-      tabConfig.onSelect(this, tabConfig) ;
+      this.setSelectedTab(tabName);
       this.render() ;
     },
 

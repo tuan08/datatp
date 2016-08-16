@@ -2,94 +2,126 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
+  'ui/UIBreadcumbs',
   'ui/UIBean',
-  'ui/UITable',
-  'plugins/crawler/Rest',
-], function($, _, Backbone, UIBean, UITable, Rest) {
-  var UISiteConfig = UITable.extend({
-    label: "Site Config List",
+  'ui/UICollapsible',
+  'plugins/crawler/site/UISiteAnalyzer'
+], function($, _, Backbone, UIBreadcumbs, UIBean, UICollabsible, UISiteAnalyzer) {
 
+  var UIURLPattern = UIBean.extend({
+    label: "URL Pattern",
     config: {
-      toolbar: {
-        dflt: {
-          actions: [
+      type: 'array',
+      beans: {
+        urlPattern: {
+          label: 'URL Pattern',
+          fields: [
             {
-              action: "onNew", icon: "add", label: "New", 
-              onClick: function(thisTable) { 
-                thisTable.onAddBean() ;
-              } 
-            }
+              field:  "type", label: "Type",
+              select: {
+                getOptions: function(field, bean) {
+                  var options = [
+                    { label: 'ignore',  value: 'ignore' },
+                    { label: 'list',    value: 'list' },
+                    { label: 'detail',  value: 'detail' },
+                    { label: 'unkwnon', value: 'unknown' },
+                  ];
+                  return options ;
+                }
+              }
+            },
+            { field: "pattern",  label: "Pattern", multiple: true }
           ]
         }
-      },
-      
-      bean: {
-        label: 'Site Config',
-        fields: [
-          { 
-            field: "hostname",   label: "Hostname", toggled: true, filterable: true,
-            onClick: function(thisTable, row) {
-              var bean = thisTable.getItemOnCurrentPage(row) ;
-              console.log('on click bean ' + JSON.stringify(bean)) ;
-            }
-          },
-          { 
-            field: "group",   label: "Group", toggled: true, filterable: true
-          },
-          { 
-            field: "status",   label: "Status", toggled: true, filterable: true
-          },
-          { 
-            field: "injectUrl",   label: "Inject URL", toggled: true, filterable: true, multiple: true
-          },
-          { 
-            field: "crawlSubDomain",   label: "Crawl Subdomain", toggled: true, filterable: true,
-            select: {
-              getOptions: function(field, bean) {
-                var options = [
-                  { label: 'True', value: true },
-                  { label: 'False', value: false }
-                ];
-                return options ;
-              }
-            }
-          },
-          { 
-            field: "crawlDeep",   label: "Crawl Deep", toggled: true, filterable: true
-          },
-          { 
-            field: "maxConnection",   label: "Max Connection", toggled: true, filterable: true
-          },
-          { 
-            field: "language",   label: "Language", toggled: true, filterable: true
-          },
-          { 
-            field: "description",   label: "Description", toggled: true, filterable: true
-          },
-        ],
-        actions:[
-          {
-            icon: "delete", label: "Delete",
-            onClick: function(thisTable, row) { 
-              thisTable.markDeletedItemOnCurrentPage(row) ;
-              console.log('Mark delete row ' + row);
-            }
-          },
-          {
-            icon: "edit", label: "Mod",
-            onClick: function(thisTable, row) { 
-              thisTable.onEditBean(row) ;
-            }
-          }
-        ]
       }
-    },
-
-    onInit: function(options) {
-      var siteConfigs = Rest.site.getSiteConfigs() ;
-      this.setBeans(siteConfigs) ;
     }
   });
-  
-  return new UISiteConfig() ;
+
+  var UISiteConfigGeneric = UIBean.extend({
+    label: "Site Config Generic",
+    config: {
+      beans: {
+        siteConfig: {
+          name: 'siteConfig', label: 'Site Config',
+          fields: [
+            { field: "group",   label: "Group", required: true  },
+            { field: "hostname",   label: "Hostname", required: true },
+            { field: "status",   label: "Status" },
+            { field: "injectUrl",   label: "Inject URL", multiple: true },
+            { 
+              field: "crawlSubDomain",   label: "Crawl Subdomain",
+              select: {
+                getOptions: function(field, bean) {
+                  var options = [
+                    { label: 'True', value: true },
+                    { label: 'False', value: false }
+                  ];
+                  return options ;
+                }
+              }
+            },
+            { field: "crawlDeep",   label: "Crawl Deep" },
+            { field: "maxConnection",   label: "Max Connection" },
+            { field: "language",   label: "Language" },
+            { field: "description",   label: "Description", textarea: {} }
+          ],
+          edit: {
+            disable: false , 
+            actions: [ ],
+          },
+          view: {
+            actions: [ ]
+          }
+        }
+      }
+    }
+  });
+
+  var UISiteConfigCollabsible = UICollabsible.extend({
+    label: "Site Config", 
+    config: {
+      actions: [
+        {
+          action: "save", label: "Save",
+          onClick: function(thisUI) { }
+        },
+        {
+          action: "analyzer", label: "Analyzer",
+          onClick: function(thisUI) { 
+            var uiSiteConfig = thisUI.getAncestorOfType("UISiteConfig") ;
+            uiSiteConfig.push(new UISiteAnalyzer());
+          }
+        },
+        { 
+          action: "back", label: "Back",
+          onClick: function(thisUI) {
+          }
+        }
+      ]
+    }
+  }) ;
+
+  var UISiteConfig = UIBreadcumbs.extend({
+    type:  "UISiteConfig",
+
+    onInit: function(options) {
+      var siteConfig = options.siteConfig;
+
+      var uiSiteConfigGeneric = new UISiteConfigGeneric();
+      uiSiteConfigGeneric.bind('siteConfig', siteConfig, true) ;
+      uiSiteConfigGeneric.getBeanState('siteConfig').editMode = true ;
+
+      var uiURLPattern = new UIURLPattern() ;
+      if(siteConfig.urlPatterns == null) siteConfig.urlPatterns = [];
+      uiURLPattern.bindArray('urlPattern', siteConfig.urlPatterns) ;
+
+      var uiSiteConfigCollabsible = new UISiteConfigCollabsible() ;
+      uiSiteConfigCollabsible.add(uiSiteConfigGeneric);
+      uiSiteConfigCollabsible.add(uiURLPattern);
+
+      this.push(uiSiteConfigCollabsible);
+    }
+  });
+
+  return UISiteConfig ;
 });

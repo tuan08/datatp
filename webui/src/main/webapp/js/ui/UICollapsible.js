@@ -42,9 +42,7 @@ define([
       this.state = { actions: {} } ;
     },
 
-    getAncestorOfType: function(type) {
-      return UIUtil.getAncestorOfType(this, type) ;
-    },
+    getAncestorOfType: function(type) { return UIUtil.getAncestorOfType(this, type) ; },
     
     setActionHidden: function(actionName, bool) {
       if(this.state.actions[actionName] == null) {
