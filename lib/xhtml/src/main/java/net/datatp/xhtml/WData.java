@@ -52,13 +52,8 @@ public class WData implements Serializable {
     this.contentType = contentType;
   }
 
-  public void addTag(String tag) {
-    this.tag = StringUtil.merge(this.tag, tag) ;
-  }
-
-  public void addTag(String[] tag) {
-    this.tag = StringUtil.merge(this.tag, tag) ;
-  }
+  public void addTag(String tag) { this.tag = StringUtil.merge(this.tag, tag) ; }
+  public void addTag(String[] tag) { this.tag = StringUtil.merge(this.tag, tag) ; }
 
   public void addTag(String prefix, String[] tag) {
     if(tag == null) return ;

@@ -67,7 +67,7 @@ public class SiteContextManager {
       if(sel.startsWith("www")) continue ;
       SiteContext context = siteContexts.get(sel) ;
       if(context == null) continue ;
-      if(context.allowURL(urlParser)) return context ; 
+      if(context.allowDomain(urlParser)) return context ; 
     }
     return null;
   }

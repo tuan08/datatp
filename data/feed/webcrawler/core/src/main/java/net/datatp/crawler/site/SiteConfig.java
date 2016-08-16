@@ -1,6 +1,7 @@
 package net.datatp.crawler.site;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import net.datatp.util.text.StringUtil;
 
@@ -12,14 +13,15 @@ public class SiteConfig implements Serializable {
   private String          group            = "default";
   private String          hostname;
   private String[]        injectUrl;
-  private String[]        ignoreUrlPattern;
   private String[]        tags;
 
-  private boolean         crawlSubDomain;
+  private boolean         crawlSubDomain   = false;
   private int             crawlDeep;
   private int             refreshPeriod;
   private int             maxConnection    = 1;
   private int             maxFetchSchedule = 100;
+  private URLPattern[]    urlPatterns;
+  
   private Status          status           = Status.Ok;
   private String          language;
   private String          description;
@@ -50,9 +52,6 @@ public class SiteConfig implements Serializable {
   public String[] getInjectUrl() { return injectUrl ; }
   public void     setInjectUrl(String[] value) { injectUrl = value ; }
 
-  public String[] getIgnoreUrlPattern() { return ignoreUrlPattern ; }
-  public void     setIgnoreUrlPattern(String[] value) { ignoreUrlPattern = value ; }
-
   public boolean hasTag(String tag) {
     if(tags == null) return false ;
     return StringUtil.isIn(tag, tags) ;
@@ -80,6 +79,14 @@ public class SiteConfig implements Serializable {
   public int getMaxFetchSchedule() { return maxFetchSchedule; }
   public void setMaxFetchSchedule(int maxFetchSchedule) {
     this.maxFetchSchedule = maxFetchSchedule;
+  }
+
+  public URLPattern[] getURLPatterns() { return urlPatterns; }
+  public void setURLPatterns(URLPattern ... urlPatterns) { 
+    this.urlPatterns = urlPatterns; 
+    if(this.urlPatterns != null) {
+      Arrays.sort(urlPatterns, URLPattern.PRIORITY_COMPARATOR);
+    }
   }
 
   public Status getStatus() { 

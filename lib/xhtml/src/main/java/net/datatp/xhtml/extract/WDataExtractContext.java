@@ -2,15 +2,17 @@ package net.datatp.xhtml.extract;
 
 import org.jsoup.nodes.Document;
 
+import net.datatp.util.URLParser;
 import net.datatp.xhtml.WData;
 import net.datatp.xhtml.xpath.NodeCleaner;
 import net.datatp.xhtml.xpath.NodeCleanerVisitor;
 import net.datatp.xhtml.xpath.XPathStructure;
 
 public class WDataExtractContext {
-  private WData                     wdata;
-  private Document                  doc;
-  private XPathStructure            xpathStructure;
+  private WData          wdata;
+  private Document       doc;
+  private URLParser      urlParser;
+  private XPathStructure xpathStructure;
 
   public WDataExtractContext(WData wdata) {
     this.wdata   = wdata;
@@ -22,6 +24,11 @@ public class WDataExtractContext {
   public WDataExtractContext(WData wdata, XPathStructure structure) {
     this.wdata = wdata;
     this.xpathStructure = structure;
+  }
+
+  public URLParser getURLParser() {
+    if(urlParser == null) urlParser = new URLParser(wdata.getUrl());
+    return urlParser;
   }
   
   public WData getWdata() { return wdata; }

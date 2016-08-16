@@ -130,6 +130,27 @@ public class XPathStructure {
     if(baseEle == null) return null ;
     return baseEle.attr("href") ;
   }
+  
+  public String findRefreshMetaNodeUrl() {
+    Elements elements = select("html > head > meta");
+    for(Element meta : elements) {
+      String httpEquiv = meta.attr("http-equiv") ;
+      if("refresh".equalsIgnoreCase(httpEquiv)) {
+        String content = meta.attr("content") ;
+        if(content == null) continue ;
+        String[] array = content.split(";") ;
+        for(String selStr : array) {
+          String normStr = selStr.trim().toLowerCase() ;
+          if(normStr.startsWith("url")) {
+            int idx = selStr.indexOf("=") ;
+            return selStr.substring(idx + 1) ;
+          }
+        }
+      }
+    }
+    return null ;
+  }
+  
 
   public XPath findTitleHeaderCandidate() {
     String title =  getAnchorText();

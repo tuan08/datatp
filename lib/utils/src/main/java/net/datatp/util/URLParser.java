@@ -18,52 +18,65 @@ public class URLParser {
   private String host ;
   private String port = "80";
   private String path ;
+  private String directory;
+  private String name;
   private String ref;
   private String ext ;
-
   private TreeMap<String, String[]> params ;
-
+  
+  private String[] tag;
+  
   public URLParser(String url) {
     this.url = url ;
-    String string = url.trim() ;
+    String remainString = url.trim() ;
 
-    int idx = string.indexOf("://") ;
+    int idx = remainString.indexOf("://") ;
     if(idx > 0) {
-      this.protocol = string.substring(0, idx + 3);
-      string = string.substring(idx + 3, string.length());
+      this.protocol = remainString.substring(0, idx + 3);
+      remainString = remainString.substring(idx + 3, remainString.length());
     }
 
-    idx = endHostName(string) ;
+    idx = endHostName(remainString) ;
     if(idx > 0) {
-      parseHostPort(string.substring(0, idx)) ;
-      string = string.substring(idx, string.length()) ;
+      parseHostPort(remainString.substring(0, idx)) ;
+      remainString = remainString.substring(idx, remainString.length()) ;
     } else {
-      int questionMark = string.indexOf('?') ;
+      int questionMark = remainString.indexOf('?') ;
       if(questionMark > 0) {
-        parseHostPort(string.substring(0, questionMark)) ;
-        string = string.substring(questionMark + 1, string.length()) ;
+        parseHostPort(remainString.substring(0, questionMark)) ;
+        remainString = remainString.substring(questionMark + 1, remainString.length()) ;
       } else {
-        parseHostPort(string) ;
-        string = null ;
+        parseHostPort(remainString) ;
+        remainString = null ;
       }
     }
-    if(string == null) return  ;
-    int refIndex = string.indexOf('#') ;
+    if(remainString == null) return  ;
+    int refIndex = remainString.indexOf('#') ;
     if(refIndex > 0) {
-      this.ref = string.substring(refIndex + 1) ;
-      string = string.substring(0, refIndex) ;
+      this.ref = remainString.substring(refIndex + 1) ;
+      remainString = remainString.substring(0, refIndex) ;
     }
 
-    int questionMark = string.indexOf('?') ;
+    int questionMark = remainString.indexOf('?') ;
     if(questionMark > 0) {
-      this.path = string.substring(0, questionMark) ;
-      string = string.substring(questionMark + 1, string.length()) ;
+      this.path = remainString.substring(0, questionMark) ;
+      remainString = remainString.substring(questionMark + 1, remainString.length()) ;
     } else {
-      this.path = string ;
-      string = null ;
+      this.path = remainString ;
+      remainString = null ;
     }
-    if(string == null) return  ;
-    parseParams(string) ;
+    
+    if(path != null && path.length() > 1) {
+      int lastSlashIdx = path.lastIndexOf('/') ;
+      if(lastSlashIdx > 0) {
+        directory = path.substring(0, lastSlashIdx);
+        name = path.substring(lastSlashIdx + 1, path.length()) ;
+      }
+      
+    }
+    
+    if(remainString == null) return  ;
+    parseParams(remainString) ;
   }
 
   public String getURL() { return this.url ; }
@@ -71,13 +84,29 @@ public class URLParser {
   public String getProtocol() { return protocol ; }
   public String getHost() { return host ; }
   public String getPort() { return port ; }
+  
   public String getPath() { 
     if(path == null || path.isEmpty()) return "/" ;
     return this.path ; 
   }
+  
+  public String getDirectory() { 
+    if(directory == null || directory.isEmpty()) return "/" ;
+    return this.directory ; 
+  }
+  
+  public String getName() { return this.name ; }
+  
   public String getRef() { return ref; }
 
   public TreeMap<String, String[]> getParams() { return this.params ; }
+  
+  public void addTag(String tag) { this.tag = StringUtil.merge(this.tag, tag) ; }
+  public void addTag(String[] tag) { this.tag = StringUtil.merge(this.tag, tag) ; }
+  public boolean hasTag(String tag) { return StringUtil.isIn(tag, this.tag) ; }
+  public String[] getTags() { return tag ; }
+  public void     setTags(String[] tag) { this.tag = tag ; }
+
 
   public String getNormalizeHostName() {
     if(host.startsWith("www.")) return host.substring("www.".length()) ; 
@@ -93,7 +122,7 @@ public class URLParser {
     }
     return b.toString() ;
   }
-
+  
   public String getPathURL() {
     StringBuilder b = new StringBuilder() ;
     b.append(this.protocol).append(this.host) ;
@@ -112,10 +141,7 @@ public class URLParser {
     if(this.port != null && !"80".equals(this.port)) {
       b.append(':').append(this.port) ;
     }
-    if(path != null && path.length() > 1) {
-      int idx = path.lastIndexOf('/') ;
-      if(idx >= 0) b.append(path.substring(0, idx));
-    }
+    if(directory != null) b.append(directory);
     return b.toString() ;
   }
 
@@ -280,7 +306,17 @@ public class URLParser {
     }
     return string.length() ;
   }
-
+  
+  public String toString() {
+    StringBuilder b = new StringBuilder();
+    b.append(getNormalizeURLAll());
+    if(tag != null) {
+      b.append(" [").append(StringUtil.joinStringArray(tag)).append("]");
+    }
+    return b.toString();
+  }
+  
+  
   final static public String[] getDomains(String host) {
     List<String> holder = new ArrayList<String>() ;
     String source = host ;

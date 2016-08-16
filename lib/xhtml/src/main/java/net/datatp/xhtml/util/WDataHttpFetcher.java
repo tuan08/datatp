@@ -18,7 +18,7 @@ public class WDataHttpFetcher {
   private CloseableHttpClient  httpclient ;
 
   public WDataHttpFetcher() {
-    this.httpclient =  HttpClients.createDefault();
+    httpclient =  HttpClients.createDefault();
   }
 
   public WData fetch(String urlString) throws Exception {

@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,8 +25,8 @@ import net.datatp.xhtml.xpath.XPathStructure;
  *          Jun 23, 2010
  */
 public class URLExtractor {
-  final static URLSessionIdCleaner URL_CLEANER     = new URLSessionIdCleaner();
   final static Logger              logger          = LoggerFactory.getLogger(URLExtractor.class);
+  final static URLSessionIdCleaner URL_CLEANER     = new URLSessionIdCleaner();
 
   private Pattern[]                excludePatternMatchers = {};
   private URLRewriter              urlRewriter     = new URLRewriter();
@@ -53,7 +51,7 @@ public class URLExtractor {
   public Map<String, URLDatum> extract(URLContext urlCtx, WDataExtractContext wdataCtx) {
     URLDatum urlDatum = urlCtx.getURLDatum();
     XPathStructure structure = wdataCtx.getXpathStructure();
-    Map<String, URLDatum> urls = new HashMap<String, URLDatum>();
+    Map<String, URLDatum> urls = new HashMap<>();
     try {
       if(urlCtx == null) return urls ;
       String siteURL = urlCtx.getUrlParser().getSiteURL();
@@ -63,7 +61,7 @@ public class URLExtractor {
       }
       
       if(urlDatum.getDeep() == 1) {
-        String refreshUrl = findRefreshMetaNodeUrl(structure) ;
+        String refreshUrl = structure.findRefreshMetaNodeUrl() ;
         if(refreshUrl != null) {
           URLDatum newURLDatum = createURLDatum(urlDatum, refreshUrl, new URLParser(refreshUrl), "refresh url");
           addURL(urls, refreshUrl, newURLDatum);
@@ -79,49 +77,25 @@ public class URLExtractor {
         if (!isAllowProtocol(newURL)) continue;
         URLParser newURLNorm = new URLParser(newURL);
         URL_CLEANER.process(newURLNorm) ;
-        String newNormalizeURL = newURLNorm.getNormalizeURL();
+        String newNormalizedURL = newURLNorm.getNormalizeURL();
 
         if (newURLNorm.getRef() != null) continue;
 
-        if (!urlCtx.getSiteContext().allowURL(newURLNorm)) {
-          continue; // ignore the external link
-        }
+        if (!urlCtx.getSiteContext().allowDomain(newURLNorm)) continue; // ignore the external link
 
-        if (isExclude(newURLNorm.getPathWithParams())) {
-          continue;
-        }
+        if (isExclude(newURLNorm.getPath())) continue;
 
         // CONTROL DEEP LIMIT
         int maxCrawlDeep = urlCtx.getSiteContext().getSiteConfig().getCrawlDeep();
 
-        URLDatum newURLDatum = createURLDatum(urlDatum, newNormalizeURL, newURLNorm, anchorText);
+        URLDatum newURLDatum = createURLDatum(urlDatum, newNormalizedURL, newURLNorm, anchorText);
         if (!isInDeepRange(newURLDatum, maxCrawlDeep)) continue;
-        addURL(urls, newNormalizeURL, newURLDatum);
+        addURL(urls, newNormalizedURL, newURLDatum);
       }
     } catch (Throwable t) {
       logger.error("Cannot extract url for " + urlDatum.getOriginalUrl(), t);
     }
     return urls;
-  }
-  
-  String findRefreshMetaNodeUrl(XPathStructure structure) {
-    Elements elements = structure.select("html > head > meta");
-    for(Element meta : elements) {
-      String httpEquiv = meta.attr("http-equiv") ;
-      if("refresh".equalsIgnoreCase(httpEquiv)) {
-        String content = meta.attr("content") ;
-        if(content == null) continue ;
-        String[] array = content.split(";") ;
-        for(String selStr : array) {
-          String normStr = selStr.trim().toLowerCase() ;
-          if(normStr.startsWith("url")) {
-            int idx = selStr.indexOf("=") ;
-            return selStr.substring(idx + 1) ;
-          }
-        }
-      }
-    }
-    return null ;
   }
   
   private void addURL(Map<String, URLDatum> urls, String url, URLDatum datum) {

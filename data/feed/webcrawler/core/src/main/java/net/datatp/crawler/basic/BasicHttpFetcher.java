@@ -15,7 +15,6 @@ public class BasicHttpFetcher extends HttpFetcher {
   private BlockingQueue<URLDatum>  urlFetchQueue;
   private BlockingQueue<URLDatum>  urlCommitQueue;
   private BlockingQueue<XDoc>      xDocQueue;
-  private FetchDataProcessor       dataProcessor;
   
   public BasicHttpFetcher(String name, 
                           SiteContextManager manager, 
@@ -28,7 +27,6 @@ public class BasicHttpFetcher extends HttpFetcher {
     this.urlFetchQueue  = urlFetchQueue;
     this.urlCommitQueue = urlCommitQueue;
     this.xDocQueue      = xDocQueue;
-    this.dataProcessor  = dataProcessor;
   }
 
   protected void onCommit(ArrayList<URLDatum> holder) throws Exception {
