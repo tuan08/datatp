@@ -3,7 +3,7 @@ package net.datatp.crawler.site;
 import java.util.Comparator;
 
 public class URLPattern {
-  static public enum Type { ignore, detail, list, unknown }
+  static public enum Type { ignore, detail, list, unknown}
 
   final static public Comparator<URLPattern> PRIORITY_COMPARATOR = new Comparator<URLPattern>() {
     @Override

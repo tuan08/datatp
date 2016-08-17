@@ -20,11 +20,17 @@ public class URLDirStructure {
   }
   
   public String getDomain() { return domain; }
-  public void setDomain(String domain) { this.domain = domain; }
 
   public String getDirectory() { return directory; }
-  public void setDirectory(String directory) { this.directory = directory; }
 
+  public String[] getUrlInfos() {
+    String[] urlInfos =  new String[urls.size()];
+    for(int i = 0; i < urlInfos.length; i++) {
+      urlInfos[i] = urls.get(i).toString();
+    }
+    return urlInfos;
+  }
+  
   public void add(URLParser urlParser) {
     analyze(urlParser);
   }

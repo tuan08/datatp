@@ -2,34 +2,58 @@ package net.datatp.crawler.site.analysis;
 
 import net.datatp.crawler.site.SiteConfig;
 import net.datatp.crawler.site.SiteCrawler;
-import net.datatp.crawler.site.URLPattern;
-import net.datatp.util.URLParser;
 import net.datatp.xhtml.extract.WDataExtractContext;
 
-public class SiteStructureAnalyzer extends SiteCrawler {
-  private URLStructure urlStructure;
+public class SiteStructureAnalyzer {
+  private SiteCrawler   siteCrawler;
+  private Thread        analyseThread;
+  private SiteStructure siteStructure;
   
-  public SiteStructureAnalyzer(String site, String injectUrl, int maxDownload) {
-    super(site, injectUrl, maxDownload);
-    urlStructure = new URLStructure();
-  }
+  private long          lastAccessTime;
   
   public SiteStructureAnalyzer(SiteConfig sConfig, int maxDownload) {
-    super(sConfig, maxDownload);
-    urlStructure = new URLStructure();
+    siteCrawler = new SiteCrawler(sConfig, maxDownload) {
+      @Override
+      public void onWData(WDataExtractContext ctx) { 
+        siteStructure.analyse(getSiteContext(), ctx); 
+      }
+    };
+    siteStructure       = new SiteStructure();
+    this.lastAccessTime = System.currentTimeMillis();
   }
+
+  public SiteStructure getSiteStructure() { return siteStructure; }
   
-  public URLStructure getURLStructure() { return urlStructure; }
-  
-  @Override
-  public void onWData(WDataExtractContext ctx) {
-    URLParser urlParser = ctx.getURLParser();
-    URLPattern urlPattern = getSiteContext().matchesURLPattern(urlParser);
-    if(urlPattern != null) {
-      urlParser.addTag("url:type:" + urlPattern.getType());
+  public void run() throws Exception {
+    if(analyseThread == null || !analyseThread.isAlive()) {
+      analyseThread = new Thread() {
+        public void run() {
+          siteCrawler.crawl();
+          notifyAnalyseTermination();
+        };
+      };
+      analyseThread.start();
     }
-    urlStructure.add(urlParser);
-    System.out.println("SiteStructureAnalyzer: Fetch" + urlParser.getNormalizeURLAll());
   }
   
+  public void stop() {
+    if(analyseThread != null && analyseThread.isAlive()) {
+      analyseThread.interrupt();
+    }
+  }
+  
+  public synchronized void notifyAnalyseTermination() {
+    notifyAll();
+  }
+  
+  public synchronized void waitForAnalyseTermination(long timeout) throws InterruptedException {
+    wait(timeout);
+  }
+  
+  public boolean isRunning() {
+    return analyseThread != null && analyseThread.isAlive();
+  }
+  
+  public long getLastAccessTime() { return lastAccessTime; }
+  public void setLastAccessTime(long lastAccessTime) { this.lastAccessTime = lastAccessTime; }
 }

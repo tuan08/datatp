@@ -11,9 +11,7 @@ define([
     initialize: function (options) {
       //this.el = options.el ;
       this.views = [] ;
-      if(this.onInit) {
-        this.onInit(options) ;
-      }
+      if(this.onInit) this.onInit(options) ;
       _.bindAll(this, 'render', 'onSelectView') ;
     },
     

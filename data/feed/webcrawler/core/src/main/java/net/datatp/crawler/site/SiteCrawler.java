@@ -41,7 +41,7 @@ public class SiteCrawler {
   
   public SiteContext getSiteContext() { return this.siteContext; }
   
-  public void crawl() throws Exception {
+  public void crawl() {
     int downloadCount = 0;
     URL[] urls = { new URL("", siteContext.getSiteConfig().getInjectUrl()[0], 1) };
     while(urls.length > 0 && downloadCount < maxDownload) {
@@ -55,6 +55,8 @@ public class SiteCrawler {
           urlExtractor.extract(selUrl, wdataExtractCtx);
           onWData(wdataExtractCtx);
           downloadCount++;
+        } catch(InterruptedException ex) {
+          return;
         } catch(Exception ex) {
           logger.error("Cannot process url " + selUrl.getUrl(), ex);
         }

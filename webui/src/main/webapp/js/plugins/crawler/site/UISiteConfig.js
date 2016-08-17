@@ -89,7 +89,8 @@ define([
           action: "analyzer", label: "Analyzer",
           onClick: function(thisUI) { 
             var uiSiteConfig = thisUI.getAncestorOfType("UISiteConfig") ;
-            uiSiteConfig.push(new UISiteAnalyzer());
+            var siteConfig = uiSiteConfig.siteConfig;
+            uiSiteConfig.push(new UISiteAnalyzer({ siteConfig: siteConfig }));
           }
         },
         { 
@@ -105,15 +106,15 @@ define([
     type:  "UISiteConfig",
 
     onInit: function(options) {
-      var siteConfig = options.siteConfig;
+      this.siteConfig = options.siteConfig;
 
       var uiSiteConfigGeneric = new UISiteConfigGeneric();
-      uiSiteConfigGeneric.bind('siteConfig', siteConfig, true) ;
+      uiSiteConfigGeneric.bind('siteConfig', this.siteConfig, true) ;
       uiSiteConfigGeneric.getBeanState('siteConfig').editMode = true ;
 
       var uiURLPattern = new UIURLPattern() ;
-      if(siteConfig.urlPatterns == null) siteConfig.urlPatterns = [];
-      uiURLPattern.bindArray('urlPattern', siteConfig.urlPatterns) ;
+      if(this.siteConfig.urlPatterns == null) this.siteConfig.urlPatterns = [];
+      uiURLPattern.bindArray('urlPattern', this.siteConfig.urlPatterns) ;
 
       var uiSiteConfigCollabsible = new UISiteConfigCollabsible() ;
       uiSiteConfigCollabsible.add(uiSiteConfigGeneric);

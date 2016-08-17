@@ -5,9 +5,7 @@ define([
   'ui/UIUtil',
   'text!ui/UICollapsible.jtpl',
 ], function($, _, Backbone, UIUtil, UICollapsibleTmpl) {
-  /**
-   *@type ui.UICollapsible 
-   */
+  /** *@type ui.UICollapsible */
   var UICollapsible = Backbone.View.extend({
     
     initialize: function (options) {

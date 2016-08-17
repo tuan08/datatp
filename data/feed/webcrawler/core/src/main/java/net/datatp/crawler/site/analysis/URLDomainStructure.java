@@ -15,6 +15,8 @@ public class URLDomainStructure {
   
   public String getDomain() { return this.domain; }
   
+  public TreeMap<String, URLDirStructure> getDirectoryStructure() { return this.dirStructures; }
+  
   public void add(URLParser urlParser) {
     URLDirStructure dirStructure = dirStructures.get(urlParser.getDirectory());
     if(dirStructure == null) {

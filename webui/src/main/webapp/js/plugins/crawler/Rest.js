@@ -7,6 +7,13 @@ define([
     this.getSiteConfigs = function() {
       return server.restGET("/site/configs");
     };
+
+    this.getAnalyzedSiteStructure = function(siteConfig, maxDownload, forceNew) {
+      var params = {
+        siteConfig: siteConfig, maxDownload: maxDownload, forceNew: forceNew
+      } ;
+      return server.syncPOSTJson("/site/analyzed-site-structure", params);
+    };
   };
 
   function SchedulerRest(server) {

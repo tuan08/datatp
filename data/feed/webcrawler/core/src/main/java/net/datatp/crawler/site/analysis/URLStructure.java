@@ -8,6 +8,7 @@ import net.datatp.util.URLParser;
 public class URLStructure {
   private TreeMap<String, URLDomainStructure> domainStructures = new TreeMap<>();
 
+  public TreeMap<String, URLDomainStructure> getDomainStructures() { return this.domainStructures; }
   
   public void add(URLParser urlParser) {
     URLDomainStructure domainStructure = domainStructures.get(urlParser.getHost());

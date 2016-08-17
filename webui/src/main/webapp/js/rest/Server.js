@@ -23,27 +23,6 @@ define([
       return returnData ;
     };
 
-    /**@memberOf service.Server */
-    this.syncPOSTJson = function(path, dataObj) {
-      path = this.baseUrl + path;
-      var returnData = null ;
-      $.ajax({ 
-        async: false ,
-        type: "POST",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        url: path,
-        data:  JSON.stringify(dataObj) ,
-        error: function(data) {  
-          console.log("Error:") ; 
-          console.printJSON(data) ; 
-        },
-        success: function(data) {  
-          returnData = data ; 
-        }
-      });
-      return returnData ;
-    };
     
     /**@memberOf service.Server */
     this.restGET = function(restPath, params) {
@@ -65,43 +44,36 @@ define([
     };
 
     /**@memberOf service.Server */
-    this.restGETJsonpPush = function(restPath, obj) {
-      restPath = this.baseUrl + restPath;
-      var restPathWithJsonp = restPath + "?jsonp=" + encodeURIComponent(JSON.stringify(obj));
-      var returnData = null ;
-      $.ajax({ 
-        type: "GET",
-        dataType: "json",
-        url: restPathWithJsonp,
-        data: {} ,
-        async: false ,
-        error: function(data) {  
-          console.log("Error:") ; 
-          console.log(data) ; 
-        },
-        success: function(data) {  returnData = data ; }
-      });
-      return returnData ;
-    };
-    
-    /**@memberOf service.Server */
-    this.restPOST = function(path, params, crossDomain) {
+    this.syncPOSTJson = function(path, dataObj) {
+      path = this.baseUrl + path;
       var returnData = null ;
       $.ajax({ 
         async: false ,
         type: "POST",
-        crossDomain: crossDomain,
         dataType: "json",
-        //contentType: "application/json; charset=utf-8",
+        contentType: "application/json; charset=utf-8",
+        url: path,
+        data:  JSON.stringify(dataObj) ,
+        error: function(data) {  console.debug("Error: \n" + JSON.stringify(data)) ; },
+        success: function(data) {  returnData = data ; }
+      });
+      return returnData ;
+    };
+
+    /**@memberOf service.Server */
+    this.restPOST = function(path, params) {
+      path = this.baseUrl + path;
+      var returnData = null ;
+      $.ajax({ 
+        async: true ,
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
         url: path,
         data:  JSON.stringify(params) ,
 
-        error: function(data) {  
-          console.debug("Error: \n" + JSON.stringify(data)) ; 
-        },
-        success: function(data) {  
-          returnData = data ; 
-        }
+        error: function(data) {  console.debug("Error: \n" + JSON.stringify(data)) ; },
+        success: function(data) {  returnData = data ; }
       });
       return returnData ;
     };

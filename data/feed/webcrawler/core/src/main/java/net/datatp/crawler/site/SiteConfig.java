@@ -1,7 +1,9 @@
 package net.datatp.crawler.site;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import net.datatp.util.text.StringUtil;
 
@@ -81,12 +83,20 @@ public class SiteConfig implements Serializable {
     this.maxFetchSchedule = maxFetchSchedule;
   }
 
-  public URLPattern[] getURLPatterns() { return urlPatterns; }
-  public void setURLPatterns(URLPattern ... urlPatterns) { 
-    this.urlPatterns = urlPatterns; 
-    if(this.urlPatterns != null) {
+  public URLPattern[] getUrlPatterns() { return urlPatterns; }
+  public void setUrlPatterns(URLPattern ... urlPatterns) { 
+    if(urlPatterns != null) {
+      List<URLPattern> holder = new ArrayList<>();
+      for(int i = 0; i < urlPatterns.length; i++) {
+        String[] pattern = urlPatterns[i].getPattern();
+        if(pattern != null && pattern.length > 0) {
+          holder.add(urlPatterns[i]);
+        }
+      }
+      urlPatterns = holder.toArray(new URLPattern[holder.size()]);
       Arrays.sort(urlPatterns, URLPattern.PRIORITY_COMPARATOR);
-    }
+    } 
+    this.urlPatterns = urlPatterns;
   }
 
   public Status getStatus() { 
