@@ -7,6 +7,7 @@ import org.springframework.context.support.GenericApplicationContext;
 
 
 public class SpringAppLauncher {
+  
   static public ApplicationContext launch(Class<?> app, String[] configSource, String[] args) throws Exception {
     SpringApplicationBuilder builder = new SpringApplicationBuilder();
     int sourceSize = 1 + configSource.length;
@@ -34,4 +35,5 @@ public class SpringAppLauncher {
     ctx.refresh();
     ctx.registerShutdownHook();
   }
+  
 }

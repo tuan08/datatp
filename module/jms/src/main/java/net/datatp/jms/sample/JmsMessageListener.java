@@ -19,7 +19,7 @@ public class JmsMessageListener implements MessageListener {
   //@Autowired
   private AtomicInteger counter = new AtomicInteger();
 
-  @JmsListener(destination = "jms.sample", containerFactory = "jmsSampleContainerFactory")
+  @JmsListener(destination = "jms.sample", containerFactory = "jmsListenerContainerFactory")
   public void onMessage(Message message) {
     try {   
       int messageCount = message.getIntProperty(JmsMessageProducer.MESSAGE_COUNT);

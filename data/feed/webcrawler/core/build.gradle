@@ -17,3 +17,17 @@ dependencies {
   compile project(':lib/xhtml')
   compile project(':module/elasticsearch')
 }
+
+test {
+  forkEvery = 1
+  ignoreFailures = true
+  testLogging.showStandardStreams = true
+
+  filter {
+    includeTestsMatching "*UnitTest"
+  }
+
+  testLogging {
+    events "passed", "skipped", "failed"
+  }
+}

@@ -16,40 +16,15 @@
 
 package net.datatp.springframework.cloud;
 
-import java.io.IOException;
-
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.WebIntegrationTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import net.datatp.springframework.cloud.sample.Application;
-import net.datatp.zk.tool.server.EmbededZKServer;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
-@WebIntegrationTest(randomPort = false)
 public class ApplicationUnitTest {
 
-  static EmbededZKServer zkServer ;
-  
-  @BeforeClass
-  static public void before() throws Exception {
-    zkServer = new EmbededZKServer("build/zookeeper/data", 2182);
-    zkServer.clean();
-    zkServer.start();
-  }
-
-  @AfterClass
-  static public void clean() throws IOException {
-    zkServer.shutdown();
-  }
-
   @Test 
-  public void contextLoads() throws InterruptedException {
-    Thread.sleep(3000000);
+  public void contextLoads() throws Exception {
+    Application.main(new String[] {});
+    Thread.sleep(3000);
   }
 }

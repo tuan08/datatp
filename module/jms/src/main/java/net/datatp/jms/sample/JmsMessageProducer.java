@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * Generates JMS messages
- * @author David Winterfeldt
  */
 @Component
 public class JmsMessageProducer {

@@ -9,6 +9,7 @@ eclipse {
 project.ext {
   releaseDir   = "${buildDir}/release"
   jacksonVersion = "2.7.2"
+  //jacksonVersion = "2.8.1"
 }
 
 dependencies {

@@ -45,12 +45,14 @@ public class JMSSample {
   }
   
 
-  @Bean(name = "jmsSampleContainerFactory")
+  //@Bean(name = "jmsSampleContainerFactory")
+  @Bean(name = "jmsListenerContainerFactory")
   public JmsListenerContainerFactory<?> myJmsContainerFactory(ConnectionFactory jmsCF) {
     SimpleJmsListenerContainerFactory factory = new SimpleJmsListenerContainerFactory();
     factory.setConnectionFactory(jmsCF);
     return factory;
   }
+  
   
   @Bean(name="jmsCF")
   public ConnectionFactory createConnectionFactory() {

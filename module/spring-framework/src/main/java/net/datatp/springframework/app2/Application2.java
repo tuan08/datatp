@@ -9,8 +9,12 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan({ "net.datatp.springframework.app2" })
 @EnableConfigurationProperties
-public class Application {
+public class Application2 {
   public static void main(String[] args) {
-    ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
+    String[] appArgs = {
+      "--spring.cloud.zookeeper.enabled=false",
+      "--server.port=-1",
+    };
+    ConfigurableApplicationContext context = SpringApplication.run(Application2.class, appArgs);
   }
 }

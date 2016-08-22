@@ -21,6 +21,17 @@ import java.util.zip.Inflater;
  * $Author: Tuan Nguyen$
  **/
 public class IOUtil {
+  static public URL findURL(String res) throws IOException {
+    if (res.startsWith("file:")) {
+      return new File(res.substring("file:".length())).toURI().toURL();
+    } else if (res.startsWith("classpath:")) {
+      res = res.substring("classpath:".length());
+      return Thread.currentThread().getContextClassLoader().getResource(res);
+    } else {
+      return Thread.currentThread().getContextClassLoader().getResource(res);
+    }
+  }
+  
   static public InputStream loadRes(String res) throws IOException {
     InputStream is = null;
     if (res.startsWith("file:")) {

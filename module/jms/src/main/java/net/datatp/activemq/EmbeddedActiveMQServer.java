@@ -2,6 +2,8 @@ package net.datatp.activemq;
 
 import java.io.File;
 
+import javax.jms.ConnectionFactory;
+
 import org.apache.activemq.broker.BrokerService;
 import org.apache.activemq.broker.region.policy.PolicyEntry;
 import org.apache.activemq.broker.region.policy.PolicyMap;
@@ -11,31 +13,26 @@ import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.activemq.store.kahadb.KahaDBPersistenceAdapter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cloud.zookeeper.ZookeeperAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+import org.springframework.core.convert.support.DefaultConversionService;
+import org.springframework.jms.config.JmsListenerContainerFactory;
+import org.springframework.jms.config.SimpleJmsListenerContainerFactory;
 
 import net.datatp.springframework.SpringAppLauncher;
+import net.datatp.util.io.IOUtil;
 import net.datatp.util.text.StringUtil;
 
 @SpringBootApplication
-@Configuration
+@EnableConfigurationProperties
 @PropertySources(value = {
     @PropertySource("classpath:embedded-activemq.properties")
   }
 )  
-@EnableAutoConfiguration()
-@ComponentScan({ "net.datatp.activemq" })
-@EnableConfigurationProperties
-@ConfigurationProperties
 @ConditionalOnProperty(value = "activemq.embedded.enabled", matchIfMissing = false)
 public class EmbeddedActiveMQServer {
   
@@ -89,6 +86,13 @@ public class EmbeddedActiveMQServer {
     
     broker.start();
     return broker;
+  }
+  
+  @Bean(name = "jmsListenerContainerFactory")
+  public JmsListenerContainerFactory<?> myJmsContainerFactory(ConnectionFactory jmsCF) {
+    SimpleJmsListenerContainerFactory factory = new SimpleJmsListenerContainerFactory();
+    factory.setConnectionFactory(jmsCF);
+    return factory;
   }
   
   static public void run(String[] args) throws Exception {

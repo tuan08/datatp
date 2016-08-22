@@ -149,9 +149,7 @@ public class EmbededZKServer implements Server {
     }
 
     @Override
-    public QuorumPeerConfig getConfig() {
-      return zkConfig;
-    }
+    public QuorumPeerConfig getConfig() { return zkConfig; }
   }
   
   public class ZooKeeperServerMainExt extends ZooKeeperServerMain implements ZookeeperLaucher {

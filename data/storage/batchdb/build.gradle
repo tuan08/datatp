@@ -16,7 +16,20 @@ configurations {
 dependencies {
   compile project(':lib/utils')
 
-  compile group: 'org.apache.hadoop', name: 'hadoop-common', version: hadoopVersion
-  compile group: 'org.apache.hadoop', name: 'hadoop-hdfs', version: hadoopVersion
-  compile group: 'org.apache.hadoop', name: 'hadoop-mapreduce-client-core', version: hadoopVersion
+  compile("org.apache.hadoop:hadoop-common:${hadoopVersion}") {
+    exclude module: "servlet-api"
+    exclude module: "httpclient"
+    exclude module: "commons-httpclient"
+    exclude group:  "org.mortbay.jetty"
+  }
+
+  compile("org.apache.hadoop:hadoop-hdfs:${hadoopVersion}") {
+    exclude module: "servlet-api"
+    exclude group:  "org.mortbay.jetty"
+  }
+
+  compile("org.apache.hadoop:hadoop-mapreduce-client-core:${hadoopVersion}") {
+    exclude module: "servlet-api"
+    exclude group: "org.mortbay.jetty"
+  }
 }

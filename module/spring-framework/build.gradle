@@ -1,6 +1,6 @@
 archivesBaseName = "module.spring-framework"
 
-apply plugin: "spring-boot" 
+//apply plugin: "spring-boot" 
 
 eclipse {
   project {
@@ -8,14 +8,8 @@ eclipse {
   }
 }
 
-springBoot {
-  mainClass = "net.datatp.springframework.MultipleApplication"
-}
-
-//configurations {
-//  deployJars {
-//    transitive = false
-//  }
+//springBoot {
+//  mainClass = "net.datatp.springframework.MultipleApplication"
 //}
 
 dependencies {
@@ -24,24 +18,27 @@ dependencies {
     exclude module: "groovy-all"
   }
 
-  compile("org.springframework.boot:spring-boot-starter:${springBootVersion}") {
+  compile("org.springframework.boot:spring-boot-starter-jetty:${springBootVersion}") {
     exclude module: "spring-boot-starter-logging"
     exclude module: "logback-classic"
   }
 
-  compile("org.springframework.integration:spring-integration-core:${springFrameworkVersion}")
-  compile("org.springframework.integration:spring-integration-jms:${springFrameworkVersion}")
-  compile("org.springframework.integration:spring-integration-java-dsl:1.1.3.RELEASE")
-  compile("org.springframework.integration:spring-integration-jmx:${springFrameworkVersion}")
+  compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}") {
+    exclude module: "spring-boot-starter-logging"
+    exclude module: "logback-classic"
+    exclude group:  "com.fasterxml.jackson.core"
+  }
+
+  compile("org.springframework.integration:spring-integration-jmx:${springIntegrationVersion}") {
+  }
 
   compile ("org.springframework.boot:spring-boot-loader:${springBootVersion}")
 
   compile("org.springframework.cloud:spring-cloud-starter-zookeeper-all:1.0.2.RELEASE") {
     exclude module: "logback-classic"
-  }
-
-  compile("org.springframework.cloud:spring-cloud-starter-feign:1.1.3.RELEASE") {
-    exclude module: "logback-classic"
+    exclude module: "httpclient"
+    exclude group:  "org.springframework"
+    exclude group:  "org.springframework.boot"
   }
 
   compile 'io.reactivex:rxjava:1.1.0'
@@ -51,12 +48,12 @@ dependencies {
   testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
 
-buildscript {
-  repositories {
-    mavenCentral()
-  }
+//buildscript {
+//  repositories {
+//    mavenCentral()
+//  }
 
-  dependencies {
-    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
-  }
-}
+//  dependencies {
+//    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+//  }
+//}
