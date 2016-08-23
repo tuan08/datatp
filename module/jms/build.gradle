@@ -26,8 +26,6 @@ dependencies {
   compile("org.springframework.integration:spring-integration-jms:${springIntegrationVersion}") {
     //exclude group: "org.springframework"
   }
-
-  //testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
 
 

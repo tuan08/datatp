@@ -12,7 +12,7 @@ import net.datatp.wanalytic.facebook.FBCrawler;
 import net.datatp.wanalytic.facebook.FBObjectIdQueue;
 import net.datatp.wanalytic.flink.WAnalytic;
 
-public class AppUnitTest {
+public class AppIntegrationTest {
   private LocalCluster localCluster ;
   
   @Before

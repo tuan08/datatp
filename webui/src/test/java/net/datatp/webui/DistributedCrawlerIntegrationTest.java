@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 
 import net.datatp.activemq.EmbeddedActiveMQServer;
+import net.datatp.crawler.distributed.CrawlerApp;
 import net.datatp.crawler.distributed.DistributedCrawlerApi;
 import net.datatp.crawler.distributed.DistributedCrawlerApiApp;
 import net.datatp.crawler.distributed.fetcher.CrawlerFetcherApp;
@@ -11,17 +12,19 @@ import net.datatp.crawler.distributed.integration.DocumentConsumerLoggerApp;
 import net.datatp.crawler.distributed.master.CrawlerMasterApp;
 import net.datatp.crawler.site.SiteConfig;
 import net.datatp.util.io.FileUtil;
+import net.datatp.util.log.LoggerFactory;
 import net.datatp.zk.tool.server.EmbededZKServer;
 
 public class DistributedCrawlerIntegrationTest {
   
   @Test
   public void run() throws Exception {
-    FileUtil.removeIfExist("build/activemq", false);
-    FileUtil.removeIfExist("build/crawler", false);
-    FileUtil.removeIfExist("build/zookeeper", false);
+    LoggerFactory.log4jUseConsoleOutputConfig("INFO");
     
-    EmbededZKServer zkServer = new EmbededZKServer("build/zookeeper/data", 2181);
+    FileUtil.removeIfExist("build/working", false);
+    
+    EmbeddedActiveMQServer.setSerializablePackages(CrawlerApp.SERIALIZABLE_PACKAGES);
+    EmbededZKServer zkServer = new EmbededZKServer("build/working/zookeeper/data", 2181);
     zkServer.clean();
     zkServer.start();
     
@@ -37,6 +40,7 @@ public class DistributedCrawlerIntegrationTest {
     api.siteAdd(new SiteConfig("vietnam", "dantri.com.vn", "http://dantri.com.vn", 3)); 
     
     api.siteReload();
+    Thread.sleep(1000);
     api.schedulerStart();
     api.fetcherStart();
     

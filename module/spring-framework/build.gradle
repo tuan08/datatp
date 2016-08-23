@@ -1,16 +1,10 @@
 archivesBaseName = "module.spring-framework"
 
-//apply plugin: "spring-boot" 
-
 eclipse {
   project {
     name = "module.spring-framework"
   }
 }
-
-//springBoot {
-//  mainClass = "net.datatp.springframework.MultipleApplication"
-//}
 
 dependencies {
   compile(project(':module/zookeeper')) {
@@ -47,13 +41,3 @@ dependencies {
 
   testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
-
-//buildscript {
-//  repositories {
-//    mavenCentral()
-//  }
-
-//  dependencies {
-//    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
-//  }
-//}

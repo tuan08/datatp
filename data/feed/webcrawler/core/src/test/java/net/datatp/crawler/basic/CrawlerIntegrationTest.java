@@ -54,7 +54,7 @@ public class CrawlerIntegrationTest {
     );
     
     crawler.siteAdd(
-      new SiteConfig("otofun", "otofun.net", "https://www.otofun.net/forums/", 3).
+      new SiteConfig("otofun", "otofun.net", "https://www.otofun.net/forums/", 2).
       setExtractConfig(ExtractConfig.forum())
     );
     

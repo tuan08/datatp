@@ -31,7 +31,7 @@ test {
   testLogging.showStandardStreams = true
 
   filter {
-    includeTestsMatching "*Test"
+    includeTestsMatching "*UnitTest"
   }
 
   testLogging {

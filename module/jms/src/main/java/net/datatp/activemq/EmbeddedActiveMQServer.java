@@ -19,12 +19,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
-import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.jms.config.JmsListenerContainerFactory;
 import org.springframework.jms.config.SimpleJmsListenerContainerFactory;
 
 import net.datatp.springframework.SpringAppLauncher;
-import net.datatp.util.io.IOUtil;
 import net.datatp.util.text.StringUtil;
 
 @SpringBootApplication
@@ -93,6 +91,10 @@ public class EmbeddedActiveMQServer {
     SimpleJmsListenerContainerFactory factory = new SimpleJmsListenerContainerFactory();
     factory.setConnectionFactory(jmsCF);
     return factory;
+  }
+  
+  static public void setSerializablePackages(String[] packages) {
+    System.setProperty("org.apache.activemq.SERIALIZABLE_PACKAGES", StringUtil.joinStringArray(packages, ","));
   }
   
   static public void run(String[] args) throws Exception {
