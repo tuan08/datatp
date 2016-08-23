@@ -14,11 +14,11 @@ public class SiteExtractorUnitTest {
   @Test
   public void test() throws Exception {
     SiteContextManager manager = new SiteContextManager();
-    manager.addConfig(
+    manager.add(
         new SiteConfig("vietnam", "vnexpress.net", "http://vnexpress.net", 3).
         setExtractConfig(ExtractConfig.article())
     );
-    manager.addConfig(
+    manager.add(
       new SiteConfig("vietnam", "dantri.com.vn", "http://dantri.com.vn", 3).
       setExtractConfig(ExtractConfig.article())
     ); 

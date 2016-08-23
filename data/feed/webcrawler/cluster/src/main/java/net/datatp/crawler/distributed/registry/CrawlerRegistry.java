@@ -36,6 +36,8 @@ public class CrawlerRegistry {
   }
 
   public String getBasePath() { return this.basePath; }
+  
+  public RegistryClient getRegistryClient() { return this.registryClient; }
 
   public SiteConfigRegistry getSiteConfigRegistry() { return this.siteConfigRegistry ; }
 

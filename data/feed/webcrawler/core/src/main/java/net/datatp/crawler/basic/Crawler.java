@@ -62,8 +62,19 @@ public class Crawler implements CrawlerApi {
   public void siteCreateGroup(String group) throws Exception { }
 
   @Override
-  public void siteAdd(SiteConfig config) throws Exception {
-    siteContextManager.addConfig(config);
+  public void siteAdd(SiteConfig ... configs) throws Exception {
+    for(int i = 0; i < configs.length; i++) {
+      SiteConfig config = configs[i];
+      siteContextManager.add(config);
+    }
+  }
+  
+  @Override
+  public void siteSave(SiteConfig ... configs) throws Exception {
+    for(int i = 0; i < configs.length; i++) {
+      SiteConfig config = configs[i];
+      siteContextManager.update(config);
+    }
   }
   
   @Override

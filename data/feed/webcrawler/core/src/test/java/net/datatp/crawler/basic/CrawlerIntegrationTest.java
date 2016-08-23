@@ -43,20 +43,12 @@ public class CrawlerIntegrationTest {
     crawler.configure(new CrawlerConfig());
 
     crawler.siteCreateGroup("vietnam");
-    crawler.siteAdd(
-      new SiteConfig("vietnam", "vnexpress.net", "http://vnexpress.net", 2).
-      setExtractConfig(ExtractConfig.article())
-    );
-    
-    crawler.siteAdd(
-      new SiteConfig("vietnam", "dantri.com.vn", "http://dantri.com.vn", 2).
-      setExtractConfig(ExtractConfig.article())
-    );
-    
-    crawler.siteAdd(
-      new SiteConfig("otofun", "otofun.net", "https://www.otofun.net/forums/", 2).
-      setExtractConfig(ExtractConfig.forum())
-    );
+    SiteConfig[] configs = {
+      new SiteConfig("vietnam", "vnexpress.net", "http://vnexpress.net", 2).setExtractConfig(ExtractConfig.article()),
+      new SiteConfig("vietnam", "dantri.com.vn", "http://dantri.com.vn", 2).setExtractConfig(ExtractConfig.article()),
+      new SiteConfig("vietnam", "otofun.net",    "https://www.otofun.net/forums/", 2).setExtractConfig(ExtractConfig.forum())
+    };
+    crawler.siteAdd(configs);
     
     ESXDocProcessor xdocProcessor = new ESXDocProcessor("xdoc", new String[] { "127.0.0.1:9300" });
     crawler.setXDocProcessor(xdocProcessor);

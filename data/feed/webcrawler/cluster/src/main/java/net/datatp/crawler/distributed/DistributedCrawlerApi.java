@@ -20,14 +20,34 @@ public class DistributedCrawlerApi implements CrawlerApi {
     crawlerRegistry = new CrawlerRegistry(new RegistryClient("127.0.0.1:2181"));
   }
   
+  public DistributedCrawlerApi(String zkConnects) throws Exception {
+    crawlerRegistry = new CrawlerRegistry(new RegistryClient(zkConnects));
+  }
+  
   public CrawlerRegistry getCrawlerRegistry() { return this.crawlerRegistry; }
   
   public void siteCreateGroup(String group) throws Exception {
     crawlerRegistry.getSiteConfigRegistry().createGroup(group);
   }
   
-  public void siteAdd(SiteConfig config) throws Exception {
-    crawlerRegistry.getSiteConfigRegistry().add(config);
+  public void siteAdd(SiteConfig ... configs) throws Exception {
+    String[] relativePath = new String[configs.length];
+    for(int i = 0; i < configs.length; i++) {
+      SiteConfig config = configs[i];
+      crawlerRegistry.getSiteConfigRegistry().add(config);
+      relativePath[i] = config.relativeStorePath();
+    }
+    crawlerRegistry.getSiteConfigRegistry().getEventBroadcaster().broadcast(new SiteConfigEvent.Reload(true, relativePath));
+  }
+  
+  public void siteSave(SiteConfig ... configs) throws Exception {
+    String[] relativePath = new String[configs.length];
+    for(int i = 0; i < configs.length; i++) {
+      SiteConfig config = configs[i];
+      crawlerRegistry.getSiteConfigRegistry().save(config);
+      relativePath[i] = config.relativeStorePath();
+    }
+    crawlerRegistry.getSiteConfigRegistry().getEventBroadcaster().broadcast(new SiteConfigEvent.Reload(false, relativePath));
   }
   
   @Override

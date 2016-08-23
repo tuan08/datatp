@@ -45,6 +45,19 @@ public class SiteConfigRegistry {
     return registryClient.getChildren("/" + GROUPS);
   }
   
+  public SiteConfig getByRelativePath(String relativePath) throws Exception {
+    String path = "/" + GROUPS + "/" + relativePath;
+    return registryClient.getDataAs(path, SiteConfig.class);
+  }
+
+  public List<SiteConfig> getByRelativePaths(String[] relativePath) throws Exception {
+    List<SiteConfig> holder = new ArrayList<>();
+    for(int i = 0; i < relativePath.length; i++) {
+      holder.add(getByRelativePath(relativePath[i]));
+    }
+    return holder;
+  }
+  
   public List<SiteConfig> getByGroup(String name) throws Exception {
     String gpath = groupPath(name);
     List<String> names = registryClient.getChildren(gpath);
@@ -70,12 +83,18 @@ public class SiteConfigRegistry {
   }
   
   public void add(SiteConfig config) throws Exception {
-    String path = groupPath(config.getGroup()) + "/" + config.getHostname();
+    String path = storePath(config);
     registryClient.create(path, config);
   }
   
+  public void save(SiteConfig config) throws Exception {
+    String path = storePath(config);
+    registryClient.setData(path, config);;
+  }
+  
+  
   public void update(SiteConfig config) throws Exception {
-    String path = groupPath(config.getGroup()) + "/" + config.getHostname();
+    String path = storePath(config);
     registryClient.setData(path, config);
   }
   
@@ -90,7 +109,7 @@ public class SiteConfigRegistry {
       transFinal = trans.check().forPath(gpath).and();
     }
     for(SiteConfig config : configs) {
-      String path = gpath + "/" + config.getHostname();
+      String path = storePath(config);
       transFinal = transFinal.create().withMode(CreateMode.PERSISTENT).forPath(path, converter.toBytes(config)).and();
     }
     transFinal.commit();
@@ -101,4 +120,6 @@ public class SiteConfigRegistry {
   }
   
   String groupPath(String name) { return "/" + GROUPS + "/" + name; }
+  
+  String storePath(SiteConfig config) { return "/" + GROUPS + "/" + config.relativeStorePath(); }
 }

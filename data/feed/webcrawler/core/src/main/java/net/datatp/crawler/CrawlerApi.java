@@ -9,7 +9,8 @@ import net.datatp.crawler.site.SiteConfig;
 public interface CrawlerApi {
   public void siteCreateGroup(String group) throws Exception ;
   
-  public void siteAdd(SiteConfig config) throws Exception ;
+  public void siteAdd(SiteConfig  ...  configs) throws Exception ;
+  public void siteSave(SiteConfig ... configs) throws Exception ;
   
   public List<SiteConfig> siteGetSiteConfigs() throws Exception ;
   

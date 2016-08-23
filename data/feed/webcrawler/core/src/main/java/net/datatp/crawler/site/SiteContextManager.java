@@ -18,19 +18,35 @@ public class SiteContextManager {
   private Map<String, SiteContext> siteContexts   = new HashMap<String, SiteContext>();
   private AutoWDataExtractors autoWDataExtractors = new AutoWDataExtractors();
   
-  public void addCongfig(String site, String injectUrl, int crawlDeep) {
-    addConfig(new SiteConfig("default", site, injectUrl, crawlDeep));
+  public void add(String site, String injectUrl, int crawlDeep) {
+    add(new SiteConfig("default", site, injectUrl, crawlDeep));
   }
 
-  public void addConfig(SiteConfig config) {
+  public void add(SiteConfig config) {
     SiteExtractor siteExtractor = new SiteExtractor(config, autoWDataExtractors);
     siteContexts.put(config.getHostname(), new SiteContext(config, siteExtractor)) ;
   }
   
-  public void addConfig(List<SiteConfig> configs) {
-    for(int i = 0; i < configs.size(); i++) addConfig(configs.get(i));
+  public void add(List<SiteConfig> configs) {
+    for(int i = 0; i < configs.size(); i++) {
+      add(configs.get(i));
+    }
   }
 
+
+  public void update(SiteConfig config) {
+    SiteContext siteContext = siteContexts.get(config.getHostname());
+    siteContext.init(config);
+  }
+  
+  public void update(List<SiteConfig> configs) {
+    for(int i = 0; i < configs.size(); i++) {
+      SiteConfig config = configs.get(i);
+      SiteContext siteContext = siteContexts.get(config.getHostname());
+      siteContext.init(config);
+    }
+  }
+  
   public int clear() { 
     int size = siteContexts.size() ;
     siteContexts.clear() ;

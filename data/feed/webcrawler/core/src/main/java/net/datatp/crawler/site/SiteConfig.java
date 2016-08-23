@@ -44,6 +44,8 @@ public class SiteConfig implements Serializable {
     setStatus(Status.Ok) ;
     setRefreshPeriod(60 * 60 * 24) ;
   }
+
+  public String relativeStorePath() { return group + "/" + hostname; }
   
   public String getGroup() { return group; }
   public void setGroup(String group) { this.group = group; }

@@ -53,6 +53,13 @@ public class CrawlerRestController {
     return analyzer.getSiteStructure();
   }
   
+  @RequestMapping(value = "/crawler/site/analyzed-site-structure", method = RequestMethod.POST)
+  public SiteConfig siteSave(@RequestBody SiteConfig config) throws Exception {
+    System.out.println(DataSerializer.JSON.toString(config));
+    crawlerApi.siteSave(config);
+    return config;
+  }
+  
   @RequestMapping("/crawler/scheduler/report/url-commit")
   public List<URLCommitMetric> schedulerGetURLCommitReport(@RequestParam(value="max", defaultValue="100") int max) throws Exception {
     return crawlerApi.schedulerGetURLCommitReport(max);

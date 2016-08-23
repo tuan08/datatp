@@ -18,9 +18,12 @@ public class SiteContext {
   private SiteExtractor       siteExtractor;
 
   public SiteContext(SiteConfig config, SiteExtractor siteExtractor) {
-    this.siteConfig    = config ;
     this.siteExtractor = siteExtractor;
-    
+    init(config);
+  }
+  
+  public void init(SiteConfig config) {
+    this.siteConfig    = config ;
     URLPattern[] urlPattern = config.getUrlPatterns();
     if(urlPattern != null) {
       urlPatternMatcher = new URLPatternMatcher[urlPattern.length];

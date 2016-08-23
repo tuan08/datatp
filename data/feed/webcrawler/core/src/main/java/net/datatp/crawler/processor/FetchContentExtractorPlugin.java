@@ -13,6 +13,7 @@ import net.datatp.xhtml.extract.entity.ExtractEntity;
 public class FetchContentExtractorPlugin implements FetchProcessorPlugin {
   @Override
   public void process(FetchContext fetchCtx, WDataExtractContext wDataCtx) {
+    if(wDataCtx == null) return;
     SiteContext siteContext      = fetchCtx.getURLContext().getSiteContext();
     SiteExtractor siteExtractor  = siteContext.getSiteExtractor();
     List<ExtractEntity> extracts = siteExtractor.extract(wDataCtx);

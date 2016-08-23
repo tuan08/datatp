@@ -83,7 +83,9 @@ define([
       actions: [
         {
           action: "save", label: "Save",
-          onClick: function(thisUI) { }
+          onClick: function(thisUI) { 
+            var siteConfig = uiSiteConfig.siteConfig;
+          }
         },
         {
           action: "analyzer", label: "Analyzer",
@@ -99,11 +101,7 @@ define([
           }
         }
       ]
-    }
-  }) ;
-
-  var UISiteConfig = UIBreadcumbs.extend({
-    type:  "UISiteConfig",
+    },
 
     onInit: function(options) {
       this.siteConfig = options.siteConfig;
@@ -116,10 +114,16 @@ define([
       if(this.siteConfig.urlPatterns == null) this.siteConfig.urlPatterns = [];
       uiURLPattern.bindArray('urlPattern', this.siteConfig.urlPatterns) ;
 
-      var uiSiteConfigCollabsible = new UISiteConfigCollabsible() ;
-      uiSiteConfigCollabsible.add(uiSiteConfigGeneric);
-      uiSiteConfigCollabsible.add(uiURLPattern);
+      this.add(uiSiteConfigGeneric);
+      this.add(uiURLPattern);
+    }
+  }) ;
 
+  var UISiteConfig = UIBreadcumbs.extend({
+    type:  "UISiteConfig",
+
+    onInit: function(options) {
+      var uiSiteConfigCollabsible = new UISiteConfigCollabsible({siteConfig: options.siteConfig}) ;
       this.push(uiSiteConfigCollabsible);
     }
   });

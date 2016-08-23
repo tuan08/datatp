@@ -5,18 +5,14 @@ import org.springframework.context.ApplicationContext;
 
 import net.datatp.activemq.EmbeddedActiveMQServer;
 import net.datatp.crawler.distributed.CrawlerApp;
+import net.datatp.crawler.distributed.DistributedCrawlerApi;
 import net.datatp.crawler.distributed.fetcher.CrawlerFetcherApp;
 import net.datatp.crawler.distributed.integration.DocumentConsumerLoggerApp;
 import net.datatp.crawler.distributed.master.CrawlerMasterApp;
-import net.datatp.crawler.distributed.registry.CrawlerRegistry;
-import net.datatp.crawler.distributed.registry.event.FetcherEvent;
-import net.datatp.crawler.distributed.registry.event.SchedulerEvent;
-import net.datatp.crawler.distributed.registry.event.SiteConfigEvent;
-import net.datatp.crawler.distributed.registry.event.SchedulerEvent.Start.Option;
+import net.datatp.crawler.site.ExtractConfig;
 import net.datatp.crawler.site.SiteConfig;
 import net.datatp.util.io.FileUtil;
 import net.datatp.util.log.LoggerFactory;
-import net.datatp.zk.registry.RegistryClient;
 import net.datatp.zk.tool.server.EmbededZKServer;
 
 public class DistributedCrawlerIntegrationTest {
@@ -24,11 +20,9 @@ public class DistributedCrawlerIntegrationTest {
   @Test
   public void run() throws Exception {
     LoggerFactory.log4jUseConsoleOutputConfig("INFO");
-    FileUtil.removeIfExist("build/activemq", false);
-    FileUtil.removeIfExist("build/crawler", false);
-    FileUtil.removeIfExist("build/zookeeper", false);
+    FileUtil.removeIfExist("build/working", false);
     
-    EmbededZKServer zkServer = new EmbededZKServer("build/zookeeper/data", 2181);
+    EmbededZKServer zkServer = new EmbededZKServer("build/working/zookeeper/data", 2181);
     zkServer.clean();
     zkServer.start();
     
@@ -39,22 +33,23 @@ public class DistributedCrawlerIntegrationTest {
     
     CrawlerFetcherApp.run(null);
     
-    RegistryClient registryClient = new RegistryClient(zkServer.getConnectString());
+    DistributedCrawlerApi api = new  DistributedCrawlerApi(zkServer.getConnectString());
+    api.siteCreateGroup("vietnam");
     
-    CrawlerRegistry wcReg = new CrawlerRegistry(registryClient);
-    
-    wcReg.getSiteConfigRegistry().createGroup("vietnam");
-    wcReg.getSiteConfigRegistry().add(new SiteConfig("vietnam", "vnexpress.net", "http://vnexpress.net", 2));
-    wcReg.getSiteConfigRegistry().add(new SiteConfig("vietnam", "dantri.com.vn", "http://dantri.com.vn", 2));
-    
-    wcReg.getSiteConfigRegistry().getEventBroadcaster().broadcast(new SiteConfigEvent.Reload());
+    SiteConfig[] configs = {
+      new SiteConfig("vietnam", "vnexpress.net", "http://vnexpress.net", 2).setExtractConfig(ExtractConfig.article()),
+      new SiteConfig("vietnam", "dantri.com.vn", "http://dantri.com.vn", 2).setExtractConfig(ExtractConfig.article()),
+      new SiteConfig("vietnam", "otofun.net", "https://www.otofun.net/forums/", 2).setExtractConfig(ExtractConfig.forum())
+    };
+    api.siteAdd(configs);
     Thread.sleep(1000);
-    wcReg.getSchedulerRegistry().getEventBroadcaster().broadcast(new SchedulerEvent.Start(Option.InjectURL));
-    wcReg.getFetcherRegistry().getEventBroadcaster().broadcast(new FetcherEvent.Start());
+
+    api.schedulerStart();
+    api.fetcherStart();
     
     ApplicationContext xhtmlLoggerAppContext = DocumentConsumerLoggerApp.run(null);
     
-    System.out.println(registryClient.formatRegistryAsText());
+    System.out.println(api.getCrawlerRegistry().getRegistryClient().formatRegistryAsText());
     Thread.currentThread().join();
   }
 }
