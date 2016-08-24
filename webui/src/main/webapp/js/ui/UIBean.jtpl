@@ -5,14 +5,13 @@
 
 <%function renderDatepickerField(field, bean, disabled) { %>
   <%var date = field.datepicker.getDate(bean) ; %>
-  <input class="onFocusDatePickerInput onBlurDatePickerInput" type="text" name="<%=field.field%>" 
-         value="<%=date%>" <%=disabled%>/>
+  <input class="onFocusDatePickerInput onBlurDatePickerInput" type="text" name="<%=field.field%>" value="<%=date%>" <%=disabled%>/>
 <%}%>
 
 <%function renderCustomField(field, bean, fieldValue, disabled) { %>
   <div class="UIBeanCustomInput">
     <%var inputVal = field.custom.getDisplay(bean); %>
-    <input class="onBlurCustomInput onChangeCustomInput span-9 text last" 
+    <input class="onBlurCustomInput onChangeCustomInput span-9 text" 
            type="search" name="<%=field.field%>" 
            value="<%=inputVal%>" <%=disabled%> autocomplete="off"/>
     <div class="UIBeanCustomInputSelector"></div>
@@ -20,7 +19,7 @@
 <%}%>
 
 <%function renderSelectInputField(field, bean, fieldValue, disabled) { %>
-  <select <%=disabled%> class="onChangeInput text" name="<%=field.field%>">
+  <select <%=disabled%> class="onChangeInput span-9 text" name="<%=field.field%>">
      <%var options = field.select.getOptions(field, bean) ; %>
      <%for(var i = 0; i < options.length ; i++) { %>
      <% fieldValue = fieldValue != null ? fieldValue : field.defaultValue ; %>
@@ -40,7 +39,7 @@
   <div class="InputGrid" field="<%=field.field%>">
     <div class="InputBlock">
       <%for(var i = 0; i < fieldValue.length; i++) { %>
-        <input class="onChangeInput text span-9 last" type="text" name="<%=field.field + '@' + i%>" 
+        <input class="onChangeInput text span-9 last" name="<%=field.field + '@' + i%>" 
                value="<%=fieldValue[i]%>" <%=disabled%> />
       <%}%>
     </div>
@@ -158,7 +157,7 @@
 
 <%function renderTabs(config, beanStates) { %>
   <%if(config.type == null || config.type == 'single') return ;%>
-  <div>
+  <div class="UIBeansTab" style="padding: 10px 0px">
     <%
       var beanConfig = null ;
       var label = null ;
@@ -169,7 +168,10 @@
           var configName = name.substring(0, idx);
           var beanIdx = name.substring(idx + 1) ;
           beanConfig = config.beans[configName] ;
-          label = beanConfig.label + ' ' + (parseInt(beanIdx) + 1);
+          if(beanConfig.getLabel) label = beanConfig.getLabel(beanState.bean);
+          if(label == null || label == '') {
+            label = beanConfig.label + ' ' + (parseInt(beanIdx) + 1);
+          }
         } else {
           beanConfig = config.beans[name] ;
           label = beanConfig.label ;
@@ -187,10 +189,8 @@
 %>
 
 <div class="UIBeans">
-  <div class="UIBeansTab" style="padding: 10px 0px">
-    <%renderTabs(config, beanStates);%>
-  </div>
   <%
+    renderTabs(config, beanStates);
     var render = null ;
     for(var name in beanStates) {
       var beanConfig = null ;

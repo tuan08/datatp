@@ -59,7 +59,7 @@ public class CrawlerIntegrationTest {
     
     ESXDocProcessor xdocProcessor = new ESXDocProcessor("xdoc", new String[] { "127.0.0.1:9300" });
     crawler.setXDocProcessor(xdocProcessor);
-    crawler.start();
+    //crawler.start();
     
     Thread.currentThread().join();
   }

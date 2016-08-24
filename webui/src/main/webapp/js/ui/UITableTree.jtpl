@@ -24,7 +24,7 @@
   <tr data-depth="<%=level%>" class="<%=cssCollapse%> level<%= level %>" style="display: <%=rowDisplay%>">
     <%var bean = node.bean ; %>
     <%for(var j = 0; j < fields.length ; j++) {%>
-    <%  if(fields[j].toggled == null || !fields[j].toggled) continue ;%>
+    <%  if(!fields[j].toggled) continue ;%>
     <%  var cell = null ; %>
     <%  if(fields[j].custom != null) {%>
     <%    cell =  fields[j].custom.getDisplay(bean) ;%>
@@ -48,7 +48,7 @@
     <%}%>
 
     <%if(actions != null) {%>
-      <td class="cell-center-align" style="padding: 3px 0px">
+      <td class="cell-center-align" style="padding: 3px 0px; white-space: nowrap">
         <%for(var k = 0; k < actions.length; k++) {%>
         <%  var action = actions[k] ;%>
             <a class="onBeanAction ui-action" action="<%= k %>"><%=action.label%></a>

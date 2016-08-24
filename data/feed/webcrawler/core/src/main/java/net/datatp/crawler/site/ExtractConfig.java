@@ -5,38 +5,29 @@ import java.io.Serializable;
 public class ExtractConfig implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  static public enum MatchType   { url, title }
+  static public enum MatchType   { url, title, none }
   static public enum ExtractAuto { content, article, comment, forum, product, job, classified }
   
-  private String         name = "content";
-  private Matcher        matcher;
-  private ExtractAuto[]  extractAuto = { ExtractAuto.content };
+  private String         name        = "content";
+  private MatchType      type;
+  private String[]       pattern;
   private XPathPattern[] extractXPath;
+  private ExtractAuto[]  extractAuto = { ExtractAuto.content };
 
   public String getName() { return name; }
   public void setName(String name) { this.name = name;}
   
-  public Matcher getMatcher() { return matcher; }
-  public void setMatcher(Matcher matcher) { this.matcher = matcher; }
+  public MatchType getMatchType() { return type; }
+  public void setMatchType(MatchType type) { this.type = type; }
   
-  public ExtractAuto[] getExtractAuto() { return extractAuto; }
-  public void setExtractAuto(ExtractAuto ... extractAuto) { this.extractAuto = extractAuto; }
-  
+  public String[] getMatchPattern() { return pattern; }
+  public void setMatchPattern(String[] pattern) { this.pattern = pattern;}
+
   public XPathPattern[] getExtractXPath() { return extractXPath; }
   public void setExtractXPath(XPathPattern[] extractXPath) { this.extractXPath = extractXPath; }
   
-  static public class Matcher implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    private MatchType type;
-    private String[]  pattern;
-
-    public MatchType getType() { return type; }
-    public void setType(MatchType type) { this.type = type; }
-    
-    public String[] getPattern() { return pattern; }
-    public void setPattern(String[] pattern) { this.pattern = pattern;}
-  }
+  public ExtractAuto[] getExtractAuto() { return extractAuto; }
+  public void setExtractAuto(ExtractAuto ... extractAuto) { this.extractAuto = extractAuto; }
   
   static public class XPathPattern implements Serializable {
     private static final long serialVersionUID = 1L;

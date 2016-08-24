@@ -318,6 +318,7 @@ define([
     },
     
     onBlurCustomInput: function(evt) {
+      console.log("onBlurCustomInput");
       var beanName = $(evt.target).closest("[bean]").attr('bean') ;
       var beanState = this.beanStates[beanName] ;
       var beanConfig = this._getBeanConfig(beanName) ;

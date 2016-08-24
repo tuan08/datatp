@@ -12,7 +12,7 @@ define([
     config: {
       actions: [
         {
-          action: "analyze", label: "Analyze",
+          action: "analyze", label: "Reanalyze",
           onClick: function(thisUI) { thisUI.analyze(); }
         },
         {

@@ -53,7 +53,7 @@ public class CrawlerRestController {
     return analyzer.getSiteStructure();
   }
   
-  @RequestMapping(value = "/crawler/site/analyzed-site-structure", method = RequestMethod.POST)
+  @RequestMapping(value = "/crawler/site/save", method = RequestMethod.POST)
   public SiteConfig siteSave(@RequestBody SiteConfig config) throws Exception {
     System.out.println(DataSerializer.JSON.toString(config));
     crawlerApi.siteSave(config);

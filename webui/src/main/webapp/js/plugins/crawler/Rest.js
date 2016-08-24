@@ -8,6 +8,10 @@ define([
       return server.restGET("/site/configs");
     };
 
+    this.save = function(siteConfig) {
+      return server.syncPOSTJson("/site/save", siteConfig);
+    };
+
     this.getAnalyzedSiteStructure = function(siteConfig, maxDownload, forceNew) {
       var params = {
         siteConfig: siteConfig, maxDownload: maxDownload, forceNew: forceNew

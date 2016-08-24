@@ -6,25 +6,6 @@ define([
   'ui/UIBean'
 ], function($, _, Backbone, UICollabsible, UIBean) {
   
-  var MyUICollabsible = UICollabsible.extend({
-    label: "Sample UICollapsible", 
-    config: {
-      actions: [
-        { 
-          action: "back", label: "Back",
-          onClick: function(thisUI) {
-            console.log("on click back") ;
-          }
-        },
-        {
-          action: "save", label: "Save",
-          onClick: function(thisUI) {
-            console.log("on click save") ;
-          }
-        }
-      ]
-    }
-  }) ;
   
   var SingleUIBean = UIBean.extend({
     label: "UIBean Single",
@@ -146,7 +127,7 @@ define([
     }
   });
   
-  var MultipleUIBean = UIBean.extend({
+  var UIMultipleBean = UIBean.extend({
     label: "UIBean Multiple",
     config: {
       type: 'multiple', // single, array, multiple
@@ -188,7 +169,7 @@ define([
     }
   });
   
-  var ArrayUIBean = UIBean.extend({
+  var UIArrayBean = UIBean.extend({
     label: "UIBean Array",
     config: {
       type: 'array',
@@ -204,40 +185,58 @@ define([
               ]
             },
             { field: "input",   label: "Input" },
-            { field: "multipleInput",  label: "Multiple Input", multiple: true
-            },
+            { field: "multipleInput",  label: "Multiple Input", multiple: true },
             { field: "textarea", label: "Text Area", type: "textarea" }
           ]
         }
       }
     }
   });
-  
-  var UIBeanDemo = new MyUICollabsible() ;
 
-  var bean = {
-    option: 'opt2' ,
-    input: "Input Field",
-    multipleInput: ["input 1", "input 2"],
-    textarea: "Text areaaaaaaaa aaaaaaaaa aaa aaaaaaaaaa aa aaa",
-    nestedObject: {
-      field: "nested object field"
+  var UIBeanDemo = UICollabsible.extend({
+    label: "Sample UICollapsible", 
+    config: {
+      actions: [
+        { 
+          action: "back", label: "Back",
+          onClick: function(thisUI) {
+            console.log("on click back") ;
+          }
+        },
+        {
+          action: "save", label: "Save",
+          onClick: function(thisUI) {
+            console.log("on click save") ;
+          }
+        }
+      ]
+    },
+    
+    onInit: function(options) {
+      var bean = {
+        option: 'opt2' ,
+        input: "Input Field",
+        multipleInput: ["input 1", "input 2"],
+        textarea: "Text areaaaaaaaa aaaaaaaaa aaa aaaaaaaaaa aa aaa",
+        nestedObject: {
+          field: "nested object field"
+        }
+      };
+      var singleUIBean = new SingleUIBean() ;
+      singleUIBean.bind('singleBean', bean, true) ;
+      this.add(singleUIBean) ;
+  
+      var uiMultipleBean = new UIMultipleBean() ;
+      uiMultipleBean.bind('bean1', jQuery.extend({}, bean)) ;
+      uiMultipleBean.bind('bean2', jQuery.extend({}, bean)) ;
+      this.add(uiMultipleBean) ;
+  
+      var uiArrayBean = new UIArrayBean() ;
+      var beans = [jQuery.extend({}, bean), jQuery.extend({}, bean)] ;
+      uiArrayBean.bindArray('bean', beans) ;
+      this.add(uiArrayBean) ;
     }
-  };
-  var singleUIBean = new SingleUIBean() ;
-  singleUIBean.bind('singleBean', bean, true) ;
-  UIBeanDemo.add(singleUIBean) ;
+  }) ;
   
-  var multipleUIBean = new MultipleUIBean() ;
-  multipleUIBean.bind('bean1', jQuery.extend({}, bean)) ;
-  multipleUIBean.bind('bean2', jQuery.extend({}, bean)) ;
-  UIBeanDemo.add(multipleUIBean) ;
-  
-  var arrayUIBean = new ArrayUIBean() ;
-  var beans = [jQuery.extend({}, bean), jQuery.extend({}, bean)] ;
-  arrayUIBean.bindArray('bean', beans) ;
-  UIBeanDemo.add(arrayUIBean) ;
-      
-  
-  return UIBeanDemo ;
+  return new UIBeanDemo() ;
 });

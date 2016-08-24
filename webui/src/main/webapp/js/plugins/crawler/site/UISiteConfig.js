@@ -5,8 +5,10 @@ define([
   'ui/UIBreadcumbs',
   'ui/UIBean',
   'ui/UICollapsible',
-  'plugins/crawler/site/UISiteAnalyzer'
-], function($, _, Backbone, UIBreadcumbs, UIBean, UICollabsible, UISiteAnalyzer) {
+  'plugins/crawler/site/UIExtractConfig',
+  'plugins/crawler/site/UISiteAnalyzer',
+  'plugins/crawler/Rest'
+], function($, _, Backbone, UIBreadcumbs, UIBean, UICollabsible, UIExtractConfig, UISiteAnalyzer, Rest) {
 
   var UIURLPattern = UIBean.extend({
     label: "URL Pattern",
@@ -15,9 +17,10 @@ define([
       beans: {
         urlPattern: {
           label: 'URL Pattern',
+          getLabel: function(bean) { return bean.type ; },
           fields: [
             {
-              field:  "type", label: "Type",
+              field:  "type", label: "Type", defaultValue: 'ignore',
               select: {
                 getOptions: function(field, bean) {
                   var options = [
@@ -84,14 +87,15 @@ define([
         {
           action: "save", label: "Save",
           onClick: function(thisUI) { 
-            var siteConfig = uiSiteConfig.siteConfig;
+            var siteConfig = thisUI.siteConfig;
+            Rest.site.save(siteConfig);
           }
         },
         {
           action: "analyzer", label: "Analyzer",
           onClick: function(thisUI) { 
+            var siteConfig = thisUI.siteConfig;
             var uiSiteConfig = thisUI.getAncestorOfType("UISiteConfig") ;
-            var siteConfig = uiSiteConfig.siteConfig;
             uiSiteConfig.push(new UISiteAnalyzer({ siteConfig: siteConfig }));
           }
         },
@@ -114,8 +118,11 @@ define([
       if(this.siteConfig.urlPatterns == null) this.siteConfig.urlPatterns = [];
       uiURLPattern.bindArray('urlPattern', this.siteConfig.urlPatterns) ;
 
+      var uiExtractConfig = new UIExtractConfig({siteConfig: options.siteConfig}) ;
+
       this.add(uiSiteConfigGeneric);
       this.add(uiURLPattern);
+      this.add(uiExtractConfig);
     }
   }) ;
 

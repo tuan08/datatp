@@ -9,6 +9,7 @@
           <div><span class="ui-action onSelectUIComponent" name="UITableTreeDemo">UITableTree Demo</span></div>
           <div><span class="ui-action onSelectUIComponent" name="UITabbedPaneDemo">UITabbedPane Demo</span></div>
           <div><span class="ui-action onSelectUIComponent" name="UIBeanDemo">UIBean Demo</span></div>
+          <div><span class="ui-action onSelectUIComponent" name="UIComplexBeanDemo">UIComplexBean Demo</span></div>
         </div>
 
         <h3 style="margin: 3px 0px">D3 Demo</h3>

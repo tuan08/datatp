@@ -24,9 +24,13 @@ define([
         ],
         actions:[
           {
-            icon: "edit", label: "Mod",
+            icon: "edit", label: "Config",
             onClick: function(thisTable, row) { 
-              thisTable.onEditBean(row) ;
+            }
+          },
+          {
+            icon: "edit", label: "Extract",
+            onClick: function(thisTable, row) { 
             }
           }
         ]

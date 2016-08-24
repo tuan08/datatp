@@ -61,12 +61,10 @@ public class SiteExtractor {
     
     public PageExtractor(ExtractConfig extractConfig, WDataExtractors extractor) {
       this.extractor     = extractor;
-      this.pageMatcher   = new PageMatcher(extractConfig.getMatcher());
+      this.pageMatcher   = new PageMatcher(extractConfig);
     }
     
-    public boolean matches(WData wdata) {
-      return pageMatcher.matches(wdata);
-    }
+    public boolean matches(WData wdata) { return pageMatcher.matches(wdata); }
     
     public List<ExtractEntity> extractEntity(WDataExtractContext context) {
       return extractor.extractEntity(context);
@@ -74,17 +72,17 @@ public class SiteExtractor {
   }
   
   static public class PageMatcher {
-    ExtractConfig.Matcher matcherConfig;
+    ExtractConfig extractConfig;
     
-    public PageMatcher(ExtractConfig.Matcher matcherConfig) {
-      this.matcherConfig = matcherConfig;
+    public PageMatcher(ExtractConfig extractConfig) {
+      this.extractConfig = extractConfig;
     }
     
     public boolean matches(WData wdata) {
-      if(matcherConfig != null) {
-        return false;
-      } else {
+      if(extractConfig.getMatchPattern() == null) {
         return true;
+      } else {
+        return false;
       }
     }
   }
