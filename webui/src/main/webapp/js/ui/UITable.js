@@ -21,17 +21,25 @@ define([
               {
                 action:'save', label: "Save", icon: "check",
                 onClick: function(thisUI, beanConfig, beanState) { 
+                  var row = 0; 
+                  var bean = beanState.bean ;
                   if(thisUI.row >= 0) {
+                    var row = thisUI.row; 
                     thisUI.UITable.markModifiedItemOnCurrentPage(thisUI.row) ;
                   } else {
-                    thisUI.UITable.addBean(thisUI.getBean('bean')) ;
+                    thisUI.UITable.addBean(bean) ;
+                  }
+                  if(thisUI.onSaveCallback) {
+                    thisUI.onSaveCallback(thisUI.UITable, row, bean);
                   }
                   thisUI.UITable.renderRows() ;
+		  UIPopup.closePopup() ;
                 }
               },
               {
                 action:'cancel', label: "Cancel", icon: "back",
                 onClick: function(thisUI, beanConfig, beanState) { 
+		  UIPopup.closePopup() ;
                 }
               }
             ],
@@ -80,9 +88,10 @@ define([
       this.beans = beans ;
       var pageSize = this.config.pageSize ;
       if(pageSize == null) pageSize = 10 ;
-      this.state = {beans: [], pageSize: pageSize } ;
+      this.tableState = { beanStates: [], pageSize: pageSize } ;
       for(var i = 0; i < beans.length; i++) {
-        this.state.beans.push( { bean: beans[i] }) ;
+        var beanState = { bean: beans[i] };
+        this.tableState.beanStates.push(beanState) ;
       }
       this._filter() ;
     },
@@ -94,8 +103,10 @@ define([
     
     commitChange: function() {
       this.beans.length = 0 ;
-      for(var i = 0; i < this.state.beans.length; i++) {
-        this.beans[i] = this.state.beans[i].bean ;
+      for(var i = 0; i < this.tableState.beanStates.length; i++) {
+        var beanState = this.tableState.beanStates[i] ;
+        var bean = beanState.bean ;
+        this.beans.push(bean)  ;
       }
     },
     
@@ -112,9 +123,9 @@ define([
     removeItemOnCurrentPage : function(idx) {
       var item = this.pageList.getItemOnCurrentPage(idx) ;
       this.pageList.removeItemOnCurrentPage(idx) ;
-      var index = this.state.beans.indexOf(item);
+      var index = this.tableState.beanStates.indexOf(item);
       if(index >= 0) {
-        this.state.beans.splice(index, 1) ;
+        this.tableState.beanStates.splice(index, 1) ;
       }
       this.renderRows() ;
     },
@@ -123,27 +134,27 @@ define([
      *@memberOf ui.UITable 
      */
     addBean: function(bean) {
-      if(this.state == null) {
+      if(this.tableState == null) {
         var pageSize = this.config.pageSize ;
         if(pageSize == null) pageSize = 10 ;
-        this.state = {beans: [], pageSize: pageSize } ;
+        this.tableState = { beanStates: [], pageSize: pageSize } ;
       }
-      bean.persistableState = 'NEW' ;
-      this.state.beans.push({ bean: bean }) ;
+      var beanState = { persistableState: 'NEW', bean: bean };
+      this.tableState.beanStates.push(beanState) ;
       this._updateBeanStateCount() ;
       this._filter() ;
     },
     
     markDeletedItemOnCurrentPage : function(idx) {
-      var item = this.pageList.getItemOnCurrentPage(idx) ;
-      item.bean.persistableState = 'DELETED' ;
+      var beanState = this.pageList.getItemOnCurrentPage(idx) ;
+      beanState.persistableState = 'DELETED' ;
       this._updateBeanStateCount() ;
       this.renderRows() ;
     },
     
     markModifiedItemOnCurrentPage : function(idx) {
-      var item = this.pageList.getItemOnCurrentPage(idx) ;
-      item.bean.persistableState = 'MODIFIED' ;
+      var beanState = this.pageList.getItemOnCurrentPage(idx) ;
+      beanState.persistableState = 'MODIFIED' ;
       this._updateBeanStateCount() ;
       this.renderRows() ;
     },
@@ -169,7 +180,7 @@ define([
     renderRows: function() {
       var params = { 
         config:   this.config,
-        state: this.state,
+        tableState: this.tableState,
         pageList: this.pageList,
         tableId: this.tableId 
       } ;
@@ -302,16 +313,18 @@ define([
       this.renderRows() ;
     },
     
-    onAddBean: function() {
-      var popupConfig = {title: "New Bean", minWidth: 600, modal: true} ;
+    onAddBean: function(onSaveCallback) {
+      var popupConfig = {title: "New", minWidth: 600, modal: true} ;
       var uicomp = new UITableBean().init(this, {}, -1) ;
+      uicomp.onSaveCallback = onSaveCallback;
       UIPopup.activate(uicomp, popupConfig) ;
     },
     
-    onEditBean: function(row) {
+    onEditBean: function(row, onSaveCallback) {
       var bean = this.getItemOnCurrentPage(row) ;
       var uicomp = new UITableBean().init(this, bean, row) ;
-      var popupConfig = {title: "Edit Bean", minWidth: 600, modal: true} ;
+      uicomp.onSaveCallback = onSaveCallback;
+      var popupConfig = { title: "Edit", minWidth: 600, modal: true} ;
       UIPopup.activate(uicomp, popupConfig) ;
     },
     
@@ -323,8 +336,8 @@ define([
         var filterField = toolbar.find('select.onDfltBeanFilter').find(':selected').val() ;
         var fieldConfig = this._getFieldConfig(filterField) ;
         var holder = [] ;
-        for(var i = 0;i < this.state.beans.length; i++) {
-          var beanState = this.state.beans[i] ;
+        for(var i = 0;i < this.tableState.beanStates.length; i++) {
+          var beanState = this.tableState.beanStates[i] ;
           var bean = beanState.bean ;
           var fieldVal = null ;
           if(fieldConfig.custom != null) {
@@ -337,9 +350,9 @@ define([
             holder.push(beanState) ;
           }
         }
-        this.pageList = new PageList(this.state.pageSize, holder) ;
+        this.pageList = new PageList(this.tableState.pageSize, holder) ;
       } else {
-        this.pageList = new PageList(this.state.pageSize, this.state.beans) ;
+        this.pageList = new PageList(this.tableState.pageSize, this.tableState.beanStates) ;
       }
     },
     
@@ -355,15 +368,15 @@ define([
       var modifiedCount = 0 ;
       var deletedCount  = 0 ;
       var newCount  = 0 ;
-      for(var i = 0; i < this.state.beans.length; i++) {
-        var bean = this.state.beans[i].bean ;
-        if(bean.persistableState == 'MODIFIED') modifiedCount++ ;
-        else if(bean.persistableState == 'DELETED') deletedCount++ ;
-        else if(bean.persistableState == 'NEW') newCount++ ;
+      for(var i = 0; i < this.tableState.beanStates.length; i++) {
+        var beanState = this.tableState.beanStates[i] ;
+        if(beanState.persistableState == 'MODIFIED') modifiedCount++ ;
+        else if(beanState.persistableState == 'DELETED') deletedCount++ ;
+        else if(beanState.persistableState == 'NEW') newCount++ ;
       }
-      this.state.newCount = newCount ;
-      this.state.modifiedCount = modifiedCount ;
-      this.state.deletedCount = deletedCount ;
+      this.tableState.newCount = newCount ;
+      this.tableState.modifiedCount = modifiedCount ;
+      this.tableState.deletedCount = deletedCount ;
     },
     
     randomId: function() {

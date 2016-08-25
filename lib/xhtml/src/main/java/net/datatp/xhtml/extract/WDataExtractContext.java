@@ -10,7 +10,6 @@ import net.datatp.xhtml.xpath.XPathStructure;
 
 public class WDataExtractContext {
   private WData          wdata;
-  private Document       doc;
   private URLAnalyzer    urlAnalyzer;
   private XPathStructure xpathStructure;
 
@@ -30,22 +29,19 @@ public class WDataExtractContext {
   
   public WData getWdata() { return wdata; }
 
-  public Document getDocument() { 
-    if(doc == null) {
-      doc = wdata.createJsoupDocument();
-      doc.traverse(new NodeCleanerVisitor(NodeCleaner.EMPTY_NODE_CLEANER, NodeCleaner.IGNORE_NODE_CLEANER));
-    }
-    return doc; 
-  }
+  public Document createDocument() { return wdata.createJsoupDocument(); }
   
   public XPathStructure getXpathStructure() { 
-    if(xpathStructure == null) xpathStructure = new XPathStructure(getDocument());
+    if(xpathStructure == null) {
+      Document doc = wdata.createJsoupDocument();
+      doc.traverse(new NodeCleanerVisitor(NodeCleaner.EMPTY_NODE_CLEANER, NodeCleaner.IGNORE_NODE_CLEANER));
+      xpathStructure = new XPathStructure(doc);
+    }
     return xpathStructure; 
   }
   
   public void reset() {
     urlAnalyzer = null;
-    doc = null;
     xpathStructure = null;
   }
 }

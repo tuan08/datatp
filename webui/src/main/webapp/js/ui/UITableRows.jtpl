@@ -16,7 +16,7 @@
   </thead>
 <%}%>
 
-<%function renderBeanRows(config, state, pageList) { %>
+<%function renderBeanRows(config, tableState, pageList) { %>
   <tbody>
     <%var from = pageList.getFrom();%>
     <%var fields = config.bean.fields;%>
@@ -25,13 +25,14 @@
     <%for(var i = 0; i < rows.length ; i++) {%>
       <tr row="<%=i%>">
         <%
-          var bean = rows[i].bean ;
+          var beanState= rows[i] ;
+          var bean = beanState.bean ;
           var statusClass = "ui-origin-text" ;
-          if(bean.persistableState == 'DELETED') {
+          if(beanState.persistableState == 'DELETED') {
             statusClass = "ui-deleted-text" ;
-          } else if(bean.persistableState == 'MODIFIED') {
+          } else if(beanState.persistableState == 'MODIFIED') {
             statusClass = "ui-modified-text" ;
-          } else if(bean.persistableState == 'NEW') {
+          } else if(beanState.persistableState == 'NEW') {
             statusClass = "ui-new-text" ;
           }
         %>
@@ -67,14 +68,14 @@
     <tr>
       <td colspan="100">
         <span>Records: <%=pageList.getAvailable()%></span>
-        <%if(state.newCount > 0) {%>
-          | <span class='ui-new-text'>New: <%=state.newCount%></span>
+        <%if(tableState.newCount > 0) {%>
+          | <span class='ui-new-text'>New: <%=tableState.newCount%></span>
         <%}%>
-        <%if(state.modifiedCount > 0) {%>
-          | <span class='ui-modified-text'>Modified: <%=state.modifiedCount%></span>
+        <%if(tableState.modifiedCount > 0) {%>
+          | <span class='ui-modified-text'>Modified: <%=tableState.modifiedCount%></span>
         <%}%>
-        <%if(state.deletedCount > 0) {%>
-          | <span class='ui-deleted-text'>Deleted: <%=state.deletedCount%></span>
+        <%if(tableState.deletedCount > 0) {%>
+          | <span class='ui-deleted-text'>Deleted: <%=tableState.deletedCount%></span>
         <%}%> 
       </td>
     </tr>
@@ -112,7 +113,7 @@
 <div>
   <table>
     <%renderBeanHeaders(config); %>
-    <%renderBeanRows(config, state, pageList); %>
+    <%renderBeanRows(config, tableState, pageList); %>
   </table>
   <%renderPageIterator(config, pageList);%>
 </div>

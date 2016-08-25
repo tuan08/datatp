@@ -3,8 +3,9 @@ define([
   'underscore', 
   'backbone',
   'ui/UIContainer',
-  'ui/UIBean'
-], function($, _, Backbone, UIContainer, UIBean) {
+  'ui/UIBean',
+  'ui/UITable'
+], function($, _, Backbone, UIContainer, UIBean, UITable) {
   
   var UIGeneric = UIBean.extend({
     label: "Generic Bean",
@@ -58,20 +59,50 @@ define([
     }
   });
 
-  var UIExtractXPath = UIBean.extend({
+  var UIExtractXPath = UITable.extend({
     label: "Extract XPath",
+
     config: {
-      type: 'array',
-      beans: {
-        extractXPath: {
-          label: 'Extract XPath',
-          getLabel: function(bean) { return bean.name ; },
-          fields: [
-            { field: "name",   label: "Name", required: true },
-            { field: "xpath",   label: "XPath", required: true }
+      toolbar: {
+        dflt: {
+          actions: [
+            {
+              action: "onNew", icon: "add", label: "New", 
+              onClick: function(thisTable) { thisTable.onAddBean(thisTable.onSaveBeanCallback) ; } 
+            }
           ]
         }
+      },
+      
+      bean: {
+        label: 'Extract XPath',
+        fields: [
+          { field: "name",   label: "Name", required: true, toggled: true, filterable: true },
+          { field: "xpath",   label: "XPath", required: true, toggled: true, filterable: true  }
+        ],
+        actions:[
+          {
+            icon: "edit", label: "Edit",
+            onClick: function(thisTable, row) { 
+              thisTable.onEditBean(row, thisTable.onSaveBeanCallback) ;
+            }
+          },
+          {
+            icon: "delete", label: "Del",
+            onClick: function(thisTable, row) { 
+              thisTable.onDeleteBeanCallback(thisTable, row);
+            }
+          }
+        ]
       }
+    },
+
+    onSaveBeanCallback: function(thisTable, row, bean) {
+      var beans = thisTable.commitChange();
+    },
+
+    onDeleteBeanCallback: function(thisTable, row) {
+      thisTable.removeItemOnCurrentPage(row);
     }
   });
 
@@ -95,7 +126,7 @@ define([
 
       var uiExtractXPath = new UIExtractXPath();
       if(extractConfig.extractXPath == null) extractConfig.extractXPath = [] ;
-      uiExtractXPath.bindArray('extractXPath', extractConfig.extractXPath) ;
+      uiExtractXPath.setBeans(extractConfig.extractXPath) ;
       this.add(uiExtractXPath) ;
     }
   }) ;

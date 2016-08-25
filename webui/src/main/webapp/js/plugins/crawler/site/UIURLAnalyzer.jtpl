@@ -61,12 +61,5 @@
   </div>
 
   <%renderURLInfo(urlInfo)%>
-  <div>
-    <%var urlPatterns = siteConfig.urlPatterns %>
-    <%for(var i = 0; i < urlPatterns.length; i++) {%>    
-      <div>
-        <%=urlPatterns[i].type%>: <%=urlPatterns[i].pattern%>
-      <div>
-    <%}%>    
-  </div>
+  <div class="UIURLPattern"></div>
 </div>

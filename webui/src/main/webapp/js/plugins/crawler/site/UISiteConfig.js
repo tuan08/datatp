@@ -4,42 +4,13 @@ define([
   'backbone',
   'ui/UIBreadcumbs',
   'ui/UIBean',
+  'ui/UITable',
   'ui/UICollapsible',
+  'plugins/crawler/site/UIURLPattern',
   'plugins/crawler/site/UIExtractConfig',
   'plugins/crawler/site/UISiteURLStructureAnalyzer',
   'plugins/crawler/Rest'
-], function($, _, Backbone, UIBreadcumbs, UIBean, UICollabsible, UIExtractConfig, UISiteURLStructureAnalyzer, Rest) {
-
-  var UIURLPattern = UIBean.extend({
-    label: "URL Pattern",
-    config: {
-      type: 'array',
-      beans: {
-        urlPattern: {
-          label: 'URL Pattern',
-          getLabel: function(bean) { return bean.type ; },
-          fields: [
-            {
-              field:  "type", label: "Type", defaultValue: 'ignore',
-              select: {
-                getOptions: function(field, bean) {
-                  var options = [
-                    { label: 'ignore',  value: 'ignore' },
-                    { label: 'list',    value: 'list' },
-                    { label: 'detail',  value: 'detail' },
-                    { label: 'unkwnon', value: 'unknown' },
-                  ];
-                  return options ;
-                }
-              }
-            },
-            { field: "pattern",  label: "Pattern", multiple: true }
-          ]
-        }
-      }
-    }
-  });
-
+], function($, _, Backbone, UIBreadcumbs, UIBean, UITable, UICollabsible, UIURLPattern, UIExtractConfig, UISiteURLStructureAnalyzer, Rest) {
   var UISiteConfigGeneric = UIBean.extend({
     label: "Site Config Generic",
     config: {
@@ -120,7 +91,7 @@ define([
 
       var uiURLPattern = new UIURLPattern() ;
       if(this.siteConfig.urlPatterns == null) siteConfig.urlPatterns = [];
-      uiURLPattern.bindArray('urlPattern', siteConfig.urlPatterns) ;
+      uiURLPattern.setBeans(siteConfig.urlPatterns) ;
 
       var uiExtractConfig = new UIExtractConfig({siteConfig: siteConfig}) ;
 

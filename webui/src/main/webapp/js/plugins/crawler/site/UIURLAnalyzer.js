@@ -3,16 +3,18 @@ define([
   'underscore', 
   'backbone',
   'ui/UIUtil',
+  'plugins/crawler/site/UIURLPattern',
   'text!plugins/crawler/site/UIURLAnalyzer.jtpl'
-], function($, _, Backbone, UIUtil,  Template) {
+], function($, _, Backbone, UIUtil, UIURLPattern, Template) {
   var UIURLAnalyzer = Backbone.View.extend({
     label: "URL Analyzer",
 
     initialize: function(options) {
       this.siteConfig = options.siteConfig;
       this.urlInfo    = options.urlInfo;
+      this.uiURLPattern = new UIURLPattern(); 
+      this.uiURLPattern.setBeans(this.siteConfig.urlPatterns) ;
       _.bindAll(this, 'render') ;
-      console.printJSON(this.siteConfig);
     },
     
     _template: _.template(Template),
@@ -23,6 +25,8 @@ define([
         urlInfo:    this.urlInfo 
       } ;
       $(this.el).html(this._template(params));
+
+      this.uiURLPattern.setElement(this.$('.UIURLPattern')).render();
     },
 
     getAncestorOfType: function(type) {

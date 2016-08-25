@@ -43,13 +43,13 @@ public class SiteStructure {
   
   public String getXhtmlContent(WDataExtractContext ctx) {
     URLAnalyzer urlAnalyzer = ctx.getURLAnalyzer();
-    Document doc = ctx.getDocument() ;
-    Element baseEle = doc.select("html > head > base").first();
-    if(baseEle == null) {
-      baseEle = new Element(Tag.valueOf("base"), "");
-      doc.select("html > head").first().appendChild(baseEle);
-    }
-    baseEle.attr("href", urlAnalyzer.getBaseURL());
+    Document doc = ctx.createDocument() ;
+//    Element baseEle = doc.select("html > head > base").first();
+//    if(baseEle == null) {
+//      baseEle = new Element(Tag.valueOf("base"), "");
+//      doc.select("html > head").first().appendChild(baseEle);
+//    }
+//    baseEle.attr("href", urlAnalyzer.getSiteURL());
     return doc.html();
   }
 }
