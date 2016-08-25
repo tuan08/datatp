@@ -17,8 +17,8 @@ th, td {
   cursor: pointer ;
   text-decoration: none ;
   color: #06c !important ;
-  padding: 3px ;
   font-weight: bold !important;
+  padding: 2px;
 }
 
 .ui-action:hover, .ui-action:focus {

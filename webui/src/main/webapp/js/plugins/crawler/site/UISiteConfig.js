@@ -6,9 +6,9 @@ define([
   'ui/UIBean',
   'ui/UICollapsible',
   'plugins/crawler/site/UIExtractConfig',
-  'plugins/crawler/site/UISiteAnalyzer',
+  'plugins/crawler/site/UISiteURLStructureAnalyzer',
   'plugins/crawler/Rest'
-], function($, _, Backbone, UIBreadcumbs, UIBean, UICollabsible, UIExtractConfig, UISiteAnalyzer, Rest) {
+], function($, _, Backbone, UIBreadcumbs, UIBean, UICollabsible, UIExtractConfig, UISiteURLStructureAnalyzer, Rest) {
 
   var UIURLPattern = UIBean.extend({
     label: "URL Pattern",
@@ -96,7 +96,7 @@ define([
           onClick: function(thisUI) { 
             var siteConfig = thisUI.siteConfig;
             var uiSiteConfig = thisUI.getAncestorOfType("UISiteConfig") ;
-            uiSiteConfig.push(new UISiteAnalyzer({ siteConfig: siteConfig }));
+            uiSiteConfig.push(new UISiteURLStructureAnalyzer({ siteConfig: siteConfig }));
           }
         },
         { 
@@ -108,17 +108,21 @@ define([
     },
 
     onInit: function(options) {
-      this.siteConfig = options.siteConfig;
+      this.onChangeSiteConfig(options.siteConfig);
+    },
 
+    onChangeSiteConfig: function(siteConfig) {
+      this.clear();
+      this.siteConfig = siteConfig;
       var uiSiteConfigGeneric = new UISiteConfigGeneric();
-      uiSiteConfigGeneric.bind('siteConfig', this.siteConfig, true) ;
+      uiSiteConfigGeneric.bind('siteConfig', siteConfig, true) ;
       uiSiteConfigGeneric.getBeanState('siteConfig').editMode = true ;
 
       var uiURLPattern = new UIURLPattern() ;
-      if(this.siteConfig.urlPatterns == null) this.siteConfig.urlPatterns = [];
-      uiURLPattern.bindArray('urlPattern', this.siteConfig.urlPatterns) ;
+      if(this.siteConfig.urlPatterns == null) siteConfig.urlPatterns = [];
+      uiURLPattern.bindArray('urlPattern', siteConfig.urlPatterns) ;
 
-      var uiExtractConfig = new UIExtractConfig({siteConfig: options.siteConfig}) ;
+      var uiExtractConfig = new UIExtractConfig({siteConfig: siteConfig}) ;
 
       this.add(uiSiteConfigGeneric);
       this.add(uiURLPattern);
@@ -130,8 +134,12 @@ define([
     type:  "UISiteConfig",
 
     onInit: function(options) {
-      var uiSiteConfigCollabsible = new UISiteConfigCollabsible({siteConfig: options.siteConfig}) ;
-      this.push(uiSiteConfigCollabsible);
+      this.uiSiteConfigCollabsible = new UISiteConfigCollabsible({siteConfig: options.siteConfig}) ;
+      this.push(this.uiSiteConfigCollabsible);
+    },
+
+    onChangeSiteConfig: function(siteConfig) {
+      this.uiSiteConfigCollabsible.onChangeSiteConfig(siteConfig);
     }
   });
 

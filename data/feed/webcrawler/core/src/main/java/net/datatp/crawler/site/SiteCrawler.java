@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.datatp.util.URLParser;
+import net.datatp.util.URLAnalyzer;
 import net.datatp.util.text.StringUtil;
 import net.datatp.xhtml.WData;
 import net.datatp.xhtml.extract.WDataExtractContext;
@@ -121,7 +121,7 @@ public class SiteCrawler {
     public URL[] getUrls() { return urls.values().toArray(new URL[urls.size()]); }
     
     public void extract(URL url, WDataExtractContext ctx) throws Exception {
-      URLParser urlParser = new URLParser(url.getUrl());
+      URLAnalyzer urlParser = new URLAnalyzer(url.getUrl());
       XPathStructure structure = ctx.getXpathStructure();
       String baseURL = structure.findBase();
       if (baseURL == null || baseURL.length() == 0) {
@@ -135,7 +135,7 @@ public class SiteCrawler {
         if(StringUtil.isEmpty(anchorText)) continue;
         String newURL = urlRewriter.rewrite(urlParser.getSiteURL(), baseURL, linkXPath.getNode().attr("href"));
         if (!isAllowProtocol(newURL)) continue;
-        URLParser newURLNorm = new URLParser(newURL);
+        URLAnalyzer newURLNorm = new URLAnalyzer(newURL);
         URL_CLEANER.process(newURLNorm) ;
         
         if(isExclude(newURLNorm.getPath())) continue;

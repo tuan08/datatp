@@ -24,6 +24,7 @@ public class SiteStructureAnalyzerService {
   
   synchronized public SiteStructureAnalyzer getSiteStructureAnalyzer(String site) {
     SiteStructureAnalyzer analyzer = analyzers.get(site);
+    if(analyzer == null) return null;
     analyzer.setLastAccessTime(System.currentTimeMillis());
     return analyzer;
   }

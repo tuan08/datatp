@@ -33,13 +33,15 @@ define([
       }
     },
 
-    addTab: function(name, label, uiComponent, closable) {
+    addTab: function(name, label, uiComponent, closable, active) {
       uiComponent.uiParent = this;
       var tabConfig = {
         name: name, label: label, uicomponent: uiComponent,  closable: closable
       };
       this.tabs.push(tabConfig);
-      this.setSelectedTabUIComponent(tabConfig.name, tabConfig.uicomponent) ;
+      if(active) {
+        this.setSelectedTabUIComponent(tabConfig.name, tabConfig.uicomponent) ;
+      }
     },
     
     _template: _.template(UITabbedPaneTmpl),

@@ -10,7 +10,7 @@ import java.util.Date;
 
 import net.datatp.crawler.http.ErrorCode;
 import net.datatp.crawler.http.ResponseCode;
-import net.datatp.util.URLParser;
+import net.datatp.util.URLAnalyzer;
 /**
  * Author : Tuan Nguyen
  *          tuan08@gmail.com
@@ -65,10 +65,10 @@ public class URLDatum implements  Externalizable {
   public String getOriginalUrl() { return this.url ; }
   
   public void setOrginalUrl(String url) { 
-    setOriginalUrl(url, new URLParser(url)) ;
+    setOriginalUrl(url, new URLAnalyzer(url)) ;
   }
 
-  public void setOriginalUrl(String url, URLParser urlParser) { 
+  public void setOriginalUrl(String url, URLAnalyzer urlParser) { 
     this.id = urlParser.getHostMD5Id() ;
     this.url = url; 
   }

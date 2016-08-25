@@ -7,13 +7,14 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import net.datatp.util.text.StringUtil;
 
-public class URLParser {
+public class URLAnalyzer {
   private Pattern PARAM_SEPARATOR = Pattern.compile("&amp;|&") ;
 
   private String url ;
-
   private String protocol ;
   private String host ;
   private String port = "80";
@@ -26,7 +27,7 @@ public class URLParser {
   
   private String[] tag;
   
-  public URLParser(String url) {
+  public URLAnalyzer(String url) {
     this.url = url ;
     String remainString = url.trim() ;
 
@@ -79,8 +80,7 @@ public class URLParser {
     parseParams(remainString) ;
   }
 
-  public String getURL() { return this.url ; }
-
+  public String getUrl() { return this.url ; }
   public String getProtocol() { return protocol ; }
   public String getHost() { return host ; }
   public String getPort() { return port ; }
@@ -107,12 +107,13 @@ public class URLParser {
   public String[] getTags() { return tag ; }
   public void     setTags(String[] tag) { this.tag = tag ; }
 
-
+  
   public String getNormalizeHostName() {
     if(host.startsWith("www.")) return host.substring("www.".length()) ; 
     return host ;
   }
 
+  @JsonIgnore
   public String getSiteURL() {
     StringBuilder b = new StringBuilder() ;
     b.append(this.protocol).append(this.host) ;
@@ -123,6 +124,7 @@ public class URLParser {
     return b.toString() ;
   }
   
+  @JsonIgnore
   public String getPathURL() {
     StringBuilder b = new StringBuilder() ;
     b.append(this.protocol).append(this.host) ;
@@ -134,6 +136,7 @@ public class URLParser {
     return b.toString() ;
   }
 
+  @JsonIgnore
   public String getBaseURL() {
     StringBuilder b = new StringBuilder() ;
     b.append(this.protocol).append(this.host) ;
@@ -145,6 +148,7 @@ public class URLParser {
     return b.toString() ;
   }
 
+  @JsonIgnore
   public String getPathWithParams() {
     StringBuilder b = new StringBuilder() ;
     if(path == null || path.isEmpty()) b.append("/") ;
@@ -166,6 +170,7 @@ public class URLParser {
     return b.toString() ;
   }
 
+  @JsonIgnore
   public String getNormalizeURL() {
     StringBuilder b = new StringBuilder() ;
     b.append(getPathURL()) ;
@@ -189,6 +194,7 @@ public class URLParser {
     return b.toString() ;
   }
 
+  @JsonIgnore
   public String getNormalizeURLAll() {
     if(ref != null) {
       StringBuilder b = new StringBuilder() ;
@@ -200,13 +206,16 @@ public class URLParser {
     }
   }
 
+  @JsonIgnore
   final public String[] getSources() { return getDomains(host) ; }
 
+  @JsonIgnore
   public String[] getParamKeys() {
     if(params == null) return StringUtil.EMPTY_ARRAY ;
     return params.keySet().toArray(new String[params.size()]) ;
   }
 
+  @JsonIgnore
   public String getHostMD5Id() {
     String host = getNormalizeHostName() ;
     StringBuilder b = new StringBuilder() ;
@@ -233,6 +242,7 @@ public class URLParser {
     return host + ":" + md5.toString();
   }
 
+  @JsonIgnore
   public String getExtension() {
     if(this.ext == null) {
       if(path != null) {

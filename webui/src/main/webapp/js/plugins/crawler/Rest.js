@@ -12,11 +12,14 @@ define([
       return server.syncPOSTJson("/site/save", siteConfig);
     };
 
-    this.getAnalyzedSiteStructure = function(siteConfig, maxDownload, forceNew) {
-      var params = {
-        siteConfig: siteConfig, maxDownload: maxDownload, forceNew: forceNew
-      } ;
-      return server.syncPOSTJson("/site/analyzed-site-structure", params);
+    this.getAnalyzedURLSiteStructure = function(siteConfig, maxDownload, forceNew) {
+      var params = { siteConfig: siteConfig, maxDownload: maxDownload, forceNew: forceNew } ;
+      return server.syncPOSTJson("/site/analyzed-site-url", params);
+    };
+
+    this.getAnalyzedURLStructure = function(url) {
+      var params = { url: url } ;
+      return server.restGET("/site/analyzed-url", params);
     };
   };
 

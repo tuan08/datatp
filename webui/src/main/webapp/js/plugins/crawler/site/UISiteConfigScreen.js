@@ -15,12 +15,12 @@ define([
     },
     
     onInit: function(options) {
-      this.addTab("siteConfigList", "Site Config", new UISiteConfigList(), false);
+      this.addTab("siteConfigList", "Site Config", new UISiteConfigList(), false, true);
     },
     
     addSiteConfigTab: function(siteConfig) {
       var name = siteConfig.hostname;
-      this.addTab(name, name, new UISiteConfig( {siteConfig: siteConfig} ), true);
+      this.addTab(name, name, new UISiteConfig( {siteConfig: siteConfig} ), true, true);
       this.render();
     }
   });

@@ -2,9 +2,10 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
+  'ui/UIUtil',
   'text!ui/UITableTree.jtpl',
   'css!ui/UITableTree.css'
-], function($, _, Backbone, UITableTreeTmpl) {
+], function($, _, Backbone, UIUtil, UITableTreeTmpl) {
 
   var Node = function(id, bean) {
     this.id = id ;
@@ -27,9 +28,8 @@ define([
       return null ;
     },
 
-    this.setCollapse = function(collapse) {
-      this.collapse = collapse ;
-    }
+    this.setCollapse = function(collapse) { this.collapse = collapse ; }
+    this.setDisableAction = function(bool) { this.disableAction = bool ; }
   };
 
   var UITableTree = Backbone.View.extend({
@@ -45,6 +45,10 @@ define([
       var node = new Node('id-' + this.nodes.length, bean) ;
       this.nodes.push(node) ;
       return node ;
+    },
+
+    getAncestorOfType: function(type) {
+      return UIUtil.getAncestorOfType(this, type) ;
     },
     
     _template: _.template(UITableTreeTmpl),
@@ -96,15 +100,28 @@ define([
 
     events: {
       'click  a.onBeanFieldClick': 'onBeanFieldClick',
+      'click  a.onBeanAction': 'onBeanAction'
     },
 
     onBeanFieldClick: function(evt) {
       var eleA = $(evt.target).closest('a') ;
-      var nodeId = eleA.attr('nodeId') ;
+      var eleTR = eleA.closest('tr') ;
+      var nodeId = eleTR.attr('nodeId') ;
       var fieldIdx = eleA.attr('field') ;
       var field = this.config.bean.fields[fieldIdx].field ;
       var node = this._findNode(nodeId) ;
       console.log('on click node ' + node.id + ', field = ' + field) ;
+    },
+
+    onBeanAction: function(evt) {
+      var eleA = $(evt.target).closest('a') ;
+      var eleTR = eleA.closest('tr') ;
+      var nodeId = eleTR.attr('nodeId') ;
+      var node = this._findNode(nodeId) ;
+
+      var actionIdx = eleA.attr('action') ;
+      var actions = this.config.bean.actions ;
+      actions[actionIdx].onClick(this, node);
     },
 
     _findNode: function(nodeId) {

@@ -3,7 +3,7 @@
     <%for(var i = 0; i < tabs.length; i++) { %>
     <%  var tab  = tabs[i]; %>
     <%  var disable = tab.name == state.tabConfig.name ? ' ui-disabled' : '' ; %>
-        <a class="onSelectTab<%=disable%>" tab="<%=tab.name%>"><%=tab.label%></a>
+        <a class="Tab onSelectTab<%=disable%>" tab="<%=tab.name%>"><%=tab.label%></a>
     <%  if(disable && tab.closable) {%>
           <a class="onCloseTab" tab="<%=tab.name%>">x</a>
     <%  }%>

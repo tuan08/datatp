@@ -21,7 +21,7 @@
   <%var cssCollapse = node.collapse ? 'expand' : 'collapse' %>
   <%var rowDisplay = hidden ? "none": "table-row";%>
 
-  <tr data-depth="<%=level%>" class="<%=cssCollapse%> level<%= level %>" style="display: <%=rowDisplay%>">
+  <tr data-depth="<%=level%>" class="<%=cssCollapse%> level<%= level %>" style="display: <%=rowDisplay%>" nodeId="<%=node.id%>">
     <%var bean = node.bean ; %>
     <%for(var j = 0; j < fields.length ; j++) {%>
     <%  if(!fields[j].toggled) continue ;%>
@@ -40,7 +40,7 @@
             <%} %>
           <%}%>
           <%if(fields[j].onClick != null) {%>
-            <a class="onBeanFieldClick ui-action" nodeId="<%=node.id%>" field="<%= j %>"><%= cell%></a>
+            <a class="onBeanFieldClick ui-action" field="<%= j %>"><%= cell%></a>
           <%} else { %>
             <%=cell%>
           <%}%>
@@ -49,9 +49,11 @@
 
     <%if(actions != null) {%>
       <td class="cell-center-align" style="padding: 3px 0px; white-space: nowrap">
-        <%for(var k = 0; k < actions.length; k++) {%>
-        <%  var action = actions[k] ;%>
-            <a class="onBeanAction ui-action" action="<%= k %>"><%=action.label%></a>
+        <%if(!node.disableAction) {%>
+          <%for(var k = 0; k < actions.length; k++) {%>
+          <%  var action = actions[k] ;%>
+              <a class="onBeanAction ui-action" action="<%= k %>"><%=action.label%></a>
+          <%}%>
         <%}%>
       </td>
     <%}%>

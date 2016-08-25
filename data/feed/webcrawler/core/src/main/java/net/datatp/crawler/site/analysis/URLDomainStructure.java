@@ -3,7 +3,7 @@ package net.datatp.crawler.site.analysis;
 import java.io.IOException;
 import java.util.TreeMap;
 
-import net.datatp.util.URLParser;
+import net.datatp.util.URLAnalyzer;
 
 public class URLDomainStructure {
   private String domain;
@@ -17,7 +17,7 @@ public class URLDomainStructure {
   
   public TreeMap<String, URLDirStructure> getDirectoryStructure() { return this.dirStructures; }
   
-  public void add(URLParser urlParser) {
+  public void add(URLAnalyzer urlParser) {
     URLDirStructure dirStructure = dirStructures.get(urlParser.getDirectory());
     if(dirStructure == null) {
       dirStructure = new URLDirStructure(domain, urlParser.getDirectory());

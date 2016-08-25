@@ -2,7 +2,7 @@ package net.datatp.crawler.site;
 
 import java.util.regex.Pattern;
 
-import net.datatp.util.URLParser;
+import net.datatp.util.URLAnalyzer;
 
 /**
  * Author : Tuan Nguyen
@@ -55,7 +55,7 @@ public class SiteContext {
     return siteScheduleStat.canSchedule(siteConfig.getMaxFetchSchedule(), getMaxConnection());
   }
 
-  public boolean allowDomain(URLParser urlParser) {
+  public boolean allowDomain(URLAnalyzer urlParser) {
     String hostname = urlParser.getNormalizeHostName() ;
     if(hostname.equals(siteConfig.getHostname())) return true ;
     if(siteConfig.getCrawlSubDomain()) {
@@ -64,7 +64,7 @@ public class SiteContext {
     return false ;
   }
   
-  public URLPattern matchesIgnoreURLPattern(URLParser urlParser) {
+  public URLPattern matchesIgnoreURLPattern(URLAnalyzer urlParser) {
     if(urlPatternMatcher != null) {
       String url = urlParser.getNormalizeURLAll();
       for(int i = 0; i < urlPatternMatcher.length; i++) {
@@ -77,7 +77,7 @@ public class SiteContext {
     return null;
   }
   
-  public URLPattern matchesURLPattern(URLParser urlParser) {
+  public URLPattern matchesURLPattern(URLAnalyzer urlParser) {
     if(urlPatternMatcher != null) {
       String url = urlParser.getNormalizeURLAll();
       for(int i = 0; i < urlPatternMatcher.length; i++) {

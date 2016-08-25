@@ -1,0 +1,72 @@
+<%function renderURLInfo(urlInfo) { %>
+  <table>
+    <tr>
+      <td><strong>Host</strong></td>
+      <td><%=urlInfo.host%></td>
+    </tr>
+
+    <tr>
+      <td><strong>Path</strong></td>
+      <td><%=urlInfo.path%></td>
+    </tr>
+
+    <tr>
+      <td><strong>Path Segments</strong></td>
+      <td>
+        <%var segments = urlInfo.pathSegments%> 
+        <%for(var i = 0 ; i < segments.length; i++) {%>
+          <div>
+            <span><%=segments[i]%><span>
+            [
+            <a class="ui-action onIgnorePattern" pattern="<%=segments[i]%>">ignore</a> -
+            <a class="ui-action onDetailPattern" pattern="<%=segments[i]%>">detail</a> -
+            <a class="ui-action onListPattern"   pattern="<%=segments[i]%>">list</a>
+            ]
+          </div>
+        <%}%>
+      </td>
+    </tr>
+
+    <tr>
+      <td><strong>Params</strong></td>
+      <td>
+        <%var params = urlInfo.params%> 
+        <%for(var key in params) {%>
+          <div>
+            <%=key%>
+            [
+            <a class="ui-action onIgnorePattern" pattern="<%=key%>">ignore</a> -
+            <a class="ui-action onDetailPattern" pattern="<%=key%>">detail</a> -
+            <a class="ui-action onListPattern"   pattern="<%=key%>">list</a>
+            ]
+            : <%=params[key]%>
+            <a class="ui-action onIgnorePattern" pattern="<%=params[key]%>">ignore</a> -
+            <a class="ui-action onDetailPattern" pattern="<%=params[key]%>">detail</a> -
+            <a class="ui-action onListPattern"   pattern="<%=params[key]%>">list</a>
+          </div>
+        <%}%>
+      </td>
+    </tr>
+
+    <tr>
+      <td><strong>Tags</strong></td>
+      <td><%=urlInfo.tags%></td>
+    </tr>
+  <table>
+<%}%>
+
+<div>
+  <div style="padding: 5px">
+    <strong>URL</strong>: <%=urlInfo.url%>
+  </div>
+
+  <%renderURLInfo(urlInfo)%>
+  <div>
+    <%var urlPatterns = siteConfig.urlPatterns %>
+    <%for(var i = 0; i < urlPatterns.length; i++) {%>    
+      <div>
+        <%=urlPatterns[i].type%>: <%=urlPatterns[i].pattern%>
+      <div>
+    <%}%>    
+  </div>
+</div>

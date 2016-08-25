@@ -6,7 +6,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.protocol.BasicHttpContext;
 
-import net.datatp.util.URLParser;
+import net.datatp.util.URLAnalyzer;
 import net.datatp.util.io.IOUtil;
 import net.datatp.xhtml.WData;
 /**
@@ -28,7 +28,7 @@ public class WDataHttpFetcher {
   public WData fetch(String anchorText, String urlString) throws Exception {  
     HttpGet httpget = new HttpGet(urlString);
     BasicHttpContext httpContext = new BasicHttpContext();
-    httpContext.setAttribute("crawler.site", new URLParser(urlString).getHost()) ;
+    httpContext.setAttribute("crawler.site", new URLAnalyzer(urlString).getHost()) ;
     HttpResponse response = httpclient.execute(httpget, httpContext);
     String content = IOUtil.getStreamContentAsString(response.getEntity().getContent(), "UTF-8");
     WData wPageData = new WData(urlString, anchorText, content);

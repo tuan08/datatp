@@ -17,10 +17,12 @@ import net.datatp.crawler.CrawlerApi;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
 import net.datatp.crawler.site.SiteConfig;
-import net.datatp.crawler.site.analysis.SiteStructure;
 import net.datatp.crawler.site.analysis.SiteStructureAnalyzer;
 import net.datatp.crawler.site.analysis.SiteStructureAnalyzerConfig;
 import net.datatp.crawler.site.analysis.SiteStructureAnalyzerService;
+import net.datatp.crawler.site.analysis.URLSiteStructure;
+import net.datatp.crawler.site.analysis.URLStructure;
+import net.datatp.util.URLAnalyzer;
 import net.datatp.util.dataformat.DataSerializer;
 
 @RestController
@@ -33,7 +35,7 @@ public class CrawlerRestController {
   
   @PostConstruct
   public void onInit() {
-    siteStructureAnalyzerService = new SiteStructureAnalyzerService(10 * 60 * 1000);
+    siteStructureAnalyzerService = new SiteStructureAnalyzerService(30 * 60 * 1000);
   }
   
   @PreDestroy
@@ -46,11 +48,27 @@ public class CrawlerRestController {
     return crawlerApi.siteGetSiteConfigs();
   }  
   
-  @RequestMapping(value = "/crawler/site/analyzed-site-structure", method = RequestMethod.POST)
-  public SiteStructure siteGetAnalyzedSiteStructure(@RequestBody SiteStructureAnalyzerConfig config) throws Exception {
-    System.out.println(DataSerializer.JSON.toString(config));
+  @RequestMapping(value = "/crawler/site/analyzed-site-url", method = RequestMethod.POST)
+  public URLSiteStructure siteGetAnalyzedSiteUrl(@RequestBody SiteStructureAnalyzerConfig config) throws Exception {
     SiteStructureAnalyzer analyzer = siteStructureAnalyzerService.getSiteStructureAnalyzer(config);
-    return analyzer.getSiteStructure();
+    return analyzer.getSiteStructure().getUrlStructure();
+  }
+  
+  @RequestMapping(value = "/crawler/site/analyzed-url")
+  public URLStructure siteGetAnalyzedUrl(@RequestParam("url") String url) throws Exception {
+    URLAnalyzer urlAnalyzer = new URLAnalyzer(url);
+    SiteStructureAnalyzer analyzer = siteStructureAnalyzerService.getSiteStructureAnalyzer(urlAnalyzer.getHost());
+    if(analyzer != null) return analyzer.getSiteStructure().getURLStructure(url);
+    return new URLStructure(new URLAnalyzer(url), "No Data");
+  }
+  //, headers = {"content-type=text/html"}
+  @RequestMapping(value = "/crawler/site/analyzed-url-xhtml")
+  public String siteGetAnalyzedUrlContent(@RequestParam("url") String url) throws Exception {
+    System.out.println("url = " + url);
+    URLAnalyzer urlAnalyzer = new URLAnalyzer(url);
+    SiteStructureAnalyzer analyzer = siteStructureAnalyzerService.getSiteStructureAnalyzer(urlAnalyzer.getHost());
+    if(analyzer != null) return analyzer.getSiteStructure().getURLStructure(url).getXhtml();
+    return "No Data";
   }
   
   @RequestMapping(value = "/crawler/site/save", method = RequestMethod.POST)
