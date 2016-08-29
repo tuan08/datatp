@@ -58,11 +58,12 @@ define([
     },
 
     onSaveBeanCallback: function(thisTable, row, bean) {
-      var beans = thisTable.commitChange();
+      thisTable.commitChange();
     },
 
     onDeleteBeanCallback: function(thisTable, row) {
       thisTable.removeItemOnCurrentPage(row);
+      thisTable.commitChange();
     }
   });
 

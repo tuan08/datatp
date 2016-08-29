@@ -94,7 +94,6 @@ define([
       uiURLPattern.setBeans(siteConfig.urlPatterns) ;
 
       var uiExtractConfig = new UIExtractConfig({siteConfig: siteConfig}) ;
-
       this.add(uiSiteConfigGeneric);
       this.add(uiURLPattern);
       this.add(uiExtractConfig);

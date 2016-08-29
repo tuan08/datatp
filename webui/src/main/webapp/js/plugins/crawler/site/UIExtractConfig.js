@@ -68,7 +68,9 @@ define([
           actions: [
             {
               action: "onNew", icon: "add", label: "New", 
-              onClick: function(thisTable) { thisTable.onAddBean(thisTable.onSaveBeanCallback) ; } 
+              onClick: function(thisTable) { 
+                thisTable.onAddBean(thisTable.onSaveBeanCallback) ; 
+              } 
             }
           ]
         }
@@ -77,7 +79,7 @@ define([
       bean: {
         label: 'Extract XPath',
         fields: [
-          { field: "name",   label: "Name", required: true, toggled: true, filterable: true },
+          { field: "name",   label: "Name", required: true, toggled: true, filterable: true, autocomplete: true },
           { field: "xpath",   label: "XPath", required: true, toggled: true, filterable: true  }
         ],
         actions:[
@@ -103,7 +105,11 @@ define([
 
     onDeleteBeanCallback: function(thisTable, row) {
       thisTable.removeItemOnCurrentPage(row);
-    }
+    },
+    
+    addExtractXPath: function(extractXPath) {
+      this.onAddBeanWith(extractXPath, this.onSaveBeanCallback);
+    } 
   });
 
   var UIExtractConfig = UIContainer.extend({
@@ -124,11 +130,15 @@ define([
       uiGenericBean.bind('generic', extractConfig, true) ;
       this.add(uiGenericBean) ;
 
-      var uiExtractXPath = new UIExtractXPath();
+      this.uiExtractXPath = new UIExtractXPath();
       if(extractConfig.extractXPath == null) extractConfig.extractXPath = [] ;
-      uiExtractXPath.setBeans(extractConfig.extractXPath) ;
-      this.add(uiExtractXPath) ;
-    }
+      this.uiExtractXPath.setBeans(extractConfig.extractXPath) ;
+      this.add(this.uiExtractXPath) ;
+    },
+    
+    addExtractXPath: function(extractXPath) {
+      this.uiExtractXPath.addExtractXPath(extractXPath);
+    } 
   }) ;
   
   return UIExtractConfig ;

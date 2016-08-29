@@ -61,15 +61,16 @@ public class CrawlerRestController {
     if(analyzer != null) return analyzer.getSiteStructure().getURLStructure(url);
     return new URLStructure(new URLAnalyzer(url), "No Data");
   }
-  //, headers = {"content-type=text/html"}
-  @RequestMapping(value = "/crawler/site/analyzed-url-xhtml")
-  public String siteGetAnalyzedUrlContent(@RequestParam("url") String url) throws Exception {
-    System.out.println("url = " + url);
-    URLAnalyzer urlAnalyzer = new URLAnalyzer(url);
-    SiteStructureAnalyzer analyzer = siteStructureAnalyzerService.getSiteStructureAnalyzer(urlAnalyzer.getHost());
-    if(analyzer != null) return analyzer.getSiteStructure().getURLStructure(url).getXhtml();
-    return "No Data";
-  }
+  
+//  @RequestMapping(value = "/crawler/site/analyzed-url-xhtml")
+//  public String siteGetAnalyzedUrlContent(@RequestParam("url") String url) throws Exception {
+//    System.out.println("url = " + url);
+//    URLAnalyzer urlAnalyzer = new URLAnalyzer(url);
+//    SiteStructureAnalyzer analyzer = siteStructureAnalyzerService.getSiteStructureAnalyzer(urlAnalyzer.getHost());
+//    if(analyzer != null) return analyzer.getSiteStructure().getURLStructure(url).getXhtml();
+//    return "No Data";
+//  }
+//  
   
   @RequestMapping(value = "/crawler/site/save", method = RequestMethod.POST)
   public SiteConfig siteSave(@RequestBody SiteConfig config) throws Exception {

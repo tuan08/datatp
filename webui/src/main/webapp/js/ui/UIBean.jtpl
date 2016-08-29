@@ -1,6 +1,6 @@
-<%function renderInputField(field, bean, fieldValue, disabled) { %>
+<%function renderInputField(field, bean, fieldValue, disabled, autocomplete) { %>
   <input class="onChangeInput span-9 text" type="text" name="<%=field.field%>" 
-         value="<%=fieldValue%>" <%=disabled%> />
+         value="<%=fieldValue%>" <%=disabled%> <%=autocomplete%> />
 <%}%>
 
 <%function renderDatepickerField(field, bean, disabled) { %>
@@ -85,7 +85,9 @@
                 } else if(field.custom != null)  {
                   renderCustomField(field, bean, fieldValue, disabled);
                 } else {
-                  renderInputField(field, bean, fieldValue, disabled);
+                  var autocomplete = "" ;
+		  if(field.autocomplete)  disabled = 'autocomplete="on"';
+                  renderInputField(field, bean, fieldValue, disabled, autocomplete);
                 }
               %>
               <%if(beanState.fieldErrors != null) { %>

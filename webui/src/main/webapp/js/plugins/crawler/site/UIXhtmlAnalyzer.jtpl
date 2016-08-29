@@ -1,3 +1,0 @@
-<div>
-  <iframe id="XhtmlContentIFrame"  width="1000px" height="700px" src="<%=xhtmlUrl%>"></iframe>
-</div>

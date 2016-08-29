@@ -313,9 +313,11 @@ define([
       this.renderRows() ;
     },
     
-    onAddBean: function(onSaveCallback) {
+    onAddBean: function(onSaveCallback) { this.onAddBeanWith({}, onSaveCallback); },
+
+    onAddBeanWith: function(bean, onSaveCallback) {
       var popupConfig = {title: "New", minWidth: 600, modal: true} ;
-      var uicomp = new UITableBean().init(this, {}, -1) ;
+      var uicomp = new UITableBean().init(this, bean, -1) ;
       uicomp.onSaveCallback = onSaveCallback;
       UIPopup.activate(uicomp, popupConfig) ;
     },
