@@ -1,7 +1,7 @@
 package net.datatp.crawler.site;
 
 import net.datatp.crawler.urldb.URLDatum;
-import net.datatp.util.URLAnalyzer;
+import net.datatp.util.URLInfo;
 
 /**
  * Author : Tuan Nguyen
@@ -10,23 +10,23 @@ import net.datatp.util.URLAnalyzer;
  */
 public class URLContext {
   private URLDatum    urlDatum;
-  private URLAnalyzer   urlParser;
+  private URLInfo   urlParser;
   private SiteContext siteContext;
   
-  public URLContext(URLDatum urlDatum, URLAnalyzer urlParser, SiteContext siteContext) {
+  public URLContext(URLDatum urlDatum, URLInfo urlParser, SiteContext siteContext) {
     this.urlDatum    = urlDatum;
     this.urlParser   = urlParser;
     this.siteContext = siteContext;
   }
   
-  public URLContext(URLAnalyzer urlParser, SiteContext siteContext) {
+  public URLContext(URLInfo urlParser, SiteContext siteContext) {
     this.urlParser = urlParser ;
     this.siteContext = siteContext ;
   }
   
   public URLDatum getURLDatum() { return urlDatum; }
   
-  public URLAnalyzer getUrlParser() { return urlParser; }
+  public URLInfo getUrlParser() { return urlParser; }
 
   public SiteContext getSiteContext() { return siteContext ; }
 }

@@ -17,9 +17,14 @@ define([
       return server.syncPOSTJson("/site/analyzed-site-url", params);
     };
 
-    this.getAnalyzedURLStructure = function(url) {
+    this.reanalyseURLSiteStructure = function(siteConfig, maxDownload) {
+      var params = { siteConfig: siteConfig, maxDownload: maxDownload, forceNew: false } ;
+      return server.syncPOSTJson("/site/reanalyse-site-url", params);
+    };
+
+    this.getAnalyzedURLData = function(url) {
       var params = { url: url } ;
-      return server.restGET("/site/analyzed-url", params);
+      return server.restGET("/site/analyzed-url-data", params);
     };
   };
 

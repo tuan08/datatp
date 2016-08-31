@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import net.datatp.crawler.site.URLContext;
 import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.crawler.urldb.URLDatumFactory;
-import net.datatp.util.URLAnalyzer;
+import net.datatp.util.URLInfo;
 import net.datatp.util.text.StringUtil;
 import net.datatp.xhtml.extract.WDataExtractContext;
 import net.datatp.xhtml.util.URLRewriter;
@@ -63,7 +63,7 @@ public class URLExtractor {
       if(urlDatum.getDeep() == 1) {
         String refreshUrl = structure.findRefreshMetaNodeUrl() ;
         if(refreshUrl != null) {
-          URLDatum newURLDatum = createURLDatum(urlDatum, refreshUrl, new URLAnalyzer(refreshUrl), "refresh url");
+          URLDatum newURLDatum = createURLDatum(urlDatum, refreshUrl, new URLInfo(refreshUrl), "refresh url");
           addURL(urls, refreshUrl, newURLDatum);
         }
       }
@@ -75,7 +75,7 @@ public class URLExtractor {
         if(StringUtil.isEmpty(anchorText)) continue;
         String newURL = urlRewriter.rewrite(siteURL, baseURL, linkXPath.getNode().attr("href"));
         if (!isAllowProtocol(newURL)) continue;
-        URLAnalyzer newURLNorm = new URLAnalyzer(newURL);
+        URLInfo newURLNorm = new URLInfo(newURL);
         URL_CLEANER.process(newURLNorm) ;
         String newNormalizedURL = newURLNorm.getNormalizeURL();
 
@@ -125,7 +125,7 @@ public class URLExtractor {
 
   private boolean isInDeepRange(URLDatum datum, int maxDeep) { return datum.getDeep() <= maxDeep; }
 
-  private URLDatum createURLDatum(URLDatum parent, String origUrl, URLAnalyzer urlNorm, String anchorText) {
+  private URLDatum createURLDatum(URLDatum parent, String origUrl, URLInfo urlNorm, String anchorText) {
     URLDatum urlDatum = urlDatumFactory.createInstance(System.currentTimeMillis());
     urlDatum.setOriginalUrl(origUrl, urlNorm);
     byte deep = (byte) (1 + parent.getDeep());

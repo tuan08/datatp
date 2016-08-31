@@ -12,7 +12,7 @@ define([
     label: "Xhtml Analyzer",
 
     initialize: function(options) {
-      this.urlStructure = options.urlStructure;
+      this.urlData = options.urlData;
       this.siteConfig   = options.siteConfig;
       this.uiExtractConfig = new UIExtractConfig({siteConfig: this.siteConfig, updateUISiteConfigOnChange: true}) ;
       this.uiExtractConfig.uiParent = this ;
@@ -43,7 +43,7 @@ define([
 
       var iframeTool = new IFrameTool(iframe);
       try {
-        iframeTool.html(this.urlStructure.xhtml);
+        iframeTool.html(this.urlData.xhtml);
       } catch(err) {
         console.error(err);
       }

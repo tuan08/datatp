@@ -34,9 +34,23 @@ public class SiteStructureAnalyzerService {
     if(analyzer != null && !config.isForceNew()) return analyzer;
 
     if(analyzer != null) analyzer.stop();
+    
     analyzer = new SiteStructureAnalyzer(config.getSiteConfig(), config.getMaxDownload());
     analyzers.put(config.getSiteConfig().getHostname(), analyzer);
     analyzer.run();
+    return analyzer;
+  }
+  
+  synchronized public SiteStructureAnalyzer reanalyse(SiteStructureAnalyzerConfig config) throws Exception {
+    SiteStructureAnalyzer analyzer = analyzers.get(config.getSiteConfig().getHostname());
+    if(analyzer == null) {
+      analyzer = new SiteStructureAnalyzer(config.getSiteConfig(), config.getMaxDownload());
+      analyzers.put(config.getSiteConfig().getHostname(), analyzer);
+      analyzer.run();
+    } else {
+      analyzer.update(config.getSiteConfig());
+      analyzer.getSiteStructure().reanalyse();
+    }
     return analyzer;
   }
   

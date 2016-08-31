@@ -21,13 +21,12 @@ public class SiteExtractor {
       for(ExtractConfig extractConfig : extractConfigs) {
         if(extractConfig.getExtractXPath() != null) {
         }
-
+        
         if(extractConfig.getExtractAuto() != null) {
-          for(ExtractConfig.ExtractAuto extractAuto  : extractConfig.getExtractAuto()) {
-            WDataExtractors extractor = extractors.getExtractor(extractAuto);
-            PageExtractor pageExtractor = new PageExtractor(extractConfig, extractor);
-            autoHolder.add(pageExtractor);
-          }
+          ExtractConfig.ExtractAuto extractAuto  = extractConfig.getExtractAuto() ;
+          WDataExtractors extractor = extractors.getExtractor(extractAuto);
+          PageExtractor pageExtractor = new PageExtractor(extractConfig, extractor);
+          autoHolder.add(pageExtractor);
         }
       }
     }

@@ -20,7 +20,7 @@ public class SiteStructureAnalyzerUnitTest {
 
     siteAnalyzer.waitForAnalyseTermination(60000);
     
-    siteAnalyzer.getSiteStructure().getUrlStructure().dump(System.out);
+    siteAnalyzer.getSiteStructure().getUrlSiteStructure().dump(System.out);
     System.out.println(DataSerializer.JSON.toString(siteAnalyzer.getSiteStructure()));
   }
   
@@ -35,6 +35,6 @@ public class SiteStructureAnalyzerUnitTest {
     SiteStructureAnalyzer siteAnalyzer = new SiteStructureAnalyzer(siteConfig, 30);
     siteAnalyzer.run();
     siteAnalyzer.waitForAnalyseTermination(60000);
-    siteAnalyzer.getSiteStructure().getUrlStructure().dump(System.out);
+    siteAnalyzer.getSiteStructure().getUrlSiteStructure().dump(System.out);
   }
 }

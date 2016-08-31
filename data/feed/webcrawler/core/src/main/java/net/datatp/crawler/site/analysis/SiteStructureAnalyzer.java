@@ -15,14 +15,20 @@ public class SiteStructureAnalyzer {
     siteCrawler = new SiteCrawler(sConfig, maxDownload) {
       @Override
       public void onWData(WDataExtractContext ctx) { 
-        siteStructure.analyse(getSiteContext(), ctx); 
+        siteStructure.analyse(ctx); 
       }
     };
-    siteStructure       = new SiteStructure();
+    siteStructure       = new SiteStructure(siteCrawler.getSiteContext());
     this.lastAccessTime = System.currentTimeMillis();
   }
 
   public SiteStructure getSiteStructure() { return siteStructure; }
+
+
+  public void update(SiteConfig config) {
+    siteCrawler.update(config);
+    siteStructure.update(siteCrawler.getSiteContext());
+  }
   
   public void run() throws Exception {
     if(analyseThread == null || !analyseThread.isAlive()) {
@@ -38,6 +44,7 @@ public class SiteStructureAnalyzer {
   
   public void stop() {
     if(analyseThread != null && analyseThread.isAlive()) {
+      siteCrawler.stopCrawl();
       analyseThread.interrupt();
     }
   }

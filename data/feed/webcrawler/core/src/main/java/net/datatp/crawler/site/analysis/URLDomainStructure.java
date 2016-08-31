@@ -3,11 +3,9 @@ package net.datatp.crawler.site.analysis;
 import java.io.IOException;
 import java.util.TreeMap;
 
-import net.datatp.util.URLAnalyzer;
-
 public class URLDomainStructure {
   private String domain;
-  private TreeMap<String, URLDirStructure> dirStructures = new TreeMap<>();
+  private TreeMap<String, URLCategoryStructure> categoryStructures = new TreeMap<>();
   
   public URLDomainStructure(String domain) {
     this.domain = domain;
@@ -15,19 +13,19 @@ public class URLDomainStructure {
   
   public String getDomain() { return this.domain; }
   
-  public TreeMap<String, URLDirStructure> getDirectoryStructure() { return this.dirStructures; }
+  public TreeMap<String, URLCategoryStructure> getCategoryStructure() { return this.categoryStructures; }
   
-  public void add(URLAnalyzer urlParser) {
-    URLDirStructure dirStructure = dirStructures.get(urlParser.getDirectory());
-    if(dirStructure == null) {
-      dirStructure = new URLDirStructure(domain, urlParser.getDirectory());
-      dirStructures.put(urlParser.getDirectory(), dirStructure);
+  public void add(URLAnalysis urlAnalysis) {
+    URLCategoryStructure categoryStructure = categoryStructures.get(urlAnalysis.getPageTypeCategory());
+    if(categoryStructure == null) {
+      categoryStructure = new URLCategoryStructure(domain, urlAnalysis.getPageTypeCategory());
+      categoryStructures.put(categoryStructure.getCategory(), categoryStructure);
     }
-    dirStructure.add(urlParser);
+    categoryStructure.add(urlAnalysis);
   }
   
   public void dump(Appendable out) throws IOException {
-    for(URLDirStructure sel : dirStructures.values()) {
+    for(URLCategoryStructure sel : categoryStructures.values()) {
       sel.dump(out);
     }
   }

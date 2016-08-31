@@ -8,9 +8,9 @@ define([
   'ui/UICollapsible',
   'plugins/crawler/site/UIURLPattern',
   'plugins/crawler/site/UIExtractConfig',
-  'plugins/crawler/site/UISiteURLStructureAnalyzer',
+  'plugins/crawler/site/UIURLSiteStructureAnalyzer',
   'plugins/crawler/Rest'
-], function($, _, Backbone, UIBreadcumbs, UIBean, UITable, UICollabsible, UIURLPattern, UIExtractConfig, UISiteURLStructureAnalyzer, Rest) {
+], function($, _, Backbone, UIBreadcumbs, UIBean, UITable, UICollabsible, UIURLPattern, UIExtractConfig, UIURLSiteStructureAnalyzer, Rest) {
   var UISiteConfigGeneric = UIBean.extend({
     label: "Site Config Generic",
     config: {
@@ -67,7 +67,7 @@ define([
           onClick: function(thisUI) { 
             var siteConfig = thisUI.siteConfig;
             var uiSiteConfig = thisUI.getAncestorOfType("UISiteConfig") ;
-            uiSiteConfig.push(new UISiteURLStructureAnalyzer({ siteConfig: siteConfig }));
+            uiSiteConfig.push(new UIURLSiteStructureAnalyzer({ siteConfig: siteConfig }));
           }
         },
         { 

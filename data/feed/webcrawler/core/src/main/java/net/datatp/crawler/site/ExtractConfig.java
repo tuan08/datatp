@@ -5,14 +5,14 @@ import java.io.Serializable;
 public class ExtractConfig implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  static public enum MatchType   { url, title, none }
-  static public enum ExtractAuto { content, article, comment, forum, product, job, classified }
+  static public enum MatchType   { any, url, title }
+  static public enum ExtractAuto { none, content, article, comment, forum, product, job, classified }
   
   private String         name        = "content";
   private MatchType      type;
   private String[]       pattern;
   private XPathPattern[] extractXPath;
-  private ExtractAuto[]  extractAuto = { ExtractAuto.content };
+  private ExtractAuto    extractAuto =  ExtractAuto.none;
 
   public String getName() { return name; }
   public void setName(String name) { this.name = name;}
@@ -26,8 +26,8 @@ public class ExtractConfig implements Serializable {
   public XPathPattern[] getExtractXPath() { return extractXPath; }
   public void setExtractXPath(XPathPattern[] extractXPath) { this.extractXPath = extractXPath; }
   
-  public ExtractAuto[] getExtractAuto() { return extractAuto; }
-  public void setExtractAuto(ExtractAuto ... extractAuto) { this.extractAuto = extractAuto; }
+  public ExtractAuto getExtractAuto() { return extractAuto; }
+  public void setExtractAuto(ExtractAuto extractAuto) { this.extractAuto = extractAuto; }
   
   static public class XPathPattern implements Serializable {
     private static final long serialVersionUID = 1L;

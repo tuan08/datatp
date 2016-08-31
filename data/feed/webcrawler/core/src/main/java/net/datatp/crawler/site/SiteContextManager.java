@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.datatp.crawler.urldb.URLDatum;
-import net.datatp.util.URLAnalyzer;
+import net.datatp.util.URLInfo;
 
 /**
  * Author : Tuan Nguyen
@@ -73,9 +73,9 @@ public class SiteContextManager {
     return count ;
   }
 
-  public SiteContext getSiteContext(String url)  { return getSiteConfigContext(new URLAnalyzer(url)) ; }
+  public SiteContext getSiteContext(String url)  { return getSiteConfigContext(new URLInfo(url)) ; }
 
-  public SiteContext getSiteConfigContext(URLAnalyzer urlParser)  {
+  public SiteContext getSiteConfigContext(URLInfo urlParser)  {
     String hostname = urlParser.getNormalizeHostName() ;
     if(hostname.startsWith("mail.") || hostname.startsWith("webmail.") || hostname.startsWith("email")) return null; 
     String[] source = urlParser.getSources() ;
@@ -89,7 +89,7 @@ public class SiteContextManager {
   }
 
   public URLContext getURLContext(URLDatum urlDatum)  {
-    URLAnalyzer urlParser = new  URLAnalyzer(urlDatum.getOriginalUrl()) ;
+    URLInfo urlParser = new  URLInfo(urlDatum.getOriginalUrl()) ;
     SiteContext context = getSiteConfigContext(urlParser) ;
     if(context != null) return new URLContext(urlDatum, urlParser, context) ;
     return null;

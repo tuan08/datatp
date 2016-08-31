@@ -2,7 +2,7 @@ package net.datatp.xhtml.util;
 
 import java.util.Map;
 
-import net.datatp.util.URLAnalyzer;
+import net.datatp.util.URLInfo;
 import net.datatp.util.URLNormalizerProcessor;
 
 
@@ -12,7 +12,7 @@ import net.datatp.util.URLNormalizerProcessor;
  * Aug 2, 2010  
  */
 public class URLSessionIdCleaner implements URLNormalizerProcessor {
-  public void process(URLAnalyzer urlnorm) {
+  public void process(URLInfo urlnorm) {
     Map<String, String[]> params = urlnorm.getParams() ;
     if(params != null) {
       processSParam(params) ;

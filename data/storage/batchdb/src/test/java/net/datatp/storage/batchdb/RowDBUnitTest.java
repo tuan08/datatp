@@ -21,7 +21,7 @@ import net.datatp.storage.batchdb.RowDB;
 import net.datatp.storage.batchdb.RowId;
 import net.datatp.storage.batchdb.RowIdPartitioner;
 import net.datatp.storage.hdfs.HDFSUtil;
-import net.datatp.util.URLAnalyzer;
+import net.datatp.util.URLInfo;
 import net.datatp.util.io.FileUtil;
 /**
  * Author : Tuan Nguyen
@@ -132,7 +132,7 @@ public class RowDBUnitTest {
     cell2.addField("segment", segment) ;
     
     Row row = new Row() ;
-    URLAnalyzer urlnorm = new URLAnalyzer(url) ;
+    URLInfo urlnorm = new URLInfo(url) ;
     keyHolder.add(urlnorm.getHostMD5Id()) ;
     row.setRowId(new RowId(new Text(urlnorm.getHostMD5Id()), 0L, 0L, RowId.STORE_STATE)) ;
     row.addCell("column1", cell1) ;

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import net.datatp.util.text.StringUtil;
 
-public class URLAnalyzer {
+public class URLInfo {
   private Pattern PARAM_SEPARATOR = Pattern.compile("&amp;|&") ;
 
   private String url ;
@@ -25,9 +25,7 @@ public class URLAnalyzer {
   private String ext ;
   private TreeMap<String, String[]> params ;
   
-  private String[] tag;
-  
-  public URLAnalyzer(String url) {
+  public URLInfo(String url) {
     this.url = url ;
     String remainString = url.trim() ;
 
@@ -114,13 +112,6 @@ public class URLAnalyzer {
   
   public TreeMap<String, String[]> getParams() { return this.params ; }
   
-  public void addTag(String tag) { this.tag = StringUtil.merge(this.tag, tag) ; }
-  public void addTag(String[] tag) { this.tag = StringUtil.merge(this.tag, tag) ; }
-  public boolean hasTag(String tag) { return StringUtil.isIn(tag, this.tag) ; }
-  public String[] getTags() { return tag ; }
-  public void     setTags(String[] tag) { this.tag = tag ; }
-
-  
   public String getNormalizeHostName() {
     if(host.startsWith("www.")) return host.substring("www.".length()) ; 
     return host ;
@@ -161,7 +152,6 @@ public class URLAnalyzer {
     return b.toString() ;
   }
 
-  @JsonIgnore
   public String getPathWithParams() {
     StringBuilder b = new StringBuilder() ;
     if(path == null || path.isEmpty()) b.append("/") ;
@@ -319,9 +309,6 @@ public class URLAnalyzer {
   public String toString() {
     StringBuilder b = new StringBuilder();
     b.append(getNormalizeURLAll());
-    if(tag != null) {
-      b.append(" [").append(StringUtil.joinStringArray(tag)).append("]");
-    }
     return b.toString();
   }
   

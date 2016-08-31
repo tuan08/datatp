@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.datatp.util.URLAnalyzer;
+import net.datatp.util.URLInfo;
 import net.datatp.util.text.StringUtil;
 import net.datatp.xhtml.WData;
 import net.datatp.xhtml.extract.WDataExtractContext;
@@ -27,7 +27,8 @@ public class SiteCrawler {
   private SiteContext      siteContext;
   private WDataHttpFetcher fetcher;
   private Set<String>      visistedUrls = new HashSet<>();
-
+  private boolean          stopCrawl = false;
+  
   public SiteCrawler(String site, String injectUrl, int maxDownload) {
     this(new SiteConfig("default", site, injectUrl, 3), maxDownload);
   }
@@ -41,10 +42,17 @@ public class SiteCrawler {
   
   public SiteContext getSiteContext() { return this.siteContext; }
   
+  public void stopCrawl() { stopCrawl = true; }
+  
+  public void update(SiteConfig config) {
+    siteContext.init(config);
+  }
+  
   public void crawl() {
+    stopCrawl = false;
     int downloadCount = 0;
     URL[] urls = { new URL("", siteContext.getSiteConfig().getInjectUrl()[0], 1) };
-    while(urls.length > 0 && downloadCount < maxDownload) {
+    while(urls.length > 0 && downloadCount < maxDownload && !stopCrawl) {
       URLExtractor urlExtractor = new URLExtractor(siteContext);
       for(URL selUrl : urls) {
         if(visistedUrls.contains(selUrl.url)) continue;
@@ -61,6 +69,7 @@ public class SiteCrawler {
           logger.error("Cannot process url " + selUrl.getUrl(), ex);
         }
         if(downloadCount == maxDownload) break;
+        if(stopCrawl) break;
       }
       urls = urlExtractor.getUrls();
     }
@@ -121,7 +130,7 @@ public class SiteCrawler {
     public URL[] getUrls() { return urls.values().toArray(new URL[urls.size()]); }
     
     public void extract(URL url, WDataExtractContext ctx) throws Exception {
-      URLAnalyzer urlParser = new URLAnalyzer(url.getUrl());
+      URLInfo urlParser = new URLInfo(url.getUrl());
       XPathStructure structure = ctx.getXpathStructure();
       String baseURL = structure.findBase();
       if (baseURL == null || baseURL.length() == 0) {
@@ -135,7 +144,7 @@ public class SiteCrawler {
         if(StringUtil.isEmpty(anchorText)) continue;
         String newURL = urlRewriter.rewrite(urlParser.getSiteURL(), baseURL, linkXPath.getNode().attr("href"));
         if (!isAllowProtocol(newURL)) continue;
-        URLAnalyzer newURLNorm = new URLAnalyzer(newURL);
+        URLInfo newURLNorm = new URLInfo(newURL);
         URL_CLEANER.process(newURLNorm) ;
         
         if(isExclude(newURLNorm.getPath())) continue;

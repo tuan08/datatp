@@ -15,14 +15,14 @@
       <td>
         <%var segments = urlInfo.pathSegments%> 
         <%for(var i = 0 ; i < segments.length; i++) {%>
-          <div>
-            <span><%=segments[i]%><span>
-            [
-            <a class="ui-action onIgnorePattern" pattern=".*<%=segments[i]%>.*">ignore</a> -
-            <a class="ui-action onDetailPattern" pattern=".*<%=segments[i]%>.*">detail</a> -
-            <a class="ui-action onListPattern"   pattern=".*<%=segments[i]%>.*">list</a>
-            ]
-          </div>
+        <%  var pattern = ".*/" + segments[i] + ".*"; %>
+        <%  if(i < segments.length - 1) pattern = ".*/" + segments[i] + "/.*"; %>
+            <div>
+              <span><%=segments[i]%><span>
+              <a class="ui-action onIgnorePattern" pattern="<%=pattern%>">ignore</a> -
+              <a class="ui-action onDetailPattern" pattern="<%=pattern%>">detail</a> -
+              <a class="ui-action onListPattern"   pattern="<%=pattern%>">list</a>
+            </div>
         <%}%>
       </td>
     </tr>

@@ -13,7 +13,7 @@ import net.datatp.crawler.site.SiteContext;
 import net.datatp.crawler.site.SiteContextManager;
 import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.crawler.urldb.URLDatumDBWriter;
-import net.datatp.util.URLAnalyzer;
+import net.datatp.util.URLInfo;
 /**
  * $Author: Tuan Nguyen$ 
  **/
@@ -114,7 +114,7 @@ public class URLScheduler {
       for(String selUrl : url) {
         selUrl = selUrl.trim() ;
         if(selUrl.length() == 0) continue ;
-        URLAnalyzer newURLParser = new URLAnalyzer(selUrl) ;
+        URLInfo newURLParser = new URLInfo(selUrl) ;
         URLDatum datum = writer.createURLDatumInstance(currentTime) ;
         datum.setDeep((byte) 1) ;
         datum.setOriginalUrl(selUrl, newURLParser) ;

@@ -6,20 +6,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.datatp.util.URLAnalyzer;
+import net.datatp.util.URLInfo;
 import net.datatp.util.text.NumberUtil;
 import net.datatp.util.text.StringUtil;
 
 public class URLVector {
   private String url;
-  private URLAnalyzer urlnormalizer ;
+  private URLInfo urlnormalizer ;
   private String seed = "";
   private Object object ;
   
   public URLVector(String url) {
     this.url = url;
     try {
-      urlnormalizer = new URLAnalyzer(URLDecoder.decode(url.toLowerCase(), "UTF-8"));
+      urlnormalizer = new URLInfo(URLDecoder.decode(url.toLowerCase(), "UTF-8"));
     } catch (Exception e) {
     	throw new RuntimeException(e) ;
     }
@@ -48,7 +48,7 @@ public class URLVector {
   public String getSeed() { return seed; }
   public void setSeed(String seed) { this.seed = seed; }
 
-  public URLAnalyzer getURLNormalizer() {
+  public URLInfo getURLNormalizer() {
   	return urlnormalizer ;
   }
 
@@ -59,7 +59,7 @@ public class URLVector {
   public String[] getVector() {
     List<String> features = new ArrayList<String>();
 
-    URLAnalyzer normalizer = getURLNormalizer();
+    URLInfo normalizer = getURLNormalizer();
     List<String> segs = normalizer.getPathSegments();
 
     features.add("deep:" + segs.size());

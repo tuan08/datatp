@@ -21,8 +21,8 @@ import net.datatp.crawler.site.analysis.SiteStructureAnalyzer;
 import net.datatp.crawler.site.analysis.SiteStructureAnalyzerConfig;
 import net.datatp.crawler.site.analysis.SiteStructureAnalyzerService;
 import net.datatp.crawler.site.analysis.URLSiteStructure;
-import net.datatp.crawler.site.analysis.URLStructure;
-import net.datatp.util.URLAnalyzer;
+import net.datatp.crawler.site.analysis.URLData;
+import net.datatp.util.URLInfo;
 import net.datatp.util.dataformat.DataSerializer;
 
 @RestController
@@ -51,26 +51,22 @@ public class CrawlerRestController {
   @RequestMapping(value = "/crawler/site/analyzed-site-url", method = RequestMethod.POST)
   public URLSiteStructure siteGetAnalyzedSiteUrl(@RequestBody SiteStructureAnalyzerConfig config) throws Exception {
     SiteStructureAnalyzer analyzer = siteStructureAnalyzerService.getSiteStructureAnalyzer(config);
-    return analyzer.getSiteStructure().getUrlStructure();
+    return analyzer.getSiteStructure().getUrlSiteStructure();
   }
   
-  @RequestMapping(value = "/crawler/site/analyzed-url")
-  public URLStructure siteGetAnalyzedUrl(@RequestParam("url") String url) throws Exception {
-    URLAnalyzer urlAnalyzer = new URLAnalyzer(url);
+  @RequestMapping(value = "/crawler/site/reanalyse-site-url", method = RequestMethod.POST)
+  public URLSiteStructure siteReanalyseSiteUrl(@RequestBody SiteStructureAnalyzerConfig config) throws Exception {
+    SiteStructureAnalyzer analyzer = siteStructureAnalyzerService.reanalyse(config);
+    return analyzer.getSiteStructure().getUrlSiteStructure();
+  }
+  
+  @RequestMapping(value = "/crawler/site/analyzed-url-data")
+  public URLData siteGetAnalyzedURLData(@RequestParam("url") String url) throws Exception {
+    URLInfo urlAnalyzer = new URLInfo(url);
     SiteStructureAnalyzer analyzer = siteStructureAnalyzerService.getSiteStructureAnalyzer(urlAnalyzer.getHost());
-    if(analyzer != null) return analyzer.getSiteStructure().getURLStructure(url);
-    return new URLStructure(new URLAnalyzer(url), "No Data");
+    if(analyzer != null) return analyzer.getSiteStructure().getURLData(url);
+    return new URLData(new URLInfo(url), "No Data");
   }
-  
-//  @RequestMapping(value = "/crawler/site/analyzed-url-xhtml")
-//  public String siteGetAnalyzedUrlContent(@RequestParam("url") String url) throws Exception {
-//    System.out.println("url = " + url);
-//    URLAnalyzer urlAnalyzer = new URLAnalyzer(url);
-//    SiteStructureAnalyzer analyzer = siteStructureAnalyzerService.getSiteStructureAnalyzer(urlAnalyzer.getHost());
-//    if(analyzer != null) return analyzer.getSiteStructure().getURLStructure(url).getXhtml();
-//    return "No Data";
-//  }
-//  
   
   @RequestMapping(value = "/crawler/site/save", method = RequestMethod.POST)
   public SiteConfig siteSave(@RequestBody SiteConfig config) throws Exception {

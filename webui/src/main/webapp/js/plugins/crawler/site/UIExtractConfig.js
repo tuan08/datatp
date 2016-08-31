@@ -23,7 +23,7 @@ define([
               select: {
                 getOptions: function(field, bean) {
                   var options = [
-                    { label: 'None', value: 'none' },
+                    { label: 'Any', value: 'any' },
                     { label: 'Url',  value: 'url' },
                     { label: 'Title', value: 'title' }
                   ];
@@ -32,27 +32,7 @@ define([
               }
             },
             { field: "matchPattern",  label: "Match Pattern", multiple: true },
-            { 
-              field: "extractAuto",  label: "Extract Auto",
-              custom: {
-                getDisplay: function(bean) { return bean.extractAuto ; },
-                set: function(bean, obj) { 
-                  if(bean.extractAuto == null) bean.extractAuto = [];
-                  if(obj == null) bean.extractAuto = [];
-                  else            bean.extractAuto.push(obj) ;
-                },
-                
-                autocomplete: {
-                  search: function(term, bean) {
-                    var result = [
-                      { value: 'article', label: "Article" },
-                      { value: 'forum',   label: "Forum" }
-                    ];
-                    return result ;
-                  }
-                }
-              }
-            },
+            { field: "extractAuto",  label: "Extract Auto" }
           ]
         }
       }

@@ -16,7 +16,7 @@ import net.datatp.storage.batchdb.RowId;
 import net.datatp.storage.batchdb.RowIdPartitioner;
 import net.datatp.storage.batchdb.RowDB.RowReader;
 import net.datatp.storage.hdfs.HDFSUtil;
-import net.datatp.util.URLAnalyzer;
+import net.datatp.util.URLInfo;
 import net.datatp.util.io.FileUtil;
 
 import org.apache.hadoop.io.Text;
@@ -89,7 +89,7 @@ public class DatabaseUnitTest {
     cell2.addField("id", id) ;
     
     Row row = new Row() ;
-    URLAnalyzer urlnorm = new URLAnalyzer(url) ;
+    URLInfo urlnorm = new URLInfo(url) ;
     row.setRowId(new RowId(new Text(urlnorm.getHostMD5Id()), 0L, 0L, RowId.STORE_STATE)) ;
     row.addCell("column1", cell1) ;
     row.addCell("column2", cell2) ;
