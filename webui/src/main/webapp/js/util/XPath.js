@@ -19,10 +19,9 @@ define([
   }; 
  
   var XPath = function(node) {
-    this.node = node;
-    
     this.xpathSegments = [];
-    var currNode = this.node;
+
+    var currNode = node;
     while(currNode != null && currNode.nodeName != '#document') {
       var xpathSeg = new XPathSegment(currNode.nodeName, currNode.id, currNode.className);
       this.xpathSegments.push(xpathSeg);

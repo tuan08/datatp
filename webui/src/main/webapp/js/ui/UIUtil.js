@@ -70,7 +70,6 @@ define([
     getAncestorOfType: function(uicomp, type) {
       var uiParent = uicomp.uiParent ;
       while(uiParent != null) {
-        console.log("uiParent = " + uiParent.type);
         if(type == uiParent.type) return uiParent ;
         uiParent = uiParent.uiParent ;
       }

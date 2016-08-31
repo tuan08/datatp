@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.parser.Tag;
 
 import net.datatp.crawler.site.SiteContext;
 import net.datatp.crawler.site.URLPattern;

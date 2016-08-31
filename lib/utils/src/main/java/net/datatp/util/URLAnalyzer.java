@@ -99,6 +99,19 @@ public class URLAnalyzer {
   
   public String getRef() { return ref; }
 
+  public String getExtension() {
+    if(this.ext == null) {
+      if(path != null) {
+        int idx = path.lastIndexOf('.') ;
+        if(idx > 0) ext = path.substring(idx + 1) ;
+        else ext = "" ;
+      } else {
+        ext = "" ;
+      }
+    }
+    return ext;
+  }
+  
   public TreeMap<String, String[]> getParams() { return this.params ; }
   
   public void addTag(String tag) { this.tag = StringUtil.merge(this.tag, tag) ; }
@@ -240,20 +253,6 @@ public class URLAnalyzer {
     }
     MD5 md5 = MD5.digest(b.toString().toLowerCase()) ;
     return host + ":" + md5.toString();
-  }
-
-  @JsonIgnore
-  public String getExtension() {
-    if(this.ext == null) {
-      if(path != null) {
-        int idx = path.lastIndexOf('.') ;
-        if(idx > 0) ext = path.substring(idx) ;
-        else ext = "" ;
-      } else {
-        ext = "" ;
-      }
-    }
-    return ext;
   }
 
   public List<String> getPathSegments() {

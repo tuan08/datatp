@@ -142,10 +142,10 @@ public class SiteCrawler {
         
         if(!siteContext.allowDomain(newURLNorm))  continue; // ignore the external link
         
-        URLPattern urlPattern = siteContext.matchesIgnoreURLPattern(newURLNorm);
-        if(urlPattern != null && urlPattern.getType() == URLPattern.Type.ignore) {
-          continue;
-        }
+//        URLPattern urlPattern = siteContext.matchesIgnoreURLPattern(newURLNorm);
+//        if(urlPattern != null && urlPattern.getType() == URLPattern.Type.ignore) {
+//          continue;
+//        }
         
         if (newURLNorm.getRef() != null) continue;
         

@@ -19,7 +19,6 @@ define([
             field: "domain", label: "Domain", defaultValue: '', toggled: true, filterable: true,
             onClick: function(thisTable, row) {
               var bean = thisTable.getItemOnCurrentPage(row) ;
-              console.log('on click bean ' + JSON.stringify(bean)) ;
             }
           },
           { field: "directory", label: "Directory", toggled: true },
@@ -28,6 +27,15 @@ define([
             custom: {
               getDisplay: function(bean) { 
                 if(bean.url) return bean.url.url; 
+                return "";
+              }
+            }
+          },
+          { 
+            field: "tags", label: "Tags", toggled: true, filterable: true,
+            custom: {
+              getDisplay: function(bean) { 
+                if(bean.url) return bean.url.tags; 
                 return "";
               }
             }

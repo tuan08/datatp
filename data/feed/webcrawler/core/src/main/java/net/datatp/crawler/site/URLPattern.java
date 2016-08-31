@@ -2,6 +2,8 @@ package net.datatp.crawler.site;
 
 import java.util.Comparator;
 
+import net.datatp.util.text.StringUtil;
+
 public class URLPattern {
   static public enum Type { ignore, detail, list, unknown}
 
@@ -27,4 +29,6 @@ public class URLPattern {
   
   public String[] getPattern() { return pattern; }
   public void setPattern(String[] pattern) { this.pattern = pattern; }
+  
+  public String toString() { return type + ":" + StringUtil.joinStringArray(pattern) ; }
 }

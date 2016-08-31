@@ -32,6 +32,8 @@ define([
       for(var i = 0; i < this.components.length; i++) {
         if(this.components[i] !=  component) {
           holder.push(this.components[i]) ;
+        } else {
+          this.components[i].uiParent = null;
         }
       }
       this.components = holder() ;

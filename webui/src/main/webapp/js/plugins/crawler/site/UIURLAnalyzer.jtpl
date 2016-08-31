@@ -18,9 +18,9 @@
           <div>
             <span><%=segments[i]%><span>
             [
-            <a class="ui-action onIgnorePattern" pattern="<%=segments[i]%>">ignore</a> -
-            <a class="ui-action onDetailPattern" pattern="<%=segments[i]%>">detail</a> -
-            <a class="ui-action onListPattern"   pattern="<%=segments[i]%>">list</a>
+            <a class="ui-action onIgnorePattern" pattern=".*<%=segments[i]%>.*">ignore</a> -
+            <a class="ui-action onDetailPattern" pattern=".*<%=segments[i]%>.*">detail</a> -
+            <a class="ui-action onListPattern"   pattern=".*<%=segments[i]%>.*">list</a>
             ]
           </div>
         <%}%>
@@ -35,16 +35,28 @@
           <div>
             <%=key%>
             [
-            <a class="ui-action onIgnorePattern" pattern="<%=key%>">ignore</a> -
-            <a class="ui-action onDetailPattern" pattern="<%=key%>">detail</a> -
-            <a class="ui-action onListPattern"   pattern="<%=key%>">list</a>
+            <a class="ui-action onIgnorePattern" pattern=".*<%=key%>.*">ignore</a> -
+            <a class="ui-action onDetailPattern" pattern=".*<%=key%>i.*">detail</a> -
+            <a class="ui-action onListPattern"   pattern=".*<%=key%>.*">list</a>
             ]
             : <%=params[key]%>
-            <a class="ui-action onIgnorePattern" pattern="<%=params[key]%>">ignore</a> -
-            <a class="ui-action onDetailPattern" pattern="<%=params[key]%>">detail</a> -
-            <a class="ui-action onListPattern"   pattern="<%=params[key]%>">list</a>
+            <a class="ui-action onIgnorePattern" pattern=".*<%=params[key]%>.*">ignore</a> -
+            <a class="ui-action onDetailPattern" pattern=".*<%=params[key]%>.*">detail</a> -
+            <a class="ui-action onListPattern"   pattern=".*<%=params[key]%>.*">list</a>
           </div>
         <%}%>
+      </td>
+    </tr>
+
+    <tr>
+      <td><strong>Extension</strong></td>
+      <td>
+        <%=urlInfo.extension%>
+        [
+        <a class="ui-action onIgnorePattern" pattern=".*\.<%=urlInfo.extension%>">ignore</a> -
+        <a class="ui-action onDetailPattern" pattern=".*\.<%=urlInfo.extension%>">detail</a> -
+        <a class="ui-action onListPattern"   pattern=".*\.<%=urlInfo.extension%>">list</a>
+        ]
       </td>
     </tr>
 

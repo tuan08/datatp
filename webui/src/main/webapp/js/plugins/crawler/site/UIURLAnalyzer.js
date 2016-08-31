@@ -48,16 +48,18 @@ define([
     _onURLPattern: function(type, evt) {
       var eleA = $(evt.target).closest("a") ;
       var pattern = eleA.attr("pattern") ;
-      console.log("type = " + type + ", pattern = " + pattern);
       
       var urlPatterns = this.siteConfig.urlPatterns;
       var selUrlPattern = null;
+      //find URLPattern config with the same type
       for(var i = 0; i < urlPatterns.length; i++) {
         if(urlPatterns[i].type == type) {
           selUrlPattern = urlPatterns[i];
           break;
         }
       }
+
+      //Find an URLPattern with type is not set
       if(selUrlPattern == null) {
         for(var i = 0; i < urlPatterns.length; i++) {
           if(urlPatterns[i].type == null) {
@@ -67,16 +69,31 @@ define([
           }
         }
       }
+
+      //If not exist URLPattern config with the same type, create a new one
       if(selUrlPattern == null) {
         selUrlPattern = { type: type };
         urlPatterns.push(selUrlPattern);
       } 
       if(selUrlPattern.pattern == null) selUrlPattern.pattern = [];
-      var regexPattern = ".*" + pattern + ".*";
-      selUrlPattern.pattern.push(regexPattern);
-      var uiSiteConfig = this.getAncestorOfType('UISiteConfig') ;
-      uiSiteConfig.onChangeSiteConfig(this.siteConfig);
-      this.render();
+      var patternAlreadyExist = false;
+      for(var i = 0; i < selUrlPattern.pattern.length; i++) {
+        var selPattern = selUrlPattern.pattern[i];
+        if(selPattern == pattern) {
+          var patternAlreadyExist = true;
+          break;
+        }
+      }
+      if(!patternAlreadyExist) {
+        selUrlPattern.pattern.push(pattern);
+
+        this.uiURLPattern.setBeans(this.siteConfig.urlPatterns) ;
+
+        var uiSiteConfig = this.getAncestorOfType('UISiteConfig') ;
+        uiSiteConfig.onChangeSiteConfig(this.siteConfig);
+
+        this.render();
+      }
     }
   });
   

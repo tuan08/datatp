@@ -8,7 +8,7 @@ define([
 ], function($, _, Backbone, UIContainer, UIBean, UITable) {
   
   var UIGeneric = UIBean.extend({
-    label: "Generic Bean",
+    label: "Generic",
     config: {
       beans: {
         generic: {
@@ -99,21 +99,36 @@ define([
       }
     },
 
+    configure: function(siteConfig, extractConfig, updateUISiteConfigOnChange) {
+      this.siteConfig = siteConfig;
+      this.setBeans(extractConfig.extractXPath) ;
+      this.updateUISiteConfigOnChange = updateUISiteConfigOnChange;
+    } ,
+
     onSaveBeanCallback: function(thisTable, row, bean) {
-      var beans = thisTable.commitChange();
+      thisTable.commitChange();
+      if(thisTable.updateUISiteConfigOnChange) {
+        var uiSiteConfig = thisTable.getAncestorOfType('UISiteConfig') ;
+        uiSiteConfig.onChangeSiteConfig(thisTable.siteConfig);
+      }
     },
 
     onDeleteBeanCallback: function(thisTable, row) {
       thisTable.removeItemOnCurrentPage(row);
+      thisTable.commitChange();
+      if(thisTable.updateUISiteConfigOnChange) {
+        var uiSiteConfig = thisTable.getAncestorOfType('UISiteConfig') ;
+        uiSiteConfig.onChangeSiteConfig(thisTable.siteConfig);
+      }
     },
     
     addExtractXPath: function(extractXPath) {
       this.onAddBeanWith(extractXPath, this.onSaveBeanCallback);
-    } 
+    }
   });
 
   var UIExtractConfig = UIContainer.extend({
-    label: "UIExtractConfig", 
+    label: "Extract Config", 
     config: {
       actions: [ ]
     },
@@ -132,13 +147,15 @@ define([
 
       this.uiExtractXPath = new UIExtractXPath();
       if(extractConfig.extractXPath == null) extractConfig.extractXPath = [] ;
-      this.uiExtractXPath.setBeans(extractConfig.extractXPath) ;
+      this.uiExtractXPath.configure(siteConfig, extractConfig, options.updateUISiteConfigOnChange) ;
       this.add(this.uiExtractXPath) ;
     },
     
     addExtractXPath: function(extractXPath) {
       this.uiExtractXPath.addExtractXPath(extractXPath);
-    } 
+    },
+
+    getXPathConfigs: function() { return this.uiExtractXPath.getBeans(); } 
   }) ;
   
   return UIExtractConfig ;

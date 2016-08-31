@@ -14,7 +14,8 @@ define([
     initialize: function(options) {
       this.urlStructure = options.urlStructure;
       this.siteConfig   = options.siteConfig;
-      this.uiExtractConfig = new UIExtractConfig({siteConfig: this.siteConfig}) ;
+      this.uiExtractConfig = new UIExtractConfig({siteConfig: this.siteConfig, updateUISiteConfigOnChange: true}) ;
+      this.uiExtractConfig.uiParent = this ;
 
       _.bindAll(this, 'render') ;
     },
@@ -24,6 +25,7 @@ define([
     _template: _.template(
       "<div>" +
       "  <div class='UIExtractConfig'></div>" +
+      "  <div><a class='ui-action onHighlightExtractContent'>Highlight Extract Content</a></div>" +
       "  <iframe id='XhtmlContentIFrame'  width='100%' height='700px' src='data:text/html;charset=utf-8,<html></html>'></iframe>" +
       "</div>"
      ),
@@ -57,7 +59,26 @@ define([
         uiExtractConfig.addExtractXPath({ name: "", xpath: xpath.getJSoupXPathSelectorExp()}) ;
       };
       iframeTool.on('onmouseup', onSelectText);
+      this.iframeTool = iframeTool;
+    },
+
+    events: {
+      'click .onHighlightExtractContent':   'onHighlightExtractContent'
+    },
+    
+    onHighlightExtractContent: function(evt) { 
+      console.log("Highlight extract content");
+      var extractXPathConfigs = this.uiExtractConfig.getXPathConfigs();
+      for(var i = 0; i < extractXPathConfigs.length; i++) {
+        var extractXPathConfig = extractXPathConfigs[i];
+        var color = "lightgray";
+        if('title' ==  extractXPathConfig.name) color = "#ddc"
+        else if('description' ==  extractXPathConfig.name) color = "#ddf"
+        $(this.iframeTool.getIFrameDocument()).find(extractXPathConfig.xpath).css("background-color", color);
+        console.printJSON(extractXPathConfig);
+      }
     }
+
   });
   
   return UIXhtmlAnalyzer ;
