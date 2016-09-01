@@ -4,7 +4,7 @@ import net.datatp.util.URLInfo;
 
 public class URLData {
   private URLInfo urlInfo;
-  private String      xhtml;
+  private String  xhtml;
   
   public URLData() {}
   

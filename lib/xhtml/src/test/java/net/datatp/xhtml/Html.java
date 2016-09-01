@@ -18,6 +18,10 @@ public class Html {
       "      window.alert('hello') ;" +
       "    </script>" +
       "    <br />" +
+      "    <div>" +
+      "      <h1>header</h1>" +
+      "      <p>paragraph</p>" +
+      "    </div>" +
       "  </body>\n" +
       "</html>" ;
 }

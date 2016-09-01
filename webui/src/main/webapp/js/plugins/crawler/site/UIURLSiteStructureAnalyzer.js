@@ -30,6 +30,15 @@ define([
                 return "";
               }
             }
+          },
+          { 
+            field: "extractEntityInfo", label: "Entity Info", toggled: true,
+            custom: {
+              getDisplay: function(bean) { 
+                if(bean.url) return bean.url.extractEntityInfo; 
+                return "";
+              }
+            }
           }
         ],
         actions:[

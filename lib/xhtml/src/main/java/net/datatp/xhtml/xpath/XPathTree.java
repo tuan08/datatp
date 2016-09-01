@@ -120,7 +120,7 @@ public class XPathTree {
     for(XPath sel : this.getXPaths()) {
       if(!sel.isTextNode()) continue;
       if(b.length() > 0) b.append("\n");
-      b.append(sel.getText());
+      b.append(sel.getText().trim());
     }
     return b.toString();
   }

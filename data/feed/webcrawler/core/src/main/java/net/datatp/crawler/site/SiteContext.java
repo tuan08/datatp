@@ -1,7 +1,5 @@
 package net.datatp.crawler.site;
 
-import java.util.regex.Pattern;
-
 import net.datatp.util.URLInfo;
 
 /**
@@ -12,25 +10,21 @@ import net.datatp.util.URLInfo;
 public class SiteContext {
   
   private SiteConfig          siteConfig;
-  private URLPatternMatcher[] urlPatternMatcher;
+  private WebPageTypeAnalyzer webPageTypeAnalyzer;
   private SiteScheduleStat    siteScheduleStat = new SiteScheduleStat();
   private URLStatistics       urlStatistics    = new URLStatistics();
+  
   private SiteExtractor       siteExtractor;
 
-  public SiteContext(SiteConfig config, SiteExtractor siteExtractor) {
-    this.siteExtractor = siteExtractor;
-    init(config);
+  public SiteContext(SiteConfig siteConfig, AutoWDataExtractors autoWDataExtractors) {
+    update(siteConfig);
+    this.siteExtractor = new SiteExtractor(siteConfig, autoWDataExtractors);
   }
   
-  public void init(SiteConfig config) {
-    this.siteConfig    = config ;
-    URLPattern[] urlPattern = config.getUrlPatterns();
-    if(urlPattern != null) {
-      urlPatternMatcher = new URLPatternMatcher[urlPattern.length];
-      for(int i = 0; i < urlPattern.length; i++) {
-        urlPatternMatcher[i] = new URLPatternMatcher(urlPattern[i]);
-      }
-    }
+  public void update(SiteConfig siteConfig) {
+    this.siteConfig    = siteConfig ;
+    this.webPageTypeAnalyzer = new WebPageTypeAnalyzer(siteConfig.getWebPageTypePatterns());
+    if(siteExtractor != null) siteExtractor.update(siteConfig);
   }
 
   public SiteConfig getSiteConfig() { return this.siteConfig ; }
@@ -38,6 +32,8 @@ public class SiteContext {
   public SiteScheduleStat getSiteScheduleStat() { return siteScheduleStat; }
   
   public URLStatistics getURLStatistics() { return urlStatistics ; }
+  
+  public WebPageTypeAnalyzer getWebPageTypeAnalyzer() { return webPageTypeAnalyzer; }
   
   public SiteExtractor getSiteExtractor() { return siteExtractor; }
   
@@ -64,52 +60,5 @@ public class SiteContext {
     return false ;
   }
   
-  public URLPattern matchesIgnoreURLPattern(URLInfo urlParser) {
-    if(urlPatternMatcher != null) {
-      String url = urlParser.getNormalizeURLAll();
-      for(int i = 0; i < urlPatternMatcher.length; i++) {
-        if(urlPatternMatcher[i].urlPattern.getType() != URLPattern.Type.ignore) continue;
-        if(urlPatternMatcher[i].matches(url)) {
-          return urlPatternMatcher[i].urlPattern;
-        }
-      }
-    }
-    return null;
-  }
-  
-  public URLPattern matchesURLPattern(URLInfo urlParser) {
-    if(urlPatternMatcher != null) {
-      String url = urlParser.getNormalizeURLAll();
-      for(int i = 0; i < urlPatternMatcher.length; i++) {
-        if(urlPatternMatcher[i].matches(url)) {
-          return urlPatternMatcher[i].urlPattern;
-        }
-      }
-    }
-    return null;
-  }
-  
-  
   public void update(SiteContext other) { this.siteConfig = other.siteConfig ; }
-
-  static public class URLPatternMatcher {
-    URLPattern urlPattern;
-    Pattern[]  pattern;
-    
-    URLPatternMatcher(URLPattern urlPattern) {
-      this.urlPattern = urlPattern;
-      String[] patternExp = urlPattern.getPattern();
-      pattern = new Pattern[patternExp.length];
-      for(int i = 0; i < pattern.length; i++) {
-        pattern[i] = Pattern.compile(patternExp[i]);
-      }
-    }
-    
-    public boolean matches(String url) {
-      for(int i = 0; i < pattern.length; i++) {
-        if(pattern[i].matcher(url).matches()) return true;
-      }
-      return false;
-    }
-  }
 }

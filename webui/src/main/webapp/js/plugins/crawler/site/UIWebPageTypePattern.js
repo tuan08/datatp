@@ -4,8 +4,8 @@ define([
   'backbone',
   'ui/UITable'
 ], function($, _, Backbone,  UITable) {
-  var UIURLPattern = UITable.extend({
-    label: "URL Pattern",
+  var UIWebPageTypePattern = UITable.extend({
+    label: "Webpage Type Pattern",
 
     config: {
       toolbar: {
@@ -22,17 +22,17 @@ define([
       },
       
       bean: {
-        label: 'URL Pattern',
+        label: 'Webpage Type Pattern',
         fields: [
           {
             field:  "type", label: "Type", defaultValue: 'ignore', toggled: true, filterable: true,
             select: {
               getOptions: function(field, bean) {
                 var options = [
-                  { label: 'ignore',  value: 'ignore' },
-                  { label: 'list',    value: 'list' },
-                  { label: 'detail',  value: 'detail' },
-                  { label: 'unkwnon', value: 'unknown' },
+                  { label: 'uncategorized', value: 'uncategorized' },
+                  { label: 'ignore',        value: 'ignore' },
+                  { label: 'list',          value: 'list' },
+                  { label: 'detail',        value: 'detail' }
                 ];
                 return options ;
               }
@@ -67,5 +67,5 @@ define([
     }
   });
 
-  return UIURLPattern ;
+  return UIWebPageTypePattern ;
 });

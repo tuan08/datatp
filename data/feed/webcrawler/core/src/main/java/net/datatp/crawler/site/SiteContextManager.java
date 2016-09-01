@@ -23,8 +23,7 @@ public class SiteContextManager {
   }
 
   public void add(SiteConfig config) {
-    SiteExtractor siteExtractor = new SiteExtractor(config, autoWDataExtractors);
-    siteContexts.put(config.getHostname(), new SiteContext(config, siteExtractor)) ;
+    siteContexts.put(config.getHostname(), new SiteContext(config, autoWDataExtractors)) ;
   }
   
   public void add(List<SiteConfig> configs) {
@@ -36,14 +35,14 @@ public class SiteContextManager {
 
   public void update(SiteConfig config) {
     SiteContext siteContext = siteContexts.get(config.getHostname());
-    siteContext.init(config);
+    siteContext.update(config);
   }
   
   public void update(List<SiteConfig> configs) {
     for(int i = 0; i < configs.size(); i++) {
       SiteConfig config = configs.get(i);
       SiteContext siteContext = siteContexts.get(config.getHostname());
-      siteContext.init(config);
+      siteContext.update(config);
     }
   }
   

@@ -12,23 +12,23 @@ public class SiteConfig implements Serializable {
 
   static public enum Status {Good, Ok, New, Pending, Review, Deleted, Moved, Empty}
 
-  private String          group            = "default";
-  private String          hostname;
-  private String[]        injectUrl;
-  private String[]        tags;
+  private String               group            = "default";
+  private String               hostname;
+  private String[]             injectUrl;
+  private String[]             tags;
 
-  private boolean         crawlSubDomain   = false;
-  private int             crawlDeep;
-  private int             refreshPeriod;
-  private int             maxConnection    = 1;
-  private int             maxFetchSchedule = 100;
-  private URLPattern[]    urlPatterns;
-  
-  private Status          status           = Status.Ok;
-  private String          language;
-  private String          description;
+  private boolean              crawlSubDomain   = false;
+  private int                  crawlDeep;
+  private int                  refreshPeriod;
+  private int                  maxConnection    = 1;
+  private int                  maxFetchSchedule = 100;
+  private WebPageTypePattern[] webPageTypePatterns;
 
-  private ExtractConfig[] extractConfig;
+  private Status               status           = Status.Ok;
+  private String               language;
+  private String               description;
+
+  private ExtractConfig[]      extractConfig;
   
   public SiteConfig() {}
 
@@ -85,20 +85,20 @@ public class SiteConfig implements Serializable {
     this.maxFetchSchedule = maxFetchSchedule;
   }
 
-  public URLPattern[] getUrlPatterns() { return urlPatterns; }
-  public void setUrlPatterns(URLPattern ... urlPatterns) { 
+  public WebPageTypePattern[] getWebPageTypePatterns() { return webPageTypePatterns; }
+  public void setWebPageTypePatterns(WebPageTypePattern ... urlPatterns) { 
     if(urlPatterns != null) {
-      List<URLPattern> holder = new ArrayList<>();
+      List<WebPageTypePattern> holder = new ArrayList<>();
       for(int i = 0; i < urlPatterns.length; i++) {
         String[] pattern = urlPatterns[i].getPattern();
         if(pattern != null && pattern.length > 0) {
           holder.add(urlPatterns[i]);
         }
       }
-      urlPatterns = holder.toArray(new URLPattern[holder.size()]);
-      Arrays.sort(urlPatterns, URLPattern.PRIORITY_COMPARATOR);
+      urlPatterns = holder.toArray(new WebPageTypePattern[holder.size()]);
+      Arrays.sort(urlPatterns, WebPageTypePattern.PRIORITY_COMPARATOR);
     } 
-    this.urlPatterns = urlPatterns;
+    this.webPageTypePatterns = urlPatterns;
   }
 
   public Status getStatus() { 

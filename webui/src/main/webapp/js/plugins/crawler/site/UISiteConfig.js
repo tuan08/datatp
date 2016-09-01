@@ -6,11 +6,11 @@ define([
   'ui/UIBean',
   'ui/UITable',
   'ui/UICollapsible',
-  'plugins/crawler/site/UIURLPattern',
+  'plugins/crawler/site/UIWebPageTypePattern',
   'plugins/crawler/site/UIExtractConfig',
   'plugins/crawler/site/UIURLSiteStructureAnalyzer',
   'plugins/crawler/Rest'
-], function($, _, Backbone, UIBreadcumbs, UIBean, UITable, UICollabsible, UIURLPattern, UIExtractConfig, UIURLSiteStructureAnalyzer, Rest) {
+], function($, _, Backbone, UIBreadcumbs, UIBean, UITable, UICollabsible, UIWebPageTypePattern, UIExtractConfig, UIURLSiteStructureAnalyzer, Rest) {
   var UISiteConfigGeneric = UIBean.extend({
     label: "Site Config Generic",
     config: {
@@ -89,9 +89,9 @@ define([
       uiSiteConfigGeneric.bind('siteConfig', siteConfig, true) ;
       uiSiteConfigGeneric.getBeanState('siteConfig').editMode = true ;
 
-      var uiURLPattern = new UIURLPattern() ;
-      if(this.siteConfig.urlPatterns == null) siteConfig.urlPatterns = [];
-      uiURLPattern.setBeans(siteConfig.urlPatterns) ;
+      var uiURLPattern = new UIWebPageTypePattern() ;
+      if(this.siteConfig.webPageTypePatterns == null) siteConfig.webPageTypePatterns = [];
+      uiURLPattern.setBeans(siteConfig.webPageTypePatterns) ;
 
       var uiExtractConfig = new UIExtractConfig({siteConfig: siteConfig}) ;
       this.add(uiSiteConfigGeneric);

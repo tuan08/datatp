@@ -3,17 +3,17 @@ define([
   'underscore', 
   'backbone',
   'ui/UIUtil',
-  'plugins/crawler/site/UIURLPattern',
+  'plugins/crawler/site/UIWebPageTypePattern',
   'text!plugins/crawler/site/UIURLAnalyzer.jtpl'
-], function($, _, Backbone, UIUtil, UIURLPattern, Template) {
+], function($, _, Backbone, UIUtil, UIWebPageTypePattern, Template) {
   var UIURLAnalyzer = Backbone.View.extend({
     label: "URL Analyzer",
 
     initialize: function(options) {
       this.siteConfig = options.siteConfig;
       this.urlInfo    = options.urlInfo;
-      this.uiURLPattern = new UIURLPattern(); 
-      this.uiURLPattern.setBeans(this.siteConfig.urlPatterns) ;
+      this.uiWebPageTypePattern = new UIWebPageTypePattern(); 
+      this.uiWebPageTypePattern.setBeans(this.siteConfig.webPageTypePatterns) ;
       _.bindAll(this, 'render') ;
     },
     
@@ -26,7 +26,7 @@ define([
       } ;
       $(this.el).html(this._template(params));
 
-      this.uiURLPattern.setElement(this.$('.UIURLPattern')).render();
+      this.uiWebPageTypePattern.setElement(this.$('.UIWebPageTypePattern')).render();
     },
 
     getAncestorOfType: function(type) {
@@ -49,45 +49,45 @@ define([
       var eleA = $(evt.target).closest("a") ;
       var pattern = eleA.attr("pattern") ;
       
-      var urlPatterns = this.siteConfig.urlPatterns;
-      var selUrlPattern = null;
+      var webPageTypePatterns = this.siteConfig.webPageTypePatterns;
+      var selWebPageTypePattern = null;
       //find URLPattern config with the same type
-      for(var i = 0; i < urlPatterns.length; i++) {
-        if(urlPatterns[i].type == type) {
-          selUrlPattern = urlPatterns[i];
+      for(var i = 0; i < webPageTypePatterns.length; i++) {
+        if(webPageTypePatterns[i].type == type) {
+          selWebPageTypePattern = webPageTypePatterns[i];
           break;
         }
       }
 
       //Find an URLPattern with type is not set
-      if(selUrlPattern == null) {
-        for(var i = 0; i < urlPatterns.length; i++) {
-          if(urlPatterns[i].type == null) {
-            selUrlPattern = urlPatterns[i];
-            selUrlPattern.type = type;
+      if(selWebPageTypePattern == null) {
+        for(var i = 0; i < webPageTypePatterns.length; i++) {
+          if(webPageTypePatterns[i].type == null) {
+            selWebPageTypePattern = webPageTypePatterns[i];
+            selWebPageTypePattern.type = type;
             break;
           }
         }
       }
 
       //If not exist URLPattern config with the same type, create a new one
-      if(selUrlPattern == null) {
-        selUrlPattern = { type: type };
-        urlPatterns.push(selUrlPattern);
+      if(selWebPageTypePattern == null) {
+        selWebPageTypePattern = { type: type };
+        webPageTypePatterns.push(selWebPageTypePattern);
       } 
-      if(selUrlPattern.pattern == null) selUrlPattern.pattern = [];
+      if(selWebPageTypePattern.pattern == null) selWebPageTypePattern.pattern = [];
       var patternAlreadyExist = false;
-      for(var i = 0; i < selUrlPattern.pattern.length; i++) {
-        var selPattern = selUrlPattern.pattern[i];
+      for(var i = 0; i < selWebPageTypePattern.pattern.length; i++) {
+        var selPattern = selWebPageTypePattern.pattern[i];
         if(selPattern == pattern) {
           var patternAlreadyExist = true;
           break;
         }
       }
       if(!patternAlreadyExist) {
-        selUrlPattern.pattern.push(pattern);
+        selWebPageTypePattern.pattern.push(pattern);
 
-        this.uiURLPattern.setBeans(this.siteConfig.urlPatterns) ;
+        this.uiWebPageTypePattern.setBeans(this.siteConfig.webPageTypePatterns) ;
 
         var uiSiteConfig = this.getAncestorOfType('UISiteConfig') ;
         uiSiteConfig.onChangeSiteConfig(this.siteConfig);

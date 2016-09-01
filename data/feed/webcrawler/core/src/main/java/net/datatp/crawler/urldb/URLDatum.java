@@ -242,7 +242,7 @@ public class URLDatum implements  Externalizable {
     b.append("Next Fetch Time: ").append(new Date(nextFetchTime)).append("\n") ;
     b.append("Error Counter: ").append(errorCount).append("\n") ;
     b.append("Last Response Code: ").append(lastResponseCode).append("\n") ;
-    b.append("Last Error Type: ").append(lastErroCode).append("\n") ;
+    b.append("Last Error WebPageType: ").append(lastErroCode).append("\n") ;
     b.append("Last Fetch Schedule At: ").append(this.lastFetchScheduleAt).append("\n") ;
     b.append("Last Fetch Finish At: ").append(this.lastFetchFinishAt).append("\n") ;
     b.append("Last Download Time: ").append(lastFetchDownloadTime).append("\n") ;

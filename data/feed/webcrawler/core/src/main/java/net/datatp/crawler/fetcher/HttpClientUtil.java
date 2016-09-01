@@ -65,7 +65,7 @@ public class HttpClientUtil {
   }
   
   static public String getContentType(HttpResponse res) {
-    Header header = res.getFirstHeader("Content-Type") ;
+    Header header = res.getFirstHeader("Content-WebPageType") ;
     if(header == null) return URLDatum.DEFAULT_CONTENT_TYPE.toString();
     String value =  header.getValue();
     int idx = value.indexOf(";") ;

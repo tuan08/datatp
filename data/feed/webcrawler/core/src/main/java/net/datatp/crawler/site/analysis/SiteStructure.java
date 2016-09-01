@@ -1,13 +1,16 @@
 package net.datatp.crawler.site.analysis;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.jsoup.nodes.Document;
 
 import net.datatp.crawler.site.SiteContext;
-import net.datatp.crawler.site.URLPattern;
+import net.datatp.crawler.site.WebPageType;
+import net.datatp.crawler.site.WebPageTypeAnalyzer;
 import net.datatp.util.URLInfo;
+import net.datatp.xhtml.extract.ExtractEntity;
 import net.datatp.xhtml.extract.WDataExtractContext;
 
 public class SiteStructure {
@@ -27,17 +30,21 @@ public class SiteStructure {
   }
   
   synchronized public void analyse(WDataExtractContext ctx) {
-    URLAnalysis urlInfo = new URLAnalysis();
-    urlInfo.setUrlInfo(ctx.getURLAnalyzer());
-    URLPattern urlPattern = siteContext.matchesURLPattern(urlInfo.getUrlInfo());
-    if(urlPattern != null) {
-      urlInfo.setPageTypeCategory(urlPattern.getType().toString());
+    URLAnalysis urlAnalysis = new URLAnalysis();
+    urlAnalysis.setUrlInfo(ctx.getURLAnalyzer());
+    WebPageTypeAnalyzer wpAnalyzer = siteContext.getWebPageTypeAnalyzer();
+    WebPageType wpType = wpAnalyzer.analyze(ctx.getWdata().getAnchorText(), urlAnalysis.getUrlInfo().getNormalizeURL());
+    urlAnalysis.setPageTypeCategory(wpType.toString());
+    if(wpType == WebPageType.detail) {
+      List<ExtractEntity> entities = siteContext.getSiteExtractor().extract(ctx);
+      urlAnalysis.withExtractEntityInfo(entities);
     }
-    urlSiteStructure.add(urlInfo);
+    urlSiteStructure.add(urlAnalysis);
+    
     ctx.reset();
-    wdataContexts.put(urlInfo.getUrlInfo().getUrl(), ctx);
+    wdataContexts.put(urlAnalysis.getUrlInfo().getUrl(), ctx);
     count++;
-    System.out.println(count + ". " + urlInfo.getUrlInfo().getUrl());
+    System.out.println(count + ". " + urlAnalysis.getUrlInfo().getUrl());
   }
   
   synchronized public void reanalyse() {

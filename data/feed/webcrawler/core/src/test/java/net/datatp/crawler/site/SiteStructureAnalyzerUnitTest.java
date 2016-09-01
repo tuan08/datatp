@@ -11,9 +11,9 @@ public class SiteStructureAnalyzerUnitTest {
   public void testVnexpress() throws Exception {
     SiteConfig siteConfig = new SiteConfig("default", "vnexpress.net", "http://vnexpress.net", 3);
     siteConfig.setCrawlSubDomain(true);
-    URLPattern ignoreUrlPattern = new URLPattern(URLPattern.Type.ignore, ".*utm_campaign.*");
-    URLPattern detailUrlPattern = new URLPattern(URLPattern.Type.detail, ".*\\-\\d*.html");
-    siteConfig.setUrlPatterns(detailUrlPattern, ignoreUrlPattern);
+    WebPageTypePattern ignoreUrlPattern = new WebPageTypePattern(WebPageType.ignore, ".*utm_campaign.*");
+    WebPageTypePattern detailUrlPattern = new WebPageTypePattern(WebPageType.detail, ".*\\-\\d*.html");
+    siteConfig.setWebPageTypePatterns(detailUrlPattern, ignoreUrlPattern);
     
     SiteStructureAnalyzerService service = new SiteStructureAnalyzerService(10 * 60 * 1000);
     SiteStructureAnalyzer siteAnalyzer = service.newSiteStructureAnalyzer(siteConfig, 30);
@@ -28,9 +28,9 @@ public class SiteStructureAnalyzerUnitTest {
   public void testOtofun() throws Exception {
     SiteConfig siteConfig = new SiteConfig("default", "otofun.net", "https://www.otofun.net/forums/", 3);
     siteConfig.setCrawlSubDomain(true);
-    URLPattern ignoreUrlPattern = new URLPattern(URLPattern.Type.ignore, ".*/(posts|members|search)/.*");
-    URLPattern detailUrlPattern = new URLPattern(URLPattern.Type.detail, ".*/threads/.*");
-    siteConfig.setUrlPatterns(detailUrlPattern, ignoreUrlPattern);
+    WebPageTypePattern ignoreUrlPattern = new WebPageTypePattern(WebPageType.ignore, ".*/(posts|members|search)/.*");
+    WebPageTypePattern detailUrlPattern = new WebPageTypePattern(WebPageType.detail, ".*/threads/.*");
+    siteConfig.setWebPageTypePatterns(detailUrlPattern, ignoreUrlPattern);
     
     SiteStructureAnalyzer siteAnalyzer = new SiteStructureAnalyzer(siteConfig, 30);
     siteAnalyzer.run();

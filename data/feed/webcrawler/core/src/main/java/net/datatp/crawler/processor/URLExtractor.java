@@ -75,20 +75,24 @@ public class URLExtractor {
         if(StringUtil.isEmpty(anchorText)) continue;
         String newURL = urlRewriter.rewrite(siteURL, baseURL, linkXPath.getNode().attr("href"));
         if (!isAllowProtocol(newURL)) continue;
-        URLInfo newURLNorm = new URLInfo(newURL);
-        URL_CLEANER.process(newURLNorm) ;
-        String newNormalizedURL = newURLNorm.getNormalizeURL();
+        URLInfo newURLInfo = new URLInfo(newURL);
+        URL_CLEANER.process(newURLInfo) ;
+        String newNormalizedURL = newURLInfo.getNormalizeURL();
 
-        if (newURLNorm.getRef() != null) continue;
+        if (newURLInfo.getRef() != null) continue;
 
-        if (!urlCtx.getSiteContext().allowDomain(newURLNorm)) continue; // ignore the external link
+        if (!urlCtx.getSiteContext().allowDomain(newURLInfo)) continue; // ignore the external link
 
-        if (isExclude(newURLNorm.getPath())) continue;
+        if (isExclude(newURLInfo.getPath())) continue;
 
+        if(urlCtx.getSiteContext().getWebPageTypeAnalyzer().isIgnore(anchorText, newNormalizedURL)) {
+          continue;
+        }
+        
         // CONTROL DEEP LIMIT
         int maxCrawlDeep = urlCtx.getSiteContext().getSiteConfig().getCrawlDeep();
 
-        URLDatum newURLDatum = createURLDatum(urlDatum, newNormalizedURL, newURLNorm, anchorText);
+        URLDatum newURLDatum = createURLDatum(urlDatum, newNormalizedURL, newURLInfo, anchorText);
         if (!isInDeepRange(newURLDatum, maxCrawlDeep)) continue;
         addURL(urls, newNormalizedURL, newURLDatum);
       }

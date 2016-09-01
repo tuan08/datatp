@@ -35,7 +35,7 @@ public class SiteCrawler {
   
   public SiteCrawler(SiteConfig siteConfig, int maxDownload) {
     siteConfig.setCrawlSubDomain(false);
-    this.siteContext = new SiteContext(siteConfig, null);
+    this.siteContext = new SiteContext(siteConfig, new AutoWDataExtractors());
     this.maxDownload = maxDownload;
     this.fetcher     = new WDataHttpFetcher();
   }
@@ -45,7 +45,7 @@ public class SiteCrawler {
   public void stopCrawl() { stopCrawl = true; }
   
   public void update(SiteConfig config) {
-    siteContext.init(config);
+    siteContext.update(config);
   }
   
   public void crawl() {
@@ -151,8 +151,8 @@ public class SiteCrawler {
         
         if(!siteContext.allowDomain(newURLNorm))  continue; // ignore the external link
         
-//        URLPattern urlPattern = siteContext.matchesIgnoreURLPattern(newURLNorm);
-//        if(urlPattern != null && urlPattern.getType() == URLPattern.Type.ignore) {
+//        WebPageTypePattern urlPattern = siteContext.matchesIgnoreURLPattern(newURLNorm);
+//        if(urlPattern != null && urlPattern.getType() == WebPageTypePattern.WebPageType.ignore) {
 //          continue;
 //        }
         
