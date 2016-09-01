@@ -5,8 +5,8 @@ import java.util.List;
 import net.datatp.crawler.fetcher.FetchContext;
 import net.datatp.crawler.site.SiteContext;
 import net.datatp.crawler.site.SiteExtractor;
+import net.datatp.xhtml.extract.ExtractEntity;
 import net.datatp.xhtml.extract.WDataExtractContext;
-import net.datatp.xhtml.extract.entity.ExtractEntity;
 /**
  * $Author: Tuan Nguyen$ 
  **/

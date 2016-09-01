@@ -2,19 +2,20 @@ package net.datatp.crawler.site;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import net.datatp.xhtml.WData;
+import net.datatp.xhtml.extract.ExtractEntity;
 import net.datatp.xhtml.extract.WDataExtractContext;
-import net.datatp.xhtml.extract.WDataExtractors;
-import net.datatp.xhtml.extract.entity.ExtractEntity;
+import net.datatp.xhtml.extract.WDataExtractor;
 
 public class SiteExtractor {
-  private PageExtractor[] autoPageExtractors;
-  private PageExtractor[] xpathPageExtractors;
+  private AutoExtractor[] autoPageExtractors;
+  private AutoExtractor[] xpathPageExtractors;
   
   public SiteExtractor(SiteConfig siteConfig, AutoWDataExtractors extractors) {
-    List<PageExtractor> autoHolder  = new ArrayList<>();
-    List<PageExtractor> xpathHolder = new ArrayList<>();
+    List<AutoExtractor> autoHolder  = new ArrayList<>();
+    List<AutoExtractor> xpathHolder = new ArrayList<>();
     
     ExtractConfig[] extractConfigs = siteConfig.getExtractConfig();
     if(extractConfigs != null) {
@@ -22,67 +23,106 @@ public class SiteExtractor {
         if(extractConfig.getExtractXPath() != null) {
         }
         
-        if(extractConfig.getExtractAuto() != null) {
-          ExtractConfig.ExtractAuto extractAuto  = extractConfig.getExtractAuto() ;
-          WDataExtractors extractor = extractors.getExtractor(extractAuto);
-          PageExtractor pageExtractor = new PageExtractor(extractConfig, extractor);
+        if(extractConfig.getExtractType() != null) {
+          ExtractConfig.ExtractType extractType  = extractConfig.getExtractType() ;
+          WDataExtractor extractor = extractors.getExtractor(extractType);
+          AutoExtractor pageExtractor = new AutoExtractor(extractConfig, extractor);
           autoHolder.add(pageExtractor);
         }
       }
     }
-    autoPageExtractors  = autoHolder.toArray(new PageExtractor[autoHolder.size()]);
-    xpathPageExtractors = xpathHolder.toArray(new PageExtractor[xpathHolder.size()]);
+    autoPageExtractors  = autoHolder.toArray(new AutoExtractor[autoHolder.size()]);
+    xpathPageExtractors = xpathHolder.toArray(new AutoExtractor[xpathHolder.size()]);
   }
   
   public List<ExtractEntity> extract(WDataExtractContext context) {
     WData wdata = context.getWdata();
-    List<ExtractEntity> extractResults = null ;
+    List<ExtractEntity> extractEntities = new ArrayList<>() ;
     if(xpathPageExtractors.length > 0) {
-      for(PageExtractor pExtractor : xpathPageExtractors) {
+      for(AutoExtractor pExtractor : xpathPageExtractors) {
         if(pExtractor.matches(wdata)) {
-          extractResults = pExtractor.extractEntity(context);
+          ExtractEntity entity = pExtractor.extractEntity(context);
+          if(entity != null) extractEntities.add(entity);
         }
       }
     }
-    if(extractResults == null && autoPageExtractors.length > 0) {
-      for(PageExtractor pExtractor : autoPageExtractors) {
+    if(autoPageExtractors.length > 0) {
+      for(AutoExtractor pExtractor : autoPageExtractors) {
         if(pExtractor.matches(wdata)) {
-          extractResults = pExtractor.extractEntity(context);
+          ExtractEntity entity = pExtractor.extractEntity(context);
+          if(entity != null) extractEntities.add(entity);
         }
       }
     }
-    return extractResults;
+    return extractEntities;
   }
   
-  static public class PageExtractor {
-    private WDataExtractors extractor;
-    private PageMatcher    pageMatcher;
+  static public class BaseExtractor {
+    private ExtractConfig extractConfig;
+    private Pattern[]     pattern;
     
-    public PageExtractor(ExtractConfig extractConfig, WDataExtractors extractor) {
-      this.extractor     = extractor;
-      this.pageMatcher   = new PageMatcher(extractConfig);
+    public BaseExtractor(ExtractConfig extractConfig) {
+      this.extractConfig = extractConfig;
+      String[] patternExp = extractConfig.getMatchPattern();
+      if(patternExp != null) {
+        pattern = new Pattern[patternExp.length];
+        for(int i = 0; i < pattern.length; i++) {
+          pattern[i] = Pattern.compile(patternExp[i].trim());
+        }
+      } else {
+        pattern = new Pattern[0];
+      }
     }
     
-    public boolean matches(WData wdata) { return pageMatcher.matches(wdata); }
+    public boolean matches(WData wdata) {
+      if(extractConfig.getMatchType() == ExtractConfig.MatchType.any) {
+        return true;
+      } else if(extractConfig.getMatchType() == ExtractConfig.MatchType.url) {
+        return matchUrl(wdata);
+      } else {
+        return matchTitle(wdata);
+      }
+    }
     
-    public List<ExtractEntity> extractEntity(WDataExtractContext context) {
+    boolean matchUrl(WData wdata) {
+      String url = wdata.getUrl();
+      for(int i = 0; i < pattern.length; i++) {
+        if(pattern[i].matcher(url).matches()) return true;
+      }
+      return false;
+    }
+    
+    boolean matchTitle(WData wdata) {
+      String title = wdata.getAnchorText();
+      for(int i = 0; i < pattern.length; i++) {
+        if(pattern[i].matcher(title).matches()) return true;
+      }
+      return false;
+    }
+  }
+  
+  static public class AutoExtractor extends BaseExtractor {
+    private WDataExtractor extractor;
+    
+    public AutoExtractor(ExtractConfig extractConfig, WDataExtractor extractor) {
+      super(extractConfig);
+      this.extractor     = extractor;
+    }
+    
+    public ExtractEntity extractEntity(WDataExtractContext context) {
       return extractor.extractEntity(context);
     }
   }
   
-  static public class PageMatcher {
-    ExtractConfig extractConfig;
+  static public class XPathExtractor extends BaseExtractor {
     
-    public PageMatcher(ExtractConfig extractConfig) {
-      this.extractConfig = extractConfig;
+    public XPathExtractor(ExtractConfig extractConfig) {
+      super(extractConfig);
+      extractConfig.getExtractXPath();
     }
     
-    public boolean matches(WData wdata) {
-      if(extractConfig.getMatchPattern() == null) {
-        return true;
-      } else {
-        return false;
-      }
+    public ExtractEntity extractEntity(WDataExtractContext context) {
+      return null;
     }
   }
 }

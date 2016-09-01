@@ -49,6 +49,6 @@ public class XDoc implements Serializable {
   
   public void addEntity(XDocEntity entity) {
     if(entities == null) entities = new HashMap<>();
-    entities.put(entity.getName(), entity);
+    entities.put(entity.name(), entity);
   }
 }

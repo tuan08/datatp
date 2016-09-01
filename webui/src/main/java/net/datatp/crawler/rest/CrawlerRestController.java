@@ -60,6 +60,13 @@ public class CrawlerRestController {
     return analyzer.getSiteStructure().getUrlSiteStructure();
   }
   
+  @RequestMapping(value = "/crawler/site/recrawl-site-url", method = RequestMethod.POST)
+  public URLSiteStructure siteRecrawlSiteUrl(@RequestBody SiteStructureAnalyzerConfig config) throws Exception {
+    config.setForceNew(true);
+    SiteStructureAnalyzer analyzer = siteStructureAnalyzerService.getSiteStructureAnalyzer(config);
+    return analyzer.getSiteStructure().getUrlSiteStructure();
+  }
+  
   @RequestMapping(value = "/crawler/site/analyzed-url-data")
   public URLData siteGetAnalyzedURLData(@RequestParam("url") String url) throws Exception {
     URLInfo urlAnalyzer = new URLInfo(url);

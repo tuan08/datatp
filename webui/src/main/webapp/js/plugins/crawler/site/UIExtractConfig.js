@@ -32,7 +32,23 @@ define([
               }
             },
             { field: "matchPattern",  label: "Match Pattern", multiple: true },
-            { field: "extractAuto",  label: "Extract Auto" }
+            { 
+              field: "extractAuto",  label: "Extract Auto", 
+              select: {
+                getOptions: function(field, bean) {
+                  var options = [
+                    { label: 'none', value: 'none' },
+                    { label: 'content', value: 'content' },
+                    { label: 'article', value: 'article' },
+                    { label: 'forum',   value: 'forum' },
+                    { label: 'classified',   value: 'classified' },
+                    { label: 'job',   value: 'job' },
+                    { label: 'comment',   value: 'comment' }
+                  ];
+                  return options ;
+                }
+              }
+            }
           ]
         }
       }

@@ -4,8 +4,6 @@ import java.util.List;
 
 import net.datatp.util.text.matcher.StringExpMatchers;
 import net.datatp.util.text.matcher.StringSetMatcher;
-import net.datatp.xhtml.extract.entity.ContentEntity;
-import net.datatp.xhtml.extract.entity.ExtractEntity;
 import net.datatp.xhtml.xpath.XPath;
 import net.datatp.xhtml.xpath.XPathSelector;
 import net.datatp.xhtml.xpath.XPathStructure;
@@ -52,13 +50,12 @@ public class ForumExtractor implements WDataExtractor  {
     List<XPath> candidates = structure.getXPathTree().select(candidateSelector, 20);
     if(candidates.size() < 5) return null;
     
-    ContentEntity entity = new ContentEntity();
-    entity.setType("forum");
+    ExtractEntity entity = new ExtractEntity("forum", "post");
     XPath titleXPath = structure.findTitleHeaderCandidate();
-    if(titleXPath != null) entity.setTitle(titleXPath.getText());
+    if(titleXPath != null) entity.withTitle(titleXPath.getText());
     XPath forumPostCandidate = structure.findCommonAncestorXPath(candidates);
     XPathTree forumPostXPathTree = structure.getXPathTree().subTree(forumPostCandidate);
-    entity.setContent(forumPostXPathTree.getText());
+    entity.withContent(forumPostXPathTree.getText());
     return entity;
   }
 }

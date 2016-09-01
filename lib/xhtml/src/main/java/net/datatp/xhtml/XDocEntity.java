@@ -1,51 +1,78 @@
 package net.datatp.xhtml;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import net.datatp.util.text.StringUtil;
-import net.datatp.xhtml.extract.entity.ExtractEntity;
 
-abstract public class XDocEntity implements Serializable  {
+public class XDocEntity extends LinkedHashMap<String, String[]>  {
   private static final long serialVersionUID = 1L;
   
-  private String   name;
-  private String   type;
-  private String[] tag;
+  final static public String NAME = "name";
+  final static public String TYPE = "type";
+  final static public String TAG  = "tag";
   
-  public String getName() { return name; }
-  public void setName(String name) { this.name = name;}
+  public XDocEntity() {}
   
-  public String getType() { return type; }
-  public void   setType(String type) { this.type = type; }
+  public XDocEntity(String name, String type) {
+    withName(name);
+    withType(type);
+  }
+  
+  public String name() { return fieldAsString(NAME); }
+  public void withName(String name) { field(NAME, name); }
+  
+  public String type() { return fieldAsString(NAME); }
+  public void   withType(String type) { field(TYPE, type); }
 
   public void addTag(String tag) {
-    this.tag = StringUtil.merge(this.tag, tag) ;
+    String[] mergedTag = StringUtil.merge(field(TAG), tag) ;
+    field(TAG, mergedTag);
   }
 
   public void addTag(String[] tag) {
-    this.tag = StringUtil.merge(this.tag, tag) ;
+    String[] mergedTag = StringUtil.merge(field(TAG), tag) ;
+    field(TAG, mergedTag);
   }
 
   public void addTag(String prefix, String[] tag) {
     if(tag == null) return ;
     String[] newTag = new String[tag.length] ;
-    for(int i = 0; i < tag.length; i++) newTag[i] = prefix +  tag[i] ;
-    this.tag = StringUtil.merge(this.tag, newTag) ;
+    for(int i = 0; i < tag.length; i++) {
+      newTag[i] = prefix +  tag[i] ;
+    }
+    String[] mergedTag = StringUtil.merge(field(TAG), newTag) ;
+    field(TAG, mergedTag);
   }
 
-  public boolean hasTag(String tag) { return StringUtil.isIn(tag, this.tag) ; }
+  public boolean hasTag(String tag) { 
+    String[] tags = field(TAG);
+    return StringUtil.isIn(tag, tags) ; 
+  }
 
-  public String[] getTags() { return tag ; }
-  public void     setTags(String[] tag) { this.tag = tag ; }
+  public String[] tags() { return field(TAG) ; }
+  public void     withTags(String[] tag) { field(TAG, tag) ; }
 
-  abstract public String getFormattedText() ;
+  public String[] field(String name) { return get(name);}
   
-  static public String toString(List<ExtractEntity> holder) {
+  public String   fieldAsString(String name) { 
+    String[] value = get(name);
+    if(value != null) {
+      if(value.length == 1) return value[0];
+      return StringUtil.joinStringArray(value);
+    }
+    return null;
+  }
+  
+  public void field(String name, String[] value) { put(name, value); }
+  public void field(String name, String value) { put(name, new String[] { value }); }
+  
+  public String getFormattedText() {
     StringBuilder b = new StringBuilder();
-    for(XDocEntity sel : holder) {
-      b.append(sel.getFormattedText()).append("\n");
+    for(Map.Entry<String, String[]> entry : entrySet()) {
+      b.append(entry.getKey()).append(": ").append(StringUtil.joinStringArray(entry.getValue())).append("\n");
     }
     return b.toString();
   }
+  
 }

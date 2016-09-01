@@ -8,7 +8,6 @@ import org.jsoup.nodes.TextNode;
 import net.datatp.util.text.matcher.StringExpMatchers;
 import net.datatp.util.text.matcher.StringMatcher;
 import net.datatp.util.text.matcher.StringSetMatcher;
-import net.datatp.xhtml.extract.entity.CommentEntity;
 import net.datatp.xhtml.xpath.XPath;
 import net.datatp.xhtml.xpath.XPathStructure;
 import net.datatp.xhtml.xpath.XPathTree;
@@ -50,12 +49,11 @@ public class CommentExtractor implements WDataExtractor  {
   }
   
   @Override
-  public CommentEntity extractEntity(WDataExtractContext context) {
+  public ExtractEntity extractEntity(WDataExtractContext context) {
     XPathTree commentBlock = findPostBlock(context.getXpathStructure());
     if(commentBlock == null) return null;
-    CommentEntity entity = new CommentEntity();
-    entity.setType("comment");
-    entity.setComment(commentBlock.getText());
+    ExtractEntity entity = new ExtractEntity(ExtractEntity.COMMENT, ExtractEntity.COMMENT);
+    entity.withComment(commentBlock.getText());
     return entity;
   }
   

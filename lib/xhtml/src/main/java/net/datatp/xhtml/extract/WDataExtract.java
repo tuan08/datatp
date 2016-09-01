@@ -3,12 +3,9 @@ package net.datatp.xhtml.extract;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.datatp.xhtml.extract.entity.ExtractEntity;
-
 public class WDataExtract {
   private String             type;
   private List<XPathExtract> xpathExtracts = new ArrayList<>();
-  private ExtractEntity      extractEntity;
 
   public WDataExtract(String name) {
     this.type = name;
@@ -27,7 +24,7 @@ public class WDataExtract {
   
   public String getFormattedText() {
     StringBuilder b = new StringBuilder();
-    b.append("Name: " + type) ;
+    b.append("Type: " + type).append("\n") ;
     for(int i = 0; i < xpathExtracts.size(); i ++) {
       b.append(xpathExtracts.get(i).getFormattedText()).append("\n");
     }

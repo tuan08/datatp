@@ -22,6 +22,11 @@ define([
       return server.syncPOSTJson("/site/reanalyse-site-url", params);
     };
 
+    this.recrawlURLSiteStructure = function(siteConfig, maxDownload) {
+      var params = { siteConfig: siteConfig, maxDownload: maxDownload, forceNew: false } ;
+      return server.syncPOSTJson("/site/recrawl-site-url", params);
+    };
+
     this.getAnalyzedURLData = function(url) {
       var params = { url: url } ;
       return server.restGET("/site/analyzed-url-data", params);

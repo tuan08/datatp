@@ -2,7 +2,6 @@ package net.datatp.xhtml.extract;
 
 import java.util.List;
 
-import net.datatp.xhtml.extract.entity.ContentEntity;
 import net.datatp.xhtml.xpath.XPath;
 import net.datatp.xhtml.xpath.XPathRepetion;
 import net.datatp.xhtml.xpath.XPathRepetions;
@@ -43,7 +42,7 @@ public class MainContentExtractor implements WDataExtractor {
     return extract;
   }
   
-  public ContentEntity extractEntity(WDataExtractContext context) {
+  public ExtractEntity extractEntity(WDataExtractContext context) {
     XPathStructure structure = context.getXpathStructure();
     XPath titleXPath = structure.findTitleHeaderCandidate();
     
@@ -58,15 +57,14 @@ public class MainContentExtractor implements WDataExtractor {
     XPath[] bodyXPathAsArray = bodyXPathTree.getXPathAsArray();
     if(bodyXPathAsArray.length < 3 &&  bodyXPathTree.getText().length() < 500) return null;
     
-    ContentEntity entity = new ContentEntity();
-    entity.setType(type);
+    ExtractEntity entity = new ExtractEntity(type, type);
 
     if(titleXPath != null) {
       XPathTree titleXPathTree = structure.getXPathTree().subTree(titleXPath);
-      entity.setTitle(titleXPathTree.getText());
+      entity.withTitle(titleXPathTree.getText());
     }
 
-    entity.setContent(bodyXPathTree.getText());
+    entity.withContent(bodyXPathTree.getText());
     return entity;
   }
 

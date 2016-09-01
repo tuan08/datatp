@@ -6,8 +6,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import net.datatp.xhtml.WData;
+import net.datatp.xhtml.extract.ExtractEntity;
 import net.datatp.xhtml.extract.WDataExtractContext;
-import net.datatp.xhtml.extract.entity.ExtractEntity;
 import net.datatp.xhtml.util.WDataHttpFetcher;
 
 public class SiteExtractorUnitTest {

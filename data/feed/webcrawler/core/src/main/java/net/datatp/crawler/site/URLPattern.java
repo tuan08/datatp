@@ -5,7 +5,7 @@ import java.util.Comparator;
 import net.datatp.util.text.StringUtil;
 
 public class URLPattern {
-  static public enum Type { ignore, list, detail, unknown }
+  static public enum Type { ignore, list, detail, uncategorized }
 
   final static public Comparator<URLPattern> PRIORITY_COMPARATOR = new Comparator<URLPattern>() {
     @Override
@@ -14,7 +14,7 @@ public class URLPattern {
     }
   };
   
-  private Type     type = Type.unknown ;
+  private Type     type = Type.uncategorized ;
   private String[] pattern;
   
   public URLPattern() {}

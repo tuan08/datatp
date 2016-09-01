@@ -10,7 +10,7 @@ import net.datatp.xhtml.xpath.XPathStructure;
 
 public class WDataExtractContext {
   private WData          wdata;
-  private URLInfo    urlAnalyzer;
+  private URLInfo        urlAnalyzer;
   private XPathStructure xpathStructure;
 
   public WDataExtractContext(WData wdata) {

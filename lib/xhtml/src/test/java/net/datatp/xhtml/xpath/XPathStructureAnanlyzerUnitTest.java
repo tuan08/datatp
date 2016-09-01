@@ -10,7 +10,7 @@ import net.datatp.xhtml.extract.ForumExtractor;
 import net.datatp.xhtml.extract.MainContentExtractor;
 import net.datatp.xhtml.extract.WDataExtract;
 import net.datatp.xhtml.extract.WDataExtractContext;
-import net.datatp.xhtml.extract.WDataExtractors;
+import net.datatp.xhtml.extract.WDataExtractor;
 import net.datatp.xhtml.util.WDataHttpFetcher;
 /**
  * $Author: Tuan Nguyen$ 
@@ -24,8 +24,7 @@ public class XPathStructureAnanlyzerUnitTest {
     WData wPageData = fetcher.fetch(anchorText, url);
     WDataExtractContext context = new WDataExtractContext(wPageData);
     
-    WDataExtractors extractor = new WDataExtractors("content", new MainContentExtractor(), new CommentExtractor());
-    List<WDataExtract> extracts = extractor.extract(context);
+    List<WDataExtract> extracts = WDataExtractor.extract(context, new MainContentExtractor(), new CommentExtractor());
     System.out.println(WDataExtract.format(extracts));
   }
   
@@ -37,8 +36,7 @@ public class XPathStructureAnanlyzerUnitTest {
     WData wPageData = fetcher.fetch(anchorText, url);
     WDataExtractContext context = new WDataExtractContext(wPageData);
     
-    WDataExtractors extractor = new WDataExtractors("content", new MainContentExtractor(), new CommentExtractor());
-    List<WDataExtract> extracts = extractor.extract(context);
+    List<WDataExtract> extracts = WDataExtractor.extract(context, new MainContentExtractor(), new CommentExtractor());
     System.out.println(WDataExtract.format(extracts));
   }
   
@@ -50,8 +48,7 @@ public class XPathStructureAnanlyzerUnitTest {
     WData wPageData = fetcher.fetch(anchorText, url);
     WDataExtractContext context = new WDataExtractContext(wPageData);
     
-    WDataExtractors extractor = new WDataExtractors("content", new ForumExtractor());
-    List<WDataExtract> extracts = extractor.extract(context);
+    List<WDataExtract> extracts = WDataExtractor.extract(context, new ForumExtractor());
     System.out.println(WDataExtract.format(extracts));
   }
 }
