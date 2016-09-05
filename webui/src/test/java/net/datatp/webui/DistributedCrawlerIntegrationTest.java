@@ -46,8 +46,7 @@ public class DistributedCrawlerIntegrationTest {
     api.siteCreateGroup("vietnam");
     api.siteAdd(configs);
     
-    api.schedulerStart();
-    api.fetcherStart();
+    api.crawlerStart();
     
     ApplicationContext xhtmlLoggerAppContext = DocumentConsumerLoggerApp.run(null);
     

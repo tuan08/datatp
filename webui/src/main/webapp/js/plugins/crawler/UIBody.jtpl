@@ -2,6 +2,13 @@
   <div id="UINavigation" class="colborder">
     <div style="padding: 10px">
       <div>
+        <h3 style="margin: 3px 0px">Status</h3>
+        <hr/>
+        <div style="margin: 10px">
+          <div>
+            <span class="ui-action onSelectUI" name="UICrawlerStatus">Crawler Status</span>
+          </div>
+        </div>
 
         <h3 style="margin: 3px 0px">Site Config</h3>
         <hr/>
@@ -12,16 +19,15 @@
         <h3 style="margin: 3px 0px">Master</h3>
         <hr/>
         <div style="margin: 10px">
-          <div><span class="ui-action onSelectUI" name="scheduler/UIURLScheduleInfo">URL Schedule Info</span></div>
-          <div><span class="ui-action onSelectUI" name="scheduler/UIURLCommitInfo">URL Commit Info</span></div>
+          <div><span class="ui-action onSelectUI" name="scheduler/UIURLScheduleInfo">URL Schedule</span></div>
+          <div><span class="ui-action onSelectUI" name="scheduler/UIURLCommitInfo">URL Commit</span></div>
         </div>
 
-        <h3 style="margin: 3px 0px">Fetcher</h3>
+        <h3 style="margin: 3px 0px">Fetchers</h3>
         <hr/>
         <div style="margin: 10px">
           <div><span class="ui-action onSelectUI" name="UIURLSchedule">Fetchers</span></div>
         </div>
-
       </div>
     </div>
   </div>

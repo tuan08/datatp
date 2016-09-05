@@ -32,8 +32,8 @@ define([
             onClick: function(thisTable, row) {
               var siteConfig = thisTable.getItemOnCurrentPage(row) ;
               console.log('on click bean ' + JSON.stringify(siteConfig)) ;
-	      var uiSiteConfigScreen = UIUtil.getAncestorOfType(thisTable, 'UISiteConfigScreen');
-	      uiSiteConfigScreen.addSiteConfigTab(siteConfig);
+              var uiSiteConfigScreen = UIUtil.getAncestorOfType(thisTable, 'UISiteConfigScreen');
+              uiSiteConfigScreen.addSiteConfigTab(siteConfig);
             }
           },
           { 

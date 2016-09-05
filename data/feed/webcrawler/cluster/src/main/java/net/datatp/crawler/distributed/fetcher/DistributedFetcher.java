@@ -15,7 +15,7 @@ import org.springframework.jms.annotation.JmsListener;
 
 import net.datatp.channel.ChannelGateway;
 import net.datatp.crawler.fetcher.SiteSessionManager;
-import net.datatp.crawler.fetcher.metric.HttpFetcherMetric;
+import net.datatp.crawler.fetcher.metric.URLFetcherMetric;
 import net.datatp.crawler.processor.FetchDataProcessor;
 import net.datatp.crawler.site.SiteContextManager;
 import net.datatp.crawler.urldb.URLDatum;
@@ -24,11 +24,11 @@ import net.datatp.crawler.urldb.URLDatum;
  *          tuan08@gmail.com
  * Apr 14, 2010  
  */
-public class HttpFetcherManager  {
+public class DistributedFetcher  {
   static int MAX_QUEUE_CAPACITY = 250000 ;
-  private static final Logger logger = LoggerFactory.getLogger(HttpFetcherManager.class);
+  private static final Logger logger = LoggerFactory.getLogger(DistributedFetcher.class);
 
-  private String name = "HttpFetcherManager" ;
+  private String name = "BasicFetcher" ;
 
   @Autowired
   private SiteContextManager manager ;
@@ -59,12 +59,12 @@ public class HttpFetcherManager  {
   public String getName() { return name ; }
   public void   setName(String name) { this.name = name ; }
 
-  public List<HttpFetcherMetric> getFetcherMetrics() {
-    List<HttpFetcherMetric> holder = new ArrayList<HttpFetcherMetric>() ;
+  public List<URLFetcherMetric> getURLFetcherMetrics() {
+    List<URLFetcherMetric> holder = new ArrayList<URLFetcherMetric>() ;
     if(thread != null) {
       for(int i = 0; i < thread.length; i++) {
         if(thread[i] != null) {
-          holder.add(thread[i].fetcher.getFetcherMetric()) ;
+          holder.add(thread[i].fetcher.getURLFetcherMetric()) ;
         }
       }
     }
@@ -90,8 +90,8 @@ public class HttpFetcherManager  {
     thread = new FetcherThread[numOfThreads] ;
     for(int i = 0; i < thread.length; i++) {
       String fetcherName = "fetcher-" + i;
-      DistributedHttpFetcher fetcher =  
-          new DistributedHttpFetcher(fetcherName, manager, siteSessionManager, urldatumFetchQueue, urlFetchCommitGateway, xDocGateway, fetchDataProcessor) ;
+      DistributedURLFetcher fetcher =  
+          new DistributedURLFetcher(fetcherName, manager, siteSessionManager, urldatumFetchQueue, urlFetchCommitGateway, xDocGateway, fetchDataProcessor) ;
       thread[i] = new FetcherThread(fetcher) ;
       thread[i].setName(fetcherName) ;
     }
@@ -101,7 +101,7 @@ public class HttpFetcherManager  {
     for(int i = 0; i < thread.length; i++) {
       if(!thread[i].isAlive()) thread[i].start() ;
     }
-    logger.info("Start HttpFetcherManager " + name) ;
+    logger.info("Start BasicFetcher " + name) ;
   }
 
   public void stop() {
@@ -112,9 +112,9 @@ public class HttpFetcherManager  {
   }
 
   static public class FetcherThread extends Thread {
-    DistributedHttpFetcher fetcher ;
+    DistributedURLFetcher fetcher ;
 
-    public FetcherThread(DistributedHttpFetcher fetcher) {
+    public FetcherThread(DistributedURLFetcher fetcher) {
       super(fetcher) ;
       this.fetcher = fetcher ;
     }

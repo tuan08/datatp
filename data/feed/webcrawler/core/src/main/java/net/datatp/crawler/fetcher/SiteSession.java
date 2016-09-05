@@ -48,7 +48,7 @@ public class SiteSession implements Comparable<SiteSession> {
 
   public boolean isLocked() { return lock  ; }
 
-  synchronized public FetchContext fetch(HttpFetcher fetcher, URLContext urlContext)  {
+  synchronized public FetchContext fetch(URLFetcher fetcher, URLContext urlContext)  {
     URLDatum urlDatum = urlContext.getURLDatum();
     FetchContext fetchContext = new FetchContext(fetcher, this, urlContext);
     if(errorCheckCondition != null) {

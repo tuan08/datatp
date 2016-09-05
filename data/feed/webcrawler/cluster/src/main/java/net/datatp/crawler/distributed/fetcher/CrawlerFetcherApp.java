@@ -86,9 +86,9 @@ public class CrawlerFetcherApp extends CrawlerApp {
   @Bean(name = "SiteSessionManager")
   public SiteSessionManager createSiteSessionManager() { return new SiteSessionManager(); }
   
-  @Bean(name = "HttpFetcherManager")
-  public HttpFetcherManager createHTTPFetchermanager(ApplicationContext context) {
-    HttpFetcherManager manager = context.getAutowireCapableBeanFactory().createBean( HttpFetcherManager.class);
+  @Bean(name = "BasicFetcher")
+  public DistributedFetcher createHTTPFetchermanager(ApplicationContext context) {
+    DistributedFetcher manager = context.getAutowireCapableBeanFactory().createBean( DistributedFetcher.class);
     return manager;
   }
   

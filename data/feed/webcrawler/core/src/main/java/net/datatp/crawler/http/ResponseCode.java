@@ -99,7 +99,7 @@ public class ResponseCode {
     addResponseCode(NOT_ACCEPTABLE, "The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request") ;
     addResponseCode(PROXY_AUTHENTICATION_REQUIRED, "This code is similar to 401 (Unauthorized), but indicates that the client must first authenticate itself with the proxy") ;
     addResponseCode(REQUEST_TIMEOUT, "The client did not produce a request within the time that the server was prepared to wait") ;
-    addResponseCode(CONFLICT, "The request could not be completed due to a conflict with the current state of the resource") ;
+    addResponseCode(CONFLICT, "The request could not be completed due to a conflict with the current status of the resource") ;
     addResponseCode(GONE, "The requested resource is no longer available at the server and no forwarding address is known") ;
     addResponseCode(LENGTH_REQUIRED, "The server refuses to accept the request without a defined Content- Length") ;
     addResponseCode(PRECONDITION_FAILED, "The precondition given in one or more of the request-header fields evaluated to false when it was tested on the server") ;

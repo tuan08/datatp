@@ -20,30 +20,30 @@ import net.datatp.util.URLInfo;
 public class URLScheduler {
   private static final Logger logger = LoggerFactory.getLogger(URLScheduler.class);
 
-  protected URLPreFetchScheduler  preFetchScheduler ;
-  
-  protected URLPostFetchScheduler postFetchScheduler ;
-  
-  protected SchedulerReporter     reporter;
-  
-  protected boolean                          exist = false;
-  protected ManageThread                     manageThread;
-  protected String                           state       = "INIT";
-  protected boolean                          injectUrl = false;
+  protected URLPreFetchScheduler  preFetchScheduler;
+
+  protected URLPostFetchScheduler postFetchScheduler;
+
+  protected URLSchedulerReporter     reporter;
+
+  protected boolean               exist     = false;
+  protected ManageThread          manageThread;
+  protected URLSchedulerStatus    status    = URLSchedulerStatus.INIT;
+  protected boolean               injectUrl = false;
 
   public URLScheduler() { }
   
   public URLScheduler(URLPreFetchScheduler preFetchScheduler, 
                       URLPostFetchScheduler postFetchScheduler, 
-                      SchedulerReporter reporter) { 
+                      URLSchedulerReporter reporter) { 
     this.preFetchScheduler = preFetchScheduler;
     this.postFetchScheduler = postFetchScheduler;
     this.reporter = reporter;
   }
   
-  public SchedulerReporter getSchedulerReporter() { return reporter; }
+  public URLSchedulerReporter getSchedulerReporter() { return reporter; }
   
-  public String getState() { return this.state ; }
+  public URLSchedulerStatus getStatus() { return this.status ; }
 
   synchronized public void start() {
     logger.info("start CrawlerURLScheduler!!!!!!!!!!!!!!!!!!!!!!!") ;
@@ -53,14 +53,14 @@ public class URLScheduler {
     }
     manageThread = new ManageThread() ;
     manageThread.setName("crawler.master.fetch-manager") ;
-    state = "STARTING" ;
+    status = URLSchedulerStatus.STARTING ;
     manageThread.start() ;
     logger.info("Create a new thread and start CrawlerURLScheduler!") ;
   }
 
   synchronized public void stop() {
     logger.info("stop CrawlerURLScheduler!!!!!!!!!!!!!!!!!!!!!!!") ;
-    state = "STOPPING" ;
+    status = URLSchedulerStatus.STOP ;
     if(manageThread == null) return ;
     if(manageThread.isAlive()) {
       exist = true ;
@@ -75,12 +75,12 @@ public class URLScheduler {
       URLCommitMetric commitInfo = null ;
       while(!exist) {
         if(injectUrl || commitInfo == null) {
-          state = "SCHEDULING" ;
+          status = URLSchedulerStatus.SCHEDULING ;
           URLScheduleMetric sheduleInfo = preFetchScheduler.schedule() ;
           reporter.report(sheduleInfo);
           if(injectUrl) injectUrl = false;
         }
-        state = "COMMITING" ;
+        status = URLSchedulerStatus.COMMITTING ;
         commitInfo = postFetchScheduler.process() ;
         reporter.report(commitInfo);
         //        if(lastUpdateDB + updatePeriod < System.currentTimeMillis()) {

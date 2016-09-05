@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.datatp.crawler.CrawlerApi;
+import net.datatp.crawler.CrawlerStatus;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
 import net.datatp.crawler.site.SiteConfig;
@@ -92,5 +93,20 @@ public class CrawlerRestController {
     return crawlerApi.schedulerGetURLScheduleReport(max);
   }
   
+  @RequestMapping("/crawler/status")
+  public CrawlerStatus getStatus() throws Exception {
+    return crawlerApi.getCrawlerStatus();
+  }
   
+  @RequestMapping("/crawler/start")
+  public CrawlerStatus crawlerStart() throws Exception {
+    crawlerApi.crawlerStart();
+    return crawlerApi.getCrawlerStatus();
+  }
+  
+  @RequestMapping("/crawler/stop")
+  public CrawlerStatus crawlerStop() throws Exception {
+    crawlerApi.crawlerStop();
+    return crawlerApi.getCrawlerStatus();
+  }
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.datatp.crawler.distributed.registry.event.CrawlerEventContext;
-import net.datatp.crawler.fetcher.metric.HttpFetcherMetric;
+import net.datatp.crawler.fetcher.metric.URLFetcherMetric;
 import net.datatp.zk.registry.RegistryClient;
 import net.datatp.zk.registry.event.EventBroadcaster;
 import net.datatp.zk.registry.event.EventListener;
@@ -39,7 +39,7 @@ public class FetcherRegistry {
     eventListener = new EventListener<>(context, registryClient, EVENTS);
   }
   
-  public void report(String machine, HttpFetcherMetric metric) throws Exception {
+  public void report(String machine, URLFetcherMetric metric) throws Exception {
     String path = REPORTS + "/" + machine + "/fetcher/" + metric.getName();
     if(!registryClient.exists(path)) {
       registryClient.createIfNotExists(path);
@@ -47,10 +47,10 @@ public class FetcherRegistry {
     registryClient.setData(path, metric);
   }
   
-  public void initReport(String vmName, List<HttpFetcherMetric> metrics) throws Exception {
+  public void initReport(String vmName, List<URLFetcherMetric> metrics) throws Exception {
     String reportPath = REPORTS + "/" + vmName + "/fetcher";
     registryClient.createIfNotExists(reportPath);
-    for(HttpFetcherMetric metric : metrics) {
+    for(URLFetcherMetric metric : metrics) {
       String path = reportPath + "/" + metric.getName();
       if(!registryClient.exists(path)) {
         registryClient.create(path, metric);
@@ -58,10 +58,10 @@ public class FetcherRegistry {
     }
   }
   
-  public void report(String vmName, List<HttpFetcherMetric> metrics) throws Exception {
+  public void report(String vmName, List<URLFetcherMetric> metrics) throws Exception {
     String reportPath = REPORTS + "/" + vmName + "/fetcher";
     List<String> names = new ArrayList<>();
-    for(HttpFetcherMetric sel : metrics) {
+    for(URLFetcherMetric sel : metrics) {
       names.add(sel.getName());
     }
     registryClient.createChildren(reportPath, names, metrics);

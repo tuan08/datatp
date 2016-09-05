@@ -13,7 +13,7 @@ import net.datatp.crawler.urldb.URLDatum;
  * Apr 14, 2010  
  */
 public class FetchContext {
-  private HttpFetcher         httpFetcher;
+  private URLFetcher         httpFetcher;
   private SiteSession         session;
   private URLContext          urlContext;
   private ResponseHeaders     responseHeaders = new ResponseHeaders();
@@ -22,7 +22,7 @@ public class FetchContext {
   private ArrayList<URLDatum> commitURLs;
   private XDocMapper          xdoc = new XDocMapper();
   
-  public FetchContext(HttpFetcher fetcher, SiteSession session, URLContext urlContext) {
+  public FetchContext(URLFetcher fetcher, SiteSession session, URLContext urlContext) {
     this.httpFetcher = fetcher;
     this.session     = session;
     this.urlContext  = urlContext;
@@ -30,7 +30,7 @@ public class FetchContext {
 
   public XDocMapper getXDocMapper() { return xdoc; }
   
-  public HttpFetcher getHttpFetcher() { return this.httpFetcher ; }
+  public URLFetcher getHttpFetcher() { return this.httpFetcher ; }
   public SiteSession getSiteSession() { return this.session; }
   
   public ResponseHeaders getResponseHeaders() { return responseHeaders; }

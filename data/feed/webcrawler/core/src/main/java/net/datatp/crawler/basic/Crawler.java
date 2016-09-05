@@ -6,9 +6,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 import net.datatp.crawler.CrawlerApi;
+import net.datatp.crawler.CrawlerStatus;
+import net.datatp.crawler.fetcher.FetcherStatus;
 import net.datatp.crawler.processor.FetchDataProcessor;
 import net.datatp.crawler.processor.URLExtractor;
 import net.datatp.crawler.processor.XDocProcessor;
+import net.datatp.crawler.scheduler.URLSchedulerStatus;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
 import net.datatp.crawler.site.SiteConfig;
@@ -27,7 +30,7 @@ public class Crawler implements CrawlerApi {
 
   private SiteContextManager      siteContextManager = new SiteContextManager();
 
-  private HttpFetcherManager      httpFetcherManager;
+  private BasicFetcher            fetcher;
 
   private InMemURLDatumDB         urlDatumDB;
   private InMemURLScheduler       urlScheduler;
@@ -47,8 +50,7 @@ public class Crawler implements CrawlerApi {
     URLExtractor urlExtractor = new URLExtractor(URLDatumFactory.DEFAULT, CrawlerConfig.EXCLUDE_URL_PATTERNS);
     dataProcessor = new FetchDataProcessor(urlExtractor);
     
-    httpFetcherManager = 
-      new HttpFetcherManager(crawlerConfig, urlFetchQueue, urlCommitQueue, xDocQueue, dataProcessor, siteContextManager);
+    fetcher = new BasicFetcher(crawlerConfig, urlFetchQueue, urlCommitQueue, xDocQueue, dataProcessor, siteContextManager);
     
     urlDatumDB   = new InMemURLDatumDB();
     urlScheduler = new InMemURLScheduler(urlDatumDB, siteContextManager, urlFetchQueue, urlCommitQueue);
@@ -57,6 +59,11 @@ public class Crawler implements CrawlerApi {
     xDocProcessorThread.start();
     return this;
   }
+  
+  public void setXDocProcessor(XDocProcessor processor) {
+    xDocProcessor = processor;
+  }
+  
   
   @Override
   public void siteCreateGroup(String group) throws Exception { }
@@ -83,6 +90,10 @@ public class Crawler implements CrawlerApi {
   @Override
   public void siteReload() throws Exception { }
   
+  public URLSchedulerStatus getURLSchedulerStatus() {
+    return urlScheduler.getStatus();
+  }
+  
   @Override
   public List<URLCommitMetric> schedulerGetURLCommitReport(int max) throws Exception {
     return urlScheduler.getSchedulerReporter().getURLCommitReport(max);
@@ -105,27 +116,37 @@ public class Crawler implements CrawlerApi {
   }
 
   @Override
+  public FetcherStatus[] getFetcherStatus() {
+    return new FetcherStatus[] { fetcher.getStatus() };
+  }
+  
+  @Override
   public void fetcherStart() throws Exception {
-    httpFetcherManager.start();
+    fetcher.start();
   }
 
   @Override
   public void fetcherStop() throws Exception {
-    httpFetcherManager.stop();
+    fetcher.stop();
   }
   
-  public void setXDocProcessor(XDocProcessor processor) {
-    xDocProcessor = processor;
+  public CrawlerStatus getCrawlerStatus() {
+    CrawlerStatus status = new CrawlerStatus();
+    status.setUrlSchedulerStatus(getURLSchedulerStatus());
+    status.setFetcherStatus(getFetcherStatus());
+    return status;
   }
   
-  public void start() throws Exception {
+  @Override
+  public void crawlerStart() throws Exception {
     schedulerStart();
     fetcherStart();
   }
-  
-  public void stop() throws Exception {
-    schedulerStop();
+
+  @Override
+  public void crawlerStop() throws Exception {
     fetcherStop();
+    schedulerStop();
   }
   
   public class XDocProcessorThread extends Thread {

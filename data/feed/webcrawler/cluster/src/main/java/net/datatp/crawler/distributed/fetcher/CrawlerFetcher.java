@@ -16,11 +16,11 @@ public class CrawlerFetcher {
   private static final Logger logger = LoggerFactory.getLogger(CrawlerFetcher.class);
 
   @Autowired
-  private HttpFetcherManager fetcherManager ;
+  private DistributedFetcher fetcherManager ;
 
   private boolean startOnInit = false;
 
-  public HttpFetcherManager getFetcherManager() { return fetcherManager ; }
+  public DistributedFetcher getFetcherManager() { return fetcherManager ; }
 
   public void setStartOnInit(boolean b) { this.startOnInit = b ; }
   

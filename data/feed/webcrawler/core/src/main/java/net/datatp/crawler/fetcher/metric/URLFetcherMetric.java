@@ -9,10 +9,9 @@ import java.util.Map;
 import net.datatp.crawler.http.ErrorCode;
 import net.datatp.crawler.urldb.URLDatum;
 
-public class HttpFetcherMetric implements Serializable {
+public class URLFetcherMetric implements Serializable {
   private static final long serialVersionUID = 1L;
-
-  static int     MAX_RECENT_URL = 50 ;
+  static int                MAX_RECENT_URL = 50 ;
   
   private String                name;
   private int                   fetchCount;
@@ -21,9 +20,9 @@ public class HttpFetcherMetric implements Serializable {
   private Map<Integer, Integer> errors           = new HashMap<Integer, Integer>();
   private Map<Integer, Integer> pageTypes        = new HashMap<Integer, Integer>();
   
-  public HttpFetcherMetric() {}
+  public URLFetcherMetric() {}
   
-  public HttpFetcherMetric(String name) {
+  public URLFetcherMetric(String name) {
     this.name = name;
   }
   

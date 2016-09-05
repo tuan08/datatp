@@ -5,10 +5,11 @@ import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Component;
 
-import net.datatp.crawler.scheduler.SchedulerReporter;
+import net.datatp.crawler.scheduler.URLSchedulerReporter;
 import net.datatp.crawler.scheduler.URLPostFetchScheduler;
 import net.datatp.crawler.scheduler.URLPreFetchScheduler;
 import net.datatp.crawler.scheduler.URLScheduler;
+import net.datatp.crawler.scheduler.URLSchedulerStatus;
 /**
  * $Author: Tuan Nguyen$ 
  **/
@@ -19,9 +20,9 @@ import net.datatp.crawler.scheduler.URLScheduler;
 )
 public class URLSchedulerImpl extends URLScheduler {
   @ManagedAttribute(
-    description="The state of the bean, the possible value are: INIT, STARTING, STOPPING, SCHEDULING, COMMITING"
+    description="The status of the bean, the possible value are: INIT, STARTING, STOPPING, SCHEDULING, COMMITING"
   )
-  public String getState() { return this.state ; }
+  public URLSchedulerStatus getStatus() { return this.status ; }
 
   @Autowired
   public void setURLPreFetchScheduler(URLPreFetchScheduler scheduler) {
@@ -34,7 +35,7 @@ public class URLSchedulerImpl extends URLScheduler {
   }
   
   @Autowired
-  public void setSchedulerReporter(SchedulerReporter reporter) {
+  public void setSchedulerReporter(URLSchedulerReporter reporter) {
     this.reporter = reporter;
   }
 }

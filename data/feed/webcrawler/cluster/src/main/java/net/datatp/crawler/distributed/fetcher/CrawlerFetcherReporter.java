@@ -20,7 +20,7 @@ public class CrawlerFetcherReporter implements Runnable {
   private CrawlerRegistry wcRegistry;
   
   @Autowired
-  private HttpFetcherManager httpFetcherManager;
+  private DistributedFetcher fetcher;
   
   private boolean terminate = false;
   private Thread  reportThread;
@@ -30,7 +30,7 @@ public class CrawlerFetcherReporter implements Runnable {
     if("unknown".equals(vmName)) {
       vmName = InetAddress.getLocalHost().getHostName();
     }
-    wcRegistry.getFetcherRegistry().initReport(vmName, httpFetcherManager.getFetcherMetrics());
+    wcRegistry.getFetcherRegistry().initReport(vmName, fetcher.getURLFetcherMetrics());
   }
   
   @PreDestroy
@@ -40,7 +40,7 @@ public class CrawlerFetcherReporter implements Runnable {
   }
   
   void reportHttpFetchers() throws Exception {
-    wcRegistry.getFetcherRegistry().report(vmName, httpFetcherManager.getFetcherMetrics());
+    wcRegistry.getFetcherRegistry().report(vmName, fetcher.getURLFetcherMetrics());
   }
 
   @Override

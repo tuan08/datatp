@@ -5,7 +5,10 @@ import java.util.List;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
 
-public interface SchedulerReporter {
+public interface URLSchedulerReporter {
+  public void setStatus(URLSchedulerStatus status) throws Exception;
+  
+  public URLSchedulerStatus getStatus() throws Exception;
   
   public void report(URLScheduleMetric info) throws Exception ;
   

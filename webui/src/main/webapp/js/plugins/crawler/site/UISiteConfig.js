@@ -4,13 +4,12 @@ define([
   'backbone',
   'ui/UIBreadcumbs',
   'ui/UIBean',
-  'ui/UITable',
   'ui/UICollapsible',
   'plugins/crawler/site/UIWebPageTypePattern',
   'plugins/crawler/site/UIExtractConfig',
   'plugins/crawler/site/UIURLSiteStructureAnalyzer',
   'plugins/crawler/Rest'
-], function($, _, Backbone, UIBreadcumbs, UIBean, UITable, UICollabsible, UIWebPageTypePattern, UIExtractConfig, UIURLSiteStructureAnalyzer, Rest) {
+], function($, _, Backbone, UIBreadcumbs, UIBean, UICollabsible, UIWebPageTypePattern, UIExtractConfig, UIURLSiteStructureAnalyzer, Rest) {
   var UISiteConfigGeneric = UIBean.extend({
     label: "Site Config Generic",
     config: {

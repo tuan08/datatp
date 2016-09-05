@@ -44,8 +44,7 @@ public class DistributedCrawlerIntegrationTest {
     api.siteAdd(configs);
     Thread.sleep(1000);
 
-    api.schedulerStart();
-    api.fetcherStart();
+    api.crawlerStart();
     
     ApplicationContext xhtmlLoggerAppContext = DocumentConsumerLoggerApp.run(null);
     

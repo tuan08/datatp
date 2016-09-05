@@ -3,11 +3,14 @@ package net.datatp.crawler.distributed;
 import java.util.List;
 
 import net.datatp.crawler.CrawlerApi;
+import net.datatp.crawler.CrawlerStatus;
 import net.datatp.crawler.distributed.registry.CrawlerRegistry;
 import net.datatp.crawler.distributed.registry.event.FetcherEvent;
 import net.datatp.crawler.distributed.registry.event.SchedulerEvent;
 import net.datatp.crawler.distributed.registry.event.SiteConfigEvent;
 import net.datatp.crawler.distributed.registry.event.SchedulerEvent.Start.Option;
+import net.datatp.crawler.fetcher.FetcherStatus;
+import net.datatp.crawler.scheduler.URLSchedulerStatus;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
 import net.datatp.crawler.site.SiteConfig;
@@ -60,6 +63,11 @@ public class DistributedCrawlerApi implements CrawlerApi {
   }
   
   @Override
+  public URLSchedulerStatus getURLSchedulerStatus() throws Exception {
+    return null;
+  }
+  
+  @Override
   public List<URLCommitMetric> schedulerGetURLCommitReport(int max) throws Exception {
     return crawlerRegistry.getSchedulerRegistry().getURLCommitMetric(max);
   }
@@ -69,19 +77,47 @@ public class DistributedCrawlerApi implements CrawlerApi {
     return crawlerRegistry.getSchedulerRegistry().getURLScheduleMetric(max);
   }
   
+  @Override
   public void schedulerStart() throws Exception {
     crawlerRegistry.getSchedulerRegistry().getEventBroadcaster().broadcast(new SchedulerEvent.Start(Option.InjectURL));
   }
   
+  @Override
   public void schedulerStop() throws Exception {
     crawlerRegistry.getSchedulerRegistry().getEventBroadcaster().broadcast(new SchedulerEvent.Stop());
   }
+
+  @Override
+  public FetcherStatus[] getFetcherStatus() throws Exception {
+    return new FetcherStatus[] {  };
+  }
   
+  @Override
   public void fetcherStart() throws Exception {
     crawlerRegistry.getFetcherRegistry().getEventBroadcaster().broadcast(new FetcherEvent.Start());
   }
   
+  @Override
   public void fetcherStop() throws Exception {
     crawlerRegistry.getFetcherRegistry().getEventBroadcaster().broadcast(new FetcherEvent.Stop());
+  }
+  
+  public CrawlerStatus getCrawlerStatus() throws Exception {
+    CrawlerStatus status = new CrawlerStatus();
+    status.setUrlSchedulerStatus(getURLSchedulerStatus());
+    status.setFetcherStatus(getFetcherStatus());
+    return status;
+  }
+
+  @Override
+  public void crawlerStart() throws Exception {
+    schedulerStart();
+    fetcherStart();
+  }
+
+  @Override
+  public void crawlerStop() throws Exception {
+    fetcherStop();
+    schedulerStop();
   }
 }

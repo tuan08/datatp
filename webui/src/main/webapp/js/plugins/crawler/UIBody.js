@@ -20,13 +20,13 @@ define([
     },
 
     onActivate: function(evt) {
-      this._loadUI('site/UISiteConfigScreen');
+      this._loadUI('UICrawlerStatus');
     },
 
     events: {
       'click .onSelectUI': 'onSelectUI'
     },
-    
+
     onSelectUI: function(evt) {
       var name = $(evt.target).closest('.onSelectUI').attr('name') ;
       this._loadUI(name);

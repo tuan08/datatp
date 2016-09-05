@@ -3,7 +3,7 @@ define([
 ], function(Server) {
   var server = new Server("http://localhost:8080/crawler");
 
-  function SiteRest() {
+  function SiteRest(server) {
     this.getSiteConfigs = function() {
       return server.restGET("/site/configs");
     };
@@ -51,10 +51,27 @@ define([
     this.server = server;
   };
 
+  function CrawlerRest(server) {
+    
+    this.getStatus = function() {
+      return server.restGET("/status", {});
+    };
+
+    this.start = function() {
+      return server.restGET("/start", {});
+    };
+
+    this.stop = function() {
+      return server.restGET("/stop", {});
+    };
+
+  };
+
   var Rest = {
     site:       new SiteRest(server),
     scheduler:  new SchedulerRest(server),
     fetcher:    new FetcherRest(server),
+    crawler:    new CrawlerRest(server)
   }
   return Rest ;
 });

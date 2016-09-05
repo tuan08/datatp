@@ -3,7 +3,7 @@ package net.datatp.crawler.distributed.fetcher;
 import java.util.ArrayList;
 
 import net.datatp.channel.ChannelGateway;
-import net.datatp.crawler.fetcher.HttpFetcher;
+import net.datatp.crawler.fetcher.URLFetcher;
 import net.datatp.crawler.fetcher.SiteSessionManager;
 import net.datatp.crawler.processor.FetchDataProcessor;
 import net.datatp.crawler.site.SiteContextManager;
@@ -14,12 +14,12 @@ import net.datatp.xhtml.XDoc;
  *         tuan08@gmail.com
  * Apr 14, 2010
  */
-public class DistributedHttpFetcher extends HttpFetcher {
+public class DistributedURLFetcher extends URLFetcher {
   private URLDatumFetchQueue urldatumFetchQueue;
   private ChannelGateway     xDocGateway;
   private ChannelGateway     urlFetchCommitGateway;
 
-  public DistributedHttpFetcher(String name,
+  public DistributedURLFetcher(String name,
                      SiteContextManager manager,
                      SiteSessionManager siteSessionManager, 
                      URLDatumFetchQueue urldatumFetchQueue,

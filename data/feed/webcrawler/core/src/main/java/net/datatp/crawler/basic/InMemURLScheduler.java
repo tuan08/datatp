@@ -8,11 +8,12 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import net.datatp.crawler.scheduler.SchedulerReporter;
+import net.datatp.crawler.scheduler.URLSchedulerReporter;
 import net.datatp.crawler.scheduler.URLPostFetchScheduler;
 import net.datatp.crawler.scheduler.URLPreFetchScheduler;
 import net.datatp.crawler.scheduler.URLScheduler;
 import net.datatp.crawler.scheduler.URLSchedulerPluginManager;
+import net.datatp.crawler.scheduler.URLSchedulerStatus;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
 import net.datatp.crawler.site.SiteContextManager;
@@ -71,9 +72,16 @@ public class InMemURLScheduler extends URLScheduler {
     
   }
   
-  public class InMemSchedulerReporter implements SchedulerReporter {
+  public class InMemSchedulerReporter implements URLSchedulerReporter {
     private Map<Long, URLScheduleMetric> urlScheduleMetrics = new MaxSizeLinkedHashMap<>(500);
     private Map<Long, URLCommitMetric>   urlCommitMetrics   = new MaxSizeLinkedHashMap<>(500);
+
+    @Override
+    public void setStatus(URLSchedulerStatus status) throws Exception {
+    }
+
+    @Override
+    public URLSchedulerStatus getStatus() throws Exception { return null; }
     
     @Override
     public void report(URLScheduleMetric metric) throws Exception {

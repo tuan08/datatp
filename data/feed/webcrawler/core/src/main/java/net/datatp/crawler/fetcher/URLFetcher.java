@@ -6,7 +6,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.datatp.crawler.fetcher.metric.HttpFetcherMetric;
+import net.datatp.crawler.fetcher.metric.URLFetcherMetric;
 import net.datatp.crawler.http.ErrorCode;
 import net.datatp.crawler.http.HttpClientFactory;
 import net.datatp.crawler.http.ResponseCode;
@@ -20,31 +20,39 @@ import net.datatp.xhtml.XDoc;
  *         tuan08@gmail.com
  * Apr 14, 2010
  */
-abstract public class HttpFetcher implements Runnable {
-  private static final Logger logger = LoggerFactory.getLogger(HttpFetcher.class);
+abstract public class URLFetcher implements Runnable {
+  private static final Logger logger = LoggerFactory.getLogger(URLFetcher.class);
 
+  private String              name;
   private SiteContextManager  manager;
   private FetchDataProcessor  dataProcessor;
-  
-  private SiteSessionManager  siteSessionManager;
-  private HttpFetcherMetric   fetcherMetric ;
-  private CloseableHttpClient httpClient ;
-  private boolean             exit        = false;
 
-  public HttpFetcher(String name,
+  private SiteSessionManager  siteSessionManager;
+  private URLFetcherMetric    fetcherMetric;
+  private CloseableHttpClient httpClient;
+  private Status    status = Status.INIT;
+  private boolean             exit   = false;
+
+  public URLFetcher(String name,
                      SiteContextManager manager,
                      SiteSessionManager siteSessionManager,
                      FetchDataProcessor dataProcessor) {
+    this.name               = name;
     this.manager            = manager ;
     this.siteSessionManager = siteSessionManager ;
     this.dataProcessor      = dataProcessor;
-    this.fetcherMetric      = new HttpFetcherMetric(name);
+    this.fetcherMetric      = new URLFetcherMetric(name);
     this.httpClient         = HttpClientFactory.createInstance() ;
   }
 
   public CloseableHttpClient getHttpClient() { return httpClient; }
   
-  public HttpFetcherMetric getFetcherMetric() { return fetcherMetric ; } 
+  public URLFetcherMetric getURLFetcherMetric() { return fetcherMetric ; } 
+  
+  public URLFetcherReport getReport() { 
+    URLFetcherReport report = new URLFetcherReport(name, status, fetcherMetric);
+    return report; 
+  }
   
   public void setExit(boolean b) { this.exit = b ; }
 
@@ -111,6 +119,7 @@ abstract public class HttpFetcher implements Runnable {
 
   public void run() {
     exit = false;
+    status = Status.FETCHING;
     try {
       while(!exit) {
         URLDatum urldatum = nextURLDatum(1000) ;
@@ -118,6 +127,8 @@ abstract public class HttpFetcher implements Runnable {
       }
     } catch(Throwable ex) {
       logger.error("Error when handling the fetched request", ex) ;
+    } finally {
+      status = Status.STOP;
     }
   }
 }
