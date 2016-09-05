@@ -4,7 +4,7 @@ import net.datatp.crawler.fetcher.metric.URLFetcherMetric;
 
 public class URLFetcherReport {
   private String           name;
-  private Status status;
+  private Status           status;
   private URLFetcherMetric metric;
 
   public URLFetcherReport() {}

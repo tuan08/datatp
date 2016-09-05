@@ -1,3 +1,5 @@
 package net.datatp.crawler.fetcher;
 
-enum  Status {INIT, FETCHING, STOP }
+public enum  Status {
+  INIT, FETCHING, STOP 
+}

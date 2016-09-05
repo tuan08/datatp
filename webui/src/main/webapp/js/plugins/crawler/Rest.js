@@ -48,7 +48,10 @@ define([
   };
 
   function FetcherRest(server) {
-    this.server = server;
+
+    this.getFetcherReport = function(id) {
+      return server.restGET("/fetcher/report", {id: id});
+    };
   };
 
   function CrawlerRest(server) {

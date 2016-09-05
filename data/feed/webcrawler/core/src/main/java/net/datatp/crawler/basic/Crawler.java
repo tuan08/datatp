@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import net.datatp.crawler.CrawlerApi;
 import net.datatp.crawler.CrawlerStatus;
+import net.datatp.crawler.fetcher.FetcherReport;
 import net.datatp.crawler.fetcher.FetcherStatus;
 import net.datatp.crawler.processor.FetchDataProcessor;
 import net.datatp.crawler.processor.URLExtractor;
@@ -118,6 +119,11 @@ public class Crawler implements CrawlerApi {
   @Override
   public FetcherStatus[] getFetcherStatus() {
     return new FetcherStatus[] { fetcher.getStatus() };
+  }
+  
+  @Override
+  public FetcherReport getFetcherReport(String id) throws Exception {
+    return fetcher.getFetcherReport();
   }
   
   @Override

@@ -72,5 +72,5 @@ define([
     }
   });
   
-  return new UIURLCommitInfo() ;
+  return UIURLCommitInfo ;
 });

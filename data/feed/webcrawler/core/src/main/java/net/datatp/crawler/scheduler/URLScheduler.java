@@ -47,6 +47,7 @@ public class URLScheduler {
 
   synchronized public void start() {
     logger.info("start CrawlerURLScheduler!!!!!!!!!!!!!!!!!!!!!!!") ;
+    exist = false;
     if(manageThread != null && manageThread.isAlive()) {
       exist = false;
       return ;

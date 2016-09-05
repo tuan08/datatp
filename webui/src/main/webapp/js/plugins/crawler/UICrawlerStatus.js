@@ -5,8 +5,12 @@ define([
   'ui/UICollapsible',
   'ui/UITable',
   'ui/UIBean',
+  'ui/UIBreadcumbs',
+  'plugins/crawler/fetcher/UIFetcherReport',
+  'plugins/crawler/scheduler/UIURLScheduleInfo',
+  'plugins/crawler/scheduler/UIURLCommitInfo',
   'plugins/crawler/Rest'
-], function($, _, Backbone, UICollabsible, UITable, UIBean, Rest) {
+], function($, _, Backbone, UICollabsible, UITable, UIBean, UIBreadcumbs, UIFetcherReport, UIURLScheduleInfo, UIURLCommitInfo, Rest) {
   var UIURLSchedulerStatus = UIBean.extend({
     label: "URL Scheduler Status",
     config: {
@@ -20,7 +24,22 @@ define([
             actions: [ ],
           },
           view: {
-            actions: [ ]
+            actions: [ 
+              {
+                action:'schedule', label: "Schedule", icon: "bars",
+                onClick: function(thisUI, beanConfig, beanState) { 
+                  var uiCrawlerStatus = thisUI.getAncestorOfType("UICrawlerStatusScreen") ;
+                  uiCrawlerStatus.push(new UIURLScheduleInfo());
+                }
+              },
+              {
+                action:'commit', label: "Commit", icon: "bars",
+                onClick: function(thisUI, beanConfig, beanState) { 
+                  var uiCrawlerStatus = thisUI.getAncestorOfType("UICrawlerStatusScreen") ;
+                  uiCrawlerStatus.push(new UIURLCommitInfo());
+                }
+              }
+            ]
           }
         }
       }
@@ -44,7 +63,18 @@ define([
           { field:  "host", label: "Host",  toggled: true, filterable: true },
           { field:  "status", label: "Status",  toggled: true, filterable: true }
         ],
-        actions:[ ]
+        actions:[ 
+          {
+            icon: "more", label: "More",
+            onClick: function(thisTable, row) { 
+              var uiCrawlerStatus = thisTable.getAncestorOfType("UICrawlerStatusScreen") ;
+              var bean = thisTable.getItemOnCurrentPage(row) ;
+              var fetcherReport = Rest.fetcher.getFetcherReport(bean.id);
+              var options = { fetcherReport: fetcherReport };
+              uiCrawlerStatus.push(new UIFetcherReport(options));
+            }
+          },
+        ]
       }
     },
 
@@ -105,5 +135,14 @@ define([
     }
   }) ;
 
-  return new UICrawlerStatus() ;
+  var UICrawlerStatusScreen = UIBreadcumbs.extend({
+    type:  "UICrawlerStatusScreen",
+
+    onInit: function(options) {
+      this.uiCrawlerStatus = new UICrawlerStatus() ;
+      this.push(this.uiCrawlerStatus);
+    }
+  });
+
+  return new UICrawlerStatusScreen() ;
 });

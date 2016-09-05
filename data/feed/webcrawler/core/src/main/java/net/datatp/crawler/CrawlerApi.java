@@ -2,6 +2,7 @@ package net.datatp.crawler;
 
 import java.util.List;
 
+import net.datatp.crawler.fetcher.FetcherReport;
 import net.datatp.crawler.fetcher.FetcherStatus;
 import net.datatp.crawler.scheduler.URLSchedulerStatus;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
@@ -29,6 +30,8 @@ public interface CrawlerApi {
   public void schedulerStop() throws Exception ;
 
   public FetcherStatus[] getFetcherStatus() throws Exception ;
+  
+  public FetcherReport getFetcherReport(String id) throws Exception ;
   
   public void fetcherStart() throws Exception ;
   

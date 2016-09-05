@@ -5,7 +5,10 @@ import java.net.UnknownHostException;
 import java.util.concurrent.BlockingQueue;
 
 import net.datatp.crawler.fetcher.URLFetcher;
+import net.datatp.crawler.fetcher.URLFetcherReport;
 import net.datatp.crawler.fetcher.Fetcher;
+import net.datatp.crawler.fetcher.FetcherReport;
+import net.datatp.crawler.fetcher.Status;
 import net.datatp.crawler.fetcher.FetcherStatus;
 import net.datatp.crawler.fetcher.SiteSessionManager;
 import net.datatp.crawler.processor.FetchDataProcessor;
@@ -40,7 +43,19 @@ public class BasicFetcher implements Fetcher {
   
   public FetcherStatus getStatus() { return this.status ; }
   
+  public FetcherReport getFetcherReport() {
+    FetcherReport report = new FetcherReport();
+    report.setStatus(status);
+    URLFetcherReport[] urlFetcherReport = new URLFetcherReport[urlFetchers.length];
+    for(int i = 0; i < urlFetchers.length; i++) {
+      urlFetcherReport[i] = urlFetchers[i].getReport();
+    }
+    report.setUrlFetcherReport(urlFetcherReport);
+    return report;
+  }
+  
   public void start() {
+    this.status.setStatus(Status.FETCHING);
     fetcherThreads = new Thread[urlFetchers.length];
     for(int i = 0; i < fetcherThreads.length; i++) {
       fetcherThreads[i] = new Thread(urlFetchers[i]);
@@ -49,6 +64,7 @@ public class BasicFetcher implements Fetcher {
   }
   
   public void stop() {
+    this.status.setStatus(Status.STOP);
     if(fetcherThreads == null) return;
     for(int i = 0; i < fetcherThreads.length; i++) {
       urlFetchers[i].setExit(true);

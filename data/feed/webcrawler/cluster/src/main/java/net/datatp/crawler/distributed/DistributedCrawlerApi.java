@@ -9,6 +9,7 @@ import net.datatp.crawler.distributed.registry.event.FetcherEvent;
 import net.datatp.crawler.distributed.registry.event.SchedulerEvent;
 import net.datatp.crawler.distributed.registry.event.SiteConfigEvent;
 import net.datatp.crawler.distributed.registry.event.SchedulerEvent.Start.Option;
+import net.datatp.crawler.fetcher.FetcherReport;
 import net.datatp.crawler.fetcher.FetcherStatus;
 import net.datatp.crawler.scheduler.URLSchedulerStatus;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
@@ -90,6 +91,11 @@ public class DistributedCrawlerApi implements CrawlerApi {
   @Override
   public FetcherStatus[] getFetcherStatus() throws Exception {
     return new FetcherStatus[] {  };
+  }
+  
+  @Override
+  public FetcherReport getFetcherReport(String id) throws Exception {
+    return null;
   }
   
   @Override

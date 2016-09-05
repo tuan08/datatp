@@ -75,5 +75,5 @@ define([
     }
   });
   
-  return new UIURLScheduleInfo() ;
+  return UIURLScheduleInfo ;
 });

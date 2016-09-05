@@ -50,8 +50,7 @@ abstract public class URLFetcher implements Runnable {
   public URLFetcherMetric getURLFetcherMetric() { return fetcherMetric ; } 
   
   public URLFetcherReport getReport() { 
-    URLFetcherReport report = new URLFetcherReport(name, status, fetcherMetric);
-    return report; 
+    return new URLFetcherReport(name, status, fetcherMetric);
   }
   
   public void setExit(boolean b) { this.exit = b ; }
@@ -125,6 +124,7 @@ abstract public class URLFetcher implements Runnable {
         URLDatum urldatum = nextURLDatum(1000) ;
         if(urldatum != null) fetch(urldatum) ;
       }
+    } catch(InterruptedException ex) {
     } catch(Throwable ex) {
       logger.error("Error when handling the fetched request", ex) ;
     } finally {

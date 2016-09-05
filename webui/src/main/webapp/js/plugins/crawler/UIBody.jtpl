@@ -15,19 +15,6 @@
         <div style="margin: 10px">
           <div><span class="ui-action onSelectUI" name="site/UISiteConfigScreen">Site Config</span></div>
         </div>
-
-        <h3 style="margin: 3px 0px">Master</h3>
-        <hr/>
-        <div style="margin: 10px">
-          <div><span class="ui-action onSelectUI" name="scheduler/UIURLScheduleInfo">URL Schedule</span></div>
-          <div><span class="ui-action onSelectUI" name="scheduler/UIURLCommitInfo">URL Commit</span></div>
-        </div>
-
-        <h3 style="margin: 3px 0px">Fetchers</h3>
-        <hr/>
-        <div style="margin: 10px">
-          <div><span class="ui-action onSelectUI" name="UIURLSchedule">Fetchers</span></div>
-        </div>
       </div>
     </div>
   </div>
