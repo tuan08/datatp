@@ -4,6 +4,8 @@ define([
   /**@type service.Server */
   Server = function(baseUrl) {
     this.baseUrl = baseUrl;
+  
+    this.toURL = function(path) { return this.baseUrl + path; };
 
     /**@memberOf service.Server */
     this.syncGETResource = function(path, dataType) {

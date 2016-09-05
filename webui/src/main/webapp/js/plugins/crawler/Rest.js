@@ -12,6 +12,8 @@ define([
       return server.syncPOSTJson("/site/save", siteConfig);
     };
 
+    this.exportURL = function() { return server.toURL("/site/export"); };
+
     this.getAnalyzedURLSiteStructure = function(siteConfig, maxDownload, forceNew) {
       var params = { siteConfig: siteConfig, maxDownload: maxDownload, forceNew: forceNew } ;
       return server.syncPOSTJson("/site/analyzed-site-url", params);

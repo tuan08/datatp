@@ -15,9 +15,20 @@ define([
         dflt: {
           actions: [
             {
-              action: "onNew", icon: "add", label: "New", 
+              action: "new", label: "New", 
               onClick: function(thisTable) { 
                 thisTable.onAddBean() ;
+              } 
+            },
+            {
+              action: "import", label: "Import", 
+              onClick: function(thisTable) { 
+              } 
+            },
+            {
+              action: "export",  label: "Export", 
+              onClick: function(thisTable) { 
+                window.open(Rest.site.exportURL(), "export");
               } 
             }
           ]

@@ -4,14 +4,18 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.datatp.crawler.CrawlerApi;
 import net.datatp.crawler.CrawlerStatus;
@@ -77,11 +81,25 @@ public class CrawlerRestController {
     return new URLData(new URLInfo(url), "No Data");
   }
   
-  @RequestMapping(value = "/crawler/site/save", method = RequestMethod.POST)
+  //@RequestMapping(value = "/crawler/site/save", method = RequestMethod.POST)
+  @PostMapping("/crawler/site/save")
   public SiteConfig siteSave(@RequestBody SiteConfig config) throws Exception {
     System.out.println(DataSerializer.JSON.toString(config));
     crawlerApi.siteSave(config);
     return config;
+  }
+  
+  @RequestMapping(value = "/crawler/site/export")
+  public String siteExport(HttpServletResponse response) throws Exception {
+    response.setContentType("application/json");
+    response.setHeader("Content-Disposition", "attachment;filename=site-config.json");
+    return DataSerializer.JSON.toString(crawlerApi.siteGetSiteConfigs());
+  }
+  
+  @PostMapping("/crawler/site/import")
+  public boolean siteImport(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+    String name = file.getName();
+    return true;
   }
   
   @RequestMapping("/crawler/scheduler/report/url-commit")
