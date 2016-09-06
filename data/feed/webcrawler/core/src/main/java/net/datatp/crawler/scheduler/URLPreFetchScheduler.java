@@ -44,20 +44,19 @@ abstract public class URLPreFetchScheduler {
     URLDatumDBIterator urlDatumDBItr = urlDatumDB.createURLDatumDBIterator();
     URLDatumDBWriter   writer = null ;
     
-    long currentTime = System.currentTimeMillis() ;
-    int urlCount = 0;
-    int errorCount = 0, delayScheduleCount = 0 ;
-    int pendingCount = 0, expiredPendingCount = 0, waitingCount = 0, scheduleCount = 0 ;
+    long currentTime = System.currentTimeMillis();
+    URLScheduleMetric scheduleMetric = new URLScheduleMetric();
+    scheduleMetric.setTime(currentTime);
     MultiListHolder<URLDatum> requestBuffer = new MultiListHolder<URLDatum>(300000);
     PriorityURLDatumHolder priorityUrlHolder = null ;
     while(urlDatumDBItr.hasNext()) {
-      urlCount++ ;
       URLDatum datum = urlDatumDBItr.next() ;
+      scheduleMetric.log(datum);
       //In case The url has been schedule to fetch 6 hours ago. It could happen when the queue has problem
       //or the fetcher has problem and url datum is not updated, shedule to refetch.
       URLContext urlContext = siteContextManager.getURLContext(datum) ;
       if(urlContext == null) {
-        errorCount++ ;
+        scheduleMetric.logError(1);
         logger.info("Scheduler: URLContext for " + datum.getOriginalUrl() + " is null!") ;
         continue ;
       }
@@ -71,18 +70,20 @@ abstract public class URLPreFetchScheduler {
 
       if(currentTime > datum.getNextFetchTime()) {
         doFetch = true ;
-        if(datum.getStatus() ==  URLDatum.STATUS_FETCHING) expiredPendingCount++ ;
+        if(datum.getStatus() ==  URLDatum.STATUS_FETCHING) {
+          scheduleMetric.logExpiredPending(1); ;
+        }
       } else {
         if(datum.getStatus() ==  URLDatum.STATUS_FETCHING) {
-          pendingCount++ ;
+          scheduleMetric.logPending(1);
         } else {
-          waitingCount++ ;
+          scheduleMetric.logWaiting(1);
         }
       }
       
       if(!doFetch) continue;
       if(!siteContext.canSchedule()) {
-        delayScheduleCount++ ;
+        scheduleMetric.logDelay(1);
         continue ;
       }
 
@@ -91,21 +92,26 @@ abstract public class URLPreFetchScheduler {
       } else if(priorityUrlHolder.getSiteConfigContext() != siteContext) {
         if(requestBuffer.getCurrentSize() + priorityUrlHolder.getSize() > requestBuffer.getCapacity()) {
           if(writer == null) writer = urlDatumDB.createURLDatumDBWriter() ;
-          scheduleCount += flush(requestBuffer, writer) ;
+          int count = flush(requestBuffer, writer) ;
+          scheduleMetric.logSchedule(count);
         }
         flushPriorityURLDatumHolder(priorityUrlHolder, requestBuffer) ;
-        delayScheduleCount += priorityUrlHolder.getDelayCount() ;
-        priorityUrlHolder = 
-          new PriorityURLDatumHolder(siteContext, siteContext.getMaxSchedule(), 3) ;
+        int delayCount = priorityUrlHolder.getDelayCount() ;
+        scheduleMetric.logDelay(delayCount);
+        priorityUrlHolder = new PriorityURLDatumHolder(siteContext, siteContext.getMaxSchedule(), 3) ;
       } 
       priorityUrlHolder.insert(datum) ;
     }
     
     flushPriorityURLDatumHolder(priorityUrlHolder, requestBuffer) ;
-    if(priorityUrlHolder != null) delayScheduleCount += priorityUrlHolder.getDelayCount() ;
+    if(priorityUrlHolder != null) {
+      int delayCount = priorityUrlHolder.getDelayCount() ;
+      scheduleMetric.logDelay(delayCount);
+    }
     if(requestBuffer.getCurrentSize() > 0) {
       if(writer == null) writer = urlDatumDB.createURLDatumDBWriter();
-      scheduleCount += flush(requestBuffer, writer) ;
+      int scheduleCount = flush(requestBuffer, writer) ;
+      scheduleMetric.logSchedule(scheduleCount);
     }
     
     urlDatumDBItr.close();
@@ -116,22 +122,25 @@ abstract public class URLPreFetchScheduler {
     siteContextManager.onPostPreSchedule() ;
     logger.info(
       "Check {} urls, error {}, fetch pending {}, expired fetch pending {}, fetch waiting {}, schedule {}, delay schedule {}", 
-      new Object[] {urlCount, errorCount, pendingCount, expiredPendingCount, waitingCount, scheduleCount, delayScheduleCount} 
+      new Object[] {
+          scheduleMetric.getUrlCount(), scheduleMetric.getErrorCount(), scheduleMetric.getPendingCount(), 
+          scheduleMetric.getExpiredPendingCount(), scheduleMetric.getWaitingCount(), scheduleMetric.getScheduleCount(),
+          scheduleMetric.getDelayScheduleCount() } 
     );
-    int checkCount = errorCount + pendingCount + waitingCount + scheduleCount + delayScheduleCount ;
-    if(urlCount != checkCount) {
-      logger.warn("The frequency of check url is " + checkCount + ", but frequency of url in the db is " + urlCount) ;
+    long checkCount = 
+        scheduleMetric.getErrorCount() + scheduleMetric.getPendingCount() + scheduleMetric.getWaitingCount() + 
+        scheduleMetric.getScheduleCount() + scheduleMetric.getDelayScheduleCount() ;
+    if(scheduleMetric.getUrlCount() != checkCount) {
+      logger.warn("The frequency of check url is " + checkCount + ", but frequency of url in the db is " + scheduleMetric.getUrlCount()) ;
     }
-    verifier.verify(logger, urlCount, waitingCount) ;
+    verifier.verify(logger, scheduleMetric.getUrlCount(), scheduleMetric.getWaitingCount()) ;
 
-    long execTime = System.currentTimeMillis() - currentTime ;
-    URLScheduleMetric info = 
-        new URLScheduleMetric(currentTime, execTime, urlCount, scheduleCount, delayScheduleCount, pendingCount, waitingCount) ;
-    if(info.isChangedCompareTo(lastScheduleMetric)) {
-      lastScheduleMetric = info;
-      return info;
-    } 
-    lastScheduleMetric = info;
+    scheduleMetric.setExecTime(System.currentTimeMillis() - currentTime);
+    if(scheduleMetric.isChangedCompareTo(lastScheduleMetric)) {
+      lastScheduleMetric = scheduleMetric;
+      return scheduleMetric;
+    }
+    lastScheduleMetric = scheduleMetric;
     return null;
   }
 

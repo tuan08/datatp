@@ -17,38 +17,38 @@ import net.datatp.util.URLInfo;
  * Apr 13, 2010  
  */
 public class URLDatum implements  Externalizable {
-  final static public byte STATUS_NEW            = 0 ;
-  final static public byte STATUS_WAITING        = 1 ;
-  final static public byte STATUS_FETCHING       = 2 ;
+  final static public byte   STATUS_NEW              = 0;
+  final static public byte   STATUS_WAITING          = 1;
+  final static public byte   STATUS_FETCHING         = 2;
 
-  final static public byte PAGE_TYPE_UNKNOWN     = 0 ;
-  final static public byte PAGE_TYPE_LIST        = 1 ;
-  final static public byte PAGE_TYPE_DETAIL      = 2 ;
+  final static public byte   PAGE_TYPE_IGNORE        = 0;
+  final static public byte   PAGE_TYPE_LIST          = 1;
+  final static public byte   PAGE_TYPE_DETAIL        = 2;
+  final static public byte   PAGE_TYPE_UNCATEGORIZED = 3;
 
-  final static public String DEFAULT_CONTENT_TYPE = "unknow/unknow" ;
-  //final static public Text EMPTY_TEXT  = new Text("".getBytes(StringUtil.UTF8));
+  final static public String DEFAULT_CONTENT_TYPE    = "unknow/unknow";
 
-  private String  id ;
-  private long  createdTime ;
-  private String  url ;
-  private String  redirectUrl ;
+  private String             id;
+  private long               createdTime;
+  private String             url;
+  private String             redirectUrl;
 
-  private String  anchorText ;
-  private long  nextFetchTime ;
+  private String             anchorText;
+  private long               nextFetchTime;
 
-  private int   fetchCount ;
-  private int   errorCount ;
-  private short lastResponseCode = ResponseCode.NONE ;
-  private byte  lastErroCode     = ErrorCode.ERROR_TYPE_NONE ;
-  private long  lastFetchWaitingPeriod ;
-  private long  lastFetchScheduleAt ;
-  private long  lastFetchFinishAt ;
-  private long  lastFetchDownloadTime ;
-  private int   lastDownloadDataSize  ;
-  private byte  pageType ;
-  private byte  deep;
-  private byte  status      = STATUS_NEW ;
-  private String  contentType = DEFAULT_CONTENT_TYPE;
+  private int                fetchCount;
+  private int                errorCount;
+  private short              lastResponseCode        = ResponseCode.NONE;
+  private byte               lastErroCode            = ErrorCode.ERROR_TYPE_NONE;
+  private long               lastFetchWaitingPeriod;
+  private long               lastFetchScheduleAt;
+  private long               lastFetchFinishAt;
+  private long               lastFetchDownloadTime;
+  private int                lastDownloadDataSize;
+  private byte               pageType;
+  private byte               deep;
+  private byte               status                  = STATUS_NEW;
+  private String             contentType             = DEFAULT_CONTENT_TYPE;
 
   public URLDatum() {
   }

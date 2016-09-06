@@ -34,21 +34,9 @@ define([
               console.log('on click bean ' + JSON.stringify(bean)) ;
             }
           },
-          { 
-            field: "execTime",   label: "Exec Time", toggled: true, filterable: true
-          },
-          { 
-            field: "commitURLCount",   label: "Commit URL Count", toggled: true, filterable: true
-          },
-          { 
-            field: "newURLFoundCount",   label: "New URL Found Count", toggled: true, filterable: true
-          },
-          { 
-            field: "newURLTypeList",   label: "New URL Type List", toggled: true, filterable: true
-          },
-          { 
-            field: "newURLTypeDetail",   label: "New URL Type Detail", toggled: true, filterable: true
-          },
+          { field: "execTime",   label: "Exec Time", toggled: true, filterable: true },
+          { field: "commitURLCount",   label: "Commit URL Count", toggled: true, filterable: true },
+          { field: "newURLFoundCount",   label: "New URL Found Count", toggled: true, filterable: true }
         ],
         actions:[
           {

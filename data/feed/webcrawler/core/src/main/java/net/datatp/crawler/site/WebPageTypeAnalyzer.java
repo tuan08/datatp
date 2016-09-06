@@ -15,6 +15,8 @@ public class WebPageTypeAnalyzer {
     }
   }
   
+  public boolean hasDetailPatternConfig() { return this.hasDetailPatternConfig; }
+  
   public boolean isIgnore(String anchorText, String url) {
     for(int i = 0; i < pattern.length; i++) {
       if(pattern[i].getType() != WebPageType.ignore) continue;

@@ -8,10 +8,10 @@ import org.slf4j.Logger;
  * Jul 10, 2010  
  */
 public class URLFetchSchedulerVerifier {
-  int pUrlCount = -1;
-  int pWaittingCount = -1 ;
+  long pUrlCount = -1;
+  long pWaittingCount = -1 ;
 
-  public void verify(Logger logger, int urlCount, int waittingCount) {
+  public void verify(Logger logger, long urlCount, long waittingCount) {
     if(pUrlCount > urlCount) {
       logger.error("Expect frequency of url is greater or equals the previous frequency of url count") ;
     }

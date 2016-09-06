@@ -34,24 +34,15 @@ define([
               console.log('on click bean ' + JSON.stringify(bean)) ;
             }
           },
-          { 
-            field: "execTime",   label: "Exec Time", toggled: true, filterable: true
-          },
-          { 
-            field: "urlCount",   label: "URL Count", toggled: true, filterable: true
-          },
-          { 
-            field: "scheduleCount",   label: "Schedule Count", toggled: true, filterable: true
-          },
-          { 
-            field: "delayScheduleCount",   label: "Delay Schedule Count", toggled: true, filterable: true
-          },
-          { 
-            field: "pendingCount",   label: "Pending Count", toggled: true, filterable: true
-          },
-          { 
-            field: "waitingCount",   label: "Waiting Count", toggled: true, filterable: true
-          },
+          { field: "execTime",   label: "Exec Time", toggled: true, filterable: true },
+          { field: "urlCount",   label: "URL Count", toggled: true, filterable: true },
+          { field: "urlListCount",   label: "URL List", toggled: true, filterable: true },
+          { field: "urlDetailCount",   label: "URL Detail", toggled: true, filterable: true },
+          { field: "urlUncategorizedCount",   label: "URL Uncategorized", toggled: true, filterable: true },
+          { field: "scheduleCount",   label: "Schedule Count", toggled: true, filterable: true },
+          { field: "delayScheduleCount",   label: "Delay Schedule Count", toggled: true, filterable: true },
+          { field: "pendingCount",   label: "Pending Count", toggled: true, filterable: true },
+          { field: "waitingCount",   label: "Waiting Count", toggled: true, filterable: true },
         ],
         actions:[
           {

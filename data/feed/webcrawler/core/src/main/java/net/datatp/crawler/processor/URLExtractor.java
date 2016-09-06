@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.datatp.crawler.site.URLContext;
+import net.datatp.crawler.site.WebPageType;
+import net.datatp.crawler.site.WebPageTypeAnalyzer;
 import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.crawler.urldb.URLDatumFactory;
 import net.datatp.util.URLInfo;
@@ -63,7 +65,8 @@ public class URLExtractor {
       if(urlDatum.getDeep() == 1) {
         String refreshUrl = structure.findRefreshMetaNodeUrl() ;
         if(refreshUrl != null) {
-          URLDatum newURLDatum = createURLDatum(urlDatum, refreshUrl, new URLInfo(refreshUrl), "refresh url");
+          URLDatum newURLDatum = 
+            createURLDatum(urlDatum, refreshUrl, new URLInfo(refreshUrl), wdataCtx.getWdata().getAnchorText(), WebPageType.list);
           addURL(urls, refreshUrl, newURLDatum);
         }
       }
@@ -84,15 +87,15 @@ public class URLExtractor {
         if (!urlCtx.getSiteContext().allowDomain(newURLInfo)) continue; // ignore the external link
 
         if (isExclude(newURLInfo.getPath())) continue;
-
-        if(urlCtx.getSiteContext().getWebPageTypeAnalyzer().isIgnore(anchorText, newNormalizedURL)) {
-          continue;
-        }
+        
+        WebPageTypeAnalyzer wpAnalyzer = urlCtx.getSiteContext().getWebPageTypeAnalyzer();
+        WebPageType wpType = wpAnalyzer.analyze(anchorText, newNormalizedURL);
+        if(wpType == WebPageType.ignore) continue;
         
         // CONTROL DEEP LIMIT
         int maxCrawlDeep = urlCtx.getSiteContext().getSiteConfig().getCrawlDeep();
 
-        URLDatum newURLDatum = createURLDatum(urlDatum, newNormalizedURL, newURLInfo, anchorText);
+        URLDatum newURLDatum = createURLDatum(urlDatum, newNormalizedURL, newURLInfo, anchorText, wpType);
         if (!isInDeepRange(newURLDatum, maxCrawlDeep)) continue;
         addURL(urls, newNormalizedURL, newURLDatum);
       }
@@ -129,12 +132,15 @@ public class URLExtractor {
 
   private boolean isInDeepRange(URLDatum datum, int maxDeep) { return datum.getDeep() <= maxDeep; }
 
-  private URLDatum createURLDatum(URLDatum parent, String origUrl, URLInfo urlNorm, String anchorText) {
+  private URLDatum createURLDatum(URLDatum parent, String origUrl, URLInfo urlNorm, String anchorText, WebPageType wpType) {
     URLDatum urlDatum = urlDatumFactory.createInstance(System.currentTimeMillis());
     urlDatum.setOriginalUrl(origUrl, urlNorm);
     byte deep = (byte) (1 + parent.getDeep());
     urlDatum.setDeep(deep);
     urlDatum.setAnchorText(anchorText);
+    if(wpType == WebPageType.detail)    urlDatum.setPageType(URLDatum.PAGE_TYPE_DETAIL);
+    else if(wpType == WebPageType.list) urlDatum.setPageType(URLDatum.PAGE_TYPE_LIST);
+    else                                urlDatum.setPageType(URLDatum.PAGE_TYPE_UNCATEGORIZED);
     return urlDatum;
   }
 }

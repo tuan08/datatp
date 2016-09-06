@@ -55,7 +55,7 @@ abstract public class URLPostFetchScheduler {
 
     long startTime = System.currentTimeMillis() ;
     URLDatumDBWriter writer = null ;
-    int processCount = 0, newURLFoundCount = 0, newURLTypeList =0, newURLTypeDetail = 0 ;
+    int processCount = 0, newURLFoundCount = 0 ;
     long expiredTime = System.currentTimeMillis() + maxProcessTime;
     while(System.currentTimeMillis() < expiredTime) {
       List<URLDatum> commitURLDatums = new ArrayList<URLDatum>() ;
@@ -88,8 +88,7 @@ abstract public class URLPostFetchScheduler {
     
     logger.info("Process {} fetch request, found {} new urls!", processCount, newURLFoundCount) ;
     long execTime = System.currentTimeMillis() - startTime ;
-    URLCommitMetric info = 
-      new URLCommitMetric(startTime, execTime, processCount, newURLFoundCount, newURLTypeList, newURLTypeDetail) ;
+    URLCommitMetric info = new URLCommitMetric(startTime, execTime, processCount, newURLFoundCount) ;
     return info ;
   }
 

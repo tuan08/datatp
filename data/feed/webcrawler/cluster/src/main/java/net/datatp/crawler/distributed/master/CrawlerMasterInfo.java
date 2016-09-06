@@ -67,24 +67,22 @@ public class CrawlerMasterInfo implements Serializable {
     printRow(out, scheduleHeader, scheduleHeaderWidth) ;
     for(URLScheduleMetric sel :  this.sheduleMetric) {
       String[] value = { 
-          Integer.toString(sel.getUrlCount()),
-          Integer.toString(sel.getScheduleCount()),
-          Integer.toString(sel.getDelayScheduleCount()),
-          Integer.toString(sel.getPendingCount()),
-          Integer.toString(sel.getWaitingCount()),
+          Long.toString(sel.getUrlCount()),
+          Long.toString(sel.getScheduleCount()),
+          Long.toString(sel.getDelayScheduleCount()),
+          Long.toString(sel.getPendingCount()),
+          Long.toString(sel.getWaitingCount()),
       } ;
       printRow(out, value, scheduleHeaderWidth) ;
     }
     out.println("############PROCESS INFO##################################") ;
-    String[] processHeader   =  { "url", "new url", "new url list", "new url detail"} ;
-    int[] processHeaderWidth =  {    10,        10,             15,              15} ;
+    String[] processHeader   =  { "url", "new url"} ;
+    int[] processHeaderWidth =  {    10,        10} ;
     printRow(out, processHeader, processHeaderWidth) ;
     for(URLCommitMetric sel : fetchURLCommitMetric) {
       String[] value = { 
           Integer.toString(sel.getCommitURLCount()),
-          Integer.toString(sel.getNewURLFoundCount()),
-          Integer.toString(sel.getNewURLTypeList()),
-          Integer.toString(sel.getNewURLTypeDetail()),
+          Integer.toString(sel.getNewURLFoundCount())
       } ;
       printRow(out, value, processHeaderWidth) ;
     }

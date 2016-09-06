@@ -11,25 +11,21 @@ import net.datatp.util.text.DateUtil;
 import net.datatp.util.text.TabularFormater;
 
 public class URLCommitMetric implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   private long time ;
   private long execTime ;
   private int  commitURLCount = 0 ;
   private int  newURLFoundCount = 0 ;
-  private int  newURLTypeList = 0 ;
-  private int  newURLTypeDetail = 0 ;
 
   public URLCommitMetric() {
   }
 
-  public URLCommitMetric(long time, long execTime, int processCount, 
-                       int newURLFoundCount, int newURLTypeList, 
-                       int newURLTypeDetail) {
+  public URLCommitMetric(long time, long execTime, int processCount, int newURLFoundCount) {
     this.time = time; 
     this.execTime = execTime ;
     this.commitURLCount = processCount ;
     this.newURLFoundCount = newURLFoundCount ;
-    this.newURLTypeList = newURLTypeList ;
-    this.newURLTypeDetail = newURLTypeDetail ;
   }
 
   public long getTime() { return time; }
@@ -44,19 +40,11 @@ public class URLCommitMetric implements Serializable {
   public int  getNewURLFoundCount() { return newURLFoundCount; }
   public void setNewURLFoundCount(int newURLFoundCount) { this.newURLFoundCount = newURLFoundCount; }
 
-  public int getNewURLTypeList() { return newURLTypeList; }
-  public void setNewURLTypeList(int newURLTypeList) { this.newURLTypeList = newURLTypeList; }
-
-  public int getNewURLTypeDetail() { return newURLTypeDetail; }
-  public void setNewURLTypeDetail(int newURLTypeDetail) { this.newURLTypeDetail = newURLTypeDetail; }
-
   public void readFields(DataInput in) throws IOException {
     time = in.readLong() ;
     execTime = in.readLong() ;
     commitURLCount = in.readInt() ;
     newURLFoundCount = in.readInt() ;
-    newURLTypeList = in.readInt() ;
-    newURLTypeDetail = in.readInt() ;
   }
 
   public void write(DataOutput out) throws IOException {
@@ -64,22 +52,20 @@ public class URLCommitMetric implements Serializable {
     out.writeLong(execTime) ;
     out.writeInt(commitURLCount) ;
     out.writeInt(newURLFoundCount);
-    out.writeInt(newURLTypeList) ;
-    out.writeInt(newURLTypeDetail) ;
   }
 
   static public String formatURLCommitInfosAsText(List<URLCommitMetric> holder) {
     String[] header = {
-        "Time", "Exec Time", "Commit URL", "New URL", "URL List", "URL Detail"
+        "Time", "Exec Time", "Commit URL", "New URL"
     } ;
     TabularFormater formatter = new TabularFormater(header) ;
     Iterator<URLCommitMetric> i = holder.iterator() ;
     while(i.hasNext()) {
       URLCommitMetric sel = i.next() ;
       formatter.addRow(
-          DateUtil.asCompactDateTime(sel.getTime()), sel.getExecTime(), sel.getCommitURLCount(),
-          sel.getNewURLFoundCount(), sel.getNewURLTypeList(), sel.getNewURLTypeDetail()
-          );
+        DateUtil.asCompactDateTime(sel.getTime()), sel.getExecTime(), sel.getCommitURLCount(),
+        sel.getNewURLFoundCount()
+      );
     }
     return formatter.getFormattedText() ; 
   }
