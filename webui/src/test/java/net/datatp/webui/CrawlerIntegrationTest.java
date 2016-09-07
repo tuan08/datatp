@@ -39,7 +39,13 @@ public class CrawlerIntegrationTest {
   
   @Test
   public void test() throws Exception {
-    Crawler crawler = CrawlerApp.run(new String[] {}).getBean(Crawler.class);
+    String[] args = {
+      "--spring.http.multipart.location=build/upload" //# Intermediate location of uploaded files.
+     // "--spring.http.multipart.multipart.file-size-threshold=0", // # Threshold after which files will be written to disk.
+     // "--spring.http.multipart.multipart.max-file-size=1Mb",     //# Max file size.
+     // "--spring.http.multipart.multipart.max-request-size=10Mb"  // # Max request size.  
+    };
+    Crawler crawler = CrawlerApp.run(args).getBean(Crawler.class);
     
     crawler.siteCreateGroup("vietnam");
     crawler.siteAdd(

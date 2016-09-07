@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import net.datatp.springframework.SpringAppLauncher;
 import net.datatp.crawler.CrawlerApi;
+import net.datatp.springframework.SpringAppLauncher;
 import net.datatp.util.text.StringUtil;
 
 /**
@@ -29,19 +29,14 @@ public class CrawlerApp {
   public CrawlerApi createCrawler() throws Exception { 
     Crawler crawler = new Crawler();
     crawler.configure(new CrawlerConfig());
-    
-//    crawler.siteCreateGroup("vietnam");
-//    crawler.siteAdd(new SiteConfig("vietnam", "vnexpress.net", "http://vnexpress.net", 3));
-//    crawler.siteAdd(new SiteConfig("vietnam", "dantri.com.vn", "http://dantri.com.vn", 3)); 
-//    crawler.configure(new CrawlerConfig()).start();
-//    
     return crawler;
   }
   
   static public ApplicationContext run(String[] args) throws Exception {
     String[] defaultArgs = {
       "--spring.cloud.zookeeper.enabled=false",
-      "--server.port=8080"
+      "--spring.http.multipart.enabled=true",
+      "--server.port=8080",
     };
     String[] config = {  };
     return SpringAppLauncher.launch(CrawlerApp.class, config, StringUtil.merge(defaultArgs, args));

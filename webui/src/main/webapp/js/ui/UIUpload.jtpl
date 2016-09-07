@@ -1,0 +1,9 @@
+<div>
+  <form>
+    <label>Select A File: </label>
+    <input name="files" type="file" style="display: none" /> 
+    <span class="uploadStatus">
+      <a class="ui-action onSelect">Browse</a> 
+    </span>
+  </form>
+</div>

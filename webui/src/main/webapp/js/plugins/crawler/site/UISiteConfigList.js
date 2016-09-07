@@ -4,9 +4,29 @@ define([
   'backbone',
   'ui/UIBean',
   'ui/UITable',
-  'ui/UIUtil',
+  'ui/UIUpload',
+  'ui/UIPopup',
   'plugins/crawler/Rest',
-], function($, _, Backbone, UIBean, UITable, UIUtil, Rest) {
+], function($, _, Backbone, UIBean, UITable, UIUpload, UIPopup, Rest) {
+  var UIImport = UIUpload.extend({
+    label: 'Import',
+
+    config: {
+      label: "Import",
+      serviceUrl: "/crawler/site/import",
+      onSuccess: function(thisUI) {
+        console.log("on upload success");
+      },
+
+      onError: function(thisUI) {
+        console.log("on upload error");
+      }
+    },
+
+    onInit: function(options) {
+    }
+  });
+
   var UISiteConfigList = UITable.extend({
     label: "Site Config List",
 
@@ -23,6 +43,8 @@ define([
             {
               action: "import", label: "Import", 
               onClick: function(thisTable) { 
+                var popupConfig = { title: "Import", minWidth: 400, modal: true} ;
+                UIPopup.activate(new UIImport(), popupConfig) ;
               } 
             },
             {
@@ -43,7 +65,7 @@ define([
             onClick: function(thisTable, row) {
               var siteConfig = thisTable.getItemOnCurrentPage(row) ;
               console.log('on click bean ' + JSON.stringify(siteConfig)) ;
-              var uiSiteConfigScreen = UIUtil.getAncestorOfType(thisTable, 'UISiteConfigScreen');
+              var uiSiteConfigScreen = thisTable.getAncestorOfType('UISiteConfigScreen');
               uiSiteConfigScreen.addSiteConfigTab(siteConfig);
             }
           },

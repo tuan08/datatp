@@ -33,13 +33,13 @@ define([
                     thisUI.onSaveCallback(thisUI.UITable, row, bean);
                   }
                   thisUI.UITable.renderRows() ;
-		  UIPopup.closePopup() ;
+                  UIPopup.closePopup() ;
                 }
               },
               {
                 action:'cancel', label: "Cancel", icon: "back",
                 onClick: function(thisUI, beanConfig, beanState) { 
-		  UIPopup.closePopup() ;
+                  UIPopup.closePopup() ;
                 }
               }
             ],

@@ -1,5 +1,8 @@
 package net.datatp.crawler.rest;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.datatp.crawler.CrawlerApi;
@@ -26,10 +30,12 @@ import net.datatp.crawler.site.SiteConfig;
 import net.datatp.crawler.site.analysis.SiteStructureAnalyzer;
 import net.datatp.crawler.site.analysis.SiteStructureAnalyzerConfig;
 import net.datatp.crawler.site.analysis.SiteStructureAnalyzerService;
-import net.datatp.crawler.site.analysis.URLSiteStructure;
 import net.datatp.crawler.site.analysis.URLData;
+import net.datatp.crawler.site.analysis.URLSiteStructure;
 import net.datatp.util.URLInfo;
 import net.datatp.util.dataformat.DataSerializer;
+import net.datatp.util.io.IOUtil;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -96,11 +102,41 @@ public class CrawlerRestController {
     return DataSerializer.JSON.toString(crawlerApi.siteGetSiteConfigs());
   }
   
-  @PostMapping("/crawler/site/import")
-  public boolean siteImport(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-    String name = file.getName();
+  @RequestMapping(value = "/crawler/site/import", method = RequestMethod.POST)
+  public boolean siteImport(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) throws Exception {
+    String fileName = file.getOriginalFilename();
+    System.out.println("receive upload " + fileName);
+    byte[] data = IOUtil.getStreamContentAsBytes(file.getInputStream());
+    List<SiteConfig> siteConfigs = DataSerializer.JSON.fromBytes(data,  new TypeReference<List<SiteConfig>>() {});
+    SiteConfig[] array = siteConfigs.toArray(new SiteConfig[siteConfigs.size()]);
+    crawlerApi.siteSave(array);
     return true;
   }
+  
+  @RequestMapping(value = "/crawler/site/upload", method = RequestMethod.POST)
+  public String upload(MultipartHttpServletRequest request) throws Exception {
+    System.out.println("content type = " + request.getContentType());
+    System.out.println("content length = " + request.getContentLength());
+    System.out.println("file map = " + request.getFileMap());
+    Iterator<String> itrator = request.getFileNames();
+    MultipartFile multiFile = request.getFile(itrator.next());
+    try {
+      // just to show that we have actually received the file
+      System.out.println("File Length:" + multiFile.getBytes().length);
+      System.out.println("File Type:" + multiFile.getContentType());
+      String fileName=multiFile.getOriginalFilename();
+      System.out.println("File Name:" +fileName);
+      String path=request.getServletContext().getRealPath("/");
+      //making directories for our required path.
+      byte[] bytes = multiFile.getBytes();
+      System.out.println(new String(bytes));
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new Exception("Error while loading the file");
+    }
+    return "{ message: 'File Uploaded successfully.'}";
+  }
+
   
   @RequestMapping("/crawler/scheduler/report/url-commit")
   public List<URLCommitMetric> schedulerGetURLCommitReport(@RequestParam(value="max", defaultValue="100") int max) throws Exception {
