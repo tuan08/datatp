@@ -15,7 +15,7 @@ import org.springframework.jms.annotation.JmsListener;
 
 import net.datatp.channel.ChannelGateway;
 import net.datatp.crawler.fetcher.SiteSessionManager;
-import net.datatp.crawler.fetcher.URLDatumFetchBufferQueue;
+import net.datatp.crawler.fetcher.URLFetchQueue;
 import net.datatp.crawler.fetcher.metric.URLFetcherMetric;
 import net.datatp.crawler.processor.FetchDataProcessor;
 import net.datatp.crawler.site.SiteContextManager;
@@ -26,7 +26,6 @@ import net.datatp.crawler.urldb.URLDatum;
  * Apr 14, 2010  
  */
 public class DistributedFetcher  {
-  static int MAX_QUEUE_CAPACITY = 250000 ;
   private static final Logger logger = LoggerFactory.getLogger(DistributedFetcher.class);
 
   private String name = "BasicFetcher" ;
@@ -43,7 +42,7 @@ public class DistributedFetcher  {
   private ChannelGateway urlFetchCommitGateway ;
   
 
-  private URLDatumFetchBufferQueue urldatumFetchQueue = new URLDatumFetchBufferQueue();
+  private URLFetchQueue urldatumFetchQueue = new URLFetchQueue(150000);
 
   @Autowired
   private FetchDataProcessor fetchDataProcessor;

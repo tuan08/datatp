@@ -11,38 +11,42 @@ import net.datatp.crawler.urldb.URLDatum;
 /**
  * $Author: Tuan Nguyen$ 
  **/
-public class URLDatumFetchBufferQueue {
-  static int MAX_QUEUE_CAPACITY = 150000 ;
+public class URLFetchQueue {
 
-  private BlockingQueue<URLDatum>      scheduleQueue;
-  private BlockingQueue<DelayURLDatum> delayURLFetchQueue = new DelayQueue<>();
+  private BlockingQueue<URLDatum>      urlFetchQueue;
+  private BlockingQueue<DelayURLDatum> urlDelayFetchQueue = new DelayQueue<>();
+  private long enqueueCount = 0;
+  private long enqueueDelayCount = 0;
   
-  public URLDatumFetchBufferQueue() {
-    scheduleQueue = new LinkedBlockingQueue<URLDatum>(MAX_QUEUE_CAPACITY);
-  }
-  
-  public URLDatumFetchBufferQueue(BlockingQueue<URLDatum> scheduleQueue) {
-    this.scheduleQueue = scheduleQueue;
+  public URLFetchQueue(int maxQueueSize) {
+    urlFetchQueue = new LinkedBlockingQueue<URLDatum>(maxQueueSize);
   }
   
   public void add(URLDatum urldatum) throws InterruptedException {
-    scheduleQueue.put(urldatum);
+    enqueueCount++;
+    urlFetchQueue.put(urldatum);
   }
 
   public void addBusy(URLDatum urldatum) throws InterruptedException {
-    delayURLFetchQueue.offer(new DelayURLDatum(urldatum, 3000));
+    enqueueDelayCount++;
+    urlDelayFetchQueue.offer(new DelayURLDatum(urldatum, 3000));
   }
 
   public URLDatum poll(long maxWait) throws InterruptedException {
-    DelayURLDatum delayURLDatum =  delayURLFetchQueue.poll();
+    DelayURLDatum delayURLDatum =  urlDelayFetchQueue.poll();
     if(delayURLDatum != null) return delayURLDatum.getURLDatum();
-    return scheduleQueue.poll(maxWait, TimeUnit.MILLISECONDS);
+    return urlFetchQueue.poll(maxWait, TimeUnit.MILLISECONDS);
   }
   
-  public long getInQueue() { return scheduleQueue.size() ; }
+  public URLFetchQueueReport getURLFetchQueueReport() {
+    URLFetchQueueReport report = new URLFetchQueueReport();
+    report.setInQueue(urlFetchQueue.size());
+    report.setEnqueue(enqueueCount);
+    report.setInDelayQueue(urlDelayFetchQueue.size());
+    report.setEnqueueDelay(enqueueDelayCount);
+    return report;
+  }
   
-  public long getInDelayQueue() { return delayURLFetchQueue.size(); }
-
   static public class DelayURLDatum implements Delayed  {
     private URLDatum urlDatum;
     private long startTime;

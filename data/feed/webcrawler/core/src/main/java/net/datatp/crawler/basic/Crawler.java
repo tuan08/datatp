@@ -9,6 +9,7 @@ import net.datatp.crawler.CrawlerApi;
 import net.datatp.crawler.CrawlerStatus;
 import net.datatp.crawler.fetcher.FetcherReport;
 import net.datatp.crawler.fetcher.FetcherStatus;
+import net.datatp.crawler.fetcher.URLFetchQueue;
 import net.datatp.crawler.processor.FetchDataProcessor;
 import net.datatp.crawler.processor.URLExtractor;
 import net.datatp.crawler.processor.XDocProcessor;
@@ -25,7 +26,7 @@ import net.datatp.xhtml.XDoc;
 public class Crawler implements CrawlerApi {
   private CrawlerConfig           crawlerConfig;
 
-  private BlockingQueue<URLDatum> urlFetchQueue;
+  private URLFetchQueue           urlFetchQueue;
   private BlockingQueue<URLDatum> urlCommitQueue;
   private BlockingQueue<XDoc>     xDocQueue;
 
@@ -44,7 +45,7 @@ public class Crawler implements CrawlerApi {
   public Crawler configure(CrawlerConfig config) throws Exception {
     crawlerConfig      = config;
     
-    urlFetchQueue  = new LinkedBlockingQueue<>(crawlerConfig.getMaxUrlQueueSize());
+    urlFetchQueue  = new URLFetchQueue(crawlerConfig.getMaxUrlQueueSize());
     urlCommitQueue = new LinkedBlockingQueue<>(crawlerConfig.getMaxUrlQueueSize());
     xDocQueue      = new LinkedBlockingQueue<>(crawlerConfig.getMaxXDocQueueSize());
     

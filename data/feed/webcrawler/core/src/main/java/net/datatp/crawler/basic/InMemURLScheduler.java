@@ -6,13 +6,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.TimeUnit;
 
-import net.datatp.crawler.scheduler.URLSchedulerReporter;
+import net.datatp.crawler.fetcher.URLFetchQueue;
 import net.datatp.crawler.scheduler.URLPostFetchScheduler;
 import net.datatp.crawler.scheduler.URLPreFetchScheduler;
 import net.datatp.crawler.scheduler.URLScheduler;
 import net.datatp.crawler.scheduler.URLSchedulerPluginManager;
+import net.datatp.crawler.scheduler.URLSchedulerReporter;
 import net.datatp.crawler.scheduler.URLSchedulerStatus;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
@@ -22,8 +22,8 @@ import net.datatp.crawler.urldb.URLDatumDB;
 
 public class InMemURLScheduler extends URLScheduler {
   public InMemURLScheduler(URLDatumDB urlDatumDB, 
-                           SiteContextManager siteContextManager,
-                           BlockingQueue<URLDatum> urlFetchQueue,
+                           SiteContextManager      siteContextManager,
+                           URLFetchQueue           urlFetchQueue,
                            BlockingQueue<URLDatum> urlCommitQueue) {
     preFetchScheduler  = new InMemURLPreFetchScheduler(urlDatumDB, siteContextManager, urlFetchQueue);
     postFetchScheduler = new InMemURLPostFetchScheduler(urlDatumDB, siteContextManager, urlCommitQueue);
@@ -31,11 +31,11 @@ public class InMemURLScheduler extends URLScheduler {
   }
   
   public class InMemURLPreFetchScheduler extends URLPreFetchScheduler {
-    private BlockingQueue<URLDatum> urlFetchQueue;
+    private URLFetchQueue urlFetchQueue;
     
     public InMemURLPreFetchScheduler(URLDatumDB urlDatumDB, 
                                      SiteContextManager siteContextManager,
-                                     BlockingQueue<URLDatum> urlFetchQueue) {
+                                     URLFetchQueue      urlFetchQueue) {
       this.urlDatumDB    = urlDatumDB;
       this.siteContextManager = siteContextManager;
       this.schedulerPluginManager = new URLSchedulerPluginManager();
@@ -45,7 +45,7 @@ public class InMemURLScheduler extends URLScheduler {
     @Override
     protected void onSchedule(ArrayList<URLDatum> holder) throws Exception {
       for(int i = 0; i < holder.size(); i++) {
-        urlFetchQueue.offer(holder.get(i), 5, TimeUnit.SECONDS);
+        urlFetchQueue.add(holder.get(i));
       }
     }
   }

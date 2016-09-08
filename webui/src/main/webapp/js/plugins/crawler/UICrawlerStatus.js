@@ -70,7 +70,7 @@ define([
               var uiCrawlerStatus = thisTable.getAncestorOfType("UICrawlerStatusScreen") ;
               var bean = thisTable.getItemOnCurrentPage(row) ;
               var fetcherReport = Rest.fetcher.getFetcherReport(bean.id);
-              var options = { fetcherReport: fetcherReport };
+              var options = { fetcherReportId: bean.id};
               uiCrawlerStatus.push(new UIFetcherReport(options));
             }
           },

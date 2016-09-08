@@ -9,6 +9,7 @@ import net.datatp.crawler.fetcher.URLFetcherReport;
 import net.datatp.crawler.fetcher.Fetcher;
 import net.datatp.crawler.fetcher.FetcherReport;
 import net.datatp.crawler.fetcher.Status;
+import net.datatp.crawler.fetcher.URLFetchQueue;
 import net.datatp.crawler.fetcher.FetcherStatus;
 import net.datatp.crawler.fetcher.SiteSessionManager;
 import net.datatp.crawler.processor.FetchDataProcessor;
@@ -18,20 +19,21 @@ import net.datatp.util.MD5;
 import net.datatp.xhtml.XDoc;
 
 public class BasicFetcher implements Fetcher {
-  private CrawlerConfig      crawlerConfig;
-  private SiteSessionManager siteSessionManager = new SiteSessionManager();
+  private CrawlerConfig            crawlerConfig;
+  private SiteSessionManager       siteSessionManager = new SiteSessionManager();
+  private URLFetchQueue            urlFetchQueue;
+  private URLFetcher[]             urlFetchers;
+  private Thread[]                 fetcherThreads;
+  private FetcherStatus            status;
 
-  private URLFetcher[]       urlFetchers;
-  private Thread[]           fetcherThreads;
-  private FetcherStatus      status;
-  
-  public BasicFetcher(CrawlerConfig config,
-                      BlockingQueue<URLDatum> urlFetchQueue, 
+  public BasicFetcher(CrawlerConfig           config,
+                      URLFetchQueue           urlFetchQueue, 
                       BlockingQueue<URLDatum> urlCommitQueue,
                       BlockingQueue<XDoc>     xDocQueue,
                       FetchDataProcessor      dataProcessor,
                       SiteContextManager      siteContextManager) throws UnknownHostException {
-    crawlerConfig = config;
+    this.crawlerConfig = config;
+    this.urlFetchQueue = urlFetchQueue;
     urlFetchers   = new URLFetcher[crawlerConfig.getNumOfFetcher()];
     for(int i = 0; i < urlFetchers.length; i++) {
       String name = "url-fetcher-" + (i);
@@ -46,6 +48,7 @@ public class BasicFetcher implements Fetcher {
   public FetcherReport getFetcherReport() {
     FetcherReport report = new FetcherReport();
     report.setStatus(status);
+    report.setUrlFetchQueueReport(urlFetchQueue.getURLFetchQueueReport());
     URLFetcherReport[] urlFetcherReport = new URLFetcherReport[urlFetchers.length];
     for(int i = 0; i < urlFetchers.length; i++) {
       urlFetcherReport[i] = urlFetchers[i].getReport();

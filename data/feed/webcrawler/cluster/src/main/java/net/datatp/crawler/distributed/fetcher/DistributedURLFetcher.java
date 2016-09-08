@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import net.datatp.channel.ChannelGateway;
 import net.datatp.crawler.fetcher.URLFetcher;
 import net.datatp.crawler.fetcher.SiteSessionManager;
-import net.datatp.crawler.fetcher.URLDatumFetchBufferQueue;
+import net.datatp.crawler.fetcher.URLFetchQueue;
 import net.datatp.crawler.processor.FetchDataProcessor;
 import net.datatp.crawler.site.SiteContextManager;
 import net.datatp.crawler.urldb.URLDatum;
@@ -16,14 +16,14 @@ import net.datatp.xhtml.XDoc;
  * Apr 14, 2010
  */
 public class DistributedURLFetcher extends URLFetcher {
-  private URLDatumFetchBufferQueue urldatumFetchQueue;
+  private URLFetchQueue urldatumFetchQueue;
   private ChannelGateway     xDocGateway;
   private ChannelGateway     urlFetchCommitGateway;
 
   public DistributedURLFetcher(String name,
                                SiteContextManager manager,
                                SiteSessionManager siteSessionManager, 
-                               URLDatumFetchBufferQueue urldatumFetchQueue,
+                               URLFetchQueue urldatumFetchQueue,
                                ChannelGateway     urlFetchCommitGateway,
                                ChannelGateway     xDocGateway,
                                FetchDataProcessor fetchDataProcessor) {

@@ -27,6 +27,25 @@ define([
     }
   });
 
+  var UIURLFetchQueueInfo = UIBean.extend({
+    label: "Queue Info",
+    config: {
+      beans: {
+        bean: {
+          label: 'Queue Info',
+          fields: [
+            { field:  "inQueue", label: "In Queue"},
+            { field:  "enqueue", label: "Enqueue"},
+            { field:  "inDelayQueue", label: "In Delay Queue"},
+            { field:  "enqueueDelay", label: "Enqueue Delay"},
+          ],
+          edit: { actions: [ ], },
+          view: { actions: [ ] }
+        }
+      }
+    }
+  });
+
   var UIURLFetcherReport = UITable.extend({
     label: "URL Fetcher Report",
 
@@ -67,16 +86,36 @@ define([
     label: "Fetcher Report", 
     config: {
       actions: [
+        { 
+          action: "refresh", label: "Refesh",
+          onClick: function(thisUI) {
+            var fetcherReport = Rest.fetcher.getFetcherReport(thisUI.fetcherReportId);
+            thisUI.onRefresh(fetcherReport);
+            thisUI.render();
+          }
+        },
       ]
     },
 
     onInit: function(options) {
-      var fetcherReport = options.fetcherReport;
+      this.fetcherReportId = options.fetcherReportId;
+      var fetcherReport = Rest.fetcher.getFetcherReport(this.fetcherReportId);
+      this.onRefresh(fetcherReport);   
+    },
+
+
+    onRefresh: function(fetcherReport) {
+      this.clear();
        
       var uiFetcherStatus = new UIFetcherStatus();
       uiFetcherStatus.bind('bean', fetcherReport.status);
       uiFetcherStatus.setReadOnly(true);
       this.add(uiFetcherStatus);
+
+      var uiURLFetchQueueInfo = new UIURLFetchQueueInfo();
+      uiURLFetchQueueInfo.bind('bean', fetcherReport.urlFetchQueueReport);
+      uiURLFetchQueueInfo.setReadOnly(true);
+      this.add(uiURLFetchQueueInfo);
 
       var uiURLFetcherReport = new UIURLFetcherReport();
       uiURLFetcherReport.setBeans(fetcherReport.urlFetcherReport);
@@ -84,7 +123,7 @@ define([
 
       var uiURLFetcherMetric = new UIURLFetcherMetric({urlFetcherMetric: fetcherReport.aggregateUrlFetcherMetric });
       this.add(uiURLFetcherMetric);
-    }
+    },
   }) ;
 
   return UIFetcherReport ;
