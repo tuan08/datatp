@@ -29,8 +29,8 @@ public class BasicFetcher implements Fetcher {
                       BlockingQueue<URLDatum> urlFetchQueue, 
                       BlockingQueue<URLDatum> urlCommitQueue,
                       BlockingQueue<XDoc>     xDocQueue,
-                      FetchDataProcessor dataProcessor,
-                      SiteContextManager siteContextManager) throws UnknownHostException {
+                      FetchDataProcessor      dataProcessor,
+                      SiteContextManager      siteContextManager) throws UnknownHostException {
     crawlerConfig = config;
     urlFetchers   = new URLFetcher[crawlerConfig.getNumOfFetcher()];
     for(int i = 0; i < urlFetchers.length; i++) {
@@ -55,7 +55,7 @@ public class BasicFetcher implements Fetcher {
   }
   
   public void start() {
-    this.status.setStatus(Status.FETCHING);
+    status.setStatus(Status.FETCHING);
     fetcherThreads = new Thread[urlFetchers.length];
     for(int i = 0; i < fetcherThreads.length; i++) {
       fetcherThreads[i] = new Thread(urlFetchers[i]);
@@ -64,7 +64,7 @@ public class BasicFetcher implements Fetcher {
   }
   
   public void stop() {
-    this.status.setStatus(Status.STOP);
+    status.setStatus(Status.STOP);
     if(fetcherThreads == null) return;
     for(int i = 0; i < fetcherThreads.length; i++) {
       urlFetchers[i].setExit(true);

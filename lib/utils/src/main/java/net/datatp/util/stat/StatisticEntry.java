@@ -8,7 +8,6 @@ public class StatisticEntry implements Serializable {
   private String name ;
   private long   frequency ;
   private String relateTo ;
-  private Object model ;
 
   public StatisticEntry(String name, String relateTo, long freq)  { 
     this.name = name ; 
@@ -23,7 +22,4 @@ public class StatisticEntry implements Serializable {
   public String getRelateTo(){ return this.relateTo; }
 
   public void incr(long value) { this.frequency += value ; }
-
-  public <T> T getModel() { return (T) model ; }
-  public void  setModel(Object object) { this.model = object ; }
 }

@@ -6,6 +6,8 @@ import java.util.TreeMap;
  * $Author: Tuan Nguyen$ 
  **/
 public class Statistic extends TreeMap<String, StatisticEntry> {
+  private static final long serialVersionUID = 1L;
+
   private String name ;
 
   public Statistic(String name) {
@@ -41,14 +43,6 @@ public class Statistic extends TreeMap<String, StatisticEntry> {
         incr(name[i], relateTo, amount) ;
       }
     }
-  }
-
-  public Object[] getModels() {
-    Object[] models = new Object[size()] ;
-    Iterator<StatisticEntry> i = values().iterator() ;
-    int idx = 0 ;
-    while(i.hasNext()) models[idx++] = i.next() ;
-    return models ;
   }
 
   public void traverse(StatisticVisitor visitor) {

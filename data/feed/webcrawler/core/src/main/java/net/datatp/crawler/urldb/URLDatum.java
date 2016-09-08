@@ -45,7 +45,7 @@ public class URLDatum implements  Externalizable {
   private long               lastFetchFinishAt;
   private long               lastFetchDownloadTime;
   private int                lastDownloadDataSize;
-  private byte               pageType;
+  private byte               pageType                = PAGE_TYPE_UNCATEGORIZED;
   private byte               deep;
   private byte               status                  = STATUS_NEW;
   private String             contentType             = DEFAULT_CONTENT_TYPE;

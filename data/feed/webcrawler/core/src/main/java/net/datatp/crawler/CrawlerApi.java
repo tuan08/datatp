@@ -14,6 +14,7 @@ public interface CrawlerApi {
   
   public void siteAdd(SiteConfig  ...  configs) throws Exception ;
   public void siteSave(SiteConfig ... configs) throws Exception ;
+  public String[] siteRemove(String group, String ... site) throws Exception ;
   
   public List<SiteConfig> siteGetSiteConfigs() throws Exception ;
   

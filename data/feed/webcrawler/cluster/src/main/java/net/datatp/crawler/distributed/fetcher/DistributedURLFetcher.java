@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.datatp.channel.ChannelGateway;
 import net.datatp.crawler.fetcher.URLFetcher;
 import net.datatp.crawler.fetcher.SiteSessionManager;
+import net.datatp.crawler.fetcher.URLDatumFetchBufferQueue;
 import net.datatp.crawler.processor.FetchDataProcessor;
 import net.datatp.crawler.site.SiteContextManager;
 import net.datatp.crawler.urldb.URLDatum;
@@ -15,17 +16,17 @@ import net.datatp.xhtml.XDoc;
  * Apr 14, 2010
  */
 public class DistributedURLFetcher extends URLFetcher {
-  private URLDatumFetchQueue urldatumFetchQueue;
+  private URLDatumFetchBufferQueue urldatumFetchQueue;
   private ChannelGateway     xDocGateway;
   private ChannelGateway     urlFetchCommitGateway;
 
   public DistributedURLFetcher(String name,
-                     SiteContextManager manager,
-                     SiteSessionManager siteSessionManager, 
-                     URLDatumFetchQueue urldatumFetchQueue,
-                     ChannelGateway     urlFetchCommitGateway,
-                     ChannelGateway     xDocGateway,
-                     FetchDataProcessor fetchDataProcessor) {
+                               SiteContextManager manager,
+                               SiteSessionManager siteSessionManager, 
+                               URLDatumFetchBufferQueue urldatumFetchQueue,
+                               ChannelGateway     urlFetchCommitGateway,
+                               ChannelGateway     xDocGateway,
+                               FetchDataProcessor fetchDataProcessor) {
     super(name, manager, siteSessionManager, fetchDataProcessor);
     this.urldatumFetchQueue    = urldatumFetchQueue ;
     this.urlFetchCommitGateway = urlFetchCommitGateway;
@@ -41,6 +42,7 @@ public class DistributedURLFetcher extends URLFetcher {
   protected void onCommit(XDoc xDoc) throws Exception {
     xDocGateway.send(xDoc);
   }
+  
   @Override
   protected void onDelay(URLDatum urlDatum) throws InterruptedException {
     urldatumFetchQueue.addBusy(urlDatum) ;

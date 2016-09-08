@@ -45,8 +45,8 @@ public class CrawlerIntegrationTest {
     crawler.siteCreateGroup("vietnam");
     SiteConfig[] configs = {
       new SiteConfig("vietnam", "vnexpress.net", "http://vnexpress.net", 2).setExtractConfig(ExtractConfig.article()),
-      new SiteConfig("vietnam", "dantri.com.vn", "http://dantri.com.vn", 2).setExtractConfig(ExtractConfig.article()),
-      new SiteConfig("vietnam", "otofun.net",    "https://www.otofun.net/forums/", 2).setExtractConfig(ExtractConfig.forum())
+    //  new SiteConfig("vietnam", "dantri.com.vn", "http://dantri.com.vn", 2).setExtractConfig(ExtractConfig.article()),
+    //  new SiteConfig("vietnam", "otofun.net",    "https://www.otofun.net/forums/", 2).setExtractConfig(ExtractConfig.forum())
     };
     crawler.siteAdd(configs);
     

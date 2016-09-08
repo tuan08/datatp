@@ -86,6 +86,11 @@ public class Crawler implements CrawlerApi {
   }
   
   @Override
+  public String[] siteRemove(String group, String ... site) throws Exception {
+    return siteContextManager.remove(group, site);
+  }
+  
+  @Override
   public List<SiteConfig> siteGetSiteConfigs() { return siteContextManager.getSiteConfigs(); }
   
   @Override

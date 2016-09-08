@@ -34,9 +34,9 @@ abstract public class URLFetcher implements Runnable {
   private boolean             exit   = false;
 
   public URLFetcher(String name,
-                     SiteContextManager manager,
-                     SiteSessionManager siteSessionManager,
-                     FetchDataProcessor dataProcessor) {
+                    SiteContextManager manager,
+                    SiteSessionManager siteSessionManager,
+                    FetchDataProcessor dataProcessor) {
     this.name               = name;
     this.manager            = manager ;
     this.siteSessionManager = siteSessionManager ;
@@ -50,7 +50,8 @@ abstract public class URLFetcher implements Runnable {
   public URLFetcherMetric getURLFetcherMetric() { return fetcherMetric ; } 
   
   public URLFetcherReport getReport() { 
-    return new URLFetcherReport(name, status, fetcherMetric);
+    URLFetcherReport report = new URLFetcherReport(name, status, fetcherMetric);
+    return report;
   }
   
   public void setExit(boolean b) { this.exit = b ; }
@@ -74,12 +75,15 @@ abstract public class URLFetcher implements Runnable {
    */
   abstract protected URLDatum nextURLDatum(long maxWaitTime) throws Exception;
   
+  static int counter = 0;
+  
   public void fetch(URLDatum datum) throws Exception {
     FetchContext fetchCtx = doFetch(datum) ;
     if(fetchCtx != null) {
       dataProcessor.process(fetchCtx);
       onCommit(fetchCtx.getCommitURLs());
       onCommit(fetchCtx.getXDocMapper().getXDoc());
+      fetcherMetric.log(datum) ;
     }
   }
 
@@ -90,12 +94,10 @@ abstract public class URLFetcher implements Runnable {
     } catch(Exception ex) {
       ex.printStackTrace();
       datum.setLastErrorCode(ErrorCode.ERROR_DB_CONFIG_GET) ;
-      fetcherMetric.log(datum) ;
       return new FetchContext(this, null, urlContext) ;
     }
     if(urlContext == null) {
       datum.setLastErrorCode(ErrorCode.ERROR_DB_CONFIG_NOT_FOUND) ;
-      fetcherMetric.log(datum) ;
       return new FetchContext(this, null, urlContext) ;
     }
 
@@ -112,7 +114,6 @@ abstract public class URLFetcher implements Runnable {
       return null ;
     }
     FetchContext fetchCtx = session.fetch(this, urlContext) ;
-    fetcherMetric.log(datum) ;
     return fetchCtx ;
   }
 

@@ -10,11 +10,12 @@ import net.datatp.crawler.http.ErrorCode;
 import net.datatp.crawler.urldb.URLDatum;
 
 public class URLFetcherMetric implements Serializable {
-  private static final long serialVersionUID = 1L;
-  static int                MAX_RECENT_URL = 50 ;
+  private static final long     serialVersionUID = 1L;
+  
+  static int                    MAX_RECENT_URL   = 50;
   
   private String                name;
-  private int                   fetchCount;
+  private long                  fetchCount       = 0L;
   private LinkedList<URLDatum>  recentFetchUrls  = new LinkedList<URLDatum>();
   private Map<Integer, Integer> rcs              = new HashMap<Integer, Integer>();
   private Map<Integer, Integer> errors           = new HashMap<Integer, Integer>();
@@ -27,75 +28,69 @@ public class URLFetcherMetric implements Serializable {
   }
   
   public String getName() { return name; }
-  public void setName(String name) { this.name = name; }
 
-  public int getFetchCount() { return fetchCount; }
-  public void setFetchCount(int fetchCount) { this.fetchCount = fetchCount; }
+  public long getFetchCount() { return fetchCount; }
 
-  public LinkedList<URLDatum> getRecentFetchUrls() { return recentFetchUrls; }
-
-  public void setRecentFetchUrls(LinkedList<URLDatum> list) { recentFetchUrls = list; }
-
-  public Map<Integer, Integer> getRcs() { return rcs; }
-  public void setRcs(Map<Integer, Integer> rcs) { this.rcs = rcs; }
-
-  public Map<Integer, Integer> getErrors() { return errors; }
-  public void setErrors(Map<Integer, Integer> errors) { this.errors = errors; }
-
-  public Map<Integer, Integer> getPageTypes() { return pageTypes; }
-  public void setPageTypes(Map<Integer, Integer> pageTypes) { this.pageTypes = pageTypes; }
-
-  public String[] recentFetchUrl() {
-    String[] array = new String[recentFetchUrls.size()] ;
-    for(int i = 0; i < recentFetchUrls.size(); i++) {
-      array[i] = recentFetchUrls.get(i).getOriginalUrl();
+  public URLDatum[] getRecentFetchUrls() { 
+    synchronized(recentFetchUrls) {
+      URLDatum[] array = new URLDatum[recentFetchUrls.size()];
+      return recentFetchUrls.toArray(array);
     }
-    return array ; 
   }
   
-  public int countResponseCodeGroup100() { return countResponseCodeGroup(100, 200) ; }
+  public Counter[] getResponseCodeGroups() {
+    Counter[] counters = {
+      countResponseCodeGroup("Response Code 100", 100, 200),
+      countResponseCodeGroup("Response Code 200", 200, 300),
+      countResponseCodeGroup("Response Code 300", 300, 400),
+      countResponseCodeGroup("Response Code 400", 400, 500),
+      countResponseCodeGroup("Response Code 500", 500, 600),
+      countResponseCodeGroup("Response Code Other", 600, 1000000),
+    };
+    return counters;
+  }
   
-  public int countResponseCodeGroup200() { return countResponseCodeGroup(200, 300) ; }
+  public Counter[] getErrorCodeGroups() {
+    Counter[] counters = {
+        countErrorCodeGroup("Error Code 1 - 128", 1, 128),
+    };
+    return counters;
+  }
   
-  public int countResponseCodeGroup300() { return countResponseCodeGroup(300, 400) ; }
-  
-  public int countResponseCodeGroup400() { return countResponseCodeGroup(400, 500) ; }
-  
-  public int countResponseCodeGroup500() { return countResponseCodeGroup(500, 600) ; }
-  
-  public int countResponseCodeGroup10000() { return countResponseCodeGroup(10000, 20000) ; }
-  
-  public int countErrors() { return countErrorCodeGroup(1, 128) ; }
+  public Counter[] getPageTypes() {
+    long list = 0, detail = 0, ignore = 0, uncategorized = 0;
+    for(Map.Entry<Integer, Integer> entry : pageTypes.entrySet()) {
+      int key   = entry.getKey();
+      byte type = (byte) key;
+      if(type == URLDatum.PAGE_TYPE_IGNORE) ignore++;
+      else if(type == URLDatum.PAGE_TYPE_LIST) list++;
+      else if(type == URLDatum.PAGE_TYPE_DETAIL) detail++;
+      else uncategorized++;
+    }
+    Counter[] counters = {
+      new Counter("ignore", ignore), new Counter("list", list), 
+      new Counter("detail", detail), new Counter("uncategorized", uncategorized)
+    };
+    return counters;
+  }
 
-  public int countPageListType() {
-    int total = 0 ;
-    Integer count = ((Integer)pageTypes.get(URLDatum.PAGE_TYPE_LIST)) ;
-    if(count != null) total = count.intValue() ;
-    return total ;
-  }
-  
-  public int countPageDetailType() {
-    int total = 0 ;
-    Integer count = ((Integer)pageTypes.get(URLDatum.PAGE_TYPE_DETAIL)) ;
-    if(count != null) total = count.intValue() ;
-    return total ;
-  }
-  
   public void log(URLDatum datum) {
-    fetchCount++ ;
-    recentFetchUrls.addFirst(datum) ;
-    if(recentFetchUrls.size() > MAX_RECENT_URL) recentFetchUrls.removeLast() ;
+    this.fetchCount++ ;
+    synchronized(recentFetchUrls) {
+      recentFetchUrls.addFirst(datum) ;
+      if(recentFetchUrls.size() > MAX_RECENT_URL) recentFetchUrls.removeLast() ;
+    }
     incrCount(rcs, datum.getLastResponseCode()) ;
     if(datum.getLastErrorCode() != ErrorCode.ERROR_TYPE_NONE) {
       incrCount(errors, datum.getLastErrorCode()) ;
     }
-    incrCount(pageTypes, (int)datum.getPageType()) ;
+    byte type = (byte) datum.getPageType();
+    incrCount(pageTypes, type) ;
   }
   
  
-  private void incrCount(Map<Integer, Integer> map, int code) {
-    Integer key = new Integer(code) ;
-    Integer count = (Integer) map.get(key) ;
+  private void incrCount(Map<Integer, Integer> map, int key) {
+    Integer count =  map.get(key) ;
     if(count == null) {
       map.put(key, 1) ;
     } else {
@@ -103,8 +98,8 @@ public class URLFetcherMetric implements Serializable {
     }
   }
   
-  private int countResponseCodeGroup(int from, int to) {
-    int total = 0 ;
+  private Counter countResponseCodeGroup(String name, int from, int to) {
+    long total = 0 ;
     Iterator<Map.Entry<Integer, Integer>> i = rcs.entrySet().iterator() ;
     while(i.hasNext()) {
       Map.Entry<Integer, Integer> entry = i.next() ;
@@ -113,11 +108,11 @@ public class URLFetcherMetric implements Serializable {
         total += ((Integer)entry.getValue()).intValue() ;
       }
     }
-    return total ;
+    return new Counter(name, total) ;
   }
   
-  private int countErrorCodeGroup(int from, int to) {
-    int total = 0 ;
+  private Counter countErrorCodeGroup(String name, int from, int to) {
+    long total = 0 ;
     Iterator<Map.Entry<Integer, Integer>> i = errors.entrySet().iterator() ;
     while(i.hasNext()) {
       Map.Entry<Integer, Integer> entry = i.next() ;
@@ -126,6 +121,45 @@ public class URLFetcherMetric implements Serializable {
         total += ((Integer)entry.getValue()).intValue() ;
       }
     }
-    return total ;
+    return new Counter(name, total) ;
+  }
+  
+  public void merge(URLFetcherMetric other) {
+    fetchCount += other.fetchCount;
+    for(URLDatum sel : other.getRecentFetchUrls()) {
+      recentFetchUrls.add(sel);
+    }
+    merge(rcs,       other.rcs);
+    merge(errors,    other.errors);
+    merge(pageTypes, other.pageTypes);
+  }
+  
+  void merge(Map<Integer, Integer> map, Map<Integer, Integer> other) {
+    for(Map.Entry<Integer, Integer> entry : other.entrySet()) {
+      Integer value = map.get(entry.getKey());
+      if(value != null) value = value + entry.getValue();
+      else              value = entry.getValue();
+      map.put(entry.getKey(), value);
+    }
+  }
+  
+  static class Counter {
+    private String name ;
+    private long   count;
+    
+    public Counter() {}
+    
+    public Counter(String name, long count) {
+      this.name  = name;
+      this.count = count;
+    }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
+
+    public long getCount() { return count; }
+    public void setCount(long count) { this.count = count; }
+    
   }
 }

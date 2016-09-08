@@ -46,6 +46,16 @@ public class SiteContextManager {
     }
   }
   
+  public String[] remove(String group, String ... site) throws Exception {
+    List<String> rmSites = new ArrayList<String>();
+    for(String selSite : site) {
+      SiteContext rmCtx = siteContexts.remove(selSite);
+      if(rmCtx != null) rmSites.add(selSite);
+    }
+    return rmSites.toArray(new String[rmSites.size()]);
+  }
+  
+  
   public int clear() { 
     int size = siteContexts.size() ;
     siteContexts.clear() ;

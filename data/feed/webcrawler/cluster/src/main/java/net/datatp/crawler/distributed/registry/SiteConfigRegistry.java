@@ -114,6 +114,17 @@ public class SiteConfigRegistry {
     }
     transFinal.commit();
   }
+
+  public String[] remove(String group, String ... site) throws Exception {
+    CuratorTransaction trans = registryClient.startTransaction();
+    String gpath = groupPath(group);
+    CuratorTransactionFinal transFinal =  trans.check().forPath(gpath).and();
+    for(String selSite : site) {
+      String path =  "/" + GROUPS + "/" + group + "/" + selSite;
+      transFinal = transFinal.delete().forPath(path).and();
+    }
+    return site;
+  }
   
   public void listenToEvent(CrawlerEventContext context) throws Exception {
     eventListener = new EventListener<>(context, registryClient, "/" + EVENTS);

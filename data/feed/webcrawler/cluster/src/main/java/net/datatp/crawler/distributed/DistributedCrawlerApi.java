@@ -55,6 +55,11 @@ public class DistributedCrawlerApi implements CrawlerApi {
   }
   
   @Override
+  public String[] siteRemove(String group, String ... site) throws Exception {
+    return crawlerRegistry.getSiteConfigRegistry().remove(group, site);
+  }
+  
+  @Override
   public List<SiteConfig> siteGetSiteConfigs() throws Exception {
     return crawlerRegistry.getSiteConfigRegistry().getAll();
   }
