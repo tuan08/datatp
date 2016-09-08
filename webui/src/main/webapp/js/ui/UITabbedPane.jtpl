@@ -5,7 +5,7 @@
     <%  var disable = tab.name == state.tabConfig.name ? ' ui-disabled' : '' ; %>
         <a class="Tab onSelectTab<%=disable%>" tab="<%=tab.name%>"><%=tab.label%></a>
     <%  if(disable && tab.closable) {%>
-          <a class="onCloseTab" tab="<%=tab.name%>">x</a>
+          <a class="ui-action onCloseTab" tab="<%=tab.name%>">x</a>
     <%  }%>
     <%}%>
   </div>

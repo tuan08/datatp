@@ -38,16 +38,16 @@ define([
           type:     "POST",
           processData: false,      
           contentType: false,      
-          success: function() {
+          success: function(data) {
             uploadStatus.html('<span>Uploaded '+ filename + '</span>');
             if(config.onSuccess) {
-              config.onSuccess(thisUI);
+              config.onSuccess(thisUI, data);
             }
           },
           error : function(result){
             alert(JSON.stringify(result));
             if(config.onError) {
-              config.onError(thisUI);
+              config.onError(thisUI, result);
             }
           }
         });

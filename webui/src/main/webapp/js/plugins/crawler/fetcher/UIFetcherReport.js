@@ -6,8 +6,9 @@ define([
   'ui/UITable',
   'ui/UIBean',
   'ui/UIBreadcumbs',
+  'plugins/crawler/fetcher/UIURLFetcherMetric',
   'plugins/crawler/Rest'
-], function($, _, Backbone, UICollabsible, UITable, UIBean, UIBreadcumbs, Rest) {
+], function($, _, Backbone, UICollabsible, UITable, UIBean, UIBreadcumbs, UIURLFetcherMetric, Rest) {
   var UIFetcherStatus = UIBean.extend({
     label: "Fetcher Status",
     config: {
@@ -44,7 +45,7 @@ define([
           { 
             field:  "fetchCount", label: "Fetch Count",  toggled: true, filterable: true,
             custom: {
-              getDisplay: function(bean) { return bean.metric.fetchCount; }
+              getDisplay: function(bean) { return bean.urlFetcherMetric.fetchCount; }
             }
           }
         ],
@@ -80,6 +81,9 @@ define([
       var uiURLFetcherReport = new UIURLFetcherReport();
       uiURLFetcherReport.setBeans(fetcherReport.urlFetcherReport);
       this.add(uiURLFetcherReport);
+
+      var uiURLFetcherMetric = new UIURLFetcherMetric({urlFetcherMetric: fetcherReport.aggregateUrlFetcherMetric });
+      this.add(uiURLFetcherMetric);
     }
   }) ;
 

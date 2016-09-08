@@ -14,16 +14,17 @@ define([
     config: {
       label: "Import",
       serviceUrl: "/crawler/site/import",
-      onSuccess: function(thisUI) {
-        console.log("on upload success");
+      onSuccess: function(thisUI, data) {
+        thisUI.uiSiteConfigList.onImportSuccess();
       },
 
-      onError: function(thisUI) {
+      onError: function(thisUI, data) {
         console.log("on upload error");
       }
     },
 
     onInit: function(options) {
+      this.uiSiteConfigList = options.uiSiteConfigList;
     }
   });
 
@@ -36,22 +37,15 @@ define([
           actions: [
             {
               action: "new", label: "New", 
-              onClick: function(thisTable) { 
-                thisTable.onAddBean() ;
-              } 
+              onClick: function(thisTable) { thisTable.onAddBean() ; } 
             },
             {
               action: "import", label: "Import", 
-              onClick: function(thisTable) { 
-                var popupConfig = { title: "Import", minWidth: 400, modal: true} ;
-                UIPopup.activate(new UIImport(), popupConfig) ;
-              } 
+              onClick: function(thisTable) { thisTable.onImport(); } 
             },
             {
               action: "export",  label: "Export", 
-              onClick: function(thisTable) { 
-                window.open(Rest.site.exportURL(), "export");
-              } 
+              onClick: function(thisTable) { window.open(Rest.site.exportURL(), "export"); } 
             }
           ]
         }
@@ -107,8 +101,9 @@ define([
           {
             icon: "delete", label: "Delete",
             onClick: function(thisTable, row) { 
-              thisTable.markDeletedItemOnCurrentPage(row) ;
-              console.log('Mark delete row ' + row);
+              var siteConfig = thisTable.getItemOnCurrentPage(row) ;
+              Rest.site.remove(siteConfig.group, siteConfig.hostname);
+              thisTable.removeItemOnCurrentPage(row) ;
             }
           }
         ]
@@ -118,7 +113,21 @@ define([
     onInit: function(options) {
       var siteConfigs = Rest.site.getSiteConfigs() ;
       this.setBeans(siteConfigs) ;
-    }
+    },
+
+    onImport: function() {
+      var popupConfig = { title: "Import", minWidth: 400, modal: true} ;
+      var options = { uiSiteConfigList: this };
+      UIPopup.activate(new UIImport(options), popupConfig) ;
+    },
+
+    onImportSuccess: function() {
+      UIPopup.closePopup() ;
+      var siteConfigs = Rest.site.getSiteConfigs() ;
+      this.setBeans(siteConfigs) ;
+      this.render();
+    },
+
   });
   
   return UISiteConfigList ;

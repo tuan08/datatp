@@ -12,6 +12,10 @@ define([
       return server.syncPOSTJson("/site/save", siteConfig);
     };
 
+    this.remove = function(group, site) {
+      return server.restGET("/site/remove", {group: group, site: site});
+    };
+
     this.exportURL = function() { return server.toURL("/site/export"); };
 
     this.getAnalyzedURLSiteStructure = function(siteConfig, maxDownload, forceNew) {
