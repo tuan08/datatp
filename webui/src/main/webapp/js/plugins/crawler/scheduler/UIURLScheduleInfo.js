@@ -35,23 +35,15 @@ define([
             }
           },
           { field: "execTime",   label: "Exec Time", toggled: true, filterable: true },
-          { field: "urlCount",   label: "URL Count", toggled: true, filterable: true },
+          { field: "urlCount",   label: "URL", toggled: true, filterable: true },
           { field: "urlListCount",   label: "URL List", toggled: true, filterable: true },
           { field: "urlDetailCount",   label: "URL Detail", toggled: true, filterable: true },
           { field: "urlUncategorizedCount",   label: "URL Uncategorized", toggled: true, filterable: true },
-          { field: "scheduleCount",   label: "Schedule Count", toggled: true, filterable: true },
-          { field: "delayScheduleCount",   label: "Delay Schedule Count", toggled: true, filterable: true },
-          { field: "pendingCount",   label: "Pending Count", toggled: true, filterable: true },
-          { field: "waitingCount",   label: "Waiting Count", toggled: true, filterable: true },
-        ],
-        actions:[
-          {
-            icon: "delete", label: "Delete",
-            onClick: function(thisTable, row) { 
-              thisTable.markDeletedItemOnCurrentPage(row) ;
-              console.log('Mark delete row ' + row);
-            }
-          }
+          { field: "scheduleCount",   label: "Schedule", toggled: true, filterable: true },
+          { field: "delayScheduleCount",   label: "Delay Schedule", toggled: true, filterable: true },
+          { field: "pendingCount",   label: "Pending", toggled: true, filterable: true },
+          { field: "expiredPendingCount",   label: "Expired Pending", toggled: true, filterable: true },
+          { field: "waitingCount",   label: "Waiting", toggled: true, filterable: true },
         ]
       }
     },

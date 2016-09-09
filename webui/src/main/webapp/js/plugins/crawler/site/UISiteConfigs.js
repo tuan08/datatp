@@ -2,12 +2,11 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'ui/UIBean',
   'ui/UITable',
   'ui/UIUpload',
   'ui/UIPopup',
   'plugins/crawler/Rest',
-], function($, _, Backbone, UIBean, UITable, UIUpload, UIPopup, Rest) {
+], function($, _, Backbone, UITable, UIUpload, UIPopup, Rest) {
   var UIImport = UIUpload.extend({
     label: 'Import',
 
@@ -28,7 +27,7 @@ define([
     }
   });
 
-  var UISiteConfigList = UITable.extend({
+  var UISiteConfigs = UITable.extend({
     label: "Site Config List",
 
     config: {
@@ -58,7 +57,6 @@ define([
             field: "hostname",   label: "Hostname", toggled: true, filterable: true,
             onClick: function(thisTable, row) {
               var siteConfig = thisTable.getItemOnCurrentPage(row) ;
-              console.log('on click bean ' + JSON.stringify(siteConfig)) ;
               var uiSiteConfigScreen = thisTable.getAncestorOfType('UISiteConfigScreen');
               uiSiteConfigScreen.addSiteConfigTab(siteConfig);
             }
@@ -130,5 +128,5 @@ define([
 
   });
   
-  return UISiteConfigList ;
+  return UISiteConfigs ;
 });

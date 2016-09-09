@@ -18,6 +18,7 @@ import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
 import net.datatp.crawler.site.SiteConfig;
 import net.datatp.crawler.site.SiteContextManager;
+import net.datatp.crawler.site.SiteStatistic;
 import net.datatp.crawler.urldb.InMemURLDatumDB;
 import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.crawler.urldb.URLDatumFactory;
@@ -82,7 +83,7 @@ public class Crawler implements CrawlerApi {
   public void siteSave(SiteConfig ... configs) throws Exception {
     for(int i = 0; i < configs.length; i++) {
       SiteConfig config = configs[i];
-      siteContextManager.update(config);
+      siteContextManager.save(config);
     }
   }
   
@@ -97,7 +98,11 @@ public class Crawler implements CrawlerApi {
   @Override
   public void siteReload() throws Exception { }
   
-  public URLSchedulerStatus getURLSchedulerStatus() {
+  public List<SiteStatistic> siteGetSiteStatistics() throws Exception {
+    return siteContextManager.getSiteStatistics();
+  }
+  
+  public URLSchedulerStatus schedulerGetURLSchedulerStatus() {
     return urlScheduler.getStatus();
   }
   
@@ -144,7 +149,7 @@ public class Crawler implements CrawlerApi {
   
   public CrawlerStatus getCrawlerStatus() {
     CrawlerStatus status = new CrawlerStatus();
-    status.setUrlSchedulerStatus(getURLSchedulerStatus());
+    status.setUrlSchedulerStatus(schedulerGetURLSchedulerStatus());
     status.setFetcherStatus(getFetcherStatus());
     return status;
   }

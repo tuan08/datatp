@@ -126,7 +126,6 @@ public class SiteExtractor {
     
     public ExtractEntity extractEntity(WDataExtractContext context) {
       ExtractEntity entity =  extractor.extractEntity(context);
-      if(entity != null) entity.addTag("extractor:auto");
       return entity;
     }
   }
@@ -158,16 +157,19 @@ public class SiteExtractor {
       return null;
     }
     
-    String[] select(Document doc, String xpath) {
-      Elements elements = doc.select(xpath);
-      if(elements.size() == 0) return null;
-      String[] text = new String[elements.size()];
-      FormatTextExtractor extractor = new FormatTextExtractor();
-      for(int i = 0; i < text.length; i++) {
-        Element ele = elements.get(i);
-        text[i] = extractor.extract(ele);
+    String[] select(Document doc, String ... xpath) {
+      for(int i = 0; i < xpath.length; i++) {
+        Elements elements = doc.select(xpath[i]);
+        if(elements.size() == 0) continue;
+        String[] text = new String[elements.size()];
+        FormatTextExtractor extractor = new FormatTextExtractor();
+        for(int j = 0; j < text.length; j++) {
+          Element ele = elements.get(j);
+          text[j] = extractor.extract(ele);
+        }
+        return text;
       }
-      return text;
+      return null;
     }
   }
 }

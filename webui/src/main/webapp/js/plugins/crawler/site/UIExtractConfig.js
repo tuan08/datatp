@@ -14,9 +14,35 @@ define([
         generic: {
           label: 'Bean',
           fields: [
+            {
+              field: "name",   label: "Entity Name", required: true,  
+              select: {
+                getOptions: function(field, bean) {
+                  var options = [
+                    { label: 'content', value: 'content' },
+                    { label: 'job',     value: 'job' },
+                    { label: 'product', value: 'product' },
+                    { label: 'comment', value: 'comment' }
+                  ];
+                  return options ;
+                }
+              }
+            },
             { 
-              field: "name",   label: "Name", required: true,  
-              validator: { name: 'empty', errorMsg: "custom error message" } 
+              field: "extractType",  label: "Extract Type", 
+              select: {
+                getOptions: function(field, bean) {
+                  var options = [
+                    { label: 'content', value: 'content' },
+                    { label: 'article', value: 'article' },
+                    { label: 'forum',   value: 'forum' },
+                    { label: 'classified',   value: 'classified' },
+                    { label: 'job',   value: 'job' },
+                    { label: 'comment',   value: 'comment' }
+                  ];
+                  return options ;
+                }
+              }
             },
             { 
               field: "matchType",   label: "Match Type",
@@ -31,24 +57,7 @@ define([
                 }
               }
             },
-            { field: "matchPattern",  label: "Match Pattern", multiple: true },
-            { 
-              field: "extractAuto",  label: "Extract Auto", 
-              select: {
-                getOptions: function(field, bean) {
-                  var options = [
-                    { label: 'none', value: 'none' },
-                    { label: 'content', value: 'content' },
-                    { label: 'article', value: 'article' },
-                    { label: 'forum',   value: 'forum' },
-                    { label: 'classified',   value: 'classified' },
-                    { label: 'job',   value: 'job' },
-                    { label: 'comment',   value: 'comment' }
-                  ];
-                  return options ;
-                }
-              }
-            }
+            { field: "matchPattern",  label: "Match Pattern", multiple: true }
           ]
         }
       }
@@ -75,8 +84,20 @@ define([
       bean: {
         label: 'Extract XPath',
         fields: [
-          { field: "name",   label: "Name", required: true, toggled: true, filterable: true, autocomplete: true },
-          { field: "xpath",   label: "XPath", required: true, toggled: true, filterable: true  }
+          { 
+            field: "name",   label: "Name", required: true, toggled: true, filterable: true,
+            select: {
+              getOptions: function(field, bean) {
+                var options = [
+                  { label: 'Title',     value: 'title' },
+                  { label: 'Description', value: 'description' },
+                  { label: 'Content',     value: 'content' }
+                ];
+                return options ;
+              }
+            }
+          },
+          { field: "xpath",   label: "XPath", required: true, multiple: true, toggled: true, filterable: true  }
         ],
         actions:[
           {
@@ -118,8 +139,19 @@ define([
       }
     },
     
-    addExtractXPath: function(extractXPath) {
-      this.onAddBeanWith(extractXPath, this.onSaveBeanCallback);
+    addExtractXPath: function(newExtractXPath) {
+      var extractXPath = this.getBeans();
+      var merged = false;
+      for(var i = 0; i < extractXPath.length; i++) {
+        if(extractXPath[i].name == newExtractXPath.name) {
+          extractXPath[i].xpath.push(newExtractXPath.xpath);
+          merged = true;
+          break;
+        }
+      }
+      if(!merged) extractXPath.push(newExtractXPath); 
+      this.setBeans(extractXPath);
+      this.render();
     }
   });
 

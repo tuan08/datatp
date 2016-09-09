@@ -28,6 +28,7 @@ import net.datatp.crawler.fetcher.FetcherReport;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
 import net.datatp.crawler.site.SiteConfig;
+import net.datatp.crawler.site.SiteStatistic;
 import net.datatp.crawler.site.analysis.SiteStructureAnalyzer;
 import net.datatp.crawler.site.analysis.SiteStructureAnalyzerConfig;
 import net.datatp.crawler.site.analysis.SiteStructureAnalyzerService;
@@ -57,6 +58,11 @@ public class CrawlerRestController {
   @RequestMapping("/crawler/site/configs")
   public List<SiteConfig> siteGetSiteConfigs() throws Exception {
     return crawlerApi.siteGetSiteConfigs();
+  }  
+  
+  @RequestMapping("/crawler/site/statistics")
+  public List<SiteStatistic> siteGetStatistics() throws Exception {
+    return crawlerApi.siteGetSiteStatistics();
   }  
   
   @RequestMapping(value = "/crawler/site/analyzed-site-url", method = RequestMethod.POST)

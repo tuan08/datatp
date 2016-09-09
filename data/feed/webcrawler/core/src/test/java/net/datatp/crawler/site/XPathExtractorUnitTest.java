@@ -17,7 +17,7 @@ public class XPathExtractorUnitTest {
   public void test() throws Exception {
     SiteContextManager manager = new SiteContextManager();
     SiteConfig config = new SiteConfig("vietnam", "vnexpress.net", "http://vnexpress.net", 3);
-    ExtractConfig extractConfig = new ExtractConfig("article", ExtractType.article);
+    ExtractConfig extractConfig = new ExtractConfig("content", ExtractType.article);
     XPathPattern[] xpathPattern = {
       new XPathPattern("title", ".main_content_detail .title_news"),
       new XPathPattern("description", ".main_content_detail .short_intro"),

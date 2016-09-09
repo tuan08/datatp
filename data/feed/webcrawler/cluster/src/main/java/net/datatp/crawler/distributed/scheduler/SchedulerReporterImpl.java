@@ -1,5 +1,6 @@
 package net.datatp.crawler.distributed.scheduler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import net.datatp.crawler.scheduler.URLSchedulerReporter;
 import net.datatp.crawler.scheduler.URLSchedulerStatus;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
+import net.datatp.crawler.site.SiteStatistic;
 
 @Component
 public class SchedulerReporterImpl implements URLSchedulerReporter {
@@ -42,5 +44,14 @@ public class SchedulerReporterImpl implements URLSchedulerReporter {
   
   public List<URLScheduleMetric> getURLScheduleReport(int max) throws Exception {
     return wcRegistry.getSchedulerRegistry().getURLScheduleMetric(max);
+  }
+  
+  @Override
+  public void report(List<SiteStatistic> list) throws Exception {
+  }
+  
+  @Override
+  public List<SiteStatistic> getSiteStatistics() throws Exception {
+    return new ArrayList<>();
   }
 }

@@ -39,13 +39,12 @@ define([
       if(hit._source.entity != null) {
         var entity = hit._source.entity;
         if(entity.content != null && entity.content.title != null) {
-          label = entity.content.title;
+          label = entity.content.title.join();
         }
       }
-      if(label.length > 50) {
-        label = label.substring(0, 50) + "...";
-      }
-      this.addTab(UIUtil.guid(), label, new UISearchHit({searchHit: hit}), true);
+      if(label.length > 30) label = label.substring(0, 30) + "...";
+      var name = label.replace(/ |"|'/g, '');
+      this.addTab(name, label, new UISearchHit({searchHit: hit}), true, true);
       this.render();
     }
   });

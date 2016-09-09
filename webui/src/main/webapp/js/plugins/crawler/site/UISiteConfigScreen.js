@@ -3,9 +3,9 @@ define([
   'underscore', 
   'backbone',
   'ui/UITabbedPane',
-  'plugins/crawler/site/UISiteConfigList',
+  'plugins/crawler/site/UISiteConfigs',
   'plugins/crawler/site/UISiteConfig'
-], function($, _, Backbone, UITabbedPane, UISiteConfigList, UISiteConfig) {
+], function($, _, Backbone, UITabbedPane, UISiteConfigs, UISiteConfig) {
   var UISiteConfigScreen = UITabbedPane.extend({
     type: 'UISiteConfigScreen',
     label: 'Site Configs',
@@ -15,7 +15,7 @@ define([
     },
     
     onInit: function(options) {
-      this.addTab("siteConfigList", "Site Config", new UISiteConfigList(), false, true);
+      this.addTab("siteConfigList", "Site Configs", new UISiteConfigs(), false, true);
     },
     
     addSiteConfigTab: function(siteConfig) {

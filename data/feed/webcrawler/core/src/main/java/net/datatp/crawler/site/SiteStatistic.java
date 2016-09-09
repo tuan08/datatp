@@ -1,33 +1,71 @@
 package net.datatp.crawler.site;
 
-import java.io.Serializable;
-
 import net.datatp.crawler.http.ErrorCode;
 import net.datatp.crawler.http.ResponseCode;
 import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.util.stat.Statistics;
 
-public class URLStatistics implements Serializable {
+public class SiteStatistic {
   final static public String FETCH_STATUS  = "fetchStatus";
   final static public String RESPONSE_CODE = "responseCode";
   final static public String ERROR_CODE    = "errorCode";
   final static public String PAGE_TYPES    = "pageTypes";
   final static public String FETCH_COUNT   = "fetchCount";
-  
-  private String name;
-  private Statistics readonly = new Statistics() ;
-  private Statistics writable = new Statistics() ;
 
-  public URLStatistics() {
-    init(readonly) ;
+  private String               group;
+  private String               hostname;
+  private int                  scheduleCount;
+  private int                  commitCount;
+  private Statistics           urlStatistics = new Statistics();
+ 
+  transient private Statistics writable      = new Statistics();
+
+  public SiteStatistic() {
+    init(urlStatistics) ;
     init(writable) ;
   }
+  
+  public SiteStatistic(String group, String hostname) {
+    this();
+    this.group    = group;
+    this.hostname = hostname;
+  }
 
-  public String getName() { return name; }
-  public void setName(String name) { this.name = name; }
+  public String getGroup() { return group; }
+  public void setGroup(String group) { this.group = group; }
 
-  public Statistics getStatisticMap() { return readonly ; }
+  public String getHostname() { return hostname; }
+  public void setHostname(String hostname) { this.hostname = hostname; }
 
+  public Statistics getUrlStatistics() { return urlStatistics; }
+  public void setUrlStatistics(Statistics statistics) { this.urlStatistics = statistics; }
+
+  public int  getScheduleCount() { return this.scheduleCount ; }
+  public void setScheduleCount(int count) { this.scheduleCount = count; }
+  
+  public int  getCommitCount() { return commitCount ; }
+  public void setCommitCount(int count) { this.commitCount = count; }
+  
+  public int  getInQueue() { return scheduleCount - commitCount ; }
+  public void setInQueue(int num) {  }
+  
+  public void addScheduleCount(int num) {  this.scheduleCount +=  num ; }
+  
+  public boolean canSchedule(int maxSchedulePerSite, int maxConn) {
+    maxSchedulePerSite = maxSchedulePerSite * maxConn ;
+    if(scheduleCount - commitCount < maxSchedulePerSite) return true ;
+    return false ;
+  }
+  
+  public int getMaxSchedule(int maxSchedulePerSite, int maxConn) {
+    maxSchedulePerSite = maxSchedulePerSite * maxConn ;
+    int inqueue = scheduleCount - commitCount ;
+    int ret = maxSchedulePerSite - inqueue ;
+    return ret ;
+  }
+  
+  public void addCommitCount(int num) { commitCount +=  num ; }
+  
   public void log(URLDatum urldatum) {
     logStatus(urldatum) ;
     logResponseCode(urldatum) ;
@@ -37,7 +75,7 @@ public class URLStatistics implements Serializable {
   }
 
   public void onPostPreSchedule() {
-    readonly = writable ;
+    urlStatistics = writable ;
     writable = new Statistics() ;
     init(writable) ;
   }

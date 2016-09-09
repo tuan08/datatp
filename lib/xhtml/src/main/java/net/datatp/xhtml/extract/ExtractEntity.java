@@ -16,11 +16,11 @@ public class ExtractEntity extends XDocEntity {
     super(name, type);
   }
   
-  public void withTitle(String title) { field(TITLE, title); }
+  public void withTitle(String ... title) { field(TITLE, title); }
   
-  public void withDescription(String desc) { field(DESCRIPTION, desc); }
+  public void withDescription(String ... desc) { field(DESCRIPTION, desc); }
   
-  public void withContent(String content) { field(CONTENT, content); }
+  public void withContent(String ... content) { field(CONTENT, content); }
   
   public void withComment(String ... comment) { field(COMMENT, comment); }
   

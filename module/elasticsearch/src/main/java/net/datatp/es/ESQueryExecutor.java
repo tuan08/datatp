@@ -16,8 +16,8 @@ import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 
 public class ESQueryExecutor {
-  private String   index;
-  private ESClient esclient;
+  private String               index;
+  private ESClient             esclient;
   private SearchRequestBuilder searchReqBuilder;
   
   public ESQueryExecutor(String index, ESClient esclient) {

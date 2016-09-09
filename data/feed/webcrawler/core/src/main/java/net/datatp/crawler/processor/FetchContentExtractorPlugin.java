@@ -32,13 +32,19 @@ public class FetchContentExtractorPlugin implements FetchProcessorPlugin {
       return;
     }
     
-    for(ExtractEntity sel : extracts) {
-      fetchCtx.getXDocMapper().addEntity(sel);
+    boolean pageList = false;
+    for(ExtractEntity entity : extracts) {
+      if(entity.hasTag("webpage:list")) pageList = true;
+      fetchCtx.getXDocMapper().addEntity(entity);
     }
-    fetchCtx.getXDocMapper().setPageType("detail");
+    
+    if(pageList) fetchCtx.getXDocMapper().setPageType("list");
+    else         fetchCtx.getXDocMapper().setPageType("detail");
+    
     URLDatum urlDatum = fetchCtx.getURLContext().getURLDatum();
-    if(urlDatum.getPageType() != URLDatum.PAGE_TYPE_DETAIL) {
-      urlDatum.setPageType(URLDatum.PAGE_TYPE_DETAIL);
+    if(urlDatum.getPageType() == URLDatum.PAGE_TYPE_UNCATEGORIZED) {
+      if(pageList) urlDatum.setPageType(URLDatum.PAGE_TYPE_LIST);
+      else         urlDatum.setPageType(URLDatum.PAGE_TYPE_DETAIL);
     }
   }
 }

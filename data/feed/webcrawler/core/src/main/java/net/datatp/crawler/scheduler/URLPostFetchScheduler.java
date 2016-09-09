@@ -103,7 +103,7 @@ abstract public class URLPostFetchScheduler {
       SiteContext siteContext = context.getSiteContext() ;
       if(urlDatum.getStatus() != URLDatum.STATUS_NEW) {
         schedulerPluginManager.postFetch(context, urlDatum, System.currentTimeMillis()) ;
-        siteContext.getSiteScheduleStat().addProcessCount(1); ;
+        siteContext.getSiteStatistic().addCommitCount(1);
       } else {
       }
       writer.write(urlDatum) ;

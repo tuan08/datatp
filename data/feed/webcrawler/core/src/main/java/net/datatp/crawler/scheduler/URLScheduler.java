@@ -18,18 +18,17 @@ import net.datatp.util.URLInfo;
  * $Author: Tuan Nguyen$ 
  **/
 public class URLScheduler {
-  private static final Logger logger = LoggerFactory.getLogger(URLScheduler.class);
+  private static final Logger     logger = LoggerFactory.getLogger(URLScheduler.class);
 
   protected URLPreFetchScheduler  preFetchScheduler;
 
   protected URLPostFetchScheduler postFetchScheduler;
 
-  protected URLSchedulerReporter     reporter;
+  protected URLSchedulerReporter  reporter;
 
-  protected boolean               exist     = false;
+  protected boolean               exist  = false;
   protected ManageThread          manageThread;
-  protected URLSchedulerStatus    status    = URLSchedulerStatus.INIT;
-  protected boolean               injectUrl = false;
+  protected URLSchedulerStatus    status = URLSchedulerStatus.INIT;
 
   public URLScheduler() { }
   
@@ -74,16 +73,21 @@ public class URLScheduler {
       long lastUpdateDB = 0l ;
       long updatePeriod =  1 * 24 * 3600 * 1000l ;
       URLCommitMetric commitInfo = null ;
+      URLScheduleMetric lastScheduleInfo = null;
       while(!exist) {
-        if(injectUrl || commitInfo == null) {
-          status = URLSchedulerStatus.SCHEDULING ;
-          URLScheduleMetric sheduleInfo = preFetchScheduler.schedule() ;
+        status = URLSchedulerStatus.SCHEDULING ;
+        URLScheduleMetric sheduleInfo = preFetchScheduler.schedule() ;
+        boolean scheduleInfoIsChanged = sheduleInfo.isChangedCompareTo(lastScheduleInfo);
+        if(scheduleInfoIsChanged) {
           reporter.report(sheduleInfo);
-          if(injectUrl) injectUrl = false;
+          reporter.report(preFetchScheduler.getSiteContextManager().getSiteStatistics());
+          lastScheduleInfo = sheduleInfo;
         }
+        
         status = URLSchedulerStatus.COMMITTING ;
         commitInfo = postFetchScheduler.process() ;
         reporter.report(commitInfo);
+        
         //        if(lastUpdateDB + updatePeriod < System.currentTimeMillis()) {
         //        	URLDatumRecordDB urldatumDB = postFetchScheduler.getURLDatumDB() ;
         //        	URLDatumDBUpdater updater = new URLDatumDBUpdater(postFetchScheduler.getSiteConfigManager()) ;
@@ -91,13 +95,26 @@ public class URLScheduler {
         //        	logger.info("\n" + updater.getUpdateInfo()) ;
         //        	lastUpdateDB = System.currentTimeMillis() ;
         //        }
-        Thread.sleep(1000) ;
+        status = URLSchedulerStatus.IDLE;
+        if(scheduleInfoIsChanged) {
+          waitForDBChange(5000);
+        } else {
+          waitForDBChange(60000);
+        }
       }
     } catch(Throwable ex) {
       logger.error("URLDatumgFetchScheduler Error", ex) ;
     }
   }
-
+  
+  synchronized void notifyDBChange() {
+    notifyAll();
+  }
+  
+  synchronized void waitForDBChange(long waitTime) throws InterruptedException {
+    wait(waitTime);
+  }
+  
   public void injectURL() throws Exception {
     URLDatumDBWriter writer = postFetchScheduler.getURLDatumDB().createURLDatumDBWriter();
     
@@ -126,7 +143,7 @@ public class URLScheduler {
     }
     writer.close() ;
     writer.optimize();
-    injectUrl = true;
+    notifyDBChange();
     logger.info("inject/update " + count + " urls") ;
   }
 

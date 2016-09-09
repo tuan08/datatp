@@ -2,18 +2,19 @@
   <div id="UINavigation" class="colborder">
     <div style="padding: 10px">
       <div>
-        <h3 style="margin: 3px 0px">Status</h3>
+        <h3 style="margin: 3px 0px">Crawler</h3>
         <hr/>
         <div style="margin: 10px">
           <div>
-            <span class="ui-action onSelectUI" name="UICrawlerStatus">Crawler Status</span>
+            <span class="ui-action onSelectUI" name="UICrawlerStatus">Status</span>
           </div>
         </div>
 
-        <h3 style="margin: 3px 0px">Site Config</h3>
+        <h3 style="margin: 3px 0px">Sites</h3>
         <hr/>
         <div style="margin: 10px">
           <div><span class="ui-action onSelectUI" name="site/UISiteConfigScreen">Site Config</span></div>
+          <div><span class="ui-action onSelectUI" name="site/UISiteStatistics">Site Statistics</span></div>
         </div>
       </div>
     </div>

@@ -17,6 +17,7 @@ import net.datatp.crawler.scheduler.URLSchedulerStatus;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
 import net.datatp.crawler.site.SiteContextManager;
+import net.datatp.crawler.site.SiteStatistic;
 import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.crawler.urldb.URLDatumDB;
 
@@ -75,6 +76,7 @@ public class InMemURLScheduler extends URLScheduler {
   public class InMemSchedulerReporter implements URLSchedulerReporter {
     private Map<Long, URLScheduleMetric> urlScheduleMetrics = new MaxSizeLinkedHashMap<>(500);
     private Map<Long, URLCommitMetric>   urlCommitMetrics   = new MaxSizeLinkedHashMap<>(500);
+    private List<SiteStatistic>          siteStatistics     = new ArrayList<>();
 
     @Override
     public void setStatus(URLSchedulerStatus status) throws Exception {
@@ -109,6 +111,16 @@ public class InMemURLScheduler extends URLScheduler {
       holder.addAll(urlScheduleMetrics.values());
       Collections.reverse(holder);
       return holder;
+    }
+
+    @Override
+    public void report(List<SiteStatistic> list) throws Exception {
+      this.siteStatistics = list;
+    }
+    
+    @Override
+    public List<SiteStatistic> getSiteStatistics() throws Exception {
+      return this.siteStatistics;
     }
   }
   

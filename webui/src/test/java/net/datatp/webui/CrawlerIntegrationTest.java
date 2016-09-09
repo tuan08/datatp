@@ -58,10 +58,10 @@ public class CrawlerIntegrationTest {
       setExtractConfig(ExtractConfig.article())
     ); 
 
-    crawler.siteAdd(
-      new SiteConfig("otofun", "otofun.net", "https://www.otofun.net/forums/", 2).
-      setExtractConfig(ExtractConfig.forum())
-    );
+//    crawler.siteAdd(
+//      new SiteConfig("otofun", "otofun.net", "https://www.otofun.net/forums/", 2).
+//      setExtractConfig(ExtractConfig.forum())
+//    );
     
     ESXDocProcessor xdocProcessor = new ESXDocProcessor("xdoc", new String[] { "127.0.0.1:9300" });
     crawler.setXDocProcessor(xdocProcessor);

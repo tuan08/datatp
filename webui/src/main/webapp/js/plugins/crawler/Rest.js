@@ -4,9 +4,9 @@ define([
   var server = new Server("http://localhost:8080/crawler");
 
   function SiteRest(server) {
-    this.getSiteConfigs = function() {
-      return server.restGET("/site/configs");
-    };
+    this.getSiteConfigs = function() { return server.restGET("/site/configs"); };
+
+    this.getSiteStatistics = function() { return server.restGET("/site/statistics"); };
 
     this.save = function(siteConfig) {
       return server.syncPOSTJson("/site/save", siteConfig);

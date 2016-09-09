@@ -1,5 +1,6 @@
 package net.datatp.crawler.distributed;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.datatp.crawler.CrawlerApi;
@@ -15,6 +16,7 @@ import net.datatp.crawler.scheduler.URLSchedulerStatus;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
 import net.datatp.crawler.site.SiteConfig;
+import net.datatp.crawler.site.SiteStatistic;
 import net.datatp.zk.registry.RegistryClient;
 
 public class DistributedCrawlerApi implements CrawlerApi {
@@ -68,8 +70,12 @@ public class DistributedCrawlerApi implements CrawlerApi {
     crawlerRegistry.getSiteConfigRegistry().getEventBroadcaster().broadcast(new SiteConfigEvent.Reload());
   }
   
+  public List<SiteStatistic> siteGetSiteStatistics() throws Exception {
+    return new ArrayList<>();
+  }
+  
   @Override
-  public URLSchedulerStatus getURLSchedulerStatus() throws Exception {
+  public URLSchedulerStatus schedulerGetURLSchedulerStatus() throws Exception {
     return null;
   }
   
@@ -115,7 +121,7 @@ public class DistributedCrawlerApi implements CrawlerApi {
   
   public CrawlerStatus getCrawlerStatus() throws Exception {
     CrawlerStatus status = new CrawlerStatus();
-    status.setUrlSchedulerStatus(getURLSchedulerStatus());
+    status.setUrlSchedulerStatus(schedulerGetURLSchedulerStatus());
     status.setFetcherStatus(getFetcherStatus());
     return status;
   }

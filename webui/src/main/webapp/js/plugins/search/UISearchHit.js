@@ -16,7 +16,6 @@ define([
       if(source.entity != null && source.entity.content != null) {
         this.content = source.entity.content;
       } 
-      console.printJSON(source);
     },
 
     _template: _.template(Template),

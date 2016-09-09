@@ -72,6 +72,7 @@ public class URLScheduleMetric implements Serializable {
     urlCount++ ;
     if(datum.getPageType() == URLDatum.PAGE_TYPE_LIST) urlListCount++;
     else if(datum.getPageType() == URLDatum.PAGE_TYPE_DETAIL) urlDetailCount++;
+    else this.urlUncategorizedCount++;
   }
   
   public void logDelay(int incr) {

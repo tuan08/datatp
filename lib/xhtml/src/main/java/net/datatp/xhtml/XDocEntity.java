@@ -64,8 +64,15 @@ public class XDocEntity extends LinkedHashMap<String, String[]>  {
     return null;
   }
   
-  public void field(String name, String[] value) { put(name, value); }
-  public void field(String name, String value) { put(name, new String[] { value }); }
+  public void field(String name, String[] value) { 
+    if(value == null) remove(name);
+    else put(name, value); 
+  }
+  
+  public void field(String name, String value) { 
+    if(value == null) remove(name);
+    else put(name, new String[] { value }); 
+  }
   
   public String getFormattedText() {
     StringBuilder b = new StringBuilder();

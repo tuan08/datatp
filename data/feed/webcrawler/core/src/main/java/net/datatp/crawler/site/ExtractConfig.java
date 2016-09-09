@@ -6,10 +6,10 @@ public class ExtractConfig implements Serializable {
   private static final long serialVersionUID = 1L;
 
   static public enum MatchType   { any, url, title }
-  static public enum ExtractType { none, content, article, comment, forum, product, job, classified }
+  static public enum ExtractType { content, article, comment, forum, product, job, classified }
   
   private String         name        = "content";
-  private ExtractType    extractType = ExtractType.none;
+  private ExtractType    extractType = ExtractType.content;
   private MatchType      type        = MatchType.any;
   private String[]       pattern;
   private XPathPattern[] extractXPath;
@@ -22,7 +22,7 @@ public class ExtractConfig implements Serializable {
   }
   
   public String getName() { return name; }
-  public void setName(String name) { this.name = name;}
+  public void setName(String name) { this.name = name; }
 
   public ExtractType getExtractType() { return extractType; }
   public void setExtractType(ExtractType extractAuto) { this.extractType = extractAuto; }
@@ -39,12 +39,12 @@ public class ExtractConfig implements Serializable {
   static public class XPathPattern implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String name;
-    private String xpath;
+    private String   name;
+    private String[] xpath;
     
     public XPathPattern() {}
     
-    public XPathPattern(String name, String xpath) {
+    public XPathPattern(String name, String ... xpath) {
       this.name  = name;
       this.xpath = xpath;
     }
@@ -52,11 +52,11 @@ public class ExtractConfig implements Serializable {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     
-    public String getXpath() { return xpath; }
-    public void setXpath(String xpath) { this.xpath = xpath; }
+    public String[] getXpath() { return xpath; }
+    public void setXpath(String[] xpath) { this.xpath = xpath; }
   }
   
-  static public ExtractConfig article() { return new ExtractConfig("article", ExtractType.article); }
+  static public ExtractConfig article() { return new ExtractConfig("content", ExtractType.article); }
   
-  static public ExtractConfig forum() { return new ExtractConfig("forum", ExtractType.forum); }
+  static public ExtractConfig forum() { return new ExtractConfig("content", ExtractType.forum); }
 }

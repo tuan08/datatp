@@ -3,16 +3,16 @@ package net.datatp.crawler.site;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.datatp.xhtml.extract.BoilerpipeContentExtractor;
 import net.datatp.xhtml.extract.CommentExtractor;
 import net.datatp.xhtml.extract.ForumExtractor;
-import net.datatp.xhtml.extract.MainContentExtractor;
 import net.datatp.xhtml.extract.WDataExtractor;
 
 public class AutoWDataExtractors {
   private Map<ExtractConfig.ExtractType, WDataExtractor> autoExtractors = new HashMap<>();
 
   public AutoWDataExtractors() {
-    add(ExtractConfig.ExtractType.article, new MainContentExtractor("article"));
+    add(ExtractConfig.ExtractType.article, new BoilerpipeContentExtractor("article"));
     add(ExtractConfig.ExtractType.forum,   new ForumExtractor());
     add(ExtractConfig.ExtractType.comment, new CommentExtractor());
   }

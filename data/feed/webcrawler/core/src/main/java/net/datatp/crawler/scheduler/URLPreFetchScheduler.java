@@ -32,10 +32,9 @@ abstract public class URLPreFetchScheduler {
 
   protected int scheduleCounter    = 0;
   
-  private URLScheduleMetric lastScheduleMetric = null;
-
-  
   abstract protected void onSchedule(ArrayList<URLDatum> holder) throws Exception ;
+  
+  public SiteContextManager getSiteContextManager() { return this.siteContextManager; }
   
   public URLScheduleMetric schedule() throws Exception {
     logger.info("Start scheduling the fetch request!") ;
@@ -62,7 +61,7 @@ abstract public class URLPreFetchScheduler {
       }
       
       SiteContext siteContext = urlContext.getSiteContext() ;
-      siteContext.getURLStatistics().log(datum) ;
+      siteContext.getSiteStatistic().log(datum) ;
       
       boolean doFetch = false ;
 
@@ -136,12 +135,8 @@ abstract public class URLPreFetchScheduler {
     verifier.verify(logger, scheduleMetric.getUrlCount(), scheduleMetric.getWaitingCount()) ;
 
     scheduleMetric.setExecTime(System.currentTimeMillis() - currentTime);
-    if(scheduleMetric.isChangedCompareTo(lastScheduleMetric)) {
-      lastScheduleMetric = scheduleMetric;
-      return scheduleMetric;
-    }
-    lastScheduleMetric = scheduleMetric;
-    return null;
+    
+    return scheduleMetric;
   }
 
   private void flushPriorityURLDatumHolder(PriorityURLDatumHolder holder, MultiListHolder<URLDatum> fRequestBuffer) throws Exception {
@@ -150,7 +145,7 @@ abstract public class URLPreFetchScheduler {
       URLContext urlContext = siteContextManager.getURLContext(sel) ;
       schedulerPluginManager.preFetch(urlContext, sel, System.currentTimeMillis()) ;
       fRequestBuffer.add(urlContext.getUrlParser().getHost(), sel) ;
-      urlContext.getSiteContext().getSiteScheduleStat().addProcessCount(1); ;
+      urlContext.getSiteContext().getSiteStatistic().addScheduleCount(1);; 
     }
   }
 

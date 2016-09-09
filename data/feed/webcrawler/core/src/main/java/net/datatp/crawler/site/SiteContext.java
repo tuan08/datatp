@@ -11,9 +11,8 @@ public class SiteContext {
   
   private SiteConfig          siteConfig;
   private WebPageTypeAnalyzer webPageTypeAnalyzer;
-  private SiteScheduleStat    siteScheduleStat = new SiteScheduleStat();
-  private URLStatistics       urlStatistics    = new URLStatistics();
-  
+  private SiteStatistic       siteStatistic = new SiteStatistic();
+
   private SiteExtractor       siteExtractor;
 
   public SiteContext(SiteConfig siteConfig, AutoWDataExtractors autoWDataExtractors) {
@@ -23,15 +22,14 @@ public class SiteContext {
   
   public void update(SiteConfig siteConfig) {
     this.siteConfig    = siteConfig ;
+    this.siteStatistic = new SiteStatistic(siteConfig.getGroup(), siteConfig.getHostname());
     this.webPageTypeAnalyzer = new WebPageTypeAnalyzer(siteConfig.getWebPageTypePatterns());
     if(siteExtractor != null) siteExtractor.update(siteConfig);
   }
 
   public SiteConfig getSiteConfig() { return this.siteConfig ; }
   
-  public SiteScheduleStat getSiteScheduleStat() { return siteScheduleStat; }
-  
-  public URLStatistics getURLStatistics() { return urlStatistics ; }
+  public SiteStatistic getSiteStatistic() { return siteStatistic ; }
   
   public WebPageTypeAnalyzer getWebPageTypeAnalyzer() { return webPageTypeAnalyzer; }
   
@@ -44,11 +42,11 @@ public class SiteContext {
   }
   
   public int getMaxSchedule() {
-    return siteScheduleStat.getMaxSchedule(siteConfig.getMaxFetchSchedule(), getMaxConnection());
+    return siteStatistic.getMaxSchedule(siteConfig.getMaxFetchSchedule(), getMaxConnection());
   }
   
   public boolean canSchedule() {
-    return siteScheduleStat.canSchedule(siteConfig.getMaxFetchSchedule(), getMaxConnection());
+    return siteStatistic.canSchedule(siteConfig.getMaxFetchSchedule(), getMaxConnection());
   }
 
   public boolean allowDomain(URLInfo urlParser) {

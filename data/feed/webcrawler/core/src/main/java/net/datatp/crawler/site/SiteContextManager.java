@@ -33,16 +33,18 @@ public class SiteContextManager {
   }
 
 
-  public void update(SiteConfig config) {
+  public void save(SiteConfig config) {
     SiteContext siteContext = siteContexts.get(config.getHostname());
-    siteContext.update(config);
+    if(siteContext != null) {
+      siteContext.update(config);
+    } else {
+      add(config);
+    }
   }
   
-  public void update(List<SiteConfig> configs) {
+  public void save(List<SiteConfig> configs) {
     for(int i = 0; i < configs.size(); i++) {
-      SiteConfig config = configs.get(i);
-      SiteContext siteContext = siteContexts.get(config.getHostname());
-      siteContext.update(config);
+      save(configs.get(i));
     }
   }
   
@@ -71,28 +73,17 @@ public class SiteContextManager {
     return holder ;
   }
 
-  public int getInQueueCount() { 
-    int count = 0 ;
-    Iterator<SiteContext> i = siteContexts.values().iterator() ;
-    while(i.hasNext()) {
-      SiteContext context = i.next() ;
-      SiteScheduleStat stat = context.getSiteScheduleStat() ;
-      count += stat.getScheduleCount() - stat.getProcessCount() ;
-    }
-    return count ;
-  }
-
   public SiteContext getSiteContext(String url)  { return getSiteConfigContext(new URLInfo(url)) ; }
 
-  public SiteContext getSiteConfigContext(URLInfo urlParser)  {
-    String hostname = urlParser.getNormalizeHostName() ;
+  public SiteContext getSiteConfigContext(URLInfo urlInfo)  {
+    String hostname = urlInfo.getNormalizeHostName() ;
     if(hostname.startsWith("mail.") || hostname.startsWith("webmail.") || hostname.startsWith("email")) return null; 
-    String[] source = urlParser.getSources() ;
+    String[] source = urlInfo.getSources() ;
     for(String sel : source) {
       if(sel.startsWith("www")) continue ;
       SiteContext context = siteContexts.get(sel) ;
       if(context == null) continue ;
-      if(context.allowDomain(urlParser)) return context ; 
+      if(context.allowDomain(urlInfo)) return context ; 
     }
     return null;
   }
@@ -103,12 +94,20 @@ public class SiteContextManager {
     if(context != null) return new URLContext(urlDatum, urlParser, context) ;
     return null;
   }
+  
+  public List<SiteStatistic> getSiteStatistics() {
+    List<SiteStatistic> holder = new ArrayList<>();
+    for(SiteContext sel : siteContexts.values()) {
+      holder.add(sel.getSiteStatistic());
+    }
+    return holder;
+  }
 
   public void onPostPreSchedule() {
     Iterator<SiteContext> i = siteContexts.values().iterator() ;
     while(i.hasNext()) {
       SiteContext context = i.next() ;
-      context.getURLStatistics().onPostPreSchedule(); 
+      context.getSiteStatistic().onPostPreSchedule(); 
     }
   }
 }

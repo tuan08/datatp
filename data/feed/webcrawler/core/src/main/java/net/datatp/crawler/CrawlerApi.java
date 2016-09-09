@@ -8,6 +8,7 @@ import net.datatp.crawler.scheduler.URLSchedulerStatus;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
 import net.datatp.crawler.site.SiteConfig;
+import net.datatp.crawler.site.SiteStatistic;
 
 public interface CrawlerApi {
   public void siteCreateGroup(String group) throws Exception ;
@@ -20,7 +21,9 @@ public interface CrawlerApi {
   
   public void siteReload() throws Exception ;
   
-  public URLSchedulerStatus getURLSchedulerStatus() throws Exception;
+  public List<SiteStatistic> siteGetSiteStatistics() throws Exception;
+  
+  public URLSchedulerStatus schedulerGetURLSchedulerStatus() throws Exception;
   
   public List<URLCommitMetric> schedulerGetURLCommitReport(int max) throws Exception ;
   

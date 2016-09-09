@@ -35,17 +35,8 @@ define([
             }
           },
           { field: "execTime",   label: "Exec Time", toggled: true, filterable: true },
-          { field: "commitURLCount",   label: "Commit URL Count", toggled: true, filterable: true },
-          { field: "newURLFoundCount",   label: "New URL Found Count", toggled: true, filterable: true }
-        ],
-        actions:[
-          {
-            icon: "delete", label: "Delete",
-            onClick: function(thisTable, row) { 
-              thisTable.markDeletedItemOnCurrentPage(row) ;
-              console.log('Mark delete row ' + row);
-            }
-          }
+          { field: "commitURLCount",   label: "Commit URL", toggled: true, filterable: true },
+          { field: "newURLFoundCount",   label: "New URL Found", toggled: true, filterable: true }
         ]
       }
     },

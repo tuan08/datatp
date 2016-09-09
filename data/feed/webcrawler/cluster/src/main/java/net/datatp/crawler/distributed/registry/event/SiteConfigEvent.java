@@ -38,7 +38,7 @@ public class SiteConfigEvent {
       if(add) {
         siteContextManager.add(siteConfigs);
       } else {
-        siteContextManager.update(siteConfigs);
+        siteContextManager.save(siteConfigs);
       }
     }
   }
