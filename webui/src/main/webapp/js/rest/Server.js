@@ -9,7 +9,7 @@ define([
 
     /**@memberOf service.Server */
     this.syncGETResource = function(path, dataType) {
-      path = this.baseUrl + path;
+      var path = this.baseUrl + path;
       var returnData = null ;
       $.ajax({ 
         type: "GET",
@@ -28,7 +28,7 @@ define([
     
     /**@memberOf service.Server */
     this.restGET = function(restPath, params) {
-      restPath = this.baseUrl + restPath;
+      var restPath = this.baseUrl + restPath;
       var returnData = null ;
       $.ajax({ 
         type: "GET",
@@ -47,7 +47,7 @@ define([
 
     /**@memberOf service.Server */
     this.syncPOSTJson = function(path, dataObj) {
-      path = this.baseUrl + path;
+      var path = this.baseUrl + path;
       var returnData = null ;
       $.ajax({ 
         async: false ,
@@ -64,7 +64,7 @@ define([
 
     /**@memberOf service.Server */
     this.restPOST = function(path, params) {
-      path = this.baseUrl + path;
+      var path = this.baseUrl + path;
       var returnData = null ;
       $.ajax({ 
         async: true ,

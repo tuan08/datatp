@@ -12,8 +12,7 @@ require.config({
     backbone:     JSLIBS + '/backbonejs/backbonejs-1.3.3.min',
 
     nv:           JSLIBS + '/d3/nv/nv.d3.min',
-    d3:           JSLIBS + '/d3/d3.min',
-    plotly:       JSLIBS + '/plotly/plotly-latest.min'
+    d3:           JSLIBS + '/d3/d3.min'
   },
   
   shim: {
@@ -36,11 +35,6 @@ require.config({
     nv: {
       deps: ['d3'],
       exports: 'nv'
-    },
-
-    plotly: {
-      deps: ['jquery'],
-      exports: 'plotly'
     }
   }
 });

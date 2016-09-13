@@ -1,0 +1,25 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+
+  <%var fields = ["_index", "_score", "_id"]; %>
+  <%for(var i = 0; i < fields.length; i++) { %>
+    <tr>
+      <td><%=fields[i]%></td>
+      <td><%=util.reflect.getFieldValue(hit, fields[i])%></td>
+    </tr>
+  <%}%>
+
+  <%var source = util.reflect.flatten(hit._source); %>
+  <%for(var key in source) { %>
+  <%  var value = source[key]; %>
+  <%  var value = "" +  source[key] ; %>
+  <%  value = value.replace(/(\r|\n|\r\n)/g, '<br/>') %>
+      <tr>
+        <td><%=key%></td>
+        <td><%=value%></td>
+      </tr>
+  <%}%>
+</table>

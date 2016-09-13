@@ -1,0 +1,10 @@
+<div style="padding: 0px">
+  <div style="width: 200px; float: left" class="UISearchHitControl">
+    Control
+  </div>
+
+  <div style="margin-left: 220px" class="UISearchHitResult">
+    Result
+  </div>
+  <div class="clearfix"><span/></div>
+</div>

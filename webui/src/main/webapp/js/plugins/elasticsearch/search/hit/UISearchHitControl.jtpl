@@ -1,0 +1,30 @@
+<div>
+  <div>
+    <h6>Document Fields</h6>
+    <hr/>
+    <div style="padding-left: 10px">
+      <div>_id</div>
+      <div>_score</div>
+    </div>
+  </div>
+
+  <div style="padding-top: 15px">
+    <h6>Source Fields</h6>
+    <hr/>
+    <div style="padding-left: 10px">
+      <%for(var key in fieldStates) {%>
+        <div style="cursor: pointer" class="field-block" field="<%=key%>">
+          <div style="float: left"><strong><%=key%><strong></div>
+          <div style="float: right; display: none" class="field-action-block">
+            <a style="text-align: left"  class="ui-action onToggleField">
+              <%var label = "add"%>
+              <%if(fieldStates[key].toggle) label = "remove"%>
+              <span><%=label%></span>
+            </a>
+          </div>
+          <div class="clearfix"><span/></div>
+        </div>
+      <%}%>
+    <div>
+  </div>
+</div>

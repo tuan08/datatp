@@ -20,7 +20,6 @@ import net.datatp.util.dataformat.DataSerializer;
 public class ElasticSearchService {
   private Logger logger = LoggerFactory.getLogger(ElasticSearchService.class);
   
-  //@Inject @Named("esProperties")
   private Map<String, String> esProperties ;
   
   private Node server ;

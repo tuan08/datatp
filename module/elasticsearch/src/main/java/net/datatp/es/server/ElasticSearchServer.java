@@ -1,22 +1,10 @@
 package net.datatp.es.server;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.slf4j.Logger;
-
-import com.beust.jcommander.JCommander;
-//import com.google.inject.Guice;
-//import com.google.inject.Injector;
-//import com.google.inject.Module;
-//import com.google.inject.Stage;
-//import com.mycila.guice.ext.closeable.CloseableModule;
-//import com.mycila.guice.ext.jsr250.Jsr250Module;
 
 //import net.datatp.module.AppServiceModule;
 //import net.datatp.module.MycilaJmxModuleExt;
 import net.datatp.tool.server.Server;
-import net.datatp.util.log.LoggerFactory;
 
 public class ElasticSearchServer implements Server {
   private String nodeName ;

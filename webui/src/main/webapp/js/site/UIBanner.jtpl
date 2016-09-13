@@ -5,20 +5,11 @@
     </div>
 
     <div style="float: right">
-      <form>
-        <input name="username" value="" placeholder="Username" style="border: 1px solid lightgray; width: 120px" />
-        <input name="passowrd" value="" placeholder="password" style="border: 1px solid lightgray; width: 120px"/>
-        <a class="ui-action onSelectPlugin">Login</a>
-      </form>
+      <a class="ui-action onSelectPlugin" plugin="elasticsearch">Elasticsearch</a> |
+      <a class="ui-action onSelectPlugin" plugin="crawler">Crawler</a> |
+      <a class="ui-action onSelectPlugin" plugin="uidemo">UI Demo</a>
     </div>
     <div style="clear: both"><span/></div>
-    <hr/>
-  </div>
-
-  <div>
-    <a class="ui-action onSelectPlugin" plugin="search">Search</a> |
-    <a class="ui-action onSelectPlugin" plugin="crawler">Crawler</a> |
-    <a class="ui-action onSelectPlugin" plugin="uidemo">UI Demo</a>
     <hr/>
   </div>
 </div>

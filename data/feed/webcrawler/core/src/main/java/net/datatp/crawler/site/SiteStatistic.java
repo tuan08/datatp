@@ -6,7 +6,7 @@ import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.util.stat.Statistics;
 
 public class SiteStatistic {
-  final static public String FETCH_STATUS  = "fetchStatus";
+  final static public String URL_STATUS    = "urlStatus";
   final static public String RESPONSE_CODE = "responseCode";
   final static public String ERROR_CODE    = "errorCode";
   final static public String PAGE_TYPES    = "pageTypes";
@@ -81,17 +81,17 @@ public class SiteStatistic {
   }
 
   private void logStatus(URLDatum urldatum) {
-    writable.incr(FETCH_STATUS, "All", 1) ;
+    writable.incr(URL_STATUS, "All", 1) ;
     if (urldatum.getRedirectUrl() != null) {
-      writable.incr(FETCH_STATUS, "wRedirect", 1) ;
+      writable.incr(URL_STATUS, "wRedirect", 1) ;
     } else if (urldatum.getStatus() == URLDatum.STATUS_FETCHING) {
-      writable.incr(FETCH_STATUS, "Pending", 1) ;
+      writable.incr(URL_STATUS, "Pending", 1) ;
     } else if (urldatum.getStatus() == URLDatum.STATUS_WAITING) {
-      writable.incr(FETCH_STATUS, "Waiting", 1) ;
+      writable.incr(URL_STATUS, "Waiting", 1) ;
     } else if (urldatum.getStatus() == URLDatum.STATUS_NEW) {
-      writable.incr(FETCH_STATUS, "New", 1) ;
+      writable.incr(URL_STATUS, "New", 1) ;
     } else {
-      writable.incr(FETCH_STATUS, "Other", 1) ;
+      writable.incr(URL_STATUS, "Other", 1) ;
     }
   }
 
@@ -118,11 +118,11 @@ public class SiteStatistic {
   }
 
   private void logError(URLDatum datum) {
-    writable.incr(ERROR_CODE, "All", 1) ;
     short ec = datum.getLastErrorCode() ;
-    if(ec == ErrorCode.ERROR_TYPE_NONE) {
-      writable.incr(ERROR_CODE, "None",1);
-    } else if(ec == ErrorCode.ERROR_CONNECTION) {
+    if(ec == ErrorCode.ERROR_TYPE_NONE) return;
+    
+    writable.incr(ERROR_CODE, "All", 1) ;
+    if(ec == ErrorCode.ERROR_CONNECTION) {
       writable.incr(ERROR_CODE, "Error Conn", 1) ;
     } else if(ec == ErrorCode.ERROR_CONNECTION_NOT_AUTHORIZED) {
       writable.incr(ERROR_CODE, "Conn not Auth", 1) ;
@@ -170,12 +170,12 @@ public class SiteStatistic {
   }
 
   private void init(Statistics map) {
-    map.incr(FETCH_STATUS, "All", 0) ;
-    map.incr(FETCH_STATUS, "Pending", 0) ;
-    map.incr(FETCH_STATUS, "Waiting", 0) ;
-    map.incr(FETCH_STATUS, "New", 0) ;
-    map.incr(FETCH_STATUS, "wRedirect", 0) ;
-    map.incr(FETCH_STATUS, "Other", 0) ;
+    map.incr(URL_STATUS, "All", 0) ;
+    map.incr(URL_STATUS, "Pending", 0) ;
+    map.incr(URL_STATUS, "Waiting", 0) ;
+    map.incr(URL_STATUS, "New", 0) ;
+    map.incr(URL_STATUS, "wRedirect", 0) ;
+    map.incr(URL_STATUS, "Other", 0) ;
 
     map.incr(RESPONSE_CODE, "All", 0) ;
     map.incr(RESPONSE_CODE, "NONE", 0) ;

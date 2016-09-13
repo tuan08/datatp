@@ -41,7 +41,37 @@ define([
           { field: "group",   label: "Group", toggled: true, filterable: true },
           { field: "scheduleCount",   label: "Schedule", toggled: true, filterable: true },
           { field: "commitCount",   label: "commit", toggled: true, filterable: true },
-          { field: "inQueue",   label: "In Queue", toggled: true, filterable: true }
+          { field: "inQueue",   label: "In Queue", toggled: true, filterable: true },
+          { 
+            field: "url.all",   label: "URL All", toggled: true,
+            custom: {
+              getDisplay: function(bean) { return  bean.urlStatistics.statistics.urlStatus.All.frequency ; }
+            }
+          },
+          { 
+            field: "url.pending",   label: "URL Pending", toggled: true,
+            custom: {
+              getDisplay: function(bean) { return  bean.urlStatistics.statistics.urlStatus.Pending.frequency ; }
+            }
+          },
+          { 
+            field: "url.new",   label: "URL New", toggled: true,
+            custom: {
+              getDisplay: function(bean) { return  bean.urlStatistics.statistics.urlStatus.New.frequency ; }
+            }
+          },
+          { 
+            field: "url.waiting",   label: "URL Waiting", toggled: true,
+            custom: {
+              getDisplay: function(bean) { return  bean.urlStatistics.statistics.urlStatus.Waiting.frequency ; }
+            }
+          },
+          { 
+            field: "rc.ok",   label: "RC OK", toggled: true,
+            custom: {
+              getDisplay: function(bean) { return  bean.urlStatistics.statistics.responseCode.OK.frequency ; }
+            }
+          },
         ]
       }
     },

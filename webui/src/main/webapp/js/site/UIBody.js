@@ -16,8 +16,7 @@ define([
       var params = { 
       } ;
       $(this.el).html(this._template(params));
-      //this.selectPlugin("scribengin");
-      this.selectPlugin("search");
+      this.selectPlugin("elasticsearch");
     },
     
     selectPlugin: function(name) {

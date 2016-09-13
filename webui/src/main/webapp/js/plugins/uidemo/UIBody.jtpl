@@ -13,13 +13,6 @@
           <div><span class="ui-action onSelectUIComponent" name="UIUploadDemo">Upload Demo</span></div>
         </div>
 
-        <h3 style="margin: 3px 0px">D3 Demo</h3>
-        <hr/>
-        <div style="margin: 10px">
-          <div><span class="ui-action onSelectUIComponent" name="UID3Demo">UI D3 Demo</span></div>
-          <div><span class="ui-action onSelectUIComponent" name="UIPlotlyDemo">UIPlotly Demo</span></div>
-        </div>
-
         <h3 style="margin: 3px 0px">NV Chart Demo</h3>
         <hr/>
         <div style="margin: 10px">

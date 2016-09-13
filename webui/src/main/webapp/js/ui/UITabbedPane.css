@@ -4,3 +4,7 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+.UITabbedPane .UITab {
+  padding: 5px 5px;
+}

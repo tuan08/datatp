@@ -55,7 +55,6 @@ public class BoilerpipeContentExtractor implements WDataExtractor {
     BoilerpipeSAXInput in = new BoilerpipeSAXInput(new InputSource(new StringReader(xhtml)));
     TextDocument doc = in.getTextDocument();
     ContentExtractor.INSTANCE.process(doc);
-    
     List<TextBlock> textBlocks = doc.getTextBlocks();
     boolean pageList = isPageList(anchorText, textBlocks);
     List<String> contentHolder = new ArrayList<>();

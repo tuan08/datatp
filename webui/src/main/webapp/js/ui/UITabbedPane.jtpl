@@ -1,16 +1,17 @@
 <div class="UITabbedPane">
-  <div>
+  <div style="background: #e5ecf9; padding: 3px 0px">
     <%for(var i = 0; i < tabs.length; i++) { %>
     <%  var tab  = tabs[i]; %>
     <%  var disable = tab.name == state.tabConfig.name ? ' ui-disabled' : '' ; %>
+    <%  if(i > 0) {%>
+          <span> | </span>
+    <%  }%>
         <a class="Tab onSelectTab<%=disable%>" tab="<%=tab.name%>"><%=tab.label%></a>
     <%  if(disable && tab.closable) {%>
           <a class="ui-action onCloseTab" tab="<%=tab.name%>">x</a>
     <%  }%>
     <%}%>
   </div>
-  
-  <hr/>
   
   <div class="UITab"> this is a test </div>
 </div>
