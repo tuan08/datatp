@@ -16,7 +16,7 @@
   </thead>
 <%}%>
 
-<%function renderBeanRows(config, tableState, pageList) { %>
+<%function renderBeanRows(config, tableState, pageList, util) { %>
   <tbody>
     <%var from = pageList.getFrom();%>
     <%var fields = config.bean.fields;%>
@@ -45,7 +45,7 @@
         <%  if(fields[j].custom != null) {%>
         <%    cell =  fields[j].custom.getDisplay(bean) ;%>
         <%  } else {%>
-        <%    cell = bean[fields[j].field] ; %>
+        <%    cell = util.reflect.getFieldValue(bean, fields[j].field) ; %>
         <%  }%>
         <%  if(fields[j].onClick != null) {%>
               <td>
@@ -113,7 +113,7 @@
 <div>
   <table>
     <%renderBeanHeaders(config); %>
-    <%renderBeanRows(config, tableState, pageList); %>
+    <%renderBeanRows(config, tableState, pageList, util); %>
   </table>
   <%renderPageIterator(config, pageList);%>
 </div>

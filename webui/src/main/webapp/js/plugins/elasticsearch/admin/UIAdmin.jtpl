@@ -1,0 +1,22 @@
+<div>
+  <div id="UINavigation" class="colborder">
+    <div style="padding: 10px">
+      <div>
+        <h3 style="margin: 3px 0px">Cluster</h3>
+        <hr/>
+        <div style="margin: 10px">
+          <div><span class="ui-action onSelectUI" name="cluster/UIClusterInfo">Info</span></div>
+        </div>
+
+        <h3 style="margin: 3px 0px">Indices</h3>
+        <hr/>
+        <div style="margin: 10px">
+          <div><span class="ui-action onSelectUI" name="indices/UIIndicesInfo">Info</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="UIWorkspace">workspace </div>
+  <div class="clearfix"><span/></div>
+</div>

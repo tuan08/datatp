@@ -4,7 +4,7 @@ define([
   'backbone',
   'ui/UICollapsible',
   'ui/UIBean'
-], function($, _, Backbone, UICollabsible, UIBean) {
+], function($, _, Backbone, UICollapsible, UIBean) {
   
   
   var SingleUIBean = UIBean.extend({
@@ -193,7 +193,7 @@ define([
     }
   });
 
-  var UIBeanDemo = UICollabsible.extend({
+  var UIBeanDemo = UICollapsible.extend({
     label: "Sample UICollapsible", 
     config: {
       actions: [

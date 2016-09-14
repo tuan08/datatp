@@ -2,10 +2,11 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
+  'util/util',
   'ui/UIUtil',
   'text!ui/UIBean.jtpl',
   'css!ui/UIBean.css'
-], function($, _, Backbone, UIUtil, UIBeanTmpl) {
+], function($, _, Backbone, util,  UIUtil, UIBeanTmpl) {
   var SearchFilterTemplate = _.template(
     "<h4>Search For <%=fieldConfig.label%>(<%=items.length%>)</h4>" +
     "<%for(var i = 0; i < items.length; i++) { %>" +
@@ -117,7 +118,8 @@ define([
     
     render: function() {
       var params = {
-        config: this.config, beanStates: this.beanStates 
+        config: this.config, beanStates: this.beanStates,
+        util: util
       } ;
       $(this.el).html(this._template(params));
       $(this.el).trigger("create");

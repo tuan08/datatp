@@ -9,7 +9,6 @@ define([
     type: 'UIBreadcumbs',
     
     initialize: function (options) {
-      //this.el = options.el ;
       this.views = [] ;
       if(this.onInit) this.onInit(options) ;
       _.bindAll(this, 'render', 'onSelectView') ;
@@ -32,7 +31,7 @@ define([
           }
           if(i == this.views.length - 1) {
             breadcumbs.find("a").removeClass('ui-disabled');
-	    breadcumbs.append(this._buttonTmpl({label: label}));
+       	    breadcumbs.append(this._buttonTmpl({label: label}));
             view.setElement(this.$('.BreadcumbsView')).render();
           } else {
             breadcumbs.append(this._buttonTmpl({label: label}));
@@ -46,6 +45,8 @@ define([
     add: function(uicomponent) { this.push(uicomponent) ; },
 
     remove: function(uicomponent) { throw new Error('to implement') ; },
+
+    clear: function() { this.views = [] ; },
     
     push: function(view) {
       view.uiParent = this ;

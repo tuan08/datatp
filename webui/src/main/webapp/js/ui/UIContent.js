@@ -13,6 +13,10 @@ define([
     initialize: function (config) {
       this.config = config ;
     },
+    
+    setContent: function(content) {
+      this.config.content = content;
+    },
 
     _template: _.template(
       "<div>" +

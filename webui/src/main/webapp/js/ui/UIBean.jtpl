@@ -59,7 +59,7 @@
             name="<%=field.field%>" <%=disabled%>><%=fieldValue%></textarea>
 <%}%>
 
-<%function renderEditable(beanName, beanConfig, beanState, display, deletable) { %>
+<%function renderEditable(beanName, beanConfig, beanState, display, deletable, util) { %>
 <%  var bean = beanState.bean %>
     <div class="UIBean span-13" style="display: <%=display%>" bean="<%=beanName%>">
       <form>
@@ -71,7 +71,7 @@
             </div>
             <div class="span-9 last">
               <%
-                var fieldValue = bean[field.field] ;
+                var fieldValue = util.reflect.getFieldValue(bean, field.field) ;
                 var disabled = "" ;
                 if(field.disable)  disabled = 'disabled="disabled"';
                 if(field.select != null) {
@@ -121,7 +121,7 @@
     <div><span class="clearfix"/></div>
 <%}%>
 
-<%function renderNonEditable(beanName, beanConfig, beanState, display, deletable) { %>
+<%function renderNonEditable(beanName, beanConfig, beanState, display, deletable, util) { %>
 <%  var bean = beanState.bean ; %>
     <div class="UIBean" style="max-width: 700px; display: <%=display%>" bean="<%=beanName%>">
       <table>
@@ -132,7 +132,8 @@
               <%if(field.custom != null) {%>
                 <%=field.custom.getDisplay(bean)%>
               <%} else {%>
-                <%=bean[field.field] %>
+                <%fieldValue = util.reflect.getFieldValue(bean, field.field); %>
+                <%=fieldValue %>
               <%}%>
             </td>
           </tr>
@@ -211,7 +212,7 @@
         render = renderNonEditable ;
       }
       var display = beanState.select ? 'block' : 'none' ;
-      render(name, beanConfig, beanState, display, config.type == 'array') ;
+      render(name, beanConfig, beanState, display, config.type == 'array', util) ;
     }
   %>
 </div>

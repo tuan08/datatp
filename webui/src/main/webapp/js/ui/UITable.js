@@ -2,6 +2,7 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
+  'util/util',
   'util/PageList',
   'ui/UIUtil',
   'ui/UIPopup',
@@ -9,7 +10,7 @@ define([
   'text!ui/UITable.jtpl',
   'text!ui/UITableRows.jtpl',
   'css!ui/UITable.css'
-], function($, _, Backbone, PageList, UIUtil, UIPopup, UIBean, UITableTmpl, UITableRowsTmpl) {
+], function($, _, Backbone, util, PageList, UIUtil, UIPopup, UIBean, UITableTmpl, UITableRowsTmpl) {
   var UITableBean = UIBean.extend({
     config: {
       beans: {
@@ -170,7 +171,8 @@ define([
       var params = {
         config:   this.config,
         pageList: this.pageList,
-        tableId: this.tableId
+        tableId: this.tableId,
+        util: util
       } ;
       $(this.el).html(this._template(params));
       $(this.el).trigger("create");
@@ -182,7 +184,8 @@ define([
         config:   this.config,
         tableState: this.tableState,
         pageList: this.pageList,
-        tableId: this.tableId 
+        tableId: this.tableId,
+        util: util
       } ;
       var tableBlock = $(this.el).find(".UITableRows");
       tableBlock.html(this._rows(params));

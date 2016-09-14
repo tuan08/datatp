@@ -3,9 +3,9 @@ define([
   'underscore', 
   'backbone',
   'ui/UITabbedPane',
-  'ui/UIContent',
   'plugins/elasticsearch/search/UISearch',
-], function($, _, Backbone, UITabbedPane, UIContent, UISearch) {
+  'plugins/elasticsearch/admin/UIAdmin'
+], function($, _, Backbone, UITabbedPane, UISearch, UIAdmin) {
   var UIBody = UITabbedPane.extend({
     label: 'Search Screen',
 
@@ -14,21 +14,20 @@ define([
         { 
           label: "Search",  name: "search",
           onSelect: function(thisUI, tabConfig) {
-            var uiTab1 = new UIContent( { content: "Search" }) ;
-            thisUI.setSelectedTabUIComponent(tabConfig.name, new UISearch()) ;
+            thisUI.setSelectedTabUIComponent(tabConfig.name, thisUI.uiSearch) ;
           }
         },
         { 
-          label: "ES",  name: "es",
+          label: "Admin",  name: "admin",
           onSelect: function(thisUI, tabConfig) {
-            var uiTab2 = new UIContent( { content: "Elasticsearch Admin" }) ;
-            thisUI.setSelectedTabUIComponent(tabConfig.name, uiTab2) ;
+            thisUI.setSelectedTabUIComponent(tabConfig.name, new UIAdmin()) ;
           }
         }
       ]
     },
     
     onInit: function(options) {
+      this.uiSearch = new UISearch();
     }
   });
   return new UIBody({}) ;

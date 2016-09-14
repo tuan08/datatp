@@ -3,9 +3,9 @@ define([
   'underscore', 
   'backbone',
   'ui/UITabbedPane',
-  'ui/UIContent',
+  'plugins/elasticsearch/search/UISearchResultInfo',
   'plugins/elasticsearch/search/hit/UISearchHit'
-], function($, _, Backbone, UITabbedPane, UIContent, UISearchHit) {
+], function($, _, Backbone, UITabbedPane, UISearchResultInfo, UISearchHit) {
   var UISearchResult = UITabbedPane.extend({
     label: 'Search Result Workspace',
 
@@ -20,8 +20,13 @@ define([
         { 
           label: "Chart",  name: "chart",
           onSelect: function(thisUI, tabConfig) {
-            var uiTab2 = new UIContent( { content: "Chart" }) ;
-            thisUI.setSelectedTabUIComponent(tabConfig.name, uiTab2) ;
+            thisUI.setSelectedTabUIComponent(tabConfig.name, thisUI.uiSearchResultInfo) ;
+          }
+        },
+        { 
+          label: "Info",  name: "info",
+          onSelect: function(thisUI, tabConfig) {
+            thisUI.setSelectedTabUIComponent(tabConfig.name, thisUI.uiSearchResultInfo) ;
           }
         }
       ]
@@ -29,11 +34,13 @@ define([
     
     onInit: function(options) {
       this.uiSearchHit = new UISearchHit();
+      this.uiSearchResultInfo = new UISearchResultInfo();
     },
 
 
     onResult: function(result) {
       this.uiSearchHit.onResult(result);
+      this.uiSearchResultInfo.onResult(result);
     }
   });
   return UISearchResult ;

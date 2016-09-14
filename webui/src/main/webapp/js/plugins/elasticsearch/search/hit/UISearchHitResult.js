@@ -56,13 +56,10 @@ define([
     label: 'Search Hits',
 
     onResult: function(result) {
-      if(this.uiSearchHitList == null) {
-        this.uiSearchHitList = new UISearchHitList();
-        this.uiSearchHitList.onResult(result);
-        this.push(this.uiSearchHitList);
-      } else {
-        this.uiSearchHitList.onResult(result);
-      }
+      this.clear();
+      this.uiSearchHitList = new UISearchHitList();
+      this.uiSearchHitList.onResult(result);
+      this.push(this.uiSearchHitList);
     }
   });
   

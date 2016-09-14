@@ -69,7 +69,12 @@
         <%for(var key in fieldStates) {%>
         <%  if(!fieldStates[key].toggle) continue; %>
         <%  toggleFieldCount++;%>
-        <%  var value = getFieldValue(source, key); %>
+        <%  var value = ""; %>
+        <%  if(key.startsWith("_")) { %>
+        <%    value = hit[key]; %>
+        <%  } else { %> 
+        <%    value = getFieldValue(source, key); %>
+        <%  } %> 
             <td><%=value%></td>
         <%}%>
         <%if(toggleFieldCount == 0) {%>

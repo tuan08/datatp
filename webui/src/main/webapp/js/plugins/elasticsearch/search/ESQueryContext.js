@@ -14,7 +14,7 @@ define([
 
     this.addQueryResult = function(query, result) {
       var qHistory = {
-        query: JSON.parse(JSON.stringify(query)),
+        query: query,
         resultInfo: {
           took: result.took,
           timeOut: result.time_out,
@@ -34,6 +34,15 @@ define([
     };
 
     this._collectHitInfo = function(hit) {
+      if(!this.fieldStates["_index"]) {
+        this.fieldStates["_index"] = { count: 1 };
+        this.fieldStates["_score"] = { count: 1 };
+        this.fieldStates["_id"]    = { count: 1 };
+      } else {
+        this.fieldStates["_index"].count++;
+        this.fieldStates["_score"].count++;
+        this.fieldStates["_id"].count++;
+      }
       var result = util.reflect.flatten(hit._source);
       for(var key in result) {
         if(this.fieldStates[key]) this.fieldStates[key].count++;
