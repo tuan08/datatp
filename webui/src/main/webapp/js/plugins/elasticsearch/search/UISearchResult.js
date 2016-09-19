@@ -3,9 +3,10 @@ define([
   'underscore', 
   'backbone',
   'ui/UITabbedPane',
-  'plugins/elasticsearch/search/UISearchResultInfo',
-  'plugins/elasticsearch/search/hit/UISearchHit'
-], function($, _, Backbone, UITabbedPane, UISearchResultInfo, UISearchHit) {
+  'plugins/elasticsearch/search/hit/UISearchHit',
+  'plugins/elasticsearch/search/analytic/UIAnalytics'
+], function($, _, Backbone, UITabbedPane, UISearchHit, UIAnalytics) {
+
   var UISearchResult = UITabbedPane.extend({
     label: 'Search Result Workspace',
 
@@ -18,29 +19,27 @@ define([
           }
         },
         { 
-          label: "Chart",  name: "chart",
+          label: "Analytics",  name: "analytics",
           onSelect: function(thisUI, tabConfig) {
-            thisUI.setSelectedTabUIComponent(tabConfig.name, thisUI.uiSearchResultInfo) ;
-          }
-        },
-        { 
-          label: "Info",  name: "info",
-          onSelect: function(thisUI, tabConfig) {
-            thisUI.setSelectedTabUIComponent(tabConfig.name, thisUI.uiSearchResultInfo) ;
+            thisUI.setSelectedTabUIComponent(tabConfig.name, thisUI.uiAnalytics) ;
           }
         }
       ]
     },
     
     onInit: function(options) {
+      var esQueryContext = options.esQueryContext;
       this.uiSearchHit = new UISearchHit();
-      this.uiSearchResultInfo = new UISearchResultInfo();
+      this.uiSearchHit.onResult(esQueryContext.getQueryResult());
+      
+      this.uiAnalytics = new UIAnalytics({esQueryContext: esQueryContext});
     },
 
 
-    onResult: function(result) {
+    onSearch: function(esQueryCtx) {
+      var result = esQueryCtx.getQueryResult();
       this.uiSearchHit.onResult(result);
-      this.uiSearchResultInfo.onResult(result);
+      this.uiAnalytics.onSearch(esQueryCtx);
     }
   });
   return UISearchResult ;

@@ -12,15 +12,19 @@ define([
       var chart = nv.models.linePlusBarChart();
       chart.
         margin({top: 50, right: 80, bottom: 30, left: 80}).
-        legendRightAxisHint(' [Using Right Axis]').
+        legendLeftAxisHint('').
+        legendRightAxisHint('*').
         color(d3.scale.category10().range());
 
-      chart.xAxis.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) }).showMaxMin(false);
 
-      chart.y2Axis.tickFormat(function(d) { return '$' + d3.format(',f')(d) });
+      chart.xAxis.tickFormat(function(d) { return config.xAxis.tickFormat(d); }).showMaxMin(false);
+      chart.x2Axis.tickFormat(function(d) { return config.x2Axis.tickFormat(d); }).showMaxMin(false);
+
+      chart.y1Axis.tickFormat(function(d) { return config.y1Axis.tickFormat(d); });
+      chart.y2Axis.tickFormat(function(d) { return config.y2Axis.tickFormat(d); });
+
       chart.bars.forceY([0]).padData(false);
 
-      chart.x2Axis.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) }).showMaxMin(false);
 
       d3.select('#' + config.id + ' svg').datum(chartData).transition().duration(500).call(chart);
 

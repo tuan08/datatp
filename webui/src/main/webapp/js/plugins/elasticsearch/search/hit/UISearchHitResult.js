@@ -7,8 +7,9 @@ define([
   'ui/UIUtil',
   'ui/UIBreadcumbs',
   'plugins/elasticsearch/search/hit/UISearchHitDetail',
+  'plugins/elasticsearch/search/hit/UISearchResultInfo',
   'text!plugins/elasticsearch/search/hit/UISearchHitList.jtpl'
-], function($, _, Backbone, util, PageList, UIUtil, UIBreadcumbs, UISearchHitDetail, Template) {
+], function($, _, Backbone, util, PageList, UIUtil, UIBreadcumbs, UISearchHitDetail, UISearchResultInfo, Template) {
   var UISearchHitList = Backbone.View.extend({
     label: 'Search Hits',
     
@@ -18,15 +19,23 @@ define([
     _template: _.template(Template),
 
     render: function() {
+      var hitTotal = 0, executeTime = 0;
+      if(this.queryResult.queryHistories.length > 0) {
+        var qInfo = this.queryResult.queryHistories[this.queryResult.queryHistories.length - 1];
+        hitTotal = qInfo.resultInfo.hitTotal;
+        executeTime = qInfo.resultInfo.took;
+      }
       var params = { 
         util: util,
         fieldStates: this.fieldStates,
-        hitPageList: this.hitPageList 
+        hitPageList: this.hitPageList,
+        hitTotal: hitTotal, executeTime: executeTime
       } ;
       $(this.el).html(this._template(params));
     },
 
     events: {
+      'click .onMoreSearchInfo': 'onMoreSearchInfo',
       'click .onSelectPage': 'onSelectPage',
       'click .onViewDetail': 'onViewDetail'
     },
@@ -42,6 +51,13 @@ define([
       var hit = this.hitPageList.getItemOnCurrentPage(parseInt(row));
       var uiSearchHitResult = UIUtil.getAncestorOfType(this, 'UISearchHitResult');
       uiSearchHitResult.push(new UISearchHitDetail({ hit: hit}));
+    },
+    
+    onMoreSearchInfo: function(evt) {
+      var uiSearchResultInfo = new UISearchResultInfo();
+      uiSearchResultInfo.onResult(this.queryResult);
+      var uiSearchHitResult = UIUtil.getAncestorOfType(this, 'UISearchHitResult');
+      uiSearchHitResult.push(uiSearchResultInfo);
     },
     
     onResult: function(queryResult) {

@@ -3,20 +3,18 @@ define([
   'underscore', 
   'backbone',
   "nv",
+  "ui/UIUtil",
   "css!../../../libs/d3/nv/nv.d3.min.css"
-], function($, _, Backbone, nv) {
+], function($, _, Backbone, nv, UIUtil) {
   var UINVChart = Backbone.View.extend({
     data:  [],
 
     initialize: function (options) {
-      if(!options) options = {};
-      if(!options.width)  options.width  = '100%';
-      if(!options.height) options.height = '600px';
-      if(!options.id)     options.id     = 'UINVBarChart';
-
+      if(this.config == null) this.config = {};
+      if(this.config.width == null) this.config.width = "100%";
+      if(this.config.height == null) this.config.height = "600px";
+      if(this.config.id == null) this.config.id = "ui-chart-" + UIUtil.guid();
       if(this.onInit) this.onInit(options);
-      this.config = options ;
-      _.bindAll(this, 'render');
     },
 
     _template: _.template(

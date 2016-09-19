@@ -1,10 +1,10 @@
 <%function renderField(fieldStates, key) {%>
   <div style="cursor: pointer" class="field-block" field="<%=key%>">
-    <div style="float: left"><strong><%=key%><strong></div>
+    <div style="float: left"><strong=><%=key%><strong></div>
     <div style="float: right; display: none" class="field-action-block">
       <a style="text-align: left"  class="ui-action onToggleField">
         <%var label = "add"%>
-        <%if(fieldStates[key].toggle) label = "remove"%>
+        <%if(fieldStates[key].toggle) label = "del"%>
         <span><%=label%></span>
       </a>
     </div>

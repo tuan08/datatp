@@ -14,7 +14,6 @@ define([
         this.tabs[i] = this.config.tabs[i];
       }
       this.onInit(options) ;
-      _.bindAll(this, 'render', 'onSelectTab') ;
     },
 
     onInit: function(options) { },

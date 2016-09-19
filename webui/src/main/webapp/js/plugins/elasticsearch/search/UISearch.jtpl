@@ -1,9 +1,10 @@
 <div style="padding: 5px">
   <div>
     <div>
+      <span class="ui-action onConfig">V</span>
       <input name="search" value="<%=queryString%>" class="onSearchInputEnter"
              placeholder="Search Query" style="width: 900px; height: 20px; border: 1px solid lightgray" />
-      <span class="ui-action onSearch">Search</span>
+      <span class="ui-action onSearch">Go</span>
     </div>
   </div>
 

@@ -7,6 +7,25 @@ define([
   var UINVLinePlusBarChartDemo = UINVLinePlusBarChart.extend({
     label: 'NV Line Plus Chart Demo',
 
+    config: {
+      width: "100%", height: "600px",
+      xAxis: {
+        tickFormat: function(value) { return d3.time.format('%x %H:%M:%S')(new Date(value)); }
+      },
+
+      x2Axis: {
+        tickFormat: function(value) { return d3.time.format('%x %H:%M:%S')(new Date(value)); }
+      },
+
+      y1Axis: {
+        tickFormat: function(value) { return  value; }
+      },
+
+      y2Axis: {
+        tickFormat: function(value) { return  '$' + d3.format(',f')(new Date(value)); }
+      },
+    },
+
     onInit: function(options) {
       var data = [
        {
@@ -59,8 +78,9 @@ define([
           ]
         }
       ];
+
       this.setData(data);
     }
   });
-  return new UINVLinePlusBarChartDemo({}) ;
+  return new UINVLinePlusBarChartDemo() ;
 });

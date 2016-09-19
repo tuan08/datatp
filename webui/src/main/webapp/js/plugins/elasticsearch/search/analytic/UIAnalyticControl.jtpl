@@ -1,0 +1,125 @@
+<%function renderDateHistogramChartType() {%>
+  <div>
+    <div>
+      <strong style="width: 65px; display: inline-block">Type:</strong> <span>Document Histogram</span>
+    </div>
+    <div>
+      <strong style="width: 65px; display: inline-block">Date Field:</strong> <span>timestamp</span>
+    </div>
+    <div>
+      <strong style="width: 65px; display: inline-block">Interval:</strong> <span>1m</span>
+    </div>
+    <div>
+      <strong style="width: 65px; display: inline-block">From:</strong> <span>-1M</span>
+    </div>
+    <div>
+      <strong style="width: 65px; display: inline-block">To:</strong> <span>Now</span>
+    </div>
+  </div>
+<%}%>
+
+<%function renderSubAggregations(chartModel) {%>
+<%  var subaggs = chartModel.getSubAggregations(); %>
+<%  for(var i = 0; i < subaggs.length; i++) { %>
+<%    var subagg = subaggs[i]; %>
+      <div style="cursor: pointer" class="mouseover-action-block" field="<%=subagg.field%>">
+        <div style="float: left">
+          <%if(subagg.type == "TermTopHit") {  %>
+            <strong>Top Hit:</strong> <span><%=subagg.field%> - <%= subagg.size%></span>
+          <%}%>
+        </div>
+        <div style="float: right; display: none" class="action-block">
+          <a style="text-align: left"  class="ui-action onRemoveSubAggregation">del</a>
+        </div>
+        <div class="clearfix"><span/></div>
+      </div>
+<%  }%>
+<%}%>
+
+<%function renderAddTopHitSubAggregation(fieldsMapping) {%>
+  <div class="add-top-hit-sub-aggregation">
+	  <div>
+	    <strong style="display: inline-block; width: 70px">Type:</strong>
+	    <select class="type" style="width: 170px">
+	      <option value="TermTopHit">Terms Top Hit</option>
+	    </select>
+	  </div>
+	  <div>
+      <strong style="display: inline-block; width: 70px">Name:</strong>
+      <input class="name" name="name" value="" style="width: 165px" /> 
+    </div>
+	  <div>
+	    <strong style="display: inline-block; width: 70px">Field:</strong>
+	    <select class="field" style="width: 170px">
+	      <%for(var key in fieldsMapping) {%>
+	        <%var fieldMapping = fieldsMapping[key]; %>
+	        <%if(fieldMapping.type != 'string' || fieldMapping.index != 'not_analyzed') continue;%>
+	        <option value="<%=key%>"><%=key%></option>
+	      <%}%>
+	    </select>
+	  </div>
+	  <div>
+	    <strong style="display: inline-block; width: 70px">Size:</strong>
+	    <input class="size" name="maxTopHitSize" value="10" style="width: 165px" /> 
+	  </div>
+	  <div style="text-align: center; padding-top: 5px">
+	    <a class="ui-action onAddTopHitSubAggregation">Add</a>
+	  </div>
+  </div>
+<%}%>
+
+
+<div style="padding: 0px">
+  <div> 
+    <h6>Select Chart Type</h6>
+    <hr/>
+    <div style="padding-top: 10px" class="more-less-section-container"> 
+      <%renderDateHistogramChartType();%>
+      
+      <div style="border: 2px dashed lightgray; margin: 10px 0px; padding: 5px 0px; display: none" class="more-less-section">
+        <div>
+          <strong style="display: inline-block; width: 70px">Type:</strong>
+          <select style="width: 170px">
+            <option value="DateHistogram">Date Histogram</option>
+          </select>
+        </div>
+        
+        <div>
+          <strong style="display: inline-block; width: 70px">Field:</strong>
+          <select style="width: 170px">
+            <option value="timstamp">Timestamp</option>
+          </select>
+        </div>
+        
+        <div>
+          <strong style="display: inline-block; width: 70px">Interval:</strong>
+          <input name="maxTopHitSize" value="10" style="width: 165px" /> 
+        </div>
+      </div>
+      
+      <div>
+        <div><a style="float: right" class="ui-action onToggleMoreLessSection">more</a></div>
+        <div class="clearfix"><span/></div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div style="padding-top: 10px" class="more-less-section-container"> 
+    <h6>Aggregation By</h6>
+    <hr/>
+    
+    <div>
+      <%renderSubAggregations(chartModel);%>
+    </div>
+    
+    <div style="border: 2px dashed lightgray; margin: 10px 0px; padding: 5px 0px; display: none" class="more-less-section">
+      <%renderAddTopHitSubAggregation(fieldsMapping); %>
+    </div>
+    
+    <div>
+      <a style="float: right" class="ui-action onToggleMoreLessSection"><span>More</span></a>
+      <div class="clearfix"><span/></div>
+    </div>
+  </div>
+</div>

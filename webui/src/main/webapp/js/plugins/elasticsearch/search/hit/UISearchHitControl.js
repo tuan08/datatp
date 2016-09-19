@@ -38,7 +38,7 @@ define([
       var fieldName = fieldBlock.attr('field');
       this.fieldStates[fieldName].toggle = !this.fieldStates[fieldName].toggle;
       if(this.fieldStates[fieldName].toggle) {
-        fieldBlock.find(".field-action-block  span").text("remove");
+        fieldBlock.find(".field-action-block  span").text("del");
       } else {
         fieldBlock.find(".field-action-block  span").text("add");
       }

@@ -90,7 +90,17 @@
 <%}%>
 
 <div>
-  <table>
+  <div style="border-bottom: 1px solid lightgray; height: 20px">
+    <div style="float: left">
+      <strong>Found:</strong> <span><%=hitTotal %> (in <%=executeTime %>ms)</span>
+    </div>
+    <div style="float: right">
+      <a class="ui-action onMoreSearchInfo">more</a>
+    </div>
+    <div style="clear: both"><span/></div>
+  </div>
+
+  <table style="margin-top: 5px">
     <%renderHeaders(fieldStates)%>
     <%renderHits(fieldStates, hitPageList, util)%>
   </table>

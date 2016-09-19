@@ -2,6 +2,69 @@ define([
   'jquery',
   'util/util',
 ], function($, util) {
+  var postDslQuery = function(restPath, dslQuery) {
+    var returnData = null ;
+    $.ajax({ 
+      url: restPath,
+      type: "POST",
+      data: JSON.stringify(dslQuery) ,
+      async: false ,
+      dataType: "json",
+
+      error: function(data) { console.log("Error: \n" + data) ; },
+
+      success: function(data) { returnData = data ; }
+    });
+    return returnData ;
+  };
+  
+  var getDslQuery = function(restPath, dslQuery) {
+    var returnData = null ;
+    $.ajax({ 
+      url: restPath,
+      type: "GET",
+      data: dslQuery ,
+      async: false ,
+      dataType: "json",
+
+      error: function(data) { console.log("Error: \n" + data) ; },
+
+      success: function(data) { returnData = data ; }
+    });
+    return returnData ;
+  };
+  
+  var IndexFieldsMapping = function() {
+    this.fieldsMapping = {};
+    
+    this.getFieldsMapping = function() { return this.fieldsMapping; };
+    
+    this.addFieldsMapping = function(indexConfig) {
+      for(var key in indexConfig) {
+        var mappings = indexConfig[key].mappings;
+        for(var mappingKey in mappings) {
+          this._extractFlatFieldMapping("", mappings[mappingKey].properties);
+        }
+      }
+    };
+    
+    this.getFieldMapping = function(flatKey) { 
+      return this.fieldsMapping[flatKey] ;
+    };
+    
+    this._extractFlatFieldMapping = function(keyPrefix, properties) {
+      for(var key in properties) {
+        var field = properties[key];
+        if(field.properties) {
+          this._extractFlatFieldMapping(keyPrefix + key + ".", field.properties)
+        } else {
+          var fullKey = keyPrefix + key;
+          this.fieldsMapping[fullKey] = field;
+        }
+      }
+    };
+  };
+  
   var ESQueryResult = function() {
     this.hits = [];
     this.fieldStates = {};
@@ -54,8 +117,13 @@ define([
   var ESQueryContext = function(restURL, indices, query) {
     this.restURL   = restURL;
     this.indices   = indices;
+    this.indexFieldsMapping = new IndexFieldsMapping();
+    
+    for(var i = 0 ; i < indices.length; i++) {
+      this.indexFieldsMapping.addFieldsMapping(getDslQuery(restURL + "/" + indices[i], {}));
+    }
+    
     this.query     = query;
-
     this.searchURL = restURL + "/" + indices.join() + "/_search?pretty=true";
     this.queryResult = new ESQueryResult();
 
@@ -65,36 +133,18 @@ define([
     };
 
     this.retrieve = function(from, size) { 
-      var dslQuery = {
-        from: from, size: size,
-        query: this.query
-      }
-      var result = this.restPOST(dslQuery); 
+      var dslQuery = { from: from, size: size, query: this.query }
+      var result = this.dslQuery(dslQuery); 
       this.queryResult.addQueryResult(dslQuery, result);
     };
 
     this.getQueryResult = function() { return this.queryResult; };
 
-    this.restPOST = function(params) {
+    this.getIndexFieldsMapping = function() { return this.indexFieldsMapping; }
+    
+    this.dslQuery = function(dslQuery) {
       var restPath = this.searchURL;
-      var returnData = null ;
-      $.ajax({ 
-        url: restPath,
-        type: "POST",
-        data: JSON.stringify(params) ,
-        async: false ,
-        dataType: "json",
-
-        error: function(data) {  
-          console.log("Error:") ; 
-          console.log(data) ; 
-        },
-
-        success: function(data) {  
-          returnData = data ; 
-        }
-      });
-      return returnData ;
+      return postDslQuery(restPath, dslQuery);
     };
   };
 

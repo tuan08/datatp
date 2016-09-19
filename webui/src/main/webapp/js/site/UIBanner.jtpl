@@ -7,7 +7,7 @@
     <div style="float: right">
       <a class="ui-action onSelectPlugin" plugin="elasticsearch">Elasticsearch</a> |
       <a class="ui-action onSelectPlugin" plugin="crawler">Crawler</a> |
-      <a class="ui-action onSelectPlugin" plugin="uidemo">UI Demo</a>
+      <a class="ui-action onSelectPlugin" plugin="uidemo">Help</a>
     </div>
     <div style="clear: both"><span/></div>
     <hr/>

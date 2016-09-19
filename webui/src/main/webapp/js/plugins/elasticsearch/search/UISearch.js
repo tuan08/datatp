@@ -12,16 +12,9 @@ define([
     type: 'UISearch',
     
     initialize: function () {
-      this.uiSearchResult = new UISearchResult();
       this.queryString = "";
-      var query = {
-        "query_string" : {
-          "fields" : ["entity.content.content^3", "entity.content.content^2", "entity.content.content"],
-          "query" : ""
-        }
-      };
-      this.esQueryCtx = new ESQueryContext("http://localhost:9200", ["xdoc"], query);
-      this.uiSearchResult.onResult(this.esQueryCtx.getQueryResult());
+      this.esQueryCtx = new ESQueryContext("http://localhost:9200", ["xdoc"], { "match_all": {} });
+      this.uiSearchResult = new UISearchResult({ esQueryContext: this.esQueryCtx });
     },
     
     _template: _.template(Template),
@@ -54,12 +47,15 @@ define([
       var query = {
         "query_string" : {
           "fields" : ["entity.content.content^3", "entity.content.content^2", "entity.content.content"],
-          "query" : this.queryString
+          "query" : queryString
         }
       };
+      if(queryString == "*") {
+        query = { "match_all": {} };
+      }
       this.esQueryCtx.setQuery(query);
       this.esQueryCtx.retrieve(0, 100);
-      this.uiSearchResult.onResult(this.esQueryCtx.getQueryResult());
+      this.uiSearchResult.onSearch(this.esQueryCtx);
       this.render();
     }
   });

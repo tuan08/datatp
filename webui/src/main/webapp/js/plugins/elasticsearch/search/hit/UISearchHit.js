@@ -4,8 +4,7 @@ define([
   'backbone',
   'plugins/elasticsearch/search/hit/UISearchHitControl',
   'plugins/elasticsearch/search/hit/UISearchHitResult',
-  'text!plugins/elasticsearch/search/hit/UISearchHit.jtpl'
-], function($, _, Backbone, UISearchHitControl, UISearchHitResult,  Template) {
+], function($, _, Backbone, UISearchHitControl, UISearchHitResult) {
 
   var UISearchHit = Backbone.View.extend({
     label: 'Search Hit',
@@ -15,7 +14,13 @@ define([
       this.uiSearchHitResult = new UISearchHitResult({ uiSearchHit: this});
     },
    
-    _template: _.template(Template),
+    _template: _.template(`
+      <div style="padding: 10px 5px">
+        <div style="width: 200px; float: left" class="UISearchHitControl"></div>
+        <div style="margin-left: 220px" class="UISearchHitResult"></div>
+        <div class="clearfix"><span/></div>
+      </div>
+    `),
 
     render: function() {
       var params = { } ;
