@@ -18,7 +18,10 @@ define([
 
 
       chart.xAxis.tickFormat(function(d) { return config.xAxis.tickFormat(d); }).showMaxMin(false);
+      //chart.xAxis.rotateLabels(-7.5);
+
       chart.x2Axis.tickFormat(function(d) { return config.x2Axis.tickFormat(d); }).showMaxMin(false);
+      //chart.x2Axis.rotateLabels(-7.5);
 
       chart.y1Axis.tickFormat(function(d) { return config.y1Axis.tickFormat(d); });
       chart.y2Axis.tickFormat(function(d) { return config.y2Axis.tickFormat(d); });

@@ -64,14 +64,24 @@ define([
     }
   };
 
-  var DateHistogramAggregation = function(name, dateField, interval) {
+  var DateHistogramAggregation = function(name, dField, interval, format) {
     $.extend(this, new Aggregation('DateHistogram', name));
-    this.dateField = dateField;
+    this.dateField = dField;
     this.interval  = interval;
+    this.format    = format == null ? "dd/MM/yyyy hh:mm:ss" : format;
+
+    this.setDateField = function(dfield) { this.dateField = dfield ;} ;
+
+    this.setInterval = function(interval) { this.interval = interval; }
+
+    this.setFormat = function(format) { 
+      if(format == null || format == '') this.format = "dd/MM/yyyy hh:mm:ss";
+      else this.format = format; 
+    }
 
     this.append = function(aggs) {
       var agg = {
-        date_histogram : { field: this.dateField, interval: this.interval, format: "dd/MM/yyyy hh:mm:ss" },
+        date_histogram : { field: this.dateField, interval: this.interval, format: this.format }
       };
       this.appendSubAggs(agg) ;
       aggs[this.name] = agg;
@@ -90,27 +100,13 @@ define([
     };
   };
 
-  var DateHistogramModel = function(name, dateField, interval) {
-    this.aggregation = new DateHistogramAggregation(name, dateField, interval);
-
-    this.getSubAggregations = function() { return this.aggregation.getSubAggregations() ; }
-    
-    this.addSubAggregation = function(agg) {
-      this.aggregation.addSubAggregation(agg);
-    };
-    
-    this.rmSubAggregation = function(field) { 
-      this.aggregation.rmSubAggregation(field);
-    };
+  var DateHistogramModel = function(name, dateField, interval, from, to) {
+    $.extend(this, new DateHistogramAggregation(name, dateField, interval, from, to));
     
     this.aggs = function() {
       var aggs = { };
-      this.aggregation.append(aggs);
+      this.append(aggs);
       return aggs ;
-    };
-
-    this.buildChartData = function(result) {
-      return this.aggregation.buildChartData(result);
     };
   };
 

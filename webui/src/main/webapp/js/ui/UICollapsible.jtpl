@@ -29,26 +29,24 @@
           <%}%>
         <%})%>
       </div>
-      <div><span class="clearfix"/></div>
+      <div class="clearfix"><span/></div>
     </div>
   <%}%>
 <%}%>
 
-<div class="UICollapsible">
+<div>
   <%renderHeader(config, state, title) ;%>
   
   <%components.forEach(function(comp, idx) { %>  
-    <div class="UICollapsibleBlock" style="padding: 10px 0px">
+    <div class="ui-collapsible" style="padding: 10px 0px">
       <%var icon = comp.collapible.collapsed ? "plus" : "minus"; %>
       <%var display = comp.collapible.collapsed ? "none" : "block"; %>
       <h4 style="margin: 0px; padding: 0px">
-        <a class="onToggleBlock ui-action" component="<%=idx%>"><span class="ui-icon ui-icon-<%=icon%>" style="display: inline-block"></span></a>
+        <a class="onToggleCollapsibleSection ui-action" component="<%=idx%>"><span class="ui-icon ui-icon-<%=icon%>" style="display: inline-block"></span></a>
         <%=comp.label%>
       </h4>
       
-      <div style="padding: 0px 15px; display: <%=display%>" 
-           class="UICollapsibleBlockContent<%=idx%>">
-      </div>
+      <div style="padding: 0px 15px; display: <%=display%>" class="ui-collapsible-section ui-component-<%=idx%>"> </div>
     </div>
   <%})%>  
   

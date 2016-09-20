@@ -27,7 +27,7 @@ define([
       async: false ,
       dataType: "json",
 
-      error: function(data) { console.log("Error: \n" + data) ; },
+      error: function(data) { console.log("Error: \n" + JSON.stringgify(data, null, 2)) ; },
 
       success: function(data) { returnData = data ; }
     });

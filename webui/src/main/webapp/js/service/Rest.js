@@ -1,7 +1,6 @@
 define([
   'service/Server'
 ], function(Server) {
-  console.log("Init Rest....................") ;
 
   function VMRest() {
     this.getActiveVMs = function() {

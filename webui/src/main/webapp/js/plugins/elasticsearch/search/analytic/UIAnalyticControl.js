@@ -24,8 +24,9 @@ define([
 
     events: {
       "click     .onRemoveSubAggregation": "onRemoveSubAggregation",
-      "click     .onToggleMoreLessSection": "onToggleMoreLessSection",
+      "click     .onToggleUICollapsible": "onToggleUICollapsible",
       "click     .onAddTopHitSubAggregation": "onAddTopHitSubAggregation",
+      "click     .onChangeDateHistogramChart": "onChangeDateHistogramChart",
       
       "mouseover .mouseover-action-block": "onMouseOverActionBlock",
       "mouseout  .mouseover-action-block": "onMouseOutActionBlock"
@@ -47,16 +48,29 @@ define([
       this.uiParent.onChangeChartModel();
     },
     
-    onToggleMoreLessSection: function(evt) {
-      var subAggBlock = $(evt.target).closest('.more-less-section-container');
-      var subAggAddBlock = subAggBlock.find('.more-less-section');
-      if(subAggAddBlock.css('display') == 'none') {
-        subAggAddBlock.css('display', 'block');
+    onToggleUICollapsible: function(evt) {
+      var collapsibleBlk = $(evt.target).closest('.ui-collapsible');
+      var collapsibleSectionBlk = collapsibleBlk.find('.ui-collapsible-section');
+      if(collapsibleSectionBlk.css('display') == 'none') {
+        collapsibleSectionBlk.css('display', 'block');
         $(evt.target).text("less");
       } else {
-        subAggAddBlock.css('display', 'none');
+        collapsibleSectionBlk.css('display', 'none');
         $(evt.target).text("more");
       }
+    },
+
+    onChangeDateHistogramChart: function(evt) {
+      var chartInputBlk = $(evt.target).closest('.ui-collapsible-section');
+      var dateField = chartInputBlk.find("select[name='dateField']").val()
+      var interval = chartInputBlk.find("input[name='interval']").val()
+      var format = chartInputBlk.find("input[name='format']").val()
+
+      var chartModel = this.analyticContext.getChartModel();
+      chartModel.setDateField(dateField);
+      chartModel.setInterval(interval);
+      chartModel.setFormat(format);
+      this.uiParent.onChangeChartModel();
     },
     
     onAddTopHitSubAggregation: function(evt) {

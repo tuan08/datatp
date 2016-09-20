@@ -1,43 +1,55 @@
 <%function renderDateHistogramChartType(chartModel) {%>
   <div>
     <div>
-      <strong class="ui-ib-75px">Type:</strong><span>Document Histogram</span>
+      <strong class="ui-ib-75px">Type:</strong>
+      <span>Document Histogram</span>
     </div>
     <div>
-      <strong class="ui-ib-75px">Date Field:</strong> <span>timestamp</span>
+      <strong class="ui-ib-75px">Date Field:</strong> 
+      <span><%=chartModel.dateField%></span>
     </div>
     <div>
-      <strong class="ui-ib-75px">Interval:</strong> <span>1m</span>
+      <strong class="ui-ib-75px">Interval:</strong> 
+      <span><%=chartModel.interval%></span>
     </div>
     <div>
-      <strong class="ui-ib-75px">From:</strong> <span>-1M</span>
-    </div>
-    <div>
-      <strong class="ui-ib-75px">To:</strong> <span>Now</span>
+      <strong class="ui-ib-75px">Format:</strong> 
+      <span><%=chartModel.format%></span>
     </div>
   </div>
 <%}%>
 
-<%function renderChangeDateHistogramChartType(fieldsMapping) {%>
+<%function renderChangeDateHistogramChartType(chartModel, fieldsMapping) {%>
   <div>
-   <strong class="ui-ib-75px">Type:</strong> <select class="ui-ib-165px">
+   <strong class="ui-ib-75px">Type:</strong> 
+   <select name="chartType" class="ui-ib-165px">
      <option value="DateHistogram">Date Histogram</option>
    </select>
   </div>
   
   <div>
-   <strong class="ui-ib-75px">Field:</strong> <select class="ui-ib-165px">
-    <option value="timstamp">Timestamp</option>
+   <strong class="ui-ib-75px">Field:</strong> 
+   <select name="dateField" class="ui-ib-165px">
+	    <%for(var key in fieldsMapping) {%>
+	    <%  var fieldMapping = fieldsMapping[key]; %>
+	    <%  if(fieldMapping.type != 'date') continue;%>
+	        <option value="<%=key%>"><%=key%></option>
+	    <%}%>
    </select>
   </div>
   
   <div>
    <strong class="ui-ib-75px">Interval:</strong>
-   <input name="maxTopHitSize" value="10" class="ui-ib-165px" />
+   <input name="interval" value="<%=chartModel.interval%>" placeholder="1s|1m|1h|1d|1M|1y" class="ui-ib-165px" />
   </div>
-  
+
+  <div>
+   <strong class="ui-ib-75px">Format:</strong>
+   <input name="format" value="<%=chartModel.format%>" placeholder="dd/MM/yyyy hh:mm:ss" class="ui-ib-165px" />
+  </div>
+
   <div style="text-align: center; padding-top: 5px">
-    <a class="ui-action">Change</a>
+    <a class="ui-action onChangeDateHistogramChart">Change</a>
   </div>
 <%}%>
 
@@ -96,35 +108,37 @@
   <div> 
     <h6>Select Chart Type</h6>
     <hr/>
-    <div style="padding-top: 10px" class="more-less-section-container"> 
-      <%renderDateHistogramChartType(chartModel);%>
-      
-      <div style="border: 2px dashed lightgray; margin: 10px 0px; padding: 5px 0px; display: none" class="more-less-section">
-        <%renderChangeDateHistogramChartType(fieldsMapping);%>
+    <div class="ui-collapsible"> 
+      <div style="padding: 10px 0px">
+        <%renderDateHistogramChartType(chartModel);%>
+      </div>
+
+      <div style="display: none" class="ui-collapsible-section ui-border-2px-dashed">
+        <%renderChangeDateHistogramChartType(chartModel, fieldsMapping);%>
       </div>
       
       <div>
-        <div><a style="float: right" class="ui-action onToggleMoreLessSection">more</a></div>
+        <div><a style="float: right" class="ui-action onToggleUICollapsible">more</a></div>
         <div class="clearfix"><span/></div>
       </div>
     </div>
     
   </div>
 
-  <div style="padding-top: 10px" class="more-less-section-container"> 
+  <div style="padding-top: 10px" class="ui-collapsible"> 
     <h6>Aggregation By</h6>
     <hr/>
     
-    <div>
+    <div style="padding: 10px 0px">
       <%renderSubAggregations(chartModel);%>
     </div>
     
-    <div style="border: 2px dashed lightgray; margin: 10px 0px; padding: 5px 0px; display: none" class="more-less-section">
+    <div style="display: none" class="ui-border-2px-dashed ui-collapsible-section">
       <%renderAddTopHitSubAggregation(fieldsMapping); %>
     </div>
     
     <div>
-      <a style="float: right" class="ui-action onToggleMoreLessSection"><span>More</span></a>
+      <a style="float: right" class="ui-action onToggleUICollapsible"><span>More</span></a>
       <div class="clearfix"><span/></div>
     </div>
   </div>

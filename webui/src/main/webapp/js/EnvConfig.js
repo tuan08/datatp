@@ -1,12 +1,8 @@
 Env = {
   user: {
-    userId:    "neverwinterdp",
+    userId:    "datatp",
     visitorId: "",
     sessionId: "",
-  },
-
-  gripper: {
-    server: "http://localhost:7081"
   },
 
   kibana: {

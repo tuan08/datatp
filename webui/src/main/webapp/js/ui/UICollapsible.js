@@ -12,7 +12,6 @@ define([
       this.clear() ;
       this.type = 'UICollapsible' ;
       this.onInit(options) ;
-      _.bindAll(this, 'render', 'onToggleBlock', 'onAction') ;
     },
     
     onInit: function(options) { },
@@ -63,29 +62,32 @@ define([
       
       for(var i = 0; i < this.components.length; i++) {
         var comp = this.components[i] ;
-        var blockClass = '.UICollapsibleBlockContent' + i ;
+        var blockClass = '.ui-component-' + i ;
         comp.setElement(this.$(blockClass)).render();
       }
     },
     
     events: {
-      'click a.onToggleBlock': 'onToggleBlock',
+      'click a.onToggleCollapsibleSection': 'onToggleCollapsibleSection',
       'click a.onAction': 'onAction',
     },
     
-    onToggleBlock: function(evt) {
+    onToggleCollapsibleSection: function(evt) {
+      var collapsibleBlock = $(evt.target).closest(".ui-collapsible") ;
+      var collapsibleSectionBlock = collapsibleBlock.find(".ui-collapsible-section") ;
+      var iconEle =$(evt.target).closest(".ui-icon");
       var compIdx = $(evt.target).closest("a").attr("component") ;
       this.components[compIdx].collapible.collapsed = !this.components[compIdx].collapible.collapsed ;
-      var blockClass = '.UICollapsibleBlockContent' + compIdx ;
+
       var iconEle =$(evt.target).closest(".ui-icon");
       if(this.components[compIdx].collapible.collapsed) {
         iconEle.removeClass("ui-icon-minus");
         iconEle.addClass("ui-icon-plus");
-        this.$(blockClass).css("display", "none");
+        collapsibleSectionBlock.css("display", "none");
       } else {
         iconEle.removeClass("ui-icon-plus");
         iconEle.addClass("ui-icon-minus");
-        this.$(blockClass).css("display", "block");
+        collapsibleSectionBlock.css("display", "block");
       }
     },
     

@@ -32,9 +32,7 @@ input, textarea, select {
   padding: 2px;
 }
 
-.ui-action:hover, .ui-action:focus {
-  color: #09f;
-}
+.ui-action:hover, .ui-action:focus { color: #09f; }
 
 .ui-disabled {
   pointer-events: none;
@@ -51,6 +49,9 @@ input, textarea, select {
 .ui-ib-150px { display: inline-block; width:  150px; }
 .ui-ib-165px { display: inline-block; width:  165px; }
 
+.ui-border { border: 1px solid lightgray; }
+.ui-border-2px-dashed { border: 2px dashed lightgray; }
+
 .ui-error-text { color:#8a1f11; }
 
 .ui-fl-200px-col { width: 200px; float: left ; }
@@ -58,6 +59,10 @@ input, textarea, select {
 
 .ui-fl-250px-col { width: 250px; float: left ; }
 .ui-ml-250px-col { margin-left: 250px ; padding-right: 10px ; overflow: auto ; }
+
+.ui-collapsible {}
+
+.ui-collapsible-section { }
 
 .logo-text {
   font-family: Garamond, serif;

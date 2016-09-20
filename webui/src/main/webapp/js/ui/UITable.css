@@ -1,37 +1,17 @@
-.UITable {
-}
-
 .UITable table {
   width: 100%;
   border-collapse:collapse;
   margin: 0px auto;
 }
 
-.UITable th, 
-.UITable td {
-  border: 1px solid ;
-  padding: 5px;
-}
+.UITable th, .UITable td { border: 1px solid ; padding: 5px; }
 
-.UITable th {
-  text-align: center ;
-}
+.UITable th { text-align: center ; }
 
-.UITable .hide-column {
-  display: none ;
-}
+.UITable .hide-column { display: none ; }
 
+.UITable .cell-center-align { text-align: center ; }
 
-.UITable .cell-center-align {
-	text-align: center ;
-}
+.UITable .cell-right-align { text-align: right ; }
 
-.UITable .cell-right-align {
-  text-align: right ;
-}
-
-.UITable .action-icon {
-  margin: 0px ;
-  padding: 0px ;
-}
-
+.UITable .action-icon { margin: 0px ; padding: 0px ; }
