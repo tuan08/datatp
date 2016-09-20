@@ -20,9 +20,9 @@ define([
 
     onActivate: function(evt) {
       require(['plugins/uidemo/UITableDemo'], function(UIDemoComponent) { 
-        $('#UIWorkspace').empty();
-        $('#UIWorkspace').unbind();
-        UIDemoComponent.setElement($('#UIWorkspace')).render();
+        $('#UIDemoWS').empty();
+        $('#UIDemoWS').unbind();
+        UIDemoComponent.setElement($('#UIDemoWS')).render();
       }) ;
     },
 
@@ -35,9 +35,9 @@ define([
       console.log('on select: ' + name) ;
 
       require(['plugins/uidemo/' + name], function(UIDemoComponent) { 
-        $('#UIWorkspace').empty();
-        $('#UIWorkspace').unbind();
-        UIDemoComponent.setElement($('#UIWorkspace')).render();
+        $('#UIDemoWS').empty();
+        $('#UIDemoWS').unbind();
+        UIDemoComponent.setElement($('#UIDemoWS')).render();
       }) ;
     }
   });

@@ -20,6 +20,9 @@ pre {
   white-space: -o-pre-wrap;    /* Opera 7 */
   word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
+input, textarea, select {
+  box-sizing: border-box;
+}
 
 .ui-action {
   cursor: pointer ;
@@ -33,29 +36,28 @@ pre {
   color: #09f;
 }
 
-
-.ui-error-text {
-  color:#8a1f11;
-}
-
-a.ui-disabled {
+.ui-disabled {
   pointer-events: none;
   cursor: default;
   text-decoration: none ;
   font-weight: normal !important ;
 }
 
+.ui-ib-60px  { display: inline-block; width:   60px; }
+.ui-ib-75px  { display: inline-block; width:   75px; }
+.ui-ib-90px  { display: inline-block; width:   90px; }
+.ui-ib-105px { display: inline-block; width:  105px; }
+.ui-ib-120px { display: inline-block; width:  120px; }
+.ui-ib-150px { display: inline-block; width:  150px; }
+.ui-ib-165px { display: inline-block; width:  165px; }
 
-#UINavigation {
-  width: 200px;
-  float: left ;
-}
+.ui-error-text { color:#8a1f11; }
 
-#UIWorkspace {
-  margin-left: 200px ;
-  padding-right: 20px ;
-  overflow: auto ;
-}
+.ui-fl-200px-col { width: 200px; float: left ; }
+.ui-ml-200px-col { margin-left: 200px ; padding-right: 10px ; overflow: auto ; }
+
+.ui-fl-250px-col { width: 250px; float: left ; }
+.ui-ml-250px-col { margin-left: 250px ; padding-right: 10px ; overflow: auto ; }
 
 .logo-text {
   font-family: Garamond, serif;

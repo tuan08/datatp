@@ -8,8 +8,6 @@ define([
     el: $("#UIBody"),
     
     initialize: function () {
-      _.bindAll(this, 'render') ;
-      
     },
     
     _template: _.template(Template),
@@ -34,9 +32,9 @@ define([
 
     _loadUI: function(name) {
       require(['plugins/crawler/' + name], function(uiComp) { 
-        $('#UIWorkspace').empty();
-        $('#UIWorkspace').unbind();
-        uiComp.setElement($('#UIWorkspace')).render();
+        $('#UICrawlerWS').empty();
+        $('#UICrawlerWS').unbind();
+        uiComp.setElement($('#UICrawlerWS')).render();
       }) ;
     }
   });

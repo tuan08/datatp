@@ -23,9 +23,9 @@ define([
     },
    
     _template: _.template(`
-      <div style='padding: 10px 5px'> 
-        <div style='width: 250px; float: left' class='UIAnalyticControl'></div>
-        <div style='margin-left: 255px' class='UIAnalyticWS'></div>
+      <div style='padding: 10px 0px'> 
+        <div class='ui-fl-250px-col colborder UIAnalyticControl'></div>
+        <div class='ui-ml-250px-col UIAnalyticWS'></div>
         <div class='clearfix'><span/></div>
       </div>
     `),

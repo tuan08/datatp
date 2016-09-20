@@ -16,8 +16,8 @@ define([
    
     _template: _.template(`
       <div style="padding: 10px 5px">
-        <div style="width: 200px; float: left" class="UISearchHitControl"></div>
-        <div style="margin-left: 220px" class="UISearchHitResult"></div>
+        <div class="ui-fl-200px-col colborder UISearchHitControl"></div>
+        <div class="ui-ml-200px-col UISearchHitResult"></div>
         <div class="clearfix"><span/></div>
       </div>
     `),

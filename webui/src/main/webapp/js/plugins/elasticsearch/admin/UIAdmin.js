@@ -30,9 +30,9 @@ define([
     _loadUI: function(name) {
       console.log("load " + name) ;
       require(['plugins/elasticsearch/admin/' + name], function(uiComp) { 
-        $('#UIWorkspace').empty();
-        $('#UIWorkspace').unbind();
-        uiComp.setElement($('#UIWorkspace')).render();
+        $('#UIAdminWS').empty();
+        $('#UIAdminWS').unbind();
+        uiComp.setElement($('#UIAdminWS')).render();
       }) ;
     }
   });

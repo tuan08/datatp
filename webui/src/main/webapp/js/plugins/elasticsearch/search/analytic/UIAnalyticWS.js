@@ -22,7 +22,7 @@ define([
     },
       
     _template: _.template(`
-      <div style='padding: 10px 5px'> 
+      <div> 
         <div class='UIChart'></div>
       </div>
     `),

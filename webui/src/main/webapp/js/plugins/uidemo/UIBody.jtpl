@@ -1,5 +1,5 @@
 <div>
-  <div id="UINavigation" class="colborder">
+  <div class="ui-fl-200px-col colborder">
     <div style="padding: 10px">
       <div>
         <h3 style="margin: 3px 0px">Core Demo</h3>
@@ -24,6 +24,6 @@
     </div>
   </div>
 
-  <div id="UIWorkspace">scribengin workspace </div>
+  <div id="UIDemoWS" class="ui-ml-200px-col"></div>
   <div class="clearfix"><span/></div>
 </div>

@@ -7,15 +7,9 @@ define([
     el: $("#UIBody"),
     
     initialize: function () {
-      _.bindAll(this, 'render') ;
     },
     
-    _template: _.template("<div>Welcome to NeverwinterDP Project</div>"),
-    
     render: function() {
-      var params = { 
-      } ;
-      $(this.el).html(this._template(params));
       this.selectPlugin("elasticsearch");
     },
     
