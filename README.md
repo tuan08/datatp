@@ -44,6 +44,8 @@ The web crawler is designed to be scalable and distributed. The crawler consists
 4. the url fetchers
 5. the xhtml processor
 
+TODO:
+
 ##Facebook Data Feeder##
 
 ##Log Data Feeder##
