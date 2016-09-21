@@ -7,6 +7,8 @@ DataTP
 5. [Log Data](##Log Data)
 6. [Other Data](##Other Data)
 7. [DataTP System](##DataTP System)
+8. [DataTP Design And Code Structure](##DataTP Design And Code Structure)
+9. [Work With DataTP](##Work With DataTP)
 
 ##Overview##
 
@@ -50,5 +52,6 @@ The web crawler is designed to be scalable and distributed. The crawler consists
 
 ##Other Data Feeder##
 
+##DataTP Design And Code Structure
 
-##DataTP System##
+##Work With DataTP
