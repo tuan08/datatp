@@ -47,6 +47,7 @@ The web crawler is designed to be scalable and distributed. The crawler consists
 2. The url scheduler periodically traverse the entire urldb, find the url that meet the criteria such new url, expired url... to schedule for fetching. It also take the url that has beed fetched from the queue or new detect url and save to the url db.
 4. the url fetchers take the url that is scheduled for fetching from the queuei, fetch the url, forward the url with the fetched data to the data processor for processing such detect the web page type(page list, detail, ignore...), extract the data by xpath, automation algorithm or other plugin. The processed data and url then save to the queue for commit or further processing by the other components. 
 5. the xhtml processor is designed with plugin to do certain job such classification, extraction...
+6. In the distributed crawler implementation, the zookeeper is used to communicate and coordinate between the sheduler and fetchers.
 
 ##Facebook Data Feeder##
 
@@ -58,9 +59,11 @@ The web crawler is designed to be scalable and distributed. The crawler consists
 
 ###Lib###
 
-1. utils
-2. xhtml
-3. nlp
+The lib directory contain the other sub library project, they are:
+
+1. utils is a project that contains the reusable classes to handle text, io, util...
+2. xhtml is a project that extends the jsoup and boilerpipe project to handle the xhtml extraction.
+3. nlp is a project that help segment text, identify the different type of token such word, digit, number, email, url, currency, phone numbers, date... The nlp lib also has a custom matcher frame work that allow to extract the complex entity such address, complex date format...
 
 ###module###
 
