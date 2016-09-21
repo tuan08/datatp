@@ -1,10 +1,8 @@
 .UITabbedPane a.Tab {
+  cursor: pointer;
   padding: 2px 5px;
   font-weight: bold ;
   text-decoration: none;
-  cursor: pointer;
 }
 
-.UITabbedPane .UITab {
-  padding: 5px 5px;
-}
+.UITabbedPane .UITab { padding: 5px 5px; }
