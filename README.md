@@ -10,9 +10,17 @@ DataTP
 
 ##Overview##
 
-The DataTP - Data Tool Platform - is a data framework that allow the developer/admin to capture the different type of data such webpage, facebook messages, log...
+The DataTP - Data Tool Platform - is an opensource data framework that allow the developer to capture the different type of data such webpage, facebook data, log data... Process the data by the data tool to extract the entities, classify the data... and then forward the data to a queue to further save the data to elasticsearch for analysis or other storage such HDFS for backup.
 
 ![Overview](docs/images/datatp_overview.png "DataTP")
+
+The main goals of the project are:
+
+1. Scalable and reliable
+2. Reuse as much as possible the other popular opensource project such spring framework, elasticsearch, zookeeper, kafka, hadoop...
+3. Implement the missing data lib or services to process the data.
+4. abc  
+
 
 ##Web Crawler##
 
@@ -23,4 +31,5 @@ The DataTP - Data Tool Platform - is a data framework that allow the developer/a
 ##Other Data##
 
 ##Data Tools##
+
 ##DataTP System##
