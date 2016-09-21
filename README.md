@@ -38,13 +38,11 @@ The main features of the text tool are:
 
 The web crawler is designed to be scalable and distributed. The crawler consists of the main components:
 
-1. The url database
-1. The queue
-2. The url scheduler
-4. the url fetchers
-5. the xhtml processor
-
-TODO:
+1. The url database is designed to be small and fast, so a single urldb can handle up to 1Billion of urls. Usually 1 url record takes about 300 bytes, 1 billion records result 300GB, but if we use the data compression it will be about 30 - 50GB.
+1. The queue is used to etablish a reliable connection between url scheduler, url fetchers and the data processor components.
+2. The url scheduler periodically traverse the entire urldb, find the url that meet the criteria such new url, expired url... to schedule for fetching. It also take the url that has beed fetched from the queue or new detect url and save to the url db.
+4. the url fetchers take the url that is scheduled for fetching from the queuei, fetch the url, forward the url with the fetched data to the data processor for processing such detect the web page type(page list, detail, ignore...), extract the data by xpath, automation algorithm or other plugin. The processed data and url then save to the queue for commit or further processing by the other components. 
+5. the xhtml processor is designed with plugin to do certain job such classification, extraction...
 
 ##Facebook Data Feeder##
 

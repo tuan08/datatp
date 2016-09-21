@@ -1,5 +1,8 @@
 package net.datatp.crawler.disributed.urldb;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+
 import org.apache.hadoop.io.Text;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +22,16 @@ public class URLDatumDBUnitTest {
   public void setup() throws Exception {
     FileUtil.mkdirs("build/urldb");
     db = new URLDatumRecordDB("build/urldb", true);
+  }
+  
+  @Test
+  public void testURLDatumSize() throws Exception {
+    URLDatumRecord urldatum = new URLDatumRecord(System.currentTimeMillis());
+    urldatum.setOrginalUrl("http://vnexpress.net/tin-tuc/giao-duc/de-an-ngoai-ngu-gan-9-400-ty-sau-8-nam-lam-duoc-nhung-gi-3470788.html");
+    ByteArrayOutputStream os = new ByteArrayOutputStream();
+    urldatum.write(new DataOutputStream(os));
+    os.close();
+    System.out.println("Data Size: " + os.toByteArray().length);
   }
   
   @Test
