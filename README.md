@@ -40,6 +40,8 @@ The main features of the text tool are:
 
 The web crawler is designed to be scalable and distributed. The crawler consists of the main components:
 
+![Web Crawler](docs/images/datatp_webcrawler_overview.png "DataTP")
+
 1. The url database is designed to be small and fast, so a single urldb can handle up to 1Billion of urls. Usually 1 url record takes about 300 bytes, 1 billion records result 300GB, but if we use the data compression it will be about 30 - 50GB.
 1. The queue is used to etablish a reliable connection between url scheduler, url fetchers and the data processor components.
 2. The url scheduler periodically traverse the entire urldb, find the url that meet the criteria such new url, expired url... to schedule for fetching. It also take the url that has beed fetched from the queue or new detect url and save to the url db.
