@@ -26,8 +26,10 @@ The main goals of the project are:
 
 The Data tool is the library for the processing of text and xhtml. 
 
-1. The xhtml tool is based on the jsoup lib and boilerpipe lib. It allow to extract the data from xhtml by xpath or  extract the title, description, content automatically by using boilerpipe lib
-2. The main features of the text tool are:
+The xhtml tool is based on the jsoup lib and boilerpipe lib. It allow to extract the data from xhtml by xpath or  extract the title, description, content automatically by using boilerpipe lib
+
+The main features of the text tool are:
+
 - Segment the text into sentences, token...
 - Analyze token and classify the token as word, digit, number, email, phone number, currency...
 - The text tool is designed to use with the other text tool or NLP tool.
