@@ -18,9 +18,9 @@ The main goals of the project are:
 
 1. Scalable and reliable
 2. Reuse as much as possible the other popular opensource project such spring framework, elasticsearch, zookeeper, kafka, hadoop...
-3. Implement the missing data lib or services to process the data.
-4. abc  
-
+3. Implement the missing data lib or services such data lib, web crawler, facebook data feeder...
+4. Integrate the data components and other opensources into an usable data analytic product. 
+5. Implement a webui to monitor, control and analyze the data.
 
 ##Web Crawler##
 
