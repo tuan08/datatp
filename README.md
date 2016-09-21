@@ -34,8 +34,15 @@ The main features of the text tool are:
 - Analyze token and classify the token as word, digit, number, email, phone number, currency...
 - The text tool is designed to use with the other text tool or NLP tool.
 
-
 ##Web Crawler##
+
+The web crawler is designed to be scalable and distributed. The crawler consists of the main components:
+
+1. The url database
+1. The queue
+2. The url scheduler
+4. the url fetchers
+5. the xhtml processor
 
 ##Facebook Data Feeder##
 
