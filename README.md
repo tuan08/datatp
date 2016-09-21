@@ -67,12 +67,15 @@ The lib directory contain the other sub library project, they are:
 
 ###module###
 
-1. module
-2. commons
-3. spring-framework
-4. jms
-5. zookeeper
-6. elasticsearch
+DataTP is heavily used and depended on the other popular opensource framework, the module contains the sub projects that are the wrapper or resusable classes to those framework. Usually, each project implement a wrapper service so the original service can be deployed as embedded service in the spring container or as an independant service and run in its own jvm.
+
+The goal of the embedded services is to allow to integrate all the services and run in a single JVM. It is quite convenient a small scale deployment or unit testing.
+
+1. commons project define some common api, implement some common and reusable service such system, memory, cpu... monitor.
+2. spring-framework define some api, implement some example to show how to implement and deploy a service via microboot service or how to integrate via queue and integration channel. 
+3. jms project implement an embedded jms service on top of activemq, define some api for jms channel integration, some examples.
+4. zookeeper project implement an embbeded zookeeper service, implement some registry api on top of the zookeeper curator project.
+5. elasticsearch project implement an embbeded elasticsearch service, some wrapper elasticsearch client classes for reusabilities and testing.
 
 ###data###
 
