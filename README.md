@@ -54,4 +54,19 @@ The web crawler is designed to be scalable and distributed. The crawler consists
 
 ##DataTP Design And Code Structure
 
+###Lib###
+
+1. utils
+2. xhtml
+3. nlp
+
+###module###
+
+1. module
+2. commons
+3. spring-framework
+4. jms
+5. zookeeper
+6. elasticsearch
+
 ##Work With DataTP
