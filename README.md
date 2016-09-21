@@ -69,4 +69,14 @@ The web crawler is designed to be scalable and distributed. The crawler consists
 5. zookeeper
 6. elasticsearch
 
+###data###
+
+1. data/storage/batchdb 
+2. data/feed/webcrawler
+3. data/feed/facebook
+
+###webui###
+
+###release###
+
 ##Work With DataTP
