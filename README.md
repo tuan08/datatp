@@ -1,11 +1,11 @@
 DataTP
 ======
 1. [Overview](##overview)
-2. [Web Crawler](##Web Crawler)
-3. [Facebook Data](##Facebook Data)
-4. [Log Data](##Log Data)
-5. [Other Data](##Other Data)
-6. [Data Tools](##Data Tools)
+2. [Data Tools](##Data Tools)
+3. [Web Crawler](##Web Crawler)
+4. [Facebook Data](##Facebook Data)
+5. [Log Data](##Log Data)
+6. [Other Data](##Other Data)
 7. [DataTP System](##DataTP System)
 
 ##Overview##
@@ -22,14 +22,24 @@ The main goals of the project are:
 4. Integrate the data components and other opensources into an usable data analytic product. 
 5. Implement a webui to monitor, control and analyze the data.
 
+##Data Tools##
+
+The Data tool is the library for the processing of text and xhtml. 
+
+1. The xhtml tool is based on the jsoup lib and boilerpipe lib. It allow to extract the data from xhtml by xpath or  extract the title, description, content automatically by using boilerpipe lib
+2. The main features of the text tool are:
+- Segment the text into sentences, token...
+- Analyze token and classify the token as word, digit, number, email, phone number, currency...
+- The text tool is designed to use with the other text tool or NLP tool.
+
+
 ##Web Crawler##
 
-##Facebook Data##
+##Facebook Data Feeder##
 
-##Log Data##
+##Log Data Feeder##
 
-##Other Data##
+##Other Data Feeder##
 
-##Data Tools##
 
 ##DataTP System##
