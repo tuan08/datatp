@@ -1,0 +1,134 @@
+Home
+----
+
+Headvances
+
+Headvances is a software services company founded in Vietnam. We provide a
+wide range of services involving on the various web technologies. With more
+than 5 years of experiences in web development, We provide the best services
+and products to the customer.
+
+Data Mining
+
+Headvances provides web mining, text mining and data extraction services. We
+took more than 5 years to develop our web mining and crawling technologies.
+These allow you to easily and quickly extract website informations, classify
+and store the results in different formats such xml, text, csv.
+
+Consulting And Services
+
+Headvances also provides outsourcing and consulting service in various web
+technologies. With the low labor cost in Vietnam and our expertise in the web
+development, we develop very sophiticated and high quality products with the
+minimum cost.
+
+Product
+-------
+
+At Headvances, customer's satisfaction is our highest priority. We constantly
+build upon the research and develop new products that deliver the best
+possible services to our customer. Below is our complete list of products and
+services.
+
+Vertical Search Engine
+
+Many people find that general search engines like Google, Yahoo are not the
+be-all and end-all for their web searches. That's because general search
+engines are cluttered with all the information that's fit to index, so many
+queries bring irrelevant results.
+
+Our vertical search engine is an enterprise class product. It is built upon
+the powerful and well-known open source technologies such lucene, hadoop,
+springframework...
+
+The Product Features:
+
+* An automated and customizable web crawler.
+* Index and update the data in one hour.
+* Detect and cluster the duplicated data automatically.
+* Scale up to hundred millions of webpages.
+* A ready vertical search engine for classifieds, products, jobs and news.
+
+Consulting And Services
+
+Our services include crawling the internet to identify content of interest,
+extracting structured data from unstructured text on web pages, building
+search indexes over structured data, and powering vertical search engine
+applications which access topic-specific search indexes.
+
+Our Services:
+
+* Gathering website data and converting them into Excel spreadsheets, xml, text formats.
+* Adding new features or writing a plugin to our existing applications.
+* Customize the vertical search engine
+* Integrate our crawler/search engine with customer software
+
+About
+-----
+
+HEADVANCES CO. LTD was created in 2007 to provide consulting and outsourcing
+services.
+
+Headvances's team has a strong background in research and web development. In
+the past, we have built the popular eXoPlatform project that deals with many
+other open source project such lucene, hibernate, groovy, tomcat, jboss,
+hadoop and many lastest java technology such JSF, JSR 168, JSR 170.
+
+We also have expertise in large scale web crawling, natural language
+processing, document classification, and data mining. Our state of the art web
+crawler and data mining technology allow customers quickly extract and convert
+the unstructured web to a structured data collection.
+
+Headvances is a privately-held company located in Hanoi, Vietnam.
+
+Tuan Nguyen
+
+Tuan Nguyen, CEO and the founder of Headvances, has an extensive background in
+the software development and expertise in many popular open source
+technologies. Before founding Headvances, he works for a startup company in
+Sillicon Valley and later co-founded the eXo Platform project and eXoPlatform
+SAS
+
+Tuan holds a bachelor's degree in Computer Science from Concordia University
+in Canada.
+
+Contacts Us
+
+HEADVANCES CO. LTD
+186 Truong Dinh, Hanoi, Vietnam
+email: info@headvances.com
+
+
+Others
+------
+
+Extraction: Crawling often meant, not just web crawling but extraction of
+structured data from web pages. Thus, our product is not just about crawling
+but heavily focused on extraction. The extraction can be either site specific
+or more general predefined schema oriented extraction.
+
+Clean Data: Even if data is extracted correctly from web pages, the data may
+not be readily consumable. It may require further transformation(eg from
+geo-location to zip code etc), or filtering undesired data, removing duplicate
+records etc. In a nutshell, what one need is clean data the way they want it.
+For this specific reason, Datoin platform allows one to plug in any desired
+component in the crawling pipeline.
+
+Analysis: Once the clean data is available, in some cases it needs further
+analysis. Going one step ahead Datoin offers the flexibility of adding many
+other components to perform classification, clustering, aggregation and any
+other analysis required.  
+
+Hosting: Apart from crawling and extraction, what matters to some people is
+that where the crawler hosted. We offer both managed hosting service and
+on-premise/private-cloud solutions.
+
+Control: Majority of the use cases of crawling is not a one-time activity. It
+may be scheduled or continuously crawled to get fresh data. We provide that
+too!
+
+Export: One should have a say in the format of data(such as JSON, XML, CSV
+etc) they need, how it should be consumed(eg: download v/s REST API) or can it
+be directly exported data stores like Mongo, Postgres etc, cloud storages like
+AWS S3, Google cloud storage, search indices like Solr and Elastic using web
+hooks?
