@@ -1,8 +1,6 @@
 <div>
   <div style="height: 25px; padding: 5px 3px">
-    <div class="logo-text" style="float: left">
-      DataTP
-    </div>
+    <div class="logo-text" style="float: left">DataTP</div>
 
     <div style="float: right">
       <a class="ui-action onSelectPlugin" plugin="elasticsearch">Elasticsearch</a> |

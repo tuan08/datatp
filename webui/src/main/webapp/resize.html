@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data TP</title>
+
+    <link rel="stylesheet" href="js/libs/jquery/jquery-ui-1.12.0/jquery-ui.css">
+    <link rel="stylesheet" href="css/blueprint.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+
+    <script data-main="js/uidemo" src="js/libs/require/require-2.2.0.min.js"></script>
+    <style>
+      .panel { 
+        padding: 1em; 
+        border-width: 6px; 
+        border-style: solid; 
+        height: 100px; 
+      }
+
+      /* Resizing */
+      .resize-x { 
+        resize: horizontal;
+        overflow: auto;
+      }
+
+      /* Panel Colors */
+      .box-a { border-color: #F6F2A4; background: #FFFEDB;}
+      .box-b { border-color: #F2B98D; background: #FEE5D0;}
+      .box-c { border-color: #F18FB3; background: #FDD1E2;}
+
+      /* Initial Dimensions */
+      .p-25{ width: 25%; }
+      .p-50{ width: 50%; }
+      .p-75{ width: 75%; }
+
+      /* Split View */
+      .split-view {
+        margin: 1em 0; 
+        width: 100%;
+        clear: both;
+        display: table;
+      }
+
+      .split-view .panel {
+        display: table-cell;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <div class="resize-x box-a panel" style="width: 272px; padding: 16px 5px">
+        Resize Me
+      </div>
+
+
+      <div class="split-view">
+        <div class="resize-x p-25 box-a panel">Panel A</div>
+        <div class="box-b panel resize-x">Panel B</div>
+        <div class="box-c panel" style="width: 200px">Panel C</div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -86,7 +86,7 @@
                   renderCustomField(field, bean, fieldValue, disabled);
                 } else {
                   var autocomplete = "" ;
-		  if(field.autocomplete)  disabled = 'autocomplete="on"';
+                  if(field.autocomplete)  disabled = 'autocomplete="on"';
                   renderInputField(field, bean, fieldValue, disabled, autocomplete);
                 }
               %>

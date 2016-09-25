@@ -1,46 +1,38 @@
 define([
-  'jquery',
+  'jquery', 
   'underscore', 
   'backbone',
-  'text!plugins/uidemo/UIBody.jtpl'
-], function($, _, Backbone, Template) {
-  var UIBody = Backbone.View.extend({
-    el: $("#UIBody"),
-    
-    initialize: function () {
-      _.bindAll(this, 'render') ;
-    },
-    
-    _template: _.template(Template),
+  'ui/UIContent',
+  'ui/UINavigation'
+], function($, _, Backbone, UIContent, UINavigation) {
+  var UIBody = UINavigation.extend({
+    onInit: function(options) {
+      var onClick = function(thisNav, menu, item) {
+        require(['plugins/uidemo/' + item.label], function(UIDemoComponent) { 
+          thisNav.setWorkspace(UIDemoComponent);
+        }) ;
+      };
+      var menu1 = this.addMenu("core", "Core Demo", false/*collapse*/);
+      menu1.addItem("UITableDemo", onClick);
+      menu1.addItem("UITableTreeDemo", onClick);
+      menu1.addItem("UITabbedPaneDemo", onClick);
+      menu1.addItem("UIBeanDemo", onClick);
+      menu1.addItem("UIComplexBeanDemo", onClick);
+      menu1.addItem("UIUploadDemo", onClick);
+      menu1.addItem("UINavigationDemo", onClick);
+      menu1.addItem("UIBorderLayoutDemo", onClick);
 
-    render: function() {
-      var params = { } ;
-      $(this.el).html(this._template(params));
-    },
+      var menu2 = this.addMenu("nvchart", "NV Chart Demo", false/*collapse*/);
+      menu2.addItem("UINVBarChartDemo", onClick);
+      menu2.addItem("UINVMultiChartDemo", onClick);
+      menu2.addItem("UINVLinePlusBarChartDemo", onClick);
 
-    onActivate: function(evt) {
-      require(['plugins/uidemo/UITableDemo'], function(UIDemoComponent) { 
-        $('#UIDemoWS').empty();
-        $('#UIDemoWS').unbind();
-        UIDemoComponent.setElement($('#UIDemoWS')).render();
-      }) ;
-    },
-
-    events: {
-      'click .onSelectUIComponent': 'onSelectUIComponent'
-    },
-    
-    onSelectUIComponent: function(evt) {
-      var name = $(evt.target).closest('.onSelectUIComponent').attr('name') ;
-      console.log('on select: ' + name) ;
-
-      require(['plugins/uidemo/' + name], function(UIDemoComponent) { 
-        $('#UIDemoWS').empty();
-        $('#UIDemoWS').unbind();
-        UIDemoComponent.setElement($('#UIDemoWS')).render();
+      var thisNav = this;
+      require(['plugins/uidemo/UIBorderLayoutDemo'], function(UIDemoComponent) { 
+        thisNav.setWorkspace(UIDemoComponent);
       }) ;
     }
   });
-  
+
   return new UIBody() ;
 });

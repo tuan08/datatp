@@ -4,7 +4,7 @@ define([
   'backbone',
   'site/UIBody',
   'text!site/UIBanner.jtpl'
-], function($, _, Backbone, UIBody, BannerTmpl) {
+], function($, _, Backbone, UIBody, UIBannerTmpl) {
   var UIBanner = Backbone.View.extend({
     el: $("#UIBanner"),
     
@@ -12,7 +12,7 @@ define([
       _.bindAll(this, 'render') ;
     },
     
-    _template: _.template(BannerTmpl),
+    _template: _.template(UIBannerTmpl),
     
     render: function() {
       var params = { 

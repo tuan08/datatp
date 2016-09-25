@@ -41,30 +41,29 @@ require.config({
 
 require([
   'jquery', 
-  'util/console',
-  'site/UIBanner',
-  'site/UIFooter',
-  'site/UIBody'
-], function($, console, UIBanner, UIFooter, UIBody) {
+  'underscore', 
+  'backbone',
+  'plugins/uidemo/UIBody',
+], function($, _, Backbone, UIBody) {
+
+  var UIDemo = Backbone.View.extend({
+    el: $("#UIDemoWS"),
+    
+    initialize: function () { this.uiBody = UIBody },
+    
+    render: function() {
+      $(this.el).empty();
+      $(this.el).unbind();
+      this.uiBody.setElement($('#UIDemoWS')).render();
+    }
+  });
+
   var app = {
-    view : {
-      UIBanner: new UIBanner(),
-      UIBody: UIBody,
-      UIFooter: new UIFooter(),
-    },
+    view : { uiDemo: new UIDemo(), },
 
     initialize: function() { this.render() ; },
 
-    render: function() {
-      this.view.UIBanner.render() ;
-      this.view.UIBody.render() ;
-      this.view.UIFooter.render() ;
-    },
-
-    reload: function() {
-      var ROOT_CONTEXT = window.location.pathname.substring(0, window.location.pathname.lastIndexOf("/"));
-      window.location = ROOT_CONTEXT + "/index.html" ;
-    }
+    render: function() { this.view.uiDemo.render() ; }
   } ;
 
   app.initialize() ;

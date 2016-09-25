@@ -2,8 +2,7 @@ define([
   'jquery',
   'underscore', 
   'backbone',
-  'text!site/UIFooter.jtpl'
-], function($, _, Backbone, FooterTmpl) {
+], function($, _, Backbone) {
   var UIFooter = Backbone.View.extend({
     el: $("#UIFooter"),
     
@@ -11,7 +10,11 @@ define([
       _.bindAll(this, 'render') ;
     },
     
-    _template: _.template(FooterTmpl),
+    _template: _.template(`
+      <div style="padding-top: 15px">
+        <em>Copyright</em> © 2016.
+      </div>
+    `),
     
     render: function() {
       var params = { 
