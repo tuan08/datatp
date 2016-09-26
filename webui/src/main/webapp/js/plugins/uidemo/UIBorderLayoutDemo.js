@@ -12,10 +12,10 @@ define([
     },
     
     onInit: function(options) {
-      var northConfig = { height: "50px" };
+      var northConfig = { height: "75px" };
       this.set('north', new UIContent({ content: 'North Panel Content'}), northConfig);
 
-      var shouthConfig = {};
+      var shouthConfig = { height: "auto" };
       this.set('shouth', new UIContent({ content: 'Shouth Panel Content'}), shouthConfig);
 
       var westConfig = { width: "250px"};

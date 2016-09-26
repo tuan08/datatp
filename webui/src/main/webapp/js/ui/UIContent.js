@@ -18,11 +18,11 @@ define([
       this.config.content = content;
     },
 
-    _template: _.template(
-      "<div>" +
-      "  <pre class='prettyprint <%=highlightSyntax%>'><%=config.content%></pre>" +
-      "</div>"
-    ),
+    _template: _.template(`
+      <div>
+        <pre class='prettyprint <%=highlightSyntax%>'><%=config.content%></pre>
+      </div>
+    `),
 
     render: function() {
       var params = {

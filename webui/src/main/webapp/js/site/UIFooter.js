@@ -11,7 +11,7 @@ define([
     },
     
     _template: _.template(`
-      <div style="padding-top: 15px">
+      <div style="padding: 3px">
         <em>Copyright</em> © 2016.
       </div>
     `),

@@ -42,7 +42,7 @@
       <%var icon = comp.collapible.collapsed ? "plus" : "minus"; %>
       <%var display = comp.collapible.collapsed ? "none" : "block"; %>
       <h4 style="margin: 0px; padding: 0px">
-        <a class="onToggleCollapsibleSection ui-action" component="<%=idx%>"><span class="ui-icon ui-icon-<%=icon%>" style="display: inline-block"></span></a>
+        <a class="onToggleCollapsibleSection ui-action" component="<%=idx%>"><span class="ui-ib ui-icon ui-icon-<%=icon%>"></span></a>
         <%=comp.label%>
       </h4>
       

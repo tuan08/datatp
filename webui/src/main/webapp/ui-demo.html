@@ -10,20 +10,28 @@
 
     <script data-main="js/uidemo" src="js/libs/require/require-2.2.0.min.js"></script>
 
+    <style>
+      html, body { height: 100%; margin: 0 }
+    </style>
   </head>
 
   <body>
-    <div style="height: 25px; padding: 5px 3px">
-      <div class="logo-text">DataTP</div>
-      <hr/>
-    </div>
+    <div class="table-display">
+      <div class="table-row">
+        <div class="table-cell-full-w">
+          <div class="logo-text">DataTP</div>
+          <hr/>
+        </div>
+      </div>
 
 
-    <div id="UIDemoWS" style="height: 750px"></div>
+      <div id="UIDemoWS" class="table-cell-full-h">ws</div>
 
-    <div>
-      <div style="padding-top: 15px">
-        <em>Copyright</em> © 2016.
+      <div class="table-row">
+        <div class="table-cell-full-w">
+          <hr/>
+          <em>Copyright</em> © 2016.
+        </div>
       </div>
     </div>
 

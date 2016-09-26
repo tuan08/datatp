@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data TP</title>
+
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/ui-icon.css">
+
+    <script src="js/libs/jquery/jquery-3.1.0.min.js"></script>
+    <style>
+      html, body { height: 100%; margin: 0 }
+    </style>
+  </head>
+
+  <body>
+    <!-- table -->
+    <div class="table-display"> 
+      <div class="table-row">
+        <div class="table-cell-full-w" style="border: 1px solid red">Table cell full width</div>
+      </div>
+
+      <div class="table-cell-full-h" style="border: 1px solid red">
+        <!-- nested 1 table -->
+        <div class="table-display">
+          <div class="table-row">
+            <div class="table-cell-full-w" style="border: 1px solid blue">Nested table cell full width</div>
+          </div>
+
+          <div class="table-cell-full-h">
+            <!-- nested 2 table -->
+            <div class="table-display">
+              <div class="table-cell-full-h debug-dashed-border">
+                <h3>Left column</h3>
+              </div>
+              <div class="table-cell-full-h debug-dashed-border">
+                <h3>Middle column</h3>
+                <span class="ui-icon-ib ui-icon-caret-2-e-w debug-dashed-border"/>
+              </div>
+              <div class="table-cell-full-h debug-dashed-border">
+                <h3>Right column</h3>
+              </div>
+            </div>
+            <!-- end nested 2 table -->
+          </div>
+        </div>
+        <!-- end nested 1 table -->
+      </div>
+    </div>
+    <!-- end table -->
+  </body>
+</html>

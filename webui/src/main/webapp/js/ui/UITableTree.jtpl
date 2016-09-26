@@ -19,6 +19,7 @@
   <%var fields = config.bean.fields;%>
   <%var actions = config.bean.actions;%>
   <%var cssCollapse = node.collapse ? 'expand' : 'collapse' %>
+  <%var toggleIcon = node.collapse ? 'plus' : 'minus' %>
   <%var rowDisplay = hidden ? "none": "table-row";%>
 
   <tr data-depth="<%=level%>" class="<%=cssCollapse%> level<%= level %>" style="display: <%=rowDisplay%>" nodeId="<%=node.id%>">
@@ -34,7 +35,7 @@
         <td>
           <%if(j == 0) { %>
             <%if(node.children.length > 0) { %>
-              <span class="toggle" />
+              <span class="toggle ui-ib ui-icon ui-icon-<%=toggleIcon%>"/>
             <%} else { %>
               <span style="padding-right: 14px"/>
             <%} %>

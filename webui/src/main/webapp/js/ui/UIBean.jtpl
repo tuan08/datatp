@@ -1,5 +1,5 @@
 <%function renderInputField(field, bean, fieldValue, disabled, autocomplete) { %>
-  <input class="onChangeInput span-9 text" type="text" name="<%=field.field%>" 
+  <input class="onChangeInput text" style="width: 100%" type="text" name="<%=field.field%>" 
          value="<%=fieldValue%>" <%=disabled%> <%=autocomplete%> />
 <%}%>
 
@@ -11,15 +11,15 @@
 <%function renderCustomField(field, bean, fieldValue, disabled) { %>
   <div class="UIBeanCustomInput">
     <%var inputVal = field.custom.getDisplay(bean); %>
-    <input class="onBlurCustomInput onChangeCustomInput span-9 text" 
+    <input class="onBlurCustomInput onChangeCustomInput text" style="width: 100%" 
            type="search" name="<%=field.field%>" 
            value="<%=inputVal%>" <%=disabled%> autocomplete="off"/>
-    <div class="UIBeanCustomInputSelector"></div>
+    <div class="ui-bean-custom-input-selector"></div>
   </div>
 <%}%>
 
 <%function renderSelectInputField(field, bean, fieldValue, disabled) { %>
-  <select <%=disabled%> class="onChangeInput span-9 text" name="<%=field.field%>">
+  <select <%=disabled%> class="onChangeInput text" style="width: 100%" name="<%=field.field%>">
      <%var options = field.select.getOptions(field, bean) ; %>
      <%for(var i = 0; i < options.length ; i++) { %>
      <% fieldValue = fieldValue != null ? fieldValue : field.defaultValue ; %>
@@ -39,8 +39,7 @@
   <div class="InputGrid" field="<%=field.field%>">
     <div class="InputBlock">
       <%for(var i = 0; i < fieldValue.length; i++) { %>
-        <input class="onChangeInput text span-9 last" name="<%=field.field + '@' + i%>" 
-               value="<%=fieldValue[i]%>" <%=disabled%> />
+        <input class="onChangeInput text" style="width: 100%" name="<%=field.field + '@' + i%>" value="<%=fieldValue[i]%>" <%=disabled%> />
       <%}%>
     </div>
         
@@ -55,53 +54,52 @@
     var height = "75px";
     if(field.textarea.height != null) height = field.textarea.height ;
   %>
-  <textarea class="onChangeInput span-9" style="height: <%=height%>"
+  <textarea class="onChangeInput span-9" style="height: <%=height%>; width: 100%"
             name="<%=field.field%>" <%=disabled%>><%=fieldValue%></textarea>
 <%}%>
 
 <%function renderEditable(beanName, beanConfig, beanState, display, deletable, util) { %>
 <%  var bean = beanState.bean %>
-    <div class="UIBean span-13" style="display: <%=display%>" bean="<%=beanName%>">
+    <div class="UIBean" style="display: <%=display%>" bean="<%=beanName%>">
       <form>
         <div>
           <%beanConfig.fields.forEach(function(field) { %>
-            <div class="first span-4" style="padding-top: 5px">
-              <%var mandatory = field.required ? "*" : ""  %>
-              <label style="padding-top: 5px"><%=mandatory%><%=field.label%>:</label>
+            <%var mandatory = field.required ? "*" : ""  %>
+            <div>
+              <label class="ui-ib-180px" style="vertical-align: top; padding-top: 5px"><%=mandatory%><%=field.label%>:</label>
+              <div class="ui-ib-450px">
+                <%
+                  var fieldValue = util.reflect.getFieldValue(bean, field.field) ;
+                  var disabled = "" ;
+                  if(field.disable)  disabled = 'disabled="disabled"';
+                  if(field.select != null) {
+                    renderSelectInputField(field, bean, fieldValue, disabled);
+                  } else if(field.multiple != null) {
+                    renderMultipleInputField(field, bean, fieldValue, disabled);
+                  } else if(field.textarea != null)  {
+                    renderTextareaInputField(field, bean, fieldValue, disabled);
+                  } else if(field.datepicker != null)  {
+                    renderDatepickerField(field, bean, disabled);
+                  } else if(field.custom != null)  {
+                    renderCustomField(field, bean, fieldValue, disabled);
+                  } else {
+                    var autocomplete = "" ;
+                    if(field.autocomplete)  disabled = 'autocomplete="on"';
+                    renderInputField(field, bean, fieldValue, disabled, autocomplete);
+                  }
+                %>
+                <%if(beanState.fieldErrors != null) { %>
+                <%  var errors = beanState.fieldErrors ;%>
+                <%  if(errors[field.field] != null) {%>
+                    <span class="ui-error-text"><%=errors[field.field]%></span>
+                <%  }%>
+                <%}%>
+              </div>
             </div>
-            <div class="span-9 last">
-              <%
-                var fieldValue = util.reflect.getFieldValue(bean, field.field) ;
-                var disabled = "" ;
-                if(field.disable)  disabled = 'disabled="disabled"';
-                if(field.select != null) {
-                  renderSelectInputField(field, bean, fieldValue, disabled);
-                } else if(field.multiple != null) {
-                  renderMultipleInputField(field, bean, fieldValue, disabled);
-                } else if(field.textarea != null)  {
-                  renderTextareaInputField(field, bean, fieldValue, disabled);
-                } else if(field.datepicker != null)  {
-                  renderDatepickerField(field, bean, disabled);
-                } else if(field.custom != null)  {
-                  renderCustomField(field, bean, fieldValue, disabled);
-                } else {
-                  var autocomplete = "" ;
-                  if(field.autocomplete)  disabled = 'autocomplete="on"';
-                  renderInputField(field, bean, fieldValue, disabled, autocomplete);
-                }
-              %>
-              <%if(beanState.fieldErrors != null) { %>
-              <%  var errors = beanState.fieldErrors ;%>
-              <%  if(errors[field.field] != null) {%>
-                  <span class="ui-error-text"><%=errors[field.field]%></span>
-              <%  }%>
-              <%}%>
-            </div>
-            <div><span class="clearfix"/></div>
           <%});%>
         </div>
 
-        <div style="float: right">
+        <div class="text-align-right" style="width: 630px">
           <a class="ui-action onRestoreBean">Reset</a>
           <%if(deletable) {%>
             <a class="ui-action onDeleteBean">Delete</a>
@@ -115,7 +113,6 @@
             <%}%>
           <%}%>
         </div>
-        <div style="clear: both"><span/></div>
       </form>
     </div>
     <div><span class="clearfix"/></div>

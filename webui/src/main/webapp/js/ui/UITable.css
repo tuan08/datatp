@@ -1,11 +1,3 @@
-.UITable table {
-  width: 100%;
-  border-collapse:collapse;
-  margin: 0px auto;
-}
-
-.UITable th, .UITable td { border: 1px solid ; padding: 5px; }
-
 .UITable th { text-align: center ; }
 
 .UITable .hide-column { display: none ; }

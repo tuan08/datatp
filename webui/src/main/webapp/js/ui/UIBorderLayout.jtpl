@@ -1,51 +1,65 @@
 <%function renderNorthSplit(layout) {%>
   <%if(!layout.north) return ;%>
-  <%var nPanelH = layout.north.config.height ? layout.north.config.height : "75px"; %>
-  <div class="v-split north-split">
-    <div class="v-panel north-panel" style="height: <%=nPanelH%>"></div>
-    <div class="v-gutter"><div class="v-grip ui-icon ui-icon-grip-dotted-horizontal-split onResizeNorthPanel"><span/></div></div>
+  <%var nPanelH = layout.north.config.height ? layout.north.config.height : "150px"; %>
+  <div class="north-split table-row">
+    <div class="table-cell-full-w">
+      <div class="north-panel" style="height: <%=nPanelH%>"></div>
+      <div class="v-gutter">
+        <div class="v-grip ui-icon ui-icon-grip-dotted-horizontal-split onResizeNorthPanel"><span/></div>
+      </div>
+    </div>
   </div>
 <%}%>
 
 <%function renderShouthSplit(layout) {%>
   <%if(!layout.shouth) return ;%>
-  <%var sPanelH = layout.shouth.config.height ? layout.shouth.config.height : "75px"; %>
-  <div class="v-split shouth-split">
-    <div class="v-gutter"><div class="v-grip ui-icon ui-icon-grip-dotted-horizontal-split onResizeShouthPanel"><span/></div></div>
-    <div class="v-panel shouth-panel" style="height: <%=sPanelH%>"></div>
+  <%var sPanelH = layout.shouth.config.height ? layout.shouth.config.height : "100px"; %>
+  <div class="shouth-split table-row">
+    <div class="table-cell-full-w">
+      <div class="v-gutter"><div class="v-grip ui-icon ui-icon-grip-dotted-horizontal-split onResizeShouthPanel"><span/></div></div>
+      <div class="v-panel shouth-panel" style="height: <%=sPanelH%>"></div>
+    </div>
   </div>
 <%}%>
 
 <%function renderMiddleSplit(layout) {%>
   <%var wPanelW = "0px", ePanelW = "0px"; %>
-  <div class="middle-split" style="overflow: auto; height: 100%">
-    <%if(layout.west) { %>
-      <%wPanelW = layout.west.config.width ? layout.west.config.width : "200px"; %>
-      <div class="h-split west-split" style="width: <%=wPanelW%>; float: left">
-        <div class="h-panel west-panel">West</div>
-        <div class="h-gutter"><div class="h-grip ui-icon ui-icon-grip-dotted-vertical-split  onResizeWestPanel"><span/></div></div>
-        <div class="clearfix"><span/></div>
-      </div>
-    <%} %>
+  <div class="middle-split table-cell-full-h">
+    <div class="table-display">
+      <%if(layout.west) { %>
+        <%wPanelW = layout.west.config.width ? layout.west.config.width : "200px"; %>
+        <div class="west-split table-cell-full-h" style="width: <%=wPanelW%>">
 
-    <%if(layout.east) { %>
-      <%ePanelW = layout.east.config.width ? layout.east.config.width : "200px"; %>
-      <div class="h-split east-split" style="width: <%=ePanelW%>; float: right">
-        <div class="h-gutter"><div class="h-grip ui-icon ui-icon-grip-dotted-vertical-split  onResizeEastPanel"><span/></div></div>
-        <div class="h-panel east-panel">East</div>
-        <div class="clearfix"><span/></div>
-      </div>
-    <%} %>
+          <div style="float: right; width: 7px; border: 1px solid lightgray; height: 100%; display: flex; align-items: center;">
+            <div class="ui-icon ui-icon-grip-dotted-vertical-split  onResizeWestPanel"><span/></div>
+          </div>
 
-    <div class="h-split center-split" style="margin-left: <%=wPanelW%>; margin-right: <%=ePanelW%>">
-      <div class="h-panel center-panel"></div>
+          <div class="west-panel" style="margin-right: 7px">West</div>
+
+          <div class="clearfix"><span/></div>
+        </div>
+      <%} %>
+
+      <div class="center-split center-panel table-cell-full-h">
+         Center
+      </div>
+
+      <%if(layout.east) { %>
+        <%ePanelW = layout.east.config.width ? layout.east.config.width : "200px"; %>
+        <div class="east-split table-cell-full-h" style="width: <%=ePanelW%>">
+          <div style="float: left; width: 7px; border: 1px solid lightgray; height: 100%; display: flex; align-items: center;">
+            <div class="h-grip ui-icon ui-icon-grip-dotted-vertical-split  onResizeEastPanel"><span/></div>
+          </div>
+
+          <div class="east-panel" style="margin-left: 7px">East</div>
+          <div class="clearfix"><span/></div>
+        </div>
+      <%} %>
     </div>
-
-    <div class="clearfix"><span/></div>
   </div>
 <%}%>
 
-<div class="ui-split" style="border: 1px solid red">
+<div class="ui-split table-display">
   <%renderNorthSplit(layout);%>
   <%renderMiddleSplit(layout);%>
   <%renderShouthSplit(layout);%>

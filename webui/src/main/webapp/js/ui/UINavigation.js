@@ -8,8 +8,8 @@ define([
   var Menu = function(menu) {
     this.menu = menu;
 
-    this.addItem = function(label, onClick) {
-      var item = {label: label, onClick: onClick };
+    this.addItem = function(label, config, onClick) {
+      var item = { label: label, config: config, onClick: onClick };
       this.menu.items.push(item);
     };
   };
@@ -24,8 +24,8 @@ define([
       if(this.onInit) this.onInit(options);
     },
 
-    addMenu: function(name, label, collapse) {
-      var menu = { name: name, label: label, collapse: collapse, items: [] };
+    addMenu: function(name, label, config) {
+      var menu = { name: name, label: label, config: config, items: [] };
       this.state.nav.menus[name] = menu;
       return new Menu(menu);
     },

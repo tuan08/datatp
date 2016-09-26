@@ -1,43 +1,30 @@
 define([
-  'jquery',
+  'jquery', 
   'underscore', 
   'backbone',
-  'text!plugins/crawler/UIBody.jtpl'
-], function($, _, Backbone,  Template) {
-  var UIBody = Backbone.View.extend({
-    el: $("#UIBody"),
-    
-    initialize: function () {
-    },
-    
-    _template: _.template(Template),
+  'ui/UIContent',
+  'ui/UINavigation'
+], function($, _, Backbone, UIContent, UINavigation) {
+  var UIBody = UINavigation.extend({
+    onInit: function(options) {
+      var onClick = function(thisNav, menu, item) {
+        require(['plugins/crawler/' + item.config.module], function(UIDemoComponent) { 
+          thisNav.setWorkspace(UIDemoComponent);
+        }) ;
+      };
+      var crawlerMenu = this.addMenu("crawler", "Crawler", { collapse: false });
+      crawlerMenu.addItem("Status", { module: "UICrawlerStatus" }, onClick);
 
-    render: function() {
-      var params = { } ;
-      $(this.el).html(this._template(params));
-    },
+      var siteMenu = this.addMenu("site", "Site", { collapse: false });
+      siteMenu.addItem("Config", { module: "site/UISiteConfigScreen" }, onClick);
+      siteMenu.addItem("Statistics", { module: "site/UISiteStatistics" }, onClick);
 
-    onActivate: function(evt) {
-      this._loadUI('UICrawlerStatus');
-    },
-
-    events: {
-      'click .onSelectUI': 'onSelectUI'
-    },
-
-    onSelectUI: function(evt) {
-      var name = $(evt.target).closest('.onSelectUI').attr('name') ;
-      this._loadUI(name);
-    },
-
-    _loadUI: function(name) {
-      require(['plugins/crawler/' + name], function(uiComp) { 
-        $('#UICrawlerWS').empty();
-        $('#UICrawlerWS').unbind();
-        uiComp.setElement($('#UICrawlerWS')).render();
+      var thisNav = this;
+      require(['plugins/crawler/UICrawlerStatus'], function(UIDemoComponent) { 
+        thisNav.setWorkspace(UIDemoComponent);
       }) ;
     }
   });
-  
+
   return new UIBody() ;
 });

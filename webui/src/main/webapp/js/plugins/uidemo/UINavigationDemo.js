@@ -18,13 +18,13 @@ define([
         var uiContent = new UIContent({ content: 'on click menu = ' + menu.name + ", item = " + item.label});
         thisNav.setWorkspace(uiContent);
       };
-      var menu1 = this.addMenu("menu-1", "Menu 1", false/*collapse*/);
-      menu1.addItem("Item 1", onClick);
-      menu1.addItem("Item 2", onClick);
+      var menu1 = this.addMenu("menu-1", "Menu 1", { collapse: false });
+      menu1.addItem("Item 1", {}, onClick);
+      menu1.addItem("Item 2", {}, onClick);
 
-      var menu2 = this.addMenu("menu-2", "Menu 2", false/*collapse*/);
-      menu2.addItem("Item 1", onClick);
-      menu2.addItem("Item 2", onClick);
+      var menu2 = this.addMenu("menu-2", "Menu 2", { collapse: false });
+      menu2.addItem("Item 1", {}, onClick);
+      menu2.addItem("Item 2", {}, onClick);
     }
   });
 

@@ -87,11 +87,12 @@ define([
         });
 
         //Change icon and hide/show children
-        if(tr.hasClass('collapse')) {
-          tr.removeClass('collapse').addClass('expand');
+        var icon = tr.find(".toggle").first();
+        if(icon.hasClass('ui-icon-minus')) {
+          icon.removeClass('ui-icon-minus').addClass('ui-icon-plus');
           children.hide();
         } else {
-          tr.removeClass('expand').addClass('collapse');
+          icon.removeClass('ui-icon-plus').addClass('ui-icon-minus');
           children.show();
         }
         return children;

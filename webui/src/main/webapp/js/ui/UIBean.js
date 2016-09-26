@@ -4,8 +4,7 @@ define([
   'backbone',
   'util/util',
   'ui/UIUtil',
-  'text!ui/UIBean.jtpl',
-  'css!ui/UIBean.css'
+  'text!ui/UIBean.jtpl'
 ], function($, _, Backbone, util,  UIUtil, UIBeanTmpl) {
   var SearchFilterTemplate = _.template(
     "<h4>Search For <%=fieldConfig.label%>(<%=items.length%>)</h4>" +
@@ -19,7 +18,7 @@ define([
   var SearchFilter = function(fieldConfig, bean, evt) {
     var typingTimer = null ;
     var searchInput = $(evt.target).closest('div.UIBeanCustomInput') ;
-    var selectorUI = searchInput.find('div.UIBeanCustomInputSelector') ;
+    var selectorUI = searchInput.find('div.ui-bean-custom-input-selector') ;
     selectorUI.css('width', searchInput.css('width')) ;
     var delaySearch = function(term) {
       var result = fieldConfig.custom.autocomplete.search(term, bean) ;
@@ -345,7 +344,7 @@ define([
       delete beanState.onSelectCustomInput ;
       delete beanState.onChangeCustomInput  ;
       delete fieldConfig.searchFilter ;
-      var searchSelector = $(evt.target).closest('div.UIBeanCustomInput').find('div.UIBeanCustomInputSelector') ;
+      var searchSelector = $(evt.target).closest('div.UIBeanCustomInput').find('div.ui-bean-custom-input-selector') ;
       searchSelector.css('display', 'none') ;
     },
     
@@ -362,7 +361,7 @@ define([
       var selectObj = fieldConfig.custom.autocomplete.searchResult[selectIdx].value ;
       fieldConfig.custom.set(bean, selectObj) ;
       input.val(fieldConfig.custom.getDisplay(bean)) ;
-      searchInputBlock.find('div.UIBeanCustomInputSelector').css('display', 'none') ;
+      searchInputBlock.find('div.ui-bean-custom-input-selector').css('display', 'none') ;
       beanState.onSelectCustomInput = true ;
     },
     
