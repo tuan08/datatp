@@ -57,17 +57,13 @@
 <%  var subaggs = chartModel.getSubAggregations(); %>
 <%  for(var i = 0; i < subaggs.length; i++) { %>
 <%    var subagg = subaggs[i]; %>
-      <div style="cursor: pointer" class="mouseover-action-block" field="<%=subagg.field%>">
-        <div style="float: left">
-          <%if(subagg.type == "TermTopHit") {  %>
-            <strong class="ui-ib-75px">Top Hit:</strong> <span><%=subagg.field%> {<%= subagg.size%>}</span>
-          <%}%>
+     <%if(subagg.type == "TermTopHit") {  %>
+        <div style="cursor: pointer" class="mouseover-action-block" field="<%=subagg.field%>">
+          <strong class="ui-ib-75px">Top Hit:</strong> 
+          <span><%=subagg.field%> {<%= subagg.size%>}</span>
+          <a style="display: none" class="action-block ui-action onRemoveSubAggregation">del</a>
         </div>
-        <div style="float: right; display: none" class="action-block">
-          <a style="text-align: left"  class="ui-action onRemoveSubAggregation">del</a>
-        </div>
-        <div class="clearfix"><span/></div>
-      </div>
+      <%}%>
 <%  }%>
 <%}%>
 
@@ -104,10 +100,9 @@
 <%}%>
 
 
-<div style="padding: 0px">
+<div style="padding: 5px">
   <div> 
-    <h6>Select Chart Type</h6>
-    <hr/>
+    <h6 class="u-line-1px">Select Chart Type</h6>
     <div class="ui-collapsible"> 
       <div style="padding: 10px 0px">
         <%renderDateHistogramChartType(chartModel);%>
@@ -118,16 +113,14 @@
       </div>
       
       <div>
-        <div><a style="float: right" class="ui-action onToggleUICollapsible">more</a></div>
-        <div class="clearfix"><span/></div>
+        <div class="text-align-right"><a class="ui-action onToggleUICollapsible">more</a></div>
       </div>
     </div>
     
   </div>
 
   <div style="padding-top: 10px" class="ui-collapsible"> 
-    <h6>Aggregation By</h6>
-    <hr/>
+    <h6 class="u-line-1px">Aggregation By</h6>
     
     <div style="padding: 10px 0px">
       <%renderSubAggregations(chartModel);%>
@@ -137,9 +130,8 @@
       <%renderAddTopHitSubAggregation(fieldsMapping); %>
     </div>
     
-    <div>
-      <a style="float: right" class="ui-action onToggleUICollapsible"><span>More</span></a>
-      <div class="clearfix"><span/></div>
+    <div class="text-align-right">
+      <a class="ui-action onToggleUICollapsible"><span>More</span></a>
     </div>
   </div>
 </div>

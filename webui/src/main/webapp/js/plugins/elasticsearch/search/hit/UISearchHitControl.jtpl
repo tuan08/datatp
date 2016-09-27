@@ -1,22 +1,20 @@
 <%function renderField(fieldStates, key) {%>
-  <div style="cursor: pointer" class="field-block" field="<%=key%>">
-    <div style="float: left"><strong=><%=key%><strong></div>
-    <div style="float: right; display: none" class="field-action-block">
-      <a style="text-align: left"  class="ui-action onToggleField">
-        <%var label = "add"%>
-        <%if(fieldStates[key].toggle) label = "del"%>
-        <span><%=label%></span>
-      </a>
-    </div>
-    <div class="clearfix"><span/></div>
+  <%var icon = "plusthick"%>
+  <%if(fieldStates[key].toggle) icon = "trash"%>
+
+  <div style="cursor: pointer; margin: 2px 0px" class="field-block" field="<%=key%>">
+    <strong class="ui-ib"><%=key%></strong>
+    <a style="display: none" class="ui-action field-action-block"><span style="vertical-align: middle" class="ui-ib ui-icon ui-icon-<%=icon%>"/></a>
   </div>
 <%}%>
 
-<div>
+<div style="padding: 10px 5px">
   <div>
-    <h6>Document Fields</h6>
-    <hr/>
-    <div style="padding-left: 10px">
+    <div>
+      <h6 class="u-line-1px">Document Fields</h6>
+    </div>
+
+    <div style="padding-left: 5px">
       <%for(var key in fieldStates) {%>
       <%  if(!key.startsWith("_")) continue; %>
       <%  renderField(fieldStates, key) ;%>
@@ -25,13 +23,13 @@
   </div>
 
   <div style="padding-top: 15px">
-    <h6>Source Fields</h6>
-    <hr/>
-    <div style="padding-left: 10px">
+    <h6 class="u-line-1px">Source Fields</h6>
+
+    <div style="padding-left: 5px">
       <%for(var key in fieldStates) {%>
       <%  if(key.startsWith("_")) continue; %>
       <%  renderField(fieldStates, key) ;%>
       <%}%>
-    <div>
+    </div>
   </div>
 </div>

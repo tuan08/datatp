@@ -20,13 +20,13 @@ define([
     },
 
     events: {
-      "click     .onToggleField": "onToggleField",
+      "click     .field-action-block": "onToggleField",
       "mouseover .field-block":   "onMouseOverFieldBlock",
       "mouseout  .field-block":   "onMouseOutFieldBlock"
     },
 
     onMouseOverFieldBlock: function(evt) {
-      $(evt.target).closest('.field-block').find(".field-action-block").css("display", "block");
+      $(evt.target).closest('.field-block').find(".field-action-block").css("display", "inline-block");
     },
 
     onMouseOutFieldBlock: function(evt) {
@@ -38,9 +38,9 @@ define([
       var fieldName = fieldBlock.attr('field');
       this.fieldStates[fieldName].toggle = !this.fieldStates[fieldName].toggle;
       if(this.fieldStates[fieldName].toggle) {
-        fieldBlock.find(".field-action-block  span").text("del");
+        fieldBlock.find(".ui-action > span").removeClass("ui-icon-plusthick").addClass("ui-icon-trash");
       } else {
-        fieldBlock.find(".field-action-block  span").text("add");
+        fieldBlock.find(".ui-action > span").removeClass("ui-icon-trash").addClass("ui-icon-plusthick");
       }
       this.uiSearchHit.uiSearchHitResult.render();
     },

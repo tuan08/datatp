@@ -4,8 +4,8 @@
   <div class="north-split table-row">
     <div class="table-cell-full-w">
       <div class="north-panel" style="height: <%=nPanelH%>"></div>
-      <div class="v-gutter">
-        <div class="v-grip ui-icon ui-icon-grip-dotted-horizontal-split onResizeNorthPanel"><span/></div>
+      <div class="h-gutter">
+        <div class="h-grip ui-icon ui-icon-grip-dotted-horizontal-split onResizeNorthPanel"><span/></div>
       </div>
     </div>
   </div>
@@ -16,8 +16,10 @@
   <%var sPanelH = layout.shouth.config.height ? layout.shouth.config.height : "100px"; %>
   <div class="shouth-split table-row">
     <div class="table-cell-full-w">
-      <div class="v-gutter"><div class="v-grip ui-icon ui-icon-grip-dotted-horizontal-split onResizeShouthPanel"><span/></div></div>
-      <div class="v-panel shouth-panel" style="height: <%=sPanelH%>"></div>
+      <div class="h-gutter">
+        <div class="h-grip ui-icon ui-icon-grip-dotted-horizontal-split onResizeShouthPanel"><span/></div>
+      </div>
+      <div class="shouth-panel" style="height: <%=sPanelH%>"></div>
     </div>
   </div>
 <%}%>
@@ -30,11 +32,11 @@
         <%wPanelW = layout.west.config.width ? layout.west.config.width : "200px"; %>
         <div class="west-split table-cell-full-h" style="width: <%=wPanelW%>">
 
-          <div style="float: right; width: 7px; border: 1px solid lightgray; height: 100%; display: flex; align-items: center;">
+          <div class="v-gutter right">
             <div class="ui-icon ui-icon-grip-dotted-vertical-split  onResizeWestPanel"><span/></div>
           </div>
 
-          <div class="west-panel" style="margin-right: 7px">West</div>
+          <div class="west-panel split-right">West</div>
 
           <div class="clearfix"><span/></div>
         </div>
@@ -47,11 +49,11 @@
       <%if(layout.east) { %>
         <%ePanelW = layout.east.config.width ? layout.east.config.width : "200px"; %>
         <div class="east-split table-cell-full-h" style="width: <%=ePanelW%>">
-          <div style="float: left; width: 7px; border: 1px solid lightgray; height: 100%; display: flex; align-items: center;">
-            <div class="h-grip ui-icon ui-icon-grip-dotted-vertical-split  onResizeEastPanel"><span/></div>
+          <div class="v-gutter left">
+            <div class="ui-icon ui-icon-grip-dotted-vertical-split  onResizeEastPanel"><span/></div>
           </div>
 
-          <div class="east-panel" style="margin-left: 7px">East</div>
+          <div class="east-panel split-left">East</div>
           <div class="clearfix"><span/></div>
         </div>
       <%} %>

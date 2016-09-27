@@ -10,7 +10,7 @@ define([
     },
     
     render: function() {
-      this.selectPlugin("uidemo");
+      this.selectPlugin("elasticsearch");
     },
     
     selectPlugin: function(name) {

@@ -33,7 +33,7 @@ define([
     },
 
     onMouseOverActionBlock: function(evt) {
-      $(evt.target).closest('.mouseover-action-block').find(".action-block").css("display", "block");
+      $(evt.target).closest('.mouseover-action-block').find(".action-block").css("display", "inline");
     },
 
     onMouseOutActionBlock: function(evt) {

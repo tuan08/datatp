@@ -68,11 +68,6 @@ define([
             var uiSiteConfig = thisUI.getAncestorOfType("UISiteConfig") ;
             uiSiteConfig.push(new UIURLSiteStructureAnalyzer({ siteConfig: siteConfig }));
           }
-        },
-        { 
-          action: "back", label: "Back",
-          onClick: function(thisUI) {
-          }
         }
       ]
     },
