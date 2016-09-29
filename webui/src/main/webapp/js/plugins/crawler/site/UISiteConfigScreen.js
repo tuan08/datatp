@@ -3,9 +3,9 @@ define([
   'underscore', 
   'backbone',
   'ui/UITabbedPane',
-  'plugins/crawler/site/UISiteConfigs',
-  'plugins/crawler/site/UISiteConfig'
-], function($, _, Backbone, UITabbedPane, UISiteConfigs, UISiteConfig) {
+  'plugins/crawler/site/UISiteConfigList',
+  'plugins/crawler/site/UISiteConfigDetail'
+], function($, _, Backbone, UITabbedPane, UISiteConfigList, UISiteConfigDetail) {
   var UISiteConfigScreen = UITabbedPane.extend({
     type: 'UISiteConfigScreen',
     label: 'Site Configs',
@@ -15,15 +15,15 @@ define([
     },
     
     onInit: function(options) {
-      this.addTab("siteConfigList", "Site Configs", new UISiteConfigs(), false, true);
+      this.addTab("siteConfigList", "Site Configs", new UISiteConfigList(), false, true);
     },
     
     addSiteConfigTab: function(siteConfig) {
       var name = siteConfig.hostname;
-      this.addTab(name, name, new UISiteConfig( {siteConfig: siteConfig} ), true, true);
+      this.addTab(name, name, new UISiteConfigDetail( {siteConfig: siteConfig} ), true, true);
       this.render();
     }
   });
 
-  return new UISiteConfigScreen() ;
+  return UISiteConfigScreen ;
 });

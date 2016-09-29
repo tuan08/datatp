@@ -1,3 +1,12 @@
+<%function renderPatternActions(label, pattern) { %>
+  <div class="ui-ib">
+    <span><%=label%><span>
+    <a class="ui-action onIgnorePattern" pattern="<%=pattern%>" title="Ignore">I</a>
+    <a class="ui-action onDetailPattern" pattern="<%=pattern%>" title="Detail">D</a>
+    <a class="ui-action onListPattern"   pattern="<%=pattern%>" title="List">L</a>
+  </div>
+<%}%>
+
 <%function renderURLInfo(urlInfo) { %>
   <table>
     <tr>
@@ -15,14 +24,11 @@
       <td>
         <%var segments = urlInfo.pathSegments%> 
         <%for(var i = 0 ; i < segments.length; i++) {%>
-        <%  var pattern = ".*/" + segments[i] + ".*"; %>
-        <%  if(i < segments.length - 1) pattern = ".*/" + segments[i] + "/.*"; %>
-            <div>
-              <span><%=segments[i]%><span>
-              <a class="ui-action onIgnorePattern" pattern="<%=pattern%>">ignore</a> -
-              <a class="ui-action onDetailPattern" pattern="<%=pattern%>">detail</a> -
-              <a class="ui-action onListPattern"   pattern="<%=pattern%>">list</a>
-            </div>
+          <%var pattern = ".*/" + segments[i] + ".*"; %>
+          <%if(i < segments.length - 1) pattern = ".*/" + segments[i] + "/.*"; %>
+          <div>
+            <%renderPatternActions(segments[i], pattern);%>
+          </div>
         <%}%>
       </td>
     </tr>
@@ -33,16 +39,11 @@
         <%var params = urlInfo.params%> 
         <%for(var key in params) {%>
           <div>
-            <%=key%>
-            [
-            <a class="ui-action onIgnorePattern" pattern=".*<%=key%>.*">ignore</a> -
-            <a class="ui-action onDetailPattern" pattern=".*<%=key%>i.*">detail</a> -
-            <a class="ui-action onListPattern"   pattern=".*<%=key%>.*">list</a>
-            ]
-            : <%=params[key]%>
-            <a class="ui-action onIgnorePattern" pattern=".*<%=params[key]%>.*">ignore</a> -
-            <a class="ui-action onDetailPattern" pattern=".*<%=params[key]%>.*">detail</a> -
-            <a class="ui-action onListPattern"   pattern=".*<%=params[key]%>.*">list</a>
+            <%var keyPattern = ".*" + key + ".*"; %>
+            <%renderPatternActions(key, keyPattern);%>
+            <span>=</span>
+            <%var valuePattern = ".*" + params[key] + ".*"; %>
+            <%renderPatternActions(params[key], valuePattern);%>
           </div>
         <%}%>
       </td>
@@ -51,12 +52,8 @@
     <tr>
       <td><strong>Extension</strong></td>
       <td>
-        <%=urlInfo.extension%>
-        [
-        <a class="ui-action onIgnorePattern" pattern=".*\.<%=urlInfo.extension%>">ignore</a> -
-        <a class="ui-action onDetailPattern" pattern=".*\.<%=urlInfo.extension%>">detail</a> -
-        <a class="ui-action onListPattern"   pattern=".*\.<%=urlInfo.extension%>">list</a>
-        ]
+        <%var extensionPattern = ".*\\." + urlInfo.extension ; %>
+        <%renderPatternActions(urlInfo.extension, extensionPattern);%>
       </td>
     </tr>
 
@@ -68,10 +65,6 @@
 <%}%>
 
 <div>
-  <div style="padding: 5px">
-    <strong>URL</strong>: <%=urlInfo.url%>
-  </div>
-
   <%renderURLInfo(urlInfo)%>
   <div class="UIWebPageTypePattern"></div>
 </div>

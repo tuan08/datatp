@@ -2,27 +2,36 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'ui/UIContent',
-  'ui/UINavigation'
-], function($, _, Backbone, UIContent, UINavigation) {
-  var UIBody = UINavigation.extend({
-    onInit: function(options) {
-      var onClick = function(thisNav, menu, item) {
-        require(['plugins/crawler/' + item.config.module], function(UIDemoComponent) { 
-          thisNav.setWorkspace(UIDemoComponent);
-        }) ;
-      };
-      var crawlerMenu = this.addMenu("crawler", "Crawler", { collapse: false });
-      crawlerMenu.addItem("Status", { module: "UICrawlerStatus" }, onClick);
+  'ui/UITabbedPane',
+  'plugins/crawler/UICrawler',
+  'plugins/crawler/site/UISiteConfigScreen',
+  'plugins/crawler/site/UISiteStatistics',
+], function($, _, Backbone, UITabbedPane, UICrawler, UISiteConfigScreen, UISiteStatistics) {
+  var UIBody = UITabbedPane.extend({
+    label: 'Crawler',
 
-      var siteMenu = this.addMenu("site", "Site", { collapse: false });
-      siteMenu.addItem("Config", { module: "site/UISiteConfigScreen" }, onClick);
-      siteMenu.addItem("Statistics", { module: "site/UISiteStatistics" }, onClick);
-
-      var thisNav = this;
-      require(['plugins/crawler/UICrawlerStatus'], function(UIDemoComponent) { 
-        thisNav.setWorkspace(UIDemoComponent);
-      }) ;
+    config: {
+      style: "ui-round-tabs",
+      tabs: [
+        { 
+          label: "Crawler",  name: "crawler",
+          onSelect: function(thisUI, tabConfig) {
+            thisUI.setSelectedTabUIComponent(tabConfig.name, new UICrawler()) ;
+          }
+        },
+        { 
+          label: "Site",  name: "site",
+          onSelect: function(thisUI, tabConfig) {
+            thisUI.setSelectedTabUIComponent(tabConfig.name, new UISiteConfigScreen()) ;
+          }
+        },
+        { 
+          label: "Report",  name: "report",
+          onSelect: function(thisUI, tabConfig) {
+            thisUI.setSelectedTabUIComponent(tabConfig.name, new UISiteStatistics()) ;
+          }
+        }
+      ]
     }
   });
 

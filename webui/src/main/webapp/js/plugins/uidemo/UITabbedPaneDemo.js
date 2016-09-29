@@ -9,6 +9,7 @@ define([
     label: 'Tabbed Pane Demo',
 
     config: {
+      style: "ui-round-tabs",
       tabs: [
         { 
           label: "Tab 1",  name: "tab1",
@@ -26,9 +27,7 @@ define([
         }
       ]
     },
-    
-    onInit: function(options) {
-    }
+
   });
   return new UITabbedPaneDemo({}) ;
 });

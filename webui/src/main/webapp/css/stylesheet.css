@@ -22,8 +22,14 @@ a img {border:none;}
 :focus {outline:0;}
 
 /* typography.css */
-html {font-size:100.01%;}
-body {font-size:75%;color:#222;background:#fff;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;}
+html { font-size:100%; }
+
+body {
+  font-size:75%; color:#222; background:#fff; 
+  /*font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;*/
+  font-family: Verdana, Geneva, sans-serif;
+}
+
 h1, h2, h3, h4, h5, h6 {font-weight:normal;color:#111;}
 h1 {font-size:3em;line-height:1;margin-bottom:0.5em;}
 h2 {font-size:2em;margin-bottom:0.75em;}
@@ -141,16 +147,22 @@ input, textarea, select, div, table {
 
 .table-cell-full-h { display:table-cell; height:100%; vertical-align: top; }
 
-
 .debug-border { border: 1px dotted red; }
+.debug-border > .debug-border { border: 1px dotted red; margin: 2px; }
 
-.u-line-1px { border-bottom: 1px solid #ddd; }
+.box-width-full { width: 100%; }
+.box-height-full { height: 100%; }
+
+.box-border-top    { border-top: 1px solid #ddd; }
+.box-border-bottom { border-bottom: 1px solid #ddd; }
+.box-bottom-border { border-bottom: 1px solid #ddd; }
 
 .ui-action {
   cursor: pointer ;
   text-decoration: none ;
   color: #06c !important ;
   font-weight: bold !important;
+  padding: 2px 3px;
 }
 
 .ui-action:hover, .ui-action:focus { color: #09f; }
@@ -163,7 +175,7 @@ input, textarea, select, div, table {
 }
 
 
-.ui-ib  { display: inline-block; }
+.ui-ib       { display: inline-block; }
 .ui-ib-60px  { display: inline-block; width:   60px; }
 .ui-ib-75px  { display: inline-block; width:   75px; }
 .ui-ib-90px  { display: inline-block; width:   90px; }
@@ -178,7 +190,7 @@ input, textarea, select, div, table {
 .ui-border { border: 1px solid lightgray; }
 .ui-border-2px-dashed { border: 2px dashed lightgray; }
 
-.ui-error-text { color:#8a1f11; }
+.ui-text-error { color:#8a1f11; }
 
 /*ui collapsible style*/
 .ui-collapsible {}
@@ -204,11 +216,120 @@ input, textarea, select, div, table {
 
 /*ui-bean*/
 
+.ui-bean { padding: 5px; }
+
+.ui-bean .header { border-bottom: 1px solid #ddd; font-size: 1.25em; font-weight: bold; }
+
+.ui-bean .field { border-bottom: 1px solid #ddd; }
+.ui-bean .field-label { display: inline-block; width: 120px; vertical-align: top; font-weight: bold; }
+.ui-bean .field-value { display: inline-block; width: calc(100% - 125px); }
+.ui-bean .field-value a.ui-icon { display: inline-block; vertical-align: middle; cursor: pointer; }
+.ui-bean .field-input { width: calc(100% - 20px); }
+
+.ui-bean .actions { display: inline-block; width: 100%; padding: 5px; text-align: right; }
+
 .ui-bean-custom-input-selector { position: absolute; padding: 5px 0px; background: white; z-index: 2; display: none; }
 
 .ui-bean-custom-input-selector  h4 { margin: 0px ; padding: 5px 2px; border-bottom: 1px solid #ddd; }
 
 .ui-bean-custom-input-selector  a { display: block ; padding: 2px 5px; font-weight: bold ; }
+
+/** ui-tabs */ 
+.ui-tabs {
+  list-style-type: none;
+  margin:  0; padding: 0;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Float the list items side by side */
+.ui-tabs li { display: inline-block  }
+
+/* Style the links inside the list items */
+.ui-tabs li a,
+.ui-tabs li span {
+  display: inline-block;
+  color: #555;
+  text-align: center;
+  padding: 2px 10px;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+/* Change background color of links on hover */
+.ui-tabs li a:hover { background-color: #ddd; }
+
+/* Create an active/current tablink class */
+.ui-tabs li a:focus, .active { background-color: #ccc; }
+
+/* Style the tab content */
+.ui-tab-content { padding: 6px 12px; border: 1px solid #ccc; border-top: none; }
+
+.ui-round-tabs {
+  text-align: left;
+  list-style: none;
+  padding: 0px 10px; margin: 0px;
+  line-height: 22px;
+  height: 24px;
+  overflow: hidden;
+  font-size: 12px;
+  font-family: verdana;
+  position: relative;
+}
+
+.ui-round-tabs li {
+  border: 1px solid #AAA;
+  background: #D1D1D1;
+  background: -o-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+  background: -ms-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+  background: -moz-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+  background: -webkit-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+  background: linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+  display: inline-block;
+  position: relative;
+  z-index: 0;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #FFF;
+  text-shadow: 0 1px #FFF;
+  margin: 0 -5px;
+  padding: 0 15px;
+}
+
+.ui-round-tabs li.active { background: #FFF; color: #333; z-index: 2; border-bottom-color: #FFF; }
+
+.ui-round-tabs a { color: #555; text-decoration: none; cursor: pointer; }
+
+
+.ui-round-tabs:before {
+  position: absolute;
+  content: " ";
+  width: 100%;
+  bottom: 0; left: 0;
+  border-bottom: 1px solid #AAA;
+  z-index: 1;
+}
+
+.ui-round-tabs li:before,
+.ui-round-tabs li:after {
+  border: 1px solid #AAA;
+  position: absolute;
+  bottom: -1px;
+  width: 5px; height: 5px;
+  content: " ";
+}
+
+.ui-round-tabs li:before { left: -6px; border-bottom-right-radius: 6px; border-width: 0 1px 1px 0; box-shadow: 2px 2px 0 #D1D1D1; }
+
+.ui-round-tabs li:after { right: -6px; border-bottom-left-radius: 6px; border-width: 0 0 1px 1px; box-shadow: -2px 2px 0 #D1D1D1; }
+
+.ui-round-tabs li.selected:before { box-shadow: 2px 2px 0 #FFF; }
+
+.ui-round-tabs li.selected:after { box-shadow: -2px 2px 0 #FFF; }
+/** end ui-tabs */ 
 
 .ui-logo-text {
   font-family: Garamond, serif;

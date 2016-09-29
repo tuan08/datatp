@@ -3,8 +3,33 @@ define([
   'underscore', 
   'backbone',
   'ui/UIBorderLayout',
-  'text!ui/UINavigation.jtpl'
-], function($, _, Backbone, UIBorderLayout, Template) {
+], function($, _, Backbone, UIBorderLayout) {
+  var UIMenusTmpl = `
+    <div class="ui-navigation">
+      <div class="box-bottom-border text-align-right">
+        <a class="ui-action onToggleControl"><span class="ui-ib ui-icon ui-icon-caret-2-e-w"/></a>
+      </div>
+
+      <div class="ui-navigation-ctrl-menu" style="padding: 0px 5px">
+        <%for(var key in state.nav.menus) {%>
+        <%  var menu = state.nav.menus[key]; %>
+          <div style="padding: 10px 5px">
+            <h4 class="box-bottom-border" style="margin: 0px">
+              <a class="ui-action"> - </a>
+              <%=menu.label%>
+            </h4>
+            <div style="padding: 10px 0px 0px 10px">
+              <%for(var i = 0; i < menu.items.length; i++) {%>
+              <%  var item = menu.items[i]; %>
+                  <div><a class="ui-action onSelectMenuItem" menu="<%=menu.name%>" itemIdx="<%=i%>"><%=item.label%></a></div>
+              <%}%>
+            </div>
+          </div>
+        <%}%>
+      </div>
+    </div>
+  `;
+
   var Menu = function(menu) {
     this.menu = menu;
 
@@ -30,7 +55,7 @@ define([
       return new Menu(menu);
     },
 
-    _template: _.template(Template),
+    _template: _.template(UIMenusTmpl),
 
     render: function() {
       var params = { state:  this.state } ;

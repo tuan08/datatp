@@ -7,11 +7,20 @@ define([
 ], function($, _, Backbone, UIContent, UINavigation) {
   var UIBody = UINavigation.extend({
     onInit: function(options) {
+      var onBeanMenuClick = function(thisNav, menu, item) {
+        require(['plugins/uidemo/bean/' + item.label], function(UIDemoComponent) { 
+          thisNav.setWorkspace(UIDemoComponent);
+        }) ;
+      };
+      var beanMenu = this.addMenu("bean", "Bean Demo", { collapse: false });
+      beanMenu.addItem("UIBeanDemo", {}, onBeanMenuClick);
+
       var onClick = function(thisNav, menu, item) {
         require(['plugins/uidemo/' + item.label], function(UIDemoComponent) { 
           thisNav.setWorkspace(UIDemoComponent);
         }) ;
       };
+
       var menu1 = this.addMenu("core", "Core Demo", { collapse: false });
       menu1.addItem("UITableDemo", {}, onClick);
       menu1.addItem("UITableTreeDemo", {},  onClick);
@@ -21,6 +30,7 @@ define([
       menu1.addItem("UIUploadDemo", {}, onClick);
       menu1.addItem("UINavigationDemo", {}, onClick);
       menu1.addItem("UIBorderLayoutDemo", {}, onClick);
+      menu1.addItem("UIPropertiesDemo", {}, onClick);
 
       var menu2 = this.addMenu("nvchart", "NV Chart Demo", { collapse: false });
       menu2.addItem("UINVBarChartDemo", {}, onClick);
@@ -28,7 +38,7 @@ define([
       menu2.addItem("UINVLinePlusBarChartDemo", {}, onClick);
 
       var thisNav = this;
-      require(['plugins/uidemo/UIBorderLayoutDemo'], function(UIDemoComponent) { 
+      require(['plugins/uidemo/bean/UIBeanDemo'], function(UIDemoComponent) { 
         thisNav.setWorkspace(UIDemoComponent);
       }) ;
     }

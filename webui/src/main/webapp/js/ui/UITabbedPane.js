@@ -2,21 +2,38 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'text!ui/UITabbedPane.jtpl',
-  'css!ui/UITabbedPane.css'
-], function($, _, Backbone, UITabbedPaneTmpl) {
+], function($, _, Backbone) {
+  var TEMPLATE = `
+    <div style="padding: 2px">
+      <%var style = config.style ? config.style : "ui-tabs"; %>
+      <ul class="<%=style%>">
+        <%for(var i = 0; i < tabs.length; i++) { %>
+        <%  var tab  = tabs[i]; %>
+        <%  var active = tab.name == state.tabConfig.name ? "active" : ""; %>
+            <li tab="<%=tab.name%>">
+              <a class="onSelectTab <%=active%>"><%=tab.label%></a>
+              <%if(active && tab.closable) {%>
+                  <span class="ui-action onCloseTab">x</span>
+              <%}%>
+            </li>
+        <%}%>
+      </ul>
+      
+      <div class="ui-tab-content"> this is a test </div>
+    </div>
+  `;
   /**@type ui.UITabbedPane */
   var UITabbedPane = Backbone.View.extend({
-
     initialize: function(options) {
+      if(!this.config) {
+        this.config = { style: "ui-tabs", tabs: [ ] };
+      }
       this.tabs = [];
       for(var i = 0; i < this.config.tabs.length; i++) {
         this.tabs[i] = this.config.tabs[i];
       }
-      this.onInit(options) ;
+      if(this.onInit) this.onInit(options) ;
     },
-
-    onInit: function(options) { },
 
     setSelectedTabUIComponent: function(name, uicomponent) {
       var tabConfig = this._getTabConfig(name) ;
@@ -43,35 +60,35 @@ define([
       }
     },
     
-    _template: _.template(UITabbedPaneTmpl),
+    _template: _.template(TEMPLATE),
     
     render: function() {
       if(this.state == null && this.tabs.length > 0) {
         var tabConfig = this.tabs[0] ;
         this.setSelectedTab(tabConfig.name);
       }
-      var params = { tabs: this.tabs, state: this.state } ;
+      var params = { tabs: this.tabs, state: this.state, config: this.config } ;
       $(this.el).html(this._template(params));
       $(this.el).trigger("create") ;
       
-      this.$('.UITab').unbind() ;
-      this.state.uicomponent.setElement(this.$('.UITab')).render();
+      var uiTabContent = this.$('.ui-tab-content') ;
+      uiTabContent.unbind() ;
+      this.state.uicomponent.setElement(uiTabContent).render();
     },
     
     events: {
-      'click a.onSelectTab': 'onSelectTab',
-      'click a.onCloseTab': 'onCloseTab'
+      'click .onSelectTab': 'onSelectTab',
+      'click .onCloseTab': 'onCloseTab'
     },
     
     onSelectTab: function(evt) {
-      var tabName = $(evt.target).closest("a").attr('tab') ;
+      var tabName = $(evt.target).closest("li").attr('tab') ;
       this.setSelectedTab(tabName);
       this.render() ;
     },
 
     onCloseTab: function(evt) {
-      var tabName = $(evt.target).closest("a").attr('tab') ;
-      console.log('on close tab ' + tabName);
+      var tabName = $(evt.target).closest("li").attr('tab') ;
       var tabIdx = -1;
       for(var i = 0; i < this.tabs.length; i++) {
         var tab = this.tabs[i] ;

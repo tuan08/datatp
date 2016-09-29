@@ -43,8 +43,9 @@ require([
   'jquery', 
   'underscore', 
   'backbone',
+  'util/console',
   'plugins/uidemo/UIBody',
-], function($, _, Backbone, UIBody) {
+], function($, _, Backbone, console, UIBody) {
 
   var UIDemo = Backbone.View.extend({
     el: $("#UIDemoWS"),

@@ -2,19 +2,34 @@ define([
   'jquery',
 ], function($) {
   var reflect = {
-    getFieldValue: function(o, s) {
-      s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
-      s = s.replace(/^\./, '');           // strip a leading dot
-      var a = s.split('.');
-      for (var i = 0, n = a.length; i < n; ++i) {
-        var k = a[i];
-        if (k in o) {
-          o = o[k];
+    getFieldValue: function(obj, prop) {
+      prop = prop.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
+      prop = prop.replace(/^\./, '');           // strip a leading dot
+      var fields = prop.split('.');
+      for (var i = 0; i < fields.length; i++) {
+        var field = fields[i];
+        if (field in obj) obj = obj[field];
+        else return null;
+      }
+      return obj;
+    },
+
+    setFieldValue: function(obj, prop, val) {
+      prop = prop.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
+      prop = prop.replace(/^\./, '');           // strip a leading dot
+      var fields = prop.split('.');
+      for (var i = 0; i < fields.length; i++) {
+        var field = fields[i];
+        if (field in obj) {
+          if(i == fields.length - 1) {
+            obj[field] = val;
+          } else {
+            obj = obj[field];
+          }
         } else {
-          return;
+          throw new Error("cannot set field " + field + ", obj is null");
         }
       }
-      return o;
     },
 
     flatten: function(data) {

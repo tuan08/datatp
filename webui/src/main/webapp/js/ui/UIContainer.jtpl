@@ -1,6 +1,6 @@
 <%function renderHeader(config, state, title) {%>
   <%if(state.hideHeader) return  ;%>
-  <div>
+  <div class="box-bottom-border">
     <h3 style="float: left; margin: 3px 0px"><%=title%></h3>
     <%if(config.actions != null) { %>
       <div style="float: right">
@@ -14,7 +14,6 @@
       </div>
       <div><span class="clearfix"/></div>
     <%}%>
-    <hr/>
   </div>
 <%}%>
 

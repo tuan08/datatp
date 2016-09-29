@@ -135,7 +135,7 @@ define([
     }
   }) ;
 
-  var UICrawlerStatusScreen = UIBreadcumbs.extend({
+  var UICrawler = UIBreadcumbs.extend({
     type:  "UICrawlerStatusScreen",
 
     onInit: function(options) {
@@ -144,5 +144,5 @@ define([
     }
   });
 
-  return new UICrawlerStatusScreen() ;
+  return UICrawler ;
 });

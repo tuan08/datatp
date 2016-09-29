@@ -102,7 +102,7 @@
 
 <div style="padding: 5px">
   <div> 
-    <h6 class="u-line-1px">Select Chart Type</h6>
+    <h6 class="box-bottom-border">Select Chart Type</h6>
     <div class="ui-collapsible"> 
       <div style="padding: 10px 0px">
         <%renderDateHistogramChartType(chartModel);%>
@@ -120,7 +120,7 @@
   </div>
 
   <div style="padding-top: 10px" class="ui-collapsible"> 
-    <h6 class="u-line-1px">Aggregation By</h6>
+    <h6 class="box-bottom-border">Aggregation By</h6>
     
     <div style="padding: 10px 0px">
       <%renderSubAggregations(chartModel);%>

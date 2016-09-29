@@ -3,8 +3,14 @@ define([
   'underscore', 
   'backbone',
   'ui/UIUtil',
-  'text!ui/UIBreadcumbs.jtpl'
-], function($, _, Backbone, UIUtil, UIBreadcumbsTmpl) {
+], function($, _, Backbone, UIUtil) {
+  var UIBreadcumbsTmpl = `
+    <div>
+      <div class="Breadcumbs" style="background: #e5ecf9; padding: 3px 0px"></div>
+      <div class="BreadcumbsView" style="padding-top: 15px"></div>
+    </div>
+  `;
+
   var UIBreadcumbs = Backbone.View.extend({
     type: 'UIBreadcumbs',
     

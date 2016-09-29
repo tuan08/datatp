@@ -66,8 +66,6 @@ define([
       this.siteConfig   = options.siteConfig;
       this.uiExtractConfig = new UIExtractConfig({siteConfig: this.siteConfig, updateUISiteConfigOnChange: true}) ;
       this.uiExtractConfig.uiParent = this ;
-
-      _.bindAll(this, 'render') ;
     },
 
     getAncestorOfType: function(type) { return UIUtil.getAncestorOfType(this, type) ; },

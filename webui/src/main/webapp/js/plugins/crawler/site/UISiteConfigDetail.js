@@ -94,7 +94,7 @@ define([
     }
   }) ;
 
-  var UISiteConfig = UIBreadcumbs.extend({
+  var UISiteConfigDetail = UIBreadcumbs.extend({
     type:  "UISiteConfig",
 
     onInit: function(options) {
@@ -107,5 +107,5 @@ define([
     }
   });
 
-  return UISiteConfig ;
+  return UISiteConfigDetail ;
 });

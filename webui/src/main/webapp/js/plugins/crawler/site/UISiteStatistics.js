@@ -101,6 +101,6 @@ define([
     }
   });
 
-  return new UISiteStatistics() ;
+  return UISiteStatistics ;
   
 });

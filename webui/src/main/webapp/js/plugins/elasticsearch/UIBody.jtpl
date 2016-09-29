@@ -1,21 +1,16 @@
 <%function renderViewSelect(state) {%>
-  <div style="background: #e5ecf9;">
-    <%var separator = ""; %>
+  <ul class="ui-tabs">
     <%for(var name in state.views) { %>
-      <%=separator%>
-      <%if(name == state.selectView) {%>
-      <span class="ui-disable"><%=name%></span>
-      <%} else {%>
-        <a class="ui-action onSelect<%=name%>"><%=name%></a>
-      <%}%>
-      <%separator = "|"%>
+      <%var active = ""; %>
+      <%if(name == state.selectView) active = "active"; %>
+      <li><a class="<%=active%> onSelect<%=name%>"><%=name%></a></li>
     <%} %>
-  </div>
+  </ul>
 <%}%>
 
 <%function renderSearchInput(state) {%>
   <%if(!state.visibleSearchInput) return;%>
-  <div style="background: #ddd" class="search-input">
+  <div style="background: #ddd; padding: 3px" class="search-input">
     <a class="ui-action ui-state-default ui-corner-all onSearch">
       <span class="ui-ib ui-icon ui-icon-plusthick" style="vertical-align: middle"/>
     </a>
@@ -27,9 +22,8 @@
   </div>
 <%}%>
 
-<div style="padding: 5px 0px">
+<div>
   <%renderViewSelect(state); %>
   <%renderSearchInput(state); %>
-
-  <div class="UISearchView">UISearchView</div>
+  <div class="UISearchView ui-tab-content " style="padding: 5px 3px">UISearchView</div>
 </div>

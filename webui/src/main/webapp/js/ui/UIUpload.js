@@ -2,8 +2,18 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'text!ui/UIUpload.jtpl'
-], function($, _, Backbone, Template) {
+], function($, _, Backbone) {
+  var UIUploadTmpl = `
+    <div>
+      <form>
+        <label>Select A File: </label>
+        <input name="files" type="file" style="display: none" /> 
+        <span class="uploadStatus">
+          <a class="ui-action onSelect">Browse</a> 
+        </span>
+      </form>
+    </div>
+  `;
 
   var UIUpload = Backbone.View.extend({
     initialize: function (options) {
@@ -12,7 +22,7 @@ define([
       }
     },
 
-    _template: _.template(Template),
+    _template: _.template(UIUploadTmpl),
 
     render: function() {
       var params = {

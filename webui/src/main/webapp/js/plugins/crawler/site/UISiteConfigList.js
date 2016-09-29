@@ -27,7 +27,7 @@ define([
     }
   });
 
-  var UISiteConfigs = UITable.extend({
+  var UISiteConfigList = UITable.extend({
     label: "Site Config List",
 
     config: {
@@ -61,15 +61,9 @@ define([
               uiSiteConfigScreen.addSiteConfigTab(siteConfig);
             }
           },
-          { 
-            field: "group",   label: "Group", toggled: true, filterable: true
-          },
-          { 
-            field: "status",   label: "Status", toggled: true, filterable: true
-          },
-          { 
-            field: "injectUrl",   label: "Inject URL", toggled: true, filterable: true, multiple: true
-          },
+          { field: "group",   label: "Group", toggled: true, filterable: true },
+          { field: "status",   label: "Status", toggled: true, filterable: true },
+          { field: "injectUrl",   label: "Inject URL", toggled: true, filterable: true, multiple: true },
           { 
             field: "crawlSubDomain",   label: "Crawl Subdomain", toggled: true, filterable: true,
             select: {
@@ -82,18 +76,10 @@ define([
               }
             }
           },
-          { 
-            field: "crawlDeep",   label: "Crawl Deep", toggled: true, filterable: true
-          },
-          { 
-            field: "maxConnection",   label: "Max Connection", toggled: true, filterable: true
-          },
-          { 
-            field: "language",   label: "Language", toggled: true, filterable: true
-          },
-          { 
-            field: "description",   label: "Description", toggled: true, filterable: true
-          },
+          { field: "crawlDeep",   label: "Crawl Deep", toggled: true, filterable: true },
+          { field: "maxConnection",   label: "Max Connection", toggled: true, filterable: true },
+          { field: "language",   label: "Language", toggled: true, filterable: true },
+          { field: "description",   label: "Description", toggled: true, filterable: true },
         ],
         actions:[
           {
@@ -128,5 +114,5 @@ define([
 
   });
   
-  return UISiteConfigs ;
+  return UISiteConfigList ;
 });

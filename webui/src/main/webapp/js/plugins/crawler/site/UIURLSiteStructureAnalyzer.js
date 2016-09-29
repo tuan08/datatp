@@ -4,9 +4,9 @@ define([
   'backbone',
   'ui/UICollapsible',
   'ui/UITableTree',
-  'plugins/crawler/site/UIURLDataAnalyzer',
+  'plugins/crawler/site/UIWebPageAnalyzer',
   'plugins/crawler/Rest'
-], function($, _, Backbone, UICollabsible, UITableTree, UIURLDataAnalyzer, Rest) {
+], function($, _, Backbone, UICollabsible, UITableTree, UIWebPageAnalyzer, Rest) {
 
   var UISiteURLStructure = UITableTree.extend({
     label: "URL Site Structure",
@@ -50,7 +50,7 @@ define([
                 siteConfig: thisTable.siteConfig,
                 urlAnalysis: node.bean.url
               };
-              uiSiteConfig.push(new UIURLDataAnalyzer(options));
+              uiSiteConfig.push(new UIWebPageAnalyzer(options));
             }
           }
         ]

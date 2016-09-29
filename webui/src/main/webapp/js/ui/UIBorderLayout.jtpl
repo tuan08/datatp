@@ -1,6 +1,6 @@
 <%function renderNorthSplit(layout) {%>
   <%if(!layout.north) return ;%>
-  <%var nPanelH = layout.north.config.height ? layout.north.config.height : "150px"; %>
+  <%var nPanelH = layout.north.config.height ? layout.north.config.height : "auto"; %>
   <div class="north-split table-row">
     <div class="table-cell-full-w">
       <div class="north-panel" style="height: <%=nPanelH%>"></div>
