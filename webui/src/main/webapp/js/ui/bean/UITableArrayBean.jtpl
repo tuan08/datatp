@@ -1,0 +1,34 @@
+<%function renderBeanState(beanInfo, beanState, idx) {%>
+  <tr class="ui-bean" idx=<%= idx %>>
+    <%for(var fieldName in beanInfo.fields) {%>
+      <td class="field">
+        <div class="field-value" field="<%=fieldName%>"><span/></div>
+      </td>
+    <%}%>
+    <td>
+      <div class="ui-ib toggle-mode"/>
+    </td>
+  </tr>
+<%}%>
+
+<%var width = config.width ? config.width : "100%"; %>
+<div class="ui-beans"  style="padding: 2px; width: <%= width %>">
+  <%if(config.header) {%>
+    <div class="header"><%=config.header%></div>
+  <%}%>
+
+  <table>
+    <tr>
+      <%for(var fieldName in beanInfo.fields) {%>
+        <%var field = beanInfo.fields[fieldName];%>
+        <th><%= field.label %></th>
+      <%}%>
+      <th> - </th>
+    </tr>
+
+    <%for(var i = 0; i < state.beanStates.length; i++) {%>
+    <%  var beanState = state.beanStates[i]%>
+    <%  renderBeanState(beanInfo, beanState, i);%>
+    <%}%>
+  </table>
+</div>

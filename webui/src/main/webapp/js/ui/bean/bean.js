@@ -1,10 +1,12 @@
 define([
   'jquery', 'underscore', 'backbone',
-  'ui/bean/UIBean'
-], function($, _, Backbone, UIBean) {
+  'ui/bean/UIBean',
+  'ui/bean/UIArrayBean'
+], function($, _, Backbone, UIBean, UIArrayBean) {
 
   var bean = {
-    UIBean: UIBean
+    UIBean: UIBean,
+    UIArrayBean: UIArrayBean
   };
   
   return bean ;

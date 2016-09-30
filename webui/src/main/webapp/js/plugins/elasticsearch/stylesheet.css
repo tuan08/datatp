@@ -1,23 +1,11 @@
 .UISearchHitResult {
 }
 
-.UISearchHitResult table {
-  width: 100%;
-  border-collapse:collapse;
-  margin: 0px auto;
-}
+.UISearchHitResult table { width: 100%; border-collapse:collapse; margin: 0px auto; }
 
-.UISearchHitResult th {
-  padding: 5px;
-  text-align: left ;
-  border: none;
-  border-bottom: 1px solid lightgray;
-}
+.UISearchHitResult th { padding: 5px; text-align: left ; border: none; border-bottom: 1px solid lightgray; }
 
-.UISearchHitResult td {
-  padding: 5px;
-  border: none;
-}
+.UISearchHitResult td { padding: 5px; border: none; }
 
 
 .UISearchHitResult .hide-column {

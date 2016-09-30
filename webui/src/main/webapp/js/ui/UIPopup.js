@@ -4,6 +4,15 @@ define([
   'underscore', 
   'backbone'
 ], function($,jqueryui,  _, Backbone) {
+  var modalTmpl = _.template(`
+    <div class="modal-content">
+      <div style="text-align: right; border-bottom: 1px solid #ddd;">
+        <span class="close">×</span>
+      </div>
+      <p>Some text in the Modal..</p>
+    </div>
+  `);
+
   var UIPopup = Backbone.View.extend({
     el: "#UIPopupDialog",
     

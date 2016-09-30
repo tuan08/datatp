@@ -2,55 +2,12 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'ui/bean/bean'
-], function($, _, Backbone, bean) {
-
-  var BeanInfo = {
-    label: 'Bean',
-    fields: {
-      "input": { 
-        label: "Input", required: true,  validator: { name: 'empty', errorMsg: "Input cannot be empty" } 
-      },
-      "email": { 
-        label: "Email", required: true, validator: { name: 'email'} 
-      },
-      "intInput": { 
-        label: "Integer Input", defaultValue: 0,
-        validator: { name: 'integer', from: 0, to: 100, errorMsg: "Expect an integer from 0 to 100" }
-      },
-
-      "select": {
-        label: "Select", type: 'select',
-        options: [
-          { label: 'Option 1', value: 'opt1' },
-          { label: 'Option 2', value: 'opt2' }
-        ]
-      },
-
-      "customSelect": {
-        label: "Custom", type: 'select',
-        options: function(thisUI) {
-          var options = [
-            { label: 'Option 1', value: 'opt1' },
-            { label: 'Option 2', value: 'opt2' }
-          ];
-          return options;
-        }
-      },
-
-      "arrayInput": { 
-        label: "Array Input", type: 'array',
-      },
-
-      "nested.input": { 
-        label: "Nested Input", required: true,  
-        validator: { name: 'empty', errorMsg: "custom error message" } 
-      },
-    }
-  };
-
-  var UIBeanDemo = bean.UIBean.extend({
-    label: 'Upload Demo',
+  'ui/UICollapsible',
+  'ui/bean/bean',
+  'plugins/uidemo/bean/data'
+], function($, _, Backbone, UICollapsible,  bean, data) {
+  var UISingleBeanDemo = bean.UIBean.extend({
+    label: 'Single Bean Demo',
 
     config: {
       header: "UIBean Demo",
@@ -58,29 +15,74 @@ define([
       actions: {
         save: { 
           label: "Save",
-          onClick: function(thisUI) {
-            console.log('call save');
-          }
+          onClick: function(thisUI) { console.log('call save'); }
         }
       }
     },
     
     onInit: function(options) {
-      this.setBeanInfo(BeanInfo);
-      var bean = {
-        input: "A Input",
-        email: "name@xyz.com",
-        intInput: 20,
-        arrayInput: ["input 1", "input 2"],
-        select: 'opt2',
-        customSelect: 'opt2',
-        nested: {
-          input: "A Input",
-        }
-      };
-      this.setBean(bean);
+      this.set(data.BeanInfo, data.bean);
     }
   });
+
+  var UIArrayBeanDemo = bean.UIArrayBean.extend({
+    label: 'UIArrayBean Demo',
+
+    config: {
+      header: "UIArrayBean Demo",
+      width:  "400px",
+      actions: {
+        save: { 
+          label: "Save",
+          onClick: function(thisUI) { console.log('call save'); }
+        }
+      }
+    },
+    
+    onInit: function(options) {
+      this.set(data.BeanInfo, data.beans);
+    }
+  });
+
+  var UIArrayTableBeanDemo = bean.UIArrayBean.extend({
+    label: 'UIArrayBean Table Demo',
+
+    config: {
+      header: "UIArrayBean Demo",
+      width:  "100%",
+      layout: 'table',
+      actions: {
+        save: { 
+          label: "Save",
+          onClick: function(thisUI) { console.log('call save'); }
+        }
+      }
+    },
+    
+    onInit: function(options) {
+      this.set(data.BeanInfo, data.beans);
+    }
+  });
+
+  var UIBeanDemo = UICollapsible.extend({
+    label: "Bean Demo", 
+    config: {
+      actions: [
+        {
+          action: "save", label: "Save",
+          onClick: function(thisUI) {
+            console.log("on click save") ;
+          }
+        }
+      ]
+    },
+    
+    onInit: function(options) {
+      this.add(new UISingleBeanDemo()) ;
+      this.add(new UIArrayBeanDemo()) ;
+      this.add(new UIArrayTableBeanDemo()) ;
+    }
+  }) ;
 
   return new UIBeanDemo() ;
 });

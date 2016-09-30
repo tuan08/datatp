@@ -1,0 +1,41 @@
+<%var width = config.width ? config.width : "100%"; %>
+<div class="ui-beans" style="padding: 2px; width: <%=width%>">
+
+  <%if(config.header) {%>
+    <div class="header"><%=config.header%></div>
+  <%}%>
+
+  <ul class="ui-tabs">
+    <%for(var i = 0; i < beans.length; i++) { %>
+    <%  var bean  = beans[i]; %>
+    <%  var label  = "bean " + i; %>
+    <%  var active = i == state.select ? "active" : ""; %>
+        <li tab="<%=i%>">
+          <a class="onSelectTab <%=active%>"><%=label%></a>
+        </li>
+    <%}%>
+  </ul>
+  
+  <div class="ui-tab-contents">
+    <%for(var i = 0; i < beans.length; i++) { %>
+      <%var display = i == state.select ? "block" : "none"; %>
+      <div class="ui-tab-content ui-bean" idx="<%=i%>" style="display: <%=display%>">
+        <%if(config.header) {%>
+          <div class="header">
+            <div class="ui-ib toggle-mode"/>
+            <span><%=config.header%></span>
+          </div>
+        <%}%>
+
+        <%for(var name in beanInfo.fields) { %>
+        <%  var field = beanInfo.fields[name]; %>
+            <div class="field">
+              <div class="field-label"><%=field.label%></div>
+              <div class="field-value" field="<%=name%>"><span/></div>
+            </div>
+        <%}%>
+        <div class="actions"></div>
+      </div>
+    <%}%>
+  </div>
+</div>

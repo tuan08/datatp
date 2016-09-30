@@ -7,19 +7,19 @@ define([
 ], function($, _, Backbone, UIContent, UINavigation) {
   var UIBody = UINavigation.extend({
     onInit: function(options) {
-      var onBeanMenuClick = function(thisNav, menu, item) {
-        require(['plugins/uidemo/bean/' + item.label], function(UIDemoComponent) { 
-          thisNav.setWorkspace(UIDemoComponent);
-        }) ;
-      };
-      var beanMenu = this.addMenu("bean", "Bean Demo", { collapse: false });
-      beanMenu.addItem("UIBeanDemo", {}, onBeanMenuClick);
 
       var onClick = function(thisNav, menu, item) {
-        require(['plugins/uidemo/' + item.label], function(UIDemoComponent) { 
+        var module = item.label;
+        if(item.config.module) {
+          module = item.config.module;
+        }
+        require(['plugins/uidemo/' + module], function(UIDemoComponent) { 
           thisNav.setWorkspace(UIDemoComponent);
         }) ;
       };
+
+      var beanMenu = this.addMenu("bean", "Bean Demo", { collapse: false });
+      beanMenu.addItem("UIBeanDemo", { module: "bean/UIBeanDemo" }, onClick);
 
       var menu1 = this.addMenu("core", "Core Demo", { collapse: false });
       menu1.addItem("UITableDemo", {}, onClick);
@@ -31,11 +31,12 @@ define([
       menu1.addItem("UINavigationDemo", {}, onClick);
       menu1.addItem("UIBorderLayoutDemo", {}, onClick);
       menu1.addItem("UIPropertiesDemo", {}, onClick);
+      menu1.addItem("UIDialogDemo", {}, onClick);
 
       var menu2 = this.addMenu("nvchart", "NV Chart Demo", { collapse: false });
-      menu2.addItem("UINVBarChartDemo", {}, onClick);
-      menu2.addItem("UINVMultiChartDemo", {}, onClick);
-      menu2.addItem("UINVLinePlusBarChartDemo", {}, onClick);
+      menu2.addItem("UINVBarChartDemo", { module: "chart/UINVBarChartDemo" }, onClick);
+      menu2.addItem("UINVMultiChartDemo", {module: "chart/UINVMultiChartDemo" }, onClick);
+      menu2.addItem("UINVLinePlusBarChartDemo", { module: "chart/UINVLinePlusBarChartDemo" }, onClick);
 
       var thisNav = this;
       require(['plugins/uidemo/bean/UIBeanDemo'], function(UIDemoComponent) { 

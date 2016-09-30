@@ -150,6 +150,8 @@ input, textarea, select, div, table {
 .debug-border { border: 1px dotted red; }
 .debug-border > .debug-border { border: 1px dotted red; margin: 2px; }
 
+.debug-background { background: #FCC; }
+
 .box-width-full { width: 100%; }
 .box-height-full { height: 100%; }
 
@@ -187,6 +189,17 @@ input, textarea, select, div, table {
 .ui-ib-300px { display: inline-block; width:  300px; }
 .ui-ib-450px { display: inline-block; width:  450px; }
 
+.ui-ib-left-right {
+  vertical-align: middle;
+  text-align: justify; 
+}
+
+.ui-ib-left-right:after {
+  content: '';
+  display: inline-block;
+  width: 100%; height: 0;
+}
+
 .ui-border { border: 1px solid lightgray; }
 .ui-border-2px-dashed { border: 2px dashed lightgray; }
 
@@ -216,9 +229,15 @@ input, textarea, select, div, table {
 
 /*ui-bean*/
 
-.ui-bean { padding: 5px; }
+.ui-beans .header { border-bottom: 1px solid #ddd; font-size: 1.25em; font-weight: bold; }
 
-.ui-bean .header { border-bottom: 1px solid #ddd; font-size: 1.25em; font-weight: bold; }
+.ui-beans table { width: 100%; border: none; margin: 0px auto; }
+
+.ui-beans th { padding: 5px; text-align: left ; border: none; border-bottom: 1px solid #ddd; }
+
+.ui-beans td { padding: 2px; border: none; }
+
+.ui-bean { padding: 5px; }
 
 .ui-bean .field { border-bottom: 1px solid #ddd; }
 .ui-bean .field-label { display: inline-block; width: 120px; vertical-align: top; font-weight: bold; }
@@ -330,6 +349,56 @@ input, textarea, select, div, table {
 
 .ui-round-tabs li.selected:after { box-shadow: -2px 2px 0 #FFF; }
 /** end ui-tabs */ 
+
+/** ui-popup */
+.ui-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 50px; /* Location of the box */
+  left: 0; top: 0;
+  width: 100%;  height: 100%; /* Full widthi and height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.ui-modal .dialog {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 2px;
+  border: 1px solid #888;
+  width:  600px;
+}
+
+.ui-modal .banner {
+  font-size: 1.25em;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+/* The Close Button */
+.ui-modal .close { color: #aaaaaa; }
+
+.ui-modal .close:hover,
+.ui-modal .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ui-modal .ui-modal-content {
+  overflow: auto;
+  width:    100%; height: calc(100% - 50px);
+}
+
+.ui-modal .footer {
+  border-top: 1px solid #ddd;
+  padding: 5px ;
+}
+
+/* end ui-popup*/
 
 .ui-logo-text {
   font-family: Garamond, serif;

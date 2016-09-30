@@ -40,7 +40,10 @@ define([
 
     refresh: function(position) {
       var config = this.layout[position];
-      if(config) config.uiComponent.setElement(this.$('.' + position + '-panel').first()).render();
+      var panel = this.$('.' + position + '-panel').first();
+      panel.empty();
+      panel.unbind();
+      if(config) config.uiComponent.setElement(panel).render();
     },
 
     events: {
