@@ -1,0 +1,78 @@
+<%function renderBasicControl() {%>
+  <div class="ui-card">
+    <h6>Basic Control</h6>
+    <div>
+      <label>Page Size</label>
+      <select class="input onSelectDisplayRow">
+        <%=widget.select.options.render(config.page.options, config.page.size)%>
+      </select>
+    </div>
+
+    <div>
+      <label>Load More</label>
+      <select class="input onLoadMore">
+        <option value="0" selected="true">Select One</option>
+        <%=widget.select.options.render(config.page.more, 0)%>
+      </select>
+    </div>
+
+    <div class="filter">
+      <div>
+        <label>Filter Field</label>
+        <%var multiFieldLabels = ["All",  "Visible Fields"];%>
+        <%var multiFieldOpts   = ["__all", "__visible"];%>
+        <select class="input onFilter">
+          <%=widget.select.options.renderWithLabel(multiFieldLabels, multiFieldOpts, config.filter.field)%>
+          <option disabled>_________________</option>
+          <%=widget.select.options.render(beanInfo.fieldNames, config.filter.field)%>
+        </select>
+      </div>
+
+      <div>
+        <label>Filter Exp</label>
+        <input class="input onFilter" name="filterExpession" value="<%=config.filter.expression%>"/>
+      </div>
+    </div>
+  </div>
+<%}%>
+
+<%function renderFieldControl() {%>
+  <div class="ui-card">
+    <h6>Field Control</h6>
+
+    <ul class="ui-tabs">
+      <li tab="toggle" class="active"><a class="onSelectFieldTabControl">Toggle</a></li>
+      <li tab="wrap"><a class="onSelectFieldTabControl">Wrap</a></li>
+    </ul>
+
+    <div class="ui-tab-contents">
+      <div class="ui-tab-content" tab="toggle">
+        <%for(var fName in beanInfo.fields) {%>
+          <%var checked = "checked='checked'";%>
+          <%if(config.field.hidden[fName]) checked = "";%>
+          <div class="box-layout-left-right">
+            <label style="width: calc(100% - 25px)"><%=fName%></label>
+            <input class="onFieldToggle" name="<%=fName%>" type="checkbox" <%=checked%>/>
+          </div>
+        <%}%>
+      </div> <%//end ui-tab-content %>
+
+      <div class="ui-tab-content" tab="wrap" style="display: none">
+        <%for(var fName in beanInfo.fields) {%>
+          <%var checked = "checked='checked'";%>
+          <%if(config.field.hidden[fName]) checked = "";%>
+          <div class="box-layout-left-right">
+            <label style="width: calc(100% - 25px)"><%=fName%></label>
+            <input class="onFieldWrap" name="<%=fName%>" type="checkbox" <%=checked%>/>
+          </div>
+        <%}%>
+      </div> <%//end ui-tab-content %>
+
+    </div> <%//end ui-tab-contents %>
+  </div> <%//end ui-card %>
+<%}%>
+
+<div class="ui-table-control">
+  <%renderBasicControl(); %>
+  <%renderFieldControl(); %>
+</div>

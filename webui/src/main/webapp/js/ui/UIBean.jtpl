@@ -66,8 +66,8 @@
           <%beanConfig.fields.forEach(function(field) { %>
             <%var mandatory = field.required ? "*" : ""  %>
             <div>
-              <label class="ui-ib-180px" style="vertical-align: top; padding-top: 5px"><%=mandatory%><%=field.label%>:</label>
-              <div class="ui-ib-450px">
+              <label class="box-display-ib-180px" style="vertical-align: top; padding-top: 5px"><%=mandatory%><%=field.label%>:</label>
+              <div class="box-display-ib-450px">
                 <%
                   var fieldValue = util.reflect.getFieldValue(bean, field.field) ;
                   var disabled = "" ;

@@ -10,8 +10,8 @@ define([
     <div class="ui-beans" style="width: <%=width%>">
       <%if(config.header) {%>
         <div class="header">
-          <div class="ui-ib toggle-mode"><span/></div>
           <span><%=config.header%></span>
+          <div class="box-display-ib toggle-mode"><span/></div>
         </div>
       <%}%>
 
@@ -33,6 +33,10 @@ define([
       if(!this.config) this.config = { };
       if(this.onInit) this.onInit(options);
       $.extend(this.events, this.UIBeanEditorEvents);
+      //clone config to isolate the modification
+      var newConfig = {} ;
+      $.extend(newConfig, this.config);
+      this.config = newConfig;
     },
 
     init: function(bInfo, bean, beanState) { 
@@ -40,12 +44,18 @@ define([
       this.bean     = bean;
       this.state    = beanState;
     },
+
+    configure: function(newConfig) { 
+      $.extend(this.config, newConfig); 
+      return this;
+    },
     
     set: function(bInfo, bean) { 
       this.beanInfo = bInfo;
       this.bean     = bean;
       this.state    = this.__createBeanState(bInfo, bean);
       this.state.editeMode = false;
+      return this;
     },
 
     onViewMode: function() {
@@ -91,7 +101,7 @@ define([
 
     __getBeanState: function(fv) { return this.state; },
 
-    __getBeanInfo: function(fv) { return this.beanInfo; },
+    __getBeanInfo: function() { return this.beanInfo; },
 
     onAction: function(evt) {
       var name = $(evt.target).attr('name');

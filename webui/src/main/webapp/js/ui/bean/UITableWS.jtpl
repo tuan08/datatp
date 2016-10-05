@@ -1,0 +1,43 @@
+<%function renderBeanStateRows() {%>
+  <%var beanStateInCurrPage = beanStatePageList.currentPageItems();%>
+  <%var from = beanStatePageList.getFrom();%>
+  <%for(var i = 0; i < beanStateInCurrPage.length; i++) {%>
+  <%  var beanState = beanStateInCurrPage[i]%>
+      <%var bean = beanState.bean; %>
+      <tr row=<%= i %>>
+        <td><%=(i + from + 1)%></td>
+        <%for(var fieldName in beanInfo.fields) {%>
+          <%if(config.field.hidden[fieldName]) continue;%>
+          <%value = util.reflect.getFieldValue(bean, fieldName); %>
+          <td><%=value%></td>
+        <%}%>
+        <td class="box-talign-center">actions</td>
+      </tr>
+
+  <%}%>
+
+<%}%>
+
+<%var width = config.width ? config.width : "100%"; %>
+<div class="ui-table">
+  <div class="box-border-bottom" style="margin-bottom: 5px">
+    <a class="ui-icon ui-icon-action ui-icon-gear onToggleControl" style="vertical-align: top"/>
+    <h6 class="box-display-ib"><%=config.table.header%></h6>
+  </div>
+
+  <table>
+    <tr>
+      <th class="box-talign-center"></th>
+      <%for(var fieldName in beanInfo.fields) {%>
+        <%if(config.field.hidden[fieldName]) continue;%>
+        <%var field = beanInfo.fields[fieldName];%>
+        <th><%= field.label %></th>
+      <%}%>
+      <th class="box-talign-center"> - </th>
+    </tr>
+
+    <%renderBeanStateRows();%>
+
+  </table>
+  <%=widget.page.iterator.render(beanStatePageList)%>
+</div>

@@ -35,7 +35,7 @@
         <td>
           <%if(j == 0) { %>
             <%if(node.children.length > 0) { %>
-              <span class="toggle ui-ib ui-icon ui-icon-<%=toggleIcon%>"/>
+              <span class="toggle box-display-ib ui-icon ui-icon-<%=toggleIcon%>"/>
             <%} else { %>
               <span style="padding-right: 14px"/>
             <%} %>

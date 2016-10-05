@@ -8,22 +8,27 @@
   <ul class="ui-tabs">
     <%for(var i = 0; i < beans.length; i++) { %>
     <%  var bean  = beans[i]; %>
-    <%  var label  = "bean " + i; %>
+    <%  var label  = "bean-" + i; %>
+    <%  if(config.label) label = config.label(bean, i); %>
     <%  var active = i == state.select ? "active" : ""; %>
-        <li tab="<%=i%>">
-          <a class="onSelectTab <%=active%>"><%=label%></a>
+        <li class="<%=active%>" beanIdx="<%=i%>">
+          <a class="onSelect"><%=label%></a>
+          <a class="remove onRemove">x</a>
         </li>
     <%}%>
+    <li>
+      <a class="add">+</a>
+    </li>
   </ul>
   
   <div class="ui-tab-contents">
     <%for(var i = 0; i < beans.length; i++) { %>
       <%var display = i == state.select ? "block" : "none"; %>
-      <div class="ui-tab-content ui-bean" idx="<%=i%>" style="display: <%=display%>">
+      <div class="ui-tab-content ui-bean" beanIdx="<%=i%>" style="display: <%=display%>">
         <%if(config.header) {%>
           <div class="header">
-            <div class="ui-ib toggle-mode"/>
             <span><%=config.header%></span>
+            <div class="box-display-ib toggle-mode"/>
           </div>
         <%}%>
 

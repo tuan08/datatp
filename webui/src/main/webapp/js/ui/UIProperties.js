@@ -7,13 +7,13 @@ define([
     <%var width = config.width ? config.width : "100%"; %>
     <div class="ui-bean" style="width: <%=width%>">
       <%if(config.header) {%>
-        <h6 class="box-bottom-border"><%=config.header%></h6>
+        <h6 class="box-border-bottom"><%=config.header%></h6>
       <%}%>
 
       <%for(var key in bean) { %>
-        <div class="box-bottom-border">
-          <label class="ui-ib-120px"><%=key%></label>
-          <span class="ui-ib"><%=bean[key]%></label>
+        <div class="box-border-bottom">
+          <label class="box-display-ib-120px"><%=key%></label>
+          <span class="box-display-ib"><%=bean[key]%></label>
         </div>
       <%}%>
     </div>

@@ -1,5 +1,5 @@
 <%function renderPatternActions(label, pattern) { %>
-  <div class="ui-ib">
+  <div class="box-display-ib">
     <span><%=label%><span>
     <a class="ui-action onIgnorePattern" pattern="<%=pattern%>" title="Ignore">I</a>
     <a class="ui-action onDetailPattern" pattern="<%=pattern%>" title="Detail">D</a>

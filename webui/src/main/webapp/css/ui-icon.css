@@ -4,7 +4,9 @@
 /* states and images */
 .ui-icon { width: 16px; height: 16px; }
 
-.ui-icon-ib { display: inline-block; }
+.ui-icon-ib {  display: inline-block; }
+
+.ui-icon-action {  display: inline-block; cursor: pointer; }
 
 .ui-icon {
 	background-image: url("images/ui-icons_222222_256x240.png");

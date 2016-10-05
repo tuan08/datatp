@@ -8,7 +8,7 @@ define([
   var UIBeanEditor = Backbone.View.extend({
     __getBean: function(fv) { throw new Error("this method need to override") },
 
-    __getBeanInfo: function(fv) { throw new Error("this method need to override") },
+    __getBeanInfo: function() { throw new Error("this method need to override") },
 
 
     UIBeanEditorEvents: {
@@ -36,7 +36,7 @@ define([
 
     onClickEditableFieldValue: function(evt) {
       var uiFieldValue = $(evt.target).closest('.field-value');
-      var beanInfo   = this.__getBeanInfo(uiFieldValue);
+      var beanInfo   = this.__getBeanInfo();
       var beanState  = this.__getBeanState(uiFieldValue);
       widget.edit.field(uiFieldValue, beanInfo, beanState);
     },
@@ -58,7 +58,7 @@ define([
       var valIdx     = parseInt($(evt.target).attr('idx'));
 
       var beanState  = this.__getBeanState(uiFieldValue);
-      var beanInfo   = this.__getBeanInfo(uiFieldValue);
+      var beanInfo   = this.__getBeanInfo();
       var value      = beanState.fields[fieldName].value;
       value.splice(valIdx, 1);
       widget.edit.field(uiFieldValue, beanInfo, beanState);
@@ -68,7 +68,7 @@ define([
       var uiFieldValue = $(evt.target).closest(".field-value");
       var fieldName  = uiFieldValue.attr('field');
       var beanState  = this.__getBeanState(uiFieldValue);
-      var beanInfo   = this.__getBeanInfo(uiFieldValue);
+      var beanInfo   = this.__getBeanInfo();
       var value      = beanState.fields[fieldName].value;
       value.push("");
       widget.edit.field(uiFieldValue, beanInfo, beanState);
@@ -76,7 +76,7 @@ define([
 
 
     __toggle: function(uiBean) {
-      var beanInfo = this.__getBeanInfo(uiBean);
+      var beanInfo = this.__getBeanInfo();
       var beanState = this.__getBeanState(uiBean);
       var fieldBlks = uiBean.find('div[field]');
       var editMode = beanState.editMode;
@@ -92,7 +92,10 @@ define([
       for(var key in bInfo.fields) {
         var value = util.reflect.getFieldValue(bean, key);
         var field = bInfo.fields[key];
-        if(field.type == 'array')  value = value.slice();
+        if(field.type == 'array')  {
+          if(value == null) value = [] ;
+          else value = value.slice();
+        }
         state.fields[key] = { value: value, modified: false };
       }
       return state;
@@ -105,7 +108,7 @@ define([
 
       var bean      = this.__getBean(uiFieldValue);
       var beanState = this.__getBeanState(uiFieldValue);
-      var beanInfo  = this.__getBeanInfo(uiFieldValue);
+      var beanInfo  = this.__getBeanInfo();
       var fieldInfo = beanInfo.fields[fieldName];
       var value     = fieldInput.val();
 
@@ -129,7 +132,7 @@ define([
         value.push(inputVal);
       });
       var beanState = this.__getBeanState(uiFieldValue);
-      var beanInfo = this.__getBeanInfo(uiFieldValue);
+      var beanInfo = this.__getBeanInfo();
       beanState.fields[fieldName].value = value;
       widget.view.field(uiFieldValue, beanInfo, beanState);
     },

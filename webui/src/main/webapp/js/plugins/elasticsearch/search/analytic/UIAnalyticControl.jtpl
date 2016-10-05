@@ -1,19 +1,19 @@
 <%function renderDateHistogramChartType(chartModel) {%>
   <div>
     <div>
-      <strong class="ui-ib-75px">Type:</strong>
+      <strong class="box-display-ib-75px">Type:</strong>
       <span>Document Histogram</span>
     </div>
     <div>
-      <strong class="ui-ib-75px">Date Field:</strong> 
+      <strong class="box-display-ib-75px">Date Field:</strong> 
       <span><%=chartModel.dateField%></span>
     </div>
     <div>
-      <strong class="ui-ib-75px">Interval:</strong> 
+      <strong class="box-display-ib-75px">Interval:</strong> 
       <span><%=chartModel.interval%></span>
     </div>
     <div>
-      <strong class="ui-ib-75px">Format:</strong> 
+      <strong class="box-display-ib-75px">Format:</strong> 
       <span><%=chartModel.format%></span>
     </div>
   </div>
@@ -21,15 +21,15 @@
 
 <%function renderChangeDateHistogramChartType(chartModel, fieldsMapping) {%>
   <div>
-   <strong class="ui-ib-75px">Type:</strong> 
-   <select name="chartType" class="ui-ib-165px">
+   <strong class="box-display-ib-75px">Type:</strong> 
+   <select name="chartType" class="box-display-ib-165px">
      <option value="DateHistogram">Date Histogram</option>
    </select>
   </div>
   
   <div>
-   <strong class="ui-ib-75px">Field:</strong> 
-   <select name="dateField" class="ui-ib-165px">
+   <strong class="box-display-ib-75px">Field:</strong> 
+   <select name="dateField" class="box-display-ib-165px">
 	    <%for(var key in fieldsMapping) {%>
 	    <%  var fieldMapping = fieldsMapping[key]; %>
 	    <%  if(fieldMapping.type != 'date') continue;%>
@@ -39,13 +39,13 @@
   </div>
   
   <div>
-   <strong class="ui-ib-75px">Interval:</strong>
-   <input name="interval" value="<%=chartModel.interval%>" placeholder="1s|1m|1h|1d|1M|1y" class="ui-ib-165px" />
+   <strong class="box-display-ib-75px">Interval:</strong>
+   <input name="interval" value="<%=chartModel.interval%>" placeholder="1s|1m|1h|1d|1M|1y" class="box-display-ib-165px" />
   </div>
 
   <div>
-   <strong class="ui-ib-75px">Format:</strong>
-   <input name="format" value="<%=chartModel.format%>" placeholder="dd/MM/yyyy hh:mm:ss" class="ui-ib-165px" />
+   <strong class="box-display-ib-75px">Format:</strong>
+   <input name="format" value="<%=chartModel.format%>" placeholder="dd/MM/yyyy hh:mm:ss" class="box-display-ib-165px" />
   </div>
 
   <div style="text-align: center; padding-top: 5px">
@@ -59,7 +59,7 @@
 <%    var subagg = subaggs[i]; %>
      <%if(subagg.type == "TermTopHit") {  %>
         <div style="cursor: pointer" class="mouseover-action-block" field="<%=subagg.field%>">
-          <strong class="ui-ib-75px">Top Hit:</strong> 
+          <strong class="box-display-ib-75px">Top Hit:</strong> 
           <span><%=subagg.field%> {<%= subagg.size%>}</span>
           <a style="display: none" class="action-block ui-action onRemoveSubAggregation">del</a>
         </div>
@@ -70,18 +70,18 @@
 <%function renderAddTopHitSubAggregation(fieldsMapping) {%>
   <div class="add-top-hit-sub-aggregation">
 	  <div>
-	    <strong class="ui-ib-75px">Type:</strong>
-	    <select class="type ui-ib-165px">
+	    <strong class="box-display-ib-75px">Type:</strong>
+	    <select class="type box-display-ib-165px">
 	      <option value="TermTopHit">Terms Top Hit</option>
 	    </select>
 	  </div>
 	  <div>
-      <strong class="ui-ib-75px">Name:</strong>
-      <input class="ui-ib-165px name" name="name" value="" /> 
+      <strong class="box-display-ib-75px">Name:</strong>
+      <input class="box-display-ib-165px name" name="name" value="" /> 
     </div>
 	  <div>
-	    <strong class="ui-ib-75px">Field:</strong>
-	    <select class="ui-ib-165px field">
+	    <strong class="box-display-ib-75px">Field:</strong>
+	    <select class="box-display-ib-165px field">
 	      <%for(var key in fieldsMapping) {%>
 	        <%var fieldMapping = fieldsMapping[key]; %>
 	        <%if(fieldMapping.type != 'string' || fieldMapping.index != 'not_analyzed') continue;%>
@@ -90,8 +90,8 @@
 	    </select>
 	  </div>
 	  <div>
-	    <strong class="ui-ib-75px">Size:</strong>
-	    <input class="ui-ib-165px size" name="maxTopHitSize" value="10"/> 
+	    <strong class="box-display-ib-75px">Size:</strong>
+	    <input class="box-display-ib-165px size" name="maxTopHitSize" value="10"/> 
 	  </div>
 	  <div style="text-align: center; padding-top: 5px">
 	    <a class="ui-action onAddTopHitSubAggregation">Add</a>

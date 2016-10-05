@@ -5,9 +5,9 @@ define([
   'ui/UIUtil',
 ], function($, _, Backbone, UIUtil) {
   var UIBreadcumbsTmpl = `
-    <div>
-      <div class="Breadcumbs" style="background: #e5ecf9; padding: 3px 0px"></div>
-      <div class="BreadcumbsView" style="padding-top: 15px"></div>
+    <div class="ui-breadcumbs">
+      <div class="breadcumbs" style="background: #e5ecf9; padding: 3px 0px"></div>
+      <div class="view" style="padding-top: 10px"></div>
     </div>
   `;
 
@@ -27,7 +27,7 @@ define([
       $(this.el).html(this._template(params));
 
       if(this.views.length > 0) {
-        var breadcumbs = this.$('.Breadcumbs') ;
+        var breadcumbs = this.$('.breadcumbs') ;
         for(var i = 0; i < this.views.length; i++) {
           var view = this.views[i];
           var label = view.label ;
@@ -38,7 +38,7 @@ define([
           if(i == this.views.length - 1) {
             breadcumbs.find("a").removeClass('ui-disabled');
        	    breadcumbs.append(this._buttonTmpl({label: label}));
-            view.setElement(this.$('.BreadcumbsView')).render();
+            view.setElement(this.$('.view')).render();
           } else {
             breadcumbs.append(this._buttonTmpl({label: label}));
           }
@@ -60,7 +60,7 @@ define([
 
       var label = view.label ;
       if(label == null) label = "???" ;
-      var breadcumbs = this.$('.Breadcumbs') ;
+      var breadcumbs = this.$('.breadcumbs') ;
       if(this.views.length > 1) {
         breadcumbs.append("<span style='font-weight: bold'> &gt;&gt; </span>");
 
@@ -68,9 +68,9 @@ define([
       breadcumbs.find("a").removeClass('ui-disabled');
       breadcumbs.append(this._buttonTmpl({label: label}));
 
-      this.$('.BreadcumbsView').unbind() ;
+      this.$('.view').unbind() ;
       view.UIParent = this ;
-      view.setElement(this.$('.BreadcumbsView')).render();
+      view.setElement(this.$('.view')).render();
     },
     
     back: function() {
@@ -94,12 +94,12 @@ define([
 
 
     _removeToLabel: function(label) {
-      var breadcumbs = this.$('.Breadcumbs') ;
+      var breadcumbs = this.$('.breadcumbs') ;
       for(var i = this.views.length - 1; i >= 0; i--) {
         if(this.views[i].label == label) {
-          this.$('.BreadcumbsView').unbind() ;
+          this.$('.view').unbind() ;
           breadcumbs.find("a:last-child").addClass("ui-disabled");
-          this.views[i].setElement(this.$('.BreadcumbsView')).render();
+          this.views[i].setElement(this.$('.view')).render();
           return ;
         } else {
           var view = this.views.pop() ;

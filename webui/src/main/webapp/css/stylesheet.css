@@ -155,49 +155,48 @@ input, textarea, select, div, table {
 .box-width-full { width: 100%; }
 .box-height-full { height: 100%; }
 
+.box-talign-center { text-align: center }
+
+.box-valign-top { vertical-align: top; }
+.box-valign-middle { vertical-align: middle; }
+
 .box-border-top    { border-top: 1px solid #ddd; }
 .box-border-bottom { border-bottom: 1px solid #ddd; }
-.box-bottom-border { border-bottom: 1px solid #ddd; }
+.box-border-none   { border: none; }
+
+.box-display-ib       { display: inline-block; }
+.box-display-ib-60px  { display: inline-block; width:   60px; }
+.box-display-ib-75px  { display: inline-block; width:   75px; }
+.box-display-ib-90px  { display: inline-block; width:   90px; }
+.box-display-ib-105px { display: inline-block; width:  105px; }
+.box-display-ib-120px { display: inline-block; width:  120px; }
+.box-display-ib-150px { display: inline-block; width:  150px; }
+.box-display-ib-165px { display: inline-block; width:  165px; }
+.box-display-ib-180px { display: inline-block; width:  180px; }
+.box-display-ib-300px { display: inline-block; width:  300px; }
+.box-display-ib-450px { display: inline-block; width:  450px; }
+
+.box-layout-left-right { display: flex; justify-content: space-between; }
+
+.box-shadow { box-shadow: 2px 2px 2px #888; }
+
+.cursor-pointer { cursor: pointer; }
 
 .ui-action {
   cursor: pointer ;
   text-decoration: none ;
-  color: #06c !important ;
-  font-weight: bold !important;
+  color: #369 ;
+  font-weight: bold;
   padding: 2px 3px;
 }
 
-.ui-action:hover, .ui-action:focus { color: #09f; }
+.ui-action:hover, .ui-action:focus { background: #e7e7e7; }
 
 .ui-disabled {
   pointer-events: none;
   cursor: default;
   text-decoration: none ;
   font-weight: normal !important ;
-}
-
-
-.ui-ib       { display: inline-block; }
-.ui-ib-60px  { display: inline-block; width:   60px; }
-.ui-ib-75px  { display: inline-block; width:   75px; }
-.ui-ib-90px  { display: inline-block; width:   90px; }
-.ui-ib-105px { display: inline-block; width:  105px; }
-.ui-ib-120px { display: inline-block; width:  120px; }
-.ui-ib-150px { display: inline-block; width:  150px; }
-.ui-ib-165px { display: inline-block; width:  165px; }
-.ui-ib-180px { display: inline-block; width:  180px; }
-.ui-ib-300px { display: inline-block; width:  300px; }
-.ui-ib-450px { display: inline-block; width:  450px; }
-
-.ui-ib-left-right {
-  vertical-align: middle;
-  text-align: justify; 
-}
-
-.ui-ib-left-right:after {
-  content: '';
-  display: inline-block;
-  width: 100%; height: 0;
 }
 
 .ui-border { border: 1px solid lightgray; }
@@ -233,9 +232,9 @@ input, textarea, select, div, table {
 
 .ui-beans table { width: 100%; border: none; margin: 0px auto; }
 
-.ui-beans th { padding: 5px; text-align: left ; border: none; border-bottom: 1px solid #ddd; }
+.ui-beans th { border: none; border: none;  border-bottom: 1px solid #ddd; }
 
-.ui-beans td { padding: 2px; border: none; }
+.ui-beans td { padding: 2px; border: none; border-bottom: 1px solid #ddd;  }
 
 .ui-bean { padding: 5px; }
 
@@ -253,7 +252,27 @@ input, textarea, select, div, table {
 
 .ui-bean-custom-input-selector  a { display: block ; padding: 2px 5px; font-weight: bold ; }
 
+/** ui-table */ 
+.ui-table { padding: 5px ; }
+
+.ui-table th { text-align: center ; }
+
+
+.ui-table-control { }
+
+
+/** ui-card */ 
+.ui-card { box-shadow: 2px 2px 2px #888; padding: 5px; margin-top: 10px; border-top: 1px solid #ddd; border-left: 1px solid #ddd; }
+.ui-card h6 { border-bottom: 1px solid #ddd; margin-bottom: 5px;}
+.ui-card label { display: inline-block; width: 75px; }
+.ui-card .input { display: inline-block; width: calc(100% - 80px); }
+
 /** ui-tabs */ 
+.ui-tab-container { padding: 2px; height:  100%; }
+
+/* Style the tab content */
+.ui-tab-content { padding: 5px; border: 1px solid #ccc; border-top: none; height: calc(100% - 25px) }
+
 .ui-tabs {
   list-style-type: none;
   margin:  0; padding: 0;
@@ -263,11 +282,10 @@ input, textarea, select, div, table {
 }
 
 /* Float the list items side by side */
-.ui-tabs li { display: inline-block  }
+.ui-tabs li { display: inline-block; }
 
 /* Style the links inside the list items */
-.ui-tabs li a,
-.ui-tabs li span {
+.ui-tabs li a {
   display: inline-block;
   color: #555;
   text-align: center;
@@ -275,17 +293,33 @@ input, textarea, select, div, table {
   text-decoration: none;
   transition: 0.3s;
   font-size: 1em;
+  font-weight: bold;
   cursor: pointer;
+}
+
+.ui-tabs li a.remove {
+  padding: 2px 5px 2px 5px;
+  margin-left: -5px;
+  display: none;
+}
+
+.ui-tabs li.active a.remove {
+  display: inline-block;
+}
+
+.ui-tabs li a.add {
+  padding: 2px 5px 2px 5px;
+  margin-left: 0px;
 }
 
 /* Change background color of links on hover */
 .ui-tabs li a:hover { background-color: #ddd; }
 
-/* Create an active/current tablink class */
-.ui-tabs li a:focus, .active { background-color: #ccc; }
+.ui-tabs li:focus,
+.ui-tabs li.active { 
+  background-color: #ccc; 
+}
 
-/* Style the tab content */
-.ui-tab-content { padding: 6px 12px; border: 1px solid #ccc; border-top: none; }
 
 .ui-round-tabs {
   text-align: left;
@@ -320,8 +354,11 @@ input, textarea, select, div, table {
 
 .ui-round-tabs li.active { background: #FFF; color: #333; z-index: 2; border-bottom-color: #FFF; }
 
-.ui-round-tabs a { color: #555; text-decoration: none; cursor: pointer; }
+.ui-round-tabs li.active:before { box-shadow: 2px 2px 0 #FFF; }
 
+.ui-round-tabs li.active:after { box-shadow: -2px 2px 0 #FFF; }
+
+.ui-round-tabs a { color: #555; text-decoration: none; cursor: pointer; }
 
 .ui-round-tabs:before {
   position: absolute;
@@ -344,11 +381,18 @@ input, textarea, select, div, table {
 .ui-round-tabs li:before { left: -6px; border-bottom-right-radius: 6px; border-width: 0 1px 1px 0; box-shadow: 2px 2px 0 #D1D1D1; }
 
 .ui-round-tabs li:after { right: -6px; border-bottom-left-radius: 6px; border-width: 0 0 1px 1px; box-shadow: -2px 2px 0 #D1D1D1; }
-
-.ui-round-tabs li.selected:before { box-shadow: 2px 2px 0 #FFF; }
-
-.ui-round-tabs li.selected:after { box-shadow: -2px 2px 0 #FFF; }
 /** end ui-tabs */ 
+
+/** ui-breadcumbs */ 
+.ui-breadcumbs {
+  height: 100%; border: 
+}
+
+.ui-breadcumbs .breadcumbs {
+  background: #e5ecf9; padding: 3px 0px
+}
+
+.ui-breadcumbs .view { padding-top: 10px; height: calc(100% - 25px); border: 1px solid #ddd; border-top: none; }
 
 /** ui-popup */
 .ui-modal {

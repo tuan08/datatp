@@ -3,8 +3,8 @@
   <%if(fieldStates[key].toggle) icon = "trash"%>
 
   <div style="cursor: pointer; margin: 2px 0px" class="field-block" field="<%=key%>">
-    <strong class="ui-ib"><%=key%></strong>
-    <a style="display: none" class="ui-action field-action-block"><span style="vertical-align: middle" class="ui-ib ui-icon ui-icon-<%=icon%>"/></a>
+    <strong class="box-display-ib"><%=key%></strong>
+    <a style="display: none" class="ui-action field-action-block"><span style="vertical-align: middle" class="box-display-ib ui-icon ui-icon-<%=icon%>"/></a>
   </div>
 <%}%>
 

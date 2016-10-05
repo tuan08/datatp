@@ -32,6 +32,7 @@ define([
 
     tableLayout: {
       onToggleMode: function(uiBeanArray, evt) {
+        console.log('onToggleMode');
         var config = {
           title: "Modify Bean", footerMessage: "Modify bean",
           width: "600px", height: "400px",
@@ -63,6 +64,11 @@ define([
       if(!this.config) this.config = { };
       if(this.onInit) this.onInit(options);
       $.extend(this.events, this.UIBeanEditorEvents);
+      //clone config to isolate the modification
+      var newConfig = {} ;
+      $.extend(newConfig, this.config);
+      this.config = newConfig;
+
       if(this.config.layout == 'table') {
         this.layout = this.tableLayout;
       } else {
@@ -70,6 +76,10 @@ define([
       }
     },
 
+    configure: function(newConfig) { 
+      $.extend(this.config, newConfig); 
+      return this;
+    },
 
     set: function(bInfo, beans) { 
       this.beanInfo = bInfo; 
@@ -78,6 +88,7 @@ define([
       for(var i = 0; i < beans.length; i++) {
         this.state.beanStates[i] =  this.__createBeanState(bInfo, beans[i]);
       }
+      return this;
     },
 
     onViewMode: function() {
@@ -87,7 +98,7 @@ define([
       var beanInfo = this.beanInfo;
       for(var i = 0; i < uiBeans.length; i++) {
         var uiBean = $(uiBeans[i]);
-        var idx = parseInt(uiBean.attr("idx"));
+        var idx = parseInt(uiBean.attr("beanIdx"));
         var beanState = this.state.beanStates[idx];
 
         var fieldBlks = uiBean.find('.field');
@@ -105,7 +116,7 @@ define([
       var beanInfo = this.beanInfo;
       for(var i = 0; i < uiBeans.length; i++) {
         var uiBean = $(uiBeans[i]);
-        var idx = parseInt(uiBean.attr("idx"));
+        var idx = parseInt(uiBean.attr("beanIdx"));
         var beanState = this.state.beanStates[idx];
 
         var fieldBlks = uiBean.find('.field');
@@ -146,10 +157,12 @@ define([
     
     events: {
       //Handle by UIBean
-      'click      .actions .onAction' : 'onAction',
-      'click      .toggle-mode .onToggleMode' : 'onToggleMode',
+      'click      .onAction' : 'onAction',
+      'click      .onToggleMode' : 'onToggleMode',
+      'click      .onRemove'     : 'onRemove',
 
-      'click      .onSelectTab' : 'onSelectTab',
+      'click      .onSelect' : 'onSelect',
+      'click      .add'      : 'onAdd',
     },
 
     onAction: function(evt) {
@@ -162,29 +175,53 @@ define([
       this.layout.onToggleMode(this, evt);
     },
 
-    onSelectTab: function(evt) {
-      var uiTab = $(evt.target).closest("li");
-      var tabIdx = parseInt(uiTab.attr("tab"));
-      $(evt.target).closest(".ui-tabs").find("a.active").removeClass("active").addClass("onSelectTab"); 
-      uiTab.find("a").addClass("active").removeClass("onSelectTab");
-      
-      var uiTabContents = $(this.el).find(".ui-tab-contents");
-      uiTabContents.find("div[idx=" + this.state.select + "]").css("display", "none");
-      uiTabContents.find("div[idx=" + tabIdx + "]").css("display", "block");
+    onSelect: function(evt) {
+      evt.preventDefault();
+      var uiTab = $(evt.target).closest("[beanIdx]");
+      var tabIdx = parseInt(uiTab.attr("beanIdx"));
+
+      var uiActiveTab  = $(evt.target).closest(".ui-tabs").find("li.active"); 
+      uiActiveTab.removeClass("active");
+
+      uiTab.addClass("active");
+
+      var uiTabContents = $(evt.target).closest('.ui-beans').find(".ui-tab-contents");
+      uiTabContents.children("[beanIdx=" + this.state.select + "]").css("display", "none");
+      uiTabContents.children("[beanIdx=" + tabIdx + "]").css("display", "block");
       this.state.select = tabIdx;
     },
 
+    onRemove: function(evt) {
+      var idx = $(evt.target).closest("[beanIdx").attr("beanIdx");
+      this.beans.splice(idx, 1);
+      this.state.beanStates.splice(idx, 1);
+      this.state.select = idx - 1;
+      if(this.state.select < 0) this.state.select = 0;
+      this.render();
+    },
+
+    onAdd: function(evt) {
+      if(this.createDefaultBean) {
+        var bean = this.createDefaultBean();
+        this.beans.push(bean);
+        var beanIdx = this.beans.length - 1;
+        this.state.beanStates.push(this.__createBeanState(this.beanInfo, bean));
+        this.state.select = beanIdx;
+        this.render();
+      }
+    },
+
     __getBean: function(fv) { 
-      var idx = fv.closest(".ui-bean").attr("idx");
+      var idx = fv.closest(".ui-bean").attr("beanIdx");
       return this.beans[parseInt(idx)]; 
     },
 
     __getBeanState: function(triggerEle) { 
-      var idx = triggerEle.closest(".ui-bean").attr("idx");
+      var idx = triggerEle.closest(".ui-bean").attr("beanIdx");
       return this.state.beanStates[parseInt(idx)]; 
     },
 
-    __getBeanInfo: function(fv) { return this.beanInfo; },
+    __getBeanInfo: function() { return this.beanInfo; },
 
   });
 

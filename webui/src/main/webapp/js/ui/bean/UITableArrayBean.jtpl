@@ -1,12 +1,12 @@
 <%function renderBeanState(beanInfo, beanState, idx) {%>
-  <tr class="ui-bean" idx=<%= idx %>>
+  <tr class="ui-bean" beanIdx=<%= idx %>>
     <%for(var fieldName in beanInfo.fields) {%>
       <td class="field">
         <div class="field-value" field="<%=fieldName%>"><span/></div>
       </td>
     <%}%>
-    <td>
-      <div class="ui-ib toggle-mode"/>
+    <td class="box-talign-center">
+      <div class="box-display-ib toggle-mode"/>
     </td>
   </tr>
 <%}%>
@@ -14,7 +14,12 @@
 <%var width = config.width ? config.width : "100%"; %>
 <div class="ui-beans"  style="padding: 2px; width: <%= width %>">
   <%if(config.header) {%>
-    <div class="header"><%=config.header%></div>
+    <div class="box-layout-left-right header">
+      <div><%=config.header%></div>
+      <div>
+        <a class="box-display-ib ui-icon ui-icon-plus add" style="cursor: pointer" />
+      </div>
+    </div>
   <%}%>
 
   <table>
@@ -23,7 +28,7 @@
         <%var field = beanInfo.fields[fieldName];%>
         <th><%= field.label %></th>
       <%}%>
-      <th> - </th>
+      <th class="box-talign-center"> - </th>
     </tr>
 
     <%for(var i = 0; i < state.beanStates.length; i++) {%>

@@ -41,6 +41,23 @@ define([
         label: "Nested Input", required: true,  
         validator: { name: 'empty', errorMsg: "custom error message" } 
       },
+
+      "textarea": { 
+        label: "textarea", type: "textarea", required: true,  
+        validator: { name: 'empty', errorMsg: "Textarea cannot be empty" } 
+      },
+    }
+  };
+
+  var ContactBeanInfo = {
+    label: 'Contact Bean Info',
+    fields: {
+      "name": { 
+        label: "Name", required: true,  validator: { name: 'empty', errorMsg: "Input cannot be empty" } 
+      },
+      "email": { 
+        label: "Email", required: true, validator: { name: 'email'} 
+      }
     }
   };
 
@@ -54,7 +71,8 @@ define([
       customSelect: 'opt2',
       nested: {
         input: "A Input",
-      }
+      },
+      textarea: "Textarea sample",
     };
     return bean;
   }
@@ -67,10 +85,37 @@ define([
     return beans;
   }
 
+  function createComplexBean(seed) {
+    var bean = createBean(seed);
+    bean.contacts = [];
+    for(var i = 0; i < 5; i++) {
+      bean.contacts[i] = { name: "name " + i, email: "contact-" + i + "@xyz.com" };
+    }
+    return bean;
+  }
+
+  function createComplexBeans(seed, size) {
+    var beans = [];
+    for(var i = 0; i < size; i++) {
+      beans.push(createComplexBean(seed + " " + i));
+    }
+    return beans;
+  }
+
+  function createContactBean(name) {
+    return { name: name };
+  }
+
   var data = {
-    BeanInfo: BeanInfo,
-    bean:     createBean("Sample single bean"),
-    beans:    createBeans("Sample array bean", 5)
+    BeanInfo:           BeanInfo,
+    ContactBeanInfo:    ContactBeanInfo,
+    bean:               createBean("Sample single bean"),
+    beans:              createBeans("Sample array bean", 5),
+    createBean:         createBean,
+    createBeans:        createBeans,
+    createComplexBean:  createComplexBean,
+    createComplexBeans: createComplexBeans,
+    createContactBean:  createContactBean
   }
 
   return data ;

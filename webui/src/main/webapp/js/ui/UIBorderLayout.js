@@ -12,14 +12,38 @@ define([
       if(this.onInit) this.onInit(options);
     },
 
-    set: function(position, uiComponent, config, refresh) {
+    getUI: function(position) { 
+      if(this.layout[position]) return this.layout[position].uiComponent;
+      return null;
+    },
+
+    setUI: function(position, uiComponent, config, refresh) {
+      var layoutConfig = { };
+      if(config != null) $.extend(layoutConfig, config);
       uiComponent.uiParent = this;
-      if(config == null) config = {};
-      this.layout[position] = { config: config, uiComponent: uiComponent }
+      this.layout[position] = { config: layoutConfig, uiComponent: uiComponent }
       if(refresh) this.refresh(position);
     },
 
-    remove: function(position) { this.layout[position] = null; },
+    removeUI: function(position) { this.layout[position] = null; },
+
+    toggleUISplit: function(pos) {
+      var config = this.layout[pos];
+      var split = this.$('.' + pos + '-split').first();
+      var display = split.css('display');
+      if(display == 'none') {
+        split.css("display", config.display);
+      } else {
+        config.display = display;
+        split.css("display", 'none');
+      }
+    },
+
+    refreshUIPanel: function(position) {
+      var config = this.layout[position];
+      var panel = this.$('.' + position + '-panel').first();
+      if(config) config.uiComponent.render();
+    },
 
     _template: _.template(Template),
 
@@ -45,6 +69,7 @@ define([
       panel.unbind();
       if(config) config.uiComponent.setElement(panel).render();
     },
+
 
     events: {
       "mousedown .onResizeNorthPanel": "onResizeNorthPanel",

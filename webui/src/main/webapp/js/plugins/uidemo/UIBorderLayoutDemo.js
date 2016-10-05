@@ -13,19 +13,19 @@ define([
     
     onInit: function(options) {
       var northConfig = { height: "75px" };
-      this.set('north', new UIContent({ content: 'North Panel Content'}), northConfig);
+      this.setUI('north', new UIContent({ content: 'North Panel Content'}), northConfig);
 
       var shouthConfig = { height: "auto" };
-      this.set('shouth', new UIContent({ content: 'Shouth Panel Content'}), shouthConfig);
+      this.setUI('shouth', new UIContent({ content: 'Shouth Panel Content'}), shouthConfig);
 
       var westConfig = { width: "250px"};
-      this.set('west', new UIContent({ content: 'West Panel Content'}), westConfig);
+      this.setUI('west', new UIContent({ content: 'West Panel Content'}), westConfig);
 
       var eastConfig = { width: "150px"};
-      this.set('east', new UIContent({ content: 'East Panel Content'}), eastConfig);
+      this.setUI('east', new UIContent({ content: 'East Panel Content'}), eastConfig);
 
       var centerConfig = {};
-      this.set('center', new UIContent({ content: 'Center Panel Content'}), centerConfig);
+      this.setUI('center', new UIContent({ content: 'Center Panel Content'}), centerConfig);
     }
   });
 

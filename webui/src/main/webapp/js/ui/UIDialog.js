@@ -14,14 +14,14 @@ define([
 
     <div class="dialog">
       <div class="banner">
-        <span class="ui-ib" style="width: calc(100% - 20px)"><%=title%></span>
+        <span class="box-display-ib" style="width: calc(100% - 20px)"><%=title%></span>
         <span class="close">×</span>
       </div>
       <div class="ui-modal-content"></div>
 
-      <div class="ui-ib-left-right footer">
-        <div class="ui-ib"><%=footerMessage%></div>
-        <div class="ui-ib actions"><%renderActions(actions);%></div>
+      <div class="box-layout-left-right footer">
+        <div class="box-display-ib"><%=footerMessage%></div>
+        <div class="box-display-ib actions"><%renderActions(actions);%></div>
       </div>
     </div>
   `;

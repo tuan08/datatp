@@ -4,30 +4,39 @@ define([
   'backbone',
 ], function($, _, Backbone) {
   var TEMPLATE = `
-    <div style="padding: 2px">
+    <div class="ui-tab-container">
+      <%if(config.header) { %>
+        <div class="box-layout-left-right box-border-bottom" style="margin-bottom: 5px">
+          <h6><%=config.header.title%></h6>
+        </div>
+      <%}%>
+
       <%var style = config.style ? config.style : "ui-tabs"; %>
       <ul class="<%=style%>">
         <%for(var i = 0; i < tabs.length; i++) { %>
         <%  var tab  = tabs[i]; %>
         <%  var active = tab.name == state.tabConfig.name ? "active" : ""; %>
-            <li tab="<%=tab.name%>">
-              <a class="onSelectTab <%=active%>"><%=tab.label%></a>
+            <li class="<%=active%>" tab="<%=tab.name%>">
+              <a class="onSelectTab"><%=tab.label%></a>
               <%if(active && tab.closable) {%>
-                  <span class="ui-action onCloseTab">x</span>
+                  <a class="remove onCloseTab">x</a>
               <%}%>
             </li>
         <%}%>
       </ul>
       
-      <div class="ui-tab-content"> this is a test </div>
+      <div class="ui-tab-content"></div>
     </div>
   `;
   /**@type ui.UITabbedPane */
   var UITabbedPane = Backbone.View.extend({
     initialize: function(options) {
-      if(!this.config) {
-        this.config = { style: "ui-tabs", tabs: [ ] };
-      }
+      var defaultConfig = { 
+        style: "ui-tabs", 
+        tabs: [ ] 
+      };
+      if(this.config) $.extend(defaultConfig, this.config);
+      this.config = defaultConfig;
       this.tabs = [];
       for(var i = 0; i < this.config.tabs.length; i++) {
         this.tabs[i] = this.config.tabs[i];

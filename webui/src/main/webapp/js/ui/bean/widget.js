@@ -3,25 +3,25 @@ define([
   'util/util'
 ], function($, _, Backbone, util) {
   var readOnlyFieldValueTmpl = _.template( `
-    <div class="ui-ib"><span><%=value%></span></div>
+    <div class="box-display-ib"><span><%=value%></span></div>
   `);
 
   var editableFieldValueTmpl = _.template( `
-    <div class="ui-ib editable-field-value">
+    <div class="box-display-ib editable-field-value">
       <span><%=value%></span>
       <a class="ui-icon ui-icon-pencil" style="visibility: hidden"><span/></a>
     </div>
   `);
 
   var inputFieldValueTmpl = _.template( `
-    <div class="ui-ib edit-field-value box-width-full">
+    <div class="box-display-ib edit-field-value box-width-full">
        <input class="field-input" type="text" name="<%=fieldName%>" value="<%=value%>" autocomplete="<%=autocomplete%>" />
        <a class="ui-icon ui-icon-check"/>
     </div>
   `);
 
   var arrayInputFieldValueTmpl = _.template( `
-    <div class="ui-ib edit-array-field-value box-width-full">
+    <div class="box-display-ib edit-array-field-value box-width-full">
       <%for(var i = 0; i < value.length; i++) {%>
         <input class="field-input" type="text" name="<%=fieldName + '_' + i %>" value="<%=value[i]%>" autocomplete="<%=autocomplete%>" />
         <a class="ui-icon ui-icon-minus" idx="<%=i%>"/>
@@ -32,7 +32,7 @@ define([
   `);
 
   var selectInputFieldValueTmpl = _.template( `
-    <div class="ui-ib edit-field-value box-width-full">
+    <div class="box-display-ib edit-field-value box-width-full">
       <select class="field-input">
         <%var fieldValue = value != null ? value : field.defaultValue ; %>
         <%for(var i = 0; i < options.length ; i++) { %>
@@ -46,8 +46,15 @@ define([
     </div>
   `);
 
+  var textareaFieldValueTmpl = _.template( `
+    <div class="box-display-ib edit-field-value box-width-full">
+       <textarea class="field-input" style="height: 75px"  name="<%=fieldName%>"><%=value%></textarea>
+       <a class="ui-icon ui-icon-check"/>
+    </div>
+  `);
+
   var actionWidgetTmpl = _.template( `
-    <div class="ui-ib box-width-full">
+    <div class="box-display-ib box-width-full">
       <%for(var name in actions) {%>
         <%var action = actions[name]; %>
         <a class="ui-action onAction" name="<%=name%>"><%=action.label%></a>
@@ -56,7 +63,9 @@ define([
   `);
 
   var toggleModeTmpl = _.template( `
-    <span class="ui-state-default ui-corner-all"><a class="ui-ib ui-icon ui-icon-pencil onToggleMode" style="cursor: pointer"/></span>
+    <span class="ui-state-default ui-corner-all">
+      <a class="box-display-ib ui-icon ui-icon-pencil onToggleMode" style="cursor: pointer"/>
+    </span>
   `);
 
   var widget = {
@@ -95,6 +104,8 @@ define([
             params.options = fieldInfo.options(this);
           }
           uiFieldValue.html(selectInputFieldValueTmpl(params));
+        } else if(fieldInfo.type == 'textarea') {
+          uiFieldValue.html(textareaFieldValueTmpl(params));
         } else {
           uiFieldValue.html(inputFieldValueTmpl(params));
         }
@@ -108,7 +119,9 @@ define([
       }
     },
 
-    toggle: function(blk) { blk.html(toggleModeTmpl({})); }
+    toggle: function(blk) { 
+      blk.html(toggleModeTmpl({})); 
+    }
   };
 
   return widget ;

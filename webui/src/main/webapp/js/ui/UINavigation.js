@@ -6,19 +6,20 @@ define([
 ], function($, _, Backbone, UIBorderLayout) {
   var UIMenusTmpl = `
     <div class="ui-navigation">
-      <div class="box-bottom-border text-align-right">
-        <a class="ui-action onToggleControl"><span class="ui-ib ui-icon ui-icon-caret-2-e-w"/></a>
+      <div class="box-border-bottom box-layout-left-right" style="padding: 10px 5px 0px 5px">
+        <h6>Navigation Menu</h6>
+        <a class="ui-icon ui-icon-action ui-icon-caret-2-e-w onToggleControl"/>
       </div>
 
       <div class="ui-navigation-ctrl-menu" style="padding: 0px 5px">
         <%for(var key in state.nav.menus) {%>
         <%  var menu = state.nav.menus[key]; %>
-          <div style="padding: 10px 5px">
-            <h4 class="box-bottom-border" style="margin: 0px">
+          <div class="ui-card">
+            <h6 class="box-bottom-border" style="margin-bottom: 10px">
               <a class="ui-action"> - </a>
               <%=menu.label%>
-            </h4>
-            <div style="padding: 10px 0px 0px 10px">
+            </h6>
+            <div>
               <%for(var i = 0; i < menu.items.length; i++) {%>
               <%  var item = menu.items[i]; %>
                   <div><a class="ui-action onSelectMenuItem" menu="<%=menu.name%>" itemIdx="<%=i%>"><%=item.label%></a></div>
@@ -80,14 +81,14 @@ define([
       this.uiMenus = new UIMenus();
       this.uiMenus.config = this.config;
       var westConfig = { width: "250px"};
-      this.set('west', this.uiMenus, westConfig);
+      this.setUI('west', this.uiMenus, westConfig);
     },
 
     addMenu: function(name, label, collapse) { return this.uiMenus.addMenu(name, label, collapse); },
 
     setWorkspace: function(uiComponent) {
       var centerConfig = { };
-      this.set('center', uiComponent, centerConfig, true);
+      this.setUI('center', uiComponent, centerConfig, true);
     }
 
   });
