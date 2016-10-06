@@ -20,10 +20,10 @@ define([
       this.uiAnalyticWS      = new UIAnalyticWS({analyticContext: this.analyticContext});
 
       var westConfig = { width: "275px"};
-      this.set('west', this.uiAnalyticControl, westConfig);
+      this.setUI('west', this.uiAnalyticControl, westConfig);
 
       var centerConfig = {};
-      this.set('center', this.uiAnalyticWS, centerConfig);
+      this.setUI('center', this.uiAnalyticWS, centerConfig);
 
       this.onSearch(esQueryContext);
     },

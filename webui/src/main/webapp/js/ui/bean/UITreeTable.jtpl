@@ -1,0 +1,79 @@
+<%function renderHeaders() {%>
+  <tr>
+    <th class="box-talign-center">Tree</th>
+    <%for(var fieldName in beanInfo.fields) {%>
+      <%if(config.table.column[fieldName] && config.table.column[fieldName].hidden) continue;%>
+      <%if(config.table.groupBy.fields[fieldName]) continue;%>
+      <%var field = beanInfo.fields[fieldName];%>
+      <th><%= field.label %></th>
+    <%}%>
+    <%if(config.actions) { %>
+      <th class="box-talign-center"> - </th>
+    <%}%>
+  </tr>
+<%}%>
+
+<%function renderBuckets(buckets, level) {%>
+  <%for(var bName in buckets) { %>
+    <%var bucket = buckets[bName]; %>
+    <%renderBucket(bucket, level);%>
+  <%}%>
+<%}%>
+
+<%function renderBucket(bucket, level) {%>
+  <tr>
+    <td style="padding-left: <%= (5 * level) %>px;">
+      <%var icon = "minus" %>
+      <%if(bucket.collapse) icon = "plus" %>
+      <a class="ui-icon ui-icon-action ui-icon-<%=icon%> box-valign-top onToggleBucket" bucket="<%=bucket.getPath()%>"/>
+      <%= bucket.name %> [<%= bucket.getBucketSize() %>, <%= bucket.getObjectSize() %>]
+    </td>
+    <td colspan="100"></td>
+  </tr>
+
+  <%if(bucket.collapse) return; %>
+  <%if(bucket.buckets) {%>
+    <%renderBuckets(bucket.buckets, level + 1); %>
+  <%} else {%>
+    <%var beanStates = bucket.objects;%>
+    <%for(var i = 0; i < beanStates.length; i++) {%>
+    <%  var beanState = beanStates[i]%>
+        <%var bean = beanState.bean; %>
+        <tr row="<%= i %>" bucket="<%=bucket.getPath()%>">
+          <td></td>
+          <%for(var fieldName in beanInfo.fields) {%>
+            <%if(config.table.column[fieldName] && config.table.column[fieldName].hidden) continue;%>
+            <%if(config.table.groupBy.fields[fieldName]) continue;%>
+            <%value = util.reflect.getFieldValue(bean, fieldName); %>
+            <td><%=value%></td>
+          <%}%>
+
+          <%if(config.actions) { %>
+            <td class="box-talign-center">
+              <%for(var name in config.actions) {%>
+                <%var action = config.actions[name];%>
+                <a class="ui-action onTreeTableRowAction" action=<%=name%>><%= action.label %></a>
+              <%}%>
+            </td>
+          <%}%>
+        </tr>
+    <%}%>
+  <%}%>
+<%}%>
+
+<%var width = config.width ? config.width : "100%"; %>
+<div class="ui-table">
+  <div class="box-border-bottom" style="margin-bottom: 5px">
+    <a class="ui-icon ui-icon-action ui-icon-gear box-valign-top onToggleControl"/>
+    <h6 class="box-display-ib"><%= config.table.header %></h6>
+  </div>
+
+  <table>
+    <%renderHeaders(); %>
+    <%if(groupByModel.buckets) { %>
+      <%renderBuckets(groupByModel.buckets, 0); %>
+    <%} else {%>
+      <%renderBucket(groupByModel, 0); %>
+    <%}%>
+  </table>
+</div>

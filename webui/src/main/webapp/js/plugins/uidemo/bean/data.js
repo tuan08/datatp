@@ -3,6 +3,8 @@ define([
   var BeanInfo = {
     label: 'Bean',
     fields: {
+      "category": { label: "Category", required: true },
+      "type":     { label: "Type", required: true },
       "input": { 
         label: "Input", required: true,  validator: { name: 'empty', errorMsg: "Input cannot be empty" } 
       },
@@ -61,8 +63,24 @@ define([
     }
   };
 
+  function randomCategory() {
+    var num = Math.random();
+    if(num < 0.3) return "category-1";
+    if(num < 0.6) return "category-2";
+    return "category-3";
+  }
+
+  function randomType() {
+    var num = Math.random();
+    if(num < 0.3) return "type-2";
+    if(num < 0.6) return "type-3";
+    return "type-1";
+  }
+
   function createBean(seed) {
     var bean = {
+      category: randomCategory(),
+      type:     randomType(),
       input: seed,
       email: "name@xyz.com",
       intInput: 20,

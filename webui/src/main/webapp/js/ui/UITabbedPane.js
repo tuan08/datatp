@@ -35,7 +35,7 @@ define([
         style: "ui-tabs", 
         tabs: [ ] 
       };
-      if(this.config) $.extend(defaultConfig, this.config);
+      if(this.config) $.extend(true, defaultConfig, this.config);
       this.config = defaultConfig;
       this.tabs = [];
       for(var i = 0; i < this.config.tabs.length; i++) {

@@ -46,7 +46,16 @@ define([
 
     config: {
       control: { header: "Table Control Demo"},
-      table: { header: "Demo Table"}
+      table: { header: "Demo Table"},
+      actions: {
+        edit: {
+          label: "Edit",
+          onClick: function(uiTable, beanState) {
+            console.log("on click");
+            console.printJSON(beanState);
+          }
+        }
+      }
     },
     
     onInit: function(options) {

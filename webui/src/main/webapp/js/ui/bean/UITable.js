@@ -7,8 +7,9 @@ define([
   'ui/UIBorderLayout',
   'ui/UITabbedPane',
   "ui/bean/UITableCtrlPlugin",
-  "ui/bean/UITableWS"
-], function($, _, Backbone, util, PageList, UIDialog, UIBean, UIBorderLayout, UITabbedPane, UITableCtrlPlugin, UITableWS) {
+  "ui/bean/UITableWS",
+  "ui/bean/bucket"
+], function($, _, Backbone, util, PageList, UIDialog, UIBean, UIBorderLayout, UITabbedPane, UITableCtrlPlugin, UITableWS, bucket) {
   var UITableCtrl = UITabbedPane.extend({
     label: 'Tabbed Pane Demo',
 
@@ -27,19 +28,28 @@ define([
 
     _onInit: function(options) {
       var tConfig = { 
-        control: { header: "Table Control" },
-        table:   { header: "Table" },
-        page:   { 
-          size: 10, 
-          options: [ 10, 25, 50, 100, 200, 500, 1000 ] ,
-          more: [  50, 100, 200, 500 ] 
-        }, 
-        filter: { field: "", expression: "" },
-        field:  { hidden: {} }
+        control: { 
+          header: "Table Control" 
+        },
+        table: { 
+          header: "Table",
+          page:   { 
+            size: 10, 
+            options: [ 10, 25, 50, 100, 200, 500, 1000 ]
+          }, 
+          column:  { },
+          border: { type: "default" },
+          actions: { visible: true },
+          groupBy: { fields: {} },
+          view: "table"
+        },
+        //actions: {} 
+        filter: { field: "__all", expression: "" },
+        load: { more: [  50, 100, 200, 500 ] }
       };
 
       //clone config to isolate the modification
-      if(this.config)  $.extend(tConfig, this.config);
+      if(this.config)  $.extend(true, tConfig, this.config);
       this.config = tConfig;
 
 
@@ -54,17 +64,15 @@ define([
       for(var name in beanInfo.fields) {
         this.beanInfo.fieldNames.push(name);
       }
-      return this.setBeans(beans);
+      this.__createBeanStates(beans);
+      this.__filter(this.config.filter.field, this.config.filter.expression);
+      this.__createViewModel();
+      return this;
     },
 
     setBeans: function(beans) {
-      this.beans    = beans;
-      this.beanStates = [] ;
-      for(var i = 0; i < beans.length; i++) {
-        var bState = { bean: beans[i] };
-        this.beanStates.push(bState);
-      }
-      this.beanStatePageList = new PageList(this.config.page.size, this.beanStates) ;
+      this.__createBeanStates(beans);
+      this.__filter(this.config.filter.field, this.config.filter.expression);
       return this;
     },
     
@@ -88,18 +96,58 @@ define([
 
     toggleControl: function() { this.toggleUISplit('west'); },
 
-    setFieldVisible: function(field, visible) { 
-      this.config.field.hidden[field] = !visible;
-      this.refreshUIPanel('center');
+    setTableView: function(view, refresh) { 
+      this.config.table.view = view;
+      if(refresh) this.__refreshTable();
     },
 
-    setSelectPage: function(page) { 
-      this.beanStatePageList.getPage(page) ;
-      this.refreshUIPanel('center');
+    setTableColumnVisible: function(field, visible, refresh) { 
+      if(!this.config.table.column[field]) this.config.table.column[field] = {}; 
+      this.config.table.column[field].hidden = !visible;
+      if(refresh) this.__refreshTable();
     },
 
-    filter: function(field, exp) { 
-      if(exp == null || exp == '') return;
+    setTableSelectPage: function(page, refresh) { 
+      this.viewModel.table.getPage(page) ;
+      if(refresh) this.__refreshTable();
+    },
+
+    setTablePageSize: function(pageSize, refresh) { 
+      this.config.table.page.size = pageSize ;
+      this.viewModel.table.setPageSize(pageSize) ;
+      if(refresh) this.__refreshTable();
+    },
+
+    addTableGroupByField: function(field, refresh) { 
+      this.config.table.groupBy.fields[field] = {} ;
+      this.viewModel.groupBy = null;
+      if(refresh) this.__refreshTable();
+    },
+
+    rmTableGroupByField: function(field, refresh) { 
+      delete this.config.table.groupBy.fields[field] ;
+      this.viewModel.groupBy = null;
+      if(refresh) this.__refreshTable();
+    },
+    
+    onAction: function(actionName, beanState) {
+      this.config.actions[actionName].onClick(this, beanState);
+    },
+
+    filter: function(field, exp, refresh) { 
+      this.config.filter.field      = field;
+      this.config.filter.expression = exp;
+      this.__filter(field, exp);
+      if(refresh) this.__refreshTable();
+    },
+
+    __filter: function(field, exp) { 
+      if(exp == null || exp == '') {
+        this.filterBeanStates = this.beanStates ;
+        this.viewModel = null;
+        return;
+      }
+      
       var selectFields = null;
       if("__all" == field) {
         selectFields = this.beanInfo.fieldNames;
@@ -113,7 +161,7 @@ define([
         selectFields = [field];
       }
 
-      var holder = [] ;
+      this.filterBeanStates = [] ;
       for(var i = 0;i < this.beanStates.length; i++) {
         var beanState = this.beanStates[i] ;
         var bean = beanState.bean ;
@@ -131,17 +179,54 @@ define([
             break;
           }
         }
-        if(match) holder.push(beanState) ;
+        if(match) this.filterBeanStates.push(beanState) ;
       }
-      this.beanStatePageList = new PageList(this.config.page.size, holder) ;
-      this.refreshUIPanel('center');
+      this.viewModel = null;
     },
 
-    updateDisplayRow: function(pageSize) { 
-      this.config.page.size = pageSize ;
-      this.beanStatePageList.setPageSize(pageSize) ;
-      this.refreshUIPanel('center');
+    __createBeanStates: function(beans) {
+      this.beanStates = [] ;
+      for(var i = 0; i < beans.length; i++) {
+        var bState = { bean: beans[i] };
+        this.beanStates.push(bState);
+      }
     },
+
+    __createAggregationModel: function() {
+      var getValue = function(beanState, field) {
+        return util.reflect.getFieldValue(beanState.bean, field); 
+      };
+      var root = new bucket.Bucket(null, "All");
+      root.setObjects(this.filterBeanStates);
+      var aggs = [];
+      for(var fieldName in this.config.table.groupBy.fields) {
+        var fieldValueAggregation = new bucket.aggregation.FieldValueAggregation(fieldName);
+        fieldValueAggregation.getValue = getValue;
+        aggs.push(fieldValueAggregation);
+      }
+      root.aggregate(aggs);
+      return root;
+    },
+
+
+    __createViewModel: function() {
+      if(!this.viewModel) this.viewModel = {} ;
+      if(this.config.table.view == 'groupby') {
+        if(!this.viewModel.groupBy) {
+          this.viewModel.groupBy = this.__createAggregationModel();
+        }
+      } else {
+        if(!this.viewModel.table) {
+          this.viewModel.table = new PageList(this.config.table.page.size, this.filterBeanStates) ;
+        }
+      }
+    },
+
+    __refreshTable: function() {
+      this.__createViewModel();
+      this.refreshUIPanel('center');
+    }
+
   });
 
   return UITable;

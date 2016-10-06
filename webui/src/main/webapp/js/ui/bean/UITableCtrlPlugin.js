@@ -20,7 +20,11 @@ define([
     },
     
     events: {
-      'change select.onSelectDisplayRow': 'onSelectDisplayRow',
+      'change select.onSelectTableView': 'onSelectTableView',
+      'change select.onSelectTablePageSize': 'onSelectTablePageSize',
+
+      'change select.onAddTableGroupByField': 'onAddTableGroupByField',
+      'click  .onRmTableGroupByField':        'onRmTableGroupByField',
 
       'keyup  .onFilter': 'onFilter',
       'change .onFilter': 'onFilter',
@@ -31,23 +35,43 @@ define([
       'change input.onFieldWrap':         'onFieldWrap',
     },
 
-    onSelectDisplayRow: function(evt) {
-      var pageSize = $(evt.target, ".onSelectDisplayRow").find(":selected").attr("value") ;
-      this.uiTable.updateDisplayRow(pageSize);
+    onSelectTableView: function(evt) {
+      var view = $(evt.target, ".onSelectTableView").find(":selected").attr("value") ;
+      var uiCard = $(evt.target).closest(".ui-card") ;
+      var uiViews = uiCard.find(".views").first() ;
+      uiViews.children("div").css("display", "none");
+      uiViews.find("." + view + "-view").css("display", "block");
+      this.uiTable.setTableView(view, true);
     },
 
+    onSelectTablePageSize: function(evt) {
+      var pageSize = $(evt.target, ".onSelectTablePageSize").find(":selected").attr("value") ;
+      this.uiTable.setTablePageSize(pageSize, true);
+    },
+
+    onAddTableGroupByField: function(evt) {
+      var fieldName = $(evt.target, ".onAddTableGroupByField").val() ;
+      this.uiTable.addTableGroupByField(fieldName, true);
+      this.render();
+    },
+
+    onRmTableGroupByField: function(evt) {
+      var fieldName = $(evt.target).attr("field") ;
+      this.uiTable.rmTableGroupByField(fieldName, true);
+      this.render();
+    },
 
     onFilter: function(evt) {
       var filterBlk = $(evt.target).closest(".filter");
       var field = filterBlk.find("select.input").val();
       var exp   = filterBlk.find("input.input").val();
-      this.uiTable.filter(field, exp);
+      this.uiTable.filter(field, exp, true);
     },
 
     onFieldToggle: function(evt) {
       var fieldName = $(evt.target).attr("name") ;
       var checked = $(evt.target).is(":checked") ;
-      this.uiTable.setFieldVisible(fieldName, checked);
+      this.uiTable.setTableColumnVisible(fieldName, checked, true);
     },
 
     onSelectFieldTabControl: function(evt) {

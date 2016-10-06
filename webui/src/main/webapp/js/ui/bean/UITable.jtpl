@@ -1,17 +1,24 @@
 <%function renderBeanStateRows() {%>
-  <%var beanStateInCurrPage = beanStatePageList.currentPageItems();%>
-  <%var from = beanStatePageList.getFrom();%>
+  <%var beanStateInCurrPage = tableModel.currentPageItems();%>
+  <%var from = tableModel.getFrom();%>
   <%for(var i = 0; i < beanStateInCurrPage.length; i++) {%>
   <%  var beanState = beanStateInCurrPage[i]%>
       <%var bean = beanState.bean; %>
       <tr row=<%= i %>>
-        <td><%=(i + from + 1)%></td>
+        <td><%= i %></td>
         <%for(var fieldName in beanInfo.fields) {%>
-          <%if(config.field.hidden[fieldName]) continue;%>
+          <%if(config.table.column[fieldName] && config.table.column[fieldName].hidden) continue;%>
           <%value = util.reflect.getFieldValue(bean, fieldName); %>
           <td><%=value%></td>
         <%}%>
-        <td class="box-talign-center">actions</td>
+        <%if(config.actions) { %>
+          <td class="box-talign-center">
+            <%for(var name in config.actions) {%>
+              <%var action = config.actions[name];%>
+              <a class="ui-action onTableRowAction" action=<%=name%>><%= action.label %></a>
+            <%}%>
+          </td>
+        <%}%>
       </tr>
 
   <%}%>
@@ -29,15 +36,17 @@
     <tr>
       <th class="box-talign-center"></th>
       <%for(var fieldName in beanInfo.fields) {%>
-        <%if(config.field.hidden[fieldName]) continue;%>
+        <%if(config.table.column[fieldName] && config.table.column[fieldName].hidden) continue;%>
         <%var field = beanInfo.fields[fieldName];%>
         <th><%= field.label %></th>
       <%}%>
-      <th class="box-talign-center"> - </th>
+      <%if(config.actions) { %>
+        <th class="box-talign-center"> - </th>
+      <%}%>
     </tr>
 
     <%renderBeanStateRows();%>
 
   </table>
-  <%=widget.page.iterator.render(beanStatePageList)%>
+  <%=widget.page.iterator.render(tableModel)%>
 </div>

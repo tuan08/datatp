@@ -2,6 +2,16 @@ define([
   'jquery',
   'underscore'
 ], function($, _) {
+  var input_array_tmpl = _.template( `
+    <div class="box-display-ib box-width-full <%=cssClass%>">
+      <%for(var i = 0; i < value.length; i++) {%>
+        <input style="width: calc(100% - 25px);" type="text" name="<%=fieldName%>" value="<%=value[i]%>" autocomplete="<%=autocomplete%>" />
+        <a class="ui-icon ui-icon-action ui-icon-minus" idx="<%=i%>"/>
+      <%}%>
+      <a class="ui-icon ui-icon-action ui-icon-plus"/>
+    </div>
+  `);
+
   var select_options_tmpl = _.template(`
     <%for(var i = 0; i < options.length; i++) {%>
       <%var selected = ""%>
@@ -44,6 +54,14 @@ define([
   `);
 
   var widget = {
+    input: {
+      array: {
+        render: function(fieldName, value, cssClass, autocomplete) {
+          var params = { fieldName: fieldName, value: value, cssClass: cssClass, autocomplete: autocomplete };
+          return input_array_tmpl(params);
+        },
+      }
+    },
     select: {
       options: {
         render: function(options, select) {

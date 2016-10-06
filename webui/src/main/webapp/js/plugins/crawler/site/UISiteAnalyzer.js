@@ -2,40 +2,23 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'ui/UIBorderLayout',
-  'plugins/crawler/site/UISiteAnalyzerWS',
-  'plugins/crawler/Rest'
-], function($, _, Backbone, UIBorderLayout, UISiteAnalyzerWS, Rest) {
+  'ui/bean/UITable',
+  'plugins/crawler/Rest',
+  'plugins/uidemo/bean/data'
+], function($, _, Backbone, UITable, Rest, data) {
 
-  var UISiteAnalyzerControl = Backbone.View.extend({
+  var UIHelloPluginCtrl = Backbone.View.extend({
     initialize: function (options) {
     },
 
     _template: _.template(`
-      <div style="padding: 5px">
+      <div class="ui-card">
+        <h6>Hello Table Plugin Control<h6>
         <div>
-          <h6 class="box-border-bottom">Control</h6>
-          <div>
-            <a class="ui-action" style="display: block">Refresh</a>
-            <a class="ui-action" style="display: block">Reanalyze</a>
-          </div>
+          <a class="ui-action onSetPageSize50">Set Page Size To 50</a>
         </div>
-
         <div>
-          <h6 class="box-border-bottom">Page Type</h6>
-          <div>
-            <a class="ui-action" style="display: block">uncategorized</a>
-            <a class="ui-action" style="display: block">list</a>
-            <a class="ui-action" style="display: block">detail</a>
-            <a class="ui-action" style="display: block">ignore</a>
-          </div>
-        </div>
-
-        <div>
-          <h6 class="box-border-bottom">Fields</h6>
-          <div>
-            <a class="ui-action" style="display: block">uncategorized</a>
-          </div>
+          <a class="ui-action onSetPageSize100">Set Page Size To 100</a>
         </div>
       </div>
     `),
@@ -46,28 +29,39 @@ define([
     },
 
     events: {
-      'click a.onOpen': 'onOpen'
+      'click a.onSetPageSize50': 'onSetPageSize50',
+      'click a.onSetPageSize100': 'onSetPageSize100'
     },
 
-    configure: function(siteConfig) {
-      return this;
+    onSetPageSize50: function(evt) {
+      this.uiTable.updateDisplayRow(50);
+    },
+
+    onSetPageSize100: function(evt) {
+      this.uiTable.updateDisplayRow(100);
     }
   });
 
-  var UISiteAnalyzer = UIBorderLayout.extend({
+  var UITableDemo = UITable.extend({
     label: 'Site Structure Analyzer',
+
+    config: {
+      control: { header: "Table Control Demo"},
+      table: { header: "Demo Table"}
+    },
     
+    onInit: function(options) {
+      this.addDefaultControlPluginUI();
+      this.addControlPluginUI("Hello", new UIHelloPluginCtrl());
+      this.set(data.BeanInfo, data.createBeans("Table Bean", 100));
+    },
+
+
     configure: function(siteConfig) {
       var urlSiteStructure = Rest.site.getAnalyzedURLSiteStructure(siteConfig, 250, false);
-
-      var westConfig = { width: "250px"};
-      this.set('west', new UISiteAnalyzerControl().configure(siteConfig), westConfig);
-
-      var centerConfig = {};
-      this.set('center', new UISiteAnalyzerWS().set(urlSiteStructure), centerConfig);
       return this;
     }
-  });
+  }) ;
 
-  return UISiteAnalyzer ;
+  return  UITableDemo ;
 });

@@ -1,21 +1,6 @@
-<%function renderBasicControl() {%>
+<%function renderFilterControl() {%>
   <div class="ui-card">
-    <h6>Basic Control</h6>
-    <div>
-      <label>Page Size</label>
-      <select class="input onSelectDisplayRow">
-        <%=widget.select.options.render(config.page.options, config.page.size)%>
-      </select>
-    </div>
-
-    <div>
-      <label>Load More</label>
-      <select class="input onLoadMore">
-        <option value="0" selected="true">Select One</option>
-        <%=widget.select.options.render(config.page.more, 0)%>
-      </select>
-    </div>
-
+    <h6>Filter Control</h6>
     <div class="filter">
       <div>
         <label>Filter Field</label>
@@ -30,7 +15,7 @@
 
       <div>
         <label>Filter Exp</label>
-        <input class="input onFilter" name="filterExpession" value="<%=config.filter.expression%>"/>
+        <input class="input onFilter" name="filterExpession" value="<%=config.filter.expression%>" type="search"/>
       </div>
     </div>
   </div>
@@ -49,7 +34,7 @@
       <div class="ui-tab-content" tab="toggle">
         <%for(var fName in beanInfo.fields) {%>
           <%var checked = "checked='checked'";%>
-          <%if(config.field.hidden[fName]) checked = "";%>
+          <%if(config.table.column[fName] && config.table.column[fName].hidden) checked = "";%>
           <div class="box-layout-left-right">
             <label style="width: calc(100% - 25px)"><%=fName%></label>
             <input class="onFieldToggle" name="<%=fName%>" type="checkbox" <%=checked%>/>
@@ -60,7 +45,7 @@
       <div class="ui-tab-content" tab="wrap" style="display: none">
         <%for(var fName in beanInfo.fields) {%>
           <%var checked = "checked='checked'";%>
-          <%if(config.field.hidden[fName]) checked = "";%>
+          <%if(config.table.column[fName] && config.table.column[fName].hidden) checked = "";%>
           <div class="box-layout-left-right">
             <label style="width: calc(100% - 25px)"><%=fName%></label>
             <input class="onFieldWrap" name="<%=fName%>" type="checkbox" <%=checked%>/>
@@ -72,7 +57,69 @@
   </div> <%//end ui-card %>
 <%}%>
 
+<%function renderViewControl() {%>
+  <div class="ui-card">
+    <h6>View Control</h6>
+
+    <div>
+      <label>View</label>
+      <%var labels = ["Table",  "Group By Fields"];%>
+      <%var options   = ["table", "groupby"];%>
+      <select class="input onSelectTableView">
+        <%=widget.select.options.renderWithLabel(labels, options, config.table.view)%>
+      </select>
+    </div>
+
+    <div>
+      <label>Border</label>
+      <select class="input onSelectTableBorder">
+        <%var labels  = ["Default", "No Border"];%>
+        <%var options = ["default", "noborder"];%>
+        <%=widget.select.options.renderWithLabel(labels, options, config.table.border.type)%>
+      </select>
+    </div>
+
+    <div>
+      <%var checked = config.table.actions.visible ? "checked='checked'" : "" ;%>
+      <label>Actions</label>
+      <input class="onTableActionToggle" name="tableAction" type="checkbox" <%=checked%>/>
+    </div>
+
+    <div class="views">
+      <%var tableViewDisp = config.table.view == 'table' ? "block" : "none";%>
+      <div class="table-view" style="display: <%= tableViewDisp %>;">
+        <div>
+          <label>Page Size</label>
+          <select class="input onSelectTablePageSize">
+            <%=widget.select.options.render(config.table.page.options, config.table.page.size)%>
+          </select>
+        </div>
+      </div> <%//end table-view %>
+
+      <%var groupByDisp = config.table.view == 'groupby' ? "block" : "none";%>
+      <div class="groupby-view" style="display: <%= groupByDisp %>;">
+        <div>
+          <label>Group By</label>
+          <div class="input">
+            <select class="box-width-full onAddTableGroupByField">
+              <option value="">Select To Add</option>
+              <%= widget.select.options.render(beanInfo.fieldNames, "") %>
+            </select>
+            <%for(var fName in config.table.groupBy.fields) {%>
+              <div>
+                <a class="ui-icon ui-icon-action ui-icon-minus box-valign-top onRmTableGroupByField" field="<%= fName %>"/>
+                <%= fName %>
+              </div>
+            <%}%>
+          </div>
+        </div>
+      </div> <%//end group-by-view %>
+    </div>
+  </div>
+<%}%>
+
 <div class="ui-table-control">
-  <%renderBasicControl(); %>
+  <%renderViewControl(); %>
+  <%renderFilterControl(); %>
   <%renderFieldControl(); %>
 </div>

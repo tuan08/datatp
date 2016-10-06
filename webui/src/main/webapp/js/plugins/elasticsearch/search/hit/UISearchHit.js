@@ -15,10 +15,10 @@ define([
       this.uiSearchHitResult = new UISearchHitResult({ uiSearchHit: this});
 
       var westConfig = { width: "250px"};
-      this.set('west', this.uiSearchHitControl, westConfig);
+      this.setUI('west', this.uiSearchHitControl, westConfig);
 
       var centerConfig = {};
-      this.set('center', this.uiSearchHitResult, centerConfig);
+      this.setUI('center', this.uiSearchHitResult, centerConfig);
 
       this.onSearch(options.esQueryContext);
     },

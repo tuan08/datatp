@@ -30,13 +30,12 @@ define([
 
   var UIBean = UIBeanEditor.extend({
     initialize: function (options) {
-      if(!this.config) this.config = { };
-      if(this.onInit) this.onInit(options);
+      var defaultConfig = {} ;
+      if(!this.config) $.extend(defaultConfig, this.config);
+      this.config = defaultConfig;
+
       $.extend(this.events, this.UIBeanEditorEvents);
-      //clone config to isolate the modification
-      var newConfig = {} ;
-      $.extend(newConfig, this.config);
-      this.config = newConfig;
+      if(this.onInit) this.onInit(options);
     },
 
     init: function(bInfo, bean, beanState) { 
