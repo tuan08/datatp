@@ -1,0 +1,56 @@
+<div style="margin-right: 5px">
+  <div class="box-border-bottom">
+    <h6>Crawler</h6>
+  </div>
+
+  <div class="ui-card">
+    <h6>Control</h6>
+    <div class="content">
+      <a class="ui-action onStart">Start</a>
+      <a class="ui-action onStop">Stop</a>
+      <a class="ui-action onSiteConfig">Site Config</a>
+      <a class="ui-action onRefresh">Reffresh</a>
+    </div>
+  </div>
+
+  <div class="ui-card">
+    <h6>Url DB</h6>
+    <div class="content">
+      <div>
+        <label>Status</label>
+        <span class="input"><%= crawlerStatus.urlSchedulerStatus %></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui-card">
+    <h6>Scheduler</h6>
+    <div class="content">
+      <div>
+        <label>Status</label>
+        <span class="input"><%= crawlerStatus.urlSchedulerStatus %></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui-card">
+    <h6>Fetcher</h6>
+    <div class="content">
+      <table>
+      <tr>
+        <th>Id</th>
+        <th>Host</th>
+        <th>Status</th>
+      </tr>
+      <%for(var i = 0; i < crawlerStatus.fetcherStatus.length; i++) { %>
+        <%var fStatus = crawlerStatus.fetcherStatus[i]; %>
+        <tr>
+          <td><a class="ui-action onFetcherStatusDetail" id="<%=fStatus.id%>"><%=fStatus.id%></a></td>
+          <td><%=fStatus.host%></td>
+          <td><%=fStatus.status%></td>
+        </tr>
+      <%}%>
+      </table>
+    </div>
+  </div> <%// end ui-card %>
+</div>

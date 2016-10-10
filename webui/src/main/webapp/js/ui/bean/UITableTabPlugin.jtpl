@@ -1,0 +1,31 @@
+<div class="ui-table">
+  <div class="ui-tabs box-layout-left-right" style="margin-bottom: 2px">
+    <div class="box-display-ib">
+      <select class="onSelectTablePageSize">
+        <%=widget.select.options.render(config.table.page.options, config.table.page.size)%>
+      </select>
+
+      <span class="filter">
+        <%var multiFieldLabels = ["All",  "Visible Fields"];%>
+        <%var multiFieldOpts   = ["__all", "__visible"];%>
+        <select class="onFilter">
+          <%=widget.select.options.renderWithLabel(multiFieldLabels, multiFieldOpts, config.filter.field)%>
+          <option disabled>_________________</option>
+          <%=widget.select.options.render(beanInfo.fieldLabels, config.filter.field)%>
+        </select>
+        <input class="onFilter" value="<%=config.filter.expression%>" placeholder="Filter Expression" type="search"/>
+      </span>
+    </div>
+
+    <div class="box-display-ib" style="margin: 6px 5px 0px 0px">
+      <%if(config.actions.toolbar) {%>
+        <%for(var actionName in config.actions.toolbar) {%>
+          <%var action = config.actions.toolbar[actionName]; %>
+          <a class="ui-action onToolbarAction" style="padding: 0px" action="<%=actionName%>"><%= action.label %> </a>
+        <%}%>
+      <%}%>
+    </div>
+  </div>
+
+  <div class="table-view"></div>
+</div>

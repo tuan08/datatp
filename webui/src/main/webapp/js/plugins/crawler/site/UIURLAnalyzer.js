@@ -2,19 +2,17 @@ define([
   'jquery',
   'underscore', 
   'backbone',
-  'ui/UIUtil',
-  'plugins/crawler/site/UIWebPageTypePattern',
+  'ui/UIView',
+  'plugins/crawler/site/uicomp',
   'text!plugins/crawler/site/UIURLAnalyzer.jtpl'
-], function($, _, Backbone, UIUtil, UIWebPageTypePattern, Template) {
-  var UIURLAnalyzer = Backbone.View.extend({
+], function($, _, Backbone, UIView, uicomp, Template) {
+  var UIURLAnalyzer = UIView.extend({
     label: "URL Analyzer",
 
     initialize: function(options) {
       this.siteConfig = options.siteConfig;
       this.urlInfo    = options.urlInfo;
-      this.uiWebPageTypePattern = new UIWebPageTypePattern(); 
-      this.uiWebPageTypePattern.setBeans(this.siteConfig.webPageTypePatterns) ;
-      _.bindAll(this, 'render') ;
+      this.uiWebPageTypePattern = new uicomp.site.UIWebpageTypePattern().setSiteConfig(this.siteConfig);
     },
     
     _template: _.template(Template),
@@ -25,12 +23,7 @@ define([
         urlInfo:    this.urlInfo 
       } ;
       $(this.el).html(this._template(params));
-
       this.uiWebPageTypePattern.setElement(this.$('.UIWebPageTypePattern')).render();
-    },
-
-    getAncestorOfType: function(type) {
-      return UIUtil.getAncestorOfType(this, type) ;
     },
 
     events: {
@@ -84,14 +77,12 @@ define([
           break;
         }
       }
+
       if(!patternAlreadyExist) {
         selWebPageTypePattern.pattern.push(pattern);
-
         this.uiWebPageTypePattern.setBeans(this.siteConfig.webPageTypePatterns) ;
 
-        var uiSiteConfig = this.getAncestorOfType('UISiteConfig') ;
-        uiSiteConfig.onChangeSiteConfig(this.siteConfig);
-
+        this.getAncestorOfType("UISiteConfigBreadcumbs").broadcastSiteConfigChange(this.siteConfig) ;
         this.render();
       }
     }

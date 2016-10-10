@@ -3,7 +3,7 @@ define([
 ], function($, util) {
   function Bucket(pPath, name) {
     if(pPath == null) this.path = name;
-    else              this.path = pPath + "/" + name;
+    else              this.path = pPath + "|#|" + name;
     this.name = name;
     this.objects = [];
 
@@ -35,7 +35,7 @@ define([
     this.getObjectSize = function() { return this.objects.length; };
 
     this.findBucketByPath = function(path) {
-      var segments = path.split('/');
+      var segments = path.split('|#|');
       var bucket = this;
       if(bucket.name != segments[0]) return null; 
       for(var i = 1; i < segments.length; i++) {

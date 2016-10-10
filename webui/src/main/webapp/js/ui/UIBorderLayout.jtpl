@@ -42,9 +42,7 @@
         </div>
       <%} %>
 
-      <div class="center-split center-panel table-cell-full-h">
-         Center
-      </div>
+      <div class="center-split center-panel table-cell-full-h">Center</div>
 
       <%if(layout.east) { %>
         <%ePanelW = layout.east.config.width ? layout.east.config.width : "200px"; %>
@@ -54,7 +52,6 @@
           </div>
 
           <div class="east-panel split-left">East</div>
-          <div class="clearfix"><span/></div>
         </div>
       <%} %>
     </div>

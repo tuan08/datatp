@@ -1,54 +1,38 @@
-<%function renderFilterControl() {%>
-  <div class="ui-card">
-    <h6>Filter Control</h6>
-    <div class="filter">
-      <div>
-        <label>Filter Field</label>
-        <%var multiFieldLabels = ["All",  "Visible Fields"];%>
-        <%var multiFieldOpts   = ["__all", "__visible"];%>
-        <select class="input onFilter">
-          <%=widget.select.options.renderWithLabel(multiFieldLabels, multiFieldOpts, config.filter.field)%>
-          <option disabled>_________________</option>
-          <%=widget.select.options.render(beanInfo.fieldNames, config.filter.field)%>
-        </select>
-      </div>
-
-      <div>
-        <label>Filter Exp</label>
-        <input class="input onFilter" name="filterExpession" value="<%=config.filter.expression%>" type="search"/>
-      </div>
-    </div>
-  </div>
-<%}%>
-
 <%function renderFieldControl() {%>
   <div class="ui-card">
     <h6>Field Control</h6>
 
     <ul class="ui-tabs">
-      <li tab="toggle" class="active"><a class="onSelectFieldTabControl">Toggle</a></li>
-      <li tab="wrap"><a class="onSelectFieldTabControl">Wrap</a></li>
+      <li tab="toggle" class="<%=uistate.field.control.tabSelect('toggle')%>"><a class="onSelectFieldTabControl">Toggle</a></li>
+      <li tab="order" class="<%=uistate.field.control.tabSelect('order')%>"><a class="onSelectFieldTabControl">Order</a></li>
     </ul>
 
     <div class="ui-tab-contents">
-      <div class="ui-tab-content" tab="toggle">
-        <%for(var fName in beanInfo.fields) {%>
+      <div class="ui-tab-content" style="display: <%=uistate.field.control.tabContent('toggle')%>">
+        <%for(var i = 0; i < beanInfo.fieldNames.length; i++) {%>
+          <%var fName = beanInfo.fieldNames[i];%>
+          <%var fieldConfig = beanInfo.fields[fName];%>
           <%var checked = "checked='checked'";%>
           <%if(config.table.column[fName] && config.table.column[fName].hidden) checked = "";%>
           <div class="box-layout-left-right">
-            <label style="width: calc(100% - 25px)"><%=fName%></label>
-            <input class="onFieldToggle" name="<%=fName%>" type="checkbox" <%=checked%>/>
+            <label style="width: calc(100% - 25px)"><%= fieldConfig.label %></label>
+            <input class="checkbox onFieldToggle" name="<%=fName%>" type="checkbox" <%=checked%>/>
           </div>
         <%}%>
       </div> <%//end ui-tab-content %>
 
-      <div class="ui-tab-content" tab="wrap" style="display: none">
-        <%for(var fName in beanInfo.fields) {%>
+      <div class="ui-tab-content" style="display: <%=uistate.field.control.tabContent('order')%>">
+        <%for(var i = 0; i < beanInfo.fieldNames.length; i++) {%>
+          <%var fName = beanInfo.fieldNames[i];%>
+          <%var fieldConfig = beanInfo.fields[fName];%>
           <%var checked = "checked='checked'";%>
           <%if(config.table.column[fName] && config.table.column[fName].hidden) checked = "";%>
           <div class="box-layout-left-right">
-            <label style="width: calc(100% - 25px)"><%=fName%></label>
-            <input class="onFieldWrap" name="<%=fName%>" type="checkbox" <%=checked%>/>
+            <label style="width: calc(100% - 50px)"><%= fieldConfig.label %></label>
+            <div>
+              <a class="ui-icon ui-icon-action ui-icon-caret-1-n onFieldOrderUp" field="<%=fName%>"/>
+              <a class="ui-icon ui-icon-action ui-icon-caret-1-s onFieldOrderDown" field="<%=fName%>"/>
+            </div>
           </div>
         <%}%>
       </div> <%//end ui-tab-content %>
@@ -59,41 +43,19 @@
 
 <%function renderViewControl() {%>
   <div class="ui-card">
-    <h6>View Control</h6>
-
-    <div>
+    <div class="box-border-bottom">
       <label>View</label>
-      <%var labels = ["Table",  "Group By Fields"];%>
+      <%var labels = ["Table",  "Group By"];%>
       <%var options   = ["table", "groupby"];%>
       <select class="input onSelectTableView">
         <%=widget.select.options.renderWithLabel(labels, options, config.table.view)%>
       </select>
     </div>
 
-    <div>
-      <label>Border</label>
-      <select class="input onSelectTableBorder">
-        <%var labels  = ["Default", "No Border"];%>
-        <%var options = ["default", "noborder"];%>
-        <%=widget.select.options.renderWithLabel(labels, options, config.table.border.type)%>
-      </select>
-    </div>
-
-    <div>
-      <%var checked = config.table.actions.visible ? "checked='checked'" : "" ;%>
-      <label>Actions</label>
-      <input class="onTableActionToggle" name="tableAction" type="checkbox" <%=checked%>/>
-    </div>
 
     <div class="views">
       <%var tableViewDisp = config.table.view == 'table' ? "block" : "none";%>
       <div class="table-view" style="display: <%= tableViewDisp %>;">
-        <div>
-          <label>Page Size</label>
-          <select class="input onSelectTablePageSize">
-            <%=widget.select.options.render(config.table.page.options, config.table.page.size)%>
-          </select>
-        </div>
       </div> <%//end table-view %>
 
       <%var groupByDisp = config.table.view == 'groupby' ? "block" : "none";%>
@@ -118,8 +80,29 @@
   </div>
 <%}%>
 
+<%function renderStyleControl() {%>
+  <div class="ui-card">
+    <h6>Style</h6>
+
+    <div>
+      <label>Border</label>
+      <select class="input onSelectTableBorder">
+        <%var labels  = ["Default", "No Border"];%>
+        <%var options = ["default", "noborder"];%>
+        <%=widget.select.options.renderWithLabel(labels, options, config.table.border.type)%>
+      </select>
+    </div>
+
+    <div>
+      <%var checked = config.table.actions.visible ? "checked='checked'" : "" ;%>
+      <label>Actions</label>
+      <input class="checkbox onTableActionToggle" name="tableAction" type="checkbox" <%=checked%>/>
+    </div>
+  </div>
+<%}%>
+
 <div class="ui-table-control">
   <%renderViewControl(); %>
-  <%renderFilterControl(); %>
+  <%renderStyleControl(); %>
   <%renderFieldControl(); %>
 </div>

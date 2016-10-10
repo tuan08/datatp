@@ -14,8 +14,9 @@ import net.datatp.xhtml.extract.ExtractEntity;
 import net.datatp.xhtml.extract.WDataExtractContext;
 
 public class SiteStructure {
-  private URLSiteStructure                 urlSiteStructure = new URLSiteStructure();
   private SiteContext                      siteContext;
+  private URLSiteStructure                 urlSiteStructure = new URLSiteStructure();
+  
   private Map<String, WDataExtractContext> wdataContexts    = new HashMap<>();
   private int                              count            = 0;
 
@@ -34,7 +35,7 @@ public class SiteStructure {
     urlAnalysis.setUrlInfo(ctx.getURLAnalyzer());
     WebPageTypeAnalyzer wpAnalyzer = siteContext.getWebPageTypeAnalyzer();
     WebPageType wpType = wpAnalyzer.analyze(ctx.getWdata().getAnchorText(), urlAnalysis.getUrlInfo().getNormalizeURL());
-    urlAnalysis.setPageTypeCategory(wpType.toString());
+    urlAnalysis.setPageType(wpType.toString());
     if(wpType == WebPageType.detail) {
       List<ExtractEntity> entities = siteContext.getSiteExtractor().extract(ctx);
       urlAnalysis.withExtractEntityInfo(entities);

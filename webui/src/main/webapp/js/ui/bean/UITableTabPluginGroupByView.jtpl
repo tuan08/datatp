@@ -7,7 +7,7 @@
       <%var field = beanInfo.fields[fieldName];%>
       <th><%= field.label %></th>
     <%}%>
-    <%if(config.actions) { %>
+    <%if(config.actions.bean) { %>
       <th class="box-talign-center"> - </th>
     <%}%>
   </tr>
@@ -48,10 +48,10 @@
             <td><%=value%></td>
           <%}%>
 
-          <%if(config.actions) { %>
+          <%if(config.actions.bean) { %>
             <td class="box-talign-center">
-              <%for(var name in config.actions) {%>
-                <%var action = config.actions[name];%>
+              <%for(var name in config.actions.bean) {%>
+                <%var action = config.actions.bean[name];%>
                 <a class="ui-action onTreeTableRowAction" action=<%=name%>><%= action.label %></a>
               <%}%>
             </td>
@@ -61,19 +61,11 @@
   <%}%>
 <%}%>
 
-<%var width = config.width ? config.width : "100%"; %>
-<div class="ui-table">
-  <div class="box-border-bottom" style="margin-bottom: 5px">
-    <a class="ui-icon ui-icon-action ui-icon-gear box-valign-top onToggleControl"/>
-    <h6 class="box-display-ib"><%= config.table.header %></h6>
-  </div>
-
-  <table>
-    <%renderHeaders(); %>
-    <%if(groupByModel.buckets) { %>
-      <%renderBuckets(groupByModel.buckets, 0); %>
-    <%} else {%>
-      <%renderBucket(groupByModel, 0); %>
-    <%}%>
-  </table>
-</div>
+<table>
+  <%renderHeaders(); %>
+  <%if(groupByModel.buckets) { %>
+    <%renderBuckets(groupByModel.buckets, 0); %>
+  <%} else {%>
+    <%renderBucket(groupByModel, 0); %>
+  <%}%>
+</table>

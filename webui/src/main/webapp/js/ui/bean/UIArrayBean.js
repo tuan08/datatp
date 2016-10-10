@@ -10,10 +10,10 @@ define([
 ], function($, _, Backbone, widget, util, UIDialog, UIBeanEditor, UIBean,  TabTmpl, TableTmpl) {
 
   var UIBeanEdit = UIBean.extend({
-    label: 'Modify Bean',
+    label: 'Modify',
 
     config: {
-      header: "Modify Bean",
+      header: "Modify",
     },
   });
 
@@ -32,15 +32,14 @@ define([
 
     tableLayout: {
       onToggleMode: function(uiBeanArray, evt) {
-        console.log('onToggleMode');
         var config = {
-          title: "Modify Bean", footerMessage: "Modify bean",
+          title: "Modify Bean", 
+          footerMessage: "Modify bean",
           width: "600px", height: "400px",
           actions: {
             save: {
               label: "Save",
               onClick: function(thisUI) {
-                console.log("call save.................") ;
               }
             }
           }
@@ -49,8 +48,7 @@ define([
         var beanInfo  = uiBeanArray.__getBeanInfo(uiBean);
         var beanState = uiBeanArray.__getBeanState(uiBean);
         var bean      = uiBeanArray.__getBean(uiBean);
-        var uiBeanEdit = new UIBeanEdit();
-        uiBeanEdit.init(beanInfo, bean, beanState);
+        var uiBeanEdit = new UIBeanEdit().init(beanInfo, bean, beanState).setEditMode(true);
         UIDialog.activate(uiBeanEdit, config);
       },
 
@@ -61,19 +59,22 @@ define([
 
 
     initialize: function (options) {
-      if(!this.config) this.config = { };
-      if(this.onInit) this.onInit(options);
-      $.extend(this.events, this.UIBeanEditorEvents);
+      var defaultConfig = {
+        //header: "a title",
+        //label: function(bean, idx) {},
+      }
       //clone config to isolate the modification
-      var newConfig = {} ;
-      $.extend(newConfig, this.config);
-      this.config = newConfig;
+      if(this.config) $.extend(defaultConfig, this.config);
+      this.config = defaultConfig;
+
+      $.extend(this.events, this.UIBeanEditorEvents);
 
       if(this.config.layout == 'table') {
         this.layout = this.tableLayout;
       } else {
         this.layout = this.tabLayout;
       }
+      if(this.onInit) this.onInit(options);
     },
 
     configure: function(newConfig) { 
@@ -83,12 +84,25 @@ define([
 
     set: function(bInfo, beans) { 
       this.beanInfo = bInfo; 
-      this.beans = beans;
-      this.state    = { editMode: false, select:   0, beanStates: [] };
-      for(var i = 0; i < beans.length; i++) {
-        this.state.beanStates[i] =  this.__createBeanState(bInfo, beans[i]);
-      }
+      this.setBeans(beans, false);
       return this;
+    },
+
+    setBeans: function(beans, refresh) { 
+      this.beans = beans;
+      this.state = { editMode: false, select:   0, beanStates: [] };
+      for(var i = 0; i < beans.length; i++) {
+        this.state.beanStates[i] =  this.__createBeanState(this.beanInfo, beans[i]);
+      }
+      if(refresh) this.render();
+    },
+
+    add: function(bean, refresh) {
+      this.beans.push(bean);
+      var beanIdx = this.beans.length - 1;
+      this.state.beanStates.push(this.__createBeanState(this.beanInfo, bean));
+      this.state.select = beanIdx;
+      if(refresh) this.render();
     },
 
     onViewMode: function() {
@@ -150,9 +164,6 @@ define([
 
       var uiToggleMode = $(this.el).find(".ui-beans").find(".toggle-mode");
       widget.toggle(uiToggleMode);
-
-      //var actionsBlk = $(this.el).find(".actions");
-      //widget.actions(actionsBlk, this.config.actions);
     },
     
     events: {
@@ -201,14 +212,7 @@ define([
     },
 
     onAdd: function(evt) {
-      if(this.createDefaultBean) {
-        var bean = this.createDefaultBean();
-        this.beans.push(bean);
-        var beanIdx = this.beans.length - 1;
-        this.state.beanStates.push(this.__createBeanState(this.beanInfo, bean));
-        this.state.select = beanIdx;
-        this.render();
-      }
+      if(this.createDefaultBean) this.add(this.createDefaultBean(), true);
     },
 
     __getBean: function(fv) { 

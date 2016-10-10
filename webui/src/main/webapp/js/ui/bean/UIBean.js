@@ -31,7 +31,7 @@ define([
   var UIBean = UIBeanEditor.extend({
     initialize: function (options) {
       var defaultConfig = {} ;
-      if(!this.config) $.extend(defaultConfig, this.config);
+      if(this.config) $.extend(true, defaultConfig, this.config);
       this.config = defaultConfig;
 
       $.extend(this.events, this.UIBeanEditorEvents);
@@ -42,10 +42,11 @@ define([
       this.beanInfo = bInfo;
       this.bean     = bean;
       this.state    = beanState;
+      return this;
     },
 
     configure: function(newConfig) { 
-      $.extend(this.config, newConfig); 
+      $.extend(true, this.config, newConfig); 
       return this;
     },
     
@@ -54,6 +55,11 @@ define([
       this.bean     = bean;
       this.state    = this.__createBeanState(bInfo, bean);
       this.state.editeMode = false;
+      return this;
+    },
+
+    setEditMode: function(bool) {
+      this.state.editMode = bool;
       return this;
     },
 
@@ -80,7 +86,11 @@ define([
     render: function() {
       var params = { config: this.config, beanInfo: this.beanInfo, bean: this.bean };
       $(this.el).html(this._template(params));
-      this.onViewMode();
+      if(this.state.editMode) {
+        this.onEditMode();
+      } else {
+        this.onViewMode();
+      }
 
       var actionsBlk = $(this.el).find(".actions");
       widget.actions(actionsBlk, this.config.actions);

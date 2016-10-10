@@ -7,12 +7,23 @@ define([
     initialize: function(options) {
     },
 
+    uistate: {
+      field: {
+        control: { 
+          active: "toggle", 
+          tabSelect: function(name) { return this.active == name ? "active" : ""; },
+          tabContent: function(name) { return this.active == name ? "display" : "none"; }
+        }
+      }
+    },
+
     _template: _.template(Template),
 
     render: function() {
       var params = { 
         config:   this.uiTable.config, 
         beanInfo: this.uiTable.beanInfo,
+        uistate:  this.uistate,
         plugins:  this.plugins,
         widget:   widget
       };
@@ -26,13 +37,13 @@ define([
       'change select.onAddTableGroupByField': 'onAddTableGroupByField',
       'click  .onRmTableGroupByField':        'onRmTableGroupByField',
 
-      'keyup  .onFilter': 'onFilter',
-      'change .onFilter': 'onFilter',
-      'blur   .onFilter': 'onFilter',
-
       "click  .onSelectFieldTabControl":  "onSelectFieldTabControl",
       'change input.onFieldToggle':       'onFieldToggle',
       'change input.onFieldWrap':         'onFieldWrap',
+
+
+      "click  .onFieldOrderUp":  "onFieldOrderUp",
+      "click  .onFieldOrderDown":  "onFieldOrderDown",
     },
 
     onSelectTableView: function(evt) {
@@ -61,13 +72,6 @@ define([
       this.render();
     },
 
-    onFilter: function(evt) {
-      var filterBlk = $(evt.target).closest(".filter");
-      var field = filterBlk.find("select.input").val();
-      var exp   = filterBlk.find("input.input").val();
-      this.uiTable.filter(field, exp, true);
-    },
-
     onFieldToggle: function(evt) {
       var fieldName = $(evt.target).attr("name") ;
       var checked = $(evt.target).is(":checked") ;
@@ -75,19 +79,39 @@ define([
     },
 
     onSelectFieldTabControl: function(evt) {
-      var uiTabContents = $(evt.target).closest(".ui-card").find(".ui-tab-contents");
-
-      var uiActiveTab   = $(evt.target).closest(".ui-tabs").find("li.active");
-      uiActiveTab.removeClass("active");
-      uiTabContents.children("[tab=" + uiActiveTab.attr("tab") + "]").css("display", "none");
-
-      var uiTab = $(evt.target).closest("li");
-      uiTab.addClass("active");
-      uiTabContents.children("[tab=" + uiTab.attr("tab") + "]").css("display", "block");
+      var tab = $(evt.target).closest("li").attr("tab");
+      this.uistate.field.control.active = tab;
+      this.render();
     },
 
-    onFieldWrap: function(evt) {
-      console.log("on field wrap");
+    onFieldOrderUp: function(evt) {
+      var field = $(evt.target).attr("field");
+      var fieldNames = this.uiTable.beanInfo.fieldNames;
+      for(var i = 0; i < fieldNames.length; i++) {
+        if(field == fieldNames[i]) {
+          if(i == 0) return ;
+          fieldNames[i] = fieldNames[i - 1];
+          fieldNames[i - 1] = field;
+          break;
+        }
+      }
+      this.render();
+      this.uiTable.__refreshTable();
+    },
+
+    onFieldOrderDown: function(evt) {
+      var field = $(evt.target).attr("field");
+      var fieldNames = this.uiTable.beanInfo.fieldNames;
+      for(var i = 0; i < fieldNames.length; i++) {
+        if(field == fieldNames[i]) {
+          if(i == fieldNames.length - 1) return ;
+          fieldNames[i] = fieldNames[i + 1];
+          fieldNames[i + 1] = field;
+          break;
+        }
+      }
+      this.render();
+      this.uiTable.__refreshTable();
     }
   });
 

@@ -20,9 +20,9 @@ define([
 
       this.state = {
         views: {
-          Search: {  uiComponent: new UISearchHit({esQueryContext: this.esQueryCtx}) },
+          Search:    {  uiComponent: new UISearchHit({esQueryContext: this.esQueryCtx}) },
           Analytics: { uiComponent: new UIAnalytics({esQueryContext: this.esQueryCtx}) },
-          Admin: { uiComponent: new UIAdmin() }
+          Admin:     { uiComponent: new UIAdmin() }
         },
         selectView: 'Search',
         visibleSearchInput: true

@@ -6,12 +6,12 @@ import net.datatp.util.URLInfo;
 import net.datatp.xhtml.extract.ExtractEntity;
 
 public class URLAnalysis {
-  private String   pageTypeCategory = "uncategorized";
+  private String   pageType = "uncategorized";
   private URLInfo  urlInfo;
   private String[] extractEntityInfo;
   
-  public String getPageTypeCategory() { return pageTypeCategory; }
-  public void setPageTypeCategory(String pageTypeCategory) { this.pageTypeCategory = pageTypeCategory; }
+  public String getPageType() { return pageType; }
+  public void setPageType(String pageType) { this.pageType = pageType; }
   
   public URLInfo getUrlInfo() { return urlInfo; }
   public void setUrlInfo(URLInfo urlInfo) { this.urlInfo = urlInfo; }

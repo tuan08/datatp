@@ -3,8 +3,9 @@ define([
   'underscore', 
   'backbone',
   'ui/bean/UITable',
+  'ui/bean/UIBean',
   'plugins/uidemo/bean/data'
-], function($, _, Backbone, UITable, data) {
+], function($, _, Backbone, UITable, UIBean, data) {
 
   var UIHelloPluginCtrl = Backbone.View.extend({
     initialize: function (options) {
@@ -48,11 +49,31 @@ define([
       control: { header: "Table Control Demo"},
       table: { header: "Demo Table"},
       actions: {
-        edit: {
-          label: "Edit",
-          onClick: function(uiTable, beanState) {
-            console.log("on click");
-            console.printJSON(beanState);
+        toolbar: {
+          refresh: {
+            label: "Refresh",
+            onClick: function(uiTable) { 
+              uiTable.setBeans(data.createBeans("Table Bean At" + new Date(), 100), true);
+            }
+          }
+        },
+
+        bean: {
+          edit: {
+            label: "Edit",
+            onClick: function(uiTable, beanState) {
+              var bean = beanState.bean;
+              var uiBean = new UIBean();
+              uiBean.set(uiTable.beanInfo, bean);
+              uiTable.addWorkspaceTabPluginUI(bean.input, bean.input, uiBean, true, true);
+              uiTable.refreshWS();
+            }
+          },
+          remove: {
+            label: "Del",
+            onClick: function(uiTable, beanState) {
+              uiTable.removeBeanState(beanState, true);
+            }
           }
         }
       }

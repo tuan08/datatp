@@ -6,7 +6,7 @@ define([
 ], function($, _, Backbone, UIUtil) {
   var UIBreadcumbsTmpl = `
     <div class="ui-breadcumbs">
-      <div class="breadcumbs" style="background: #e5ecf9; padding: 3px 0px"></div>
+      <div class="breadcumbs"></div>
       <div class="view" style="padding-top: 10px"></div>
     </div>
   `;
@@ -68,7 +68,7 @@ define([
       breadcumbs.find("a").removeClass('ui-disabled');
       breadcumbs.append(this._buttonTmpl({label: label}));
 
-      this.$('.view').unbind() ;
+      this.$('.view').first().unbind() ;
       view.UIParent = this ;
       view.setElement(this.$('.view')).render();
     },
@@ -76,7 +76,8 @@ define([
     back: function() {
       if(this.views.length <= 1) return ;
       var view = this.views[this.views.length - 2];
-      this._removeToLabel(view.label) ;
+      var breadcumbs = $(this.el).children('.ui-breadcumbs').first().children(".breadcumbs") ;
+      this._removeToLabel(breadcumbs, view.label) ;
     },
 
     getAncestorOfType: function(type) {
@@ -84,22 +85,24 @@ define([
     },
     
     events: {
-      'click a.onSelectView': 'onSelectView'
+      'click .breadcumbs > a.onSelectView': 'onSelectView'
     },
     
     onSelectView: function(evt) {
+      evt.stopPropagation();
       var label = $.trim($(evt.target).text()) ;
-      this._removeToLabel(label);
+      var breadcumbs = $(evt.target).closest('.breadcumbs') ;
+      this._removeToLabel(breadcumbs,label);
     },
 
 
-    _removeToLabel: function(label) {
-      var breadcumbs = this.$('.breadcumbs') ;
+    _removeToLabel: function(breadcumbs, label) {
       for(var i = this.views.length - 1; i >= 0; i--) {
         if(this.views[i].label == label) {
-          this.$('.view').unbind() ;
+          var uiView = breadcumbs.closest(".ui-breadcumbs").children(".view");
+          uiView.unbind() ;
           breadcumbs.find("a:last-child").addClass("ui-disabled");
-          this.views[i].setElement(this.$('.view')).render();
+          this.views[i].setElement(uiView).render();
           return ;
         } else {
           var view = this.views.pop() ;

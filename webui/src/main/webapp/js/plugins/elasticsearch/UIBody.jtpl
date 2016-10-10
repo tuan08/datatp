@@ -12,7 +12,7 @@
   <%if(!state.visibleSearchInput) return;%>
   <div style="background: #ddd; padding: 3px" class="search-input">
     <a class="ui-action ui-state-default ui-corner-all onSearch">
-      <span class="box-display-ib ui-icon ui-icon-plusthick" style="vertical-align: middle"/>
+      <span class="box-display-ib ui-icon ui-icon-gear" style="vertical-align: middle"/>
     </a>
     <input name="search" value="<%=queryString%>" class="onSearchInputEnter"
            placeholder="Search Query" style="width: calc(100% - 48px); height: 22px; border: 1px solid #ddd" />

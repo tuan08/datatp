@@ -13,8 +13,8 @@ define([
 
       <%var style = config.style ? config.style : "ui-tabs"; %>
       <ul class="<%=style%>">
-        <%for(var i = 0; i < tabs.length; i++) { %>
-        <%  var tab  = tabs[i]; %>
+        <%for(var name in tabs) { %>
+        <%  var tab  = tabs[name]; %>
         <%  var active = tab.name == state.tabConfig.name ? "active" : ""; %>
             <li class="<%=active%>" tab="<%=tab.name%>">
               <a class="onSelectTab"><%=tab.label%></a>
@@ -37,9 +37,10 @@ define([
       };
       if(this.config) $.extend(true, defaultConfig, this.config);
       this.config = defaultConfig;
-      this.tabs = [];
+      this.tabs = {};
       for(var i = 0; i < this.config.tabs.length; i++) {
-        this.tabs[i] = this.config.tabs[i];
+        var name = this.config.tabs[i].name;
+        this.tabs[name] = this.config.tabs[i];
       }
       if(this.onInit) this.onInit(options) ;
     },
@@ -63,7 +64,7 @@ define([
       var tabConfig = {
         name: name, label: label, uicomponent: uiComponent,  closable: closable
       };
-      this.tabs.push(tabConfig);
+      this.tabs[name] = tabConfig;
       if(active) {
         this.setSelectedTabUIComponent(tabConfig.name, tabConfig.uicomponent) ;
       }
@@ -72,8 +73,8 @@ define([
     _template: _.template(TEMPLATE),
     
     render: function() {
-      if(this.state == null && this.tabs.length > 0) {
-        var tabConfig = this.tabs[0] ;
+      if(this.state == null) {
+        var tabConfig = this.tabs[Object.keys(this.tabs)[0]];
         this.setSelectedTab(tabConfig.name);
       }
       var params = { tabs: this.tabs, state: this.state, config: this.config } ;
@@ -98,28 +99,12 @@ define([
 
     onCloseTab: function(evt) {
       var tabName = $(evt.target).closest("li").attr('tab') ;
-      var tabIdx = -1;
-      for(var i = 0; i < this.tabs.length; i++) {
-        var tab = this.tabs[i] ;
-        if(tabName == tab.name) {
-          tabIdx = i;
-          break;
-        }
-      }
-      if(tabIdx > -1) {
-        this.tabs.splice(tabIdx, 1);
-        this.state = null;
-      }
+      delete this.tabs[tabName];
+      this.state = null;
       this.render() ;
     },
     
-    _getTabConfig: function(name) {
-      for(var i = 0; i < this.tabs.length; i++) {
-        var tab = this.tabs[i] ;
-        if(name == tab.name) return tab ;
-      }
-      return null ;
-    }
+    _getTabConfig: function(name) { return this.tabs[name]; }
   });
   
   return UITabbedPane ;

@@ -11,7 +11,7 @@ public class SiteContext {
   
   private SiteConfig          siteConfig;
   private WebPageTypeAnalyzer webPageTypeAnalyzer;
-  private SiteStatistic       siteStatistic = new SiteStatistic();
+  private SiteStatistic       siteStatistic ;
 
   private SiteExtractor       siteExtractor;
 

@@ -34,7 +34,7 @@ public class BasicFetcher implements Fetcher {
                       SiteContextManager      siteContextManager) throws UnknownHostException {
     this.crawlerConfig = config;
     this.urlFetchQueue = urlFetchQueue;
-    urlFetchers   = new URLFetcher[crawlerConfig.getNumOfFetcher()];
+    urlFetchers   = new URLFetcher[ crawlerConfig.getNumOfFetcher() ];
     for(int i = 0; i < urlFetchers.length; i++) {
       String name = "url-fetcher-" + (i);
       urlFetchers[i] = new BasicURLFetcher(name, siteContextManager, siteSessionManager, urlFetchQueue, urlCommitQueue, xDocQueue, dataProcessor);

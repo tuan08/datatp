@@ -22,6 +22,11 @@ define([
         }
       }
     },
+
+    onFieldChange: function(bean, fieldName, oldValue, newValue) {
+      console.log('field change: field = ' + fieldName + ", old value = " + oldValue + ", new value = " + newValue);
+      console.printJSON(bean);
+    }
   });
 
   var UIArrayBeanDemo = UIArrayBean.extend({
@@ -30,7 +35,7 @@ define([
     config: {
       header: "UIArrayBean Demo",
       width:  "600px",
-      label: function(bean, idx) { return "bean " + idx},
+      label: function(bean, idx) { return "bean[" + idx + "]"},
       actions: {
         save: { 
           label: "Save",

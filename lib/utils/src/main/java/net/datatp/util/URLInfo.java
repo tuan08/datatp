@@ -110,6 +110,8 @@ public class URLInfo {
     return ext;
   }
   
+  public int getParamCount() { return params == null ? 0 : params.size() ; }
+  
   public TreeMap<String, String[]> getParams() { return this.params ; }
   
   public String getNormalizeHostName() {

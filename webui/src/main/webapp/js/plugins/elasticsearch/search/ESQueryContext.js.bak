@@ -1,8 +1,7 @@
 define([
   'jquery',
   'util/util',
-  'plugins/elasticsearch/search/model'
-], function($, util, model) {
+], function($, util) {
   var postDslQuery = function(restPath, dslQuery) {
     var returnData = null ;
     $.ajax({ 
@@ -33,6 +32,37 @@ define([
       success: function(data) { returnData = data ; }
     });
     return returnData ;
+  };
+  
+  var IndexFieldsMapping = function() {
+    this.fieldsMapping = {};
+    
+    this.getFieldsMapping = function() { return this.fieldsMapping; };
+    
+    this.addFieldsMapping = function(indexConfig) {
+      for(var key in indexConfig) {
+        var mappings = indexConfig[key].mappings;
+        for(var mappingKey in mappings) {
+          this._extractFlatFieldMapping("", mappings[mappingKey].properties);
+        }
+      }
+    };
+    
+    this.getFieldMapping = function(flatKey) { 
+      return this.fieldsMapping[flatKey] ;
+    };
+    
+    this._extractFlatFieldMapping = function(keyPrefix, properties) {
+      for(var key in properties) {
+        var field = properties[key];
+        if(field.properties) {
+          this._extractFlatFieldMapping(keyPrefix + key + ".", field.properties)
+        } else {
+          var fullKey = keyPrefix + key;
+          this.fieldsMapping[fullKey] = field;
+        }
+      }
+    };
   };
   
   var ESQueryResult = function() {
@@ -87,13 +117,13 @@ define([
   var ESQueryContext = function(restURL, indices, query) {
     this.restURL   = restURL;
     this.indices   = indices;
+    this.indexFieldsMapping = new IndexFieldsMapping();
     
-    var indexConfigs = [];
     for(var i = 0 ; i < indices.length; i++) {
-      var indexConfig = getDslQuery(restURL + "/" + indices[i], {});
-      indexConfigs.push(indexConfig);
+      this.indexFieldsMapping.addFieldsMapping(getDslQuery(restURL + "/" + indices[i], {}));
     }
-    this.searchHitModel = model.search.hit.createModel(indexConfigs);
+    
+    console.printJSON(this.indexFieldsMapping);
     
     this.query     = query;
     this.searchURL = restURL + "/" + indices.join() + "/_search?pretty=true";

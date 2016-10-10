@@ -88,7 +88,7 @@ fieldset {padding:0 1.4em 1.4em 1.4em;margin:0 0 1.5em 0;border:1px solid #ccc;}
 legend {font-weight:bold;font-size:1.2em;margin-top:-0.2em;margin-bottom:1em;}
 fieldset, #IE8#HACK {padding-top:1.4em;}
 legend, #IE8#HACK {margin-top:0;margin-bottom:0;}
-input[type=text], input[type=password], input.text, input.title, textarea {background-color:#fff;border:1px solid #bbb;}
+input[type=text], input[type=password], input.text, input.title, textarea {background-color:#fff;}
 input[type=text]:focus, input[type=password]:focus, input.text:focus, input.title:focus, textarea:focus {border-color:#666;}
 select {background-color:#fff;border-width:1px;border-style:solid;}
 input[type=text], input[type=password], input.text, input.title, textarea, select {margin: 3px 0;}
@@ -137,6 +137,11 @@ input, textarea, select, div, table {
   -webkit-box-sizing: border-box;
 }
 
+input, select {
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
 .text-align-right{ text-align: right; }
 
 .table-display { display: table; width: 100% ; height: 100%; }
@@ -150,7 +155,7 @@ input, textarea, select, div, table {
 .debug-border { border: 1px dotted red; }
 .debug-border > .debug-border { border: 1px dotted red; margin: 2px; }
 
-.debug-background { background: #FCC; }
+.debug-background { background: #FCC; margin: 1px 0px; }
 
 .box-width-full { width: 100%; }
 .box-height-full { height: 100%; }
@@ -238,7 +243,7 @@ input, textarea, select, div, table {
 
 .ui-bean { padding: 5px; }
 
-.ui-bean .field { border-bottom: 1px solid #ddd; }
+.ui-bean .field { border-bottom: 1px dotted #ddd; }
 .ui-bean .field-label { display: inline-block; width: 120px; vertical-align: top; font-weight: bold; }
 .ui-bean .field-value { display: inline-block; width: calc(100% - 125px); }
 .ui-bean .field-value a.ui-icon { display: inline-block; vertical-align: middle; cursor: pointer; }
@@ -264,8 +269,10 @@ input, textarea, select, div, table {
 /** ui-card */ 
 .ui-card { box-shadow: 2px 2px 2px #888; padding: 5px; margin-top: 10px; border-top: 1px solid #ddd; border-left: 1px solid #ddd; }
 .ui-card h6 { border-bottom: 1px solid #ddd; margin-bottom: 5px;}
-.ui-card label { display: inline-block; width: 75px; vertical-align: top; padding-top: 0px;}
-.ui-card .input { display: inline-block; width: calc(100% - 80px); }
+.ui-card .content { padding: 5px 0px; }
+.ui-card label { display: inline-block; width: 75px; vertical-align: middle; line-height: 1.5em; }
+.ui-card .input { display: inline-block; width: calc(100% - 80px); line-height: 1.5em; vertical-align: middle; }
+.ui-card .checkbox { display: inline-block; line-height: 1.5em; vertical-align: middle; }
 
 /** ui-tabs */ 
 .ui-tab-container { padding: 2px; height:  100%; }
@@ -384,15 +391,40 @@ input, textarea, select, div, table {
 /** end ui-tabs */ 
 
 /** ui-breadcumbs */ 
-.ui-breadcumbs {
-  height: 100%; border: 
-}
+.ui-breadcumbs { height: 100%; }
 
 .ui-breadcumbs .breadcumbs {
-  background: #e5ecf9; padding: 3px 0px
+  background: #f1f1f1; padding: 3px 0px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
 }
 
 .ui-breadcumbs .view { padding-top: 10px; height: calc(100% - 25px); border: 1px solid #ddd; border-top: none; }
+
+/** ui-toolbar-16px */
+.ui-toolbar-16px {
+  margin: 0px; padding: 0px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.ui-toolbar-16px li {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 2px;
+}
+
+.ui-toolbar-16px li span,
+.ui-toolbar-16px li a {
+  display: inline-block;
+  vertical-align: bottom;
+  line-height: 1em;
+  padding: 0px;
+}
+
+.ui-toolbar-16px li a.ui-action { 
+  padding: 0px 0px 1px 0px;
+}
 
 /** ui-popup */
 .ui-modal {

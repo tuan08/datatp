@@ -3,22 +3,21 @@ define([
   'underscore', 
   'backbone',
   'ui/bean/UITable',
+  'plugins/crawler/site/UIWebPageAnalyzer',
+  'plugins/crawler/model',
   'plugins/crawler/Rest',
-  'plugins/uidemo/bean/data'
-], function($, _, Backbone, UITable, Rest, data) {
+], function($, _, Backbone, UITable, UIWebPageAnalyzer, model, Rest) {
 
-  var UIHelloPluginCtrl = Backbone.View.extend({
+  var UISiteAnalyzerCtrl = Backbone.View.extend({
     initialize: function (options) {
     },
 
     _template: _.template(`
       <div class="ui-card">
-        <h6>Hello Table Plugin Control<h6>
-        <div>
-          <a class="ui-action onSetPageSize50">Set Page Size To 50</a>
-        </div>
-        <div>
-          <a class="ui-action onSetPageSize100">Set Page Size To 100</a>
+        <h6>Views</h6>
+        <div class="content">
+          <div><a class="ui-action onGroupByPageType">Group By Page Type</a></div>
+          <div><a class="ui-action onGroupByDirectory">Group By Directory</a></div>
         </div>
       </div>
     `),
@@ -29,39 +28,82 @@ define([
     },
 
     events: {
-      'click a.onSetPageSize50': 'onSetPageSize50',
-      'click a.onSetPageSize100': 'onSetPageSize100'
+      'click .onGroupByPageType': 'onGroupByPageType',
+      'click .onGroupByDirectory': 'onGroupByDirectory',
     },
 
-    onSetPageSize50: function(evt) {
-      this.uiTable.updateDisplayRow(50);
+    onGroupByPageType: function(evt) {
+      var groupByFields = ["urlInfo.host", "pageType"];
+      this.uiTable.setTableGroupByFields(groupByFields, false);
+      this.uiTable.setTableView('groupby', true);
     },
 
-    onSetPageSize100: function(evt) {
-      this.uiTable.updateDisplayRow(100);
-    }
+    onGroupByDirectory: function(evt) {
+      var groupByFields = ["urlInfo.host", "urlInfo.directory"];
+      this.uiTable.setTableGroupByFields(groupByFields, false);
+      this.uiTable.setTableView('groupby', true);
+    },
   });
 
-  var UITableDemo = UITable.extend({
+  var UISiteAnalyzer = UITable.extend({
     label: 'Site Structure Analyzer',
 
     config: {
-      control: { header: "Table Control Demo"},
-      table: { header: "Demo Table"}
+      control: { header: "Site Analyzer Control"},
+      table: { header: "Site URL Structure And Data"},
+      actions: {
+        toolbar: {
+          reanalyze: {
+            label: "Reanalyze",
+            onClick: function(uiTable) { uiTable.onReanalyze(); }
+          },
+          refresh: {
+            label: "Refresh",
+            onClick: function(uiTable) { uiTable.onRefresh(); }
+          }
+        },
+
+        bean: {
+          more: {
+            label: "More",
+            onClick: function(uiTable, beanState) {
+              uiTable.onAnalyzeURL(beanState.bean);
+            }
+          }
+        }
+      }
     },
     
-    onInit: function(options) {
+
+    configure: function(siteConfig) {
+      this.siteConfig = siteConfig;
+      var urlSiteStructure = Rest.site.getAnalyzedURLSiteStructure(siteConfig, 250, false);
       this.addDefaultControlPluginUI();
-      this.addControlPluginUI("Hello", new UIHelloPluginCtrl());
-      this.set(data.BeanInfo, data.createBeans("Table Bean", 100));
+      this.addControlPluginUI("Control", new UISiteAnalyzerCtrl());
+      this.set(model.site.analysis.URLAnalysis, urlSiteStructure);
+      return this;
+    },
+
+    onRefresh: function() {
+      var urlSiteStructure = Rest.site.getAnalyzedURLSiteStructure(this.siteConfig, 250, false);
+      this.setBeans(urlSiteStructure, true);
+    },
+
+    onReanalyze: function() {
+      var urlSiteStructure = Rest.site.reanalyseURLSiteStructure(this.siteConfig, 250);
+      this.setBeans(urlSiteStructure, true);
     },
 
 
-    configure: function(siteConfig) {
-      var urlSiteStructure = Rest.site.getAnalyzedURLSiteStructure(siteConfig, 250, false);
-      return this;
-    }
+    onAnalyzeURL: function(urlAnalysis) {
+      var uiBreadcumbs = this.getAncestorOfType("UISiteConfigBreadcumbs") ;
+      var options = {
+        siteConfig: this.siteConfig,
+        urlAnalysis: urlAnalysis
+      };
+      uiBreadcumbs.push(new UIWebPageAnalyzer(options));
+    },
   }) ;
 
-  return  UITableDemo ;
+  return  UISiteAnalyzer ;
 });

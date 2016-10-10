@@ -2,33 +2,37 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'ui/UIContent',
-  'ui/UIBorderLayout',
-  'plugins/elasticsearch/search/hit/UISearchHitControl',
-  'plugins/elasticsearch/search/hit/UISearchHitResult',
-], function($, _, Backbone, UIContent, UIBorderLayout, UISearchHitControl, UISearchHitResult) {
-  var UISearchHit = UIBorderLayout.extend({
-    label: 'Search Hits',
+  'ui/bean/UITable',
+  'plugins/uidemo/bean/data'
+], function($, _, Backbone, UITable, data) {
 
+  var UISearchHit = UITable.extend({
+    label: "Search Hit", 
+
+    config: {
+      control: { header: "Search Hit"},
+      table: { 
+        header: "Search Hit Result",
+        page: { size: 25 }
+      },
+      actions: {
+      }
+    },
+    
     onInit: function(options) {
-      this.uiSearchHitControl = new UISearchHitControl({ uiSearchHit: this });
-      this.uiSearchHitResult = new UISearchHitResult({ uiSearchHit: this});
+      var esQueryCtx = options.esQueryContext ;
 
-      var westConfig = { width: "250px"};
-      this.setUI('west', this.uiSearchHitControl, westConfig);
-
-      var centerConfig = {};
-      this.setUI('center', this.uiSearchHitResult, centerConfig);
-
-      this.onSearch(options.esQueryContext);
+      this.addDefaultControlPluginUI();
+      this.set(esQueryCtx.searchHitModel, []);
+      this.setTableColumnsVisible(this.getTableColumns(), false, false);
+      this.setTableColumnsVisible(["_id"], true, false);
     },
 
     onSearch: function(esQueryCtx) {
-      var result = esQueryCtx.getQueryResult();
-      this.uiSearchHitControl.onResult(result);
-      this.uiSearchHitResult.onResult(result);
+      var queryResult = esQueryCtx.getQueryResult();
+      this.setBeans(queryResult.hits, true);
     }
-  });
+  }) ;
 
   return UISearchHit ;
 });

@@ -28,6 +28,11 @@ define([
       if(!this.config) this.config = {};
     },
 
+    conf: function(config) {
+      $.extend(true, this.config, config);
+      return this;
+    },
+
     setBean: function(bean) { this.bean = bean; },
 
     _template: _.template(TEMPLATE),

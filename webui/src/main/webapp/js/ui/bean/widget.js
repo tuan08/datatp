@@ -63,8 +63,8 @@ define([
   `);
 
   var toggleModeTmpl = _.template( `
-    <span class="ui-state-default ui-corner-all">
-      <a class="box-display-ib ui-icon ui-icon-pencil onToggleMode" style="cursor: pointer"/>
+    <span>
+      <a class="ui-icon ui-icon-action ui-icon-pencil onToggleMode"/>
     </span>
   `);
 

@@ -15,11 +15,11 @@ define([
         <%for(var key in state.nav.menus) {%>
         <%  var menu = state.nav.menus[key]; %>
           <div class="ui-card">
-            <h6 class="box-bottom-border" style="margin-bottom: 10px">
+            <h6 class="box-bottom-border">
               <a class="ui-action"> - </a>
               <%=menu.label%>
             </h6>
-            <div>
+            <div class="content">
               <%for(var i = 0; i < menu.items.length; i++) {%>
               <%  var item = menu.items[i]; %>
                   <div><a class="ui-action onSelectMenuItem" menu="<%=menu.name%>" itemIdx="<%=i%>"><%=item.label%></a></div>

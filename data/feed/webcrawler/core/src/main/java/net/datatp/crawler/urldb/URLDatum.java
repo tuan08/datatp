@@ -102,11 +102,8 @@ public class URLDatum implements  Externalizable {
   public short getLastResponseCode() { return lastResponseCode; }
   public void  setLastResponseCode(short code) {
     this.lastResponseCode = code;
-    if(code != 200) {
-      errorCount++ ;
-    } else {
-      errorCount  = 0 ;
-    }
+    if(code != 200) errorCount++ ;
+    else            errorCount  = 0 ;
   }
 
   public byte getLastErrorCode() { return this.lastErroCode ; }
@@ -127,6 +124,13 @@ public class URLDatum implements  Externalizable {
   public int getLastDownloadDataSize() { return this.lastDownloadDataSize ; }
   public void setLastDownloadDataSize(int value) { this.lastDownloadDataSize = value ; }
 
+  public String pageType() {
+    if(pageType == PAGE_TYPE_IGNORE) return "ignore";
+    if(pageType == PAGE_TYPE_LIST)   return "list";
+    if(pageType == PAGE_TYPE_DETAIL) return "detail";
+    return "uncategorized";
+  }
+  
   public byte getPageType() { return this.pageType ; }
   public void setPageType(byte value) { this.pageType = value ; }
 

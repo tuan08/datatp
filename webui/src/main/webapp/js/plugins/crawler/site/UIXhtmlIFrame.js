@@ -16,12 +16,15 @@ define([
 
     _template: _.template(`
       <div style="height: 100%">
-        <iframe id='XhtmlContentIFrame' width='100%' height='100%' src='data:text/html;charset=utf-8,<html></html>'></iframe>
+        <div class="ui-tabs" style="margin: 2px 0px">
+          <strong>URL:</strong> <%=url%>
+        </div>
+        <iframe id='XhtmlContentIFrame' style="width: 100%; height: calc(100% - 25px);" src='data:text/html;charset=utf-8,<html></html>'></iframe>
       </div>
      `),
 
     render: function() {
-      var params = { } ;
+      var params = { url: this.urlData.urlInfo.url } ;
       $(this.el).html(this._template(params));
       this.addIFrameEventListener();
     },

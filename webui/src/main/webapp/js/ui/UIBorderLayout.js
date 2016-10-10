@@ -29,6 +29,7 @@ define([
 
     toggleUISplit: function(pos) {
       var config = this.layout[pos];
+      if(!config) return;
       var split = this.$('.' + pos + '-split').first();
       var display = split.css('display');
       if(display == 'none') {
@@ -64,10 +65,29 @@ define([
 
     refresh: function(position) {
       var config = this.layout[position];
-      var panel = this.$('.' + position + '-panel').first();
+      //var panel = this.$('.' + position + '-panel').first();
+      var panel = this.__findPanel(position);
       panel.empty();
       panel.unbind();
       if(config) config.uiComponent.setElement(panel).render();
+    },
+
+    __findSplit: function(position) {
+      var uiSplit = $(this.el).children(".ui-split").first();
+      if(position == 'north' || position == 'shouth') return uiSplit.children('.' + position + '-split');
+      var middleSplit = uiSplit.children('.middle-split').children(".table-display");
+      if(position == 'center') return middleSplit.children("." + position + "-split").first();
+      else return middleSplit.children('.' + position + '-split');
+    },
+
+    __findPanel: function(position) {
+      var uiSplit = this.__findSplit(position);
+      if(position == 'center') return uiSplit;
+      if(position == 'north' || position == 'shouth') {
+        return uiSplit.children(".table-cell-full-w").children("." + position + "-panel").first();
+      } else {
+        return uiSplit.children("." + position + "-panel").first();
+      }
     },
 
 

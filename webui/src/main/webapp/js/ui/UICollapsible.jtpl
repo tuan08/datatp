@@ -1,8 +1,8 @@
 <%function renderHeader(config, state, title) {%>
-  <div style="height: 25px; border-bottom: 1px solid lightgray">
-    <h3 style="float: left; margin: 3px 0px"><%=title%></h3>
+  <div class="box-layout-left-right box-border-bottom">
+    <h4 style="margin-bottom: 0px"><%=title%></h4>
     <%if(config.actions != null) { %>
-      <div style="float: right">
+      <div>
         <%config.actions.forEach(function(action) { %>
           <%var hidden = false; %>
           <%if(state.actions[action.action] != null) hidden = state.actions[action.action].hidden ; %>
@@ -11,27 +11,8 @@
           <%}%>
         <%})%>
       </div>
-      <div><span class="clearfix"/></div>
     <%}%>
   </div>
-<%}%>
-
-<%function renderFooter(config, state, title) {%>
-  <%if(config.actions != null) {%>
-    <div>
-      <hr/>
-      <div style="float: right">
-        <%config.actions.forEach(function(action) { %>
-          <%var hidden = false; %>
-          <%if(state.actions[action.action] != null) hidden = state.actions[action.action].hidden ;%>
-          <%if(!hidden) {%>
-            <a class="ui-action onAction" action='<%=action.action%>'><%=action.label %></a>
-          <%}%>
-        <%})%>
-      </div>
-      <div class="clearfix"><span/></div>
-    </div>
-  <%}%>
 <%}%>
 
 <div>
@@ -42,7 +23,9 @@
       <%var icon = comp.collapible.collapsed ? "plus" : "minus"; %>
       <%var display = comp.collapible.collapsed ? "none" : "block"; %>
       <h4 style="margin: 0px; padding: 0px">
-        <a class="onToggleCollapsibleSection ui-action" component="<%=idx%>"><span class="box-display-ib ui-icon ui-icon-<%=icon%>"></span></a>
+        <a class="onToggleCollapsibleSection ui-action  " component="<%=idx%>">
+          <span class="ui-icon ui-icon-action ui-icon-<%=icon%> box-valign-top"></span>
+        </a>
         <%=comp.label%>
       </h4>
       
@@ -50,5 +33,4 @@
     </div>
   <%})%>  
   
-  <%renderFooter(config, state, title) ;%>
 </div>

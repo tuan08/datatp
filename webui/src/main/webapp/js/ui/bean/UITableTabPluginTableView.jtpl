@@ -1,0 +1,48 @@
+<%function renderBeanStateRows() {%>
+  <%var beanStateInCurrPage = tableModel.currentPageItems();%>
+  <%var from = tableModel.getFrom();%>
+  <%for(var i = 0; i < beanStateInCurrPage.length; i++) {%>
+  <%  var beanState = beanStateInCurrPage[i]%>
+      <%var bean = beanState.bean; %>
+      <tr row=<%= i %>>
+        <td><%= (from + i +1) %></td>
+        <%for(var j = 0; j < beanInfo.fieldNames.length; j++) {%>
+          <%var fName = beanInfo.fieldNames[j]; %>
+          <%if(config.table.column[fName] && config.table.column[fName].hidden) continue;%>
+          <%value = util.reflect.getFieldValue(bean, fName); %>
+          <td><%=value%></td>
+        <%}%>
+        <%if(config.actions.bean) { %>
+          <td class="box-talign-center">
+            <%for(var name in config.actions.bean) {%>
+              <%var action = config.actions.bean[name];%>
+              <a class="ui-action onTableRowAction" action=<%=name%>><%= action.label %></a>
+            <%}%>
+          </td>
+        <%}%>
+      </tr>
+  <%}%>
+<%}%>
+
+<table>
+  <tr>
+    <th class="box-talign-center"></th>
+    <%for(var i = 0; i < beanInfo.fieldNames.length; i++) {%>
+      <%var fName = beanInfo.fieldNames[i]; %>
+      <%if(config.table.column[fName] && config.table.column[fName].hidden) continue;%>
+      <%var field = beanInfo.fields[fName];%>
+      <th>
+        <div class="box-layout-left-right box-width-full">
+          <span class="box-display-ib"><%= field.label %></span>
+          <a class="ui-icon ui-icon-action ui-icon-caret-2-n-s" style="vertical-align: top"/>
+        </div>
+      </th>
+    <%}%>
+    <%if(config.actions.bean) { %>
+      <th class="box-talign-center"> - </th>
+    <%}%>
+  </tr>
+
+  <%renderBeanStateRows();%>
+</table>
+<%=widget.page.iterator.render(tableModel)%>

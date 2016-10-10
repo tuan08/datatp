@@ -114,8 +114,11 @@ define([
 
       var validateResult = validator.validate(fieldInfo, value);
       if(validateResult.success) {
+        var oldValue = beanState.fields[fieldName].value ;
         beanState.fields[fieldName].value = value;
+        util.reflect.setFieldValue(bean, fieldName, value);
         widget.view.field(uiFieldValue, beanInfo, beanState);
+        if(this.onFieldChange) this.onFieldChange(bean, fieldName, oldValue, value);
       } else {
         uiFieldValue.find('.ui-text-error').remove();
         uiFieldValue.append("<span class='ui-text-error'>" +  validateResult.err + "<span>");
@@ -131,10 +134,14 @@ define([
         var inputVal = $(input).val();
         value.push(inputVal);
       });
+      var bean      = this.__getBean(uiFieldValue);
       var beanState = this.__getBeanState(uiFieldValue);
       var beanInfo = this.__getBeanInfo();
+      var oldValue = beanState.fields[fieldName].value ;
       beanState.fields[fieldName].value = value;
+      util.reflect.setFieldValue(bean, fieldName, value);
       widget.view.field(uiFieldValue, beanInfo, beanState);
+      if(this.onFieldChange) this.onFieldChange(bean, fieldName, oldValue, value);
     },
   });
 
