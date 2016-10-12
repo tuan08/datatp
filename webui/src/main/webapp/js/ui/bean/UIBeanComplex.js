@@ -3,8 +3,8 @@ define([
   "ui/UITemplateLayout",
 ], function($, _, Backbone, UITemplateLayout) {
 
-  var UIComplexBean = UITemplateLayout.extend({
+  var UIBeanComplex = UITemplateLayout.extend({
   });
 
-  return UIComplexBean ;
+  return UIBeanComplex ;
 });

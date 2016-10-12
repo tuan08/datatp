@@ -63,21 +63,36 @@ define([
     }
   };
 
-  function randomCategory() {
-    var num = Math.random();
-    if(num < 0.3) return "category-1";
-    if(num < 0.6) return "category-2";
-    return "category-3";
-  }
+  var BarChartModel = {
+    label: 'BarChart Model',
+    fields: {
+      "timestamp": { label: "Timestamp", datatype: "date", required: true },
+      "bar1": { label: "Bar 1", datatype: "integer", required: true },
+      "bar2": { label: "Bar 2", datatype: "integer", required: true },
+      "bar3": { label: "Bar 3", datatype: "integer", required: true },
+      "stream1": { label: "Stream 1", datatype: "number", required: true },
+      "stream2": { label: "Stream 2", datatype: "number", required: true },
+      "stream3": { label: "Stream 3", datatype: "number", required: true },
+    }
+  };
 
-  function randomType() {
-    var num = Math.random();
-    if(num < 0.3) return "type-2";
-    if(num < 0.6) return "type-3";
-    return "type-1";
-  }
+
 
   function createBean(seed) {
+    var randomCategory = function() {
+      var num = Math.random();
+      if(num < 0.3) return "category-1";
+      if(num < 0.6) return "category-2";
+      return "category-3";
+    };
+
+    var randomType =  function() {
+      var num = Math.random();
+      if(num < 0.3) return "type-2";
+      if(num < 0.6) return "type-3";
+      return "type-1";
+    };
+
     var bean = {
       category: randomCategory(),
       type:     randomType(),
@@ -124,6 +139,25 @@ define([
     return { name: name };
   }
 
+  function createBarChart(size) {
+    var currTimeMillis = new Date().getTime();
+    var beans = [] ;
+    for(var i = 0; i < size; i++) {
+      var bar3 = Math.floor((Math.random() * 100) + 1) ;
+      var BarChart = { 
+        timestamp: currTimeMillis + (i * 60 * 1000), 
+        bar1:    Math.floor((Math.random() * 100) + 1),
+        bar2:    Math.floor((Math.random() * 100) + 1),
+        bar3:    Math.floor((Math.random() * 100) + 1),
+        stream1: Math.floor((Math.random() * 300) + 1),
+        stream2: Math.floor((Math.random() * 400) + 1),
+        stream3: Math.floor((Math.random() * 500) + 1),
+      } ;
+      beans.push(BarChart);
+    }
+    return beans;
+  }
+
   var data = {
     BeanInfo:           BeanInfo,
     ContactBeanInfo:    ContactBeanInfo,
@@ -133,7 +167,14 @@ define([
     createBeans:        createBeans,
     createComplexBean:  createComplexBean,
     createComplexBeans: createComplexBeans,
-    createContactBean:  createContactBean
+    createContactBean:  createContactBean,
+
+    chart: {
+      BarChart: {
+        Model:  BarChartModel,
+        create: createBarChart
+      }
+    }
   }
 
   return data ;

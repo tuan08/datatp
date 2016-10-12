@@ -32,6 +32,40 @@ define([
       }
     },
 
+    deleteField: function(obj, prop) {
+      prop = prop.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
+      prop = prop.replace(/^\./, '');           // strip a leading dot
+      var fields = prop.split('.');
+      for (var i = 0; i < fields.length; i++) {
+        var field = fields[i];
+        if (field in obj) {
+          if(i == fields.length - 1) delete obj[field] 
+          else obj = obj[field];
+        } else {
+          throw new Error("cannot delete field " + field + ", obj is null");
+        }
+      }
+    },
+
+    addValueToArray: function(obj, prop, val) {
+      var array = reflect.getFieldValue(obj, prop);
+      if(array == null) {
+        array = [val],
+        reflect.setFieldValue(obj, prop, array);
+        return;
+      }
+      if(array.constructor !== Array) throw new Error(prop + " is not an array");
+      array.push(val);
+    },
+
+    removeValueFromArray: function(obj, prop, val) {
+      var array = reflect.getFieldValue(obj, prop);
+      if(array == null) return;
+      if(array.constructor !== Array) throw new Error(prop + " is not an array");
+      var idx = array.indexOf(val);
+      if(idx >= 0) array.splice(index, 1);
+    },
+
     flatten: function(data) {
       var result = {};
       function recurse (cur, prop) {

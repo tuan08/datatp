@@ -1,10 +1,8 @@
 define([
-  'jquery', 
-  'underscore', 
-  'backbone',
-  'ui/d3/nv/UINVBarChart'
-], function($, _, Backbone, UINVBarChart) {
-  var UINVBarChartDemo = UINVBarChart.extend({
+  'jquery', 'underscore', 'backbone',
+  'ui/d3/nv3d'
+], function($, _, Backbone, nv3d) {
+  var UINVBarChartDemo = nv3d.ui.UINVBarChart.extend({
     label: 'NV Bar Chart Demo',
 
     onInit: function(options) {

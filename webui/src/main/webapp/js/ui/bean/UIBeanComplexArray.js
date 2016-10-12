@@ -10,7 +10,7 @@ define([
         <%  if(config.label) label = config.label(i); %>
         <%  var active = i == state.select ? "active" : ""; %>
             <li class="<%=active%>" beanIdx="<%=i%>">
-              <a class="onSelectUIComplexBean"><%=label%></a>
+              <a class="onSelectUIBeanComplex"><%=label%></a>
               <a class="remove">x</a>
             </li>
         <%}%>
@@ -27,7 +27,7 @@ define([
   
   `;
 
-  var UIArrayComplexBean = Backbone.View.extend({
+  var UIBeanComplexArray = Backbone.View.extend({
     initialize: function (options) {
       if(!this.config) this.config = { };
       //clone config to isolate the modification
@@ -46,7 +46,7 @@ define([
     set: function(beans) { 
       this.uiComplexBeans = [];
       for(var i = 0; i < beans.length; i++) {
-        var uiComplexBean = new this.config.UIComplexBean();
+        var uiComplexBean = new this.config.UIBeanComplex();
         uiComplexBean.set(beans[i]);
         this.uiComplexBeans.push(uiComplexBean);
       }
@@ -69,7 +69,7 @@ define([
     },
     
     events: {
-      'click      .onSelectUIComplexBean' : 'onSelect',
+      'click      .onSelectUIBeanComplex' : 'onSelect',
       'click      .add' :       'onAdd',
       'click      .remove' :    'onRemove',
     },
@@ -92,7 +92,7 @@ define([
     onAdd: function(evt) {
       console.log('add');
       if(!this.createDefaultBean) return ;
-      var uiComplexBean = new this.config.UIComplexBean();
+      var uiComplexBean = new this.config.UIBeanComplex();
       var bean = this.createDefaultBean()
       uiComplexBean.set(bean);
       this.uiComplexBeans.push(uiComplexBean);
@@ -112,5 +112,5 @@ define([
     }
   });
 
-  return UIArrayComplexBean ;
+  return UIBeanComplexArray ;
 });

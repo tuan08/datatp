@@ -1,0 +1,189 @@
+<%function tableColumnControl() {%>
+  <div class="ui-card">
+    <h6>Field Control</h6>
+
+    <ul class="ui-tabs">
+      <li tab="toggle" class="<%=uistate.field.control.tabSelect('toggle')%>"><a class="onSelectFieldTabControl">Toggle</a></li>
+      <li tab="order" class="<%=uistate.field.control.tabSelect('order')%>"><a class="onSelectFieldTabControl">Order</a></li>
+    </ul>
+
+    <div class="ui-tab-contents">
+      <div class="ui-tab-content" style="display: <%=uistate.field.control.tabContent('toggle')%>">
+        <%for(var i = 0; i < beanInfo.fieldNames.length; i++) {%>
+          <%var fName = beanInfo.fieldNames[i];%>
+          <%var fieldConfig = beanInfo.fields[fName];%>
+          <%var checked = "checked='checked'";%>
+          <%if(config.table.column[fName] && config.table.column[fName].hidden) checked = "";%>
+          <div class="box-layout-left-right">
+            <label style="width: calc(100% - 25px)"><%= fieldConfig.label %></label>
+            <input class="checkbox onFieldToggle" name="<%=fName%>" type="checkbox" <%=checked%>/>
+          </div>
+        <%}%>
+      </div> <%//end ui-tab-content %>
+
+      <div class="ui-tab-content" style="display: <%=uistate.field.control.tabContent('order')%>">
+        <%for(var i = 0; i < beanInfo.fieldNames.length; i++) {%>
+          <%var fName = beanInfo.fieldNames[i];%>
+          <%var fieldConfig = beanInfo.fields[fName];%>
+          <%var checked = "checked='checked'";%>
+          <%if(config.table.column[fName] && config.table.column[fName].hidden) checked = "";%>
+          <div class="box-layout-left-right">
+            <label style="width: calc(100% - 50px)"><%= fieldConfig.label %></label>
+            <div>
+              <a class="ui-icon ui-icon-action ui-icon-caret-1-n onFieldOrderUp" field="<%=fName%>"/>
+              <a class="ui-icon ui-icon-action ui-icon-caret-1-s onFieldOrderDown" field="<%=fName%>"/>
+            </div>
+          </div>
+        <%}%>
+      </div> <%//end ui-tab-content %>
+
+    </div> <%//end ui-tab-contents %>
+  </div> <%//end ui-card %>
+<%}%>
+
+<%function groupByControl() {%>
+  <div class="ui-card">
+    <h6>Group By</h6>
+    <div>
+      <label>Group By</label>
+      <div class="input">
+        <%for(var fName in config.table.groupBy.fields) {%>
+          <div>
+            <a class="ui-icon ui-icon-action ui-icon-trash box-valign-top onRmTableGroupByField" field="<%= fName %>"/>
+            <%= fName %>
+          </div>
+        <%}%>
+        <select class="box-width-full onAddTableGroupByField">
+          <option value="">Select Field To Add</option>
+          <%= widget.select.options.render(beanInfo.fieldNames, "") %>
+        </select>
+      </div>
+    </div>
+  </div>
+<%}%>
+
+<%function tableControl() {%>
+  <div class="ui-card">
+    <h6>Style</h6>
+
+    <div>
+      <label>Border</label>
+      <select class="input onSelectTableBorder">
+        <%var labels  = ["Default", "No Border"];%>
+        <%var options = ["default", "noborder"];%>
+        <%=widget.select.options.renderWithLabel(labels, options, config.table.border.type)%>
+      </select>
+    </div>
+
+    <div>
+      <%var checked = config.table.actions.visible ? "checked='checked'" : "" ;%>
+      <label>Actions</label>
+      <input class="checkbox onTableActionToggle" name="tableAction" type="checkbox" <%=checked%>/>
+    </div>
+  </div>
+<%}%>
+
+<%function chartControl() {%>
+  <div class="ui-card">
+    <div>
+      <label>Chart Type</label>
+      <select class="input onSelectFirePropertyChange" object="config.table.chart" op="set" property="type">
+        <%var labels  = ["Bar Chart", "Line + Bar Chart"];%>
+        <%var options = ["BarChart", "LinePlusBarChart"];%>
+        <%=widget.select.options.renderWithLabel(labels, options, config.table.chart.type)%>
+      </select>
+    </div>
+  </div>
+<%}%>
+
+<%function xAxisControl(header, chartConfig, axisName) {%>
+  <%var xAxis = chartConfig[axisName]; %>
+  <div class="ui-card">
+    <h6><%= header %></h6>
+
+    <div>
+      <label>Label</label>
+      <input class="input onFieldToggle" name="property" value="<%=xAxis.label.title%>"/>
+    </div>
+
+    <div>
+      <label>Tick Format</label>
+      <input class="input onFieldToggle" name="property" value="<%=xAxis.datatype %>"/>
+    </div>
+
+    <div>
+      <label>Field</label>
+      <select class="input onSelectFirePropertyChange" object="config.table.chart" op="setXAxisMapField" property="<%=axisName%>.mapField">
+        <option value="">Select Field</option>
+        <%= widget.select.options.render(beanInfo.fieldNames, xAxis.mapField) %>
+      </select>
+    </div>
+  </div>
+<%}%>
+
+<%function yAxisControl(header, chartConfig, axisName) {%>
+  <%var yAxis = chartConfig[axisName]; %>
+  <div class="ui-card">
+    <h6><%= header %></h6>
+
+    <div>
+      <label>Label</label>
+      <input class="input onFieldToggle" name="property" value="<%= yAxis.label.title %>"/>
+    </div>
+
+    <div>
+      <label>Tick Format</label>
+      <input class="input onFieldToggle" name="property" value="<%= yAxis.datatype %>"/>
+    </div>
+
+    <div>
+      <label>Field</label>
+      <div class="input">
+        <%for(var fName in yAxis.mapFields) {%>
+          <div>
+            <a class="ui-icon ui-icon-action ui-icon-trash box-valign-top onFirePropertyChange" 
+               object="config.table.chart"  op="delete" property="<%=axisName%>.mapFields.<%= fName %>"/>
+            <%= fName %>
+          </div>
+        <%}%>
+        <select class="box-full-width onSelectFirePropertyChange" object="config.table.chart" op="addYAxisMapField" property="<%=axisName%>.mapFields">
+          <option>Select Field To Add</option>
+          <%= widget.select.options.render(beanInfo.fieldNames, "") %>
+        </select>
+      </div>
+    </div>
+  </div>
+<%}%>
+
+<div class="ui-table-control">
+  <ul class="ui-toolbar-16px">
+    <li><span class="ui-icon ui-icon-grip-dotted-vertical"/></li>
+    <li><a class="ui-action onSelectTableView" view="table">Table</a></li>
+    <li><span class="ui-icon ui-icon-grip-dotted-vertical"/></li>
+    <li><a class="ui-action onSelectTableView" view="groupby">Group By</a></li>
+    <li><span class="ui-icon ui-icon-grip-dotted-vertical"/></li>
+    <li><a class="ui-action onSelectTableView" view="chart">Chart</a></li>
+    <li><span class="ui-icon ui-icon-grip-dotted-vertical"/></li>
+  </ul>
+  <%
+    if(config.table.view == "groupby") {
+      groupByControl();
+      tableControl();
+      tableColumnControl();
+    } else if(config.table.view == "chart") {
+      chartControl();
+      var chart = config.table.chart;
+      if(chart.type == "BarChart") {
+        xAxisControl("X Axis", chart, "xAxis");
+        yAxisControl("Y Axis", chart, "yAxis");
+      } else if(chart.type == "LinePlusBarChart") {
+        xAxisControl("X1 Axis", chart, "xAxis");
+        yAxisControl("Y1 Axis", chart, "yAxis");
+        yAxisControl("Y2 Axis", chart, "yAxis");
+      }
+    } else {
+      tableControl();
+      tableColumnControl();
+    }
+  %>
+</div>

@@ -5,7 +5,7 @@ define([
   'ui/UITabbedPane',
   'ui/UIUpload',
   'ui/UIDialog',
-  'ui/bean/UITable',
+  'ui/table/UITable',
   'plugins/crawler/site/UISiteConfigBreadcumbs',
   'plugins/crawler/model',
   'plugins/crawler/Rest',

@@ -19,8 +19,9 @@ define([
       };
 
       var beanMenu = this.addMenu("bean", "Bean Demo", { collapse: false });
-      beanMenu.addItem("UIBeanDemo", { module: "bean/UIBeanDemo" }, onClick);
-      beanMenu.addItem("UITableDemo", { module: "bean/UITableDemo" }, onClick);
+      beanMenu.addItem("UIBean Demo", { module: "bean/UIBeanDemo" }, onClick);
+      beanMenu.addItem("UITable Demo", { module: "bean/UITableDemo" }, onClick);
+      beanMenu.addItem("UITable Bar Chart Demo", { module: "bean/UITableBarChartDemo" }, onClick);
 
       var menu1 = this.addMenu("core", "Core Demo", { collapse: false });
       menu1.addItem("UITableDemo", {}, onClick);
@@ -41,7 +42,7 @@ define([
       menu2.addItem("UINVLinePlusBarChartDemo", { module: "chart/UINVLinePlusBarChartDemo" }, onClick);
 
       var thisNav = this;
-      require(['plugins/uidemo/bean/UITableDemo'], function(UIDemoComponent) { 
+      require(['plugins/uidemo/bean/UITableBarChartDemo'], function(UIDemoComponent) { 
         thisNav.setWorkspace(UIDemoComponent);
       }) ;
     }

@@ -2,10 +2,11 @@ define([
   'jquery',
   'underscore', 
   'backbone',
+  'ui/UIView',
   'text!ui/UIBorderLayout.jtpl'
-], function($, _, Backbone, Template) {
+], function($, _, Backbone, UIView, Template) {
 
-  var UIBorderLayout = Backbone.View.extend({
+  var UIBorderLayout = UIView.extend({
     initialize: function(options) {
       this.layout = { };
       if(this._onInit) this._onInit(options);

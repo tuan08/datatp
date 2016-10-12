@@ -2,9 +2,9 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'ui/d3/nv/UINVMultiChart'
-], function($, _, Backbone, UINVMultiChart) {
-  var UINVMultiChartDemo = UINVMultiChart.extend({
+  'ui/d3/nv3d'
+], function($, _, Backbone, nv3d) {
+  var UINVMultiChartDemo = nv3d.ui.UINVMultiChart.extend({
     label: 'NV Multi Chart Demo',
 
     onInit: function(options) {

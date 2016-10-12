@@ -1,21 +1,22 @@
 define([
-  "ui/bean/UITableTabPlugin"
+  "ui/table/UITableTabPlugin"
 ], function(UITableTabPlugin) {
 
-  var UITableWS = Backbone.View.extend({
-    plugins: {
-      tabs: { }
-    },
-
-    uistate: {
-      plugin: { 
-        active: "default",
-        tabState: function(name) { return this.active == name ? "ui-disabled" : ""; },
-        isClosable: function(plugin) { return plugin.closable && this.active == plugin.name ; }
-      }
-    },
+  var UITableWorkspace = Backbone.View.extend({
 
     initialize: function(options) {
+      this.plugins = {
+        tabs: { }
+      };
+
+      this.uistate = {
+        plugin: { 
+          active: "default",
+          tabState: function(name) { return this.active == name ? "ui-disabled" : ""; },
+          isClosable: function(plugin) { return plugin.closable && this.active == plugin.name ; }
+        }
+      };
+
       this.uiTable = options.uiTable;
       this.addTabPlugin("default", "Default", new UITableTabPlugin(), false, true);
     },
@@ -83,7 +84,26 @@ define([
       this.uistate.plugin.active = Object.keys(this.plugins.tabs)[0];
       this.render();
     },
+
+    fireDataChange: function() {
+      for(var name in this.plugins.tabs) {
+        var plugin = this.plugins.tabs[name];
+        if(plugin.uiComponent.fireDataChange) {
+          plugin.uiComponent.fireDataChange();
+        }
+      }
+    },
+
+    firePropertyChange: function(object, op, property, value) { 
+      for(var name in this.plugins.tabs) {
+        var plugin = this.plugins.tabs[name];
+        if(plugin.uiComponent.firePropertyChange) {
+          plugin.uiComponent.firePropertyChange(object, op,  property, value); 
+        }
+      }
+    },
+
   });
 
-  return UITableWS;
+  return UITableWorkspace;
 });

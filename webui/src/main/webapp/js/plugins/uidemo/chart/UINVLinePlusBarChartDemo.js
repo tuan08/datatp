@@ -2,9 +2,9 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'ui/d3/nv/UINVLinePlusBarChart'
-], function($, _, Backbone, UINVLinePlusBarChart) {
-  var UINVLinePlusBarChartDemo = UINVLinePlusBarChart.extend({
+  'ui/d3/nv3d'
+], function($, _, Backbone, nv3d) {
+  var UINVLinePlusBarChartDemo = nv3d.ui.UINVLinePlusBarChart.extend({
     label: 'NV Line Plus Chart Demo',
 
     config: {

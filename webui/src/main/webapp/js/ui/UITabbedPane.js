@@ -2,7 +2,8 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-], function($, _, Backbone) {
+  'ui/UIUtil',
+], function($, _, Backbone, UIUtil) {
   var TEMPLATE = `
     <div class="ui-tab-container">
       <%if(config.header) { %>
@@ -69,6 +70,8 @@ define([
         this.setSelectedTabUIComponent(tabConfig.name, tabConfig.uicomponent) ;
       }
     },
+
+    getAncestorOfType: function(type) { return UIUtil.getAncestorOfType(this, type) ; },
     
     _template: _.template(TEMPLATE),
     

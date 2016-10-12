@@ -1,6 +1,6 @@
 define([
   'ui/UIBreadcumbs',
-  'ui/bean/UITable',
+  'ui/table/UITable',
   'plugins/crawler/model',
   'plugins/crawler/Rest'
 ], function(UIBreadcumbs,UITable, model, Rest) {

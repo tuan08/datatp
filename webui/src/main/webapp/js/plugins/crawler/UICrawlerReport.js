@@ -1,6 +1,6 @@
 define([
   'ui/UITabbedPane',
-  'ui/bean/UITable',
+  'ui/table/UITable',
   'plugins/crawler/site/UISiteStatisticBreadcumbs',
   'plugins/crawler/model',
   'plugins/crawler/Rest'

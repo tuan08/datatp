@@ -5,16 +5,14 @@ define([
   "ui/UIDialog",
   "ui/bean/UIBeanEditor",
   "ui/bean/UIBean",
-  "text!ui/bean/UITabArrayBean.jtpl",
-  "text!ui/bean/UITableArrayBean.jtpl"
+  "text!ui/bean/UIBeanArrayTab.jtpl",
+  "text!ui/bean/UIBeanArrayTable.jtpl"
 ], function($, _, Backbone, widget, util, UIDialog, UIBeanEditor, UIBean,  TabTmpl, TableTmpl) {
 
   var UIBeanEdit = UIBean.extend({
     label: 'Modify',
 
-    config: {
-      header: "Modify",
-    },
+    config: { header: "Modify" },
   });
 
   var UIBeanArray = UIBeanEditor.extend({

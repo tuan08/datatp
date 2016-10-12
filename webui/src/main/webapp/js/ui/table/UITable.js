@@ -1,16 +1,13 @@
 define([
   'jquery', 'underscore',
   'util/util',
-  'util/PageList',
-  'ui/UIUtil',
   "ui/UIDialog",
-  "ui/bean/UIBean",
   'ui/UIBorderLayout',
   'ui/UITabbedPane',
-  "ui/bean/UITableCtrlPlugin",
-  "ui/bean/UITableWorkspace",
-  "ui/bean/bucket"
-], function($, _, util, PageList, UIUtil, UIDialog, UIBean, UIBorderLayout, UITabbedPane, UITableCtrlPlugin, UITableWorkspace, bucket) {
+  "ui/bean/UIBean",
+  "ui/table/UITableCtrlPlugin",
+  "ui/table/UITableWorkspace",
+], function($, _, util, UIDialog, UIBorderLayout, UITabbedPane, UIBean, UITableCtrlPlugin, UITableWorkspace) {
   var UITableCtrlTabbedPane = UITabbedPane.extend({
     label: 'Tabbed Pane Demo',
 
@@ -26,42 +23,40 @@ define([
 
   var UITable = UIBorderLayout.extend({
     label: 'UITable Demo',
+    defaultConfig: { 
+      control: { 
+        header: "Table Control" 
+      },
+      table: { 
+        header: "Table",
+        page:   { 
+          size: 10, 
+          select: 1, 
+          options: [ 10, 25, 50, 100, 200, 500, 1000 ]
+        }, 
+        column:  { },
+        border: { type: "default" },
+        actions: { visible: true },
+        groupBy: { fields: {} },
+        chart: { type: "BarChart" },
+        view: "table"
+      },
+      actions: { },
+      filter: { field: "__all", expression: "" },
+      load: { more: [  50, 100, 200, 500 ] }
+    },
 
     _onInit: function(options) {
-      var tConfig = { 
-        control: { 
-          header: "Table Control" 
-        },
-        table: { 
-          header: "Table",
-          page:   { 
-            size: 10, 
-            options: [ 10, 25, 50, 100, 200, 500, 1000 ]
-          }, 
-          column:  { },
-          border: { type: "default" },
-          actions: { visible: true },
-          groupBy: { fields: {} },
-          view: "table"
-        },
-        actions: { },
-        filter: { field: "__all", expression: "" },
-        load: { more: [  50, 100, 200, 500 ] }
-      };
-
-      //clone config to isolate the modification
-      if(this.config)  $.extend(true, tConfig, this.config);
-      this.config = tConfig;
-
+      this.config = this.mergeConfig(null);
 
       var centerConfig = {};
-      this.uiTableWS = new UITableWorkspace({ uiTable: this });
-      this.setUI('center', this.uiTableWS, centerConfig);
+      this.uiTableWorkspace = new UITableWorkspace({ uiTable: this });
+      this.setUI('center', this.uiTableWorkspace, centerConfig);
     },
 
 
     set: function(beanInfo, beans) {
-      this.beanInfo = $.extend({}, beanInfo);
+      this.beanInfo = $.extend(true, {}, beanInfo);
       this.beanInfo.fieldNames = [];
       this.beanInfo.fieldLabels = [];
       for(var name in beanInfo.fields) {
@@ -70,14 +65,15 @@ define([
       }
       this.__createBeanStates(beans);
       this.__filter(this.config.filter.field, this.config.filter.expression);
-      this.__createViewModel();
+      this.fireDataChange();
       return this;
     },
 
     setBeans: function(beans, refresh) {
       this.__createBeanStates(beans);
       this.__filter(this.config.filter.field, this.config.filter.expression);
-      if(refresh) this.__refreshTable();
+      this.fireDataChange();
+      if(refresh) this.uiTableWorkspace.onRefresh();
       return this;
     },
     
@@ -99,7 +95,7 @@ define([
     },
 
     addWorkspaceTabPluginUI: function(name, label, uiPlugin, closable, active) {
-      this.uiTableWS.addTabPlugin(name, label, uiPlugin, closable, active);
+      this.uiTableWorkspace.addTabPlugin(name, label, uiPlugin, closable, active);
       return this;
     },
 
@@ -109,7 +105,7 @@ define([
 
     setTableView: function(view, refresh) { 
       this.config.table.view = view;
-      if(refresh) this.__refreshTable();
+      if(refresh) this.uiTableWorkspace.onRefresh();
     },
 
     getTableColumns: function() { return this.beanInfo.fieldNames; },
@@ -117,7 +113,7 @@ define([
     setTableColumnVisible: function(field, visible, refresh) { 
       if(!this.config.table.column[field]) this.config.table.column[field] = {}; 
       this.config.table.column[field].hidden = !visible;
-      if(refresh) this.__refreshTable();
+      if(refresh) this.uiTableWorkspace.onRefresh();
     },
 
     setTableColumnsVisible: function(fields, visible, refresh) { 
@@ -126,24 +122,26 @@ define([
         if(!this.config.table.column[field]) this.config.table.column[field] = {}; 
         this.config.table.column[field].hidden = !visible;
       }
-      if(refresh) this.__refreshTable();
+      this.firePropertyChange("config", "change", "table.column.fields", fields) ;
+      if(refresh) this.uiTableWorkspace.onRefresh();
     },
 
     setTableSelectPage: function(page, refresh) { 
-      this.viewModel.table.getPage(page) ;
-      if(refresh) this.__refreshTable();
+      this.config.table.page.select = page ;
+      this.firePropertyChange("config", "set", "table.page.select", page) ;
+      if(refresh) this.uiTableWorkspace.onRefresh();
     },
 
     setTablePageSize: function(pageSize, refresh) { 
       this.config.table.page.size = pageSize ;
-      this.viewModel.table.setPageSize(pageSize) ;
-      if(refresh) this.__refreshTable();
+      this.firePropertyChange("config", "set", "table.page.size", pageSize) ;
+      if(refresh) this.uiTableWorkspace.onRefresh();
     },
 
     addTableGroupByField: function(field, refresh) { 
       this.config.table.groupBy.fields[field] = {} ;
-      this.viewModel.groupBy = null;
-      if(refresh) this.__refreshTable();
+      this.firePropertyChange("config", "add", "table.groupBy.fields", field) ;
+      if(refresh) this.uiTableWorkspace.onRefresh();
     },
 
     setTableGroupByFields: function(fields, refresh) { 
@@ -151,30 +149,23 @@ define([
       for(var i = 0; i < fields.length; i++) {
         this.config.table.groupBy.fields[fields[i]] = {} ;
       }
-      if(this.viewModel) this.viewModel.groupBy = null;
-      if(refresh) this.__refreshTable();
+      this.firePropertyChange("config", "set", "table.groupBy.fields", fields) ;
+      if(refresh) this.uiTableWorkspace.onRefresh();
     },
 
     rmTableGroupByField: function(field, refresh) { 
       delete this.config.table.groupBy.fields[field] ;
-      this.viewModel.groupBy = null;
-      if(refresh) this.__refreshTable();
+      this.firePropertyChange("config", "remove", "table.groupBy.fields", field) ;
+      if(refresh) this.uiTableWorkspace.onRefresh();
     },
 
     removeBeanState: function(beanState, refresh) {
       var idx = this.beanStates.indexOf(beanState);
       this.beanStates.splice(idx, 1);
-      if(this.viewModel) {
-        if(this.viewModel.table) {
-          var idx = this.filterBeanStates.indexOf(beanState) ;
-          if(idx >= 0) this.filterBeanStates.splice(idx, 1);
-          var currPage = this.viewModel.table.getCurrentPage() ;
-          this.viewModel.table = new PageList(this.config.table.page.size, this.filterBeanStates) ;
-          this.viewModel.table.getPage(currPage);
-        }
-        if(this.viewModel.groupBy) this.viewModel.groupBy = null;
-      }
-      if(refresh) this.__refreshTable();
+      var idx = this.filterBeanStates.indexOf(beanState) ;
+      if(idx >= 0) this.filterBeanStates.splice(idx, 1);
+      this.fireDataChange();
+      if(refresh) this.uiTableWorkspace.onRefresh();
     },
     
     onToolbarAction: function(actionName) {
@@ -185,20 +176,21 @@ define([
       this.config.actions.bean[actionName].onClick(this, beanState);
     },
 
-    getAncestorOfType: function(type) {
-      return UIUtil.getAncestorOfType(this, type) ;
-    },
 
     filter: function(field, exp, refresh) { 
       this.config.filter.field      = field;
       this.config.filter.expression = exp;
       this.__filter(field, exp);
-      if(refresh) this.__refreshTable();
+      this.fireDataChange();
+      if(refresh) this.uiTableWorkspace.onRefresh();;
     },
 
-    refreshWS: function() {
-      this.__createViewModel();
-      this.uiTableWS.render();
+    refreshWorkspace: function() { this.uiTableWorkspace.render(); },
+
+    fireDataChange: function() { this.uiTableWorkspace.fireDataChange(); },
+
+    firePropertyChange: function(object, op, property, value) { 
+      this.uiTableWorkspace.firePropertyChange(object, op,  property, value); 
     },
 
     __filter: function(field, exp) { 
@@ -252,41 +244,9 @@ define([
       }
     },
 
-    __createAggregationModel: function() {
-      var getValue = function(beanState, field) {
-        return util.reflect.getFieldValue(beanState.bean, field); 
-      };
-      var root = new bucket.Bucket(null, "All");
-      root.setObjects(this.filterBeanStates);
-      var aggs = [];
-      for(var fieldName in this.config.table.groupBy.fields) {
-        var fieldValueAggregation = new bucket.aggregation.FieldValueAggregation(fieldName);
-        fieldValueAggregation.getValue = getValue;
-        aggs.push(fieldValueAggregation);
-      }
-      root.aggregate(aggs);
-      return root;
-    },
-
-
-    __createViewModel: function() {
-      if(!this.viewModel) this.viewModel = {} ;
-      if(this.config.table.view == 'groupby') {
-        if(!this.viewModel.groupBy) {
-          this.viewModel.groupBy = this.__createAggregationModel();
-        }
-      } else {
-        if(!this.viewModel.table) {
-          this.viewModel.table = new PageList(this.config.table.page.size, this.filterBeanStates) ;
-        }
-      }
-    },
-
     __refreshTable: function() {
-      this.__createViewModel();
-      this.uiTableWS.onRefresh();
+      this.uiTableWorkspace.onRefresh();
     }
-
   });
 
   return UITable;

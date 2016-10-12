@@ -2,9 +2,8 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'ui/bean/UITable',
-  'plugins/uidemo/bean/data'
-], function($, _, Backbone, UITable, data) {
+  'ui/table/UITable'
+], function($, _, Backbone, UITable) {
 
   var UISearchHit = UITable.extend({
     label: "Search Hit", 

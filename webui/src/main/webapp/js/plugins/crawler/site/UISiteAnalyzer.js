@@ -2,7 +2,7 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'ui/bean/UITable',
+  'ui/table/UITable',
   'plugins/crawler/site/UIWebPageAnalyzer',
   'plugins/crawler/model',
   'plugins/crawler/Rest',

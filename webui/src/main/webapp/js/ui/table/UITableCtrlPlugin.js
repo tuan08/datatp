@@ -1,7 +1,7 @@
 define([
   'jquery', 'underscore', 'backbone',
   'ui/widget',
-  'text!ui/bean/UITableCtrlPlugin.jtpl'
+  'text!ui/table/UITableCtrlPlugin.jtpl'
 ], function($, _, Backbone, widget, Template) {
   var UITableCtrlPlugin = Backbone.View.extend({
     initialize: function(options) {
@@ -31,8 +31,7 @@ define([
     },
     
     events: {
-      'change select.onSelectTableView': 'onSelectTableView',
-      'change select.onSelectTablePageSize': 'onSelectTablePageSize',
+      'click  .onSelectTableView': 'onSelectTableView',
 
       'change select.onAddTableGroupByField': 'onAddTableGroupByField',
       'click  .onRmTableGroupByField':        'onRmTableGroupByField',
@@ -44,20 +43,16 @@ define([
 
       "click  .onFieldOrderUp":  "onFieldOrderUp",
       "click  .onFieldOrderDown":  "onFieldOrderDown",
+
+
+      'change .onSelectFirePropertyChange': 'onSelectFirePropertyChange',
+      'click  .onFirePropertyChange': 'onFirePropertyChange',
     },
 
     onSelectTableView: function(evt) {
-      var view = $(evt.target, ".onSelectTableView").find(":selected").attr("value") ;
-      var uiCard = $(evt.target).closest(".ui-card") ;
-      var uiViews = uiCard.find(".views").first() ;
-      uiViews.children("div").css("display", "none");
-      uiViews.find("." + view + "-view").css("display", "block");
+      var view = $(evt.target).attr("view") ;
       this.uiTable.setTableView(view, true);
-    },
-
-    onSelectTablePageSize: function(evt) {
-      var pageSize = $(evt.target, ".onSelectTablePageSize").find(":selected").attr("value") ;
-      this.uiTable.setTablePageSize(pageSize, true);
+      this.render();
     },
 
     onAddTableGroupByField: function(evt) {
@@ -95,8 +90,8 @@ define([
           break;
         }
       }
-      this.render();
       this.uiTable.__refreshTable();
+      this.render();
     },
 
     onFieldOrderDown: function(evt) {
@@ -110,11 +105,34 @@ define([
           break;
         }
       }
-      this.render();
       this.uiTable.__refreshTable();
+      this.render();
+    },
+
+    onSelectFirePropertyChange: function(evt) {
+      var ele      = $(evt.target, ".onSelectFirePropertyChange") ;
+      var object   = ele.attr("object") ;
+      var op       = ele.attr("op") ;
+      var property = ele.attr("property") ;
+      var value    = ele.val() ;
+      console.log("UITableCtrlPlugin: object = " + object + ", op = " + op + ", property = " + property + ", value = " + value);
+      this.uiTable.firePropertyChange(object, op, property, value);
+      this.uiTable.refreshWorkspace();
+      this.render();
+    },
+
+    onFirePropertyChange: function(evt) {
+      var ele      = $(evt.target) ;
+      var object   = ele.attr("object") ;
+      var op       = ele.attr("op") ;
+      var property = ele.attr("property") ;
+      var value    = ele.attr("value") ;
+      console.log("UITableCtrlPlugin: object = " + object + ", op = " + op + ", property = " + property + ", value = " + value);
+      this.uiTable.firePropertyChange(object, op, property, value);
+      this.uiTable.refreshWorkspace();
+      this.render();
     }
   });
-
 
   return UITableCtrlPlugin ;
 });

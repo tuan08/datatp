@@ -7,6 +7,14 @@ define([
 
   var UIView = Backbone.View.extend({
 
+    mergeConfig: function(config) {
+      var newConfig = {};
+      if(this.defaultConfig) $.extend(true, newConfig, this.defaultConfig);
+      if(this.config) $.extend(true, newConfig, this.config);
+      if(config) $.extend(true, newConfig, config);
+      return newConfig;
+    },
+
     getAncestorOfType: function(type) { return UIUtil.getAncestorOfType(this, type) ; },
 
     getUIUtil: function() { return UIUtil; },

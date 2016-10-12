@@ -2,10 +2,10 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'ui/bean/UITable',
   'ui/bean/UIBean',
+  'ui/table/UITable',
   'plugins/uidemo/bean/data'
-], function($, _, Backbone, UITable, UIBean, data) {
+], function($, _, Backbone, UIBean, UITable, data) {
 
   var UIHelloPluginCtrl = Backbone.View.extend({
     initialize: function (options) {
@@ -66,7 +66,7 @@ define([
               var uiBean = new UIBean();
               uiBean.set(uiTable.beanInfo, bean);
               uiTable.addWorkspaceTabPluginUI(bean.input, bean.input, uiBean, true, true);
-              uiTable.refreshWS();
+              uiTable.refreshWorkspace();
             }
           },
           remove: {

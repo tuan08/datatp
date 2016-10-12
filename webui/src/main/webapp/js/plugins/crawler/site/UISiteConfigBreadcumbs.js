@@ -1,15 +1,12 @@
 define([
   'ui/UITemplateLayout',
   'ui/bean/UIBean',
-  'ui/bean/UIArrayBean',
-  'ui/bean/UIComplexBean',
-  'ui/bean/UIArrayComplexBean',
   'ui/UIBreadcumbs',
   'plugins/crawler/site/UISiteAnalyzer',
   'plugins/crawler/site/uicomp',
   'plugins/crawler/model',
   'plugins/crawler/Rest'
-], function(UITemplateLayout, UIBean, UIArrayBean, UIComplexBean, UIArrayComplexBean, UIBreadcumbs, UISiteAnalyzer, uicomp,  model, Rest) {
+], function(UITemplateLayout, UIBean, UIBreadcumbs, UISiteAnalyzer, uicomp,  model, Rest) {
   var UISiteConfigGeneric = UIBean.extend({
 
     config: { header: "Site Config Generic" },

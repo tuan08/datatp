@@ -1,14 +1,14 @@
 define([
   'ui/UITemplateLayout',
   'ui/bean/UIBean',
-  'ui/bean/UIArrayBean',
-  'ui/bean/UIComplexBean',
-  'ui/bean/UIArrayComplexBean',
+  'ui/bean/UIBeanArray',
+  'ui/bean/UIBeanComplex',
+  'ui/bean/UIBeanComplexArray',
   'ui/UIBreadcumbs',
   'plugins/crawler/site/UISiteAnalyzer',
   'plugins/crawler/model'
-], function(UITemplateLayout, UIBean, UIArrayBean, UIComplexBean, UIArrayComplexBean, UIBreadcumbs, UISiteAnalyzer,  model) {
-  var UIWebpageTypePattern = UIArrayBean.extend({
+], function(UITemplateLayout, UIBean, UIBeanArray, UIBeanComplex, UIBeanComplexArray, UIBreadcumbs, UISiteAnalyzer,  model) {
+  var UIWebpageTypePattern = UIBeanArray.extend({
     config: { 
       header: "Webpage Type Pattern",
       label: function(bean, idx) { return bean.type; }
@@ -38,7 +38,7 @@ define([
     }
   });
 
-  var UIExtractConfigXPath = UIArrayBean.extend({
+  var UIExtractConfigXPath = UIBeanArray.extend({
     config: {
       header: "Extract XPath",
       layout: 'table'
@@ -54,7 +54,7 @@ define([
     createDefaultBean: function() { return { }; }
   });
 
-  var UIExtractConfig = UIComplexBean.extend({
+  var UIExtractConfig = UIBeanComplex.extend({
     _template: _.template(`
       <div style="border: 1px solid #ddd; margin-top: 10px">
         <div name="UIExtractConfigBasic" />
@@ -72,9 +72,9 @@ define([
     }
   });
 
-  var UIExtractConfigs = UIArrayComplexBean.extend({
+  var UIExtractConfigs = UIBeanComplexArray.extend({
     config: {
-      UIComplexBean: UIExtractConfig,
+      UIBeanComplex: UIExtractConfig,
       label: function(idx) { return "Extract " + (idx + 1); }
     },
 

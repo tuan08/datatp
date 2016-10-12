@@ -3,7 +3,7 @@ define([
   'ui/UIProperties',
   'ui/UIBorderLayout',
   'ui/UITabbedPane',
-  'ui/bean/UITable',
+  'ui/table/UITable',
   'plugins/crawler/model',
   'plugins/crawler/Rest'
 ], function(UICollabsible, UIProperties, UIBorderLayout, UITabbedPane, UITable, model, Rest) {

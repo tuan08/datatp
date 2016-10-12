@@ -4,11 +4,11 @@ define([
   'backbone',
   'ui/UICollapsible',
   'ui/bean/UIBean',
-  'ui/bean/UIArrayBean',
-  'ui/bean/UIComplexBean',
-  'ui/bean/UIArrayComplexBean',
+  'ui/bean/UIBeanArray',
+  'ui/bean/UIBeanComplex',
+  'ui/bean/UIBeanComplexArray',
   'plugins/uidemo/bean/data'
-], function($, _, Backbone, UICollapsible, UIBean, UIArrayBean, UIComplexBean, UIArrayComplexBean, data) {
+], function($, _, Backbone, UICollapsible, UIBean, UIBeanArray, UIBeanComplex, UIBeanComplexArray, data) {
   var UISingleBeanDemo = UIBean.extend({
     label: 'Single Bean Demo',
 
@@ -29,11 +29,11 @@ define([
     }
   });
 
-  var UIArrayBeanDemo = UIArrayBean.extend({
-    label: 'UIArrayBean Demo',
+  var UIBeanArrayDemo = UIBeanArray.extend({
+    label: 'UIBeanArray Demo',
 
     config: {
-      header: "UIArrayBean Demo",
+      header: "UIBeanArray Demo",
       width:  "600px",
       label: function(bean, idx) { return "bean[" + idx + "]"},
       actions: {
@@ -51,11 +51,11 @@ define([
     createDefaultBean: function() { return data.createBean("New Bean"); }
   });
 
-  var UIArrayTableBeanDemo = UIArrayBean.extend({
-    label: 'UIArrayBean Table Demo',
+  var UIArrayTableBeanDemo = UIBeanArray.extend({
+    label: 'UIBeanArray Table Demo',
 
     config: {
-      header: "UIArrayBean Demo",
+      header: "UIBeanArray Demo",
       width:  "100%",
       layout: 'table',
       actions: {
@@ -73,7 +73,7 @@ define([
     createDefaultBean: function() { return data.createBean("New Bean"); }
   });
 
-  var UIArrayContactBean = UIArrayBean.extend({
+  var UIArrayContactBean = UIBeanArray.extend({
     label: 'Contacts',
 
     config: {
@@ -83,15 +83,15 @@ define([
     createDefaultBean: function() { return data.createContactBean("New Bean"); }
   });
 
-  var UIComplexBeanDemo = UIComplexBean.extend({
-    label: 'UIComplexBean Demo',
+  var UIBeanComplexDemo = UIBeanComplex.extend({
+    label: 'UIBeanComplex Demo',
 
     _template: _.template(`
       <div style="border: 1px solid #ddd; margin-top: 10px">
         <h6 class="box-border-bottom" style="padding: 5px">Complex Bean Mapping Demo</h6>
         <div class="box-display-ib-left-right" style="padding: 10px">
           <div class="box-display-ib box-valign-top" style="width: 40%" name="UISingleBeanDemo"/>
-          <div class="box-display-ib box-valign-top" style="width: calc(60% - 20px)" name="UIArrayBeanDemo"/>
+          <div class="box-display-ib box-valign-top" style="width: calc(60% - 20px)" name="UIBeanArrayDemo"/>
         </div>
       </div>
     `),
@@ -101,16 +101,16 @@ define([
       this.__setUIComponent("UISingleBeanDemo", uiSingle) ;
 
       var uiArray = new UIArrayContactBean().configure({ width: "100%"} ).set(data.ContactBeanInfo, bean.contacts);
-      this.__setUIComponent("UIArrayBeanDemo", uiArray) ;
+      this.__setUIComponent("UIBeanArrayDemo", uiArray) ;
       return this;
     }
   });
 
-  var UIArrayComplexBeanDemo = UIArrayComplexBean.extend({
-    label: 'Array UIComplexBean Demo',
+  var UIBeanComplexArrayDemo = UIBeanComplexArray.extend({
+    label: 'Array UIBeanComplex Demo',
     
     config: {
-      UIComplexBean: UIComplexBeanDemo
+      UIBeanComplex: UIBeanComplexDemo
     },
 
     createDefaultBean: function() { return data.createComplexBean("New Bean"); }
@@ -131,10 +131,10 @@ define([
     
     onInit: function(options) {
       this.add(new UISingleBeanDemo().set(data.BeanInfo, data.bean));
-      this.add(new UIArrayBeanDemo()) ;
+      this.add(new UIBeanArrayDemo()) ;
       this.add(new UIArrayTableBeanDemo()) ;
-      this.add(new UIComplexBeanDemo().set(data.createComplexBean("A Complex Bean"))) ;
-      this.add(new UIArrayComplexBeanDemo().set(data.createComplexBeans("Array Complex Bean", 5))) ;
+      this.add(new UIBeanComplexDemo().set(data.createComplexBean("A Complex Bean"))) ;
+      this.add(new UIBeanComplexArrayDemo().set(data.createComplexBeans("Array Complex Bean", 5))) ;
     }
   }) ;
 
