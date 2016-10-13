@@ -1,7 +1,7 @@
 define([
   'rest/Server'
 ], function(Server) {
-  var server = new Server("http://localhost:8080/crawler");
+  var server = new Server("http://192.168.1.14:8080/crawler");
 
   function SiteRest(server) {
     this.getSiteConfigs = function() { return server.restGET("/site/configs"); };

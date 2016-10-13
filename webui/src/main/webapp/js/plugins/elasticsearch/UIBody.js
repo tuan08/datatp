@@ -4,11 +4,11 @@ define([
   'backbone',
   'plugins/elasticsearch/search/ESQueryContext',
   'plugins/elasticsearch/search/hit/UISearchHit',
-  'plugins/elasticsearch/search/analytic/UIAnalytics',
+//  'plugins/elasticsearch/search/analytic/UIAnalytics',
   'plugins/elasticsearch/admin/UIAdmin',
   'text!plugins/elasticsearch/UIBody.jtpl',
   'css!plugins/elasticsearch/stylesheet.css'
-], function($, _, Backbone, ESQueryContext, UISearchHit, UIAnalytics, UIAdmin, Template) {
+], function($, _, Backbone, ESQueryContext, UISearchHit, /*UIAnalytics,*/ UIAdmin, Template) {
 
   var UISearch = Backbone.View.extend({
     type: 'UISearch',
@@ -21,7 +21,7 @@ define([
       this.state = {
         views: {
           Search:    {  uiComponent: new UISearchHit({esQueryContext: this.esQueryCtx}) },
-          Analytics: { uiComponent: new UIAnalytics({esQueryContext: this.esQueryCtx}) },
+//          Analytics: { uiComponent: new UIAnalytics({esQueryContext: this.esQueryCtx}) },
           Admin:     { uiComponent: new UIAdmin() }
         },
         selectView: 'Search',

@@ -108,12 +108,16 @@
 
     <div>
       <label>Tick Format</label>
-      <input class="input onFieldToggle" name="property" value="<%=xAxis.datatype %>"/>
+      <select class="input onSelectFirePropertyChange" object="config.table.chart" op="set" property="<%=axisName%>.tickFormat">
+        <%var labels  = ["Auto", "Number", "Integer", "Date", "Time", "Date Time", "Raw"];%>
+        <%var options = ["auto", "number", "integer", "date", "time", "datetime",  "raw"];%>
+        <%=widget.select.options.renderWithLabel(labels, options, xAxis.tickFormat)%>
+      </select>
     </div>
 
     <div>
       <label>Field</label>
-      <select class="input onSelectFirePropertyChange" object="config.table.chart" op="setXAxisMapField" property="<%=axisName%>.mapField">
+      <select class="input onSelectFirePropertyChange" object="config.table.chart" op="setAxisMapField" property="<%=axisName%>">
         <option value="">Select Field</option>
         <%= widget.select.options.render(beanInfo.fieldNames, xAxis.mapField) %>
       </select>
@@ -133,7 +137,11 @@
 
     <div>
       <label>Tick Format</label>
-      <input class="input onFieldToggle" name="property" value="<%= yAxis.datatype %>"/>
+      <select class="input onSelectFirePropertyChange" object="config.table.chart" op="set" property="<%=axisName%>.tickFormat">
+        <%var labels  = ["Auto", "Number", "Integer", "Date", "Time", "Date Time", "Raw"];%>
+        <%var options = ["auto", "number", "integer", "date", "time", "datetime",  "raw"];%>
+        <%=widget.select.options.renderWithLabel(labels, options, yAxis.tickFormat)%>
+      </select>
     </div>
 
     <div>
@@ -146,7 +154,7 @@
             <%= fName %>
           </div>
         <%}%>
-        <select class="box-full-width onSelectFirePropertyChange" object="config.table.chart" op="addYAxisMapField" property="<%=axisName%>.mapFields">
+        <select class="box-full-width onSelectFirePropertyChange" object="config.table.chart" op="addAxisMapField" property="<%=axisName%>">
           <option>Select Field To Add</option>
           <%= widget.select.options.render(beanInfo.fieldNames, "") %>
         </select>
@@ -179,7 +187,7 @@
       } else if(chart.type == "LinePlusBarChart") {
         xAxisControl("X1 Axis", chart, "xAxis");
         yAxisControl("Y1 Axis", chart, "yAxis");
-        yAxisControl("Y2 Axis", chart, "yAxis");
+        yAxisControl("Y2 Axis", chart, "y2Axis");
       }
     } else {
       tableControl();

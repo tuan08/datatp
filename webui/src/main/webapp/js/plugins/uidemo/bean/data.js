@@ -66,7 +66,7 @@ define([
   var BarChartModel = {
     label: 'BarChart Model',
     fields: {
-      "timestamp": { label: "Timestamp", datatype: "date", required: true },
+      "timestamp": { label: "Timestamp", datatype: "datetime", required: true },
       "bar1": { label: "Bar 1", datatype: "integer", required: true },
       "bar2": { label: "Bar 2", datatype: "integer", required: true },
       "bar3": { label: "Bar 3", datatype: "integer", required: true },
@@ -149,9 +149,9 @@ define([
         bar1:    Math.floor((Math.random() * 100) + 1),
         bar2:    Math.floor((Math.random() * 100) + 1),
         bar3:    Math.floor((Math.random() * 100) + 1),
-        stream1: Math.floor((Math.random() * 300) + 1),
-        stream2: Math.floor((Math.random() * 400) + 1),
-        stream3: Math.floor((Math.random() * 500) + 1),
+        stream1: Math.floor((Math.random() * 100) + 201),
+        stream2: Math.floor((Math.random() * 100) + 301),
+        stream3: Math.floor((Math.random() * 100) + 401),
       } ;
       beans.push(BarChart);
     }

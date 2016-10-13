@@ -11,7 +11,7 @@ require.config({
     underscore:   JSLIBS + '/underscore/underscore-1.8.3.min',
     backbone:     JSLIBS + '/backbonejs/backbonejs-1.3.3.min',
 
-    nv:           JSLIBS + '/d3/nv/1.8.2-dev/nv.d3.min',
+    nv:           JSLIBS + '/d3/nv/1.8.4-dev/nv.d3.min',
     d3:           JSLIBS + '/d3/d3.min'
   },
   

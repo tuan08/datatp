@@ -64,13 +64,11 @@ define([
             if(this.uiChart == null) {
               var type = uiTable.config.table.chart.type;
               if(type == "LinePlusBarChart") {
-                console.log("create line plus bar chart");
-                this.uiChart = new uichart.UITableLinePlusBarChart();
+                this.uiChart = new uichart.UILinePlusBarChart();
               } else {
-                console.log("create bar chart");
-                this.uiChart = new uichart.UITableBarChart();
+                this.uiChart = new uichart.UIBarChart();
               }
-              this.uiChart.init(uiTable);
+              this.uiChart.useDataFromUITable(uiTable);
             }
             this.uiChart.setElement(blkView).render();
           },

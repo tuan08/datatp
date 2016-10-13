@@ -1,51 +1,49 @@
 define([
-  'jquery', 'underscore', 'backbone',
+  'jquery', 'underscore', 'backbone', "d3", "nv",
   'util/util',
   "ui/UIUtil",
-  "ui/UIView",
-  'ui/d3/nv3d',
-], function($, _, Backbone, util, UIUtil, UIView, nv3d) {
+  "ui/UIView"
+], function($, _, Backbone, d3, nv, util, UIUtil, UIView) {
   var tickFormat = {
-    number:   d3.format(',.3f'),
+    number:   d3.format(',.2f'),
     integer:  d3.format(',.0f'),
-    datetime: function(value) { return d3.time.format('%x %H:%M:%S')(new Date(value)); },
+    datetime: function(value) { return d3.time.format('%x %H:%M')(new Date(value)); },
     date:     function(value) { return d3.time.format('%x')(new Date(value)); },
     time:     function(value) { return d3.time.format('%H:%M:%S')(new Date(value)); },
     raw:     function(value) { return  value ;}
   };
 
-  var configureAxis = function(axis, fieldConfig) {
-    if(fieldConfig.datatype != null) axis.datatype = fieldConfig.datatype;
-    axis.label.title = fieldConfig.label;
+  var configureAxisWithFieldConfig = function(axisConfig, config, mapField) {
+    if(!config.beanModel) return;
+    var fieldConfig = config.beanModel.fields[mapField];
+    if(fieldConfig.datatype != null) axisConfig.datatype = fieldConfig.datatype;
   };
 
-  var opHandler = {
-    "set": function(uiTable, obj, property, value) {
-      util.reflect.setFieldValue(obj, property, value) ;
+  var opConfigHandler = {
+    "set": function(config, property, value) {
+      util.reflect.setFieldValue(config, property, value) ;
     },
 
-    "add": function(uiTable, obj, property, value) {
-      util.reflect.addValueToArray(obj, property, value) ;
+    "add": function(config, property, value) {
+      util.reflect.addValueToArray(config, property, value) ;
     },
 
-    "delete": function(uiTable, obj, property, value) {
-      util.reflect.deleteField(obj, property) ;
-      console.printJSON(obj);
+    "delete": function(config, property, value) {
+      util.reflect.deleteField(config, property) ;
     },
 
-    "setXAxisMapField": function(uiTable, obj,  property, value) {
-      obj.xAxis.mapField = value  ;
-      var fieldConfig = uiTable.beanInfo.fields[value];
-      configureAxis(obj.xAxis, fieldConfig);
-      console.printJSON(obj.xAxis);
-    },
-
-    "addYAxisMapField": function(uiTable, obj,  property, value) {
+    "setAxisMapField": function(config,  property, value) {
       var field = value;
-      obj.yAxis.mapFields[field] = true ;
-      var fieldConfig = uiTable.beanInfo.fields[value];
-      configureAxis(obj.yAxis, fieldConfig);
-      console.printJSON(obj.yAxis);
+      var axis = util.reflect.getFieldValue(config, property);
+      axis.mapField = field  ;
+      configureAxisWithFieldConfig(axis, config, field);
+    },
+
+    "addAxisMapField": function(config,  property, value) {
+      var field = value;
+      var axis = util.reflect.getFieldValue(config, property);
+      axis.mapFields[field] = true; 
+      configureAxisWithFieldConfig(axis, config, field);
     }
   }
 
@@ -56,13 +54,13 @@ define([
       width:  "100%", height: "600px", 
       xAxis: {
         label: { title: "X Axis", rotate: 0 },
-        tickFormat: "time",
+        tickFormat: "auto",
         mapField: null, datatype: "number" 
       },
 
       yAxis: {
         label: { title: "Y Axis" },
-        tickFormat: "number",
+        tickFormat: "auto",
         datatype: "number", mapFields: { }
       }
     },
@@ -70,7 +68,7 @@ define([
     initialize: function (options) {
       this.data =  [];
       this.__init(options);
-      this.config.id = "ui-chart-" + UIUtil.guid();
+      this.config.id = "nv3d-chart-" + UIUtil.guid();
       if(this.onInit) this.onInit(options);
     },
 
@@ -82,9 +80,17 @@ define([
       this.configure(this.chart, this.config);
       var params = { config: this.config };
       $(this.el).html(this._template(params));
+
       d3.select('#' + this.config.id + ' svg').datum(this.data).call(this.chart);
       nv.utils.windowResize(this.chart.update);
       nv.addGraph(function() { return this.chart; });
+    },
+
+    useDataFromUITable: function(uiTable) {
+      this.uiTable = uiTable;
+      this.config.beanModel = uiTable.beanInfo;
+      uiTable.config.table.chart = this.config;
+      return this;
     },
 
     setData: function (data) { this.data = data ; },
@@ -94,8 +100,19 @@ define([
     /** chart data should in format { key: "name", values: [ {x: xValue, y: yValue}]*/
     addChartData: function (chartData) { this.data.push(chartData) ; },
 
+    configureAxis: function(axis, axisConfig) {
+      var tickFormatName = axisConfig.tickFormat;
+      if(tickFormatName == null || tickFormatName == "" || tickFormatName == "auto") {
+        tickFormatName = axisConfig.datatype;
+      }
+      if(tickFormatName == null) tickFormatName = "raw";
+      axis.
+        axisLabel(axisConfig.label.title).
+        tickFormat(tickFormat[tickFormatName]) ;
+    },
+
     firePropertyChange: function(object, op, property, value) {
-      opHandler[op](this.uiTable, this.config, property, value);
+      opConfigHandler[op](this.config, property, value);
       this.updateChartData();
     },
 
@@ -113,7 +130,7 @@ define([
     }
   });
 
-  var UITableBarChart = UINVChart.extend({
+  var UIBarChart = UINVChart.extend({
     chartType: "BarChart",
 
     __init: function(options) {
@@ -121,7 +138,7 @@ define([
 
       var chart = nv.models.multiBarChart();
       chart.
-        duration(150).groupSpacing(0.1).
+        duration(300).groupSpacing(0.1).stacked(false).
         margin({ bottom: 75, left: 75, right: 50 }).
         reduceXTicks(true).staggerLabels(false);
       //chart.barColor(d3.scale.category20().range()).
@@ -136,23 +153,11 @@ define([
       this.chart = chart;
     },
 
+
     configure: function(chart, config) { 
-      chart.
-        rotateLabels(config.xAxis.label.rotate);
-
-      chart.xAxis.
-        axisLabel(config.xAxis.label.title).
-        tickFormat(tickFormat[config.xAxis.tickFormat]) ;
-
-      chart.yAxis.
-        axisLabel(config.yAxis.label.title).
-        tickFormat(tickFormat[config.yAxis.tickFormat]) ;
-    },
-
-
-    init: function(uiTable) {
-      this.uiTable = uiTable;
-      uiTable.config.table.chart = this.config;
+      chart.rotateLabels(config.xAxis.label.rotate);
+      this.configureAxis(chart.xAxis, config.xAxis);
+      this.configureAxis(chart.yAxis, config.yAxis);
     },
 
 
@@ -170,13 +175,19 @@ define([
     }
   });
 
-  var UITableLinePlusBarChart = UINVChart.extend({
+  var UILinePlusBarChart = UINVChart.extend({
     chartType: "LinePlusBarChart",
 
     overrideConfig: {
       type: "LinePlusBarChart",
       xAxis: { label: { title: "X1 Axis" } },
-      yAxis: { label: { title: "Y1 Axis" } }
+      yAxis: { label: { title: "Y1 Axis" } },
+
+      y2Axis: {
+        label: { title: "Y2 Axis" },
+        tickFormat: "auto",
+        datatype: "number", mapFields: { }
+      }
     },
 
     __init: function(options) {
@@ -191,40 +202,29 @@ define([
 
       chart.bars.forceY([0]).padData(false);
 
-
       chart.xAxis.
         showMaxMin(false).
         staggerLabels(false).
-        tickFormat(tickFormat[this.config.xAxis.tickFormat]).
-        rotateLabels(this.config.xAxis.label.rotate).
-        axisLabel(this.config.xAxis.label.title);
+        rotateLabels(this.config.xAxis.label.rotate);
 
       chart.x2Axis.
         showMaxMin(false).
         staggerLabels(false).
-        tickFormat(tickFormat[this.config.xAxis.tickFormat]).
-        rotateLabels(this.config.xAxis.label.rotate).
-        axisLabel(this.config.xAxis.label.title);
+        rotateLabels(this.config.xAxis.label.rotate);
 
       chart.y1Axis.
         showMaxMin(true).
-        axisLabelDistance(0).
-        axisLabel(this.config.yAxis.label.title).
-        tickFormat(tickFormat[this.config.yAxis.tickFormat]) ;
-
-      chart.y2Axis.
-        tickFormat(tickFormat['raw']) ;
+        axisLabelDistance(0);
 
       chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
       this.chart = chart;
     },
 
     configure: function(chart, config) { 
-    },
-
-    init: function(uiTable) {
-      this.uiTable = uiTable;
-      uiTable.config.table.chart = this.config;
+      this.configureAxis(chart.xAxis, config.xAxis);
+      this.configureAxis(chart.x2Axis, config.xAxis);
+      this.configureAxis(chart.y1Axis, config.yAxis);
+      this.configureAxis(chart.y2Axis, config.y2Axis);
     },
 
     updateChartData: function() {
@@ -232,18 +232,24 @@ define([
       var chart = this.uiTable.config.table.chart;
       if(chart.xAxis.mapField == null) return;
       var yAxisFieldCount = Object.keys(chart.yAxis.mapFields).length;
-      if(yAxisFieldCount == 0) return;
+      var y2AxisFieldCount = Object.keys(chart.y2Axis.mapFields).length;
+      if(yAxisFieldCount == 0 && y2AxisFieldCount == 0) return;
       for(var fName in chart.yAxis.mapFields) {
         var chartData = this.tableCreateChartData(this.uiTable, fName, chart.xAxis.mapField, fName);
         chartData.bar = true;
+        this.addChartData(chartData);
+      }
+
+      for(var fName in chart.y2Axis.mapFields) {
+        var chartData = this.tableCreateChartData(this.uiTable, fName, chart.xAxis.mapField, fName);
         this.addChartData(chartData);
       }
     }
   });
 
   var uichart = {
-    UITableBarChart: UITableBarChart,
-    UITableLinePlusBarChart: UITableLinePlusBarChart
+    UIBarChart: UIBarChart,
+    UILinePlusBarChart: UILinePlusBarChart
   }
 
   return uichart;
