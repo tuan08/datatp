@@ -119,7 +119,7 @@
       <label>Field</label>
       <select class="input onSelectFirePropertyChange" object="config.table.chart" op="setAxisMapField" property="<%=axisName%>">
         <option value="">Select Field</option>
-        <%= widget.select.options.render(beanInfo.fieldNames, xAxis.mapField) %>
+        <%= widget.select.options.renderWithLabel(beanInfo.fieldLabels, beanInfo.fieldNames, xAxis.mapField) %>
       </select>
     </div>
   </div>
@@ -150,13 +150,13 @@
         <%for(var fName in yAxis.mapFields) {%>
           <div>
             <a class="ui-icon ui-icon-action ui-icon-trash box-valign-top onFirePropertyChange" 
-               object="config.table.chart"  op="delete" property="<%=axisName%>.mapFields.<%= fName %>"/>
+               object="config.table.chart"  op="deleteAxisMapField" property="<%=axisName%>" value="<%= fName %>"/>
             <%= fName %>
           </div>
         <%}%>
-        <select class="box-full-width onSelectFirePropertyChange" object="config.table.chart" op="addAxisMapField" property="<%=axisName%>">
+        <select class="box-width-full onSelectFirePropertyChange" object="config.table.chart" op="addAxisMapField" property="<%=axisName%>">
           <option>Select Field To Add</option>
-          <%= widget.select.options.render(beanInfo.fieldNames, "") %>
+          <%= widget.select.options.renderWithLabel(beanInfo.fieldLabels, beanInfo.fieldNames, "") %>
         </select>
       </div>
     </div>

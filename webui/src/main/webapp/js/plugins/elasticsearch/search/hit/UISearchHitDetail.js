@@ -8,22 +8,18 @@ define([
   var UISearchHitDetail = Backbone.View.extend({
     label: 'Hit Detail',
     
-    initialize: function (options) {
-      this.hit = options.hit;
+    withHit: function (hit) {
+      this.hit = hit;
+      return this;
     },
     
     _template: _.template(Template),
 
     render: function() {
       var params = { 
-        hit:  this.hit,
-        util: util
+        hit:  this.hit, util: util
       } ;
       $(this.el).html(this._template(params));
-    },
-
-    events: {
-      'click .onSelectPage': 'onSelectPage'
     }
   });
   

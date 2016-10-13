@@ -187,25 +187,16 @@ input, select {
 
 .cursor-pointer { cursor: pointer; }
 
-.ui-action {
-  cursor: pointer ;
-  text-decoration: none ;
-  color: #369 ;
-  font-weight: bold;
-  padding: 2px 3px;
-}
+
+.ui-icon-action {  display: inline-block; cursor: pointer; }
+.ui-icon-grip-dotted-vertical-split { background-position: -5px -224px; }
+.ui-icon-grip-dotted-horizontal-split { background-position: -16px -229px; }
+
+.ui-action { cursor: pointer ; text-decoration: none ; color: #369 ; font-weight: bold; padding: 2px 3px; }
 
 .ui-action:hover, .ui-action:focus { background: #e7e7e7; }
 
-.ui-disabled {
-  pointer-events: none;
-  cursor: default;
-  text-decoration: none ;
-  font-weight: normal !important ;
-}
-
-.ui-border { border: 1px solid lightgray; }
-.ui-border-2px-dashed { border: 2px dashed lightgray; }
+.ui-disabled { pointer-events: none; cursor: default; text-decoration: none ; font-weight: normal !important ; }
 
 .ui-text-error { color:#8a1f11; }
 

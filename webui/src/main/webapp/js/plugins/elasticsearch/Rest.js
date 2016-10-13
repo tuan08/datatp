@@ -1,7 +1,8 @@
 define([
+  'env',
   'rest/Server'
-], function(Server) {
-  var server = new Server("http://localhost:9200");
+], function(env, Server) {
+  var server = new Server(env.service.elasticsearch.restURL);
 
   function Cluster(server) {
     this.getStatus = function() { return server.restGET("/_cluster/health?pretty=true", {}); };

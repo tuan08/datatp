@@ -24,11 +24,7 @@ define([
       beanMenu.addItem("UITable Bar Chart Demo", { module: "bean/UITableBarChartDemo" }, onClick);
 
       var menu1 = this.addMenu("core", "Core Demo", { collapse: false });
-      menu1.addItem("UITableDemo", {}, onClick);
-      menu1.addItem("UITableTreeDemo", {},  onClick);
       menu1.addItem("UITabbedPaneDemo", {}, onClick);
-      menu1.addItem("UIBeanDemo", {}, onClick);
-      menu1.addItem("UIComplexBeanDemo", {}, onClick);
       menu1.addItem("UIUploadDemo", {}, onClick);
       menu1.addItem("UINavigationDemo", {}, onClick);
       menu1.addItem("UIBorderLayoutDemo", {}, onClick);

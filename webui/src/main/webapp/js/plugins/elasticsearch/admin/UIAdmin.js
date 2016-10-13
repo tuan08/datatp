@@ -9,8 +9,8 @@ define([
 
     onInit: function(options) {
       var onClick = function(thisNav, menu, item) {
-        require(['plugins/elasticsearch/admin/' + item.config.module], function(uiComp) { 
-          thisNav.setWorkspace(uiComp);
+        require(['plugins/elasticsearch/admin/' + item.config.module], function(UIComponent) { 
+          thisNav.setWorkspace(new UIComponent());
         }) ;
       };
 
@@ -21,8 +21,8 @@ define([
       indicesMenu.addItem("Info", { module: "indices/UIIndicesInfo" }, onClick);
 
       var thisNav = this;
-      require(['plugins/elasticsearch/admin/cluster/UIClusterInfo'], function(uiComp) { 
-        thisNav.setWorkspace(uiComp);
+      require(['plugins/elasticsearch/admin/cluster/UIClusterInfo'], function(UIComponent) { 
+        thisNav.setWorkspace(new UIComponent());
       }) ;
     }
   });

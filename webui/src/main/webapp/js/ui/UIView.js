@@ -10,6 +10,7 @@ define([
     mergeConfig: function(config) {
       var newConfig = {};
       if(this.defaultConfig) $.extend(true, newConfig, this.defaultConfig);
+      if(this.overrideConfig) $.extend(true, newConfig, this.overrideConfig);
       if(this.config) $.extend(true, newConfig, this.config);
       if(config) $.extend(true, newConfig, config);
       return newConfig;

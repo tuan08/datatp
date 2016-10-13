@@ -2,27 +2,26 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'ui/d3/nv3d'
-], function($, _, Backbone, nv3d) {
-  var UINVLinePlusBarChartDemo = nv3d.ui.UINVLinePlusBarChart.extend({
+  'ui/nvd3'
+], function($, _, Backbone, nvd3) {
+  var UINVLinePlusBarChartDemo = nvd3.UILinePlusBarChart.extend({
     label: 'NV Line Plus Chart Demo',
 
     config: {
       width: "100%", height: "600px",
-      xAxis: {
-        tickFormat: function(value) { return d3.time.format('%x %H:%M:%S')(new Date(value)); }
+      xAxis: { 
+        label: { title: "X1 Axis Demo" },
+        tickFormat: "datetime" 
       },
 
-      x2Axis: {
-        tickFormat: function(value) { return d3.time.format('%x %H:%M:%S')(new Date(value)); }
+      yAxis: { 
+        label: { title: "Y1 Axis Demo" },
+        tickFormat: "integer" 
       },
 
-      y1Axis: {
-        tickFormat: function(value) { return  value; }
-      },
-
-      y2Axis: {
-        tickFormat: function(value) { return  '$' + d3.format(',f')(new Date(value)); }
+      y2Axis: { 
+        label: { title: "Y2 Axis Demo" },
+        tickFormat: function(value) { return  '$' + d3.format(',f')(new Date(value)); } 
       },
     },
 

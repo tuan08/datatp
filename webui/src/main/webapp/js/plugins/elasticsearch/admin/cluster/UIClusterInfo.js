@@ -1,85 +1,65 @@
 define([
-  'jquery', 
-  'underscore', 
-  'backbone',
-  'ui/UIBean',
-  'ui/UITable',
+  'ui/table/UITable',
   'ui/UICollapsible',
   'ui/UIBreadcumbs',
   'ui/UIContent',
+  'ui/UIProperties',
   'plugins/elasticsearch/Rest'
-], function($, _, Backbone, UIBean, UITable, UICollapsible, UIBreadcumbs, UIContent, Rest) {
+], function(UITable, UICollapsible, UIBreadcumbs, UIContent, UIProperties, Rest) {
   
-  var UIClusterHealth = UIBean.extend({
+  var UIClusterHealth = UIProperties.extend({
     label: "Cluster Health",
+     
     config: {
-      beans: {
-        bean: {
-          label: 'Cluster Health',
-          fields: [
-            { field: "cluster_name", label: "Cluster Name"},
-            { field: "status", label: "Status"},
-            { field: "timedOut", label: "Time Out"},
-            { field: "number_of_nodes", label: "Num Of Nodes"},
-            { field: "number_of_data_nodes", label: "Num Of Data Nodes"},
-            { field: "active_primary_shards", label: "Active Primary Shards"},
-            { field: "active_shards", label: "Active Shards"},
-            { field: "relocating_shards", label: "Recolating Shards"},
-            { field: "initializing_shards", label: "Initializing Shards"},
-            { field: "unassigned_shards", label: "Unassigned Shards"},
-            { field: "delayed_unassigned_shards", label: "Delayed Unassigned Shards"},
-            { field: "number_of_pending_tasks", label: "Number Of Pending Tasks"},
-            { field: "number_of_in_flight_fetch", label: "Number Of In Flight Fetch"},
-            { field: "task_max_waiting_in_queue_millis", label: "Task Max Waiting In Queue Millis"},
-            { field: "active_shards_percent_as_number", label: "Active Shards Percent As Number"}
-          ]
-        }
-      }
+      width: "600px",
+      label: { width: "250px" }
     },
 
     onInit: function(options) {
       var cStatus = Rest.cluster.getStatus();
-      this.bind('bean', cStatus);
-      this.setReadOnly(true);
-    }
+      this.setBean(cStatus);
+    },
   });
 
+  var NodeModel = {
+    label: 'Cluster Node Model',
+    fields: {
+      "name": { label: "Name", datatype: "string"},
+      "transport_address": { label: "Transport Address", datatype: "string"},
+      "http_address": { label: "Http Address", datatype: "string"},
+    }
+  };
+
   var UIClusterNodes = UITable.extend({
-    label: "Cluster Nodes",
+    label: "Cluster Nodes", 
 
     config: {
-      toolbar: {
-        dflt: {
-          actions: [
-            {
-              action: "refresh", label: "Refresh", 
-              onClick: function(thisTable) { 
-              } 
-            }
-          ]
-        }
-      },
-      
-      bean: {
-        label: 'Cluster Nodes',
-        fields: [
-          { 
-            field: "id",   label: "Id", toggled: true, filterable: true,
-            onClick: function(thisTable, row) {
-              var bean = thisTable.getItemOnCurrentPage(row) ;
-              var uiClusterInfo = thisTable.getAncestorOfType('UIClusterInfo');
+      control: { header: "Cluster Nodes"},
+      table: { header: "Cluster Nodes"},
+
+      actions: {
+        toolbar: {
+          refresh: {
+            label: "Refresh",
+            onClick: function(uiTable) { }
+          }
+        },
+
+        bean: {
+          detail: {
+            label: "Detail",
+            onClick: function(uiTable, beanState) {
+              var bean = beanState.bean;
+              var uiClusterInfo = uiTable.getAncestorOfType('UIClusterInfo');
               var uiContent = new UIContent({ content: JSON.stringify(bean, null, 2), highlightSyntax: "json" });
               uiContent.label = "Cluster Node " + bean.http_address;
               uiClusterInfo.push(uiContent);
             }
-          },
-          { field: "name",   label: "Name", toggled: true, filterable: true },
-          { field: "transport_address",   label: "Transport Addr", toggled: true, filterable: true },
-          { field: "http_address",   label: "Http Addr", toggled: true, filterable: true },
-        ]
+          }
+        }
       }
     },
-
+    
     onInit: function(options) {
       var result = Rest.cluster.getNodes();
       var nodes = [];
@@ -88,9 +68,9 @@ define([
         node.id = key;
         nodes.push(node);
       }
-      this.setBeans(nodes);
+      this.set(NodeModel, nodes);
     }
-  });
+  }) ;
 
   var UIClusterInfoGeneric = UICollapsible.extend({
     label: "Cluster Info Generic", 
@@ -115,5 +95,5 @@ define([
     }
   });
   
-  return new UIClusterInfo() ;
+  return UIClusterInfo ;
 });

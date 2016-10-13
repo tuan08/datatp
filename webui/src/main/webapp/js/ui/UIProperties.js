@@ -1,8 +1,7 @@
 define([
-  'jquery', 
-  'underscore', 
-  'backbone',
-], function($, _, Backbone) {
+  'jquery', 'underscore', 'backbone',
+  'ui/UIView'
+], function($, _, Backbone, UIView) {
   var TEMPLATE = `
     <%var width = config.width ? config.width : "100%"; %>
     <div class="ui-bean" style="width: <%=width%>">
@@ -12,20 +11,22 @@ define([
 
       <%for(var key in bean) { %>
         <div class="box-border-bottom">
-          <label class="box-display-ib-120px"><%=key%></label>
+          <label class="box-display-ib" style="width: <%=config.label.width%>"><%=key%></label>
           <span class="box-display-ib"><%=bean[key]%></label>
         </div>
       <%}%>
     </div>
   `;
 
-  var UIProperties = Backbone.View.extend({
+  var UIProperties = UIView.extend({
+    defaultConfig: {
+      width: "100%",
+      label: { width: "120px" }
+    },
+
     initialize: function (options) {
-      if(options) {
-        this.bean = options.bean;
-      }
+      this.config = this.mergeConfig(null);
       if(this.onInit) this.onInit(options);
-      if(!this.config) this.config = {};
     },
 
     conf: function(config) {

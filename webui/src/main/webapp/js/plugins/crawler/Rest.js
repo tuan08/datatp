@@ -1,7 +1,8 @@
 define([
+  'env',
   'rest/Server'
-], function(Server) {
-  var server = new Server("http://192.168.1.14:8080/crawler");
+], function(env, Server) {
+  var server = new Server(env.service.crawler.restURL);
 
   function SiteRest(server) {
     this.getSiteConfigs = function() { return server.restGET("/site/configs"); };

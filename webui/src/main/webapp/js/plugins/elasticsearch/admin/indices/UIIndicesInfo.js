@@ -2,85 +2,79 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'ui/UIBean',
-  'ui/UITable',
+  'ui/bean/UIBean',
+  'ui/table/UITable',
   'ui/UICollapsible',
   'ui/UIBreadcumbs',
   'ui/UIContent',
+  'ui/UIProperties',
   'plugins/elasticsearch/Rest'
-], function($, _, Backbone, UIBean, UITable, UICollapsible, UIBreadcumbs, UIContent, Rest) {
+], function($, _, Backbone, UIBean, UITable, UICollapsible, UIBreadcumbs, UIContent, UIProperties, Rest) {
   
-  var UIShardGenericInfo = UIBean.extend({
+  var UIShardGenericInfo = UIProperties.extend({
     label: "Shard Info",
     config: {
-      beans: {
-        bean: {
-          label: 'Shard Info',
-          fields: [
-            { field: "total", label: "Total"},
-            { field: "successful", label: "Successful"},
-            { field: "failed", label: "Failed"},
-          ]
-        }
-      }
+      width: "600px"
     },
 
     onInit: function(options) {
       var stats = options.stats;
-      this.bind('bean', stats._shards);
-      this.setReadOnly(true);
+      this.setBean(stats._shards);
     }
   });
+
+  var OpGenericInfoModel = {
+    label: "Operation Info",
+    fields: {
+      "docs.count": { label: "Docs Count"},
+      "docs.deleted": { label: "Docs Deleted"},
+      "store.size_in_bytes": { label: "Store Size In Bytes"},
+      "store.throttle_time_in_millis": { label: "Throttle Time In Millis"}
+    }
+  };
 
   var UIOpGenericInfo = UIBean.extend({
     label: "Operation Info",
     config: {
-      beans: {
-        bean: {
-          label: 'Operation Info',
-          fields: [
-            { field: "docs.count", label: "Docs Count"},
-            { field: "docs.deleted", label: "Docs Deleted"},
-            { field: "store.size_in_bytes", label: "Store Size In Bytes"},
-            { field: "store.throttle_time_in_millis", label: "Throttle Time In Millis"},
-          ]
-        }
-      }
+      header: "Operation Info",
+      width:  "600px",
     },
 
     onInit: function(options) {
       var stats = options.stats;
-      this.bind('bean', stats._all.primaries);
-      this.setReadOnly(true);
+      this.set(OpGenericInfoModel, stats._all.primaries);
     }
   });
+
+  var IndexModel = {
+    label: "Index",
+    fields: {
+      "name": {   label: "Name" },
+      "info.docs.count": { label: "Docs Count" },
+      "info.docs.deleted": { label: "Docs Deleted" },
+    }
+  };
 
   var UIIndicesList = UITable.extend({
     label: "Indices",
 
     config: {
-      toolbar: {
-        dflt: {
-          actions: [ ]
-        }
-      },
-      
-      bean: {
-        label: 'Cluster Nodes',
-        fields: [
-          { 
-            field: "name",   label: "Name", toggled: true, filterable: true,
-            onClick: function(thisTable, row) {
-              var bean = thisTable.getItemOnCurrentPage(row) ;
-              var uiIndicesInfo = thisTable.getAncestorOfType('UIIndicesInfo');
+      control: { header: "Indices"},
+      table: { header: "Indices"},
+
+      actions: {
+        bean: {
+          detail: {
+            label: "Detail",
+            onClick: function(uiTable, beanState) {
+              var bean = beanState.bean;
+              var uiIndicesInfo = uiTable.getAncestorOfType('UIIndicesInfo');
               var uiContent = new UIContent({ content: JSON.stringify(bean, null, 2), highlightSyntax: "json" });
               uiContent.label = "Cluster Node " + bean.http_address;
               uiIndicesInfo.push(uiContent);
             }
-          },
-          { field: "info.docs.count",   label: "Docs Count", toggled: true, filterable: true },
-          { field: "info.docs.deleted",   label: "Docs Deleted", toggled: true, filterable: true },
-        ]
+          }
+        }
       }
     },
 
@@ -93,7 +87,7 @@ define([
         var bean = { name: key, info: index.total};
         beans.push(bean);
       }
-      this.setBeans(beans);
+      this.set(IndexModel, beans);
     }
   });
 
@@ -123,5 +117,5 @@ define([
     }
   });
   
-  return new UIIndicesInfo() ;
+  return UIIndicesInfo ;
 });

@@ -3,13 +3,13 @@ define([
   'util/util',
   'util/PageList',
   "ui/widget",
+  "ui/nvd3",
   "ui/UIDialog",
-  "ui/table/uichart",
   "ui/table/bucket",
   "text!ui/table/UITableTabPlugin.jtpl",
   "text!ui/table/UITableTabPluginTableView.jtpl",
   "text!ui/table/UITableTabPluginGroupByView.jtpl"
-], function($, _, Backbone, util, PageList, widget, UIDialog, uichart, bucket, UITableTabPluginTmpl, TableView, GroupByView) {
+], function($, _, Backbone, util, PageList, widget, nvd3, UIDialog, bucket, UITableTabPluginTmpl, TableView, GroupByView) {
 
   var createGroupByModel = function(uiTable) {
     var getValue = function(beanState, field) {
@@ -64,9 +64,9 @@ define([
             if(this.uiChart == null) {
               var type = uiTable.config.table.chart.type;
               if(type == "LinePlusBarChart") {
-                this.uiChart = new uichart.UILinePlusBarChart();
+                this.uiChart = new nvd3.UILinePlusBarChart();
               } else {
-                this.uiChart = new uichart.UIBarChart();
+                this.uiChart = new nvd3.UIBarChart();
               }
               this.uiChart.useDataFromUITable(uiTable);
             }

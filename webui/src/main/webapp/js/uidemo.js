@@ -27,10 +27,7 @@ require.config({
       exports: "Backbone"
     },
 
-    d3: {
-      deps: [],
-      exports: 'd3'
-    },
+    d3: { deps: [], exports: 'd3' },
 
     nv: {
       deps: ['d3'],

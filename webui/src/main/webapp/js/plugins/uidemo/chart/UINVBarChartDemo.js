@@ -1,14 +1,26 @@
 define([
   'jquery', 'underscore', 'backbone',
-  'ui/d3/nv3d'
-], function($, _, Backbone, nv3d) {
-  var UINVBarChartDemo = nv3d.ui.UINVBarChart.extend({
+  'ui/nvd3'
+], function($, _, Backbone, nvd3) {
+  var UINVBarChartDemo = nvd3.UIBarChart.extend({
     label: 'NV Bar Chart Demo',
+    
+    config: {
+      xAxis: {
+        label: { title: "X Axis Demo" },
+        tickFormat: "integer"
+      },
+
+      yAxis: {
+        label: { title: "Y Axis Demo" },
+        tickFormat: "number",
+      }
+    },
 
     onInit: function(options) {
-      var chart1 = {
-        name: "Bar 1",
-        xyCoordinates: [
+      var chartData1 = {
+        key: "Bar 1",
+        values: [
           { "y": 84.79595886446555, "x": 0 },
           { "y": 99.89250052861944, "x": 1 },
           { "y": 67.67801413116035, "x": 2 },
@@ -23,9 +35,9 @@ define([
         ]
       };
 
-      var chart2 = {
-        name: "Bar 2",
-        xyCoordinates: [
+      var chartData2 = {
+        key: "Bar 2",
+        values: [
           { "y": -39.30149871817755, "x": 0 },
           { "y": -55.626052631305214, "x": 1 },
           { "y": -85.04127493232377, "x": 2 },
@@ -40,9 +52,9 @@ define([
         ]
       };
 
-      var chart3 =  {
-        name: "Bar 3",
-        xyCoordinates: [
+      var chartData3 =  {
+        key: "Bar 3",
+        values: [
           { "y": -11.614114374242877, "x": 0 },
           { "y": 41.132804448784725, "x": 1 },
           { "y": 109.22227255418088, "x": 2 },
@@ -57,10 +69,10 @@ define([
         ]
       };
 
-      this.addChartData(chart1.name, chart1.xyCoordinates);
-      this.addChartData(chart2.name, chart2.xyCoordinates);
-      this.addChartData(chart3.name, chart3.xyCoordinates);
+      this.addChartData(chartData1);
+      this.addChartData(chartData2);
+      this.addChartData(chartData3);
     }
   });
-  return new UINVBarChartDemo({}) ;
+  return new UINVBarChartDemo() ;
 });
