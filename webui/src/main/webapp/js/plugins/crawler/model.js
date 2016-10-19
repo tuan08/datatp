@@ -1,5 +1,6 @@
 define([
-], function($, _, Backbone) {
+  'util/util',
+], function(util) {
   var SiteConfigGeneric = {
     label: 'Site Config',
     fields: {
@@ -159,7 +160,7 @@ define([
   var URLSchedule = {
     label: 'URL Schedule',
     fields: {
-      "time": { label: "Time" },
+      "time": { label: "Time", format: util.formater.time.locale  },
       "execTime": {   label: "Exec Time" } , 
       "urlCount":   { label: "URL" },
       "urlListCount": { label: "URL List"} ,
@@ -176,7 +177,7 @@ define([
   var URLCommit = {
     label: 'URL Commit',
     fields: {
-      "time": { label: "Time" }, 
+      "time": { label: "Time", format: util.formater.time.locale  },
       "execTime": { label: "Exec Time" },
       "commitURLCount": { label: "Commit URL" },  
       "newURLFoundCount": { label: "New URL Found" }

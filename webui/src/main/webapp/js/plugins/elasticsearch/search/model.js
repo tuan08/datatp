@@ -32,9 +32,9 @@ define([
     var model = {
       label: 'Search Hit Model',
       fields: {
-        "_index": { label: "Index", required: true  },
-        "_id":    { label: "Id",    required: true  },
-        "_score": { label: "Score", required: true  }
+        "_index": { label: "_index", required: true  },
+        "_id":    { label: "_id",    required: true  },
+        "_score": { label: "_score", required: true  }
       }
     };
 
@@ -43,6 +43,13 @@ define([
       var label = flatFieldName.replace("_source.", "");
       var fieldConfig = {label: label, mapping: flatIndexFieldMappings[flatFieldName] }
       model.fields[flatFieldName] = fieldConfig;
+    }
+    model.fieldNames  = [];
+    model.fieldLabels = [];
+    for(var name in model.fields) {
+      var fieldConfig = model.fields[name];
+      model.fieldNames.push(name);
+      model.fieldLabels.push(fieldConfig.label);
     }
     return model;
   };

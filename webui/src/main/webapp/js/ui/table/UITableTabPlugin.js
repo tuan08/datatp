@@ -153,7 +153,7 @@ define([
 
     onToggleBucket: function(evt) { 
       var bucketPath = $(evt.target).attr("bucket");
-      var bucket = this.view.groupBy.model.findBucketByPath(bucketPath);
+      var bucket = this.view.groupby.model.findBucketByPath(bucketPath);
       bucket.collapse = !bucket.collapse ;
       this.render();
     },
@@ -172,7 +172,7 @@ define([
       var tr = $(evt.target).closest("tr"); 
       var row = parseInt(tr.attr("row"));
       var bucketPath = tr.attr("bucket");
-      var bucket = this.uiTable.viewModel.groupBy.findBucketByPath(bucketPath);
+      var bucket = this.uiTable.viewModel.groupby.findBucketByPath(bucketPath);
       var beanState = bucket.objects[row];
       this.uiTable.onBeanAction(actionName, beanState);
     },

@@ -4,11 +4,11 @@ define([
   'backbone',
   'plugins/elasticsearch/search/ESQueryContext',
   'plugins/elasticsearch/search/hit/UISearchHit',
-//  'plugins/elasticsearch/search/analytic/UIAnalytics',
+  'plugins/elasticsearch/search/aggregations/UIAggregations',
   'plugins/elasticsearch/admin/UIAdmin',
   'text!plugins/elasticsearch/UIBody.jtpl',
   'css!plugins/elasticsearch/stylesheet.css'
-], function($, _, Backbone, ESQueryContext, UISearchHit, /*UIAnalytics,*/ UIAdmin, Template) {
+], function($, _, Backbone, ESQueryContext, UISearchHit, UIAggregations, UIAdmin, Template) {
 
   var UISearch = Backbone.View.extend({
     type: 'UISearch',
@@ -20,8 +20,8 @@ define([
 
       this.state = {
         views: {
-          Search:    {  uiComponent: new UISearchHit({esQueryContext: this.esQueryCtx}) },
-//          Analytics: { uiComponent: new UIAnalytics({esQueryContext: this.esQueryCtx}) },
+          Search:    { uiComponent: new UISearchHit({esQueryContext: this.esQueryCtx}) },
+          Aggregations: { uiComponent: new UIAggregations({esQueryContext: this.esQueryCtx}) },
           Admin:     { uiComponent: new UIAdmin() }
         },
         selectView: 'Search',
@@ -40,7 +40,7 @@ define([
 
     events: {
       'click .onSelectSearch':    'onSelectSearch',
-      'click .onSelectAnalytics': 'onSelectAnalytics',
+      'click .onSelectAggregations': 'onSelectAggregations',
       'click .onSelectAdmin':     'onSelectAdmin',
 
       'click .onSearch': 'onSearch',
@@ -54,8 +54,8 @@ define([
       this.render();
     },
 
-    onSelectAnalytics: function(evt) {
-      this.state.selectView = 'Analytics';
+    onSelectAggregations: function(evt) {
+      this.state.selectView = 'Aggregations';
       this.state.visibleSearchInput = true;
       this.render();
     },

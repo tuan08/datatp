@@ -385,7 +385,7 @@ input, select {
 .ui-breadcumbs { height: 100%; }
 
 .ui-breadcumbs .breadcumbs {
-  background: #f1f1f1; padding: 3px 0px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+  background: #f1f1f1; padding: 3px 0px; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; 
 }
 
 .ui-breadcumbs .view { padding-top: 10px; height: calc(100% - 25px); border: 1px solid #ddd; border-top: none; }

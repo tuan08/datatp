@@ -14,9 +14,7 @@ define([
       this.config = config ;
     },
     
-    setContent: function(content) {
-      this.config.content = content;
-    },
+    setContent: function(content) { this.config.content = content; },
 
     _template: _.template(`
       <div>
@@ -25,16 +23,13 @@ define([
     `),
 
     render: function() {
-      var params = {
-        config: this.config,
-        highlightSyntax: ''
-      };
+      var params = { config: this.config, highlightSyntax: '' };
       if(this.config.highlightSyntax != null) {
         params.highlightSyntax = 'lang-' + this.config.highlightSyntax ;
       }
       $(this.el).html(this._template(params));
       $(this.el).prettify();
-    }
+    },
   });
   
   return UIContent ;

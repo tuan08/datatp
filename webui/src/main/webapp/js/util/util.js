@@ -111,10 +111,25 @@ define([
     }
   };
 
+  function patch0(val) { return val > 9 ? val : '0' + val; }
+
+  var formater = {
+    time: {
+      ddMMyyyyWithTime: function(value) {
+        var date  = new Date(value);
+        var fVal  = patch0(date.getDate()) + "/" + patch0((date.getMonth() + 1)) + "/" + date.getFullYear() ;
+        fVal      = fVal + " " + patch0(date.getHours()) + ":" + patch0(date.getMinutes()) + ":" + patch0(date.getSeconds());
+        return fVal;
+      }
+    }
+  };
+
+  formater.time.locale = formater.time.ddMMyyyyWithTime;
+
   var util = {
-    reflect: reflect
+    reflect:  reflect,
+    formater: formater
   };
 
   return util  ;
 });
-

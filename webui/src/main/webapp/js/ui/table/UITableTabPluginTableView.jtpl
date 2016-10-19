@@ -7,9 +7,13 @@
       <tr row=<%= i %>>
         <td><%= (from + i +1) %></td>
         <%for(var j = 0; j < beanInfo.fieldNames.length; j++) {%>
-          <%var fName = beanInfo.fieldNames[j]; %>
-          <%if(config.table.column[fName] && config.table.column[fName].hidden) continue;%>
-          <%value = util.reflect.getFieldValue(bean, fName); %>
+          <%
+            var fName = beanInfo.fieldNames[j]; 
+            if(config.table.column[fName] && config.table.column[fName].hidden) continue;
+            var fieldConfig = beanInfo.fields[fName];
+            value = util.reflect.getFieldValue(bean, fName); 
+            if(fieldConfig.format) value = fieldConfig.format(value)
+          %>
           <td><%=value%></td>
         <%}%>
         <%if(config.actions.bean) { %>

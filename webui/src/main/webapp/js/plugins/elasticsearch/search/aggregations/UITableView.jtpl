@@ -1,0 +1,34 @@
+<%function renderNode(node) {%>
+  <%if(node.separator) {%>
+    <tr><td style="padding-left: <%=indent%>px; background: #ddd" colspan="3"></td></tr>
+    <%return;%>
+  <%}%>
+  <%var indent = node.level * 10; %>
+  <tr>
+    <td style="padding-left: <%=indent%>px"><%=node.bucket%></td>
+    <td><%=node.key%></td>
+    <td><%=node.count%></td>
+  </tr>
+  <%for(var i = 0; i < node.children.length; i++) { %>
+    <%renderNode(node.children[i]); %>
+  <%}%>
+<%}%>
+
+<%function renderResult() {%>
+  <%if(treeModel == null) return; %>
+  <%for(var i = 0; i < treeModel.children.length; i++) { %>
+    <%renderNode(treeModel.children[i]); %>
+  <%}%>
+<%}%>
+
+<div style="padding: 2px 5px;">
+  <h6>ES Aggregations<h6>
+  <table class="ui-table">
+    <tr> 
+      <th>Bucket</th>
+      <th>Key</th>
+      <th>Count</th>
+    </tr>
+    <%renderResult() ;%>
+  </table>
+</div>

@@ -7,6 +7,7 @@ define([
 ], function($, _, Backbone, UIView, Template) {
 
   var UIBorderLayout = UIView.extend({
+
     initialize: function(options) {
       this.layout = { };
       if(this._onInit) this._onInit(options);

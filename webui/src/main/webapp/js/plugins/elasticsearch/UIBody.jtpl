@@ -22,8 +22,8 @@
   </div>
 <%}%>
 
-<div>
+<div style="height: 100%">
   <%renderViewSelect(state); %>
   <%renderSearchInput(state); %>
-  <div class="UISearchView ui-tab-content " style="padding: 5px 3px">UISearchView</div>
+  <div class="UISearchView ui-tab-content" style="padding: 5px 3px; height: calc(100% - 45px)">UISearchView</div>
 </div>

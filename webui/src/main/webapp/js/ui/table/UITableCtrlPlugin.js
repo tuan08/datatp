@@ -115,7 +115,6 @@ define([
       var op       = ele.attr("op") ;
       var property = ele.attr("property") ;
       var value    = ele.val() ;
-      console.log("UITableCtrlPlugin: object = " + object + ", op = " + op + ", property = " + property + ", value = " + value);
       this.uiTable.firePropertyChange(object, op, property, value);
       this.uiTable.refreshWorkspace();
       this.render();
@@ -127,7 +126,6 @@ define([
       var op       = ele.attr("op") ;
       var property = ele.attr("property") ;
       var value    = ele.attr("value") ;
-      console.log("UITableCtrlPlugin: object = " + object + ", op = " + op + ", property = " + property + ", value = " + value);
       this.uiTable.firePropertyChange(object, op, property, value);
       this.uiTable.refreshWorkspace();
       this.render();

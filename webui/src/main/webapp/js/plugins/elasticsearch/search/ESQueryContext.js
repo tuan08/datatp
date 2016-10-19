@@ -98,6 +98,8 @@ define([
     this.query     = query;
     this.searchURL = restURL + "/" + indices.join() + "/_search?pretty=true";
     this.queryResult = new ESQueryResult();
+    
+    this.getSearchHitModel = function() { return this.searchHitModel ;};
 
     this.setQuery = function(query) {
       this.query = query; 
@@ -112,8 +114,6 @@ define([
 
     this.getQueryResult = function() { return this.queryResult; };
 
-    this.getIndexFieldsMapping = function() { return this.indexFieldsMapping; }
-    
     this.dslQuery = function(dslQuery) {
       var restPath = this.searchURL;
       return postDslQuery(restPath, dslQuery);
