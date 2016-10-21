@@ -32,7 +32,7 @@ public class ForumExtractor implements WDataExtractor  {
   }
   
   @Override
-  public WDataExtract extract(WDataExtractContext context) {
+  public WDataExtract extract(WDataContext context) {
     XPathStructure structure = context.getXpathStructure();
     List<XPath> candidates = structure.getXPathTree().select(candidateSelector, 20);
     if(candidates.size() < 5) return null;
@@ -45,7 +45,7 @@ public class ForumExtractor implements WDataExtractor  {
     return extract;
   }
   
-  public ExtractEntity extractEntity(WDataExtractContext context) {
+  public ExtractEntity extractEntity(WDataContext context) {
     XPathStructure structure = context.getXpathStructure();
     List<XPath> candidates = structure.getXPathTree().select(candidateSelector, 20);
     if(candidates.size() < 5) return null;

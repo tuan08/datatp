@@ -16,7 +16,7 @@ public class BoilerpipeContentExtractorUnitTest {
     String url = "http://vnexpress.net/tin-tuc/thoi-su/bao-mirinae-huong-vao-dong-bang-bac-bo-3442861.html";
     WDataHttpFetcher fetcher = new WDataHttpFetcher();
     WData wPageData = fetcher.fetch(anchorText, url);
-    WDataExtractContext context = new WDataExtractContext(wPageData);
+    WDataContext context = new WDataContext(wPageData);
     
     List<ExtractEntity> entities = WDataExtractor.extractEntity(context, new BoilerpipeContentExtractor("article"));
     System.out.println(ExtractEntity.toString(entities));
@@ -28,7 +28,7 @@ public class BoilerpipeContentExtractorUnitTest {
     String url = "http://kinhdoanh.vnexpress.net/";
     WDataHttpFetcher fetcher = new WDataHttpFetcher();
     WData wPageData = fetcher.fetch(anchorText, url);
-    WDataExtractContext context = new WDataExtractContext(wPageData);
+    WDataContext context = new WDataContext(wPageData);
     
     List<ExtractEntity> entities = WDataExtractor.extractEntity(context, new BoilerpipeContentExtractor("article"));
     System.out.println(ExtractEntity.toString(entities));

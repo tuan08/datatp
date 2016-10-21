@@ -84,9 +84,9 @@ define([
         { 
           action: "refresh", label: "Refesh",
           onClick: function(thisUI) {
-            var fetcherReport = Rest.fetcher.getFetcherReport(thisUI.fetcherReportId);
-            thisUI.onRefresh(fetcherReport);
-            thisUI.render();
+            var uiReport = thisUI.getAncestorOfType("UIFetcherReport");
+            uiReport.onRefresh();
+            uiReport.render();
           }
         },
       ]
@@ -146,6 +146,7 @@ define([
 
 
   var UIFetcherReport = UIBorderLayout.extend({
+    type: 'UIFetcherReport',
     label: 'Fetcher Report',
 
     config: {
@@ -153,14 +154,23 @@ define([
     
     init: function(fetcherReportId) {
       this.fetcherReportId = fetcherReportId;
-      var fetcherReport = Rest.fetcher.getFetcherReport(fetcherReportId);
 
       var westConfig = { width: "450px"};
-      this.setUI('west', new UIFetcherStatus().onRefresh(fetcherReport), westConfig);
+      this.uiFetcherStatus = new UIFetcherStatus();
+      this.setUI('west', this.uiFetcherStatus, westConfig);
 
       var centerConfig = {};
-      this.setUI('center', new UIFetcherReportTabbedPane().setFetcherReport(fetcherReport), centerConfig);
+      this.uiFetcherReportTabbedPane = new UIFetcherReportTabbedPane();
+      this.setUI('center', this.uiFetcherReportTabbedPane, centerConfig);
+
+      this.onRefresh();
       return this;
+    },
+
+    onRefresh: function() {
+      var fetcherReport = Rest.fetcher.getFetcherReport(this.fetcherReportId);
+      this.uiFetcherStatus.onRefresh(fetcherReport);
+      this.uiFetcherReportTabbedPane.setFetcherReport(fetcherReport);
     }
   }) ;
 

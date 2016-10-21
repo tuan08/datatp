@@ -3,14 +3,14 @@ package net.datatp.crawler.processor;
 import net.datatp.crawler.XDocMapper;
 import net.datatp.crawler.fetcher.FetchContext;
 import net.datatp.crawler.http.ResponseHeaders;
-import net.datatp.xhtml.extract.WDataExtractContext;
+import net.datatp.xhtml.extract.WDataContext;
 /**
  * $Author: Tuan Nguyen$ 
  **/
 public class FetchErrorAnalyzerPlugin implements FetchProcessorPlugin {
 
   @Override
-  public void process(FetchContext fetchCtx, WDataExtractContext wdataCtx) {
+  public void process(FetchContext fetchCtx, WDataContext wdataCtx) {
     XDocMapper xdoc = fetchCtx.getXDocMapper();
     ResponseHeaders responseHeaders = fetchCtx.getResponseHeaders();
     int rcode = responseHeaders.getResponseCode() ;

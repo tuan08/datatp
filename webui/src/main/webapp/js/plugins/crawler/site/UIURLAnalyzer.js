@@ -1,11 +1,10 @@
 define([
   'jquery',
   'underscore', 
-  'backbone',
   'ui/UIView',
   'plugins/crawler/site/uicomp',
   'text!plugins/crawler/site/UIURLAnalyzer.jtpl'
-], function($, _, Backbone, UIView, uicomp, Template) {
+], function($, _, UIView, uicomp, Template) {
   var UIURLAnalyzer = UIView.extend({
     label: "URL Analyzer",
 

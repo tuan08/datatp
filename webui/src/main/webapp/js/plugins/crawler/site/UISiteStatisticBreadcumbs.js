@@ -36,8 +36,7 @@ define([
         toolbar: {
           refresh: {
             label: "Refresh",
-            onClick: function(uiTable) { 
-            }
+            onClick: function(uiTable) { uiTable.onRefresh(); }
           }
         },
 
@@ -58,6 +57,13 @@ define([
       var siteStatistics = Rest.site.getSiteStatistics() ;
       this.set(model.site.SiteStatistic, siteStatistics);
       this.setTablePageSize(25, false);
+    },
+
+
+    onRefresh: function() {
+      var siteStatistics = Rest.site.getSiteStatistics() ;
+      this.setBeans(siteStatistics);
+      this.refreshTable();
     }
   }) ;
 

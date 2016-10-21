@@ -16,7 +16,7 @@ public class MainContentExtractor implements WDataExtractor {
   public MainContentExtractor(String type) { this.type = type; }
   
   @Override
-  public WDataExtract extract(WDataExtractContext context) {
+  public WDataExtract extract(WDataContext context) {
     XPathStructure structure = context.getXpathStructure();
     XPath titleXPath = structure.findTitleHeaderCandidate();
     
@@ -42,7 +42,7 @@ public class MainContentExtractor implements WDataExtractor {
     return extract;
   }
   
-  public ExtractEntity extractEntity(WDataExtractContext context) {
+  public ExtractEntity extractEntity(WDataContext context) {
     XPathStructure structure = context.getXpathStructure();
     XPath titleXPath = structure.findTitleHeaderCandidate();
     

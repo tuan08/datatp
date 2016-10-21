@@ -47,16 +47,19 @@ public class CrawlerIntegrationTest {
      // "--spring.http.multipart.multipart.max-file-size=1Mb",     //# Max file size.
      // "--spring.http.multipart.multipart.max-request-size=10Mb"  // # Max request size.  
     };
+    int REFRESH_PERIOD_IN_SEC = 60 * 60;
     Crawler crawler = CrawlerApp.run(args).getBean(Crawler.class);
     
     crawler.siteCreateGroup("vietnam");
     crawler.siteAdd(
       new SiteConfig("vietnam", "vnexpress.net", "http://vnexpress.net", 2).
+      setRefreshPeriod(REFRESH_PERIOD_IN_SEC).
       setExtractConfig(ExtractConfig.article())
     );
     
     crawler.siteAdd(
       new SiteConfig("vietnam", "dantri.com.vn", "http://dantri.com.vn", 2).
+      setRefreshPeriod(REFRESH_PERIOD_IN_SEC).
       setExtractConfig(ExtractConfig.article())
     ); 
 

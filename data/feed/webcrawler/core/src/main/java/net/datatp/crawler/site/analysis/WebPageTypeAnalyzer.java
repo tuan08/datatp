@@ -1,4 +1,7 @@
-package net.datatp.crawler.site;
+package net.datatp.crawler.site.analysis;
+
+import net.datatp.crawler.site.WebPageType;
+import net.datatp.crawler.site.WebPageTypePattern;
 
 public class WebPageTypeAnalyzer {
   private WebPageTypePattern[] pattern;
@@ -30,7 +33,6 @@ public class WebPageTypeAnalyzer {
     for(WebPageTypePattern sel : this.pattern) {
       if(sel.matches(url)) return sel.getType();
     }
-    if(hasDetailPatternConfig) return WebPageType.uncategorized;
-    return WebPageType.detail;
+    return null;
   }
 }

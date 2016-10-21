@@ -7,9 +7,10 @@ import org.junit.Test;
 
 import net.datatp.crawler.site.ExtractConfig.ExtractType;
 import net.datatp.crawler.site.ExtractConfig.XPathPattern;
+import net.datatp.crawler.site.analysis.WebPageAnalyzer;
 import net.datatp.xhtml.WData;
 import net.datatp.xhtml.extract.ExtractEntity;
-import net.datatp.xhtml.extract.WDataExtractContext;
+import net.datatp.xhtml.extract.WDataContext;
 import net.datatp.xhtml.util.WDataHttpFetcher;
 
 public class XPathExtractorUnitTest {
@@ -30,13 +31,13 @@ public class XPathExtractorUnitTest {
     SiteContext vnexpressCtx = manager.getSiteContext("http://vnexpress.net");
     Assert.assertNotNull(vnexpressCtx);
     
-    SiteExtractor vnexpressExtractor = vnexpressCtx.getSiteExtractor();
+    WebPageAnalyzer vnexpressExtractor = vnexpressCtx.getWebPageAnalyzer();
     
     WDataHttpFetcher fetcher = new WDataHttpFetcher();
     WData wdata = fetcher.fetch(
         "Những quy định nổi bật có hiệu lực từ 1/8", 
         "http://vnexpress.net/tin-tuc/thoi-su/giao-thong/nhung-quy-dinh-noi-bat-co-hieu-luc-tu-1-8-3445254.html");
-    WDataExtractContext wdataContext = new WDataExtractContext(wdata);
+    WDataContext wdataContext = new WDataContext(wdata);
     List<ExtractEntity> extracts  = vnexpressExtractor.extract(wdataContext);
     System.out.println(ExtractEntity.toString(extracts));
   }

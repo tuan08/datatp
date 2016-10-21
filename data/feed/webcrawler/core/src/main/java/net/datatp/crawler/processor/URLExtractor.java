@@ -11,12 +11,12 @@ import org.slf4j.LoggerFactory;
 
 import net.datatp.crawler.site.URLContext;
 import net.datatp.crawler.site.WebPageType;
-import net.datatp.crawler.site.WebPageTypeAnalyzer;
+import net.datatp.crawler.site.analysis.WebPageTypeAnalyzer;
 import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.crawler.urldb.URLDatumFactory;
 import net.datatp.util.URLInfo;
 import net.datatp.util.text.StringUtil;
-import net.datatp.xhtml.extract.WDataExtractContext;
+import net.datatp.xhtml.extract.WDataContext;
 import net.datatp.xhtml.util.URLRewriter;
 import net.datatp.xhtml.util.URLSessionIdCleaner;
 import net.datatp.xhtml.xpath.XPath;
@@ -50,7 +50,7 @@ public class URLExtractor {
     }
   }
   
-  public Map<String, URLDatum> extract(URLContext urlCtx, WDataExtractContext wdataCtx) {
+  public Map<String, URLDatum> extract(URLContext urlCtx, WDataContext wdataCtx) {
     URLDatum urlDatum = urlCtx.getURLDatum();
     XPathStructure structure = wdataCtx.getXpathStructure();
     Map<String, URLDatum> urls = new HashMap<>();
@@ -88,7 +88,7 @@ public class URLExtractor {
 
         if (isExclude(newURLInfo.getPath())) continue;
         
-        WebPageTypeAnalyzer wpAnalyzer = urlCtx.getSiteContext().getWebPageTypeAnalyzer();
+        WebPageTypeAnalyzer wpAnalyzer = urlCtx.getSiteContext().getWebPageAnalyzer().getWebPageTypeAnalyzer();
         WebPageType wpType = wpAnalyzer.analyze(anchorText, newNormalizedURL);
         if(wpType == WebPageType.ignore) continue;
         

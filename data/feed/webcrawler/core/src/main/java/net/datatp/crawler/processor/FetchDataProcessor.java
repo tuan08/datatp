@@ -11,7 +11,7 @@ import net.datatp.crawler.fetcher.FetchContext;
 import net.datatp.crawler.processor.metric.ProcessMetric;
 import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.xhtml.WData;
-import net.datatp.xhtml.extract.WDataExtractContext;
+import net.datatp.xhtml.extract.WDataContext;
 /**
  * $Author: Tuan Nguyen$ 
  **/
@@ -38,7 +38,7 @@ public class FetchDataProcessor {
     metric.incrProcessCount() ;
     final long start = System.currentTimeMillis() ;
     URLDatum urlDatum = fetchCtx.getURLContext().getURLDatum() ;
-    WDataExtractContext wDataCtx = null;
+    WDataContext wDataCtx = null;
     byte[] data = fetchCtx.getData();
     
     try {
@@ -46,7 +46,7 @@ public class FetchDataProcessor {
         Charset charset = EncodingDetector.INSTANCE.detect(data, data.length);
         String xhtml = new String(data, charset);
         WData wdata = new WData(urlDatum.getOriginalUrl(), urlDatum.getAnchorText(), xhtml) ;
-        wDataCtx = new WDataExtractContext(wdata);
+        wDataCtx = new WDataContext(wdata);
       }
       metric.addSumHtmlProcessTime(System.currentTimeMillis() - start) ;
       processPlugins(fetchCtx, wDataCtx);
@@ -59,13 +59,8 @@ public class FetchDataProcessor {
     metric.addSumProcessTime(System.currentTimeMillis() - start) ;
   }
   
-  private void processUrls(FetchContext fetchCtx, WDataExtractContext wDataCtx) throws Exception {
+  private void processUrls(FetchContext fetchCtx, WDataContext wDataCtx) throws Exception {
     URLDatum urlDatum = fetchCtx.getURLContext().getURLDatum();
-    if(fetchCtx.getXDocMapper().hasEntities()) {
-      urlDatum.setPageType(URLDatum.PAGE_TYPE_DETAIL);
-    } else {
-      urlDatum.setPageType(URLDatum.PAGE_TYPE_LIST);
-    }
     ArrayList<URLDatum> commitUrls = new ArrayList<URLDatum>() ;
     commitUrls.add(urlDatum);
     if(wDataCtx != null) {
@@ -77,7 +72,7 @@ public class FetchDataProcessor {
     fetchCtx.setCommitURLs(commitUrls);
   }
   
-  private void processPlugins(FetchContext fetchCtx, WDataExtractContext wdataCtx) throws Exception {
+  private void processPlugins(FetchContext fetchCtx, WDataContext wdataCtx) throws Exception {
     for(FetchProcessorPlugin sel : plugin) {
       sel.process(fetchCtx, wdataCtx);
     }

@@ -8,18 +8,18 @@ import net.datatp.xhtml.xpath.NodeCleaner;
 import net.datatp.xhtml.xpath.NodeCleanerVisitor;
 import net.datatp.xhtml.xpath.XPathStructure;
 
-public class WDataExtractContext {
+public class WDataContext {
+  private URLInfo        urlInfo;
   private WData          wdata;
-  private URLInfo        urlAnalyzer;
   private XPathStructure xpathStructure;
 
-  public WDataExtractContext(WData wdata) {
+  public WDataContext(WData wdata) {
     this.wdata   = wdata;
   }
   
-  public URLInfo getURLAnalyzer() {
-    if(urlAnalyzer == null) urlAnalyzer = new URLInfo(wdata.getUrl());
-    return urlAnalyzer;
+  public URLInfo getURInfo() {
+    if(urlInfo == null) urlInfo = new URLInfo(wdata.getUrl());
+    return urlInfo;
   }
   
   public WData getWdata() { return wdata; }
@@ -36,7 +36,6 @@ public class WDataExtractContext {
   }
   
   public void reset() {
-    urlAnalyzer = null;
     xpathStructure = null;
   }
 }

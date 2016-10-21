@@ -1,5 +1,6 @@
 package net.datatp.crawler.site;
 
+import net.datatp.crawler.site.analysis.WebPageAnalyzer;
 import net.datatp.util.URLInfo;
 
 /**
@@ -10,30 +11,26 @@ import net.datatp.util.URLInfo;
 public class SiteContext {
   
   private SiteConfig          siteConfig;
-  private WebPageTypeAnalyzer webPageTypeAnalyzer;
   private SiteStatistic       siteStatistic ;
 
-  private SiteExtractor       siteExtractor;
+  private WebPageAnalyzer     webpageAnalyzer;
 
   public SiteContext(SiteConfig siteConfig, AutoWDataExtractors autoWDataExtractors) {
+    this.webpageAnalyzer = new WebPageAnalyzer(autoWDataExtractors);
     update(siteConfig);
-    this.siteExtractor = new SiteExtractor(siteConfig, autoWDataExtractors);
   }
   
   public void update(SiteConfig siteConfig) {
     this.siteConfig    = siteConfig ;
     this.siteStatistic = new SiteStatistic(siteConfig.getGroup(), siteConfig.getHostname());
-    this.webPageTypeAnalyzer = new WebPageTypeAnalyzer(siteConfig.getWebPageTypePatterns());
-    if(siteExtractor != null) siteExtractor.update(siteConfig);
+    this.webpageAnalyzer.update(siteConfig);
   }
 
   public SiteConfig getSiteConfig() { return this.siteConfig ; }
   
   public SiteStatistic getSiteStatistic() { return siteStatistic ; }
   
-  public WebPageTypeAnalyzer getWebPageTypeAnalyzer() { return webPageTypeAnalyzer; }
-  
-  public SiteExtractor getSiteExtractor() { return siteExtractor; }
+  public WebPageAnalyzer getWebPageAnalyzer() { return webpageAnalyzer; }
   
   public int getMaxConnection() { 
     int max = siteConfig.getMaxConnection() ;

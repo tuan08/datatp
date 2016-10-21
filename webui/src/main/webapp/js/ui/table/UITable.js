@@ -185,13 +185,16 @@ define([
       if(refresh) this.uiTableWorkspace.onRefresh();;
     },
 
-    refreshWorkspace: function() { this.uiTableWorkspace.render(); },
 
     fireDataChange: function() { this.uiTableWorkspace.fireDataChange(); },
 
     firePropertyChange: function(object, op, property, value) { 
       this.uiTableWorkspace.firePropertyChange(object, op,  property, value); 
     },
+
+    refreshWorkspace: function() { this.uiTableWorkspace.render(); },
+
+    refreshTable: function() { this.uiTableWorkspace.onRefresh(); },
 
     __filter: function(field, exp) { 
       if(exp == null || exp == '') {
@@ -244,9 +247,6 @@ define([
       }
     },
 
-    __refreshTable: function() {
-      this.uiTableWorkspace.onRefresh();
-    }
   });
 
   return UITable;

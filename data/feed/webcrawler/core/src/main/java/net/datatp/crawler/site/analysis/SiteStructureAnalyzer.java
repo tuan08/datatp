@@ -2,7 +2,7 @@ package net.datatp.crawler.site.analysis;
 
 import net.datatp.crawler.site.SiteConfig;
 import net.datatp.crawler.site.SiteCrawler;
-import net.datatp.xhtml.extract.WDataExtractContext;
+import net.datatp.xhtml.extract.WDataContext;
 
 public class SiteStructureAnalyzer {
   private SiteCrawler   siteCrawler;
@@ -14,7 +14,7 @@ public class SiteStructureAnalyzer {
   public SiteStructureAnalyzer(SiteConfig sConfig, int maxDownload) {
     siteCrawler = new SiteCrawler(sConfig, maxDownload) {
       @Override
-      public void onWData(WDataExtractContext ctx) { 
+      public void onWData(WDataContext ctx) { 
         siteStructure.analyse(ctx); 
       }
     };

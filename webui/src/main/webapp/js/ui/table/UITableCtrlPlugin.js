@@ -90,7 +90,7 @@ define([
           break;
         }
       }
-      this.uiTable.__refreshTable();
+      this.uiTable.refreshTable();
       this.render();
     },
 
@@ -105,7 +105,7 @@ define([
           break;
         }
       }
-      this.uiTable.__refreshTable();
+      this.uiTable.refreshTable();
       this.render();
     },
 

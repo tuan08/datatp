@@ -1,6 +1,7 @@
-package net.datatp.crawler.site;
+package net.datatp.crawler.site.analysis;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -8,25 +9,32 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import net.datatp.crawler.site.AutoWDataExtractors;
+import net.datatp.crawler.site.ExtractConfig;
+import net.datatp.crawler.site.SiteConfig;
+import net.datatp.crawler.site.WebPageType;
 import net.datatp.crawler.site.ExtractConfig.XPathPattern;
+
 import net.datatp.xhtml.WData;
 import net.datatp.xhtml.extract.ExtractEntity;
-import net.datatp.xhtml.extract.WDataExtractContext;
+import net.datatp.xhtml.extract.WDataContext;
 import net.datatp.xhtml.extract.WDataExtractor;
 import net.datatp.xhtml.xpath.FormatTextExtractor;
 import net.datatp.xhtml.xpath.NodeCleaner;
 import net.datatp.xhtml.xpath.NodeCleanerVisitor;
 
-public class SiteExtractor {
+public class WebPageAnalyzer {
+  private WebPageTypeAnalyzer wpTypeAnalyzer;
+  
   private AutoWDataExtractors autoWDataExtractors;
   private EntityExtractor[]   entityExtractor;
   
-  public SiteExtractor(SiteConfig siteConfig, AutoWDataExtractors autoWDataExtractors) {
+  public WebPageAnalyzer(AutoWDataExtractors autoWDataExtractors) {
     this.autoWDataExtractors = autoWDataExtractors;
-    update(siteConfig);
   }
   
   public void update(SiteConfig siteConfig) {
+    wpTypeAnalyzer = new WebPageTypeAnalyzer(siteConfig.getWebPageTypePatterns());
     ExtractConfig[] extractConfigs = siteConfig.getExtractConfig();
     if(extractConfigs != null) {
       this.entityExtractor = new EntityExtractor[extractConfigs.length];
@@ -36,7 +44,42 @@ public class SiteExtractor {
     }
   }
   
-  public List<ExtractEntity> extract(WDataExtractContext context) {
+  public WebPageTypeAnalyzer getWebPageTypeAnalyzer() { return wpTypeAnalyzer; }
+  
+  public WebPageAnalysis analyze(WDataContext ctx) {
+    WebPageAnalysis wpAnalysis = new WebPageAnalysis();
+    WebPageType wpType = wpTypeAnalyzer.analyze(ctx.getWdata().getAnchorText(), ctx.getWdata().getUrl());
+    if(wpType == WebPageType.ignore || wpType == WebPageType.list) {
+      wpAnalysis.setWebPageType(wpType);
+      return wpAnalysis;
+    }
+    if(wpType == WebPageType.detail) wpAnalysis.setWebPageType(wpType);
+    
+    List<ExtractEntity> entities = extract(ctx);
+    Iterator<ExtractEntity> itr = entities.iterator();
+    boolean pageList = false;
+    while(itr.hasNext()) {
+      ExtractEntity entity = itr.next();
+      if(entity.hasTag("webpage:list")) {
+        pageList = true;
+        itr.remove();
+      }
+    }
+    wpAnalysis.setEntities(entities);
+    
+    if(wpType != null) return wpAnalysis;
+    if(entities == null || entities.size() == 0) {
+      wpAnalysis.setWebPageType(WebPageType.uncategorized);
+      return wpAnalysis;
+    }
+    
+    if(pageList) wpAnalysis.setWebPageType(WebPageType.list);
+    else         wpAnalysis.setWebPageType(WebPageType.detail);
+    return wpAnalysis;
+  }
+  
+  
+  public List<ExtractEntity> extract(WDataContext context) {
     List<ExtractEntity> extractEntities = new ArrayList<>() ;
     if(entityExtractor == null) return extractEntities;
     for(int i = 0; i < entityExtractor.length; i++) {
@@ -64,18 +107,16 @@ public class SiteExtractor {
         pattern = new Pattern[0];
       }
       
-      if(extractConfig.getExtractXPath() != null) {
+      if(extractConfig.getExtractXPath() != null && extractConfig.getExtractXPath().length > 0) {
         xpathExtractor = new XPathExtractor(extractConfig);
-      }
-      
-      if(extractConfig.getExtractType() != null) {
+      } else if(extractConfig.getExtractType() != null) {
         ExtractConfig.ExtractType extractType  = extractConfig.getExtractType() ;
         WDataExtractor extractor = extractors.getExtractor(extractType);
         autoExtractor = new AutoExtractor(extractConfig, extractor);
       }
     }
     
-    public ExtractEntity extractEntity(WDataExtractContext context) {
+    public ExtractEntity extractEntity(WDataContext context) {
       WData wdata = context.getWdata();
       if(!matches(wdata)) return null;
       if(xpathExtractor != null) {
@@ -124,7 +165,7 @@ public class SiteExtractor {
       this.extractor     = extractor;
     }
     
-    public ExtractEntity extractEntity(WDataExtractContext context) {
+    public ExtractEntity extractEntity(WDataContext context) {
       ExtractEntity entity =  extractor.extractEntity(context);
       return entity;
     }
@@ -137,7 +178,7 @@ public class SiteExtractor {
       this.extractConfig = extractConfig;
     }
     
-    public ExtractEntity extractEntity(WDataExtractContext context) {
+    public ExtractEntity extractEntity(WDataContext context) {
       ExtractEntity extractEntity = new ExtractEntity(extractConfig.getName(), extractConfig.getExtractType().toString());
       XPathPattern[] xpathPattern = extractConfig.getExtractXPath();
       Document doc = context.getWdata().createJsoupDocument();

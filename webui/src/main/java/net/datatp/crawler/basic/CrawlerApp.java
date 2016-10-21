@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 import net.datatp.crawler.CrawlerApi;
 import net.datatp.springframework.SpringAppLauncher;
 import net.datatp.util.text.StringUtil;
-
 /**
  * Author : Tuan Nguyen
  *          tuan@gmail.com
@@ -20,7 +19,7 @@ import net.datatp.util.text.StringUtil;
  */
 @SpringBootApplication
 @Configuration
-@ComponentScan(basePackages = {"net.datatp.crawler.rest"})
+@ComponentScan(basePackages = { "net.datatp.crawler.rest" })
 @EnableConfigurationProperties
 @EnableAutoConfiguration
 @ConfigurationProperties
@@ -44,6 +43,6 @@ public class CrawlerApp {
   
   static public void main(String[] args) throws Exception {
     run(args);
-    Thread.currentThread().join();;
+    Thread.currentThread().join();
   }
 }

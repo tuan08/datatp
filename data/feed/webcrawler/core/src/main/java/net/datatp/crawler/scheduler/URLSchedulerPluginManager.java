@@ -8,7 +8,7 @@ import net.datatp.crawler.urldb.URLDatum;
  * May 4, 2010  
  */
 public class URLSchedulerPluginManager {
-  private URLSchedulerPlugin[] plugins = { new URLStateManagerPlugin() } ;
+  private URLSchedulerPlugin[] plugins = { new URLStateManagerPlugin(), new URLNextFetchTimePlugin() } ;
   
   public void preFetch(URLContext context, URLDatum frequest, long atTime) {
     for(int i = 0; i < plugins.length; i++) {

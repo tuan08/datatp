@@ -9,7 +9,7 @@ import net.datatp.xhtml.extract.CommentExtractor;
 import net.datatp.xhtml.extract.ForumExtractor;
 import net.datatp.xhtml.extract.MainContentExtractor;
 import net.datatp.xhtml.extract.WDataExtract;
-import net.datatp.xhtml.extract.WDataExtractContext;
+import net.datatp.xhtml.extract.WDataContext;
 import net.datatp.xhtml.extract.WDataExtractor;
 import net.datatp.xhtml.util.WDataHttpFetcher;
 /**
@@ -22,7 +22,7 @@ public class XPathStructureAnanlyzerUnitTest {
     String url = "http://vnexpress.net/tin-tuc/thoi-su/bao-mirinae-huong-vao-dong-bang-bac-bo-3442861.html";
     WDataHttpFetcher fetcher = new WDataHttpFetcher();
     WData wPageData = fetcher.fetch(anchorText, url);
-    WDataExtractContext context = new WDataExtractContext(wPageData);
+    WDataContext context = new WDataContext(wPageData);
     
     List<WDataExtract> extracts = WDataExtractor.extract(context, new MainContentExtractor(), new CommentExtractor());
     System.out.println(WDataExtract.format(extracts));
@@ -34,7 +34,7 @@ public class XPathStructureAnanlyzerUnitTest {
     String url = "http://vnexpress.net/tin-tuc/the-gioi";
     WDataHttpFetcher fetcher = new WDataHttpFetcher();
     WData wPageData = fetcher.fetch(anchorText, url);
-    WDataExtractContext context = new WDataExtractContext(wPageData);
+    WDataContext context = new WDataContext(wPageData);
     
     List<WDataExtract> extracts = WDataExtractor.extract(context, new MainContentExtractor(), new CommentExtractor());
     System.out.println(WDataExtract.format(extracts));
@@ -46,7 +46,7 @@ public class XPathStructureAnanlyzerUnitTest {
     String url = "http://www.webtretho.com/forum/f4519/thay-bo-thot-go-qua-date-ma-con-bi-vo-cau-nhau-2273789/";
     WDataHttpFetcher fetcher = new WDataHttpFetcher();
     WData wPageData = fetcher.fetch(anchorText, url);
-    WDataExtractContext context = new WDataExtractContext(wPageData);
+    WDataContext context = new WDataContext(wPageData);
     
     List<WDataExtract> extracts = WDataExtractor.extract(context, new ForumExtractor());
     System.out.println(WDataExtract.format(extracts));

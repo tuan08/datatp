@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import net.datatp.util.URLInfo;
 import net.datatp.util.text.StringUtil;
 import net.datatp.xhtml.WData;
-import net.datatp.xhtml.extract.WDataExtractContext;
+import net.datatp.xhtml.extract.WDataContext;
 import net.datatp.xhtml.util.URLRewriter;
 import net.datatp.xhtml.util.URLSessionIdCleaner;
 import net.datatp.xhtml.util.WDataHttpFetcher;
@@ -58,7 +58,7 @@ public class SiteCrawler {
         if(visistedUrls.contains(selUrl.url)) continue;
         try {
           WData wdata = fetcher.fetch(selUrl.anchorText, selUrl.url);
-          WDataExtractContext wdataExtractCtx = new WDataExtractContext(wdata);
+          WDataContext wdataExtractCtx = new WDataContext(wdata);
           visistedUrls.add(selUrl.getUrl());
           urlExtractor.extract(selUrl, wdataExtractCtx);
           onWData(wdataExtractCtx);
@@ -75,7 +75,7 @@ public class SiteCrawler {
     }
   }
   
-  public void onWData(WDataExtractContext ctx) {
+  public void onWData(WDataContext ctx) {
     System.out.println("Fetch: " + ctx.getWdata().getUrl());
   }
   
@@ -129,7 +129,7 @@ public class SiteCrawler {
     
     public URL[] getUrls() { return urls.values().toArray(new URL[urls.size()]); }
     
-    public void extract(URL url, WDataExtractContext ctx) throws Exception {
+    public void extract(URL url, WDataContext ctx) throws Exception {
       URLInfo urlParser = new URLInfo(url.getUrl());
       XPathStructure structure = ctx.getXpathStructure();
       String baseURL = structure.findBase();

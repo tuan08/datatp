@@ -13,9 +13,6 @@ define([
       actions: {
         toolbar: {
           refresh: { label: "Refresh", onClick: function(uiTable) { uiTable.onRefresh(); } }
-        },
-        bean: {
-          more: { label: "More", onClick: function(uiTable, beanState) { } }
         }
       }
     },
@@ -40,9 +37,6 @@ define([
       actions: {
         toolbar: {
           refresh: { label: "Refresh", onClick: function(uiTable) { uiTable.onRefresh(); } }
-        },
-        bean: {
-          more: { label: "More", onClick: function(uiTable, beanState) { } }
         }
       }
     },

@@ -72,30 +72,18 @@ public class URLScheduleMetric implements Serializable {
     urlCount++ ;
     if(datum.getPageType() == URLDatum.PAGE_TYPE_LIST) urlListCount++;
     else if(datum.getPageType() == URLDatum.PAGE_TYPE_DETAIL) urlDetailCount++;
-    else this.urlUncategorizedCount++;
+    else urlUncategorizedCount++;
   }
   
-  public void logDelay(int incr) {
-    this.delayScheduleCount += incr;
-  }
+  public void logDelay(int incr) { this.delayScheduleCount += incr; }
   
-  public void logSchedule(int incr) {
-    this.scheduleCount += incr;
-  }
+  public void logSchedule(int incr) { this.scheduleCount += incr; }
   
-  public void logPending(int incr) {
-    this.pendingCount += incr;
-  }
+  public void logPending(int incr) { this.pendingCount += incr; }
   
-  public void logExpiredPending(int incr) {
-    this.expiredPendingCount += incr;
-  }
+  public void logExpiredPending(int incr) { this.expiredPendingCount += incr; }
   
-  public void logWaiting(int incr) {
-    this.waitingCount += incr;
-  }
+  public void logWaiting(int incr) { this.waitingCount += incr; }
   
-  public void logError(int incr) {
-    this.errorCount += incr;
-  }
+  public void logError(int incr) { this.errorCount += incr; }
 }

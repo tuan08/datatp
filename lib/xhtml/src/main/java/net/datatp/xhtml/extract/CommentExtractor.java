@@ -40,7 +40,7 @@ public class CommentExtractor implements WDataExtractor  {
   }
   
   @Override
-  public WDataExtract extract(WDataExtractContext context) {
+  public WDataExtract extract(WDataContext context) {
     WDataExtract extract = new WDataExtract("comment");
     XPathTree commentBlock = findPostBlock(context.getXpathStructure());
     if(commentBlock == null) return null;
@@ -49,7 +49,7 @@ public class CommentExtractor implements WDataExtractor  {
   }
   
   @Override
-  public ExtractEntity extractEntity(WDataExtractContext context) {
+  public ExtractEntity extractEntity(WDataContext context) {
     XPathTree commentBlock = findPostBlock(context.getXpathStructure());
     if(commentBlock == null) return null;
     ExtractEntity entity = new ExtractEntity(ExtractEntity.COMMENT, ExtractEntity.COMMENT);

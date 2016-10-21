@@ -8,64 +8,59 @@ import org.jsoup.nodes.Document;
 
 import net.datatp.crawler.site.SiteContext;
 import net.datatp.crawler.site.WebPageType;
-import net.datatp.crawler.site.WebPageTypeAnalyzer;
 import net.datatp.util.URLInfo;
 import net.datatp.xhtml.extract.ExtractEntity;
-import net.datatp.xhtml.extract.WDataExtractContext;
+import net.datatp.xhtml.extract.WDataContext;
 
 public class SiteStructure {
   private SiteContext                      siteContext;
   private URLSiteStructure                 urlSiteStructure = new URLSiteStructure();
-  
-  private Map<String, WDataExtractContext> wdataContexts    = new HashMap<>();
-  private int                              count            = 0;
+  private Map<String, WDataContext> wdataContexts    = new HashMap<>();
 
   public SiteStructure(SiteContext siteContext) {
     this.siteContext = siteContext;
   }
-  
+
   public URLSiteStructure getUrlSiteStructure() { return urlSiteStructure; }
-  
+
   public void update(SiteContext siteContext) {
     this.siteContext = siteContext;
   }
-  
-  synchronized public void analyse(WDataExtractContext ctx) {
+
+  synchronized public void analyse(WDataContext ctx) {
     URLAnalysis urlAnalysis = new URLAnalysis();
-    urlAnalysis.setUrlInfo(ctx.getURLAnalyzer());
-    WebPageTypeAnalyzer wpAnalyzer = siteContext.getWebPageTypeAnalyzer();
-    WebPageType wpType = wpAnalyzer.analyze(ctx.getWdata().getAnchorText(), urlAnalysis.getUrlInfo().getNormalizeURL());
+    urlAnalysis.setUrlInfo(ctx.getURInfo());
+    WebPageAnalysis wpAnalysis = siteContext.getWebPageAnalyzer().analyze(ctx);
+    WebPageType wpType = wpAnalysis.getWebPageType();
     urlAnalysis.setPageType(wpType.toString());
-    if(wpType == WebPageType.detail) {
-      List<ExtractEntity> entities = siteContext.getSiteExtractor().extract(ctx);
-      urlAnalysis.withExtractEntityInfo(entities);
-    }
+    urlAnalysis.withExtractEntityInfo(wpAnalysis.getEntities());
     urlSiteStructure.add(urlAnalysis);
-    
+
     ctx.reset();
     wdataContexts.put(urlAnalysis.getUrlInfo().getUrl(), ctx);
-    count++;
-    System.out.println(count + ". " + urlAnalysis.getUrlInfo().getUrl());
   }
-  
+
   synchronized public void reanalyse() {
-    System.out.println("Reanalyse SiteStructure");
-    WDataExtractContext[] wdataExtractContexts = 
-      wdataContexts.values().toArray(new WDataExtractContext[wdataContexts.size()]);
+    WDataContext[] wdataExtractContexts = 
+        wdataContexts.values().toArray(new WDataContext[wdataContexts.size()]);
     urlSiteStructure.clear();
     wdataContexts.clear();
-    count = 0;
-    for(WDataExtractContext sel : wdataExtractContexts) {
+    for(WDataContext sel : wdataExtractContexts) {
       analyse(sel);
     }
   }
-  
+
   public URLData getURLData(String url) {
-    WDataExtractContext ctx = wdataContexts.get(url);
+    WDataContext ctx = wdataContexts.get(url);
     if(ctx != null) {
       Document doc = ctx.createDocument() ;
-      return new URLData(ctx.getURLAnalyzer(), doc.html());
+      return new URLData(ctx.getURInfo(), doc.html());
     }
     return new URLData(new URLInfo(url), "No Data");
+  }
+
+  List<ExtractEntity> extractEntities(WDataContext ctx) {
+    WebPageAnalysis wpAnalysis = siteContext.getWebPageAnalyzer().analyze(ctx);
+    return wpAnalysis.getEntities();
   }
 }

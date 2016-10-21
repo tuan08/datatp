@@ -19,7 +19,7 @@ public class SiteConfig implements Serializable {
 
   private boolean              crawlSubDomain   = false;
   private int                  crawlDeep;
-  private int                  refreshPeriod;
+  private int                  refreshPeriod = 6 * 60 * 60;
   private int                  maxConnection    = 1;
   private int                  maxFetchSchedule = 100;
   private WebPageTypePattern[] webPageTypePatterns;
@@ -75,7 +75,10 @@ public class SiteConfig implements Serializable {
   public void setCrawlDeep(int value) { crawlDeep = value ; }
 
   public int getRefreshPeriod() { return refreshPeriod ; }
-  public void setRefreshPeriod(int value) { refreshPeriod = value ; }
+  public SiteConfig setRefreshPeriod(int value) { 
+    refreshPeriod = value ;
+    return this;
+  }
 
   public int getMaxConnection() { return maxConnection ; }
   public void setMaxConnection(int value) { maxConnection = value ; }

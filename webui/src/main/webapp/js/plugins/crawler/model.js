@@ -17,6 +17,7 @@ define([
       },
       "crawlDeep": { label: "Crawl Deep" },
       "maxConnection": { label: "Max Connection" },
+      "refreshPeriod": { label: "Refresh Period" },
       "language": { label: "Language" },
       "description": { label: "Description", type: "textarea" }
     },
@@ -103,6 +104,8 @@ define([
       "statistics.urlStatus_New.count":  { label: "URL New" },
       "statistics.urlStatus_Waiting.count": { label: "URL Waiting" },
       "statistics.responseCode_OK.count":  {  label: "RC OK" },
+      "statistics.fetchCount_FC0.count":  {  label: "FC 0" },
+      "statistics.fetchCount_FC1-5.count":  {  label: "FC 1-5" }
     }
   };
 
@@ -123,7 +126,8 @@ define([
       "urlInfo.directory": { label: "Directory" },
       "urlInfo.path": { label: "Path" },
       "urlInfo.extension": { label: "Extension" },
-      "urlInfo.paramCount": { label: "Param Count" }
+      "urlInfo.paramCount": { label: "Param Count" },
+      "extractEntityInfo": { label: "Extract Entities" }
     }
   };
 

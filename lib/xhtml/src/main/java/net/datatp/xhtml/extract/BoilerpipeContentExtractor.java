@@ -34,11 +34,11 @@ public class BoilerpipeContentExtractor implements WDataExtractor {
   }
   
   @Override
-  public WDataExtract extract(WDataExtractContext context) {
+  public WDataExtract extract(WDataContext context) {
     throw new RuntimeException("Not supported");
   }
   
-  public ExtractEntity extractEntity(WDataExtractContext context) {
+  public ExtractEntity extractEntity(WDataContext context) {
     try {
       return boilerpipeExtract(context);
     } catch (Exception e) {
@@ -49,7 +49,7 @@ public class BoilerpipeContentExtractor implements WDataExtractor {
     }
   }
   
-  ExtractEntity boilerpipeExtract(WDataExtractContext context) throws Exception {
+  ExtractEntity boilerpipeExtract(WDataContext context) throws Exception {
     String anchorText = context.getWdata().getAnchorText();
     String xhtml = context.createDocument().html();
     BoilerpipeSAXInput in = new BoilerpipeSAXInput(new InputSource(new StringReader(xhtml)));
