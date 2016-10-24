@@ -18,8 +18,7 @@ define([
 
     render: function() {
       var params = {
-        siteConfig: this.siteConfig, 
-        urlInfo:    this.urlInfo 
+        siteConfig: this.siteConfig, urlInfo:  this.urlInfo 
       } ;
       $(this.el).html(this._template(params));
       this.uiWebPageTypePattern.setElement(this.$('.UIWebPageTypePattern')).render();
@@ -28,7 +27,9 @@ define([
     events: {
       'click .onIgnorePattern': 'onIgnorePattern',
       'click .onDetailPattern': 'onDetailPattern',
-      'click .onListPattern':   'onListPattern'
+      'click .onListPattern':   'onListPattern',
+
+      "click .onPopupAction": "onPopupAction"
     },
     
     onIgnorePattern: function(evt) { this._onURLPattern('ignore', evt); },
@@ -36,7 +37,19 @@ define([
     onDetailPattern: function(evt) { this._onURLPattern('detail', evt); },
 
     onListPattern: function(evt) { this._onURLPattern('list', evt); },
-    
+
+    onPopupAction: function(e) {
+      var uiPopup = $(e.target).parent().find('.ui-widget-popup').first();
+      if(uiPopup.css('display') == 'none') {
+        var height = uiPopup.height();
+        var leftVal = e.pageX + "px";
+        var topVal  = e.pageY - height + "px";
+        uiPopup.css({left: leftVal, top: topVal}).show().delay(1500).fadeOut("fast");
+      } else {
+        uiPopup.hide();
+      }
+    },
+
     _onURLPattern: function(type, evt) {
       var eleA = $(evt.target).closest("a") ;
       var pattern = eleA.attr("pattern") ;

@@ -1,9 +1,11 @@
 <%function renderPatternActions(label, pattern) { %>
   <div class="box-display-ib">
-    <span><%=label%><span>
-    <a class="ui-action onIgnorePattern" pattern="<%=pattern%>" title="Ignore">I</a>
-    <a class="ui-action onDetailPattern" pattern="<%=pattern%>" title="Detail">D</a>
-    <a class="ui-action onListPattern"   pattern="<%=pattern%>" title="List">L</a>
+    <a class="ui-action onPopupAction" title="Click to custom"><%=label%></a>
+    <div class="ui-widget-popup" style="padding: 5px">
+      <a class="ui-action onIgnorePattern" pattern="<%=pattern%>">Igore</a>
+      <a class="ui-action onDetailPattern" pattern="<%=pattern%>">Detail</a>
+      <a class="ui-action onListPattern"   pattern="<%=pattern%>">List</a>
+    </div>
   </div>
 <%}%>
 

@@ -28,6 +28,7 @@ public class CrawlerIntegrationTest {
     nb.getSettings().put("cluster.name",       "elasticsearch");
     nb.getSettings().put("path.home",          "build/working/elasticsearch/data");
     nb.getSettings().put("node.name",          "localhost");
+    nb.getSettings().put("network.bind_host",  "0.0.0.0");
     nb.getSettings().put("transport.tcp.port", "9300");
     nb.getSettings().put("http.cors.enabled",  "true");
     nb.getSettings().put("http.cors.allow-origin", "*");

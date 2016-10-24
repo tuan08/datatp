@@ -1,22 +1,23 @@
 define([
   'jquery',
   'underscore', 
-  'backbone',
+  "env",
+  "ui/UIView",
   'plugins/elasticsearch/search/ESQueryContext',
   'plugins/elasticsearch/search/hit/UISearchHit',
   'plugins/elasticsearch/search/aggregations/UIAggregations',
   'plugins/elasticsearch/admin/UIAdmin',
   'text!plugins/elasticsearch/UIBody.jtpl',
   'css!plugins/elasticsearch/stylesheet.css'
-], function($, _, Backbone, ESQueryContext, UISearchHit, UIAggregations, UIAdmin, Template) {
+], function($, _, env, UIView, ESQueryContext, UISearchHit, UIAggregations, UIAdmin, Template) {
 
-  var UISearch = Backbone.View.extend({
+  var UISearch = UIView.extend({
     type: 'UISearch',
     
 
     initialize: function () {
       this.queryString = "";
-      this.esQueryCtx = new ESQueryContext("http://localhost:9200", ["xdoc"], { "match_all": {} });
+      this.esQueryCtx = new ESQueryContext(env.service.elasticsearch.restURL, ["xdoc"], { "match_all": {} });
 
       this.state = {
         views: {

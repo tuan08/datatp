@@ -172,7 +172,7 @@ define([
       var tr = $(evt.target).closest("tr"); 
       var row = parseInt(tr.attr("row"));
       var bucketPath = tr.attr("bucket");
-      var bucket = this.uiTable.viewModel.groupby.findBucketByPath(bucketPath);
+      var bucket = this.view.groupby.model.findBucketByPath(bucketPath);
       var beanState = bucket.objects[row];
       this.uiTable.onBeanAction(actionName, beanState);
     },

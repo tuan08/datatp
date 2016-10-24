@@ -31,6 +31,7 @@ define([
       menu1.addItem("UIPropertiesDemo", {}, onClick);
       menu1.addItem("UIDialogDemo", {}, onClick);
       menu1.addItem("UITemplateLayoutDemo", {}, onClick);
+      menu1.addItem("UIWidgetDemo", {}, onClick);
 
       var menu2 = this.addMenu("nvchart", "NV Chart Demo", { collapse: false });
       menu2.addItem("UINVBarChartDemo", { module: "chart/UINVBarChartDemo" }, onClick);
@@ -38,7 +39,7 @@ define([
       menu2.addItem("UINVLinePlusBarChartDemo", { module: "chart/UINVLinePlusBarChartDemo" }, onClick);
 
       var thisNav = this;
-      require(['plugins/uidemo/bean/UITableBarChartDemo'], function(UIDemoComponent) { 
+      require(['plugins/uidemo/UIWidgetDemo'], function(UIDemoComponent) { 
         thisNav.setWorkspace(UIDemoComponent);
       }) ;
     }

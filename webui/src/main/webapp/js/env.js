@@ -9,11 +9,11 @@ define([
 
     service: {
       crawler: {
-        restURL: "http://localhost:8080/crawler"
+        restURL: "http://192.168.1.14:8080/crawler"
       },
 
       elasticsearch: {
-        restURL: "http://localhost:9200"
+        restURL: "http://192.168.1.14:9200"
       }
     }
   };

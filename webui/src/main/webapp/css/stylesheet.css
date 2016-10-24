@@ -265,6 +265,9 @@ input, select {
 .ui-card .input { display: inline-block; width: calc(100% - 80px); line-height: 1.5em; vertical-align: middle; }
 .ui-card .checkbox { display: inline-block; line-height: 1.5em; vertical-align: middle; }
 
+
+.ui-widget-popup { position: absolute; z-index:10; background: #fee; box-shadow: 2px 2px 2px #888; display:none; }
+
 /** ui-tabs */ 
 .ui-tab-container { padding: 2px; height:  100%; }
 

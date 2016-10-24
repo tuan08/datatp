@@ -30,7 +30,7 @@ define([
       table: { 
         header: "Table",
         page:   { 
-          size: 10, 
+          size: 25, 
           select: 1, 
           options: [ 10, 25, 50, 100, 200, 500, 1000 ]
         }, 
@@ -199,7 +199,6 @@ define([
     __filter: function(field, exp) { 
       if(exp == null || exp == '') {
         this.filterBeanStates = this.beanStates ;
-        this.viewModel = null;
         return;
       }
       
@@ -236,7 +235,6 @@ define([
         }
         if(match) this.filterBeanStates.push(beanState) ;
       }
-      this.viewModel = null;
     },
 
     __createBeanStates: function(beans) {

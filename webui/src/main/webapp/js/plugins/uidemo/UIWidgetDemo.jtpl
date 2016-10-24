@@ -1,0 +1,19 @@
+<div style="padding: 5px">
+  <h2>Hello Widget</h2>
+
+  <div>
+    <h3 class='onPopupFadeout cursor-pointer'>Click on any position to show pop up fadeout</h3>
+    <div class="ui-widget-popup">
+      Popup Message<br/>
+      Message goes here Message goes here
+    </div>
+  </div>
+
+  <div>
+    <h3 class='popup-trigger hide-trigger cursor-pointer'>Move the mouse to show the mouse over</h3>
+    <div class="ui-widget-popup" style="padding: 5px">
+      Popup Message<br/>
+      Message goes here Message goes here
+    </div>
+  </div>
+</div>
