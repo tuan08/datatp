@@ -38,6 +38,9 @@ define([
             save: {
               label: "Save",
               onClick: function(thisUI) {
+                thisUI.onViewMode();
+                UIDialog.close()
+                thisUI.uiBeanArray.render();
               }
             }
           }
@@ -47,6 +50,7 @@ define([
         var beanState = uiBeanArray.__getBeanState(uiBean);
         var bean      = uiBeanArray.__getBean(uiBean);
         var uiBeanEdit = new UIBeanEdit().init(beanInfo, bean, beanState).setEditMode(true);
+        uiBeanEdit.uiBeanArray = uiBeanArray;
         UIDialog.activate(uiBeanEdit, config);
       },
 
@@ -110,15 +114,7 @@ define([
       var beanInfo = this.beanInfo;
       for(var i = 0; i < uiBeans.length; i++) {
         var uiBean = $(uiBeans[i]);
-        var idx = parseInt(uiBean.attr("beanIdx"));
-        var beanState = this.state.beanStates[idx];
-
-        var fieldBlks = uiBean.find('.field');
-        for(var j = 0; j < fieldBlks.length; j++) {
-          var field = $(fieldBlks[j]) ;
-          var uiFieldValue = field.find('.field-value');
-          this.layout.renderFieldValue(uiFieldValue, beanInfo, beanState);
-        }
+        this.__setViewMode(uiBean);
       }
       this.editMode = false;
     },
@@ -128,15 +124,7 @@ define([
       var beanInfo = this.beanInfo;
       for(var i = 0; i < uiBeans.length; i++) {
         var uiBean = $(uiBeans[i]);
-        var idx = parseInt(uiBean.attr("beanIdx"));
-        var beanState = this.state.beanStates[idx];
-
-        var fieldBlks = uiBean.find('.field');
-        fieldBlks.each(function(idx, ele) {
-          var field = $(ele) ;
-          var uiFieldValue = field.find('.field-value');
-          widget.edit.field(uiFieldValue, beanInfo, beanState);
-        });
+        this.__setEditMode(uiBean);
       }
 
       this.editMode = true;

@@ -41,16 +41,14 @@ define([
       widget.edit.field(uiFieldValue, beanInfo, beanState);
     },
 
-    onFieldInputEnter: function(evt) { if(evt.keyCode == 13) this.__onSaveFieldValue($(evt.target)); },
-    onFieldInputSave: function(evt) { this.__onSaveFieldValue($(evt.target)); },
+    onFieldInputEnter: function(evt) { if(evt.keyCode == 13) this.__onTriggerSaveFieldValue($(evt.target)); },
+    onFieldInputSave: function(evt) { this.__onTriggerSaveFieldValue($(evt.target)); },
 
     onFieldArrayInputEnter: function(evt) { 
-      if(evt.keyCode == 13) this.__onSaveArrayFieldValue($(evt.target)); 
+      if(evt.keyCode == 13) this.__onTriggerSaveArrayFieldValue($(evt.target)); 
     },
 
-    onFieldArrayInputSave: function(evt) { 
-      this.__onSaveArrayFieldValue($(evt.target)); 
-    },
+    onFieldArrayInputSave: function(evt) { this.__onTriggerSaveArrayFieldValue($(evt.target)); },
 
     onFieldArrayInputRemove: function(evt) { 
       var uiFieldValue = $(evt.target).closest(".field-value");
@@ -74,17 +72,46 @@ define([
       widget.edit.field(uiFieldValue, beanInfo, beanState);
     },
 
+    commitChange: function(uiBean) {
+      var uiFieldValues = uiBean.find(".field-value");
+      var beanInfo = this.__getBeanInfo();
+      for(var i = 0; i < uiFieldValues.length; i++) {
+        var uiFieldValue = $(uiFieldValues[i]);
+        var fieldName    = uiFieldValue.attr("field");
+        var fieldConfig  = beanInfo.fields[fieldName];
+        if(fieldConfig.type == "array") {
+          this.__onSaveArrayFieldValue(uiFieldValue);
+        } else {
+          this.__onSaveFieldValue(uiFieldValue);
+        }
+      }
+    },
 
     __toggle: function(uiBean) {
+      var beanState = this.__getBeanState(uiBean);
+      if(beanState.editMode) this.__setViewMode(uiBean);
+      else this.__setEditMode(uiBean);
+    },
+
+    __setViewMode: function(uiBean) {
+      var beanInfo = this.__getBeanInfo();
+      var beanState = this.__getBeanState(uiBean);
+      if(beanState.editMode) this.commitChange(uiBean);
+      var fieldBlks = uiBean.find('div[field]');
+      fieldBlks.each(function(idx, ele) {
+        widget.view.field($(ele), beanInfo, beanState);
+      });
+      beanState.editMode = false;
+    },
+
+    __setEditMode: function(uiBean) {
       var beanInfo = this.__getBeanInfo();
       var beanState = this.__getBeanState(uiBean);
       var fieldBlks = uiBean.find('div[field]');
-      var editMode = beanState.editMode;
       fieldBlks.each(function(idx, ele) {
-       if(editMode) widget.view.field($(ele), beanInfo, beanState);
-       else widget.edit.field($(ele), beanInfo, beanState);
+        widget.edit.field($(ele), beanInfo, beanState);
       });
-      beanState.editMode = !editMode;
+      beanState.editMode = true;
     },
 
     __createBeanState: function(bInfo, bean) { 
@@ -101,8 +128,12 @@ define([
       return state;
     },
 
-    __onSaveFieldValue: function(triggerEle) {
+    __onTriggerSaveFieldValue: function(triggerEle) {
       var uiFieldValue = triggerEle.closest('.field-value');
+      this.__onSaveFieldValue(uiFieldValue);
+    },
+
+    __onSaveFieldValue: function(uiFieldValue) {
       var fieldInput = uiFieldValue.find('.field-input');
       var fieldName  = uiFieldValue.attr("field");
 
@@ -125,8 +156,12 @@ define([
       }
     },
 
-    __onSaveArrayFieldValue: function(triggerEle) {
+    __onTriggerSaveArrayFieldValue: function(triggerEle) {
       var uiFieldValue = triggerEle.closest('.field-value');
+      this.__onSaveArrayFieldValue(uiFieldValue);
+    },
+
+    __onSaveArrayFieldValue: function(uiFieldValue) {
       var fieldName =  uiFieldValue.attr('field');
       var fieldInput = uiFieldValue.find('.field-input');
       var value = [];

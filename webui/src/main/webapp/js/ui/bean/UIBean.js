@@ -64,6 +64,11 @@ define([
     },
 
     onViewMode: function() {
+      this.__setViewMode($(this.el).find(".ui-bean"));
+      /*
+      if(this.state.editMode) {
+        this.__onCommitChange($(this.el));
+      }
       var fieldBlks = $(this.el).find('div[field]');
       var beanInfo = this.beanInfo;
       var beanState = this.state;
@@ -71,14 +76,18 @@ define([
         widget.view.field($(ele), beanInfo, beanState);
       });
       this.state.editMode = false;
+      */
     },
 
     onEditMode: function() {
+      this.__setEditMode($(this.el).find(".ui-bean"));
+      /*
       var uiFieldValues = $(this.el).find('.field-value');
       for(var i = 0; i < uiFieldValues.length; i++) {
         widget.edit.field($(uiFieldValues[i]), this.beanInfo, this.state);
       }
       this.state.editMode = true;
+      */
     },
 
     _template: _.template(UIBeanTmpl),
