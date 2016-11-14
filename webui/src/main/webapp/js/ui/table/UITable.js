@@ -80,7 +80,7 @@ define([
     addControlPluginUI: function(name, plugin) {
       var uiTableCtrl = this.getUI("west"); 
       if(uiTableCtrl == null) {
-        var westConfig = { width: "250px"};
+        var westConfig = { width: "275px"};
         uiTableCtrl = new UITableCtrlTabbedPane();
         uiTableCtrl.config.header.title = this.config.control.header;
         this.setUI('west', uiTableCtrl, westConfig);

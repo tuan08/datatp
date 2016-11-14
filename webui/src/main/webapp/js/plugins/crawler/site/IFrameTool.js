@@ -48,7 +48,8 @@ define([
     };
 
     this.html = function(xhtml) {
-      $(this.iframe).contents().find('html').html(xhtml)
+      var html = $(this.iframe).contents().find('html');
+      html.html(xhtml) ;
     };
   };
   

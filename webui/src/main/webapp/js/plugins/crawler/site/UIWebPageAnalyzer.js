@@ -32,12 +32,38 @@ define([
       var westConfig = { width: "500px"};
       var uiUrlAndXhtmlTabs = new UITabbedPane();
       uiUrlAndXhtmlTabs.addTab("url", "URL", new UIURLAnalyzer(opts), false, true);
-      var uiExtractConfigs =  new uicomp.site.UIExtractConfigs().set(siteConfig.extractConfig);
-      uiUrlAndXhtmlTabs.addTab("extractConfigs", "Extract Configs", uiExtractConfigs, false, false);
+
+      this.uiExtractConfigs =  new uicomp.site.UIExtractConfigs();
+      var uiWebPageAnalyzer = this;
+      this.uiExtractConfigs.onInitUIBeanComplex = function(uiExtractConfig) {
+        var onSelectHighlight = function(uiComp, beanState) {
+          var xpath = uiWebPageAnalyzer.uiXhtmlIFrame.getCurrentSelectXPath();
+          if(xpath == null) return;
+          var xpathSelectorExp = xpath.getJSoupXPathSelectorExp();
+          beanState.addToArray("xpath", xpathSelectorExp);
+          beanState.commitChange();
+          uiComp.render();
+        };
+        var uiXPaths = uiExtractConfig.getUIExtractConfigXPath();
+        uiXPaths.addAction("selectHighlight", "Sel", onSelectHighlight);
+      };
+
+      this.uiExtractConfigs.set(siteConfig.extractConfig);
+      
+
+      uiUrlAndXhtmlTabs.addTab("extractConfigs", "Extract Configs", this.uiExtractConfigs, false, false);
       this.setUI('west', uiUrlAndXhtmlTabs, westConfig);
 
-      var centerConfig = {};
-      this.setUI('center', new UIXhtmlIFrame(opts), centerConfig);
+      var uiXhtmlContentTabs = new UITabbedPane();
+      this.uiXhtmlIFrame = new UIXhtmlIFrame(opts);
+      uiXhtmlContentTabs.addTab("xhtml", "Xhtml", this.uiXhtmlIFrame, false, true);
+      var uiWebPageAnalysis = new UIContent({ content: JSON.stringify(urlData.webPageAnalysis, null, 2) });
+      uiXhtmlContentTabs.addTab("uiWebPageAnalysis", "WebPage Analysis", uiWebPageAnalysis, false, false);
+      this.setUI('center', uiXhtmlContentTabs , {}/*center config*/);
+    },
+
+    onBreadcumbsRemove: function() {
+      this.uiExtractConfigs.commitChange();
     }
   });
 

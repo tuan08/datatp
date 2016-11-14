@@ -1,11 +1,58 @@
 define([
-  'jquery', 'underscore', 'backbone',
+  'jquery', 'underscore',
+  'ui/UIView',
   "ui/bean/validator",
   "ui/bean/widget",
   'util/util',
-], function($, _, Backbone, validator, widget, util) {
+], function($, _, UIView, validator, widget, util) {
 
-  var UIBeanEditor = Backbone.View.extend({
+  function BeanState(bInfo, bean) {
+    this.bean   = bean;
+    this.fields = {};
+
+    for(var key in bInfo.fields) {
+      var value = util.reflect.getFieldValue(bean, key);
+      var field = bInfo.fields[key];
+      if(field.type == 'array')  {
+        if(value == null) value = [] ;
+        else value = value.slice();
+      }
+      this.fields[key] = { value: value, modified: false };
+    };
+
+    this.getBean = function() { return this.bean; };
+
+    this.modify = function(key, value) { 
+      var oldVal = this.fields[key].value;
+      this.fields[key].value = value;
+      this.fields[key].modified = true;
+      return oldVal;
+    };
+
+    this.addToArray = function(key, value) { 
+      this.fields[key].value.push(value);
+      this.fields[key].modified = true;
+    };
+
+    this.commitChange = function() { 
+      for(var key in this.fields) {
+        var field = this.fields[key];
+        util.reflect.setFieldValue(this.bean, key, field.value);
+        field.modified = false;
+      }
+    };
+
+    this.getBeanWithCommitChange = function() { 
+      this.commitChange();
+      return this.bean; 
+    };
+  }
+
+  var UIBeanEditor = UIView.extend({
+    autoCommit: true,
+
+    setAutoCommit: function(bool) { this.autoCommit = bool; },
+
     __getBean: function(fv) { throw new Error("this method need to override") },
 
     __getBeanInfo: function() { throw new Error("this method need to override") },
@@ -13,17 +60,17 @@ define([
 
     UIBeanEditorEvents: {
       //Handle by UIBeanEditor
-      "mouseover .editable-field-value":   "onMouseOverEditableFieldValue",
-      "mouseout  .editable-field-value":   "onMouseOutEditableFieldValue",
-      "click     .editable-field-value":   "onClickEditableFieldValue",
+      "mouseover .editable-field-value": "onMouseOverEditableFieldValue",
+      "mouseout  .editable-field-value": "onMouseOutEditableFieldValue",
+      "click     .editable-field-value": "onClickEditableFieldValue",
 
-      'click      .edit-field-value .ui-icon-check' : 'onFieldInputSave',
-      'keydown    .edit-field-value .field-input' :   'onFieldInputEnter',
+      'click      .edit-field-value .ui-icon-check': 'onFieldInputSave',
+      'keydown    .edit-field-value .field-input':   'onFieldInputEnter',
 
-      'click      .edit-array-field-value .ui-icon-check' : 'onFieldArrayInputSave',
-      'click      .edit-array-field-value .ui-icon-minus' : 'onFieldArrayInputRemove',
-      'click      .edit-array-field-value .ui-icon-plus'  : 'onFieldArrayInputAdd',
-      'keydown    .edit-array-field-value .field-input'   : 'onFieldArrayInputEnter',
+      'click      .edit-array-field-value .ui-icon-check': 'onFieldArrayInputSave',
+      'click      .edit-array-field-value .ui-icon-minus': 'onFieldArrayInputRemove',
+      'click      .edit-array-field-value .ui-icon-plus':  'onFieldArrayInputAdd',
+      'keydown    .edit-array-field-value .field-input':   'onFieldArrayInputEnter',
     },
 
     onMouseOverEditableFieldValue: function(evt) {
@@ -72,7 +119,7 @@ define([
       widget.edit.field(uiFieldValue, beanInfo, beanState);
     },
 
-    commitChange: function(uiBean) {
+    __commitUIBeanChange: function(uiBean) {
       var uiFieldValues = uiBean.find(".field-value");
       var beanInfo = this.__getBeanInfo();
       for(var i = 0; i < uiFieldValues.length; i++) {
@@ -96,7 +143,7 @@ define([
     __setViewMode: function(uiBean) {
       var beanInfo = this.__getBeanInfo();
       var beanState = this.__getBeanState(uiBean);
-      if(beanState.editMode) this.commitChange(uiBean);
+      if(beanState.editMode) this.__commitUIBeanChange(uiBean);
       var fieldBlks = uiBean.find('div[field]');
       fieldBlks.each(function(idx, ele) {
         widget.view.field($(ele), beanInfo, beanState);
@@ -114,19 +161,7 @@ define([
       beanState.editMode = true;
     },
 
-    __createBeanState: function(bInfo, bean) { 
-      var state    = { fields: {} };
-      for(var key in bInfo.fields) {
-        var value = util.reflect.getFieldValue(bean, key);
-        var field = bInfo.fields[key];
-        if(field.type == 'array')  {
-          if(value == null) value = [] ;
-          else value = value.slice();
-        }
-        state.fields[key] = { value: value, modified: false };
-      }
-      return state;
-    },
+    __createBeanState: function(bInfo, bean) { return new BeanState(bInfo, bean); },
 
     __onTriggerSaveFieldValue: function(triggerEle) {
       var uiFieldValue = triggerEle.closest('.field-value');
@@ -137,7 +172,6 @@ define([
       var fieldInput = uiFieldValue.find('.field-input');
       var fieldName  = uiFieldValue.attr("field");
 
-      var bean      = this.__getBean(uiFieldValue);
       var beanState = this.__getBeanState(uiFieldValue);
       var beanInfo  = this.__getBeanInfo();
       var fieldInfo = beanInfo.fields[fieldName];
@@ -145,11 +179,14 @@ define([
 
       var validateResult = validator.validate(fieldInfo, value);
       if(validateResult.success) {
-        var oldValue = beanState.fields[fieldName].value ;
-        beanState.fields[fieldName].value = value;
-        util.reflect.setFieldValue(bean, fieldName, value);
+        var oldValue = beanState.modify(fieldName, value);
         widget.view.field(uiFieldValue, beanInfo, beanState);
-        if(this.onFieldChange) this.onFieldChange(bean, fieldName, oldValue, value);
+        if(this.autoCommit) {
+          beanState.commitChange();
+        } else {
+          if(this.onFieldChange) this.onFieldChange(beanState, fieldName, oldValue, value);
+          else throw new Error("This UIBean is not set to autocommit, need to implement method onFieldChange");
+        }
       } else {
         uiFieldValue.find('.ui-text-error').remove();
         uiFieldValue.append("<span class='ui-text-error'>" +  validateResult.err + "<span>");
@@ -169,14 +206,17 @@ define([
         var inputVal = $(input).val();
         value.push(inputVal);
       });
-      var bean      = this.__getBean(uiFieldValue);
       var beanState = this.__getBeanState(uiFieldValue);
       var beanInfo = this.__getBeanInfo();
-      var oldValue = beanState.fields[fieldName].value ;
-      beanState.fields[fieldName].value = value;
-      util.reflect.setFieldValue(bean, fieldName, value);
+      var oldValue = beanState.modify(fieldName, value) ;
+      //util.reflect.setFieldValue(bean, fieldName, value);
       widget.view.field(uiFieldValue, beanInfo, beanState);
-      if(this.onFieldChange) this.onFieldChange(bean, fieldName, oldValue, value);
+      if(this.autoCommit) {
+        beanState.commitChange();
+      } else {
+        if(this.onFieldChange) this.onFieldChange(beanState, fieldName, oldValue, value);
+        else throw new Error("This UIBean is not set to autocommit, need to implement method onFieldChange");
+      }
     },
   });
 

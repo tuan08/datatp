@@ -6,8 +6,8 @@
   <%}%>
 
   <ul class="ui-tabs">
-    <%for(var i = 0; i < beans.length; i++) { %>
-    <%  var bean  = beans[i]; %>
+    <%for(var i = 0; i < state.beanStates.length; i++) { %>
+    <%  var bean  = state.beanStates[i].bean; %>
     <%  var label  = "bean-" + i; %>
     <%  if(config.label) label = config.label(bean, i); %>
     <%  var active = i == state.select ? "active" : ""; %>
@@ -22,7 +22,7 @@
   </ul>
   
   <div class="ui-tab-contents">
-    <%for(var i = 0; i < beans.length; i++) { %>
+    <%for(var i = 0; i < state.beanStates.length; i++) { %>
       <%var display = i == state.select ? "block" : "none"; %>
       <div class="ui-tab-content ui-bean" beanIdx="<%=i%>" style="display: <%=display%>">
         <%if(config.header) {%>
@@ -39,7 +39,14 @@
               <div class="field-value" field="<%=name%>"><span/></div>
             </div>
         <%}%>
-        <div class="actions"></div>
+          <%if(config.actions) {%>
+            <div class="actions">
+              <%for(var actionName in config.actions) {%>
+                <%var action = config.actions[actionName]; %>
+                <a class="ui-action onBeanAction" name="<%=actionName%>"><%=action.label%></a>
+              <%}%>
+            </div>
+          <%}%>
       </div>
     <%}%>
   </div>

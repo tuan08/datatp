@@ -26,7 +26,10 @@ define([
 
     __getUICompoent: function(name) { return this.uiComponents[name] ; },
 
-    __setUIComponent: function(name, uiComponent) { this.uiComponents[name] = uiComponent; },
+    __setUIComponent: function(name, uiComponent) { 
+      uiComponent.uiParent = this;
+      this.uiComponents[name] = uiComponent; 
+    },
   });
   
   return UITemplateLayout ;

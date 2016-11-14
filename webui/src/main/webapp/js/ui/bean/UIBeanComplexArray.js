@@ -43,12 +43,23 @@ define([
       return this;
     },
 
+    getUIBeanComplexes: function() { return this.uiBeanComplexes; },
+
+    getBeans: function() { 
+      var beans = [] ;
+      for(var i = 0; i < this.uiBeanComplexes.length; i++) {
+        beans.push(this.uiBeanComplexes[i].getBean());
+      }
+      return beans;
+    },
+
     set: function(beans) { 
-      this.uiComplexBeans = [];
+      this.uiBeanComplexes = [];
       for(var i = 0; i < beans.length; i++) {
-        var uiComplexBean = new this.config.UIBeanComplex();
-        uiComplexBean.set(beans[i]);
-        this.uiComplexBeans.push(uiComplexBean);
+        var uiBeanComplex = new this.config.UIBeanComplex();
+        uiBeanComplex.set(beans[i]);
+        this.initUIBeanComplex(uiBeanComplex);
+        this.uiBeanComplexes.push(uiBeanComplex);
       }
       this.state = { size: beans.length, select: 0 }
       return this;
@@ -64,7 +75,7 @@ define([
       for(var i = 0; i < uiTabContents.length; i++) {
         var uiTabContent = $(uiTabContents[i]) ;
         var idx = parseInt(uiTabContent.attr("beanIdx"));
-        this.uiComplexBeans[idx].setElement(uiTabContent).render();
+        this.uiBeanComplexes[idx].setElement(uiTabContent).render();
       }
     },
     
@@ -92,23 +103,28 @@ define([
     onAdd: function(evt) {
       console.log('add');
       if(!this.createDefaultBean) return ;
-      var uiComplexBean = new this.config.UIBeanComplex();
+      var uiBeanComplex = new this.config.UIBeanComplex();
       var bean = this.createDefaultBean()
-      uiComplexBean.set(bean);
-      this.uiComplexBeans.push(uiComplexBean);
+      uiBeanComplex.set(bean);
+      this.initUIBeanComplex(uiBeanComplex);
+      this.uiBeanComplexes.push(uiBeanComplex);
       this.state.size +=1;
-      this.state.select = this.uiComplexBeans.length - 1;
+      this.state.select = this.uiBeanComplexes.length - 1;
       this.render();
     },
 
     onRemove: function(evt) {
       var uiTab = $(evt.target).closest("[beanIdx]");
       var beanIdx = parseInt(uiTab.attr("beanIdx"));
-      this.uiComplexBeans.splice(beanIdx, 1);
-      this.state.size = this.uiComplexBeans.length;
+      this.uiBeanComplexes.splice(beanIdx, 1);
+      this.state.size = this.uiBeanComplexes.length;
       this.state.select = beanIdx - 1;
       if(this.state.select < 0) this.state.select = 0;
       this.render();
+    },
+
+    initUIBeanComplex: function(uiBeanComplex) {
+      if(this.onInitUIBeanComplex) this.onInitUIBeanComplex(uiBeanComplex);
     }
   });
 

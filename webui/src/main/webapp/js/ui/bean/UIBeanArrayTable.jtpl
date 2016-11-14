@@ -1,13 +1,24 @@
 <%function renderBeanState(beanInfo, beanState, idx) {%>
   <tr class="ui-bean" beanIdx=<%= idx %>>
+    <td class="box-talign-center" style="width: 36px">
+      <span class="toggle-mode"/>
+      <a class="ui-icon ui-icon-action ui-icon-trash onRemove"/>
+    </td>
+
     <%for(var fieldName in beanInfo.fields) {%>
       <td class="field">
         <div class="field-value" field="<%=fieldName%>"><span/></div>
       </td>
     <%}%>
-    <td class="box-talign-center">
-      <span class="toggle-mode"/>
-    </td>
+
+    <%if(config.actions) {%>
+      <td class="box-talign-center">
+        <%for(var actionName in config.actions) {%>
+          <%var action = config.actions[actionName]; %>
+          <a class="ui-action onBeanAction" name="<%=actionName%>"><%=action.label%></a>
+        <%}%>
+      </td>
+    <%}%>
   </tr>
 <%}%>
 
@@ -24,11 +35,14 @@
 
   <table>
     <tr>
+      <th class="box-talign-center"> - </th>
       <%for(var fieldName in beanInfo.fields) {%>
         <%var field = beanInfo.fields[fieldName];%>
         <th><%= field.label %></th>
       <%}%>
-      <th class="box-talign-center"> - </th>
+      <%if(config.actions) {%>
+        <th class="box-talign-center">Actions</th>
+      <%}%>
     </tr>
 
     <%for(var i = 0; i < state.beanStates.length; i++) {%>

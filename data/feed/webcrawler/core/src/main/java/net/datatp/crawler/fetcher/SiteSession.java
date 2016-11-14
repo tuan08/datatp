@@ -12,11 +12,12 @@ import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.CookieStore;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.BasicCookieStore;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,6 @@ import net.datatp.crawler.http.ResponseHeaders;
 import net.datatp.crawler.site.URLContext;
 import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.util.io.IOUtil;
-import net.datatp.xhtml.WData;
 /**
  * Author : Tuan Nguyen
  *          tuan08@gmail.com
@@ -64,15 +64,16 @@ public class SiteSession implements Comparable<SiteSession> {
       long startTime = System.currentTimeMillis() ;
       String fetchUrl = urlDatum.fetchUrl();
       
-      HttpGet httpget = new HttpGet(fetchUrl); 
-      BasicHttpContext httpContext = new BasicHttpContext();
+      HttpGet httpGet = new HttpGet(fetchUrl); 
+      //BasicHttpContext httpContext = new BasicHttpContext();
+      HttpClientContext httpContext = HttpClientContext.create();
       httpContext.setAttribute("crawler.site", hostname) ;
       httpContext.setAttribute(HttpClientContext.COOKIE_STORE, cookieStore);
-      HttpResponse response = fetcher.getHttpClient().execute(httpget, httpContext);
+      
+      HttpResponse response = fetcher.getHttpClient().execute(httpGet, httpContext);
       String redirectUrl = (String)httpContext.getAttribute("url.redirect") ;
-      if(redirectUrl != null) {
-        urlDatum.setRedirectUrl(redirectUrl) ;
-      }
+      if(redirectUrl != null) urlDatum.setRedirectUrl(redirectUrl) ;
+
       fetchContext.setResponseHeaders(getResponseHeaders(response));
       fetchContext.setContentType(HttpClientUtil.getContentType(response)) ;
       StatusLine sline = response.getStatusLine() ;

@@ -10,8 +10,6 @@ define([
 ], function($, _, Backbone, widget, util, UIDialog, UIBeanEditor, UIBean,  TabTmpl, TableTmpl) {
 
   var UIBeanEdit = UIBean.extend({
-    label: 'Modify',
-
     config: { header: "Modify" },
   });
 
@@ -22,17 +20,16 @@ define([
         thisUI.__toggle(uiBean) ;
       },
 
-      renderFieldValue: function(uiFieldValue, beanInfo, beanState) {
-        widget.view.field(uiFieldValue, beanInfo, beanState);
-      }
+      onAdd: function(thisUI, evt) { thisUI.add(thisUI.createDefaultBean(), true); },
 
+      renderFieldValue: function(uiFieldValue, beanInfo, beanState) { widget.view.field(uiFieldValue, beanInfo, beanState); }
     },
 
     tableLayout: {
       onToggleMode: function(uiBeanArray, evt) {
         var config = {
-          title: "Modify Bean", 
-          footerMessage: "Modify bean",
+          title: "Edit", 
+          footerMessage: "Edit",
           width: "600px", height: "400px",
           actions: {
             save: {
@@ -48,8 +45,33 @@ define([
         var uiBean    = $(evt.target).closest(".ui-bean");
         var beanInfo  = uiBeanArray.__getBeanInfo(uiBean);
         var beanState = uiBeanArray.__getBeanState(uiBean);
-        var bean      = uiBeanArray.__getBean(uiBean);
-        var uiBeanEdit = new UIBeanEdit().init(beanInfo, bean, beanState).setEditMode(true);
+        var uiBeanEdit = new UIBeanEdit().init(beanInfo, beanState).setEditMode(true);
+        uiBeanEdit.uiBeanArray = uiBeanArray;
+        UIDialog.activate(uiBeanEdit, config);
+      },
+
+      onAdd: function(uiBeanArray, evt) {
+        var config = {
+          title: "Add", 
+          footerMessage: "Add",
+          width: "600px", height: "400px",
+          actions: {
+            save: {
+              label: "Save",
+              onClick: function(thisUI) {
+                thisUI.onViewMode();
+                UIDialog.close()
+                var bean = thisUI.getBeanState().getBeanWithCommitChange();
+                console.printJSON(bean);
+                thisUI.uiBeanArray.add(bean, true);
+                thisUI.uiBeanArray.render();
+              }
+            }
+          }
+        }
+        var beanInfo  = uiBeanArray.__getBeanInfo();
+        var bean      = uiBeanArray.createDefaultBean();
+        var uiBeanEdit = new UIBeanEdit().set(beanInfo, bean).setEditMode(true);
         uiBeanEdit.uiBeanArray = uiBeanArray;
         UIDialog.activate(uiBeanEdit, config);
       },
@@ -62,8 +84,8 @@ define([
 
     initialize: function (options) {
       var defaultConfig = {
-        //header: "a title",
-        //label: function(bean, idx) {},
+        header: "Array",
+        label: function(bean, idx) { return "Bean " + (idx + 1); } ,
       }
       //clone config to isolate the modification
       if(this.config) $.extend(defaultConfig, this.config);
@@ -71,11 +93,9 @@ define([
 
       $.extend(this.events, this.UIBeanEditorEvents);
 
-      if(this.config.layout == 'table') {
-        this.layout = this.tableLayout;
-      } else {
-        this.layout = this.tabLayout;
-      }
+      if(this.config.layout == 'table')  this.layout = this.tableLayout;
+      else                               this.layout = this.tabLayout;
+
       if(this.onInit) this.onInit(options);
     },
 
@@ -90,6 +110,13 @@ define([
       return this;
     },
 
+    addAction: function(name, label, onClick) {
+      var actionConfig = { label: label, onClick: onClick };
+      if(!this.config.actions) this.config.actions = {};
+      this.config.actions[name] = actionConfig;
+      return this;
+    },
+
     setBeans: function(beans, refresh) { 
       this.beans = beans;
       this.state = { editMode: false, select:   0, beanStates: [] };
@@ -100,21 +127,34 @@ define([
     },
 
     add: function(bean, refresh) {
-      this.beans.push(bean);
-      var beanIdx = this.beans.length - 1;
       this.state.beanStates.push(this.__createBeanState(this.beanInfo, bean));
+      var beanIdx = this.state.beanStates.length - 1;
       this.state.select = beanIdx;
       if(refresh) this.render();
     },
 
+    commitChange: function() {
+      this.beans.splice(0, this.beans.length);
+      var bStates = this.state.beanStates;
+      for(var i = 0; i < bStates.length; i++) {
+        this.beans.push(bStates[i].getBeanWithCommitChange());
+      }
+    },
+
     onViewMode: function() {
-      var readonly = false;
-      if(this.config.layout == 'table') readonly = true;
       var uiBeans = $(this.el).find('.ui-bean');
       var beanInfo = this.beanInfo;
       for(var i = 0; i < uiBeans.length; i++) {
         var uiBean = $(uiBeans[i]);
-        this.__setViewMode(uiBean);
+        var idx = parseInt(uiBean.attr("beanIdx"));
+        var beanState = this.state.beanStates[idx];
+        if(beanState.editMode) this.__commitUIBeanChange(uiBean);
+        var fieldBlks = uiBean.find('.field');
+        for(var j = 0; j < fieldBlks.length; j++) {
+          var field = $(fieldBlks[j]) ;
+          var uiFieldValue = field.find('.field-value');
+          this.layout.renderFieldValue(uiFieldValue, beanInfo, beanState);
+        }
       }
       this.editMode = false;
     },
@@ -138,9 +178,9 @@ define([
       var params = { 
         config: this.config, 
         beanInfo: this.beanInfo, 
-        beans: this.beans,
         state: this.state
       };
+
       if(this.config.layout == 'table') {
         $(this.el).html(this._tableTemplate(params));
       } else {
@@ -154,7 +194,7 @@ define([
     
     events: {
       //Handle by UIBean
-      'click      .onAction' : 'onAction',
+      'click      .onBeanAction' : 'onBeanAction',
       'click      .onToggleMode' : 'onToggleMode',
       'click      .onRemove'     : 'onRemove',
 
@@ -162,10 +202,13 @@ define([
       'click      .add'      : 'onAdd',
     },
 
-    onAction: function(evt) {
+    onBeanAction: function(evt) {
       var name = $(evt.target).attr('name');
+      var idx = $(evt.target).closest(".ui-bean").attr("beanIdx");
+      idx = parseInt(idx); 
+      var beanState = this.state.beanStates[idx];
       var action = this.config.actions[name];
-      action.onClick(this);
+      action.onClick(this, beanState);
     },
 
     onToggleMode: function(evt) {
@@ -190,20 +233,17 @@ define([
 
     onRemove: function(evt) {
       var idx = $(evt.target).closest("[beanIdx").attr("beanIdx");
-      this.beans.splice(idx, 1);
       this.state.beanStates.splice(idx, 1);
       this.state.select = idx - 1;
       if(this.state.select < 0) this.state.select = 0;
+      if(this.autoCommit) this.commitChange();
       this.render();
     },
 
     onAdd: function(evt) {
-      if(this.createDefaultBean) this.add(this.createDefaultBean(), true);
-    },
-
-    __getBean: function(fv) { 
-      var idx = fv.closest(".ui-bean").attr("beanIdx");
-      return this.beans[parseInt(idx)]; 
+      evt.stopPropagation();
+      if(this.createDefaultBean) this.layout.onAdd(this, evt);
+      if(this.autoCommit) this.commitChange();
     },
 
     __getBeanState: function(triggerEle) { 

@@ -48,7 +48,7 @@ public class WebPageAnalyzer {
   
   public WebPageAnalysis analyze(WDataContext ctx) {
     WebPageAnalysis wpAnalysis = new WebPageAnalysis();
-    WebPageType wpType = wpTypeAnalyzer.analyze(ctx.getWdata().getAnchorText(), ctx.getWdata().getUrl());
+    WebPageType wpType = wpTypeAnalyzer.analyze(ctx.getWdata().getAnchorText(), ctx.getURInfo());
     if(wpType == WebPageType.ignore || wpType == WebPageType.list) {
       wpAnalysis.setWebPageType(wpType);
       return wpAnalysis;
@@ -68,6 +68,7 @@ public class WebPageAnalyzer {
     wpAnalysis.setEntities(entities);
     
     if(wpType != null) return wpAnalysis;
+    
     if(entities == null || entities.size() == 0) {
       wpAnalysis.setWebPageType(WebPageType.uncategorized);
       return wpAnalysis;

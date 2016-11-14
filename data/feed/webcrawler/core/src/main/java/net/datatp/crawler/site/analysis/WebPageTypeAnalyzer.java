@@ -2,6 +2,7 @@ package net.datatp.crawler.site.analysis;
 
 import net.datatp.crawler.site.WebPageType;
 import net.datatp.crawler.site.WebPageTypePattern;
+import net.datatp.util.URLInfo;
 
 public class WebPageTypeAnalyzer {
   private WebPageTypePattern[] pattern;
@@ -29,9 +30,9 @@ public class WebPageTypeAnalyzer {
   }
 
   
-  public WebPageType analyze(String anchorText, String url) {
+  public WebPageType analyze(String anchorText, URLInfo urlInfo) {
     for(WebPageTypePattern sel : this.pattern) {
-      if(sel.matches(url)) return sel.getType();
+      if(sel.matches(urlInfo.getPathWithParams())) return sel.getType();
     }
     return null;
   }

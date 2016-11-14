@@ -11,7 +11,7 @@
         <select class="onFilter">
           <%=widget.select.options.renderWithLabel(multiFieldLabels, multiFieldOpts, config.filter.field)%>
           <option disabled>_________________</option>
-          <%=widget.select.options.render(beanInfo.fieldLabels, config.filter.field)%>
+          <%=widget.select.options.renderWithLabel(beanInfo.fieldLabels, beanInfo.fieldNames, config.filter.field)%>
         </select>
         <input class="onFilter" value="<%=config.filter.expression%>" placeholder="Filter Expression" type="search"/>
       </span>

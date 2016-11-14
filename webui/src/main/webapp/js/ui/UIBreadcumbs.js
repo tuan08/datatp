@@ -106,6 +106,9 @@ define([
           return ;
         } else {
           var view = this.views.pop() ;
+          if(view.onBreadcumbsRemove) {
+            view.onBreadcumbsRemove();
+          }
           breadcumbs.find("a:last-child").remove();
           breadcumbs.find("span:last-child").remove();
         }

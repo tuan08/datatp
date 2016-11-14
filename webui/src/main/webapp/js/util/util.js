@@ -26,6 +26,8 @@ define([
           } else {
             obj = obj[field];
           }
+        } else if(i == fields.length - 1) {
+          obj[field] = val;
         } else {
           throw new Error("cannot set field " + field + ", obj is null");
         }

@@ -15,6 +15,7 @@ define([
     },
 
     onFieldChange: function(bean, fieldName, oldValue, value) {
+      console.log("on field change: fieldName = " + fieldName + ", oldValue = " + oldValue + ", newValue = " + value);
       this.getAncestorOfType("UISiteConfigBreadcumbs").broadcastSiteConfigChange(this.siteConfig) ;
     },
     
@@ -45,9 +46,8 @@ define([
     },
     
     setExtractConfig: function(extractConfig) {
-      var xpaths = extractConfig.extractXPath;
-      if(xpaths == null) xpaths = [];
-      this.set(model.site.config.ExtractConfigXPath, xpaths);
+      if(extractConfig.extractXPath == null) extractConfig.extractXPath = [];
+      this.set(model.site.config.ExtractConfigXPath, extractConfig.extractXPath);
       return this;
     },
 
@@ -61,24 +61,39 @@ define([
         <div name="UIExtractConfigXPath" />
       </div>
     `),
+
+    getBean: function() { return this.extractConfig; },
     
     set: function(config) {
+      this.extractConfig = config;
       var uiBasic = new UIExtractConfigBasic().setExtractConfig(config);
       this.__setUIComponent("UIExtractConfigBasic", uiBasic) ;
 
-      var uiXPaths = new UIExtractConfigXPath().setExtractConfig(config);
-      this.__setUIComponent("UIExtractConfigXPath", uiXPaths) ;
+      this.uiExtractConfigXPath = new UIExtractConfigXPath().setExtractConfig(config);
+      this.__setUIComponent("UIExtractConfigXPath", this.uiExtractConfigXPath) ;
       return this;
+    },
+
+    getUIExtractConfigXPath: function() { return this.uiExtractConfigXPath; },
+    
+    commitChange: function() { 
+      this.uiExtractConfigXPath.commitChange(); 
     }
   });
 
   var UIExtractConfigs = UIBeanComplexArray.extend({
     config: {
       UIBeanComplex: UIExtractConfig,
+
       label: function(idx) { return "Extract " + (idx + 1); }
     },
 
-    createDefaultBean: function() { return { }; }
+    createDefaultBean: function() { return { }; },
+
+    commitChange: function() { 
+      var uiExtractConfigs = this.getUIBeanComplexes();
+      for(var i = 0; i < uiExtractConfigs.length; i++) uiExtractConfigs[i].commitChange();
+    }
   });
 
   var uicomp = {

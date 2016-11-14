@@ -7,7 +7,7 @@ define([
       "group": { label: "Group", required: true  },
       "hostname": { label: "Hostname", required: true },
       "status": { label: "Status" },
-      "injectUrl": {label: "Inject URL", type: 'array' },
+      "injectUrl": { label: "Inject URL", type: 'array' },
       "crawlSubDomain": {   
         label: "Crawl Subdomain", type: "select",
         options: [
@@ -86,7 +86,7 @@ define([
         ]
       },
       "xpath": {
-        label: "XPath", required: true
+        label: "XPath", type: "array",  required: true
       }
     },
   };

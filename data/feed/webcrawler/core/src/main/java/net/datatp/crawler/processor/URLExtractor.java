@@ -89,7 +89,7 @@ public class URLExtractor {
         if (isExclude(newURLInfo.getPath())) continue;
         
         WebPageTypeAnalyzer wpAnalyzer = urlCtx.getSiteContext().getWebPageAnalyzer().getWebPageTypeAnalyzer();
-        WebPageType wpType = wpAnalyzer.analyze(anchorText, newNormalizedURL);
+        WebPageType wpType = wpAnalyzer.analyze(anchorText, newURLInfo);
         if(wpType == WebPageType.ignore) continue;
         
         // CONTROL DEEP LIMIT

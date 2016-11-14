@@ -63,6 +63,44 @@ public class CrawlerIntegrationTest {
       setRefreshPeriod(REFRESH_PERIOD_IN_SEC).
       setExtractConfig(ExtractConfig.article())
     ); 
+    
+    crawler.siteAdd(
+      new SiteConfig("vietnam", "vietnamnet.vn", "http://vietnamnet.vn", 2).
+      setRefreshPeriod(REFRESH_PERIOD_IN_SEC).
+      setExtractConfig(ExtractConfig.article())
+    );
+    
+    crawler.siteAdd(
+      new SiteConfig("vietnam", "cafef.vn", "http://cafef.vn", 2).
+      setRefreshPeriod(REFRESH_PERIOD_IN_SEC).
+      setExtractConfig(ExtractConfig.article())
+    );
+    
+    crawler.siteAdd(
+      new SiteConfig("US", "edition.cnn.com", "http://edition.cnn.com", 2).
+      setRefreshPeriod(REFRESH_PERIOD_IN_SEC).
+      setExtractConfig(ExtractConfig.article())
+    ); 
+    
+    
+    crawler.siteAdd(
+      new SiteConfig("US", "nytimes.com", "http://www.nytimes.com", 2).
+      setRefreshPeriod(REFRESH_PERIOD_IN_SEC).
+      setExtractConfig(ExtractConfig.article())
+    ); 
+    
+    crawler.siteAdd(
+      new SiteConfig("US", "amazon.com", "https://www.amazon.com/gp/site-directory", 2).
+      setRefreshPeriod(REFRESH_PERIOD_IN_SEC).
+      setExtractConfig(ExtractConfig.article())
+    ); 
+    
+    
+    crawler.siteAdd(
+      new SiteConfig("US", "ebay.com", "http://www.ebay.com/rpp/electronics-en", 2).
+      setRefreshPeriod(REFRESH_PERIOD_IN_SEC).
+      setExtractConfig(ExtractConfig.article())
+    ); 
 
 //    crawler.siteAdd(
 //      new SiteConfig("otofun", "otofun.net", "https://www.otofun.net/forums/", 2).

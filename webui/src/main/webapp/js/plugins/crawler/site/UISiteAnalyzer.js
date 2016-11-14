@@ -77,17 +77,14 @@ define([
 
     configure: function(siteConfig) {
       this.siteConfig = siteConfig;
-      var urlSiteStructure = Rest.site.getAnalyzedURLSiteStructure(siteConfig, 250, false);
       this.addDefaultControlPluginUI();
       this.addControlPluginUI("Control", new UISiteAnalyzerCtrl());
-      this.set(model.site.analysis.URLAnalysis, urlSiteStructure);
+      this.set(model.site.analysis.URLAnalysis, []);
+      this.autoRefresh();
       return this;
     },
 
-    onRefresh: function() {
-      var urlSiteStructure = Rest.site.getAnalyzedURLSiteStructure(this.siteConfig, 250, false);
-      this.setBeans(urlSiteStructure, true);
-    },
+    onRefresh: function() { this.autoRefresh(); },
 
     onReanalyze: function() {
       var urlSiteStructure = Rest.site.reanalyseURLSiteStructure(this.siteConfig, 250);
@@ -102,6 +99,21 @@ define([
         urlAnalysis: urlAnalysis
       };
       uiBreadcumbs.push(new UIWebPageAnalyzer(options));
+    },
+
+    autoRefresh: function() {
+      var SIZE = 250 ;
+      var repeatCount = 0;
+      var thisUI = this;
+      var refreshMethod = function() {
+        var urlSiteStructure = Rest.site.getAnalyzedURLSiteStructure(thisUI.siteConfig, SIZE, false);
+        thisUI.setBeans(urlSiteStructure, true);
+        repeatCount++;
+        if(urlSiteStructure.length < SIZE && repeatCount < 5) {
+          setTimeout(refreshMethod, 1500);
+        }
+      }
+      refreshMethod();
     },
   }) ;
 

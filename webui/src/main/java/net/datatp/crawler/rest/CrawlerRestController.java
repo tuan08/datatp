@@ -86,8 +86,8 @@ public class CrawlerRestController {
   
   @RequestMapping(value = "/crawler/site/analyzed-url-data")
   public URLData siteGetAnalyzedURLData(@RequestParam("url") String url) throws Exception {
-    URLInfo urlAnalyzer = new URLInfo(url);
-    SiteStructureAnalyzer analyzer = siteStructureAnalyzerService.getSiteStructureAnalyzer(urlAnalyzer.getHost());
+    URLInfo urlInfo = new URLInfo(url);
+    SiteStructureAnalyzer analyzer = siteStructureAnalyzerService.getSiteStructureAnalyzer(urlInfo.getNormalizeHostName());
     if(analyzer != null) return analyzer.getSiteStructure().getURLData(url);
     return new URLData(new URLInfo(url), "No Data");
   }

@@ -139,7 +139,6 @@ define([
     },
 
     onFilter: function(evt) {
-      console.log("on filter...");
       var filterBlk = $(evt.target).closest(".filter");
       var field = filterBlk.find("select.onFilter").val();
       var exp   = filterBlk.find("input.onFilter").val();

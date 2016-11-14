@@ -5,6 +5,7 @@ import net.datatp.util.URLInfo;
 public class URLData {
   private URLInfo urlInfo;
   private String  xhtml;
+  private WebPageAnalysis webPageAnalysis;
   
   public URLData() {}
   
@@ -18,4 +19,7 @@ public class URLData {
   
   public String getXhtml() { return xhtml; }
   public void setXhtml(String xhtml) { this.xhtml = xhtml; }
+
+  public WebPageAnalysis getWebPageAnalysis() { return webPageAnalysis; }
+  public void setWebPageAnalysis(WebPageAnalysis webpageAnalysis) { this.webPageAnalysis = webpageAnalysis; }
 }

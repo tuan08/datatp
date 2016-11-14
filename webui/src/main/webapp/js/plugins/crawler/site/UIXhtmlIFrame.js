@@ -1,12 +1,12 @@
 define([
   'jquery',
   'underscore', 
-  'backbone',
+  'ui/UIView',
   'util/XPath',
   'plugins/crawler/site/IFrameTool'
-], function($, _, Backbone, XPath, IFrameTool) {
+], function($, _, UIView, XPath, IFrameTool) {
 
-  var UIXhtmlContent = Backbone.View.extend({
+  var UIXhtmlIFrame = UIView.extend({
     label: "Xhtml",
 
     initialize: function(options) {
@@ -19,9 +19,11 @@ define([
         <div class="ui-tabs" style="margin: 2px 0px">
           <strong>URL:</strong> <%=url%>
         </div>
-        <iframe id='XhtmlContentIFrame' style="width: 100%; height: calc(100% - 25px);" src='data:text/html;charset=utf-8,<html></html>'></iframe>
+        <iframe id="XhtmlContentIFrame" style="width: 100%; height: calc(100% - 25px);"></iframe>
       </div>
      `),
+
+    getCurrentSelectXPath: function() { return this.currentSelectXPath; } ,
 
     render: function() {
       var params = { url: this.urlData.urlInfo.url } ;
@@ -31,15 +33,15 @@ define([
 
     addIFrameEventListener: function() {
       var uiExtractConfig = this.uiExtractConfig;
-      var iframe= document.getElementById('XhtmlContentIFrame');
 
-      var iframeTool = new IFrameTool(iframe);
+      var iframeTool = new IFrameTool(document.getElementById('XhtmlContentIFrame'));
       try {
         iframeTool.html(this.urlData.xhtml);
       } catch(err) {
         console.error(err);
       }
  
+      var uiIFrame  = this;
       var onSelectText = function(evt){
         var hlText = iframeTool.getHighlightText();
         if(hlText == null || hlText == '') return;
@@ -47,9 +49,9 @@ define([
         var elem = null;
         if (evt.srcElement)  elem = evt.srcElement;
         else if (evt.target) elem = evt.target;
-        var xpath = new XPath($(elem)[0]);
-        console.printJSON(xpath);
+        uiIFrame.currentSelectXPath = new XPath($(elem)[0]);
       };
+
       iframeTool.on('onmouseup', onSelectText);
       this.iframeTool = iframeTool;
     },
@@ -58,5 +60,5 @@ define([
     },
   });
   
-  return UIXhtmlContent ;
+  return UIXhtmlIFrame ;
 });

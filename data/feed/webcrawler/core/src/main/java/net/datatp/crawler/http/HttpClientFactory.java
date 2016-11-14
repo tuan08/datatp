@@ -21,6 +21,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpResponseInterceptor;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.HttpRequestRetryHandler;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.entity.HttpEntityWrapper;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -146,7 +148,12 @@ public class HttpClientFactory {
     } ;
     builder.addInterceptorLast(responseInterceptor);
     builder.setRedirectStrategy(new CrawlerRedirectHandler()) ;
-    return builder.build();
+    
+    RequestConfig globalConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.DEFAULT).build();
+    builder.setDefaultRequestConfig(globalConfig);
+    
+    CloseableHttpClient httpClient = builder.build();
+    return httpClient;
   }
 
   static class GzipDecompressingEntity extends HttpEntityWrapper {

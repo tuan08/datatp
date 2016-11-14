@@ -38,9 +38,8 @@ define([
       if(this.onInit) this.onInit(options);
     },
 
-    init: function(bInfo, bean, beanState) { 
+    init: function(bInfo, beanState) { 
       this.beanInfo = bInfo;
-      this.bean     = bean;
       this.state    = beanState;
       return this;
     },
@@ -49,10 +48,13 @@ define([
       $.extend(true, this.config, newConfig); 
       return this;
     },
+
+    getBean: function() { return this.state.getBean(); },
+
+    getBeanState: function() { return this.state; },
     
     set: function(bInfo, bean) { 
       this.beanInfo = bInfo;
-      this.bean     = bean;
       this.state    = this.__createBeanState(bInfo, bean);
       this.state.editeMode = false;
       return this;
@@ -63,37 +65,14 @@ define([
       return this;
     },
 
-    onViewMode: function() {
-      this.__setViewMode($(this.el).find(".ui-bean"));
-      /*
-      if(this.state.editMode) {
-        this.__onCommitChange($(this.el));
-      }
-      var fieldBlks = $(this.el).find('div[field]');
-      var beanInfo = this.beanInfo;
-      var beanState = this.state;
-      fieldBlks.each(function(idx, ele) {
-        widget.view.field($(ele), beanInfo, beanState);
-      });
-      this.state.editMode = false;
-      */
-    },
+    onViewMode: function() { this.__setViewMode($(this.el).find(".ui-bean")); },
 
-    onEditMode: function() {
-      this.__setEditMode($(this.el).find(".ui-bean"));
-      /*
-      var uiFieldValues = $(this.el).find('.field-value');
-      for(var i = 0; i < uiFieldValues.length; i++) {
-        widget.edit.field($(uiFieldValues[i]), this.beanInfo, this.state);
-      }
-      this.state.editMode = true;
-      */
-    },
+    onEditMode: function() { this.__setEditMode($(this.el).find(".ui-bean")); },
 
     _template: _.template(UIBeanTmpl),
 
     render: function() {
-      var params = { config: this.config, beanInfo: this.beanInfo, bean: this.bean };
+      var params = { config: this.config, beanInfo: this.beanInfo };
       $(this.el).html(this._template(params));
       if(this.state.editMode) {
         this.onEditMode();
@@ -115,7 +94,8 @@ define([
       'click      .toggle-mode .onToggleMode' : 'onToggleMode',
     },
 
-    __getBean: function(fv) { return this.bean; },
+
+    __getBean: function(fv) { return this.state.getBean(); },
 
     __getBeanState: function(fv) { return this.state; },
 

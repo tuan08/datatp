@@ -39,12 +39,18 @@ define([
       actions: {
         save: { 
           label: "Save",
-          onClick: function(thisUI) { console.log('call save'); }
+          onClick: function(thisUI, beanState, bean) { 
+            console.log('call save(tab)'); 
+            console.printJSON(beanState);
+            console.printJSON(bean);
+          }
         }
       }
     },
     
     onInit: function(options) {
+      var actionTest = function(uiArrayBean) {
+      };
       this.set(data.BeanInfo, data.beans);
     },
 
@@ -61,7 +67,10 @@ define([
       actions: {
         save: { 
           label: "Save",
-          onClick: function(thisUI) { console.log('call save'); }
+          onClick: function(thisUI, beanState, bean) { 
+            console.printJSON(beanState);
+            console.printJSON(bean);
+          }
         }
       }
     },
@@ -95,6 +104,9 @@ define([
         </div>
       </div>
     `),
+
+    getBean: function() {
+    },
     
     set: function(bean) {
       var uiSingle = new UISingleBeanDemo().configure({ width: "100%"}).set(data.BeanInfo, bean);

@@ -91,9 +91,7 @@ define([
         var value = beanState.fields[fieldName].value;
         var fieldInfo = beanInfo.fields[fieldName];
         var params = {
-          fieldName: fieldName, field: fieldInfo,
-          value: value,
-          autocomplete: 'on'
+          fieldName: fieldName, field: fieldInfo, value: value, autocomplete: 'on'
         };
         if(fieldInfo.type == 'array') {
           uiFieldValue.html(arrayInputFieldValueTmpl(params));

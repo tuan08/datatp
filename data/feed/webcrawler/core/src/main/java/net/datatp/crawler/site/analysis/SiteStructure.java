@@ -9,6 +9,7 @@ import org.jsoup.nodes.Document;
 import net.datatp.crawler.site.SiteContext;
 import net.datatp.crawler.site.WebPageType;
 import net.datatp.util.URLInfo;
+import net.datatp.util.dataformat.DataSerializer;
 import net.datatp.xhtml.extract.ExtractEntity;
 import net.datatp.xhtml.extract.WDataContext;
 
@@ -41,8 +42,10 @@ public class SiteStructure {
   }
 
   synchronized public void reanalyse() {
-    WDataContext[] wdataExtractContexts = 
-        wdataContexts.values().toArray(new WDataContext[wdataContexts.size()]);
+    System.out.println("Analyze: ");
+    System.out.println(DataSerializer.JSON.toString(siteContext.getSiteConfig()));
+    
+    WDataContext[] wdataExtractContexts = wdataContexts.values().toArray(new WDataContext[wdataContexts.size()]);
     urlSiteStructure.clear();
     wdataContexts.clear();
     for(WDataContext sel : wdataExtractContexts) {
@@ -54,7 +57,10 @@ public class SiteStructure {
     WDataContext ctx = wdataContexts.get(url);
     if(ctx != null) {
       Document doc = ctx.createDocument() ;
-      return new URLData(ctx.getURInfo(), doc.html());
+      URLData urlData = new URLData(ctx.getURInfo(), doc.html());
+      WebPageAnalysis wpAnalysis = siteContext.getWebPageAnalyzer().analyze(ctx);
+      urlData.setWebPageAnalysis(wpAnalysis);
+      return urlData;
     }
     return new URLData(new URLInfo(url), "No Data");
   }

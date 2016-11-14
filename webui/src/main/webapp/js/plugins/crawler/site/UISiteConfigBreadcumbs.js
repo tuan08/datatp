@@ -35,6 +35,7 @@ define([
         <div name="UIExtractConfigs" />
       <div>
     `),
+
     events: {
       "click .onSave": "onSave",
       "click .onAnalyze": "onAnalyze"
