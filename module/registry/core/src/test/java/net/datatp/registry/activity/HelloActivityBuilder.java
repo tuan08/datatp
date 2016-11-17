@@ -7,12 +7,12 @@ import java.util.Random;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
 
-import net.datattp.registry.activity.Activity;
-import net.datattp.registry.activity.ActivityBuilder;
-import net.datattp.registry.activity.ActivityExecutionContext;
-import net.datattp.registry.activity.ActivityStep;
-import net.datattp.registry.activity.ActivityStepBuilder;
-import net.datattp.registry.activity.ActivityStepExecutor;
+import net.datatp.registry.activity.Activity;
+import net.datatp.registry.activity.ActivityBuilder;
+import net.datatp.registry.activity.ActivityExecutionContext;
+import net.datatp.registry.activity.ActivityStep;
+import net.datatp.registry.activity.ActivityStepBuilder;
+import net.datatp.registry.activity.ActivityStepExecutor;
 
 
 public class HelloActivityBuilder extends ActivityBuilder {

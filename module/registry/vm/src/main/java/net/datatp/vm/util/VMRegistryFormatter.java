@@ -6,8 +6,8 @@ import java.util.Map;
 import net.datatp.util.text.TabularFormater;
 import net.datatp.vm.VMDescriptor;
 import net.datatp.vm.VMStatus;
-import net.datattp.registry.Node;
-import net.datattp.registry.util.NodeFormatter;
+import net.datatp.registry.Node;
+import net.datatp.registry.util.NodeFormatter;
 
 public class VMRegistryFormatter extends NodeFormatter {
   private Node vmNode ;

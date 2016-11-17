@@ -1,5 +1,7 @@
 package net.datatp.es.server;
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 
 //import net.datatp.module.AppServiceModule;
@@ -43,7 +45,11 @@ public class ElasticSearchServer implements Server {
   @Override
   public void shutdown() {
     if(elasticServiceThread != null) {
-      elasticServiceThread.elasticService.stop();
+      try {
+        elasticServiceThread.elasticService.stop();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
   }
   
@@ -51,31 +57,6 @@ public class ElasticSearchServer implements Server {
     private ElasticSearchService elasticService ;
     
     public void run() {
-//      try {
-//        String[] args = {
-//            "--es:server.name=" + hostname,
-//            "--es:path.home=" + dataDir,
-//            "--es:transport.tcp.port=" + port
-//        } ;
-//        final Configuration configuration = new Configuration() ;
-//        new JCommander(configuration, args);
-//        AppServiceModule module = new AppServiceModule(new HashMap<String, String>()) {
-//          @Override
-//          protected void configure(Map<String, String> properties) {
-//            bindMapProperties("esProperties", configuration.getESProperties()) ;
-//            bindInstance(LoggerFactory.class, new LoggerFactory("elasticsearch")) ;
-//          };
-//        };
-//        Module[] modules = {
-//            new CloseableModule(),new Jsr250Module(), new MycilaJmxModuleExt(nodeName),  module
-//        };
-//        Injector container = Guice.createInjector(Stage.PRODUCTION, modules);
-//        elasticService = container.getInstance(ElasticSearchService.class);
-//        elasticService.start();
-//        Thread.currentThread().join();
-//      } catch(Exception ex) {
-//        ex.printStackTrace();
-//      }
     }
   }
 }

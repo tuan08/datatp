@@ -19,13 +19,12 @@ dependencies {
   compile("org.apache.activemq:activemq-broker:${activeMQVersion}") {
     exclude group: "org.springframework"
   }
+
   compile("org.apache.activemq:activemq-kahadb-store:${activeMQVersion}") {
     exclude group: "org.springframework"
   }
 
-  compile("org.springframework.integration:spring-integration-jms:${springIntegrationVersion}") {
-    //exclude group: "org.springframework"
-  }
+  compile("org.springframework.integration:spring-integration-jms:${springIntegrationVersion}") 
 }
 
 

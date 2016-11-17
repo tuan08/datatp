@@ -7,6 +7,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.RegistryException;
+import net.datatp.registry.zk.RegistryImpl;
 import net.datatp.tracking.TrackingGeneratorService;
 import net.datatp.tracking.TrackingMessageReport;
 import net.datatp.tracking.TrackingRegistry;
@@ -15,10 +19,6 @@ import net.datatp.tracking.inmem.InMemTrackingStorage;
 import net.datatp.util.io.FileUtil;
 import net.datatp.util.log.LoggerFactory;
 import net.datatp.zk.tool.server.EmbededZKServer;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.RegistryException;
-import net.datattp.registry.zk.RegistryImpl;
 
 public class TrackingMessageUnitTest {
   final static String WORKING_DIR           = "./build/working";

@@ -11,17 +11,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import net.datatp.registry.ErrorCode;
+import net.datatp.registry.Node;
+import net.datatp.registry.NodeCreateMode;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.RegistryException;
+import net.datatp.registry.lock.Lock;
+import net.datatp.registry.lock.LockId;
+import net.datatp.registry.zk.RegistryImpl;
 import net.datatp.util.io.FileUtil;
 import net.datatp.zk.tool.server.EmbededZKServer;
-import net.datattp.registry.ErrorCode;
-import net.datattp.registry.Node;
-import net.datattp.registry.NodeCreateMode;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.RegistryException;
-import net.datattp.registry.lock.Lock;
-import net.datattp.registry.lock.LockId;
-import net.datattp.registry.zk.RegistryImpl;
 
 public class LockUnitTest {
   static {

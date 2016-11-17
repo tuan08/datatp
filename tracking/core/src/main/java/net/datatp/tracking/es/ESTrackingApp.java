@@ -6,11 +6,11 @@ import java.util.concurrent.TimeUnit;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.zk.RegistryImpl;
 import net.datatp.tracking.PropertiesConfig;
 import net.datatp.tracking.TrackingGeneratorService;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.zk.RegistryImpl;
 
 public class ESTrackingApp {
   @Parameter(names = "--zk-connect", description = "The zk connect string")

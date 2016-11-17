@@ -69,7 +69,7 @@ public class KafkaAppender extends AppenderSkeleton {
   protected void append(LoggingEvent event) {
     if(closed) return ;
     if(queueError) return ;
-    append(new Log4jRecord(event)) ;
+   // append(new Log4jRecord(event)) ;
   }
   
   public void append(Log4jRecord record) {

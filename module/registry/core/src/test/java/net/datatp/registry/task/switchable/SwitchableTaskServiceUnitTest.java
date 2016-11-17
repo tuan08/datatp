@@ -23,18 +23,18 @@ import com.mycila.guice.ext.closeable.CloseableModule;
 import com.mycila.guice.ext.jsr250.Jsr250Module;
 
 import net.datatp.module.AppServiceModule;
+import net.datatp.registry.ErrorCode;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.RegistryException;
 import net.datatp.registry.task.TaskDescriptor;
+import net.datatp.registry.task.TaskExecutorDescriptor;
+import net.datatp.registry.task.switchable.SwitchableTaskContext;
+import net.datatp.registry.task.switchable.SwitchableTaskMonitor;
+import net.datatp.registry.task.switchable.SwitchableTaskService;
 import net.datatp.util.io.FileUtil;
 import net.datatp.util.text.TabularFormater;
 import net.datatp.zk.tool.server.EmbededZKServer;
-import net.datattp.registry.ErrorCode;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.RegistryException;
-import net.datattp.registry.task.TaskExecutorDescriptor;
-import net.datattp.registry.task.switchable.SwitchableTaskContext;
-import net.datattp.registry.task.switchable.SwitchableTaskMonitor;
-import net.datattp.registry.task.switchable.SwitchableTaskService;
 
 public class SwitchableTaskServiceUnitTest {
   static {

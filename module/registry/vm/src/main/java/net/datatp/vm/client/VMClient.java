@@ -20,13 +20,13 @@ import net.datatp.vm.command.CommandResult;
 import net.datatp.vm.command.VMCommand;
 import net.datatp.vm.service.VMService;
 import net.datatp.vm.service.VMServiceCommand;
-import net.datattp.registry.ErrorCode;
-import net.datattp.registry.Node;
-import net.datattp.registry.NodeCreateMode;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryException;
-import net.datattp.registry.event.NodeEvent;
-import net.datattp.registry.event.NodeWatcher;
+import net.datatp.registry.ErrorCode;
+import net.datatp.registry.Node;
+import net.datatp.registry.NodeCreateMode;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryException;
+import net.datatp.registry.event.NodeEvent;
+import net.datatp.registry.event.NodeWatcher;
 
 @JmxBean("role=vm-client, type=VMClient, name=VMClient")
 public class VMClient {

@@ -2,8 +2,9 @@ package net.datatp.es.log4j;
 
 import java.io.IOException;
 
-import org.apache.log4j.AppenderSkeleton;
-import org.apache.log4j.spi.LoggingEvent;
+import org.apache.logging.log4j.core.impl.Log4jLogEvent;
+//import org.apache.log4j.AppenderSkeleton;
+//import org.apache.log4j.spi.LoggingEvent;
 import org.elasticsearch.ElasticsearchException;
 
 import net.datatp.buffer.chronicle.MultiSegmentQueue;
@@ -14,7 +15,7 @@ import net.datatp.util.io.IOUtil;
 import net.datatp.util.log.Log4jRecord;
 import net.datatp.util.text.StringUtil;
 
-public class ElasticSearchAppender extends AppenderSkeleton {
+public class ElasticSearchAppender  {
   private String[] connect ;
   private String   indexName ;
   private String   queueBufferDir;
@@ -75,7 +76,7 @@ public class ElasticSearchAppender extends AppenderSkeleton {
   
   public boolean requiresLayout() { return false; }
 
-  protected void append(LoggingEvent event) {
+  protected void append(Log4jLogEvent event) {
     if(queueError) return ;
     Log4jRecord record = new Log4jRecord(event) ;
     record.setHost(appHost);

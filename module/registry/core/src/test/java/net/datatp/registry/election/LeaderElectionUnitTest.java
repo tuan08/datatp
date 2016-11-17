@@ -10,15 +10,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import net.datatp.registry.Node;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.RegistryException;
+import net.datatp.registry.election.LeaderElection;
+import net.datatp.registry.election.LeaderElectionListener;
+import net.datatp.registry.zk.RegistryImpl;
 import net.datatp.util.io.FileUtil;
 import net.datatp.zk.tool.server.EmbededZKServer;
-import net.datattp.registry.Node;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.RegistryException;
-import net.datattp.registry.election.LeaderElection;
-import net.datattp.registry.election.LeaderElectionListener;
-import net.datattp.registry.zk.RegistryImpl;
 
 public class LeaderElectionUnitTest {
   static {

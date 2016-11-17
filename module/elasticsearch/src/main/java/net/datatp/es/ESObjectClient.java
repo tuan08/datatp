@@ -6,6 +6,7 @@ import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 import java.util.Map;
 
 import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.action.DocWriteResponse.Result;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
@@ -110,7 +111,7 @@ public class ESObjectClient<T> {
   public boolean remove(String id) throws ElasticsearchException {
     DeleteResponse response =
         esclient.client.prepareDelete(index, mappingType.getSimpleName(), id).execute().actionGet();
-    return response.isFound();
+    return response.getResult() == Result.DELETED;
   }
   
   public ESQueryExecutor getQueryExecutor() { return new ESQueryExecutor(index, esclient); }

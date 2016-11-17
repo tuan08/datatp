@@ -18,19 +18,19 @@ import com.mycila.guice.ext.closeable.CloseableModule;
 import com.mycila.guice.ext.jsr250.Jsr250Module;
 
 import net.datatp.module.AppServiceModule;
+import net.datatp.registry.ErrorCode;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.RegistryException;
 import net.datatp.registry.task.TaskDescriptor;
+import net.datatp.registry.task.TaskExecutorDescriptor;
+import net.datatp.registry.task.dedicated.DedicatedTaskContext;
+import net.datatp.registry.task.dedicated.DedicatedTaskRegistry;
+import net.datatp.registry.task.dedicated.DedicatedTaskService;
+import net.datatp.registry.task.dedicated.TaskSlotExecutor;
+import net.datatp.registry.task.dedicated.TaskSlotExecutorFactory;
 import net.datatp.util.io.FileUtil;
 import net.datatp.zk.tool.server.EmbededZKServer;
-import net.datattp.registry.ErrorCode;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.RegistryException;
-import net.datattp.registry.task.TaskExecutorDescriptor;
-import net.datattp.registry.task.dedicated.DedicatedTaskContext;
-import net.datattp.registry.task.dedicated.DedicatedTaskRegistry;
-import net.datattp.registry.task.dedicated.DedicatedTaskService;
-import net.datattp.registry.task.dedicated.TaskSlotExecutor;
-import net.datattp.registry.task.dedicated.TaskSlotExecutorFactory;
 
 public class DedicatedTaskServiceUnitTest {
   static {

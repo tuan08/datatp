@@ -3,12 +3,10 @@ package net.datatp.util.log;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.apache.log4j.spi.LoggingEvent;
+import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import net.datatp.util.ExceptionUtil;
 
 public class Log4jRecord implements Serializable {
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy HH:mm:ss")
@@ -25,15 +23,12 @@ public class Log4jRecord implements Serializable {
   public Log4jRecord() {
   }
 
-  public Log4jRecord(LoggingEvent event) {
-    timestamp = new Date(event.getTimeStamp());
+  public Log4jRecord(Log4jLogEvent event) {
+    timestamp = new Date(event.getTimeMillis());
     threadName = event.getThreadName() ;
     loggerName = event.getLoggerName();
     level = event.getLevel().toString();
-    message = event.getRenderedMessage();
-    if(event.getThrowableInformation() != null) {
-      stacktrace = ExceptionUtil.getStackTrace(event.getThrowableInformation().getThrowable());
-    }
+    message = event.getMessage().getFormat();
   }
 
   @JsonIgnore

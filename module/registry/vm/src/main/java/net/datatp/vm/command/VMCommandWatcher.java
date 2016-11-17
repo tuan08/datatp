@@ -4,9 +4,9 @@ import java.util.List;
 
 import net.datatp.util.ExceptionUtil;
 import net.datatp.vm.VM;
-import net.datattp.registry.Registry;
-import net.datattp.registry.event.NodeEvent;
-import net.datattp.registry.event.NodeWatcher;
+import net.datatp.registry.Registry;
+import net.datatp.registry.event.NodeEvent;
+import net.datatp.registry.event.NodeWatcher;
 
 public class VMCommandWatcher extends NodeWatcher {
   private VM vm;

@@ -16,15 +16,15 @@ import com.mycila.guice.ext.closeable.CloseableModule;
 import com.mycila.guice.ext.jsr250.Jsr250Module;
 
 import net.datatp.module.AppServiceModule;
+import net.datatp.registry.Node;
+import net.datatp.registry.NodeCreateMode;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.util.NodeDebugger;
+import net.datatp.registry.util.NodeFormatter;
+import net.datatp.registry.util.RegistryDebugger;
 import net.datatp.util.io.FileUtil;
 import net.datatp.zk.tool.server.EmbededZKServer;
-import net.datattp.registry.Node;
-import net.datattp.registry.NodeCreateMode;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.util.NodeDebugger;
-import net.datattp.registry.util.NodeFormatter;
-import net.datattp.registry.util.RegistryDebugger;
 
 public class DebugRegistryListenerUnitTest {
   static {

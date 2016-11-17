@@ -9,9 +9,23 @@ eclipse {
 dependencies {
   compile project(':module/commons')
 
-  compile group: 'org.apache.zookeeper', name: 'zookeeper', version: '3.4.8'
-  compile group: 'org.apache.curator', name: 'curator-recipes', version: '2.11.0'
-  compile group: 'org.apache.curator', name: 'curator-x-discovery', version: '2.11.0'
+  compile('org.apache.zookeeper:zookeeper:3.4.8') {
+    exclude group: "io.netty"
+    exclude group: "log4j"
+    exclude group: "org.slf4j"
+  }
+
+  compile('org.apache.curator:curator-recipes:2.11.0') {
+    exclude group: "io.netty"
+    exclude group: "log4j"
+    exclude group: "org.slf4j"
+  }
+
+  compile('org.apache.curator:curator-x-discovery:2.11.0') {
+    exclude group: "io.netty"
+    exclude group: "log4j"
+    exclude group: "org.slf4j"
+  }
 
   testCompile group: 'org.apache.curator', name: 'curator-test', version: '2.11.0'
 }

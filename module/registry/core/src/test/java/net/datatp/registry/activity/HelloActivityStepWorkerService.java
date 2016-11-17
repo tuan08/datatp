@@ -4,8 +4,8 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
 
-import net.datattp.registry.RegistryException;
-import net.datattp.registry.activity.ActivityStepWorkerService;
+import net.datatp.registry.RegistryException;
+import net.datatp.registry.activity.ActivityStepWorkerService;
 
 @Singleton
 public class HelloActivityStepWorkerService extends ActivityStepWorkerService<String> {

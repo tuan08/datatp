@@ -5,10 +5,10 @@ import net.datatp.vm.VMConfig;
 import net.datatp.vm.environment.jvm.JVMVMServicePlugin;
 import net.datatp.vm.service.VMServiceApp;
 import net.datatp.vm.service.VMServicePlugin;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.RegistryException;
-import net.datattp.registry.zk.RegistryImpl;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.RegistryException;
+import net.datatp.registry.zk.RegistryImpl;
 
 public class LocalVMClient extends VMClient {
   public LocalVMClient() throws RegistryException {

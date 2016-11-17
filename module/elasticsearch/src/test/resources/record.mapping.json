@@ -1,13 +1,13 @@
 {
   "Record": {
     "properties" : {
-      "createdBy" : { "type" : "string", "index" : "analyzed", "analyzer" : "standard" },
+      "createdBy" : { "type" : "text", "index" : "analyzed", "analyzer" : "standard" },
 
       "content" : {
-        "type" : "multi_field",
+        "type" : "text",
         "fields" : {
-          "content" :   {"type" : "string", "index" : "analyzed", "analyzer": "standard" },
-          "custom_content" : {"type" : "string", "index" : "analyzed", "analyzer": "standard" }
+          "content" :   {"type" : "text", "index" : "analyzed", "analyzer": "standard" },
+          "custom_content" : {"type" : "text", "index" : "analyzed", "analyzer": "standard" }
         }
       },
 

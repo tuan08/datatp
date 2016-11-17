@@ -1,15 +1,14 @@
 package net.datatp.tracking.es;
 
-import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
+import java.io.IOException;
 
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.node.Node;
-import org.elasticsearch.node.NodeBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import net.datatp.tracking.TrackingReportApp;
-import net.datatp.tracking.es.ESTrackingApp;
 import net.datatp.util.io.FileUtil;
 import net.datatp.util.log.LoggerFactory;
 import net.datatp.zk.tool.server.EmbededZKServer;
@@ -29,17 +28,16 @@ public class ESTrackingAppUnitTest {
     zkServer = new EmbededZKServer(WORKING_DIR + "/zookeeper") ;
     zkServer.start();
 
-    NodeBuilder nb = nodeBuilder();
-    nb.getSettings().put("cluster.name",       "neverwinterdp");
-    nb.getSettings().put("path.home",          WORKING_DIR + "/elasticsearch/data");
-    nb.getSettings().put("node.name",          "localhost");
-    nb.getSettings().put("transport.tcp.port", "9300");
-
-    node = nb.node();
+    Settings.Builder settingBuilder = Settings.builder();
+    settingBuilder.put("cluster.name",       "elasticsearch");
+    settingBuilder.put("path.home",          "build/elasticsearch/data");
+    settingBuilder.put("node.name",          "localhost");
+    settingBuilder.put("transport.tcp.port", "9300");
+    node = new Node(settingBuilder.build());
   }
   
   @After
-  public void after() {
+  public void after() throws IOException {
     zkServer.shutdown();
     node.close();
   }

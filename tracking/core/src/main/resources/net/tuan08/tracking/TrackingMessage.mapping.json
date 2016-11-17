@@ -1,9 +1,0 @@
-{
-  "TrackingMessage": {
-
-    "properties" : {
-      "vmId" : { "type" : "string", "index":"not_analyzed" },
-      "chunkId" : { "type" : "string", "index":"not_analyzed" }
-    }
-  }
-}

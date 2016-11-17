@@ -17,14 +17,14 @@ import com.mycila.guice.ext.closeable.CloseableModule;
 import com.mycila.guice.ext.jsr250.Jsr250Module;
 
 import net.datatp.module.AppServiceModule;
+import net.datatp.registry.Node;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.event.NodeEvent;
+import net.datatp.registry.event.NodeEventMatcher;
+import net.datatp.registry.event.WaitingOrderNodeEventListener;
 import net.datatp.util.io.FileUtil;
 import net.datatp.zk.tool.server.EmbededZKServer;
-import net.datattp.registry.Node;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.event.NodeEvent;
-import net.datattp.registry.event.NodeEventMatcher;
-import net.datattp.registry.event.WaitingOrderNodeEventListener;
 
 public class WaitingNodeEventListenerUnitTest {
   static {

@@ -15,6 +15,10 @@ public class JHiccupMeter {
     jHiccupRecorder.start();
   }
 
+  public void shutdown() {
+    jHiccupRecorder.terminate();
+    jHiccupRecorder.interrupt();
+  }
   
   static public class JHiccupRecorder extends Thread {
     private String vmName   = "localhost";

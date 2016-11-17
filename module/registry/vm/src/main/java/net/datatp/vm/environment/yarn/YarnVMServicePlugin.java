@@ -15,7 +15,7 @@ import net.datatp.vm.VMConfig;
 import net.datatp.vm.VMDescriptor;
 import net.datatp.vm.service.VMService;
 import net.datatp.vm.service.VMServicePlugin;
-import net.datattp.registry.RegistryException;
+import net.datatp.registry.RegistryException;
 
 @Singleton
 @JmxBean("role=vm-manager, type=VMServicePlugin, name=YarnVMServicePlugin")

@@ -4,11 +4,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.SequenceIdTracker;
+import net.datatp.registry.zk.RegistryImpl;
 import net.datatp.util.io.FileUtil;
 import net.datatp.zk.tool.server.EmbededZKServer;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.SequenceIdTracker;
-import net.datattp.registry.zk.RegistryImpl;
 
 public class SequenceIdTrackerUnitTest {
   static {

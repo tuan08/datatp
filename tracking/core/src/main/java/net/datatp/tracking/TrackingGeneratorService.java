@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryException;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryException;
 
 public class TrackingGeneratorService {
   private Logger logger ;

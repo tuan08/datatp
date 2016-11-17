@@ -1,14 +1,15 @@
 package net.datatp.es.sysinfo;
 
 import static org.elasticsearch.index.query.QueryBuilders.termQuery;
-import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.logging.log4j.Logger;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.common.logging.Loggers;
 import org.elasticsearch.node.Node;
-import org.elasticsearch.node.NodeBuilder;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.elasticsearch.search.aggregations.Aggregation;
@@ -21,35 +22,37 @@ import org.elasticsearch.search.aggregations.metrics.valuecount.InternalValueCou
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import com.carrotsearch.randomizedtesting.RandomizedRunner;
+import com.carrotsearch.randomizedtesting.annotations.ThreadLeakLingering;
+import com.carrotsearch.randomizedtesting.annotations.ThreadLeakScope;
+import com.carrotsearch.randomizedtesting.annotations.ThreadLeakScope.Scope;
 
 import net.datatp.es.ESClient;
 import net.datatp.es.ESObjectClient;
+import net.datatp.es.NodeBuilder;
 import net.datatp.es.sys.SysInfoLoggerService;
 import net.datatp.model.sys.Sys;
 import net.datatp.sys.RuntimeEnv;
-import net.datatp.util.io.FileUtil;
-import net.datatp.util.log.LoggerFactory;
 
+@RunWith(RandomizedRunner.class)
+@ThreadLeakScope(Scope.SUITE)
+@ThreadLeakLingering(linger = 3000)
 public class SysInfoLoggerServiceUnitTest {
   static String WORKING_DIR = "build/working";
+  
+  protected final Logger logger = Loggers.getLogger(getClass());
   
   private Node node ;
   
   @Before
   public void setup() throws Exception {
-    LoggerFactory.log4jUseConsoleOutputConfig("INFO");
-    FileUtil.removeIfExist(WORKING_DIR, false);
-    NodeBuilder nb = nodeBuilder();
-    nb.getSettings().put("cluster.name",       "Elasticsearch");
-    nb.getSettings().put("path.home",          WORKING_DIR + "/elasticsearch/data");
-    nb.getSettings().put("node.name",          "localhost");
-    nb.getSettings().put("transport.tcp.port", "9300");
-
-    node = nb.node();
+    node = new NodeBuilder().newNode();
   }
   
   @After
-  public void after() {
+  public void after() throws IOException {
     node.close();
   }
   
@@ -69,8 +72,8 @@ public class SysInfoLoggerServiceUnitTest {
     
     ESClient esclient = new ESClient(new String[] { "127.0.0.1:9300" });
     ESObjectClient<Sys> esObjecClient = new ESObjectClient<Sys>(esclient, "sys-info", Sys.class) ;
-    System.out.println("SysMetric records = " + esObjecClient.count(termQuery("host", "vm-1")));
-    System.out.println("SysMetric Heap Memory = " + esObjecClient.count(termQuery("metric.mem.name", "Heap")));
+    logger.info("SysMetric records = " + esObjecClient.count(termQuery("host", "vm-1")));
+    logger.info("SysMetric Heap Memory = " + esObjecClient.count(termQuery("metric.mem.name", "Heap")));
     
     AbstractAggregationBuilder[] aggregationBuilders = { 
       AggregationBuilders.terms("by_vmName").field("host"),
@@ -81,12 +84,13 @@ public class SysInfoLoggerServiceUnitTest {
     };
     SearchResponse searchResponse = esObjecClient.search(null, aggregationBuilders, true, 0, 3);
     SearchHits hits = searchResponse.getHits();
-    System.out.println("Total  Hits = " + hits.getTotalHits());
-    System.out.println("Return Hits = " + hits.getHits().length);
+    logger.info("Total  Hits = " + hits.getTotalHits());
+    logger.info("Return Hits = " + hits.getHits().length);
     Aggregations aggregations = searchResponse.getAggregations() ;
     dump(aggregations, "");
     
-    System.out.println(esObjecClient.getQueryExecutor().matchAll().setAggregations(aggregationBuilders).executeAndReturnAsJson());
+    logger.info(esObjecClient.getQueryExecutor().matchAll().setAggregations(aggregationBuilders).executeAndReturnAsJson());
+    esclient.close();
   }
   
   private void dump(Aggregations aggregations, String indent) {

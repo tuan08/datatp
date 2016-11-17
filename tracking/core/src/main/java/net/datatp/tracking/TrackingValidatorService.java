@@ -8,8 +8,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryException;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryException;
 
 public class TrackingValidatorService {
   private int expectNumOfMessagePerChunk = 100;

@@ -8,7 +8,7 @@ import net.datatp.vm.VMStatus;
 import net.datatp.vm.command.CommandResult;
 import net.datatp.vm.service.VMService;
 import net.datatp.vm.service.VMServiceCommand;
-import net.datattp.registry.event.WaitingOrderNodeEventListener;
+import net.datatp.registry.event.WaitingOrderNodeEventListener;
 
 public class VMSubmitter {
   private VMClient     vmClient;

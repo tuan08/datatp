@@ -23,9 +23,9 @@ import net.datatp.vm.environment.yarn.MiniClusterUtil;
 import net.datatp.vm.service.VMServiceApp;
 import net.datatp.vm.service.VMServiceCommand;
 import net.datatp.zk.tool.server.EmbededZKServer;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.zk.RegistryImpl;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.zk.RegistryImpl;
 
 public class VMManagerAppIntegrationTest {
   

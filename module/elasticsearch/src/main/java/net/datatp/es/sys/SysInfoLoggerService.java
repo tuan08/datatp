@@ -3,8 +3,6 @@ package net.datatp.es.sys;
 import java.io.IOException;
 import java.util.Date;
 
-import javax.annotation.PreDestroy;
-
 //import com.google.inject.Inject;
 //import com.google.inject.Singleton;
 
@@ -14,7 +12,6 @@ import net.datatp.sys.JHiccupMeter;
 import net.datatp.sys.RuntimeEnv;
 import net.datatp.sys.SysInfoService;
 
-//@Singleton
 public class SysInfoLoggerService extends ObjectLoggerService {
   private String                    serverName;
   private SysInfoService            sysInfoService;
@@ -22,7 +19,6 @@ public class SysInfoLoggerService extends ObjectLoggerService {
   private MetricInfoCollectorThread metricCollectorThread;
   private long                      logPeriod         = 15000;
   
-  //nject
   public void onInit(RuntimeEnv runtimeEnv) throws Exception {
     this.serverName     = runtimeEnv.getVMName();
     this.sysInfoService = new SysInfoService();
@@ -38,9 +34,8 @@ public class SysInfoLoggerService extends ObjectLoggerService {
     metricCollectorThread.start();
   }
   
-  @PreDestroy
   public void onDestroy() throws IOException {
-    System.err.println("OSMonitorLoggerService: onDestroy.........................");
+    jhiccupMetter.shutdown();
     metricCollectorThread.interrupt();
     close();
   }

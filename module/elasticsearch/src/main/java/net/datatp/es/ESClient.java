@@ -24,19 +24,25 @@ import org.elasticsearch.action.admin.indices.settings.put.UpdateSettingsRespons
 import org.elasticsearch.action.admin.indices.stats.IndexStats;
 import org.elasticsearch.action.admin.indices.stats.IndicesStatsRequestBuilder;
 import org.elasticsearch.action.admin.indices.stats.IndicesStatsResponse;
+import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.cluster.ClusterState;
 import org.elasticsearch.cluster.node.DiscoveryNode;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 /**
  * $Author: Tuan Nguyen$
  **/
 public class ESClient {
-  protected TransportClient client;
+  protected Client client;
   private String[] address;
 
+  public ESClient(Client client) {
+    this.client = client;
+  }
+  
   public ESClient(String[] address) throws UnknownHostException {
     this("elasticsearch", address);
   }
@@ -48,27 +54,34 @@ public class ESClient {
       put("cluster.name", clusterName).
       put("transport.ping_schedule", "20s").
       build();
-    client  = TransportClient.builder().settings(settings).build();
+    
+    PreBuiltTransportClient transportClient = new PreBuiltTransportClient(settings);
+    
     for (String selAddr : address) {
       int port = 9300;
       if (selAddr.indexOf(":") > 0) {
         port = Integer.parseInt(selAddr.substring(selAddr.indexOf(":") + 1));
         selAddr = selAddr.substring(0, selAddr.indexOf(":"));
       }
-      client.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(selAddr), port));
+      transportClient.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(selAddr), port));
     }
+    this.client = transportClient;
   }
-
+  
   public String[] getAddress() { return this.address; }
 
   public boolean waitForConnected(long timeout) throws InterruptedException {
-    long stopTime = System.currentTimeMillis() + timeout ;
-    while(System.currentTimeMillis() < stopTime) {
-      List<DiscoveryNode> nodes  = client.connectedNodes() ;
-      if(!nodes.isEmpty()) return true ;
-      Thread.sleep(1000);
+    if(client instanceof TransportClient) {
+      TransportClient transportClient = (TransportClient) client;
+      long stopTime = System.currentTimeMillis() + timeout ;
+      while(System.currentTimeMillis() < stopTime) {
+        List<DiscoveryNode> nodes  = transportClient.connectedNodes() ;
+        if(!nodes.isEmpty()) return true ;
+        Thread.sleep(1000);
+      }
+      return false ;
     }
-    return false ;
+    return true;
   }
   
   public void createIndex(String index, String settings) throws Exception {
@@ -113,13 +126,14 @@ public class ESClient {
   public NodeInfo getNodeInfo(String nodeId) {
     NodesInfoRequestBuilder builder = client.admin().cluster().prepareNodesInfo(nodeId);
     NodesInfoResponse response = builder.execute().actionGet();
-    return response.getNodes()[0];
+    return response.getNodes().get(0);
   }
 
   public NodeInfo[] getNodeInfo(String... nodeId) {
     NodesInfoRequestBuilder builder = client.admin().cluster().prepareNodesInfo(nodeId);
     NodesInfoResponse response = builder.execute().actionGet();
-    return response.getNodes();
+    List<NodeInfo> holder = response.getNodes();
+    return holder.toArray(new NodeInfo[holder.size()]);
   }
 
   public boolean hasIndex(String name) {

@@ -19,9 +19,9 @@ import net.datatp.vm.event.VMWaitingEventListener;
 import net.datatp.vm.service.VMService;
 import net.datatp.vm.service.VMServiceCommand;
 import net.datatp.vm.tool.LocalVMCluster;
-import net.datattp.registry.event.WaitingNodeEventListener;
-import net.datattp.registry.event.WaitingRandomNodeEventListener;
-import net.datattp.registry.zk.RegistryImpl;
+import net.datatp.registry.event.WaitingNodeEventListener;
+import net.datatp.registry.event.WaitingRandomNodeEventListener;
+import net.datatp.registry.zk.RegistryImpl;
 
 public class VMManagerAppUnitTest  {
   static {

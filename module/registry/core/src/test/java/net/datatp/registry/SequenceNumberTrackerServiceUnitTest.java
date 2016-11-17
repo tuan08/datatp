@@ -5,11 +5,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.SequenceNumberTrackerService;
+import net.datatp.registry.zk.RegistryImpl;
 import net.datatp.util.io.FileUtil;
 import net.datatp.zk.tool.server.EmbededZKServer;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.SequenceNumberTrackerService;
-import net.datattp.registry.zk.RegistryImpl;
 
 public class SequenceNumberTrackerServiceUnitTest {
   static {

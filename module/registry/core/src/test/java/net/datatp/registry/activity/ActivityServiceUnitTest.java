@@ -19,15 +19,15 @@ import com.mycila.guice.ext.closeable.CloseableModule;
 import com.mycila.guice.ext.jsr250.Jsr250Module;
 
 import net.datatp.module.AppServiceModule;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.activity.Activity;
+import net.datatp.registry.activity.ActivityCoordinator;
+import net.datatp.registry.activity.ActivityExecutionContext;
+import net.datatp.registry.activity.ActivityService;
+import net.datatp.registry.activity.ActivityStep;
 import net.datatp.util.io.FileUtil;
 import net.datatp.zk.tool.server.EmbededZKServer;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.activity.Activity;
-import net.datattp.registry.activity.ActivityCoordinator;
-import net.datattp.registry.activity.ActivityExecutionContext;
-import net.datattp.registry.activity.ActivityService;
-import net.datattp.registry.activity.ActivityStep;
 
 public class ActivityServiceUnitTest {
   static {

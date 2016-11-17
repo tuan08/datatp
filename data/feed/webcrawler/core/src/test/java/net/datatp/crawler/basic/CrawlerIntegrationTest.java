@@ -1,35 +1,36 @@
 package net.datatp.crawler.basic;
 
-import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
-
+import org.apache.logging.log4j.Logger;
+import org.elasticsearch.common.logging.Loggers;
 import org.elasticsearch.node.Node;
-import org.elasticsearch.node.NodeBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import com.carrotsearch.randomizedtesting.RandomizedRunner;
 
 import net.datatp.crawler.processor.ESXDocProcessor;
 import net.datatp.crawler.site.ExtractConfig;
 import net.datatp.crawler.site.SiteConfig;
 import net.datatp.es.ESQueryExecutor;
+import net.datatp.es.NodeBuilder;
 import net.datatp.search.ESXDocSearcher;
 import net.datatp.util.io.FileUtil;
-import net.datatp.util.log.LoggerFactory;
 
+@RunWith(RandomizedRunner.class)
 public class CrawlerIntegrationTest {
+  protected final Logger logger = Loggers.getLogger(getClass());
+  
   private Node node;
   
   @Before
   public void setup() throws Exception {
-    LoggerFactory.log4jUseConsoleOutputConfig("INFO");
     FileUtil.removeIfExist("build/working", false);
     
-    NodeBuilder nb = nodeBuilder();
-    nb.getSettings().put("cluster.name",       "elasticsearch");
-    nb.getSettings().put("path.home",          "build/working/elasticsearch/data");
-    nb.getSettings().put("node.name",          "localhost");
-    nb.getSettings().put("transport.tcp.port", "9300");
-    node = nb.node();
+    node = new NodeBuilder().newNode();
+    logger.info("Node Name: " + node.settings().get("node.name"));
+    logger.info("Port     : " + node.settings().get("transport.tcp.port"));
   }
 
   @After

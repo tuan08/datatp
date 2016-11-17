@@ -14,7 +14,7 @@ import net.datatp.vm.environment.yarn.AppClient;
 import net.datatp.vm.environment.yarn.YarnVMServicePlugin;
 import net.datatp.vm.service.VMServiceApp;
 import net.datatp.vm.service.VMServicePlugin;
-import net.datattp.registry.Registry;
+import net.datatp.registry.Registry;
 
 public class YarnVMClient extends VMClient {
   private HadoopProperties hadoopProperties ;

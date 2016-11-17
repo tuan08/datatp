@@ -5,10 +5,10 @@ import java.util.List;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.RegistryException;
-import net.datattp.registry.zk.RegistryImpl;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.RegistryException;
+import net.datatp.registry.zk.RegistryImpl;
 
 public class TrackingReportApp {
   @Parameter(names = "--zk-connect", description = "The zk connect string")

@@ -13,7 +13,7 @@ import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParametersDelegate;
 
 import net.datatp.util.text.StringUtil;
-import net.datattp.registry.RegistryConfig;
+import net.datatp.registry.RegistryConfig;
 
 public class VMConfig {
   public enum ClusterEnvironment {

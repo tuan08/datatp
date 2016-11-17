@@ -21,15 +21,26 @@ dependencies {
     exclude module: "httpclient"
     exclude module: "commons-httpclient"
     exclude group:  "org.mortbay.jetty"
+    exclude group:  "io.netty"
+    exclude group: "log4j"
+    exclude group: "org.slf4j"
   }
 
   compile("org.apache.hadoop:hadoop-hdfs:${hadoopVersion}") {
     exclude module: "servlet-api"
-    exclude group:  "org.mortbay.jetty"
+    exclude group: "org.mortbay.jetty"
+    exclude group: "io.netty"
+    exclude group: "log4j"
+    exclude group: "org.slf4j"
   }
 
   compile("org.apache.hadoop:hadoop-mapreduce-client-core:${hadoopVersion}") {
     exclude module: "servlet-api"
     exclude group: "org.mortbay.jetty"
+    exclude group: "io.netty"
+    exclude group: "log4j"
+    exclude group: "org.slf4j"
   }
+
+  testCompile("log4j:log4j:1.2.17")
 }

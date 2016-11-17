@@ -1,7 +1,7 @@
 package net.datatp.vm.event;
 
-import net.datattp.registry.event.Event;
-import net.datattp.registry.event.NodeEvent;
+import net.datatp.registry.event.Event;
+import net.datatp.registry.event.NodeEvent;
 
 public class VMEvent extends Event {
   static public enum VMAttr { vmdescriptor, vmstatus, heartbeat, master_leader}

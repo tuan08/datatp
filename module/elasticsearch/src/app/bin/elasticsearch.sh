@@ -13,7 +13,7 @@ bin=`cd "$bin"; pwd`
 ES_HOME=`cd $bin/..; pwd; cd $bin`
 JAVACMD=$JAVA_HOME/bin/java
 
-JAVA_OPTS="-Xshare:auto -Xms128m -Xmx1536m -XX:-UseSplitVerifier" 
+JAVA_OPTS="-Xshare:auto -Xms128m -Xmx1536m" 
 LOG_OPT="-Dlog4j.configuration=file:$ES_HOME/config/log4j.properties"
 ES_OPT="-Dapp.dir=$ES_HOME -Duser.dir=$ES_HOME"
 

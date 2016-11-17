@@ -1,5 +1,6 @@
 package net.datatp.webui;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 
@@ -15,6 +16,7 @@ import net.datatp.util.io.FileUtil;
 import net.datatp.util.log.LoggerFactory;
 import net.datatp.zk.tool.server.EmbededZKServer;
 
+@Ignore
 public class DistributedCrawlerIntegrationTest {
   
   @Test

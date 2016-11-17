@@ -52,9 +52,7 @@ public class ObjectLogger<T> {
   }
 
   synchronized public void close() throws IOException { 
-    if(esObjectClient != null) {
-      esObjectClient.close();
-    }
+    if(esObjectClient != null) esObjectClient.close();
     queue.close(); 
   }
   

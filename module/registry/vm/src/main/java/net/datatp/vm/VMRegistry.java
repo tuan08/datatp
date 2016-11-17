@@ -4,11 +4,11 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
-import net.datattp.registry.Node;
-import net.datattp.registry.NodeCreateMode;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryException;
-import net.datattp.registry.event.NodeWatcher;
+import net.datatp.registry.Node;
+import net.datatp.registry.NodeCreateMode;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryException;
+import net.datatp.registry.event.NodeWatcher;
 
 @Singleton
 public class VMRegistry {

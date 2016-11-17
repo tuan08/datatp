@@ -21,9 +21,9 @@ import net.datatp.util.log.LoggerFactory;
 import net.datatp.vm.VMApp.TerminateEvent;
 import net.datatp.vm.command.VMCommandWatcher;
 import net.datatp.vm.service.VMService;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.RegistryException;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.RegistryException;
 
 public class VM {
   static private Map<String, VM> vms = new ConcurrentHashMap<String, VM>() ;

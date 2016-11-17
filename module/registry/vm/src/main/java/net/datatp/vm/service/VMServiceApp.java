@@ -14,10 +14,10 @@ import net.datatp.vm.VMConfig.ClusterEnvironment;
 import net.datatp.vm.environment.jvm.JVMVMServicePlugin;
 import net.datatp.vm.environment.yarn.YarnVMServicePlugin;
 import net.datatp.vm.event.VMShutdownEventListener;
-import net.datattp.registry.RefNode;
-import net.datattp.registry.Registry;
-import net.datattp.registry.election.LeaderElection;
-import net.datattp.registry.election.LeaderElectionListener;
+import net.datatp.registry.RefNode;
+import net.datatp.registry.Registry;
+import net.datatp.registry.election.LeaderElection;
+import net.datatp.registry.election.LeaderElectionListener;
 
 
 public class VMServiceApp extends VMApp {

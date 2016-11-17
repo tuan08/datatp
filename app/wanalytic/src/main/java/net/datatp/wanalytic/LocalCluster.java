@@ -1,11 +1,9 @@
 package net.datatp.wanalytic;
 
-import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
-
 import java.util.Properties;
 
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.node.Node;
-import org.elasticsearch.node.NodeBuilder;
 
 import net.datatp.kafka.tool.server.KafkaCluster;
 import net.datatp.util.io.FileUtil;
@@ -43,10 +41,11 @@ public class LocalCluster {
   
   public void start() throws Exception {
     h1("Start Elasticsearch");
-    NodeBuilder nb = nodeBuilder();
-    nb.getSettings().put("cluster.name", "elasticsearch");
-    nb.getSettings().put("path.home",    baseDir + "/elasticsearch/data");
-    esNode = nb.node();
+    
+    Settings.Builder settingBuilder = Settings.builder();
+    settingBuilder.put("cluster.name",       "elasticsearch");
+    settingBuilder.put("path.home",          baseDir + "/elasticsearch/data");
+    esNode = new Node(settingBuilder.build());
     
     h1("Start kafka cluster");
     kafkaCluster.start();

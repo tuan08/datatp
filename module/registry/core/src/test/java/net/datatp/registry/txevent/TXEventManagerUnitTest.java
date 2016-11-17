@@ -5,16 +5,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryConfig;
+import net.datatp.registry.txevent.TXEvent;
+import net.datatp.registry.txevent.TXEventBroadcaster;
+import net.datatp.registry.txevent.TXEventNotification;
+import net.datatp.registry.txevent.TXEventNotificationListener;
+import net.datatp.registry.txevent.TXEventNotificationWatcher;
+import net.datatp.registry.txevent.TXEventWatcher;
 import net.datatp.util.io.FileUtil;
 import net.datatp.zk.tool.server.EmbededZKServer;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryConfig;
-import net.datattp.registry.txevent.TXEvent;
-import net.datattp.registry.txevent.TXEventBroadcaster;
-import net.datattp.registry.txevent.TXEventNotification;
-import net.datattp.registry.txevent.TXEventNotificationListener;
-import net.datattp.registry.txevent.TXEventNotificationWatcher;
-import net.datattp.registry.txevent.TXEventWatcher;
 
 public class TXEventManagerUnitTest {
   static {

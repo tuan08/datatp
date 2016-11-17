@@ -1,10 +1,10 @@
 package net.datatp.vm.event;
 
 import net.datatp.vm.service.VMService;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryException;
-import net.datattp.registry.event.NodeEvent;
-import net.datattp.registry.event.NodeEventListener;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryException;
+import net.datatp.registry.event.NodeEvent;
+import net.datatp.registry.event.NodeEventListener;
 
 abstract public class VMShutdownEventListener extends NodeEventListener<VMEvent> {
   

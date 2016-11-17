@@ -13,7 +13,5 @@ dependencies {
 
   compile group: 'com.syncthemall', name: 'boilerpipe', version: '1.2.2'
   compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
-  //compile group: 'net.sourceforge.htmlcleaner', name: 'htmlcleaner', version: '2.16'
   compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.2'
-  compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
 }

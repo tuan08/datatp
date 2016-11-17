@@ -23,9 +23,14 @@ include 'data/storage/batchdb'
 include 'data/feed/facebook'
 include 'data/feed/webcrawler/core'
 include 'data/feed/webcrawler/cluster'
-
-include 'webui'
+include 'data/feed/webcrawler/release'
 
 include 'tracking/core'
 
 include 'app/wanalytic'
+
+include 'webui'
+
+include 'release'
+
+

@@ -3,10 +3,10 @@ package net.datatp.registry.task.dedicated;
 import java.util.Random;
 
 import net.datatp.registry.task.TaskDescriptor;
-import net.datattp.registry.task.TaskExecutorDescriptor;
-import net.datattp.registry.task.dedicated.DedicatedTaskContext;
-import net.datattp.registry.task.dedicated.TaskExecutorEvent;
-import net.datattp.registry.task.dedicated.TaskSlotExecutor;
+import net.datatp.registry.task.TaskExecutorDescriptor;
+import net.datatp.registry.task.dedicated.DedicatedTaskContext;
+import net.datatp.registry.task.dedicated.TaskExecutorEvent;
+import net.datatp.registry.task.dedicated.TaskSlotExecutor;
 
 public class DummyTaskSlotExecutor extends TaskSlotExecutor<TaskDescriptor> {
   private Random random = new Random();

@@ -1,12 +1,11 @@
 package net.datatp.es.server;
 
-import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
-
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.node.Node;
-import org.elasticsearch.node.NodeBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,11 +27,11 @@ public class ElasticSearchService {
   
   public void start() throws Exception {
     Map<String, String> properties = new HashMap<String, String>() ;
-    properties.put("cluster.name", "neverwinterdp");
+    properties.put("cluster.name", "elasticsearch");
     properties.put("path.data",    "./build/elasticsearch");
     logger.info(
-        "ElasticSearch default properties:\n" + 
-        DataSerializer.JSON.toString(properties)
+      "ElasticSearch default properties:\n" + 
+      DataSerializer.JSON.toString(properties)
     );
     if(esProperties != null) {
       properties.putAll(esProperties);
@@ -42,14 +41,11 @@ public class ElasticSearchService {
       );
     }
     
-    NodeBuilder nb = nodeBuilder();
-    for(Map.Entry<String, String> entry : properties.entrySet()) {
-      nb.getSettings().put(entry.getKey(), entry.getValue());
-    }
-    server = nb.node();
+    Settings.Builder settingBuilder = Settings.builder();
+    server = new Node(settingBuilder.build());
   }
 
-  public void stop() {
+  public void stop() throws IOException {
     server.close();
   }
 }

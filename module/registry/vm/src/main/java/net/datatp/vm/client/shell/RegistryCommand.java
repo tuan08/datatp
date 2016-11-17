@@ -8,9 +8,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import net.datatp.util.dataformat.DataSerializer;
 import net.datatp.vm.client.VMClient;
-import net.datattp.registry.Node;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryException;
+import net.datatp.registry.Node;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryException;
 
 public class RegistryCommand extends Command {
   public RegistryCommand() {

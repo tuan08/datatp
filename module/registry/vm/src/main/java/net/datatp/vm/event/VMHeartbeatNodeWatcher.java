@@ -1,9 +1,9 @@
 package net.datatp.vm.event;
 
 import net.datatp.vm.VMDescriptor;
-import net.datattp.registry.Registry;
-import net.datattp.registry.event.NodeEvent;
-import net.datattp.registry.event.NodeWatcher;
+import net.datatp.registry.Registry;
+import net.datatp.registry.event.NodeEvent;
+import net.datatp.registry.event.NodeWatcher;
 
 public class VMHeartbeatNodeWatcher extends NodeWatcher {
   private Registry registry;

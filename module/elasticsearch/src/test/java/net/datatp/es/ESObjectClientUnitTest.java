@@ -2,64 +2,61 @@ package net.datatp.es;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.elasticsearch.index.query.QueryBuilders.termQuery;
-import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.Logger;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.common.logging.Loggers;
 import org.elasticsearch.index.query.GeoDistanceQueryBuilder;
 import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.node.Node;
-import org.elasticsearch.node.NodeBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import net.datatp.es.ESClient;
-import net.datatp.es.ESObjectClient;
-import net.datatp.util.io.FileUtil;
+import com.carrotsearch.randomizedtesting.RandomizedRunner;
+import com.carrotsearch.randomizedtesting.annotations.ThreadLeakLingering;
+import com.carrotsearch.randomizedtesting.annotations.ThreadLeakScope;
+import com.carrotsearch.randomizedtesting.annotations.ThreadLeakScope.Scope;
+
 import net.datatp.util.io.IOUtil;
-import net.datatp.util.log.LoggerFactory;
 import net.datatp.util.text.DateUtil;
 
 
 /**
  * $Author: Tuan Nguyen$
  **/
+@RunWith(RandomizedRunner.class)
+@ThreadLeakScope(Scope.SUITE)
+@ThreadLeakLingering(linger = 3000)
 public class ESObjectClientUnitTest {
+  protected final Logger logger = Loggers.getLogger(getClass());
+  
   private Node                                node;
   private ESClient                            esclient;
   private ESObjectClient<Map<String, Object>> esObjecclient;
   
   @Before
   public void setup() throws Exception {
-    LoggerFactory.log4jUseConsoleOutputConfig("INFO");
-    FileUtil.removeIfExist("build/elasticsearch", false);
+    node = new NodeBuilder().newNode();
     
-    NodeBuilder nb = nodeBuilder();
-    nb.getSettings().put("cluster.name",       "elasticsearch");
-    nb.getSettings().put("path.home",          "build/elasticsearch/data");
-    nb.getSettings().put("node.name",          "localhost");
-    nb.getSettings().put("transport.tcp.port", "9300");
-
-    node = nb.node();
-    esclient = new ESClient(new String[] { "127.0.0.1:9300" });
+    esclient = new ESClient(node.client());
     esObjecclient = new ESObjectClient<Map<String, Object>>(esclient, "index", Record.class) ;
-    System.out.println("Node Name: " + node.settings().get("node.name"));
-    System.out.println("Port     : " + node.settings().get("transport.tcp.port"));
-    
-    System.out.println("Client Node Name: " + node.client().admin().cluster());
-    System.out.println("Client Port     : " + node.settings().get("transport.tcp.port"));
+    logger.info("Node Name: " + node.settings().get("node.name"));
+    logger.info("Port     : " + node.settings().get("transport.tcp.port"));
   }
   
   @After
-  public void after() {
+  public void after() throws IOException {
     esclient.close();
     node.close();
   }
@@ -68,8 +65,8 @@ public class ESObjectClientUnitTest {
   public void test() throws Exception {
     if (!esObjecclient.isCreated()) {
       esObjecclient.createIndexWithJSONConfig( 
-          IOUtil.getFileContentAsString("src/test/resources/record.setting.json", "UTF8"), 
-          IOUtil.getFileContentAsString("src/test/resources/record.mapping.json", "UTF8")
+        IOUtil.getFileContentAsString("src/test/resources/record.setting.json", "UTF8"), 
+        IOUtil.getFileContentAsString("src/test/resources/record.mapping.json", "UTF8")
       );
     }
     
@@ -130,7 +127,7 @@ public class ESObjectClientUnitTest {
     Assert.assertEquals(20, esObjecclient.count(termQuery("primitive.booleanValue", "true")));
 
     GeoDistanceQueryBuilder geoFilter = new GeoDistanceQueryBuilder("location");
-    geoFilter.lat(40.73d).lon(-74.1d);
+    geoFilter.point(40.73d, -74.1d);
     geoFilter.distance("1km");
     Assert.assertEquals(20, esObjecclient.count(geoFilter));
 

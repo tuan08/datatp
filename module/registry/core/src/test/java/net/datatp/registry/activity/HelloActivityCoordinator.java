@@ -3,11 +3,11 @@ package net.datatp.registry.activity;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import net.datattp.registry.activity.Activity;
-import net.datattp.registry.activity.ActivityCoordinator;
-import net.datattp.registry.activity.ActivityExecutionContext;
-import net.datattp.registry.activity.ActivityService;
-import net.datattp.registry.activity.ActivityStep;
+import net.datatp.registry.activity.Activity;
+import net.datatp.registry.activity.ActivityCoordinator;
+import net.datatp.registry.activity.ActivityExecutionContext;
+import net.datatp.registry.activity.ActivityService;
+import net.datatp.registry.activity.ActivityStep;
 
 @Singleton
 public class HelloActivityCoordinator extends ActivityCoordinator {

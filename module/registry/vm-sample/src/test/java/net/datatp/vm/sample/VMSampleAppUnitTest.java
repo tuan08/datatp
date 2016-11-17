@@ -9,7 +9,7 @@ import net.datatp.vm.client.VMClient;
 import net.datatp.vm.client.shell.Shell;
 import net.datatp.vm.sample.VMSampleApp;
 import net.datatp.vm.tool.LocalVMCluster;
-import net.datattp.registry.zk.RegistryImpl;
+import net.datatp.registry.zk.RegistryImpl;
 
 public class VMSampleAppUnitTest  {
   LocalVMCluster  vmCluster ;

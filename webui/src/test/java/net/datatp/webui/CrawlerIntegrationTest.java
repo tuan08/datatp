@@ -1,38 +1,39 @@
 package net.datatp.webui;
 
-import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
-
 import org.elasticsearch.node.Node;
-import org.elasticsearch.node.NodeBuilder;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.carrotsearch.randomizedtesting.RandomizedRunner;
 
 import net.datatp.crawler.basic.Crawler;
 import net.datatp.crawler.basic.CrawlerApp;
 import net.datatp.crawler.processor.ESXDocProcessor;
 import net.datatp.crawler.site.ExtractConfig;
 import net.datatp.crawler.site.SiteConfig;
-import net.datatp.util.io.FileUtil;
-import net.datatp.util.log.LoggerFactory;
+import net.datatp.es.NodeBuilder;
 
+//@Ignore
+@RunWith(RandomizedRunner.class)
 public class CrawlerIntegrationTest {
+  static {
+    System.setProperty("log4j.configurationFile", "src/test/resources/log4j2.yml");
+  }
+  
+  final Logger logger = LoggerFactory.getLogger(getClass());
   private Node node;
   
   @Before
   public void setup() throws Exception {
-    LoggerFactory.log4jUseConsoleOutputConfig("INFO");
-    FileUtil.removeIfExist("build/working", false);
-    
-    NodeBuilder nb = nodeBuilder();
-    nb.getSettings().put("cluster.name",       "elasticsearch");
-    nb.getSettings().put("path.home",          "build/working/elasticsearch/data");
-    nb.getSettings().put("node.name",          "localhost");
-    nb.getSettings().put("network.bind_host",  "0.0.0.0");
-    nb.getSettings().put("transport.tcp.port", "9300");
-    nb.getSettings().put("http.cors.enabled",  "true");
-    nb.getSettings().put("http.cors.allow-origin", "*");
-    node = nb.node();
+    logger.info("setup(): ");
+    node = new NodeBuilder().newNode();
+    logger.info("Node Name: " + node.settings().get("node.name"));
+    logger.info("Port     : " + node.settings().get("transport.tcp.port"));
   }
 
   @After
@@ -42,6 +43,8 @@ public class CrawlerIntegrationTest {
   
   @Test
   public void test() throws Exception {
+    logger.info("test(): ");
+    
     String[] args = {
       "--spring.http.multipart.location=build/upload" //# Intermediate location of uploaded files.
      // "--spring.http.multipart.multipart.file-size-threshold=0", // # Threshold after which files will be written to disk.

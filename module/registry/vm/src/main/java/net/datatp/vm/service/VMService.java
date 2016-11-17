@@ -13,14 +13,14 @@ import net.datatp.vm.VMConfig;
 import net.datatp.vm.VMDescriptor;
 import net.datatp.vm.VMStatus;
 import net.datatp.vm.event.VMHeartbeatNodeWatcher;
-import net.datattp.registry.Node;
-import net.datattp.registry.NodeCreateMode;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryException;
-import net.datattp.registry.SequenceIdTracker;
-import net.datattp.registry.Transaction;
-import net.datattp.registry.event.NodeEvent;
-import net.datattp.registry.event.RegistryListener;
+import net.datatp.registry.Node;
+import net.datatp.registry.NodeCreateMode;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryException;
+import net.datatp.registry.SequenceIdTracker;
+import net.datatp.registry.Transaction;
+import net.datatp.registry.event.NodeEvent;
+import net.datatp.registry.event.RegistryListener;
 
 @Singleton
 @JmxBean("role=vm-manager, type=VMService, name=VMService")

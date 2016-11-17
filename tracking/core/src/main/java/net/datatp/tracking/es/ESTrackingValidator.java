@@ -6,12 +6,12 @@ import java.util.TreeMap;
 
 import net.datatp.es.ESClient;
 import net.datatp.es.ESObjectClient;
+import net.datatp.registry.Registry;
+import net.datatp.registry.RegistryException;
 import net.datatp.tracking.TrackingMessage;
 import net.datatp.tracking.TrackingMessageReport;
 import net.datatp.tracking.TrackingRegistry;
 import net.datatp.util.text.StringUtil;
-import net.datattp.registry.Registry;
-import net.datattp.registry.RegistryException;
 
 public class ESTrackingValidator {
   private int              numOfChunk ;
