@@ -1,0 +1,58 @@
+archivesBaseName = 'data.feed.webcrawler.release'
+
+eclipse {
+  project {
+    name = 'data.feed.webcrawler.release'
+  }
+}
+
+configurations {
+  releaseDeployJars {
+    transitive = false
+  }
+}
+
+
+dependencies {
+  /*************************Runtime deploy jars***************************/
+  releaseDeployJars project(':lib/utils')
+  releaseDeployJars project(':lib/yara')
+  releaseDeployJars project(':lib/buffer')
+  releaseDeployJars project(':module/elasticsearch')
+  releaseDeployJars project(':module/commons')
+
+  releaseDeployJars project(':data/feed/webcrawler/core')
+  releaseDeployJars project(':data/feed/webcrawler/cluster')
+
+  releaseDeployJars project(':data/storage/batchdb')
+
+  releaseDeployJars group: 'org.elasticsearch', name: 'elasticsearch', version: elasticsearchVersion
+  
+  releaseDeployJars group: 'com.beust', name: 'jcommander', version: '1.35'
+}
+
+task release (dependsOn: 'build') << {
+  println "\n\n"
+  println "*************************************************"
+  println "Build release webcrawler ${releaseDir}"
+  println "*************************************************"
+
+  println "Copy the dependency library"
+  configurations.releaseDeployJars.each { File file -> 
+    copy {
+      from file
+      into "${releaseDir}/webcrawler/libs"
+    }
+  }
+
+  copy {
+    from "${buildDir}/libs"
+    into "${releaseDir}/webcrawler/libs"
+  }
+
+  println "Copy and override app"
+  copy {
+    from "src/app"
+    into "${releaseDir}/webcrawler"
+  }
+}

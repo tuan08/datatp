@@ -1,0 +1,27 @@
+Configutation:
+  status: error
+
+  Appenders:
+    Console:
+      name: console
+      target: SYSTEM_OUT
+      PatternLayout:
+        #Pattern: '[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{10} - %msg%n'
+        Pattern: '[%-5level] %d{yyyy-MM-dd HH:mm:ss} %c{1} - %msg%n'
+
+  Loggers:
+    Root:
+      level: info
+      AppenderRef:
+        - ref: console
+    Logger:
+      - name: org.elasticsearch.deprecation
+        additivity: false
+        level: error
+        AppenderRef:
+          - ref: console
+      - name: org.apache.http.client.protocol.ResponseProcessCookies
+        additivity: false
+        level: error
+        AppenderRef:
+          - ref: console

@@ -1,0 +1,27 @@
+archivesBaseName = 'datatp.release'
+
+eclipse {
+  project {
+    name = 'datatp.release'
+  }
+}
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+}
+
+task release(dependsOn: 'build') << {
+
+  def webcrawler = project(':data/feed/webcrawler/release');
+  webcrawler.releaseDir =  "${buildDir}/release";
+  webcrawler.release.execute()
+
+  def esProject = project(':module/elasticsearch');
+  esProject.releaseDir =  "${buildDir}/release";
+  esProject.release.execute()
+
+  def trackingProject = project(':tracking/core');
+  trackingProject.releaseDir =  "${buildDir}/release";
+  trackingProject.release.execute()
+}
