@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.jms.ConnectionFactory;
 
+import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
 import org.apache.activemq.broker.region.policy.PolicyEntry;
 import org.apache.activemq.broker.region.policy.PolicyMap;
@@ -86,12 +87,18 @@ public class EmbeddedActiveMQServer {
     return broker;
   }
   
-  @Bean(name = "jmsListenerContainerFactory")
-  public JmsListenerContainerFactory<?> myJmsContainerFactory(ConnectionFactory jmsCF) {
-    SimpleJmsListenerContainerFactory factory = new SimpleJmsListenerContainerFactory();
-    factory.setConnectionFactory(jmsCF);
-    return factory;
-  }
+//  @Bean(name="jmsCF")
+//  public ConnectionFactory createConnectionFactory() {
+//    ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory("vm://localhost");
+//    return cf;
+//  }
+//  
+//  @Bean(name = "jmsListenerContainerFactory")
+//  public JmsListenerContainerFactory<?> createJmsContainerFactory(ConnectionFactory jmsCF) {
+//    SimpleJmsListenerContainerFactory factory = new SimpleJmsListenerContainerFactory();
+//    factory.setConnectionFactory(jmsCF);
+//    return factory;
+//  }
   
   static public void setSerializablePackages(String[] packages) {
     System.setProperty("org.apache.activemq.SERIALIZABLE_PACKAGES", StringUtil.joinStringArray(packages, ","));

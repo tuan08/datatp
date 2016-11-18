@@ -12,6 +12,11 @@ subprojects {
   apply plugin: 'maven-publish'
 
   project.ext {
+    //log4jVersion             = '2.7'
+    log4jVersion             = '2.6.2'
+    slf4jVersion             = '1.7.21'
+    jacksonVersion           = '2.8.1'
+
     luceneVersion            = "6.2.0"
     elasticsearchVersion     = "5.0.0"
     hadoopVersion            = "2.7.2"
@@ -23,12 +28,13 @@ subprojects {
     springFrameworkVersion   = '4.3.4.RELEASE'
     springIntegrationVersion = '4.3.5.RELEASE'
 
-    activeMQVersion          = '5.14.0'
-    //log4jVersion             = '2.7'
-    log4jVersion             = '2.6.2'
-    slf4jVersion             = '1.7.21'
+    zookeeperVersion         = '3.4.8'
+    activeMQVersion          = '5.14.1'
 
     releaseDir = "${buildDir}/release"
+
+    appTemplateDir = "/home/tuan/projects/AppTemplate"
+    elasticsearchAppTemplateDir = "${appTemplateDir}/elasticsearch"
   }
 
   eclipse {

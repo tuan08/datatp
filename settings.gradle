@@ -23,7 +23,7 @@ include 'data/storage/batchdb'
 include 'data/feed/facebook'
 include 'data/feed/webcrawler/core'
 include 'data/feed/webcrawler/cluster'
-include 'data/feed/webcrawler/release'
+include 'data/feed/webcrawler/rest'
 
 include 'tracking/core'
 

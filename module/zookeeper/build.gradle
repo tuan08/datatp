@@ -9,7 +9,7 @@ eclipse {
 dependencies {
   compile project(':module/commons')
 
-  compile('org.apache.zookeeper:zookeeper:3.4.8') {
+  compile("org.apache.zookeeper:zookeeper:$zookeeperVersion") {
     exclude group: "io.netty"
     exclude group: "log4j"
     exclude group: "org.slf4j"

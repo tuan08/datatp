@@ -1,8 +1,8 @@
-archivesBaseName = 'webui'
+archivesBaseName = 'data.feed.webcrawler.rest'
 
 eclipse {
   project {
-    name = 'webui'
+    name = 'data.feed.webcrawler.rest'
   }
 }
 
@@ -13,7 +13,7 @@ configurations {
 }
 
 dependencies {
-  compile project(':data/feed/webcrawler/rest')
+  compile project(':data/feed/webcrawler/cluster')
   compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.2'
 }
 
@@ -23,7 +23,7 @@ test {
   testLogging.showStandardStreams = true
 
   filter {
-    includeTestsMatching "*Test"
+    includeTestsMatching "UnitTest"
   }
 
   testLogging {

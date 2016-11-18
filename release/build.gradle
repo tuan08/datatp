@@ -11,11 +11,139 @@ repositories {
   mavenCentral()
 }
 
-task release(dependsOn: 'build') << {
+configurations {
+  commonJars { transitive = false }
+  springJars { transitive = false }
+  batchdbJars { transitive = false }
+  zkJars { transitive = false }
+  jmsJars { transitive = false }
+  webcrawlerJars { transitive = false }
+}
 
-  def webcrawler = project(':data/feed/webcrawler/release');
-  webcrawler.releaseDir =  "${buildDir}/release";
-  webcrawler.release.execute()
+dependencies {
+  /*************************Commons runtime deploy jars***************************/
+  commonJars project(':lib/utils')
+  commonJars project(':lib/yara')
+  commonJars project(':lib/buffer')
+  commonJars project(':module/commons')
+
+  commonJars group: 'com.beust', name: 'jcommander', version: '1.35'
+
+  commonJars group: 'net.openhft', name: 'chronicle', version: '3.2.2'
+  commonJars group: 'net.openhft', name: 'compiler', version: '2.2.0'
+  commonJars group: 'net.openhft', name: 'lang', version: '6.4.6'
+
+  commonJars group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jacksonVersion
+  commonJars group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion
+  commonJars group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: jacksonVersion
+  commonJars group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: jacksonVersion
+  commonJars group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-smile', version: jacksonVersion
+
+  commonJars group: 'org.slf4j', name: 'slf4j-api', version:  slf4jVersion
+  commonJars group: 'org.slf4j', name: 'jcl-over-slf4j', version: slf4jVersion
+
+  commonJars group: 'org.apache.logging.log4j', name: 'log4j-api', version: log4jVersion
+  commonJars group: 'org.apache.logging.log4j', name: 'log4j-core', version: log4jVersion
+  commonJars group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: log4jVersion
+
+  /*************************springframework runtime deploy jars***************************/
+  springJars project(':module/spring-framework')
+
+  springJars group: "org.springframework", name: "spring-core", version: springFrameworkVersion
+  springJars group: "org.springframework", name: "spring-beans", version: springFrameworkVersion
+  springJars group: "org.springframework", name: "spring-context", version: springFrameworkVersion
+  springJars group: "org.springframework", name: "spring-aop", version: springFrameworkVersion
+  springJars group: "org.springframework", name: "spring-expression", version: springFrameworkVersion
+
+  springJars group: "org.springframework.boot", name: "spring-boot", version: springBootVersion
+  springJars group: "org.springframework.boot", name: "spring-boot-loader", version: springBootVersion
+  springJars group: "org.springframework.boot", name: "spring-boot-starter", version: springBootVersion
+  springJars group: "org.springframework.boot", name: "spring-boot-starter-jetty", version: springBootVersion
+  springJars group: "org.springframework.boot", name: "spring-boot-starter-web", version: springBootVersion
+  springJars group: "org.springframework.boot", name: "spring-boot-starter-log4j2", version: springBootVersion
+
+  springJars group: "org.springframework.integration", name: "spring-integration-jmx", version: springIntegrationVersion
+  springJars group: "org.springframework.cloud", name: "spring-cloud-starter-zookeeper-all", version: "1.0.3.RELEASE"
+
+  springJars group: 'org.yaml', name: 'snakeyaml', version: '1.15'
+  /*************************zookeeper runtime deploy jars***************************/
+  commonJars project(':module/zookeeper')
+  zkJars group: "org.apache.zookeeper", name: "zookeeper", version: zookeeperVersion
+  zkJars group: "org.apache.curator", name: "curator-recipes", version:"2.11.0"
+  zkJars group: "org.apache.curator", name: "curator-x-discovery", version: "2.11.0"
+
+  /*************************jms runtime deploy jars***************************/
+  jmsJars project(':module/jms')
+  jmsJars group: "javax.jms", name: "javax.jms-api", version: "2.0"
+  jmsJars group: "javax.management.j2ee", name: "javax.management.j2ee-api", version: "1.1.1"
+  
+  jmsJars group: "org.apache.activemq", name: "activemq-openwire-legacy", version: activeMQVersion
+  jmsJars group: "org.apache.activemq", name: "activemq-broker", version: activeMQVersion
+  jmsJars group: "org.apache.activemq", name: "activemq-kahadb-store", version: activeMQVersion
+  jmsJars group: "org.apache.activemq", name: "activemq-client", version: activeMQVersion
+  jmsJars group: "org.apache.activemq.protobuf", name: "activemq-protobuf", version: "1.1"
+  jmsJars group: "org.fusesource.hawtbuf", name: "hawtbuf", version: "1.11"
+  //jmsJars group: "org.fusesource.hawtbuf", name: "hawtbuf-protoc", version: "1.11"
+
+  jmsJars group: "org.springframework", name: "spring-jms", version: springFrameworkVersion
+  jmsJars group: "org.springframework.integration", name: "spring-integration-jms", version: springIntegrationVersion
+
+  /*************************batchdb runtime deploy jars***************************/
+  batchdbJars project(':data/storage/batchdb')
+
+  /*************************Webcrawler runtime deploy jars***************************/
+  webcrawlerJars project(':data/feed/webcrawler/core')
+  webcrawlerJars project(':data/feed/webcrawler/cluster')
+}
+
+task release(dependsOn: 'build') << {
+  configurations.commonJars.each { File file -> 
+    copy {
+      from file
+      into "${releaseDir}/datatp/lib"
+    }
+  }
+
+  configurations.springJars.each { File file -> 
+    copy {
+      from file
+      into "${releaseDir}/datatp/lib/spring"
+    }
+  }
+
+  configurations.jmsJars.each { File file -> 
+    copy {
+      from file
+      into "${releaseDir}/datatp/lib/jms"
+    }
+  }
+
+  configurations.zkJars.each { File file -> 
+    copy {
+      from file
+      into "${releaseDir}/datatp/lib/zookeeper"
+    }
+  }
+
+  configurations.batchdbJars.each { File file -> 
+    copy {
+      from file
+      into "${releaseDir}/datatp/lib/batchdb"
+    }
+  }
+
+  configurations.webcrawlerJars.each { File file -> 
+    copy {
+      from file
+      into "${releaseDir}/datatp/lib/webcrawler"
+    }
+  }
+
+  println "Copy the the datatp app template"
+  copy {
+    from "src/app"
+    into "${releaseDir}/datatp"
+  }
 
   def esProject = project(':module/elasticsearch');
   esProject.releaseDir =  "${buildDir}/release";

@@ -12,6 +12,8 @@ dependencies {
     exclude module: "groovy-all"
   }
 
+  compile ("org.springframework.boot:spring-boot-loader:${springBootVersion}")
+
   compile("org.springframework.boot:spring-boot-starter-jetty:${springBootVersion}") {
     exclude module: "spring-boot-starter-logging"
     exclude module: "logback-classic"
@@ -25,11 +27,9 @@ dependencies {
 
   compile ("org.springframework.boot:spring-boot-starter-log4j2:${springBootVersion}")
 
+
   compile("org.springframework.integration:spring-integration-jmx:${springIntegrationVersion}") {
   }
-
-  compile ("org.springframework.boot:spring-boot-loader:${springBootVersion}")
-
 
   compile("org.springframework.cloud:spring-cloud-starter-zookeeper-all:1.0.3.RELEASE") {
     exclude module: "logback-classic"

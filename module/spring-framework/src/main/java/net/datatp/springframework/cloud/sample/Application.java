@@ -18,6 +18,7 @@ public class Application {
     FileUtil.removeIfExist("build/zookeeper/data", false);
     EmbededZKServer zkServer = new EmbededZKServer("build/zookeeper/data", 2182);
     zkServer.start();
+    
     SpringApplication.run(Application.class, args);
   }
 }

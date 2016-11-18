@@ -4,14 +4,13 @@ import org.junit.Test;
 
 import net.datatp.activemq.EmbeddedActiveMQServer;
 import net.datatp.springframework.SpringAppLauncher;
-import net.datatp.util.log.LoggerFactory;
 
 public class JmsMessageListenerUnitTest {
 
   @Test
   public void testMessage() throws Exception {
-    LoggerFactory.log4jUseConsoleOutputConfig("INFO");
     EmbeddedActiveMQServer.run(null);
+    
     String[] args = {
         "--spring.cloud.zookeeper.enabled=false",
         "--server.port=-1",
