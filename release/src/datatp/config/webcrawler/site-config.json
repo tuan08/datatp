@@ -1,0 +1,169 @@
+[ {
+  "group" : "vietnam",
+  "hostname" : "cafef.vn",
+  "injectUrl" : [ "http://cafef.vn" ],
+  "tags" : null,
+  "crawlSubDomain" : false,
+  "crawlDeep" : 2,
+  "refreshPeriod" : 3600,
+  "maxConnection" : 1,
+  "maxFetchSchedule" : 100,
+  "webPageTypePatterns" : null,
+  "status" : "Ok",
+  "language" : null,
+  "description" : null,
+  "extractConfig" : [ {
+    "name" : "content",
+    "extractType" : "article",
+    "extractXPath" : null,
+    "matchType" : "any",
+    "matchPattern" : null
+  } ]
+}, {
+  "group" : "vietnam",
+  "hostname" : "vnexpress.net",
+  "injectUrl" : [ "http://vnexpress.net" ],
+  "tags" : null,
+  "crawlSubDomain" : false,
+  "crawlDeep" : 2,
+  "refreshPeriod" : 3600,
+  "maxConnection" : 1,
+  "maxFetchSchedule" : 100,
+  "webPageTypePatterns" : null,
+  "status" : "Ok",
+  "language" : null,
+  "description" : null,
+  "extractConfig" : [ {
+    "name" : "content",
+    "extractType" : "article",
+    "extractXPath" : null,
+    "matchType" : "any",
+    "matchPattern" : null
+  } ]
+}, {
+  "group" : "vietnam",
+  "hostname" : "dantri.com.vn",
+  "injectUrl" : [ "http://dantri.com.vn" ],
+  "tags" : null,
+  "crawlSubDomain" : false,
+  "crawlDeep" : 2,
+  "refreshPeriod" : 3600,
+  "maxConnection" : 1,
+  "maxFetchSchedule" : 100,
+  "webPageTypePatterns" : null,
+  "status" : "Ok",
+  "language" : null,
+  "description" : null,
+  "extractConfig" : [ {
+    "name" : "content",
+    "extractType" : "article",
+    "extractXPath" : null,
+    "matchType" : "any",
+    "matchPattern" : null
+  } ]
+}, {
+  "group" : "US",
+  "hostname" : "edition.cnn.com",
+  "injectUrl" : [ "http://edition.cnn.com" ],
+  "tags" : null,
+  "crawlSubDomain" : false,
+  "crawlDeep" : 2,
+  "refreshPeriod" : 3600,
+  "maxConnection" : 1,
+  "maxFetchSchedule" : 100,
+  "webPageTypePatterns" : null,
+  "status" : "Ok",
+  "language" : null,
+  "description" : null,
+  "extractConfig" : [ {
+    "name" : "content",
+    "extractType" : "article",
+    "extractXPath" : null,
+    "matchType" : "any",
+    "matchPattern" : null
+  } ]
+}, {
+  "group" : "US",
+  "hostname" : "ebay.com",
+  "injectUrl" : [ "http://www.ebay.com/rpp/electronics-en" ],
+  "tags" : null,
+  "crawlSubDomain" : false,
+  "crawlDeep" : 2,
+  "refreshPeriod" : 3600,
+  "maxConnection" : 1,
+  "maxFetchSchedule" : 100,
+  "webPageTypePatterns" : null,
+  "status" : "Ok",
+  "language" : null,
+  "description" : null,
+  "extractConfig" : [ {
+    "name" : "content",
+    "extractType" : "article",
+    "extractXPath" : null,
+    "matchType" : "any",
+    "matchPattern" : null
+  } ]
+}, {
+  "group" : "US",
+  "hostname" : "amazon.com",
+  "injectUrl" : [ "https://www.amazon.com/gp/site-directory" ],
+  "tags" : null,
+  "crawlSubDomain" : false,
+  "crawlDeep" : 2,
+  "refreshPeriod" : 3600,
+  "maxConnection" : 1,
+  "maxFetchSchedule" : 100,
+  "webPageTypePatterns" : null,
+  "status" : "Ok",
+  "language" : null,
+  "description" : null,
+  "extractConfig" : [ {
+    "name" : "content",
+    "extractType" : "article",
+    "extractXPath" : null,
+    "matchType" : "any",
+    "matchPattern" : null
+  } ]
+}, {
+  "group" : "US",
+  "hostname" : "nytimes.com",
+  "injectUrl" : [ "http://www.nytimes.com" ],
+  "tags" : null,
+  "crawlSubDomain" : false,
+  "crawlDeep" : 2,
+  "refreshPeriod" : 3600,
+  "maxConnection" : 1,
+  "maxFetchSchedule" : 100,
+  "webPageTypePatterns" : null,
+  "status" : "Ok",
+  "language" : null,
+  "description" : null,
+  "extractConfig" : [ {
+    "name" : "content",
+    "extractType" : "article",
+    "extractXPath" : null,
+    "matchType" : "any",
+    "matchPattern" : null
+  } ]
+}, {
+  "group" : "vietnam",
+  "hostname" : "vietnamnet.vn",
+  "injectUrl" : [ "http://vietnamnet.vn" ],
+  "tags" : null,
+  "crawlSubDomain" : false,
+  "crawlDeep" : 2,
+  "refreshPeriod" : 3600,
+  "maxConnection" : 1,
+  "maxFetchSchedule" : 100,
+  "webPageTypePatterns" : null,
+  "status" : "Ok",
+  "language" : null,
+  "description" : null,
+  "extractConfig" : [ {
+    "name" : "content",
+    "extractType" : "article",
+    "extractXPath" : null,
+    "matchType" : "any",
+    "matchPattern" : null
+  } ]
+} ]

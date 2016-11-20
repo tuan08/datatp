@@ -12,12 +12,16 @@ repositories {
 }
 
 configurations {
-  commonJars { transitive = false }
-  springJars { transitive = false }
-  batchdbJars { transitive = false }
-  zkJars { transitive = false }
-  jmsJars { transitive = false }
+  commonJars     { transitive = false }
+  springJars     { transitive = false }
+  batchdbJars    { transitive = false }
+  jettyJars      { transitive = false }
+  zkJars         { transitive = false }
+  jmsJars        { transitive = false }
+  esClientJars   { transitive = false }
   webcrawlerJars { transitive = false }
+
+  webappWars     { transitive = false }
 }
 
 dependencies {
@@ -54,23 +58,74 @@ dependencies {
   springJars group: "org.springframework", name: "spring-context", version: springFrameworkVersion
   springJars group: "org.springframework", name: "spring-aop", version: springFrameworkVersion
   springJars group: "org.springframework", name: "spring-expression", version: springFrameworkVersion
+  springJars group: "org.springframework", name: "spring-messaging", version: springFrameworkVersion
 
   springJars group: "org.springframework.boot", name: "spring-boot", version: springBootVersion
+  springJars group: "org.springframework.boot", name: "spring-boot-autoconfigure", version: springBootVersion
   springJars group: "org.springframework.boot", name: "spring-boot-loader", version: springBootVersion
   springJars group: "org.springframework.boot", name: "spring-boot-starter", version: springBootVersion
   springJars group: "org.springframework.boot", name: "spring-boot-starter-jetty", version: springBootVersion
   springJars group: "org.springframework.boot", name: "spring-boot-starter-web", version: springBootVersion
   springJars group: "org.springframework.boot", name: "spring-boot-starter-log4j2", version: springBootVersion
 
+  springJars group: "org.springframework.integration", name: "spring-integration-core", version: springIntegrationVersion
   springJars group: "org.springframework.integration", name: "spring-integration-jmx", version: springIntegrationVersion
   springJars group: "org.springframework.cloud", name: "spring-cloud-starter-zookeeper-all", version: "1.0.3.RELEASE"
 
+  springJars group: "javax.inject", name: "javax.inject", version: "1"
   springJars group: 'org.yaml', name: 'snakeyaml', version: '1.15'
+
+  /*************************jetty web server runtime deploy jars***************************/
+  jettyJars group: "org.eclipse.jetty", name: "jetty-servlet", version: jettyVersion
+  jettyJars group: "org.eclipse.jetty", name: "jetty-servlets", version: jettyVersion
+  jettyJars group: "org.eclipse.jetty", name: "jetty-continuation", version: jettyVersion
+  jettyJars group: "org.eclipse.jetty", name: "jetty-http", version: jettyVersion
+  jettyJars group: "org.eclipse.jetty", name: "jetty-util", version: jettyVersion
+  jettyJars group: "org.eclipse.jetty", name: "jetty-io", version: jettyVersion
+  jettyJars group: "org.eclipse.jetty", name: "jetty-server", version: jettyVersion
+  jettyJars group: "org.eclipse.jetty", name: "jetty-webapp", version: jettyVersion
+  jettyJars group: "org.eclipse.jetty", name: "jetty-security", version: jettyVersion
+  
+  jettyJars group: "javax.servlet", name: "javax.servlet-api", version: "3.1.0"
+
+  jettyJars group: "org.springframework", name: "spring-web", version: springFrameworkVersion
+  jettyJars group: "org.springframework", name: "spring-webmvc", version: springFrameworkVersion
+
   /*************************zookeeper runtime deploy jars***************************/
   commonJars project(':module/zookeeper')
   zkJars group: "org.apache.zookeeper", name: "zookeeper", version: zookeeperVersion
   zkJars group: "org.apache.curator", name: "curator-recipes", version:"2.11.0"
   zkJars group: "org.apache.curator", name: "curator-x-discovery", version: "2.11.0"
+
+  /*************************elasticsearch client runtime deploy jars***************************/
+  esClientJars project(':module/elasticsearch')
+  esClientJars group: 'org.elasticsearch', name: 'elasticsearch', version: elasticsearchVersion
+  esClientJars group: "org.elasticsearch.client", name: "transport", version: elasticsearchVersion
+  esClientJars group: "org.elasticsearch.plugin", name: "transport-netty4-client", version: elasticsearchVersion
+  esClientJars group: "org.elasticsearch.plugin", name: "reindex-client", version: elasticsearchVersion
+  esClientJars group: "org.elasticsearch.plugin", name: "percolator-client", version: elasticsearchVersion
+  esClientJars group: "org.elasticsearch.plugin", name: "lang-mustache-client", version: elasticsearchVersion
+
+  esClientJars group: "com.carrotsearch", name: "hppc", version: "0.7.1"
+  esClientJars group: "joda-time", name: "joda-time", version: "2.9.4"
+  esClientJars group: "org.joda", name: "joda-convert", version: "1.2"
+  esClientJars group: 'com.tdunning', name: 't-digest', version: '3.0'
+
+  esClientJars group: "org.apache.lucene", name: "lucene-core", version: luceneVersion
+  esClientJars group: "org.apache.lucene", name: "lucene-queries", version: luceneVersion
+  esClientJars group: "org.apache.lucene", name: "lucene-join", version: luceneVersion
+  esClientJars group: "org.apache.lucene", name: "lucene-suggest", version: luceneVersion
+  esClientJars group: "org.apache.lucene", name: "lucene-highlighter", version: luceneVersion
+  esClientJars group: "org.apache.lucene", name: "lucene-spatial", version: luceneVersion
+  esClientJars group: "org.apache.lucene", name: "lucene-sandbox", version: luceneVersion
+  //esClientJars group: "org.apache.lucene", name: "lucene-queryparser", version: luceneVersion
+
+  esClientJars group: "io.netty", name: "netty-common", version: nettyVersion
+  esClientJars group: "io.netty", name: "netty-buffer", version: nettyVersion
+  esClientJars group: "io.netty", name: "netty-codec", version: nettyVersion
+  esClientJars group: "io.netty", name: "netty-handler", version: nettyVersion
+  esClientJars group: "io.netty", name: "netty-resolver", version: nettyVersion
+  esClientJars group: "io.netty", name: "netty-transport", version: nettyVersion
 
   /*************************jms runtime deploy jars***************************/
   jmsJars project(':module/jms')
@@ -83,7 +138,6 @@ dependencies {
   jmsJars group: "org.apache.activemq", name: "activemq-client", version: activeMQVersion
   jmsJars group: "org.apache.activemq.protobuf", name: "activemq-protobuf", version: "1.1"
   jmsJars group: "org.fusesource.hawtbuf", name: "hawtbuf", version: "1.11"
-  //jmsJars group: "org.fusesource.hawtbuf", name: "hawtbuf-protoc", version: "1.11"
 
   jmsJars group: "org.springframework", name: "spring-jms", version: springFrameworkVersion
   jmsJars group: "org.springframework.integration", name: "spring-integration-jms", version: springIntegrationVersion
@@ -92,8 +146,21 @@ dependencies {
   batchdbJars project(':data/storage/batchdb')
 
   /*************************Webcrawler runtime deploy jars***************************/
+  webcrawlerJars project(':lib/xhtml')
   webcrawlerJars project(':data/feed/webcrawler/core')
   webcrawlerJars project(':data/feed/webcrawler/cluster')
+  webcrawlerJars project(':data/feed/webcrawler/rest')
+
+  webcrawlerJars group: 'com.syncthemall', name: 'boilerpipe', version: boilerpipeVersion
+  webcrawlerJars group: 'xerces', name: 'xercesImpl', version: "2.11.0"
+  webcrawlerJars group: 'org.jsoup', name: 'jsoup', version: jsoupVersion
+  webcrawlerJars group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
+
+  webcrawlerJars group: 'org.apache.httpcomponents', name: 'httpclient', version: httpclientVersion
+  webcrawlerJars group: 'org.apache.httpcomponents', name: 'httpcore', version: "4.4.5"
+
+  /*************************runtime deploy wars***************************/
+  webappWars project(':webui')
 }
 
 task release(dependsOn: 'build') << {
@@ -118,10 +185,24 @@ task release(dependsOn: 'build') << {
     }
   }
 
+  configurations.jettyJars.each { File file -> 
+    copy {
+      from file
+      into "${releaseDir}/datatp/lib/jetty"
+    }
+  }
+
   configurations.zkJars.each { File file -> 
     copy {
       from file
       into "${releaseDir}/datatp/lib/zookeeper"
+    }
+  }
+
+  configurations.esClientJars.each { File file -> 
+    copy {
+      from file
+      into "${releaseDir}/datatp/lib/esclient"
     }
   }
 
@@ -139,11 +220,22 @@ task release(dependsOn: 'build') << {
     }
   }
 
+  configurations.webappWars.each { File file -> 
+    copy {
+      from file
+      into "${releaseDir}/datatp/webapps"
+    }
+  }
+
   println "Copy the the datatp app template"
   copy {
-    from "src/app"
+    from "src/datatp"
     into "${releaseDir}/datatp"
   }
+
+  def webuiProject = project(':webui');
+  webuiProject.releaseDir =  "${buildDir}/release/datatp/public";
+  webuiProject.copyWebapp.execute()
 
   def esProject = project(':module/elasticsearch');
   esProject.releaseDir =  "${buildDir}/release";
