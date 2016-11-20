@@ -5,6 +5,9 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.datatp.crawler.CrawlerApi;
 import net.datatp.crawler.CrawlerStatus;
 import net.datatp.crawler.fetcher.FetcherReport;
@@ -25,6 +28,8 @@ import net.datatp.crawler.urldb.URLDatumFactory;
 import net.datatp.xhtml.XDoc;
 
 public class Crawler implements CrawlerApi {
+  private Logger logger = LoggerFactory.getLogger(getClass());
+  
   private CrawlerConfig           crawlerConfig;
 
   private URLFetchQueue           urlFetchQueue;
@@ -44,6 +49,7 @@ public class Crawler implements CrawlerApi {
   private XDocProcessorThread     xDocProcessorThread;
 
   public Crawler configure(CrawlerConfig config) throws Exception {
+    logger.info("start configure()");
     crawlerConfig      = config;
     
     urlFetchQueue  = new URLFetchQueue(crawlerConfig.getMaxUrlQueueSize());
@@ -60,13 +66,11 @@ public class Crawler implements CrawlerApi {
     
     xDocProcessorThread = new XDocProcessorThread();
     xDocProcessorThread.start();
+    logger.info("finish configure()");
     return this;
   }
   
-  public void setXDocProcessor(XDocProcessor processor) {
-    xDocProcessor = processor;
-  }
-  
+  public void setXDocProcessor(XDocProcessor processor) { xDocProcessor = processor; }
   
   @Override
   public void siteCreateGroup(String group) throws Exception { }
@@ -85,6 +89,7 @@ public class Crawler implements CrawlerApi {
       SiteConfig config = configs[i];
       siteContextManager.save(config);
     }
+    logger.info("Save " + configs.length + " site config objects");
   }
   
   @Override

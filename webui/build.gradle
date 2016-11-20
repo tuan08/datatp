@@ -1,4 +1,5 @@
 archivesBaseName = 'webui'
+apply plugin: 'war'
 
 eclipse {
   project {
@@ -6,10 +7,8 @@ eclipse {
   }
 }
 
-configurations {
-  deployJars {
-    transitive = false
-  }
+war {   
+  rootSpec.exclude("**/*.jar")
 }
 
 dependencies {
@@ -28,5 +27,17 @@ test {
 
   testLogging {
     events "passed", "skipped", "failed"
+  }
+}
+
+task copyWebapp << {
+  println "\n\n"
+  println "*************************************************"
+  println "Copy webui webapp directory ${releaseDir}"
+  println "*************************************************"
+
+  copy {
+    from "src/main/webapp"
+    into "${releaseDir}"
   }
 }

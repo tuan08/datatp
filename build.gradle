@@ -16,7 +16,12 @@ subprojects {
     log4jVersion             = '2.6.2'
     slf4jVersion             = '1.7.21'
     jacksonVersion           = '2.8.1'
+    jsoupVersion             = '1.9.2'
+    boilerpipeVersion        = '1.2.2'
+    httpclientVersion        = '4.5.2'
+    nettyVersion             = '4.1.5.Final'
 
+    jettyVersion             = "9.3.14.v20161028"
     luceneVersion            = "6.2.0"
     elasticsearchVersion     = "5.0.0"
     hadoopVersion            = "2.7.2"

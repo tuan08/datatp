@@ -6,11 +6,10 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCache;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent.Type;
+import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
 
 import net.datatp.util.io.IOUtil;
 import net.datatp.zk.registry.RegistryClient;
-
-import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
 
 public class EventListener<C extends EventContext> {
   private String            path;

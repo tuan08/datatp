@@ -2,6 +2,8 @@ package net.datatp.crawler;
 
 import java.util.List;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+
 import net.datatp.crawler.fetcher.FetcherReport;
 import net.datatp.crawler.fetcher.FetcherStatus;
 import net.datatp.crawler.scheduler.URLSchedulerStatus;
@@ -9,6 +11,7 @@ import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
 import net.datatp.crawler.site.SiteConfig;
 import net.datatp.crawler.site.SiteStatistic;
+import net.datatp.util.dataformat.DataSerializer;
 
 public interface CrawlerApi {
   public void siteCreateGroup(String group) throws Exception ;
@@ -47,4 +50,10 @@ public interface CrawlerApi {
   
   public void crawlerStop() throws Exception ;
   
+  static public int importJson(CrawlerApi crawlerApi, byte[] data) throws Exception {
+    List<SiteConfig> siteConfigs = DataSerializer.JSON.fromBytes(data,  new TypeReference<List<SiteConfig>>() {});
+    SiteConfig[] array = siteConfigs.toArray(new SiteConfig[siteConfigs.size()]);
+    crawlerApi.siteSave(array);
+    return siteConfigs.size();
+  }
 }

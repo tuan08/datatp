@@ -20,6 +20,7 @@ dependencies {
   }
 
   compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}") {
+    exclude module: "spring-boot-starter-tomcat"
     exclude module: "spring-boot-starter-logging"
     exclude module: "logback-classic"
     exclude group:  "com.fasterxml.jackson.core"

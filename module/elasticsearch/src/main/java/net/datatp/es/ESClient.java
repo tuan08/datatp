@@ -2,8 +2,12 @@ package net.datatp.es;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.elasticsearch.action.ActionFuture;
 import org.elasticsearch.action.admin.cluster.node.info.NodeInfo;
@@ -28,14 +32,24 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.cluster.ClusterState;
 import org.elasticsearch.cluster.node.DiscoveryNode;
+import org.elasticsearch.common.network.NetworkModule;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.index.reindex.ReindexPlugin;
+import org.elasticsearch.percolator.PercolatorPlugin;
+import org.elasticsearch.plugins.Plugin;
+import org.elasticsearch.script.mustache.MustachePlugin;
+import org.elasticsearch.transport.Netty4Plugin;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
+
+import io.netty.util.ThreadDeathWatcher;
+import io.netty.util.concurrent.GlobalEventExecutor;
 
 /**
  * $Author: Tuan Nguyen$
  **/
 public class ESClient {
+  
   protected Client client;
   private String[] address;
 
@@ -53,9 +67,11 @@ public class ESClient {
       Settings.builder().
       put("cluster.name", clusterName).
       put("transport.ping_schedule", "20s").
+      put(NetworkModule.TRANSPORT_TYPE_KEY, "netty4").
+      put(NetworkModule.HTTP_TYPE_KEY,      "netty4").
       build();
     
-    PreBuiltTransportClient transportClient = new PreBuiltTransportClient(settings);
+    ESTransportClient transportClient = new ESTransportClient(settings);
     
     for (String selAddr : address) {
       int port = 9300;
@@ -154,4 +170,37 @@ public class ESClient {
   }
   
   public void close() { client.close(); }
+  
+  
+  static public class ESTransportClient extends TransportClient {
+    private static final Collection<Class<? extends Plugin>> PRE_INSTALLED_PLUGINS =
+      Arrays.asList(Netty4Plugin.class, ReindexPlugin.class, PercolatorPlugin.class, MustachePlugin.class);
+
+    @SafeVarargs
+    public ESTransportClient(Settings settings, Class<? extends Plugin>... plugins) {
+      this(settings, Arrays.asList(plugins));
+    }
+
+    public ESTransportClient(Settings settings, Collection<Class<? extends Plugin>> plugins) {
+      super(settings, Settings.EMPTY, addPlugins(plugins, PRE_INSTALLED_PLUGINS));
+    }
+
+    @Override
+    public void close() {
+      super.close();
+      if (NetworkModule.TRANSPORT_TYPE_SETTING.exists(settings) == false
+          || NetworkModule.TRANSPORT_TYPE_SETTING.get(settings).equals(Netty4Plugin.NETTY_TRANSPORT_NAME)) {
+        try {
+          GlobalEventExecutor.INSTANCE.awaitInactivity(5, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+        }
+        try {
+          ThreadDeathWatcher.awaitInactivity(5, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+        }
+      }
+    }
+  }
 }

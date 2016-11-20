@@ -20,9 +20,11 @@ dependencies {
   compile("org.elasticsearch:elasticsearch:$elasticsearchVersion") {
     exclude group: "org.slf4j"
   }
+
   compile("org.elasticsearch.plugin:transport-netty4-client:$elasticsearchVersion") {
     exclude group: "org.slf4j"
   }
+
   compile("org.elasticsearch.client:transport:$elasticsearchVersion") {
     exclude group: "org.slf4j"
   }

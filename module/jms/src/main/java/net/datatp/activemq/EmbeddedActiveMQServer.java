@@ -2,9 +2,6 @@ package net.datatp.activemq;
 
 import java.io.File;
 
-import javax.jms.ConnectionFactory;
-
-import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
 import org.apache.activemq.broker.region.policy.PolicyEntry;
 import org.apache.activemq.broker.region.policy.PolicyMap;
@@ -20,8 +17,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
-import org.springframework.jms.config.JmsListenerContainerFactory;
-import org.springframework.jms.config.SimpleJmsListenerContainerFactory;
 
 import net.datatp.springframework.SpringAppLauncher;
 import net.datatp.util.text.StringUtil;
@@ -86,19 +81,6 @@ public class EmbeddedActiveMQServer {
     broker.start();
     return broker;
   }
-  
-//  @Bean(name="jmsCF")
-//  public ConnectionFactory createConnectionFactory() {
-//    ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory("vm://localhost");
-//    return cf;
-//  }
-//  
-//  @Bean(name = "jmsListenerContainerFactory")
-//  public JmsListenerContainerFactory<?> createJmsContainerFactory(ConnectionFactory jmsCF) {
-//    SimpleJmsListenerContainerFactory factory = new SimpleJmsListenerContainerFactory();
-//    factory.setConnectionFactory(jmsCF);
-//    return factory;
-//  }
   
   static public void setSerializablePackages(String[] packages) {
     System.setProperty("org.apache.activemq.SERIALIZABLE_PACKAGES", StringUtil.joinStringArray(packages, ","));

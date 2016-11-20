@@ -3,7 +3,6 @@ package net.datatp.webui;
 import org.elasticsearch.node.Node;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -46,6 +45,9 @@ public class CrawlerIntegrationTest {
     logger.info("test(): ");
     
     String[] args = {
+      "--spring.cloud.zookeeper.enabled=false",
+      "--spring.http.multipart.enabled=true",
+      "--server.port=8080",
       "--spring.http.multipart.location=build/upload" //# Intermediate location of uploaded files.
      // "--spring.http.multipart.multipart.file-size-threshold=0", // # Threshold after which files will be written to disk.
      // "--spring.http.multipart.multipart.max-file-size=1Mb",     //# Max file size.
@@ -110,8 +112,6 @@ public class CrawlerIntegrationTest {
 //      setExtractConfig(ExtractConfig.forum())
 //    );
     
-    ESXDocProcessor xdocProcessor = new ESXDocProcessor("xdoc", new String[] { "127.0.0.1:9300" });
-    crawler.setXDocProcessor(xdocProcessor);
     //crawler.crawlerStart();
     
     Thread.currentThread().join();

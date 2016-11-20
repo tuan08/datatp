@@ -121,10 +121,7 @@ public class CrawlerRestController {
       String fileName = mFile.getOriginalFilename();
       fileNames.add(fileName);
       byte[] data = mFile.getBytes();
-      List<SiteConfig> siteConfigs = DataSerializer.JSON.fromBytes(data,  new TypeReference<List<SiteConfig>>() {});
-      SiteConfig[] array = siteConfigs.toArray(new SiteConfig[siteConfigs.size()]);
-      crawlerApi.siteSave(array);
-      importCount += siteConfigs.size();
+      importCount += CrawlerApi.importJson(crawlerApi, data);
     }
     result.put("message", "Import successfully");
     result.put("files",   fileNames);
