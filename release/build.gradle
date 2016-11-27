@@ -113,12 +113,12 @@ dependencies {
 
   esClientJars group: "org.apache.lucene", name: "lucene-core", version: luceneVersion
   esClientJars group: "org.apache.lucene", name: "lucene-queries", version: luceneVersion
+  esClientJars group: "org.apache.lucene", name: "lucene-queryparser", version: luceneVersion
   esClientJars group: "org.apache.lucene", name: "lucene-join", version: luceneVersion
   esClientJars group: "org.apache.lucene", name: "lucene-suggest", version: luceneVersion
   esClientJars group: "org.apache.lucene", name: "lucene-highlighter", version: luceneVersion
   esClientJars group: "org.apache.lucene", name: "lucene-spatial", version: luceneVersion
   esClientJars group: "org.apache.lucene", name: "lucene-sandbox", version: luceneVersion
-  //esClientJars group: "org.apache.lucene", name: "lucene-queryparser", version: luceneVersion
 
   esClientJars group: "io.netty", name: "netty-common", version: nettyVersion
   esClientJars group: "io.netty", name: "netty-buffer", version: nettyVersion

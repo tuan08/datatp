@@ -29,6 +29,16 @@ sudo apt-get install mysql-server
 
 You will be asked to supply a root (administrative) password for use within the MySQL system.
 
+Export a wordpress database
+```
+mysqldump -u username -p wordpress > wordpress.sql
+```
+
+Import a wordpress database
+```
+mysql -u <username> -p<PlainPassword> wordpress < wordpress.sql
+```
+
 #Install PHP for Processing#
 
 

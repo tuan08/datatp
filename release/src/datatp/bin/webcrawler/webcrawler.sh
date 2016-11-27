@@ -8,6 +8,19 @@ bin=`dirname "$0"`
 bin=`cd "$bin"; pwd`
 APP_DIR=`cd $bin/../..; pwd; cd $bin`
 
+function has_opt() {
+  OPT_NAME=$1
+  shift
+  #Par the parameters
+  for i in "$@"; do
+    if [[ $i == $OPT_NAME ]] ; then
+      echo "true"
+      return
+    fi
+  done
+  echo "false"
+}
+
 
 JAVACMD=$JAVA_HOME/bin/java
 JAVA_OPTS="-Xshare:auto -Xms128m -Xmx256m" 
@@ -25,5 +38,14 @@ RUN_CMD="\
   --spring.http.multipart.location=build/upload \
   --crawler.site.config.file=$APP_DIR/config/webcrawler/site-config.json"
 
-exec $RUN_CMD
 
+DAEMON=$(has_opt "-d" $@ )
+if [ "$DAEMON" = "true" ] ; then
+  mkdir -p $APP_DIR/logs/webcrawler
+  LOG_FILE="$APP_DIR/logs/webcrawler/webcrawler.stdout"
+  PID_FILE="$APP_DIR/logs/webcrawler/pid.txt"
+  nohup $RUN_CMD > $LOG_FILE 2>&1 < /dev/null &
+  printf '%d' $! > $PID_FILE
+else
+  exec $RUN_CMD
+fi

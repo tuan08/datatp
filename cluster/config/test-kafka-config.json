@@ -2,7 +2,7 @@
   "properties": {
     "account_dev": "dev",
     "projects_dir":       "/home/tuan/projects",
-    "app_release_dir":    "${projects_dir}/tuan/tuan08.net/neverwinterdp/release/build/release",
+    "app_release_dir":    "${projects_dir}/tuan/datatp/release/build/release",
     "app_repository_dir": "${projects_dir}/AppRepo",
     "zk_home_dir":        "/opt/zookeeper",
     "kafka_home_dir":     "/opt/kafka",
