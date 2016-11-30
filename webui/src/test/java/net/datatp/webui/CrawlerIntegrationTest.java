@@ -10,9 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import com.carrotsearch.randomizedtesting.RandomizedRunner;
 
+import net.datatp.crawler.BasicCrawlerApp;
 import net.datatp.crawler.basic.Crawler;
-import net.datatp.crawler.basic.CrawlerApp;
-import net.datatp.crawler.processor.ESXDocProcessor;
 import net.datatp.crawler.site.ExtractConfig;
 import net.datatp.crawler.site.SiteConfig;
 import net.datatp.es.NodeBuilder;
@@ -54,7 +53,7 @@ public class CrawlerIntegrationTest {
      // "--spring.http.multipart.multipart.max-request-size=10Mb"  // # Max request size.  
     };
     int REFRESH_PERIOD_IN_SEC = 60 * 60;
-    Crawler crawler = CrawlerApp.run(args).getBean(Crawler.class);
+    Crawler crawler = BasicCrawlerApp.run(args).getBean(Crawler.class);
     
     crawler.siteCreateGroup("vietnam");
     crawler.siteAdd(
@@ -107,10 +106,10 @@ public class CrawlerIntegrationTest {
       setExtractConfig(ExtractConfig.article())
     ); 
 
-//    crawler.siteAdd(
-//      new SiteConfig("otofun", "otofun.net", "https://www.otofun.net/forums/", 2).
-//      setExtractConfig(ExtractConfig.forum())
-//    );
+    crawler.siteAdd(
+      new SiteConfig("otofun", "otofun.net", "https://www.otofun.net/forums/", 2).
+      setExtractConfig(ExtractConfig.forum())
+    );
     
     //crawler.crawlerStart();
     

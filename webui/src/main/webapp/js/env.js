@@ -1,5 +1,9 @@
 define([
 ], function() {
+  //var httpServer = "http://192.168.1.15" ;
+  var httpServer = window.location.origin;
+  var esHost     = window.location.hostname;
+
   env = {
     user: {
       userId:    "datatp",
@@ -9,11 +13,11 @@ define([
 
     service: {
       crawler: {
-        restURL: "http://192.168.1.18:8080/crawler"
+        restURL: httpServer + "/crawler"
       },
 
       elasticsearch: {
-        restURL: "http://192.168.1.18:9200"
+        restURL:  "http://" + esHost + ":9200"
       }
     }
   };

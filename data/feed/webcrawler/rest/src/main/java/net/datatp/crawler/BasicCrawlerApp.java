@@ -1,4 +1,4 @@
-package net.datatp.crawler.basic;
+package net.datatp.crawler;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -9,8 +9,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import net.datatp.crawler.CrawlerApi;
+import net.datatp.crawler.basic.Crawler;
+import net.datatp.crawler.basic.CrawlerConfig;
 import net.datatp.crawler.processor.ESXDocProcessor;
 import net.datatp.springframework.SpringAppLauncher;
 import net.datatp.util.io.IOUtil;
@@ -26,7 +29,8 @@ import net.datatp.util.text.StringUtil;
 @EnableConfigurationProperties
 @EnableAutoConfiguration
 @ConfigurationProperties
-public class CrawlerApp {
+@Import({ SecurityConfig.class })
+public class BasicCrawlerApp {
   @Value("${crawler.site.config.file:#{null}}")
   private String siteConfigFile;
   
@@ -45,7 +49,7 @@ public class CrawlerApp {
       CrawlerApi.importJson(crawler, jsonData);
     }
     
-    System.out.println("CrawlerApp: xdocProcessor = " + xdocProcessor + ", esConnects = " + esConnects);
+    System.out.println("BasicCrawlerApp: xdocProcessor = " + xdocProcessor + ", esConnects = " + esConnects);
     if("es".equals(xdocProcessor)) {
       String[] esConnect = StringUtil.splitAsArray(esConnects, ',');
       ESXDocProcessor xdocProcessor = new ESXDocProcessor("xdoc", esConnect);
@@ -63,9 +67,9 @@ public class CrawlerApp {
           "--server.port=8080",
       };
     }
-    System.out.println("Launch CrawlerApp with args: " + StringUtil.joinStringArray(args, " "));
+    System.out.println("Launch BasicCrawlerApp with args: " + StringUtil.joinStringArray(args, " "));
     String[] config = {  };
-    return SpringAppLauncher.launch(CrawlerApp.class, config, args);
+    return SpringAppLauncher.launch(BasicCrawlerApp.class, config, args);
   }
 
   public static void main(String[] args) throws Exception {

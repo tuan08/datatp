@@ -32,6 +32,7 @@ subprojects {
     //springIntegrationVersion = '4.3.1.RELEASE'
     springFrameworkVersion   = '4.3.4.RELEASE'
     springIntegrationVersion = '4.3.5.RELEASE'
+    springSecurityVersion    = '4.2.0.RELEASE'
 
     zookeeperVersion         = '3.4.8'
     activeMQVersion          = '5.14.1'

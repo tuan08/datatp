@@ -29,6 +29,12 @@ dependencies {
   compile ("org.springframework.boot:spring-boot-starter-log4j2:${springBootVersion}")
 
 
+  compile("org.springframework.security:spring-security-config:${springSecurityVersion}") {
+  }
+
+  compile("org.springframework.security:spring-security-web:${springSecurityVersion}") {
+  }
+
   compile("org.springframework.integration:spring-integration-jmx:${springIntegrationVersion}") {
   }
 
