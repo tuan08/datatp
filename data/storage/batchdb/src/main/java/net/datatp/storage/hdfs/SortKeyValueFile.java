@@ -88,6 +88,7 @@ public class SortKeyValueFile<K extends WritableComparable, V extends Writable> 
       SequenceFile.Metadata meta = new SequenceFile.Metadata() ;
       Path writePath = new Path(path + ".writer");
       Path parentPath = writePath.getParent();
+      
       SequenceFile.Writer.Option[] opts = {
         SequenceFile.Writer.file(writePath),
         SequenceFile.Writer.keyClass(keyType),

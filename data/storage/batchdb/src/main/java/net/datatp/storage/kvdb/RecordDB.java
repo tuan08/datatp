@@ -16,11 +16,11 @@ import net.datatp.storage.hdfs.SortKeyValueFile;
  *          tuan08@gmail.com
  */
 abstract public class RecordDB<K extends WritableComparable<?>, V extends Record> {
-  private Configuration configuration ;
   private String dblocation ;
   private Class<K> keyType ;
   private Class<V> valueType ;
   private Segment<K,V>[] segments ;
+  private FileSystem fs ;
 
   public RecordDB() {
   }
@@ -30,19 +30,23 @@ abstract public class RecordDB<K extends WritableComparable<?>, V extends Record
   }
   
   public void onInit(Configuration configuration, String dblocation, Class<K> keyType, Class<V> valueType) throws Exception {
-    this.configuration = configuration ;
+    fs = FileSystem.get(configuration) ;
     this.dblocation = dblocation ;
     this.keyType = keyType ;
     this.valueType = valueType ;
   }
   
-  public Configuration getConfiguration() { return this.configuration ; }
+  public void onInit(FileSystem fs, String dblocation, Class<K> keyType, Class<V> valueType) throws Exception {
+    this.fs = fs;
+    this.dblocation = dblocation ;
+    this.keyType = keyType ;
+    this.valueType = valueType ;
+  }
   
   public String getDbLocation() { return this.dblocation ; }
   public void   setDbLocation(String location) { this.dblocation = location ; }
   
   synchronized public void reload() throws Exception {
-    FileSystem fs = FileSystem.get(configuration) ;
     Path dbLocationPath = new Path(dblocation);
     if(!fs.exists(dbLocationPath)) fs.mkdirs(dbLocationPath);
     FileStatus[] status = fs.listStatus(dbLocationPath) ;
@@ -50,7 +54,7 @@ abstract public class RecordDB<K extends WritableComparable<?>, V extends Record
     for(int i = 0; i < status.length; i++) {
       Path path = status[i].getPath() ;
       if(!path.getName().startsWith("segment")) continue ;
-      holder.add(new Segment<K,V>(configuration, dblocation, path.getName(), keyType, valueType)) ;
+      holder.add(new Segment<K,V>(fs, dblocation, path.getName(), keyType, valueType)) ;
     }
     Collections.sort(holder) ;
     this.segments = holder.toArray(new Segment[holder.size()]) ;
@@ -69,7 +73,7 @@ abstract public class RecordDB<K extends WritableComparable<?>, V extends Record
     } else {
       segmentName = Segment.createSegmentName(segments[segments.length - 1].getIndex() + 1) ;
     }
-    temp[segments.length] = new Segment<K,V>(configuration, dblocation, segmentName, keyType, valueType) ;
+    temp[segments.length] = new Segment<K,V>(fs, dblocation, segmentName, keyType, valueType) ;
     this.segments = temp ;
     return this.segments[segments.length - 1] ;
   }

@@ -19,17 +19,22 @@ dependencies {
 
   compile("org.elasticsearch:elasticsearch:$elasticsearchVersion") {
     exclude group: "org.slf4j"
+    exclude module: "commons-logging"
   }
 
   compile("org.elasticsearch.plugin:transport-netty4-client:$elasticsearchVersion") {
     exclude group: "org.slf4j"
+    exclude module: "commons-logging"
   }
 
   compile("org.elasticsearch.client:transport:$elasticsearchVersion") {
     exclude group: "org.slf4j"
+    exclude module: "commons-logging"
   }
 
-  compile group: 'org.elasticsearch.test', name: 'framework', version: elasticsearchVersion
+  compile("org.elasticsearch.test:framework:$elasticsearchVersion") {
+    exclude module: "commons-logging"
+  }
 
 
   /*************************ES runtime deploy jars***************************/

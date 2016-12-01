@@ -40,7 +40,7 @@ public class RowDBUnitTest {
       new ColumnDefinition("column1"), new ColumnDefinition("column2")
     } ;
     DatabaseConfiguration dbconfiguration = 
-    	new DatabaseConfiguration(columnDefinition, new RowIdPartitioner.RowIdHashPartioner(3, ":")) ;
+      new DatabaseConfiguration(columnDefinition, new RowIdPartitioner.RowIdHashPartioner(3, ":")) ;
     dbconfiguration.setHadoopConfiguration(HDFSUtil.getDaultConfiguration()) ;
     RowDB rowDB = new RowDB(dblocation, "rowdb", dbconfiguration) ;
     

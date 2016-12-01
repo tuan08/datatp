@@ -2,7 +2,6 @@ package net.datatp.storage.kvdb;
 
 import java.io.IOException;
 
-import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.io.SequenceFile;
 import org.apache.hadoop.io.WritableComparable;
@@ -24,21 +23,18 @@ public class Segment<K extends WritableComparable, V extends Record> implements 
   private String                 dblocation;
   private String                 name;
   private int                    index;
-  private Configuration          configuration;
   private Class<K>               keyType;
   private Class<V>               valueType;
   private FileSystem             fs;
   private SortKeyValueFile<K, V> segmentFile;
 
-  public Segment(Configuration configuration, String dblocation, String name, 
-                 Class<K> keyType, Class<V> valueType) throws Exception {
-    this.configuration = configuration ;
+  public Segment(FileSystem fs, String dblocation, String name, Class<K> keyType, Class<V> valueType) throws Exception {
+    this.fs = fs;
     this.dblocation = dblocation ;
     this.name = name ;
     this.index = Integer.parseInt(name.substring(name.indexOf('-') + 1)) ;
     this.keyType = keyType; 
     this.valueType = valueType ;
-    fs = FileSystem.get(configuration) ;
     HDFSUtil.mkdirs(fs, dblocation + "/" + name) ;
     segmentFile = new SortKeyValueFile<K, V>(fs, getDatFilePath(), keyType, valueType);
   }
@@ -53,15 +49,9 @@ public class Segment<K extends WritableComparable, V extends Record> implements 
     return dblocation + "/" + name ;
   }
   
-  public Configuration getConfiguration() { return this.configuration ; }
+  public long getDataSize() throws Exception { return segmentFile.getDataSize(); }
   
-  public long getDataSize() throws Exception {
-    return segmentFile.getDataSize();
-  }
-  
-  public SequenceFile.Reader getReader() throws Exception {
-    return segmentFile.getReader();
-  }
+  public SequenceFile.Reader getReader() throws Exception { return segmentFile.getReader(); }
   
   public void delete() throws IOException {
     segmentFile.delete();

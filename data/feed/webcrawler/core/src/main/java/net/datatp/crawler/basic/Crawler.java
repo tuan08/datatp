@@ -16,6 +16,7 @@ import net.datatp.crawler.fetcher.URLFetchQueue;
 import net.datatp.crawler.processor.FetchDataProcessor;
 import net.datatp.crawler.processor.URLExtractor;
 import net.datatp.crawler.processor.XDocProcessor;
+import net.datatp.crawler.scheduler.URLScheduler;
 import net.datatp.crawler.scheduler.URLSchedulerStatus;
 import net.datatp.crawler.scheduler.metric.URLCommitMetric;
 import net.datatp.crawler.scheduler.metric.URLScheduleMetric;
@@ -24,7 +25,7 @@ import net.datatp.crawler.site.SiteContextManager;
 import net.datatp.crawler.site.SiteStatistic;
 import net.datatp.crawler.urldb.InMemURLDatumDB;
 import net.datatp.crawler.urldb.URLDatum;
-import net.datatp.crawler.urldb.URLDatumFactory;
+import net.datatp.crawler.urldb.URLDatumDB;
 import net.datatp.xhtml.XDoc;
 
 public class Crawler implements CrawlerApi {
@@ -40,8 +41,8 @@ public class Crawler implements CrawlerApi {
 
   private BasicFetcher            fetcher;
 
-  private InMemURLDatumDB         urlDatumDB;
-  private InMemURLScheduler       urlScheduler;
+  private URLDatumDB              urlDatumDB;
+  private URLScheduler            urlScheduler;
 
   private FetchDataProcessor      dataProcessor;
 
@@ -49,6 +50,10 @@ public class Crawler implements CrawlerApi {
   private XDocProcessorThread     xDocProcessorThread;
 
   public Crawler configure(CrawlerConfig config) throws Exception {
+    return configure(config, new InMemURLDatumDB());
+  }
+  
+  public Crawler configure(CrawlerConfig config, URLDatumDB urlDatumDB) throws Exception {
     logger.info("start configure()");
     crawlerConfig      = config;
     
@@ -56,21 +61,24 @@ public class Crawler implements CrawlerApi {
     urlCommitQueue = new LinkedBlockingQueue<>(crawlerConfig.getMaxUrlQueueSize());
     xDocQueue      = new LinkedBlockingQueue<>(crawlerConfig.getMaxXDocQueueSize());
     
-    URLExtractor urlExtractor = new URLExtractor(URLDatumFactory.DEFAULT, CrawlerConfig.EXCLUDE_URL_PATTERNS);
+    URLExtractor urlExtractor = new URLExtractor(urlDatumDB.getURLDatumFactory(), CrawlerConfig.EXCLUDE_URL_PATTERNS);
     dataProcessor = new FetchDataProcessor(urlExtractor);
     
     fetcher = new BasicFetcher(crawlerConfig, urlFetchQueue, urlCommitQueue, xDocQueue, dataProcessor, siteContextManager);
     
-    urlDatumDB   = new InMemURLDatumDB();
-    urlScheduler = new InMemURLScheduler(urlDatumDB, siteContextManager, urlFetchQueue, urlCommitQueue);
+    this.urlDatumDB = urlDatumDB;
+    urlScheduler = new InMemURLScheduler(this.urlDatumDB, siteContextManager, urlFetchQueue, urlCommitQueue);
     
     xDocProcessorThread = new XDocProcessorThread();
     xDocProcessorThread.start();
+    
     logger.info("finish configure()");
     return this;
   }
   
-  public void setXDocProcessor(XDocProcessor processor) { xDocProcessor = processor; }
+  public void setXDocProcessor(XDocProcessor processor) { 
+    xDocProcessor = processor; 
+  }
   
   @Override
   public void siteCreateGroup(String group) throws Exception { }
@@ -173,13 +181,12 @@ public class Crawler implements CrawlerApi {
   
   public class XDocProcessorThread extends Thread {
     boolean terminate ;
+    
     public void run() {
       while(!terminate) {
         try {
-          XDoc xdoc = xDocQueue.poll(1, TimeUnit.SECONDS);
-          if(xdoc != null) {
-            xDocProcessor.process(xdoc);
-          }
+          XDoc xdoc = xDocQueue.poll(3, TimeUnit.SECONDS);
+          if(xdoc != null) xDocProcessor.process(xdoc);
         } catch(InterruptedException ex) {
         } catch(Exception ex) {
           ex.printStackTrace();

@@ -20,6 +20,7 @@ import net.datatp.es.NodeBuilder;
 @RunWith(RandomizedRunner.class)
 public class CrawlerIntegrationTest {
   static {
+    System.setProperty("org.jboss.logging.provider", "slf4j");
     System.setProperty("log4j.configurationFile", "src/test/resources/log4j2.yml");
   }
   
@@ -47,10 +48,11 @@ public class CrawlerIntegrationTest {
       "--spring.cloud.zookeeper.enabled=false",
       "--spring.http.multipart.enabled=true",
       "--server.port=8080",
-      "--spring.http.multipart.location=build/upload" //# Intermediate location of uploaded files.
+      "--spring.http.multipart.location=build/upload", //# Intermediate location of uploaded files.
      // "--spring.http.multipart.multipart.file-size-threshold=0", // # Threshold after which files will be written to disk.
      // "--spring.http.multipart.multipart.max-file-size=1Mb",     //# Max file size.
-     // "--spring.http.multipart.multipart.max-request-size=10Mb"  // # Max request size.  
+     // "--spring.http.multipart.multipart.max-request-size=10Mb"  // # Max request size.
+      "--crawler.url.recorddb.dir=build/urldb"
     };
     int REFRESH_PERIOD_IN_SEC = 60 * 60;
     Crawler crawler = BasicCrawlerApp.run(args).getBean(Crawler.class);

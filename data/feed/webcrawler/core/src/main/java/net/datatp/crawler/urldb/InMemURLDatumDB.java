@@ -22,6 +22,8 @@ public class InMemURLDatumDB implements URLDatumDB {
     return new URLDatumDBWriterImpl();
   }
   
+  public URLDatumFactory getURLDatumFactory() { return URLDatumFactory.DEFAULT; }
+  
   public class URLDatumDBWriterImpl implements URLDatumDBWriter {
 
     @Override

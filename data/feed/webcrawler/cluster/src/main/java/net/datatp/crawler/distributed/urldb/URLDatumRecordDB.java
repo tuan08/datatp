@@ -8,12 +8,14 @@ import javax.annotation.PostConstruct;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.util.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Value;
 
 import net.datatp.crawler.urldb.URLDatum;
 import net.datatp.crawler.urldb.URLDatumDB;
 import net.datatp.crawler.urldb.URLDatumDBIterator;
 import net.datatp.crawler.urldb.URLDatumDBWriter;
+import net.datatp.crawler.urldb.URLDatumFactory;
 import net.datatp.storage.hdfs.HDFSUtil;
 import net.datatp.storage.hdfs.SortKeyValueFile;
 import net.datatp.storage.kvdb.MergeMultiSegmentIterator;
@@ -42,9 +44,9 @@ public class URLDatumRecordDB extends RecordDB<Text, URLDatumRecord> implements 
   @PostConstruct
   public void onInit() throws Exception {
     Configuration conf = HDFSUtil.getDaultConfiguration() ;
-    FileSystem fs = FileSystem.get(conf) ;
+    FileSystem fs = FileSystem.get(conf);
     if(cleandb) HDFSUtil.removeIfExists(fs, dbLocation) ;
-    onInit(conf, dbLocation, Text.class, URLDatumRecord.class);
+    onInit(fs, dbLocation, Text.class, URLDatumRecord.class);
     reload() ;
   }
 
@@ -68,6 +70,8 @@ public class URLDatumRecordDB extends RecordDB<Text, URLDatumRecord> implements 
   public URLDatumDBIterator createURLDatumDBIterator() throws Exception { 
     return new URLDatumRecordDBIterator();
   }
+  
+  public URLDatumFactory getURLDatumFactory() { return new  URLDatumRecordFactory(); }
   
   public class URLDatumRecordDBWriter  implements URLDatumDBWriter {
     private SortKeyValueFile<Text, URLDatumRecord>.Writer writer;

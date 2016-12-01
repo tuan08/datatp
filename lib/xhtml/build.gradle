@@ -12,7 +12,10 @@ dependencies {
   compile group: 'org.jsoup', name: 'jsoup', version: jsoupVersion
 
   compile group: 'com.syncthemall', name: 'boilerpipe', version: boilerpipeVersion
-  compile group: 'org.apache.httpcomponents', name: 'httpclient', version: httpclientVersion
+
+  compile("org.apache.httpcomponents:httpclient:$httpclientVersion") {
+    exclude module: "commons-logging"
+  }
 
   compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
 }

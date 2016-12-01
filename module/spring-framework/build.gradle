@@ -12,11 +12,14 @@ dependencies {
     exclude module: "groovy-all"
   }
 
-  compile ("org.springframework.boot:spring-boot-loader:${springBootVersion}")
+  compile ("org.springframework.boot:spring-boot-loader:${springBootVersion}") {
+    exclude group:  "commons-logging"
+  }
 
   compile("org.springframework.boot:spring-boot-starter-jetty:${springBootVersion}") {
     exclude module: "spring-boot-starter-logging"
     exclude module: "logback-classic"
+    exclude group: "commons-logging"
   }
 
   compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}") {
@@ -24,18 +27,22 @@ dependencies {
     exclude module: "spring-boot-starter-logging"
     exclude module: "logback-classic"
     exclude group:  "com.fasterxml.jackson.core"
+    exclude group: "commons-logging"
   }
 
   compile ("org.springframework.boot:spring-boot-starter-log4j2:${springBootVersion}")
 
 
   compile("org.springframework.security:spring-security-config:${springSecurityVersion}") {
+    exclude group: "commons-logging"
   }
 
   compile("org.springframework.security:spring-security-web:${springSecurityVersion}") {
+    exclude group: "commons-logging"
   }
 
   compile("org.springframework.integration:spring-integration-jmx:${springIntegrationVersion}") {
+    exclude group: "commons-logging"
   }
 
   compile("org.springframework.cloud:spring-cloud-starter-zookeeper-all:1.0.3.RELEASE") {
@@ -43,11 +50,14 @@ dependencies {
     exclude module: "httpclient"
     exclude group:  "org.springframework"
     exclude group:  "org.springframework.boot"
+    exclude group:  "commons-logging"
   }
 
   compile 'io.reactivex:rxjava:1.1.0'
 
   //compile ("commons-logging:commons-logging")
 
-  testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+  testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}") {
+    exclude group:  "commons-logging"
+  }
 }

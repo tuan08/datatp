@@ -99,9 +99,7 @@ public class CrawlerMasterApp extends CrawlerApp {
   }
   
   @Bean(name = "URLSchedulerPluginManager")
-  public  URLSchedulerPluginManager createURLSchedulerPluginManager() {
-    return new URLSchedulerPluginManager();
-  }
+  public  URLSchedulerPluginManager createURLSchedulerPluginManager() { return new URLSchedulerPluginManager(); }
 
   @Bean(name = "URLDatumFactory")
   public URLDatumFactory createURLDatumFactory() { return new URLDatumRecordFactory(); }
@@ -120,7 +118,7 @@ public class CrawlerMasterApp extends CrawlerApp {
   
   @Bean(name = "CrawlerRegistry")
   public CrawlerRegistry createWebCrawlerRegistry(ApplicationContext appContext, 
-                                                     RegistryClient registryClient) throws Exception {
+                                                  RegistryClient registryClient) throws Exception {
     CrawlerEventContext context = new CrawlerEventContext(appContext);
     CrawlerRegistry wReg = 
         new CrawlerRegistry(registryClient).

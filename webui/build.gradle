@@ -12,7 +12,10 @@ war {
 }
 
 dependencies {
-  compile project(':data/feed/webcrawler/rest')
+  compile(project(':data/feed/webcrawler/rest')) {
+    exclude module: "hadoop-mapreduce-client-core"
+    exclude group:  "commons-logging"
+  }
 }
 
 test {

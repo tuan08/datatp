@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Import;
 import net.datatp.crawler.CrawlerApi;
 import net.datatp.crawler.basic.Crawler;
 import net.datatp.crawler.basic.CrawlerConfig;
+import net.datatp.crawler.distributed.urldb.URLDatumRecordDB;
 import net.datatp.crawler.processor.ESXDocProcessor;
 import net.datatp.springframework.SpringAppLauncher;
 import net.datatp.util.io.IOUtil;
@@ -37,13 +38,23 @@ public class BasicCrawlerApp {
   @Value("${crawler.xdoc.processor:es}")
   private String xdocProcessor = null;
   
+  @Value("${crawler.url.recorddb.dir}")
+  private String urlRecordDBDir = null;
+  
   @Value("${crawler.es.address:127.0.0.1:9300}")
   private String esConnects = null;
   
   @Bean(name = "CrawlerApi")
   public CrawlerApi createCrawler() throws Exception { 
     Crawler crawler = new Crawler();
-    crawler.configure(new CrawlerConfig());
+    
+    if(urlRecordDBDir != null) {
+      URLDatumRecordDB urlDB = new URLDatumRecordDB(urlRecordDBDir, false);
+      crawler.configure(new CrawlerConfig(), urlDB);
+    } else {
+      crawler.configure(new CrawlerConfig());
+    }
+    
     if(siteConfigFile != null) {
       byte[] jsonData = IOUtil.getFileContentAsBytes(siteConfigFile);
       CrawlerApi.importJson(crawler, jsonData);
