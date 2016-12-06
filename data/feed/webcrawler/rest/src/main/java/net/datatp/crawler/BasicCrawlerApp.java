@@ -11,7 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import net.datatp.crawler.CrawlerApi;
 import net.datatp.crawler.basic.Crawler;
 import net.datatp.crawler.basic.CrawlerConfig;
 import net.datatp.crawler.distributed.urldb.URLDatumRecordDB;
@@ -38,7 +37,7 @@ public class BasicCrawlerApp {
   @Value("${crawler.xdoc.processor:es}")
   private String xdocProcessor = null;
   
-  @Value("${crawler.url.recorddb.dir}")
+  @Value("${crawler.url.recorddb.dir:#{null}}")
   private String urlRecordDBDir = null;
   
   @Value("${crawler.es.address:127.0.0.1:9300}")
@@ -46,6 +45,7 @@ public class BasicCrawlerApp {
   
   @Bean(name = "CrawlerApi")
   public CrawlerApi createCrawler() throws Exception { 
+    
     Crawler crawler = new Crawler();
     
     if(urlRecordDBDir != null) {
@@ -60,7 +60,6 @@ public class BasicCrawlerApp {
       CrawlerApi.importJson(crawler, jsonData);
     }
     
-    System.out.println("BasicCrawlerApp: xdocProcessor = " + xdocProcessor + ", esConnects = " + esConnects);
     if("es".equals(xdocProcessor)) {
       String[] esConnect = StringUtil.splitAsArray(esConnects, ',');
       ESXDocProcessor xdocProcessor = new ESXDocProcessor("xdoc", esConnect);

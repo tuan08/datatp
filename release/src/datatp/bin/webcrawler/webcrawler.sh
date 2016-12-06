@@ -24,19 +24,28 @@ function has_opt() {
 
 JAVACMD=$JAVA_HOME/bin/java
 JAVA_OPTS="-Xshare:auto -Xms128m -Xmx256m" 
+LIB_DIR="$JAVA_HOME/jre/lib/ext:$APP_DIR/lib:$APP_DIR/lib/spring:$APP_DIR/lib/jetty"
+LIB_DIR="$LIB_DIR:$APP_DIR/lib/esclient:$APP_DIR/lib/batchdb:$APP_DIR/lib/webcrawler"
 
-MAIN_CLASS="net.datatp.crawler.basic.CrawlerApp"
+
+MAIN_CLASS="net.datatp.crawler.BasicCrawlerApp"
+#Optional
+#--spring.mvc.view.prefix=/WEB-INF/jsp/ \
+#--spring.mvc.view.suffix=.jsp \
 RUN_CMD="\
   $JAVACMD \
-  -Djava.ext.dirs=$JAVA_HOME/jre/lib/ext:$APP_DIR/lib:$APP_DIR/lib/spring:$APP_DIR/lib/jetty:$APP_DIR/lib/esclient:$APP_DIR/lib/webcrawler \
+  -Djava.ext.dirs=$LIB_DIR \
   $JAVA_OPTS $MAIN_CLASS  \
   --logging.config=$APP_DIR/config/log4j2.yml \
   --server.port=8080 \
   --server.compression.enabled=true \
+  --server.error.whitelabel.enabled=false \
   --spring.cloud.zookeeper.enabled=false \
   --spring.http.multipart.enabled=true \
   --spring.http.multipart.location=build/upload \
+  --crawler.url.recorddb.dir=$APP_DIR/data/urldb \
   --crawler.site.config.file=$APP_DIR/config/webcrawler/site-config.json"
+
 
 
 DAEMON=$(has_opt "-d" $@ )
@@ -44,8 +53,10 @@ if [ "$DAEMON" = "true" ] ; then
   mkdir -p $APP_DIR/logs/webcrawler
   LOG_FILE="$APP_DIR/logs/webcrawler/webcrawler.stdout"
   PID_FILE="$APP_DIR/logs/webcrawler/pid.txt"
+  cd $APP_DIR 
   nohup $RUN_CMD > $LOG_FILE 2>&1 < /dev/null &
   printf '%d' $! > $PID_FILE
 else
+  cd $APP_DIR 
   exec $RUN_CMD
 fi
