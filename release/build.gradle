@@ -43,6 +43,12 @@ dependencies {
   commonJars group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: jacksonVersion
   commonJars group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-smile', version: jacksonVersion
 
+  commonJars group: "commons-io", name: "commons-io",   version: "2.5"
+  commonJars group: "commons-configuration", name: "commons-configuration",   version: "1.6"
+  commonJars group: "commons-collections",   name: "commons-collections",   version: "3.2.2"
+  commonJars group: "commons-lang",          name: "commons-lang",   version: "2.6"
+  commonJars group: "com.google.guava", name: "guava",   version: "18.0"
+
   commonJars group: 'org.slf4j', name: 'slf4j-api', version:  slf4jVersion
   commonJars group: 'org.slf4j', name: 'jcl-over-slf4j', version: slf4jVersion
 
@@ -68,6 +74,12 @@ dependencies {
   springJars group: "org.springframework.boot", name: "spring-boot-starter-web", version: springBootVersion
   springJars group: "org.springframework.boot", name: "spring-boot-starter-log4j2", version: springBootVersion
 
+  springJars group: "org.springframework.security", name: "spring-security-core", version: springSecurityVersion
+  springJars group: "org.springframework.security", name: "spring-security-config", version: springSecurityVersion
+  springJars group: "org.springframework.security", name: "spring-security-web", version: springSecurityVersion
+  springJars group: "org.springframework.security", name: "spring-security-crypto", version: springSecurityVersion
+  springJars group: "org.springframework.security", name: "spring-security-rsa", version: "1.0.1.RELEASE"
+
   springJars group: "org.springframework.integration", name: "spring-integration-core", version: springIntegrationVersion
   springJars group: "org.springframework.integration", name: "spring-integration-jmx", version: springIntegrationVersion
   springJars group: "org.springframework.cloud", name: "spring-cloud-starter-zookeeper-all", version: "1.0.3.RELEASE"
@@ -84,9 +96,14 @@ dependencies {
   jettyJars group: "org.eclipse.jetty", name: "jetty-io", version: jettyVersion
   jettyJars group: "org.eclipse.jetty", name: "jetty-server", version: jettyVersion
   jettyJars group: "org.eclipse.jetty", name: "jetty-webapp", version: jettyVersion
+  //jettyJars group: "org.eclipse.jetty", name: "apache-jstl", version: jettyVersion
+
+  //jettyJars group: "org.eclipse.jetty", name: "jetty-xml", version: jettyVersion
   jettyJars group: "org.eclipse.jetty", name: "jetty-security", version: jettyVersion
   
-  jettyJars group: "javax.servlet", name: "javax.servlet-api", version: "3.1.0"
+  jettyJars group: "javax.servlet",     name: "javax.servlet-api", version: "3.1.0"
+  //jettyJars group: "javax.servlet.jsp", name: "jsp-api",           version: "2.1"
+  //jettyJars group: "javax.servlet",     name: "jstl",              version: "1.2"
 
   jettyJars group: "org.springframework", name: "spring-web", version: springFrameworkVersion
   jettyJars group: "org.springframework", name: "spring-webmvc", version: springFrameworkVersion
@@ -128,7 +145,7 @@ dependencies {
   esClientJars group: "io.netty", name: "netty-transport", version: nettyVersion
 
   /*************************jms runtime deploy jars***************************/
-  jmsJars project(':module/jms')
+  jmsJars project(":module/jms")
   jmsJars group: "javax.jms", name: "javax.jms-api", version: "2.0"
   jmsJars group: "javax.management.j2ee", name: "javax.management.j2ee-api", version: "1.1.1"
   
@@ -144,14 +161,19 @@ dependencies {
 
   /*************************batchdb runtime deploy jars***************************/
   batchdbJars project(':data/storage/batchdb')
+  batchdbJars group: "org.apache.hadoop", name: "hadoop-common", version: hadoopVersion
+  batchdbJars group: "org.apache.hadoop", name: "hadoop-hdfs",   version: hadoopVersion
+  batchdbJars group: "org.apache.hadoop", name: "hadoop-auth",   version: hadoopVersion
+
 
   /*************************Webcrawler runtime deploy jars***************************/
-  webcrawlerJars project(':lib/xhtml')
-  webcrawlerJars project(':data/feed/webcrawler/core')
-  webcrawlerJars project(':data/feed/webcrawler/cluster')
-  webcrawlerJars project(':data/feed/webcrawler/rest')
+  webcrawlerJars project(":lib/xhtml")
+  webcrawlerJars project(":data/feed/webcrawler/core")
+  webcrawlerJars project(":data/feed/webcrawler/cluster")
+  webcrawlerJars project(":data/feed/webcrawler/rest")
 
   webcrawlerJars group: 'com.syncthemall', name: 'boilerpipe', version: boilerpipeVersion
+  webcrawlerJars group: 'xml-apis', name: 'xml-apis', version: "1.4.01"
   webcrawlerJars group: 'xerces', name: 'xercesImpl', version: "2.11.0"
   webcrawlerJars group: 'org.jsoup', name: 'jsoup', version: jsoupVersion
   webcrawlerJars group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
@@ -234,7 +256,7 @@ task release(dependsOn: 'build') << {
   }
 
   def webuiProject = project(':webui');
-  webuiProject.releaseDir =  "${buildDir}/release/datatp/public";
+  webuiProject.releaseDir =  "${buildDir}/release/datatp/src/main/webapp";
   webuiProject.copyWebapp.execute()
 
   def esProject = project(':module/elasticsearch');

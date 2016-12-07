@@ -21,6 +21,7 @@ subprojects {
     nettyVersion             = '4.1.5.Final'
 
     jettyVersion             = "9.3.14.v20161028"
+
     luceneVersion            = "6.2.0"
     elasticsearchVersion     = "5.0.0"
     hadoopVersion            = "2.7.2"
@@ -38,7 +39,7 @@ subprojects {
 
     appTemplateDir           = "${projectDir}/../AppTemplate"
 
-    elasticsearchAppTemplateDir = "${appTemplateDir}/elasticsearch"
+    elasticsearchAppTemplateDir = "${datatpAppTemplateDir}/elasticsearch"
   }
 
   eclipse {

@@ -105,8 +105,6 @@ task release (dependsOn: 'build') << {
   //  }
   //}
 
-  print "elasticsearch app template dir = ${elasticsearchAppTemplateDir}"
-
   copy {
     from "${elasticsearchAppTemplateDir}"
     into "${releaseDir}/elasticsearch"

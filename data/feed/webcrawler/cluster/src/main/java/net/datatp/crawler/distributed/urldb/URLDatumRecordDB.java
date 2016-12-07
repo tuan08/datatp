@@ -8,7 +8,6 @@ import javax.annotation.PostConstruct;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.util.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Value;
 
 import net.datatp.crawler.urldb.URLDatum;
